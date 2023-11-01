@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "DTCHp8VTNNuIKECUK3nFs7K8hPmvoS8Tp8fRJxR0Vlg=",
+  "Source": "BicycleApp.WebApi",
+  "BasePath": "_content/BicycleApp.WebApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

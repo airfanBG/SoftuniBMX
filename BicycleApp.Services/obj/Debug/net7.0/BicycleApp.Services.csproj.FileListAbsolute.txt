@@ -1,0 +1,17 @@
+C:\Moi\ProgramiSoft\BMX\BicycleApp.Services\bin\Debug\net7.0\BicycleApp.Services.deps.json
+C:\Moi\ProgramiSoft\BMX\BicycleApp.Services\bin\Debug\net7.0\BicycleApp.Services.dll
+C:\Moi\ProgramiSoft\BMX\BicycleApp.Services\bin\Debug\net7.0\BicycleApp.Services.pdb
+C:\Moi\ProgramiSoft\BMX\BicycleApp.Services\bin\Debug\net7.0\BicycleApp.Common.dll
+C:\Moi\ProgramiSoft\BMX\BicycleApp.Services\bin\Debug\net7.0\BicycleApp.Data.dll
+C:\Moi\ProgramiSoft\BMX\BicycleApp.Services\bin\Debug\net7.0\BicycleApp.Common.pdb
+C:\Moi\ProgramiSoft\BMX\BicycleApp.Services\bin\Debug\net7.0\BicycleApp.Data.pdb
+C:\Moi\ProgramiSoft\BMX\BicycleApp.Services\obj\Debug\net7.0\BicycleApp.Services.csproj.AssemblyReference.cache
+C:\Moi\ProgramiSoft\BMX\BicycleApp.Services\obj\Debug\net7.0\BicycleApp.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Moi\ProgramiSoft\BMX\BicycleApp.Services\obj\Debug\net7.0\BicycleApp.Services.AssemblyInfoInputs.cache
+C:\Moi\ProgramiSoft\BMX\BicycleApp.Services\obj\Debug\net7.0\BicycleApp.Services.AssemblyInfo.cs
+C:\Moi\ProgramiSoft\BMX\BicycleApp.Services\obj\Debug\net7.0\BicycleApp.Services.csproj.CoreCompileInputs.cache
+C:\Moi\ProgramiSoft\BMX\BicycleApp.Services\obj\Debug\net7.0\BicycleApp.Services.csproj.CopyComplete
+C:\Moi\ProgramiSoft\BMX\BicycleApp.Services\obj\Debug\net7.0\BicycleApp.Services.dll
+C:\Moi\ProgramiSoft\BMX\BicycleApp.Services\obj\Debug\net7.0\refint\BicycleApp.Services.dll
+C:\Moi\ProgramiSoft\BMX\BicycleApp.Services\obj\Debug\net7.0\BicycleApp.Services.pdb
+C:\Moi\ProgramiSoft\BMX\BicycleApp.Services\obj\Debug\net7.0\ref\BicycleApp.Services.dll
