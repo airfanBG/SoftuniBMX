@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\BicycleApp.WebApi.props" />
-</Project>
