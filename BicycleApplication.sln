@@ -3,7 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BicycleApp.Data", "BicycleApp.Data\BicycleApp.Data.csproj", "{8147830F-7E99-458B-81F9-D67E2B8AB2C7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BicycleApp.Common", "BicycleApp.Common\BicycleApp.Common.csproj", "{57BB8952-DA97-49C7-93CB-DA2C4390EFBE}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8147830F-7E99-458B-81F9-D67E2B8AB2C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8147830F-7E99-458B-81F9-D67E2B8AB2C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8147830F-7E99-458B-81F9-D67E2B8AB2C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8147830F-7E99-458B-81F9-D67E2B8AB2C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57BB8952-DA97-49C7-93CB-DA2C4390EFBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57BB8952-DA97-49C7-93CB-DA2C4390EFBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57BB8952-DA97-49C7-93CB-DA2C4390EFBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57BB8952-DA97-49C7-93CB-DA2C4390EFBE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
