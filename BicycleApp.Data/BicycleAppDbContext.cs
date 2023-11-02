@@ -10,6 +10,11 @@
 
     public class BicycleAppDbContext : IdentityDbContext<Employee, IdentityRole<string>, string>
     {
+        public BicycleAppDbContext():base()
+        {
+            
+        }
+
         public BicycleAppDbContext(DbContextOptions<BicycleAppDbContext> options)
             : base(options) { }
 
@@ -29,6 +34,10 @@
 
         public DbSet<ImagePart> ImagesParts { get; set; } = null!;
 
+        public DbSet<ImageClient> ImagesClients { get; set; } = null!;
+
+        public DbSet<ImageEmployee> ImagesEmployees { get; set; } = null!;
+
         public DbSet<VATCategory> VATCategories { get; set; } = null!;
 
         public DbSet<Rate> Rates { get; set; } = null!;
@@ -44,6 +53,17 @@
         public DbSet<Status> Statuses { get; set; } = null!;
 
         public DbSet<OrderPartEmployee> OrdersPartsEmployees { get; set; } = null!;
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            var conectionString = "Server=DESKTOP-O0P5VDC\\SQLEXPRESS;Database=BicycleDB;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False";
+
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(conectionString);
+            }
+        }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -112,6 +132,26 @@
                     .HasOne(ip => ip.Part)
                     .WithMany(p => p.ImagesParts)
                     .HasForeignKey(p => p.PartId)
+                    .OnDelete(DeleteBehavior.NoAction);
+            });
+
+            //ImageClientEntityConfiguration
+            builder.Entity<ImageClient>(entity =>
+            {
+                entity
+                    .HasOne(ic => ic.Client)
+                    .WithMany(c => c.Images)
+                    .HasForeignKey(ic => ic.ClientId)
+                    .OnDelete(DeleteBehavior.NoAction);
+            });
+
+            //ImageEmployeeEntityConfiguration
+            builder.Entity<ImageEmployee>(entity =>
+            {
+                entity
+                    .HasOne(ie => ie.Employee)
+                    .WithMany(e => e.ImagesEmployees)
+                    .HasForeignKey(ie => ie.EmployeeId)
                     .OnDelete(DeleteBehavior.NoAction);
             });
 
@@ -234,6 +274,8 @@
             builder.Entity<Delivary>(entity => entity.HasData(seeder.SeedDelivaries()));
             builder.Entity<Department>(entity => entity.HasData(seeder.SeedDepartments()));
             builder.Entity<ImagePart>(entity => entity.HasData(seeder.SeedImagesParts()));
+            builder.Entity<ImageClient>(entity => entity.HasData(seeder.SeedImagesClients()));
+            builder.Entity<ImageEmployee>(entity => entity.HasData(seeder.SeedImagesEmployees()));
             builder.Entity<Order>(entity => entity.HasData(seeder.SeedOrders()));
             builder.Entity<OrderPartEmployee>(entity => entity.HasData(seeder.SeedOrdersPartsEmployees()));
             builder.Entity<Part>(entity => entity.HasData(seeder.SeedParts()));

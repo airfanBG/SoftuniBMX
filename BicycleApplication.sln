@@ -3,17 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BicycleApp.WebApi", "BicycleApp.WebApi\BicycleApp.WebApi.csproj", "{23C84A13-B5EE-4692-93C4-388D1B9AE21A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BicycleApp.Data", "BicycleApp.Data\BicycleApp.Data.csproj", "{8147830F-7E99-458B-81F9-D67E2B8AB2C7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D4CEF10C-42C5-485D-923B-CEB69D7A7ABA}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{D33294CF-02ED-4166-8FC4-39628A2995A4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BicycleApp.Data", "BicycleApp.Data\BicycleApp.Data.csproj", "{35846A9A-8637-4B96-BF9D-0A7593831217}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BicycleApp.Common", "BicycleApp.Common\BicycleApp.Common.csproj", "{07125A30-82CC-4FCD-B30A-CE5FB6B02339}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BicycleApp.Services", "BicycleApp.Services\BicycleApp.Services.csproj", "{97EF89E5-69FF-4447-9ACE-6A5A9FDA1163}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BicycleApp.Common", "BicycleApp.Common\BicycleApp.Common.csproj", "{57BB8952-DA97-49C7-93CB-DA2C4390EFBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,32 +13,17 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{23C84A13-B5EE-4692-93C4-388D1B9AE21A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{23C84A13-B5EE-4692-93C4-388D1B9AE21A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{23C84A13-B5EE-4692-93C4-388D1B9AE21A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{23C84A13-B5EE-4692-93C4-388D1B9AE21A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{35846A9A-8637-4B96-BF9D-0A7593831217}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{35846A9A-8637-4B96-BF9D-0A7593831217}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{35846A9A-8637-4B96-BF9D-0A7593831217}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{35846A9A-8637-4B96-BF9D-0A7593831217}.Release|Any CPU.Build.0 = Release|Any CPU
-		{07125A30-82CC-4FCD-B30A-CE5FB6B02339}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{07125A30-82CC-4FCD-B30A-CE5FB6B02339}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{07125A30-82CC-4FCD-B30A-CE5FB6B02339}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{07125A30-82CC-4FCD-B30A-CE5FB6B02339}.Release|Any CPU.Build.0 = Release|Any CPU
-		{97EF89E5-69FF-4447-9ACE-6A5A9FDA1163}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{97EF89E5-69FF-4447-9ACE-6A5A9FDA1163}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{97EF89E5-69FF-4447-9ACE-6A5A9FDA1163}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{97EF89E5-69FF-4447-9ACE-6A5A9FDA1163}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8147830F-7E99-458B-81F9-D67E2B8AB2C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8147830F-7E99-458B-81F9-D67E2B8AB2C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8147830F-7E99-458B-81F9-D67E2B8AB2C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8147830F-7E99-458B-81F9-D67E2B8AB2C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57BB8952-DA97-49C7-93CB-DA2C4390EFBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57BB8952-DA97-49C7-93CB-DA2C4390EFBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57BB8952-DA97-49C7-93CB-DA2C4390EFBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57BB8952-DA97-49C7-93CB-DA2C4390EFBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{23C84A13-B5EE-4692-93C4-388D1B9AE21A} = {D33294CF-02ED-4166-8FC4-39628A2995A4}
-		{D33294CF-02ED-4166-8FC4-39628A2995A4} = {D4CEF10C-42C5-485D-923B-CEB69D7A7ABA}
-		{35846A9A-8637-4B96-BF9D-0A7593831217} = {D33294CF-02ED-4166-8FC4-39628A2995A4}
-		{07125A30-82CC-4FCD-B30A-CE5FB6B02339} = {D33294CF-02ED-4166-8FC4-39628A2995A4}
-		{97EF89E5-69FF-4447-9ACE-6A5A9FDA1163} = {D33294CF-02ED-4166-8FC4-39628A2995A4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {63A818FE-4D68-4345-8AE4-A812FA4F5D2F}

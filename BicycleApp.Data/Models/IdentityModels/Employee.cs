@@ -15,6 +15,7 @@
         public Employee()
         {
             this.OrdersPartsEmployees = new HashSet<OrderPartEmployee>();
+            this.ImagesEmployees = new HashSet<ImageEmployee>();
         }
 
         [Required]
@@ -66,5 +67,7 @@
 
         [Required]
         public bool IsManeger { get; set; } = false;
+
+        public virtual ICollection<ImageEmployee> ImagesEmployees { get; set; }
     }
 }

@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\BicycleApp.WebApi.props" />
-</Project>

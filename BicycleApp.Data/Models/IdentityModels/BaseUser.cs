@@ -10,6 +10,5 @@
         {
             this.Id = Guid.NewGuid().ToString();
         }
-
     }
 }
