@@ -2826,23 +2826,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\airfan\\.nuget\\packages\\": {},
+    "C:\\Users\\HP\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Repositories\\Repos\\BicycleSoftuni\\BicycleApp.Services\\BicycleApp.Services.csproj",
+      "projectUniqueName": "C:\\Moi\\ProgramiSoft\\BMXrepo\\BicycleApp.Services\\BicycleApp.Services.csproj",
       "projectName": "BicycleApp.Services",
-      "projectPath": "D:\\Repositories\\Repos\\BicycleSoftuni\\BicycleApp.Services\\BicycleApp.Services.csproj",
-      "packagesPath": "C:\\Users\\airfan\\.nuget\\packages\\",
-      "outputPath": "D:\\Repositories\\Repos\\BicycleSoftuni\\BicycleApp.Services\\obj\\",
+      "projectPath": "C:\\Moi\\ProgramiSoft\\BMXrepo\\BicycleApp.Services\\BicycleApp.Services.csproj",
+      "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+      "outputPath": "C:\\Moi\\ProgramiSoft\\BMXrepo\\BicycleApp.Services\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\airfan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -2858,11 +2858,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\Repositories\\Repos\\BicycleSoftuni\\BicycleApp.Common\\BicycleApp.Common.csproj": {
-              "projectPath": "D:\\Repositories\\Repos\\BicycleSoftuni\\BicycleApp.Common\\BicycleApp.Common.csproj"
+            "C:\\Moi\\ProgramiSoft\\BMXrepo\\BicycleApp.Common\\BicycleApp.Common.csproj": {
+              "projectPath": "C:\\Moi\\ProgramiSoft\\BMXrepo\\BicycleApp.Common\\BicycleApp.Common.csproj"
             },
-            "D:\\Repositories\\Repos\\BicycleSoftuni\\BicycleApp.Data\\BicycleApp.Data.csproj": {
-              "projectPath": "D:\\Repositories\\Repos\\BicycleSoftuni\\BicycleApp.Data\\BicycleApp.Data.csproj"
+            "C:\\Moi\\ProgramiSoft\\BMXrepo\\BicycleApp.Data\\BicycleApp.Data.csproj": {
+              "projectPath": "C:\\Moi\\ProgramiSoft\\BMXrepo\\BicycleApp.Data\\BicycleApp.Data.csproj"
             }
           }
         }
@@ -2892,7 +2892,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }
