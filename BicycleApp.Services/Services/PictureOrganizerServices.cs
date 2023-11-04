@@ -87,7 +87,9 @@
                 Directory.CreateDirectory(currentImageFolderName);
             }
 
-            string imagePath = this.SaveFile(file, fileType, clientIdentification, currentImageFolderName);
+            string newFileName = this.CreateFileName(currentImageFolderName, clientIdentification);
+
+            string imagePath = this.SaveFile(file, fileType, newFileName, currentImageFolderName);
 
             return imagePath;
         }
@@ -165,7 +167,9 @@
                 Directory.CreateDirectory(currentImageFolderName);
             }
 
-            string imagePath = this.SaveFile(file, fileType, employeeIdentitycation, currentImageFolderName);
+            string newFileName = this.CreateFileName(currentImageFolderName, employeeIdentitycation);
+
+            string imagePath = this.SaveFile(file, fileType, newFileName, currentImageFolderName);
 
             return imagePath;
         }
@@ -243,7 +247,9 @@
                 Directory.CreateDirectory(currentImageFolderName);
             }
 
-            string imagePath = this.SaveFile(file, fileType, partIdentification, currentImageFolderName);
+            string newFileName = this.CreateFileName(currentImageFolderName, partIdentification);
+
+            string imagePath = this.SaveFile(file, fileType, newFileName, currentImageFolderName);
 
             return imagePath;
         }
@@ -320,6 +326,19 @@
             File.WriteAllBytes(filePath, fileData);
 
             return filePath;
+        }
+
+        /// <summary>
+        /// This method creates a name for the new file
+        /// </summary>
+        /// <param name="folderPath">The path of the new file</param>
+        /// <param name="identification">The unique identification of the name</param>
+        /// <returns>Returns the new name of the file as String</returns>
+        private string CreateFileName(string folderPath, string identification)
+        {
+            string[] files = Directory.GetFiles(folderPath);
+            int count = files.Length + 1;
+            return $"{identification}-{count}";
         }
     }
 }
