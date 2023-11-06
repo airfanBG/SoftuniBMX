@@ -31,7 +31,11 @@ function Register() {
   const PASS_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/;
 
   function onChangeHandler(e) {
-    setValues({ ...values, [e.target.name]: e.target.value });
+    if (e.target.name === "amount") {
+      setValues({ ...values, [e.target.name]: Number(e.target.value) });
+    } else {
+      setValues({ ...values, [e.target.name]: e.target.value });
+    }
   }
 
   function validateInput(e) {
@@ -43,7 +47,7 @@ function Register() {
     // Full Name VALIDATION
     if (
       inputName === "fullName" &&
-      (inputValue.length < 3 || inputValue.length > 9)
+      (inputValue.length < 3 || inputValue.length > 20)
     ) {
       return setInputError((err) => ({
         ...err,
@@ -110,7 +114,8 @@ function Register() {
     if (Object.values(values).some((x) => x === "")) {
       return setIsAllowed(true);
     }
-    console.log("ok");
+
+    console.log(values);
   }
 
   return (
@@ -356,7 +361,7 @@ function Register() {
                 onBlur={(e) => validateInput(e)}
                 onFocus={(e) => clearErrorState(e)}
               />
-              <div className={styles.svg}>
+              {/* <div className={styles.svg}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -371,12 +376,10 @@ function Register() {
                     d="M4.5 12.75l6 6 9-13.5"
                   />
                 </svg>
-              </div>
+              </div> */}
             </div>
             {inputError.iban && (
-              <p style={{ color: "red", fontSize: "1.8rem" }}>
-                {inputError.iban}
-              </p>
+              <p className={styles.warning}>{inputError.iban}</p>
             )}
           </div>
 
@@ -414,7 +417,7 @@ function Register() {
                 onBlur={(e) => validateInput(e)}
                 onFocus={(e) => clearErrorState(e)}
               />
-              <div className={styles.svg}>
+              {/* <div className={styles.svg}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -429,7 +432,7 @@ function Register() {
                     d="M4.5 12.75l6 6 9-13.5"
                   />
                 </svg>
-              </div>
+              </div> */}
             </div>
             {inputError.amount && (
               <p className={styles.warning}>{inputError.amount}</p>
