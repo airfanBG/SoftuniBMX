@@ -23,6 +23,7 @@ function Register() {
     iban: "",
     amount: 0,
   });
+  const [isAllowed, setIsAllowed] = useState(false);
   const navigate = useNavigate();
 
   const EMAIL_REGEX =
@@ -104,11 +105,19 @@ function Register() {
     }));
   }
 
+  function formSubmitHandler(e) {
+    e.preventDefault();
+    if (Object.values(values).some((x) => x === "")) {
+      return setIsAllowed(true);
+    }
+    console.log("ok");
+  }
+
   return (
     <>
       <Navigation />
       <div className="modal">
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={formSubmitHandler}>
           <h2 className={styles.heading}>Register</h2>
 
           {/* NAME */}
@@ -426,8 +435,14 @@ function Register() {
               <p className={styles.warning}>{inputError.amount}</p>
             )}
           </div>
-
-          <button className={styles["button-submit"]}>Sign Up</button>
+          {isAllowed && (
+            <p style={{ color: "red", fontSize: "1.8rem" }}>
+              All fields are required!
+            </p>
+          )}
+          <button className={styles["button-submit"]} disabled={isAllowed}>
+            Sign Up
+          </button>
 
           <p className={styles["p"]}>
             Already have an account?
