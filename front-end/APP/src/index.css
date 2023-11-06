@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css");
+
+html {
+  font-size: 62.5%;
+  font-family: "Rubik", sans-serif;
+}
+
+:root {
+  --color-main-dark: #0a0a0a;
+  --color-link-light: #f8f9fa;
+  --color-link-light-hover: #dee2e6;
+  --color-hd: #6c6c6c;
+  --color-secondary-hd: #363636;
+  --color-line: #c92a2a;
+  --color-border: #e2e2e2;
+  --color-border-hover: #b6b6b6;
+}
+
+body {
+  position: relative;
+}
+:global(.container) {
+  max-width: 130rem;
+  position: relative;
+}
+
+:global(.m-bottom-20) {
+  margin-bottom: 2rem;
+}
+:global(.m-bottom-30) {
+  margin-bottom: 3rem;
+}
+:global(.m-bottom-50) {
+  margin-bottom: 5rem;
+}
+:global(.m-bottom-80) {
+  margin-bottom: 8rem;
+}
+:global(.m-bottom-10) {
+  margin-bottom: 10rem;
+}

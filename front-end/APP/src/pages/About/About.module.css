@@ -1,0 +1,8 @@
+.container {
+  max-width: 130rem;
+  position: relative;
+}
+
+.content {
+  min-height: 670px;
+}

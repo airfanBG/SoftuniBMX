@@ -1,0 +1,63 @@
+.navigation {
+  background-color: var(--color-main-dark);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 5rem;
+  color: var(--color-link-light);
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  overflow: hidden;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.logoFirstLine:link,
+.logoFirstLine:visited {
+  font-size: 2.4rem;
+  font-weight: 500;
+  letter-spacing: 0.4rem;
+  color: var(--color-link-light);
+  text-decoration: none;
+}
+
+.logoFirstLine:hover,
+.logoFirstLine:active {
+  color: var(--color-link-light-hover);
+}
+
+.logoFirstLine span {
+  color: red;
+  letter-spacing: 0.2rem;
+}
+
+.logoSecondary {
+  font-size: 1.6rem;
+  margin-left: 2.1rem;
+}
+
+.navList {
+  display: flex;
+  gap: 2rem;
+}
+
+.navLink:link,
+.navLink:visited {
+  font-size: 2rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--color-link-light);
+  transition: all 0.2s ease-in;
+}
+
+.navLink:hover,
+.navLink:active,
+.navLink:focus {
+  color: var(--color-link-light-hover);
+}
