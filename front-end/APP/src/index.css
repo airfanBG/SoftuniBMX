@@ -40,3 +40,12 @@ body {
 :global(.m-bottom-10) {
   margin-bottom: 10rem;
 }
+
+.modal {
+  /* width: 100%;
+  height: 100vh;
+  background-color: #3636365d; */
+  display: grid;
+  place-content: center;
+  z-index: 10;
+}

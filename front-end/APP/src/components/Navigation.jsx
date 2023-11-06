@@ -1,6 +1,5 @@
-import { NavLink } from "react-router-dom";
 import styles from "./Navigation.module.css";
-import { useEffect } from "react";
+import { NavLink } from "react-router-dom";
 
 function Navigation() {
   return (
@@ -19,13 +18,18 @@ function Navigation() {
             </NavLink>
           </li>
           <li className={styles.navListItem}>
-            <NavLink to={"about"} className={styles.navLink}>
+            <NavLink to={"/about"} className={styles.navLink}>
               About
             </NavLink>
           </li>
           <li className={styles.navListItem}>
-            <NavLink to={"contacts"} className={styles.navLink}>
+            <NavLink to={"/contacts"} className={styles.navLink}>
               Contacts
+            </NavLink>
+          </li>
+          <li className={styles.navListItem}>
+            <NavLink to={"/login"} className={styles.navLink}>
+              Sign in
             </NavLink>
           </li>
         </ul>
