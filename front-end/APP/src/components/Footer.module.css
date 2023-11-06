@@ -1,5 +1,6 @@
 .footer {
   padding: 10rem 10rem 2rem;
+  justify-self: flex-end;
 }
 .logo {
   display: flex;

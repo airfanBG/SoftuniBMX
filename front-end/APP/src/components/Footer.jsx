@@ -1,6 +1,6 @@
-import { Link, NavLink } from "react-router-dom";
-
 import styles from "./Footer.module.css";
+
+import { Link, NavLink } from "react-router-dom";
 
 function Footer() {
   function toStart() {

@@ -1,14 +1,19 @@
-import Footer from "../../components/Footer.jsx";
-import LoginComponent from "../../components/authComponents/LoginComponent.jsx";
-import Navigation from "../../components/Navigation.jsx";
 import styles from "./About.module.css";
+
+import Navigation from "../../components/Navigation.jsx";
+import Footer from "../../components/Footer.jsx";
+// import Form from "../../components/Form.jsx";
 
 function About() {
   return (
     <div className={styles.compBody}>
       <Navigation />
       <div className={styles.container}>
-        <div className={styles.content}></div>
+        <div className={styles.content}>
+          {/* <Form /> */}
+
+          <span>lkjsanldkfjnalsjgfn</span>
+        </div>
       </div>
       <Footer />
     </div>
