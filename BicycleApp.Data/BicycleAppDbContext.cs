@@ -7,16 +7,20 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
 
     public class BicycleAppDbContext : IdentityDbContext<Employee, IdentityRole<string>, string>
-    {
-        public BicycleAppDbContext():base()
+    {        
+        public BicycleAppDbContext() :base()
         {
             
         }
 
-        public BicycleAppDbContext(DbContextOptions<BicycleAppDbContext> options)
-            : base(options) { }
+        public BicycleAppDbContext(DbContextOptions<BicycleAppDbContext> options, IConfiguration config)
+            : base(options)
+        {
+            
+        }
 
         //Identity Tables
         public DbSet<Client> Clients { get; set; } = null!;
@@ -54,17 +58,7 @@
 
         public DbSet<OrderPartEmployee> OrdersPartsEmployees { get; set; } = null!;
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            var conectionString = "Server=DESKTOP-O0P5VDC\\SQLEXPRESS;Database=BicycleDB;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False";
-
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer(conectionString);
-            }
-        }
-
-
+       
         protected override void OnModelCreating(ModelBuilder builder)
         {
             
