@@ -3360,34 +3360,33 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ttodo\\.nuget\\packages\\": {}
+    "/Users/airfan/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ttodo\\source\\repos\\SoftuniBMX\\BicycleApp.Data\\BicycleApp.Data.csproj",
+      "projectUniqueName": "/Users/airfan/Dev/Github/bmx/BicycleApp.Data/BicycleApp.Data.csproj",
       "projectName": "BicycleApp.Data",
-      "projectPath": "C:\\Users\\ttodo\\source\\repos\\SoftuniBMX\\BicycleApp.Data\\BicycleApp.Data.csproj",
-      "packagesPath": "C:\\Users\\ttodo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ttodo\\source\\repos\\SoftuniBMX\\BicycleApp.Data\\obj\\",
+      "projectPath": "/Users/airfan/Dev/Github/bmx/BicycleApp.Data/BicycleApp.Data.csproj",
+      "packagesPath": "/Users/airfan/.nuget/packages/",
+      "outputPath": "/Users/airfan/Dev/Github/bmx/BicycleApp.Data/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ttodo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/airfan/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "/usr/local/share/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\ttodo\\source\\repos\\SoftuniBMX\\BicycleApp.Common\\BicycleApp.Common.csproj": {
-              "projectPath": "C:\\Users\\ttodo\\source\\repos\\SoftuniBMX\\BicycleApp.Common\\BicycleApp.Common.csproj"
+            "/Users/airfan/Dev/Github/bmx/BicycleApp.Common/BicycleApp.Common.csproj": {
+              "projectPath": "/Users/airfan/Dev/Github/bmx/BicycleApp.Common/BicycleApp.Common.csproj"
             }
           }
         }
@@ -3437,7 +3436,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
       }
     }
   }
