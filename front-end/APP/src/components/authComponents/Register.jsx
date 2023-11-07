@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navigation from "../Navigation.jsx";
 import Footer from "../Footer.jsx";
+import { register } from "../../util/auth.js";
+import { get } from "../../util/api.js";
 
 function Register() {
   const [isHidden, setIsHidden] = useState(true);
@@ -13,7 +15,7 @@ function Register() {
     password: "",
     repass: "",
     iban: "",
-    amount: null,
+    balance: null,
   });
   const [values, setValues] = useState({
     fullName: "",
@@ -21,7 +23,7 @@ function Register() {
     password: "",
     repass: "",
     iban: "",
-    amount: 0,
+    balance: 0,
   });
   const [isAllowed, setIsAllowed] = useState(false);
   const navigate = useNavigate();
@@ -31,8 +33,13 @@ function Register() {
   const PASS_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/;
 
   function onChangeHandler(e) {
-    if (e.target.name === "amount") {
-      setValues({ ...values, [e.target.name]: Number(e.target.value) });
+    if (e.target.name === "balance") {
+      setValues({
+        ...values,
+        [e.target.name]: Number(e.target.value),
+      });
+    } else if (e.target.name === "iban") {
+      setValues({ ...values, [e.target.name]: e.target.value.toUpperCase() });
     } else {
       setValues({ ...values, [e.target.name]: e.target.value });
     }
@@ -93,12 +100,20 @@ function Register() {
       }));
     }
 
-    //AMOUNT VALIDATION
-    if (inputName === "amount" && inputValue === 0) {
-      return setInputError((err) => ({
-        ...err,
-        [e.target.name]: "Amount should be greater than 0",
-      }));
+    //BALANCE VALIDATION
+
+    if (inputName === "balance") {
+      if (inputValue === 0) {
+        return setInputError((err) => ({
+          ...err,
+          [e.target.name]: "Balance should be greater than 0",
+        }));
+      } else {
+        setValues({
+          ...values,
+          [e.target.name]: Number(Number(e.target.value).toFixed(2)),
+        });
+      }
     }
   }
 
@@ -109,13 +124,16 @@ function Register() {
     }));
   }
 
-  function formSubmitHandler(e) {
+  async function formSubmitHandler(e) {
     e.preventDefault();
     if (Object.values(values).some((x) => x === "")) {
       return setIsAllowed(true);
     }
 
-    console.log(values);
+    const user = values;
+
+    const regResponse = await register(user);
+    console.log(regResponse);
   }
 
   return (
@@ -383,7 +401,7 @@ function Register() {
             )}
           </div>
 
-          {/* Account amount */}
+          {/* Account balance */}
           <div className={styles.wrapper}>
             <div className={styles["flex-column"]}>
               <label>Account </label>
@@ -410,9 +428,9 @@ function Register() {
               <input
                 type="number"
                 className={styles["input"]}
-                placeholder="Enter amount"
-                name={"amount"}
-                value={values.amount}
+                placeholder="Enter balance"
+                name={"balance"}
+                value={values.balance}
                 onChange={(e) => onChangeHandler(e)}
                 onBlur={(e) => validateInput(e)}
                 onFocus={(e) => clearErrorState(e)}
@@ -434,8 +452,8 @@ function Register() {
                 </svg>
               </div> */}
             </div>
-            {inputError.amount && (
-              <p className={styles.warning}>{inputError.amount}</p>
+            {inputError.balance && (
+              <p className={styles.warning}>{inputError.balance}</p>
             )}
           </div>
           {isAllowed && (
