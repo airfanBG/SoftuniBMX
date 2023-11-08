@@ -1,7 +1,17 @@
+import { useEffect, useState } from "react";
 import styles from "./Navigation.module.css";
 import { NavLink } from "react-router-dom";
+import { getUserData } from "../util/util.js";
 
 function Navigation() {
+  const [isUser, setIsUser] = useState(null);
+
+  useEffect(function () {
+    const user = getUserData();
+    if (user) setIsUser(user);
+    console.log(user);
+  }, []);
+
   return (
     <div className={styles.navigation}>
       <p className={styles.logo}>
@@ -28,9 +38,15 @@ function Navigation() {
             </NavLink>
           </li>
           <li className={styles.navListItem}>
-            <NavLink to={"/login"} className={styles.navLink}>
-              Sign in
-            </NavLink>
+            {isUser ? (
+              <NavLink to={"/profile"} className={styles.navLink}>
+                {isUser.fullName}
+              </NavLink>
+            ) : (
+              <NavLink to={"/login"} className={styles.navLink}>
+                Sign in
+              </NavLink>
+            )}
           </li>
         </ul>
       </nav>

@@ -5,10 +5,14 @@ import Navigation from "../Navigation.jsx";
 import Footer from "../Footer.jsx";
 import { register } from "../../util/auth.js";
 import { get } from "../../util/api.js";
+import Loader from "../Loader.jsx";
+import { setUserData } from "../../util/util.js";
 
 function Register() {
   const [isHidden, setIsHidden] = useState(true);
   const [isHiddenRepass, setIsHiddenRepass] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [resError, setResError] = useState({ status: false, message: "" });
   const [inputError, setInputError] = useState({
     fullName: "",
     email: "",
@@ -131,14 +135,41 @@ function Register() {
     }
 
     const user = values;
+    try {
+      setIsLoading(true);
+      const regResponse = await register(user);
 
-    const regResponse = await register(user);
-    console.log(regResponse);
+      setValues({
+        fullName: "",
+        email: "",
+        password: "",
+        repass: "",
+        iban: "",
+        balance: 0,
+      });
+
+      if (regResponse.code) {
+        setIsLoading(false);
+        setResError({ status: true, message: regResponse.message });
+        throw new Error(regResponse);
+      }
+
+      setIsLoading(false);
+      setUserData(regResponse);
+      navigate("/");
+    } catch (err) {
+      setTimeout(() => {
+        navigate("/");
+        setResError({ status: false, message: "" });
+      }, "5000");
+      throw new Error(err.message);
+    }
   }
 
   return (
     <>
       <Navigation />
+      {isLoading && <Loader />}
       <div className="modal">
         <form className={styles.form} onSubmit={formSubmitHandler}>
           <h2 className={styles.heading}>Register</h2>
@@ -282,12 +313,20 @@ function Register() {
                 {isHidden ? (
                   <i
                     className="fa-regular fa-eye"
-                    style={inputError.password ? { color: "red" } : null}
+                    style={
+                      inputError.password
+                        ? { display: "none", color: "red" }
+                        : null
+                    }
                   ></i>
                 ) : (
                   <i
                     className="fa-regular fa-eye-slash"
-                    style={inputError.password ? { color: "red" } : null}
+                    style={
+                      inputError.password
+                        ? { display: "none", color: "red" }
+                        : null
+                    }
                   ></i>
                 )}
               </div>
@@ -330,12 +369,20 @@ function Register() {
                 {isHiddenRepass ? (
                   <i
                     className="fa-regular fa-eye"
-                    style={inputError.repass ? { color: "red" } : null}
+                    style={
+                      inputError.repass
+                        ? { display: "none", color: "red" }
+                        : null
+                    }
                   ></i>
                 ) : (
                   <i
                     className="fa-regular fa-eye-slash"
-                    style={inputError.repass ? { color: "red" } : null}
+                    style={
+                      inputError.repass
+                        ? { display: "none", color: "red" }
+                        : null
+                    }
                   ></i>
                 )}
               </div>
@@ -452,6 +499,7 @@ function Register() {
                 </svg>
               </div> */}
             </div>
+
             {inputError.balance && (
               <p className={styles.warning}>{inputError.balance}</p>
             )}
@@ -460,6 +508,9 @@ function Register() {
             <p style={{ color: "red", fontSize: "1.8rem" }}>
               All fields are required!
             </p>
+          )}
+          {resError.status && (
+            <p className={styles.generalError}>{resError.message}</p>
           )}
           <button className={styles["button-submit"]} disabled={isAllowed}>
             Sign Up

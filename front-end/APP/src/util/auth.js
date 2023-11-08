@@ -10,14 +10,14 @@ const endpoints = {
 
 //TODO Change user object according to project requirements
 
-export async function login(email, password) {
-  const result = await post(endpoints.login, { email, password });
+export async function login(user) {
+  const result = await post(endpoints.login, user);
   setUserData(result);
 }
 
 export async function register(user) {
   const result = await post(endpoints.register, user);
-  setUserData(result);
+  return result;
 }
 
 export async function logout() {
