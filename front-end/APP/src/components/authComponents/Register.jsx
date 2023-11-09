@@ -11,9 +11,11 @@ import Footer from "../Footer.jsx";
 import { register } from "../../util/auth.js";
 import Loader from "../Loader.jsx";
 import { setUserData } from "../../util/util.js";
+import LoaderWheel from "../LoaderWheel.jsx";
 
 const initialState = {
-  fullName: "",
+  firstName: "",
+  lastName: "",
   email: "",
   password: "",
   repass: "",
@@ -58,14 +60,26 @@ function Register() {
 
     if (inputValue.length === 0) return;
 
-    // Full Name VALIDATION
+    // FIRST NAME VALIDATION
     if (
-      inputName === "fullName" &&
+      inputName === "firstName" &&
+      (inputValue.length < 2 || inputValue.length > 20)
+    ) {
+      return setInputError((err) => ({
+        ...err,
+        [e.target.name]:
+          "First name should be between 2 and 20 characters long",
+      }));
+    }
+
+    // LAST NAME VALIDATION
+    if (
+      inputName === "lastName" &&
       (inputValue.length < 3 || inputValue.length > 20)
     ) {
       return setInputError((err) => ({
         ...err,
-        [e.target.name]: "Name should be between 3 an 20 characters long",
+        [e.target.name]: "Last name should be between 3 and 20 characters long",
       }));
     }
 
@@ -163,7 +177,8 @@ function Register() {
       console.log(user);
 
       setValues({
-        fullName: "",
+        firstName: "",
+        lastName: "",
         email: "",
         password: "",
         repass: "",
@@ -178,31 +193,30 @@ function Register() {
         setResError({ status: true, message: regResponse.message });
         throw new Error(regResponse);
       }
-
-      setIsLoading(false);
-      // setUserData(regResponse);
-      navigate("/");
+      setTimeout(() => {
+        navigate("/");
+        setIsLoading(false);
+      }, 2000);
     } catch (err) {
       setTimeout(() => {
         navigate("/");
         setResError({ status: false, message: "" });
-      }, "5000");
+      }, 3000);
       throw new Error(err.message);
     }
   }
 
   return (
     <>
-      <Navigation />
-      {isLoading && <Loader />}
+      {isLoading && <LoaderWheel />}
       <div className="modal">
         <form className={styles.form} onSubmit={formSubmitHandler}>
           <h2 className={styles.heading}>Register</h2>
 
-          {/* NAME */}
+          {/*FIRST NAME */}
           <div className={styles.wrapper}>
             <div className={styles["flex-column"]}>
-              <label>Name </label>
+              <label>First Name </label>
             </div>
 
             <div className={styles.inputForm}>
@@ -227,32 +241,55 @@ function Register() {
                 type="text"
                 className={styles.input}
                 placeholder="Enter your Name"
-                name={"fullName"}
-                value={values.fullName}
+                name={"firstName"}
+                value={values.firstName}
                 onChange={(e) => onChangeHandler(e)}
                 onBlur={(e) => validateInput(e)}
                 onFocus={(e) => clearErrorState(e)}
               />
-
-              {/* <div className={styles.svg}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4.5 12.75l6 6 9-13.5"
-                />
-              </svg>
-            </div> */}
             </div>
-            {inputError.fullName && (
-              <p className={styles.warning}>{inputError.fullName}</p>
+            {inputError.firstName && (
+              <p className={styles.warning}>{inputError.firstName}</p>
+            )}
+          </div>
+
+          {/*LAST NAME */}
+          <div className={styles.wrapper}>
+            <div className={styles["flex-column"]}>
+              <label>Last Name </label>
+            </div>
+
+            <div className={styles.inputForm}>
+              <div className={styles.svg}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z"
+                  />
+                </svg>
+              </div>
+
+              <input
+                type="text"
+                className={styles.input}
+                placeholder="Enter your Last Name"
+                name={"lastName"}
+                value={values.lastName}
+                onChange={(e) => onChangeHandler(e)}
+                onBlur={(e) => validateInput(e)}
+                onFocus={(e) => clearErrorState(e)}
+              />
+            </div>
+            {inputError.lastName && (
+              <p className={styles.warning}>{inputError.lastName}</p>
             )}
           </div>
 
@@ -283,22 +320,6 @@ function Register() {
                 onBlur={(e) => validateInput(e)}
                 onFocus={(e) => clearErrorState(e)}
               />
-              {/* <div className={styles.svg}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4.5 12.75l6 6 9-13.5"
-                />
-              </svg>
-            </div> */}
             </div>
             {inputError.email && (
               <p className={styles.warning}>{inputError.email}</p>
@@ -600,7 +621,6 @@ function Register() {
           </p>
         </form>
       </div>
-      <Footer />
     </>
   );
 }
@@ -608,12 +628,13 @@ function Register() {
 export default Register;
 
 // {
-//   "fullName": "Van Deribohten",
-//   "email": "van@deribohten.com",
-//   "password": "Van-12",
-//   "repass": "Van-12",
-//   "iban": "IBAN129381092839182",
-//   "balance": 12345.68,
+//   "firstName": "First Name Test",
+//   "lastName": "Last Name Test",
+//   "email": "test@test.bg",
+//   "password": "Test-1",
+//   "repass": "Test-1",
+//   "iban": "QWE123345567789",
+//   "balance": 9536433.24,
 //   "phone": "+359888888888",
-//   "address": "Address test, Cambodia123"
+//   "address": "Testuser str. 123 , Washington DC , USA"
 // }

@@ -1,0 +1,58 @@
+/* Center the container */
+.loaderContainer {
+  width: 100%;
+  height: 50vh;
+  position: relative;
+  position: absolute;
+  display: grid;
+  place-items: center;
+}
+
+img {
+  width: 250px;
+  z-index: 999;
+}
+
+/******************************************
+  /* ANIMATION STYLES                   
+  /*******************************************/
+@-webkit-keyframes spin-me {
+  0% {
+    -webkit-transform: rotateZ(0deg);
+    transform: rotateZ(0deg);
+  }
+  100% {
+    -webkit-transform: rotateZ(360deg);
+    transform: rotateZ(360deg);
+  }
+}
+
+@keyframes spin-me {
+  0% {
+    -webkit-transform: rotateZ(0deg);
+    transform: rotateZ(0deg);
+  }
+  100% {
+    -webkit-transform: rotateZ(360deg);
+    transform: rotateZ(360deg);
+  }
+}
+
+.thing-to-spin {
+  /*animation-name*/
+  -webkit-animation-name: spin-me;
+  animation-name: spin-me;
+  /*animation-iteration-count*/
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  /*animation-duration*/
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+  /*animation-timing-function*/
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+
+  /* Shorthand */
+  /*  -webkit-animation: spin-me 500ms linear infinite;
+    animation: spin-me 500ms linear infinite;*/
+}

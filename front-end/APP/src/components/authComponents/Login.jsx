@@ -8,6 +8,7 @@ import Footer from "../Footer.jsx";
 import { login } from "../../util/auth.js";
 import { clearUserData } from "../../util/util.js";
 import Loader from "../Loader.jsx";
+import LoaderWheel from "../LoaderWheel.jsx";
 
 const EMAIL_REGEX =
   /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
@@ -101,8 +102,7 @@ function Login() {
 
   return (
     <>
-      <Navigation />
-      {isLoading && <Loader />}
+      {isLoading && <LoaderWheel />}
       <div className="modal">
         <form className={styles.form} onSubmit={formSubmitHandler}>
           <h2 className={styles.heading}>Login</h2>
@@ -214,18 +214,8 @@ function Login() {
           </p>
         </form>
       </div>
-      <Footer />
     </>
   );
 }
 
 export default Login;
-
-// {
-//   "values": {
-//       "email": "van@deribohten.com",
-//       "password": "Van-12"
-//   }
-// }
-
-// {"email": "van@deribohten.com","password": "Van-12"}
