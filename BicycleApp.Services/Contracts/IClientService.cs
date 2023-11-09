@@ -4,8 +4,10 @@
 
     public interface IClientService
     {
-        Task<bool> RegisterClient(ClientRegisterDto clientDto);
+        Task<bool> RegisterClientAsync(ClientRegisterDto clientDto);
 
-        Task<bool> LoginClient(ClientLoginDto clientDto);
+        Task<ClientReturnDto> LoginClientAsync(ClientLoginDto clientDto);
+
+        Task<ClientInfoDto?> GetClientInfoAsync(string Id);
     }
 }

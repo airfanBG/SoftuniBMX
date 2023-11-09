@@ -1,13 +1,11 @@
-﻿namespace BicycleApp.Services.Models.IdentityModels
+﻿using System.ComponentModel.DataAnnotations;
+namespace BicycleApp.Services.Models.IdentityModels
 {
-    using System.ComponentModel.DataAnnotations;
-
-    using Microsoft.AspNetCore.Http;
-
     using static BicycleApp.Common.EntityValidationConstants.User;
 
-    public class ClientRegisterDto
+    public class EmployeeRegisterDto
     {
+
         [Required]
         [StringLength(FirstNameMaxLength, MinimumLength = FirstNameMinLength)]
         public string FirstName { get; set; } = null!;
@@ -15,6 +13,9 @@
         [Required]
         [StringLength(LastNameMaxLength, MinimumLength = LastNameMinLength)]
         public string LastName { get; set; } = null!;
+
+        [Required]
+        public string PhoneNumber { get; set; } = null!;
 
         [Required]
         public string Email { get; set; } = null!;
@@ -27,21 +28,17 @@
         public string ConfirmPassword { get; set; } = null!;
 
         [Required]
-        [StringLength(PhoneNumberMaxLength)]
-        public string PhoneNumber { get; set; } = null!;
+        [StringLength(PositionMaxLength, MinimumLength = PositionMinLength)]
+        public string Position { get; set; } = null!;
+
 
         [Required]
-        [StringLength(DelivaryAddressMaxLength)]
-        public string DelivaryAddress { get; set; } = null!;
+        public string DateOfHire { get; set; } = null!;
 
         [Required]
-        public string Town { get; set; } = null!;
+        public string Department { get; set; } = null!;
 
         [Required]
-        [StringLength(IBANMaxLength)]
-        public string IBAN { get; set; } = null!;
-
-        [Required]
-        public decimal Balance { get; set; }
+        public bool IsManeger { get; set; }
     }
 }
