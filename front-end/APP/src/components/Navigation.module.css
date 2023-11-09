@@ -61,3 +61,6 @@
 .navLink:focus {
   color: var(--color-link-light-hover);
 }
+.navLink:global(.active) {
+  border-bottom: 1px solid var(--color-line);
+}

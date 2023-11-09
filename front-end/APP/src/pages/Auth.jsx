@@ -1,15 +1,17 @@
+import styles from "./Auth.module.css";
+
+import { Outlet } from "react-router-dom";
 import Navigation from "../components/Navigation.jsx";
-import styles from "./AppLayout.module.css";
 import Footer from "../components/Footer.jsx";
 
-function AppLayout() {
+function Auth() {
   return (
-    <div className={styles["app-component"]}>
+    <div>
       <Navigation />
-      <h2>App page</h2>
+      <Outlet />
       <Footer />
     </div>
   );
 }
 
-export default AppLayout;
+export default Auth;

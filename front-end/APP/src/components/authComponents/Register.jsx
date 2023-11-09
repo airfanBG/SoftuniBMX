@@ -1,35 +1,38 @@
 import styles from "./Register.module.css";
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { PhoneInput } from "react-international-phone";
+import "react-international-phone/style.css";
+
 import Navigation from "../Navigation.jsx";
 import Footer from "../Footer.jsx";
 import { register } from "../../util/auth.js";
-import { get } from "../../util/api.js";
 import Loader from "../Loader.jsx";
 import { setUserData } from "../../util/util.js";
 
+const initialState = {
+  fullName: "",
+  email: "",
+  password: "",
+  repass: "",
+  iban: "",
+  balance: "",
+  phone: "",
+  address: "",
+};
+
 function Register() {
+  const [phone, setPhone] = useState("");
   const [isHidden, setIsHidden] = useState(true);
   const [isHiddenRepass, setIsHiddenRepass] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [resError, setResError] = useState({ status: false, message: "" });
-  const [inputError, setInputError] = useState({
-    fullName: "",
-    email: "",
-    password: "",
-    repass: "",
-    iban: "",
-    balance: null,
-  });
-  const [values, setValues] = useState({
-    fullName: "",
-    email: "",
-    password: "",
-    repass: "",
-    iban: "",
-    balance: 0,
-  });
+  const [inputError, setInputError] = useState(initialState);
+  const [values, setValues] = useState(initialState);
   const [isAllowed, setIsAllowed] = useState(false);
+
   const navigate = useNavigate();
 
   const EMAIL_REGEX =
@@ -77,7 +80,7 @@ function Register() {
     //PASSWORD VALIDATION
     if (inputName === "password" && !PASS_REGEX.test(inputValue)) {
       const passErrorText =
-        "The password should be a minimum 6 characters long. At least one upper case letter, one lower case letter and at least one number.";
+        "The password should be a minimum 6 characters long. At least one upper case, one lower case letter and at least one digit.";
 
       return setInputError((err) => ({
         ...err,
@@ -90,6 +93,14 @@ function Register() {
       return setInputError((err) => ({
         ...err,
         [e.target.name]: "Passwords don't match",
+      }));
+    }
+
+    //PHONE VALIDATION
+    if (inputName === "phone" && inputValue) {
+      return setInputError((err) => ({
+        ...err,
+        [e.target.name]: "Invalid phone number",
       }));
     }
 
@@ -119,6 +130,17 @@ function Register() {
         });
       }
     }
+
+    //ADDRESS VALIDATION
+    // if (
+    //   inputName === "address" &&
+    //   (inputValue.length < 5 || inputValue.length > 34)
+    // ) {
+    //   return setInputError((err) => ({
+    //     ...err,
+    //     [e.target.name]: "Invalid IBAN number",
+    //   }));
+    // }
   }
 
   function clearErrorState(e) {
@@ -138,6 +160,7 @@ function Register() {
     try {
       setIsLoading(true);
       const regResponse = await register(user);
+      console.log(user);
 
       setValues({
         fullName: "",
@@ -145,7 +168,9 @@ function Register() {
         password: "",
         repass: "",
         iban: "",
-        balance: 0,
+        balance: "",
+        phone: "",
+        address: "",
       });
 
       if (regResponse.code) {
@@ -155,7 +180,7 @@ function Register() {
       }
 
       setIsLoading(false);
-      setUserData(regResponse);
+      // setUserData(regResponse);
       navigate("/");
     } catch (err) {
       setTimeout(() => {
@@ -286,7 +311,7 @@ function Register() {
               <label>Password </label>
             </div>
 
-            <div className={styles["inputForm"]}>
+            <div className={`${styles["inputForm"]}`}>
               <svg
                 height={20}
                 viewBox="-64 0 512 512"
@@ -392,6 +417,30 @@ function Register() {
             )}
           </div>
 
+          {/* PHONE */}
+          <div className={styles.wrapper}>
+            <div className={styles["flex-column"]}>
+              <label>Telepfone </label>
+            </div>
+            <div className={styles["inputForm"]}>
+              <PhoneInput
+                defaultCountry="bg"
+                value={phone}
+                onChange={(phone) => setPhone(phone)}
+                onBlur={() => setValues({ ...values, phone: phone })}
+                inputStyle={{
+                  // width: "90%",
+                  // height: "50px",
+                  // border: "1.5px solid #ecedec",
+                  border: "none",
+                  borderRadius: "10px",
+                  fontSize: "2rem",
+                }}
+                buttonStyle={false}
+              />
+            </div>
+          </div>
+
           {/* IBAN */}
           <div className={styles.wrapper}>
             <div className={styles["flex-column"]}>
@@ -482,26 +531,50 @@ function Register() {
                 onBlur={(e) => validateInput(e)}
                 onFocus={(e) => clearErrorState(e)}
               />
-              {/* <div className={styles.svg}>
+            </div>
+
+            {inputError.balance && (
+              <p className={styles.warning}>{inputError.balance}</p>
+            )}
+          </div>
+
+          {/* ADDRESS */}
+          <div className={styles.wrapper}>
+            <div className={styles["flex-column"]}>
+              <label>Address </label>
+            </div>
+
+            <div className={styles["address"]}>
+              <div className={styles.svgTextArea}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  strokeWidth={1.5}
+                  strokeWidth={1.2}
                   stroke="currentColor"
                   className="w-6 h-6"
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d="M4.5 12.75l6 6 9-13.5"
+                    d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"
                   />
                 </svg>
-              </div> */}
+              </div>
+              <textarea
+                rows="3"
+                cols="80"
+                placeholder="Enter address"
+                className={styles["textarea"]}
+                name={"address"}
+                onChange={(e) => onChangeHandler(e)}
+                onBlur={(e) => validateInput(e)}
+                onFocus={(e) => clearErrorState(e)}
+                value={values.address}
+              ></textarea>
             </div>
-
-            {inputError.balance && (
-              <p className={styles.warning}>{inputError.balance}</p>
+            {inputError.address && (
+              <p className={styles.warning}>{inputError.address}</p>
             )}
           </div>
           {isAllowed && (
@@ -518,7 +591,10 @@ function Register() {
 
           <p className={styles["p"]}>
             Already have an account?
-            <span className={styles["span"]} onClick={() => navigate("/login")}>
+            <span
+              className={styles["span"]}
+              onClick={() => navigate("/auth/login")}
+            >
               Sign In
             </span>
           </p>
@@ -530,3 +606,14 @@ function Register() {
 }
 
 export default Register;
+
+// {
+//   "fullName": "Van Deribohten",
+//   "email": "van@deribohten.com",
+//   "password": "Van-12",
+//   "repass": "Van-12",
+//   "iban": "IBAN129381092839182",
+//   "balance": 12345.68,
+//   "phone": "+359888888888",
+//   "address": "Address test, Cambodia123"
+// }

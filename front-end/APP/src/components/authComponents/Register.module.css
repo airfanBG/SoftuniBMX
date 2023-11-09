@@ -44,7 +44,8 @@
   font-size: 1.5rem;
 }
 
-.inputForm {
+.inputForm,
+.address {
   border: 1.5px solid #ecedec;
   border-radius: 10px;
   height: 50px;
@@ -54,20 +55,34 @@
   transition: 0.2s ease-in-out;
 }
 
-.form input.input {
+.address {
+  height: 100px;
+}
+textarea {
+  all: unset;
+}
+
+.form input.input,
+.form textarea.textarea {
   margin: 0 10px;
   border-radius: 10px;
   border: none;
   width: 85%;
-  height: 100%;
   font-size: 2rem;
+  height: 100%;
 }
 
-.input:focus {
+.form textarea.textarea {
+  resize: none;
+}
+
+.input:focus,
+.textarea {
   outline: none;
 }
 
-.inputForm:focus-within {
+.inputForm:focus-within,
+.address:focus-within {
   border: 1.5px solid #393a3c;
 }
 
@@ -144,6 +159,16 @@
   width: 22px;
   height: 22px;
 }
+.svgTextArea {
+  font-size: 2rem;
+  width: 22px;
+  height: 22px;
+  align-self: flex-start;
+}
+.inputFormSvg {
+  width: 22px;
+  height: 22px;
+}
 
 .wrapper {
   position: relative;
@@ -151,7 +176,7 @@
 
 .warning {
   position: absolute;
-  width: 100%;
+  width: 127%;
   top: 10px;
   left: 200px;
   /* background-color: var(--color-warning);

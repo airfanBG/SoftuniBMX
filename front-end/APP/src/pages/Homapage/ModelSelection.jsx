@@ -49,7 +49,9 @@ function ModelSelection() {
             </span>
           </div>
 
-          <button className={styles["step-btn"]}>Start production</button>
+          <Link to={"create"} className={styles["step-link"]}>
+            Start production
+          </Link>
         </div>
       </article>
       <p className={styles["secondary-hd"]}>or</p>

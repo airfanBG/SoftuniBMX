@@ -12,7 +12,9 @@ const endpoints = {
 
 export async function login(user) {
   const result = await post(endpoints.login, user);
+  console.log(result);
   setUserData(result);
+  return result;
 }
 
 export async function register(user) {

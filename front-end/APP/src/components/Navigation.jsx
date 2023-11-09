@@ -9,7 +9,11 @@ function Navigation() {
   useEffect(function () {
     const user = getUserData();
     if (user) setIsUser(user);
-    console.log(user);
+    // console.log(user);
+
+    return () => {
+      setIsUser(user);
+    };
   }, []);
 
   return (
@@ -43,7 +47,7 @@ function Navigation() {
                 {isUser.fullName}
               </NavLink>
             ) : (
-              <NavLink to={"/login"} className={styles.navLink}>
+              <NavLink to={"/auth"} className={styles.navLink}>
                 Sign in
               </NavLink>
             )}
