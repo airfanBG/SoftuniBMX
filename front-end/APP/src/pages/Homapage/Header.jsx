@@ -1,7 +1,7 @@
 import styles from "./Header.module.css";
 
 import Hero from "./Hero.jsx";
-import Navigation from "../../components/Navigation.jsx";
+import Navigation from "../../components/navigationsComponents/Navigation.jsx";
 
 function Header() {
   return (

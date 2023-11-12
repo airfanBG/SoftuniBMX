@@ -2,7 +2,7 @@ import styles from "./Login.module.css";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Navigation from "../Navigation.jsx";
+import Navigation from "../navigationsComponents/Navigation.jsx";
 import Footer from "../Footer.jsx";
 
 import { login } from "../../util/auth.js";

@@ -7,6 +7,7 @@ import PageNotFound from "./components/PageNotFound.jsx";
 import Login from "./components/authComponents/Login.jsx";
 import Register from "./components/authComponents/Register.jsx";
 import Auth from "./pages/Auth.jsx";
+import UserProfile from "./components/UserProfile.jsx";
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="about" element={<About />} />
-        <Route path="create" element={<AppLayout />} />
+        <Route path="profile" element={<UserProfile />} />
+        <Route path="app" element={<AppLayout />} />
         <Route path="auth" element={<Auth />}>
           <Route index element={<Navigate replace to="login" />} />
           <Route path="login" element={<Login />} />

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 
-import Navigation from "../Navigation.jsx";
+import Navigation from "../navigationsComponents/Navigation.jsx";
 import Footer from "../Footer.jsx";
 import { register } from "../../util/auth.js";
 import Loader from "../Loader.jsx";
@@ -23,6 +23,7 @@ const initialState = {
   balance: "",
   phone: "",
   address: "",
+  role: "user",
 };
 
 function Register() {

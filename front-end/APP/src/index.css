@@ -11,13 +11,17 @@ html {
 :root {
   --color-main-dark: #0a0a0a;
   --color-link-light: #f8f9fa;
-  --color-link-light-hover: #dee2e6;
+  --color-link-light-hover: #dee6de;
   --color-hd: #6c6c6c;
   --color-secondary-hd: #363636;
   --color-line: #c92a2a;
   --color-border: #e2e2e2;
   --color-border-hover: #b6b6b6;
   --color-warning: #bf0000;
+  --button-color: #6b9080;
+  --button-color-hover: #a4c3b2;
+  --button-font-color: #eaf4f4;
+  --button-font-color-hover: #f6fff8;
 }
 
 body {

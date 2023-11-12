@@ -1,0 +1,47 @@
+.wrapper {
+  width: 1300px;
+  padding: 2rem 0;
+}
+
+.dashHeading {
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  color: var(--color-secondary-hd);
+  margin: 1rem 0;
+}
+
+.board {
+  width: 100%;
+  min-height: 100px;
+  border: 1px solid gray;
+  padding: 1rem 1rem 0;
+}
+
+.boardHeader {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 2rem 0.5rem;
+  border-bottom: 2px solid var(--color-line);
+}
+
+.boardHeader span {
+  font-size: 1.8rem;
+}
+.boardHeader h3 {
+  font-size: 2rem;
+  color: var(--color-main-dark);
+}
+.boardHeader h3 span {
+  font-size: 1.8rem;
+  color: var(--color-hd);
+}
+
+.orders {
+  padding: 1rem 0;
+}
+
+.boardHeader .cash {
+  font-size: 2rem;
+  color: red;
+}

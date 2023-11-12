@@ -1,0 +1,18 @@
+.componentBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.spacer {
+  height: 9rem;
+}
+
+.container {
+  max-width: 130rem;
+  min-height: 670px;
+
+  position: relative;
+}

@@ -1,6 +1,6 @@
 import styles from "./About.module.css";
 
-import Navigation from "../../components/Navigation.jsx";
+import Navigation from "../../components/navigationsComponents/Navigation.jsx";
 import Footer from "../../components/Footer.jsx";
 // import Form from "../../components/Form.jsx";
 

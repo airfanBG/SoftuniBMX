@@ -1,12 +1,13 @@
-import Navigation from "../components/Navigation.jsx";
+import Navigation from "../components/navigationsComponents/Navigation.jsx";
 import styles from "./AppLayout.module.css";
 import Footer from "../components/Footer.jsx";
+import { Outlet } from "react-router-dom";
 
 function AppLayout() {
   return (
     <div className={styles["app-component"]}>
       <Navigation />
-      <h2>App page</h2>
+      <Outlet />
       <Footer />
     </div>
   );
