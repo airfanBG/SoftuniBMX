@@ -11,7 +11,7 @@
         "projectName": "BicycleApp.Common",
         "projectPath": "C:\\Users\\ttodo\\source\\repos\\SoftuniBMX\\BicycleApp.Common\\BicycleApp.Common.csproj",
         "packagesPath": "C:\\Users\\ttodo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ttodo\\Source\\Repos\\SoftuniBMX\\BicycleApp.Common\\obj\\",
+        "outputPath": "C:\\Users\\ttodo\\source\\repos\\SoftuniBMX\\BicycleApp.Common\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ttodo\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -4,6 +4,7 @@ using BicycleApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BicycleApp.Data.Migrations
 {
     [DbContext(typeof(BicycleAppDbContext))]
-    partial class BicycleAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231109122149_Initialize")]
+    partial class Initialize
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,8 +77,8 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = 1,
                             ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 870, DateTimeKind.Local).AddTicks(8436),
-                            DateUpdated = new DateTime(2023, 11, 13, 11, 24, 30, 870, DateTimeKind.Local).AddTicks(8484),
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6137),
+                            DateUpdated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6179),
                             Description = "Test Description",
                             PartId = 1,
                             Title = "Test Title"
@@ -129,8 +132,8 @@ namespace BicycleApp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateDelivered = new DateTime(2023, 11, 13, 11, 24, 30, 870, DateTimeKind.Local).AddTicks(8597),
-                            DateUpdated = new DateTime(2023, 11, 13, 11, 24, 30, 870, DateTimeKind.Local).AddTicks(8600),
+                            DateDelivered = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6238),
+                            DateUpdated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6240),
                             Note = "text",
                             PartId = 1,
                             QuantityDelivered = 2.0,
@@ -179,14 +182,14 @@ namespace BicycleApp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 870, DateTimeKind.Local).AddTicks(8688),
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6297),
                             IsDeleted = false,
                             Name = "Administration"
                         },
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 870, DateTimeKind.Local).AddTicks(8694),
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6304),
                             IsDeleted = false,
                             Name = "Workshop"
                         });
@@ -405,7 +408,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = 1,
                             ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 870, DateTimeKind.Local).AddTicks(8853),
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6457),
                             Description = "row=1;partId=1;partName=test;partPrice=10.00,priceQty=1$",
                             Discount = 0m,
                             FinalAmount = 12.00m,
@@ -471,7 +474,7 @@ namespace BicycleApp.Data.Migrations
                             OrderId = 1,
                             PartId = 1,
                             EmployeeId = "21003785-a275-4139-ae20-af6a6cf8fea8",
-                            DatetimeAsigned = new DateTime(2023, 11, 13, 11, 24, 30, 870, DateTimeKind.Local).AddTicks(8910),
+                            DatetimeAsigned = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6498),
                             Description = "test",
                             IsCompleted = false
                         });
@@ -555,7 +558,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 871, DateTimeKind.Local).AddTicks(224),
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6550),
                             Description = "Best frame in the world!",
                             IsDeleted = false,
                             Name = "Frame OG",
@@ -569,7 +572,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = 2,
                             CategoryId = 2,
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 871, DateTimeKind.Local).AddTicks(278),
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6560),
                             Description = "Best wheels ever!",
                             IsDeleted = false,
                             Name = "Wheel of the Year",
@@ -583,7 +586,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = 3,
                             CategoryId = 3,
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 871, DateTimeKind.Local).AddTicks(283),
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6563),
                             Description = "Worst shift - have only one!",
                             IsDeleted = false,
                             Name = "Shift",
@@ -641,7 +644,7 @@ namespace BicycleApp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 871, DateTimeKind.Local).AddTicks(516),
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6600),
                             ImageUrl = "test",
                             IsDeleted = false,
                             Name = "Frame"
@@ -649,7 +652,7 @@ namespace BicycleApp.Data.Migrations
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 871, DateTimeKind.Local).AddTicks(523),
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6609),
                             ImageUrl = "test",
                             IsDeleted = false,
                             Name = "Wheel"
@@ -657,7 +660,7 @@ namespace BicycleApp.Data.Migrations
                         new
                         {
                             Id = 3,
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 871, DateTimeKind.Local).AddTicks(526),
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6611),
                             ImageUrl = "test",
                             IsDeleted = false,
                             Name = "Shift"
@@ -737,49 +740,42 @@ namespace BicycleApp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 871, DateTimeKind.Local).AddTicks(733),
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6710),
                             IsDeleted = false,
-                            Name = "Pending approval"
+                            Name = "Order approval"
                         },
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 871, DateTimeKind.Local).AddTicks(738),
-                            IsDeleted = false,
-                            Name = "Approved order"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 871, DateTimeKind.Local).AddTicks(748),
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6721),
                             IsDeleted = false,
                             Name = "Frame management"
                         },
                         new
                         {
-                            Id = 4,
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 871, DateTimeKind.Local).AddTicks(750),
+                            Id = 3,
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6724),
                             IsDeleted = false,
                             Name = "Wheel management"
                         },
                         new
                         {
-                            Id = 5,
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 871, DateTimeKind.Local).AddTicks(753),
+                            Id = 4,
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6726),
                             IsDeleted = false,
                             Name = "Shift management"
                         },
                         new
                         {
-                            Id = 6,
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 871, DateTimeKind.Local).AddTicks(764),
+                            Id = 5,
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6728),
                             IsDeleted = false,
                             Name = "Quality control"
                         },
                         new
                         {
-                            Id = 7,
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 871, DateTimeKind.Local).AddTicks(767),
+                            Id = 6,
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6737),
                             IsDeleted = false,
                             Name = "Send order"
                         });
@@ -857,8 +853,8 @@ namespace BicycleApp.Data.Migrations
                             Id = 1,
                             Address = "Sofia, center",
                             ContactName = "Pesh Peshev",
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 871, DateTimeKind.Local).AddTicks(1194),
-                            DateUpdated = new DateTime(2023, 11, 13, 11, 24, 30, 871, DateTimeKind.Local).AddTicks(1197),
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6805),
+                            DateUpdated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6806),
                             Email = "text@test.bg",
                             IsDeleted = false,
                             Name = "X Ltd",
@@ -907,22 +903,22 @@ namespace BicycleApp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 871, DateTimeKind.Local).AddTicks(1301),
-                            DateUpdated = new DateTime(2023, 11, 13, 11, 24, 30, 871, DateTimeKind.Local).AddTicks(1337),
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6849),
+                            DateUpdated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6851),
                             IsDeleted = false,
                             Name = "Sofia"
                         },
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 871, DateTimeKind.Local).AddTicks(1343),
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6858),
                             IsDeleted = false,
                             Name = "Varna"
                         },
                         new
                         {
                             Id = 3,
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 871, DateTimeKind.Local).AddTicks(1346),
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(6861),
                             IsDeleted = false,
                             Name = "Burgas"
                         });
@@ -967,8 +963,8 @@ namespace BicycleApp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 871, DateTimeKind.Local).AddTicks(1529),
-                            DateUpdated = new DateTime(2023, 11, 13, 11, 24, 30, 871, DateTimeKind.Local).AddTicks(1531),
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(7151),
+                            DateUpdated = new DateTime(2023, 11, 9, 14, 21, 49, 179, DateTimeKind.Local).AddTicks(7166),
                             IsDeleted = false,
                             VATPercent = 20.00m
                         });
@@ -1082,8 +1078,8 @@ namespace BicycleApp.Data.Migrations
                             Id = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
                             AccessFailedCount = 0,
                             Balance = 1000.00m,
-                            ConcurrencyStamp = "bd2e7ab8-c50d-4cfe-843d-c07b2e56fdad",
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 481, DateTimeKind.Local).AddTicks(7406),
+                            ConcurrencyStamp = "416fe525-e612-4242-990d-96fc4e6a9203",
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 48, 782, DateTimeKind.Local).AddTicks(2531),
                             DelivaryAddress = "Sofia, Mladost 1, bl 20",
                             Email = "client@test.bg",
                             EmailConfirmed = false,
@@ -1093,7 +1089,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Ivanov",
                             LockoutEnabled = false,
                             NormalizedEmail = "CLIENT@TEST.BG",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEPp/F00VYKjqepQE9/CgvOTDEDNNj9Wu+1x2jBk5VvrDMBcifbtIM7sNeYZc7ILVg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJKbQOWNkS9mIUIH/0647TPZA8YBg2GXV+ZprblO+hoXCTyO5j61uRCht2UF5tMpjQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "CLIENT@TEST.BG",
@@ -1106,8 +1102,8 @@ namespace BicycleApp.Data.Migrations
                             Id = "17ce735d-6713-4d0a-8fcb-e4a71ee86f6f",
                             AccessFailedCount = 0,
                             Balance = 50.00m,
-                            ConcurrencyStamp = "11f04e33-adea-4054-8a0c-dbef86762b2e",
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 546, DateTimeKind.Local).AddTicks(4937),
+                            ConcurrencyStamp = "6c81b25b-c6fb-4455-92d3-9661d25b6bc0",
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 48, 848, DateTimeKind.Local).AddTicks(3672),
                             DelivaryAddress = "Varna, Mladost 1, bl 20",
                             Email = "joro@test.bg",
                             EmailConfirmed = false,
@@ -1117,7 +1113,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Georgiev",
                             LockoutEnabled = false,
                             NormalizedEmail = "JORO@TEST.BG",
-                            PasswordHash = "AQAAAAIAAYagAAAAELq0TuqfVjJSM0Vsj1pqNcRJap+Wi3F7Xxg1Er1YwdpA2oBrU/lwwvI+wi+mw3REaA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMtJmAfpU2Z8NLTklZeTbYJes8inogK62BUjxzGcznCaneJ/7exAusC/A0uSGk9Ytg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "JORO@TEST.BG",
@@ -1130,8 +1126,8 @@ namespace BicycleApp.Data.Migrations
                             Id = "99d3ca6f-2067-4316-a5d7-934c93789521",
                             AccessFailedCount = 0,
                             Balance = 1246.00m,
-                            ConcurrencyStamp = "120ddcb5-ac1c-40f9-82a4-871278ebc45b",
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 611, DateTimeKind.Local).AddTicks(5867),
+                            ConcurrencyStamp = "cced88ba-2da9-4761-a642-b6e8515eb47a",
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 48, 914, DateTimeKind.Local).AddTicks(7238),
                             DelivaryAddress = "Burgas, Mladost 1, bl 20",
                             Email = "powerranger@test.bg",
                             EmailConfirmed = false,
@@ -1141,7 +1137,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Dimitrov",
                             LockoutEnabled = false,
                             NormalizedEmail = "POWERRANGER@TEST.BG",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEYbt1vHFaJPoYyeNn745lMyFtXA9M2lD0Pt7jH32LRRq4eB6yIqjmMdcIgs6suIhg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELXfjqadLLMxaz2pDxSxqFRRakOPKDju8ML86lI09/JhftAswRpmxkwM8IrFcTVQug==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "POWERRANGER@TEST.BG",
@@ -1272,9 +1268,9 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "21003785-a275-4139-ae20-af6a6cf8fea8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "83dc8fb2-497a-4a6d-bfea-87b13dcb0f8f",
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 676, DateTimeKind.Local).AddTicks(2331),
-                            DateOfHire = new DateTime(2023, 11, 13, 11, 24, 30, 676, DateTimeKind.Local).AddTicks(2295),
+                            ConcurrencyStamp = "fb716385-7816-4623-a75c-b9ef42791abc",
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 48, 981, DateTimeKind.Local).AddTicks(2442),
+                            DateOfHire = new DateTime(2023, 11, 9, 14, 21, 48, 981, DateTimeKind.Local).AddTicks(2408),
                             DepartmentId = 2,
                             Email = "marinov@b-free.com",
                             EmailConfirmed = false,
@@ -1284,7 +1280,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Marinov",
                             LockoutEnabled = false,
                             NormalizedEmail = "MARINOV@B-FREE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIjCLnxkMaasjDppKf+V1pd50LYRLApBTYry6+PXtxtd2dxDhKlKsfDsn4EzQ2eEcw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEB36HSwYOFpxi11IACjHLA3eeeV7kq3lwB0ANnWmDjuTlPqd3bfgP+ZsVGgxKnITLA==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             Position = "mehanik",
@@ -1296,9 +1292,9 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "406e8cf1-acaa-44a8-afec-585ff64bed34",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f81d6e52-faf4-4aae-8af2-c2d5cd18493f",
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 741, DateTimeKind.Local).AddTicks(1190),
-                            DateOfHire = new DateTime(2023, 11, 13, 11, 24, 30, 741, DateTimeKind.Local).AddTicks(1151),
+                            ConcurrencyStamp = "2dd314e3-1a13-4016-b10a-16b2863f9e6b",
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 49, 47, DateTimeKind.Local).AddTicks(3289),
+                            DateOfHire = new DateTime(2023, 11, 9, 14, 21, 49, 47, DateTimeKind.Local).AddTicks(3250),
                             DepartmentId = 1,
                             Email = "manager@b-free.com",
                             EmailConfirmed = false,
@@ -1308,7 +1304,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Kalinov",
                             LockoutEnabled = false,
                             NormalizedEmail = "MANAGER@B-FREE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEH/Qz0rCBmjKCcuT1cW1IacsgBUiN45RsOmFpJ8UVKlet8FhEg2UazEZrKasdzaZDQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIto+wKWPwypAM4mxPNEKzylZwkjbgiP7A+ya/cUIs4gxnNPlHz6sBRprCDRs9agtQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             Position = "manager",
@@ -1320,9 +1316,9 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "17063948-8fdc-417e-8fb7-2ae6bf572f94",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "742f02c6-c0d5-4346-8832-047bdf9c8492",
-                            DateCreated = new DateTime(2023, 11, 13, 11, 24, 30, 806, DateTimeKind.Local).AddTicks(435),
-                            DateOfHire = new DateTime(2023, 11, 13, 11, 24, 30, 806, DateTimeKind.Local).AddTicks(391),
+                            ConcurrencyStamp = "f01a3d53-6a0e-43e5-af0d-a9b93fe05512",
+                            DateCreated = new DateTime(2023, 11, 9, 14, 21, 49, 113, DateTimeKind.Local).AddTicks(4590),
+                            DateOfHire = new DateTime(2023, 11, 9, 14, 21, 49, 113, DateTimeKind.Local).AddTicks(4555),
                             DepartmentId = 2,
                             Email = "todorov@b-free.com",
                             EmailConfirmed = false,
@@ -1332,7 +1328,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Todorov",
                             LockoutEnabled = false,
                             NormalizedEmail = "TODOROV@B-FREE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEE87VCPGSxYmOT6UjcgZCvHABJbogFd3nRq2I23a+LIw99Oy54jyhCMXtjINV1n/Iw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENPQfbsq9PgoqdzEA2YGyuD1ULV2RKPTn0QuwkVgawY+h+8NwH10boR2P1th00L4ng==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             Position = "worker",
