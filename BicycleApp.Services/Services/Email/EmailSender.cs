@@ -11,7 +11,6 @@
     using System.Security.Cryptography;
     using System.Text;
     using System.Text.Encodings.Web;
-    using static BicycleApp.Common.UserConstants;
 
     public class EmailSender : IEmailSender
     {

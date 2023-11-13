@@ -61,7 +61,6 @@
             return false;
         }
 
-
         public async Task<ICollection<OrderInfoDto>> AllPendingOrdersAsync(string managerId)
         {
             var listOfPendingOrders = await _db.Orders
@@ -223,6 +222,13 @@
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="employeeId"></param>
+        /// <param name="orderId"></param>
+        /// <param name="partId"></param>
+        /// <returns></returns>
         public async Task EmployeeStartProduction(string employeeId, int orderId, int partId)
         {
             try
