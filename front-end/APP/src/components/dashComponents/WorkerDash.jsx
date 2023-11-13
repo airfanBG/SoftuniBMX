@@ -1,8 +1,9 @@
-import NavigationSecondary from "../navigationsComponents/NavigationSecondary.jsx";
 import styles from "./WorkerDash.module.css";
-import OrderItem from "./OrderItem.jsx";
 import { useEffect, useState } from "react";
 import { get } from "../../util/api.js";
+
+import NavigationSecondary from "../navigationsComponents/NavigationSecondary.jsx";
+import OrderItem from "./OrderItem.jsx";
 
 const data = {
   firstName: "Peter",
@@ -12,55 +13,18 @@ const data = {
   category: "frames",
 };
 
-// const workerSequence = [
-//   {
-//     unitType: "frame",
-//     model: "BGS5657",
-//     brand: "Scott",
-//     jobType: "painting",
-//     id: "ufiuy73737948",
-//     startedTime: null,
-//     finishedTime: null,
-//     description:
-//       "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, dolorum.",
-//   },
-//   {
-//     unitType: "frame",
-//     model: "BGKL5657",
-//     brand: "BMC",
-//     jobType: "painting",
-//     id: "ufiuy73wert7948",
-//     startedTime: null,
-//     finishedTime: null,
-//     description:
-//       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis molestias recusandae ipsa.",
-//   },
-//   {
-//     unitType: "frame",
-//     model: "S-WORKS",
-//     brand: "Specialized",
-//     jobType: "painting",
-//     id: "ufiaslkdkas948",
-//     startedTime: null,
-//     finishedTime: null,
-//     description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-//   },
-// ];
-
 function WorkerDash({ ...receivedUser }) {
   const [user, setUser] = useState({});
   const [workerSequence, setWorkerSequence] = useState([]);
 
   useEffect(function () {
     if (!receivedUser?._id) return;
-    console.log("has user");
     setUser((user) => (user = { ...receivedUser }));
   }, []);
 
   useEffect(function () {
     async function getJobs() {
       const workerSequence = await get("/data/workerSequence");
-      console.log(workerSequence);
       setWorkerSequence(workerSequence);
     }
     getJobs();
@@ -71,7 +35,7 @@ function WorkerDash({ ...receivedUser }) {
   }, []);
 
   const headingType = {
-    frames:
+    worker:
       "<span className={styles.selected}>Frames</span> &#10072; <span>Tyres</span> &#10072; <span>Assembly</span>",
     tyres:
       "<span>Frames</span> &#10072; <span className={styles.selected}>Tyres</span> &#10072; <span>Assembly</span>",
@@ -86,10 +50,38 @@ function WorkerDash({ ...receivedUser }) {
       <section className={styles.board}>
         <header className={styles.boardHeader}>
           <span>Category: </span>
-          {/* dynamic data */}
           <h3>
-            {console.log(headingType[user.role])}
-            {/* Frames<span> &#10072; </span>Painting<span> &#10072; </span>Assembly */}
+            {/* TODO:  change with actual - probably user.category === 'frames'*/}
+
+            {user.role === "worker" && (
+              <>
+                <span className={`${styles.selected} ${styles.element}`}>
+                  Frames
+                </span>{" "}
+                &#10072; <span className={styles.element}>Tyres</span> &#10072;{" "}
+                <span className={styles.element}>Assembly</span>
+              </>
+            )}
+            {user.category === "tyres" && (
+              <>
+                <span className={styles.element}>Frames</span> &#10072;{" "}
+                <span className={`${styles.selected} ${styles.element}`}>
+                  {" "}
+                  Tyres
+                </span>{" "}
+                &#10072; <span className={styles.element}>Assembly</span>
+              </>
+            )}
+
+            {user.category === "assembly" && (
+              <>
+                <span className={styles.element}>Frames</span> &#10072;{" "}
+                <span className={styles.element}>Tyres</span> &#10072;{" "}
+                <span className={`${styles.selected} ${styles.element}`}>
+                  Assembly
+                </span>
+              </>
+            )}
           </h3>
         </header>
         <div className={styles.orders}>

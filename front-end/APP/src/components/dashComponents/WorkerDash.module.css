@@ -29,13 +29,14 @@
   font-size: 1.8rem;
 }
 .boardHeader h3 {
-  font-size: 2rem;
+  font-size: 1.4rem;
+  /* color: var(--color-hd); */
   color: var(--color-main-dark);
 }
-.boardHeader h3 span {
-  font-size: 1.8rem;
-  color: var(--color-hd);
-}
+/* .boardHeader h3 span.element {
+  font-size: 2rem;
+  color: var(--color-main-dark);
+} */
 
 .orders {
   padding: 1rem 0;

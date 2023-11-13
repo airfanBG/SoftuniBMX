@@ -1,11 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+
 import styles from "./NavigationSecondary.module.css";
 import NavSecListItem from "./navSecListItem.jsx";
 import { useEffect, useState } from "react";
 import OrderItem from "../dashComponents/OrderItem.jsx";
+import { logout } from "../../util/auth.js";
 
 function NavigationSecondary({ role }) {
   const [currentMenu, setCurrentMenu] = useState([]);
+  const navigate = useNavigate();
 
   const userMenu = {
     user: [
@@ -26,6 +30,11 @@ function NavigationSecondary({ role }) {
     ],
   };
 
+  function onLogout() {
+    const exit = logout();
+    navigate("/");
+  }
+
   useEffect(() => {
     if (!role) return;
     setCurrentMenu(userMenu[role]);
@@ -43,6 +52,9 @@ function NavigationSecondary({ role }) {
             />
           ))}
       </ul>
+      <button className={styles.logout} onClick={onLogout}>
+        Logout
+      </button>
     </nav>
   );
 }

@@ -31,17 +31,18 @@
 .boardHeader h3 {
   font-size: 2rem;
   color: var(--color-main-dark);
+  margin-bottom: 2px;
 }
-.boardHeader h3 span {
+/* .boardHeader h3 span {
   font-size: 1.8rem;
   color: var(--color-hd);
-}
+} */
 
 .orders {
   padding: 1rem 0;
 }
 
-.boardHeader .cash {
+/* .boardHeader .cash {
   font-size: 2rem;
-  color: red;
-}
+  color: var(--color-main-dark);
+} */

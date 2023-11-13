@@ -1,5 +1,5 @@
 import NavigationSecondary from "../navigationsComponents/NavigationSecondary.jsx";
-import styles from "./WorkerDash.module.css";
+import styles from "./UserDash.module.css";
 import OrderItem from "./OrderItem.jsx";
 import { useEffect, useState } from "react";
 
