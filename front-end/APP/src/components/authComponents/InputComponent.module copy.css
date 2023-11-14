@@ -1,28 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css");
 
-.form {
+/* .form {
   display: flex;
   flex-direction: column;
   gap: 10px;
   background-color: #ffffff;
   padding: 0 30px;
-  width: 70%;
+  width: 450px;
   border-radius: 20px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   margin: 18rem 0 8rem;
-}
-
-.heading {
-  display: inline-block;
-  width: fit-content;
-  font-size: 2.4rem;
-  font-weight: 300;
-  margin-bottom: 2rem;
-  padding: 0 0.5rem;
-  border-bottom: 1px solid var(--color-line);
-}
+} */
 
 ::placeholder {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -33,9 +23,6 @@
   font-size: 1.6rem;
   font-weight: 300;
   color: #999;
-}
-.form button {
-  align-self: flex-end;
 }
 
 .flex-column > label {
@@ -199,10 +186,4 @@ textarea {
   text-align: center;
   padding: 0.4rem 1rem;
   border-radius: 6px;
-}
-
-.fieldsGroup {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
 }

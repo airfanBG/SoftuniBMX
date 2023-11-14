@@ -1,0 +1,40 @@
+.form label {
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: #999;
+}
+
+.flex-column > label {
+  color: #888888;
+  /* color: #171516; */
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.inputForm {
+  border: 1.5px solid #ecedec;
+  border-radius: 10px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding-inline: 10px;
+  transition: 0.2s ease-in-out;
+}
+
+.form input.input {
+  margin: 0 10px;
+  border-radius: 10px;
+  border: none;
+  width: 85%;
+  font-size: 2rem;
+  height: 100%;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.inputForm:focus-within,
+.address:focus-within {
+  border: 1.5px solid #393a3c;
+}
