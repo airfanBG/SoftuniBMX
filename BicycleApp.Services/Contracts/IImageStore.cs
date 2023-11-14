@@ -1,6 +1,6 @@
 ﻿namespace BicycleApp.Services.Contracts
 {
-    using BicycleApp.Services.Models;
+    using BicycleApp.Services.Models.Image;
 
     public interface IImageStore
     {

@@ -10,16 +10,16 @@
     using Microsoft.Extensions.Configuration;
 
     public class BicycleAppDbContext : IdentityDbContext<Employee, IdentityRole<string>, string>
-    {        
-        public BicycleAppDbContext() :base()
+    {
+        public BicycleAppDbContext() : base()
         {
-            
+
         }
 
-        public BicycleAppDbContext(DbContextOptions<BicycleAppDbContext> options)
+        public BicycleAppDbContext(DbContextOptions<BicycleAppDbContext> options, IConfiguration config)
             : base(options)
         {
-            
+
         }
 
         //Identity Tables
@@ -58,10 +58,16 @@
 
         public DbSet<OrderPartEmployee> OrdersPartsEmployees { get; set; } = null!;
 
-       
+        public DbSet<BikeStandartModel> BikesStandartModels { get; set; } = null!;
+
+        public DbSet<BikeModelPart> BikeModelsParts { get; set; } = null!;
+
+
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            
+
             //ClientEntityConfiguration
             builder.Entity<Client>(entity =>
             {
@@ -257,6 +263,24 @@
             {
                 entity
                     .Property(v => v.VATPercent).HasColumnType("decimal(6,2)");
+            });
+
+            //BikeModelPartEntityConfiguration
+            builder.Entity<BikeModelPart>(entity =>
+            {
+                entity.HasKey(b => new { b.PartId, b.BikeModelId });
+
+                entity
+                    .HasOne(bp => bp.BikeModel)
+                    .WithMany(bm => bm.BikeModelsParts)
+                    .HasForeignKey(bp => bp.BikeModelId)
+                    .OnDelete(DeleteBehavior.NoAction);
+
+                entity
+                    .HasOne(bp => bp.Part)
+                    .WithMany(p => p.BikeModelsParts)
+                    .HasForeignKey(bp => bp.BikeModelId)
+                    .OnDelete(DeleteBehavior.NoAction);
             });
 
             //Seed Test Data

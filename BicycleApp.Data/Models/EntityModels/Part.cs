@@ -20,6 +20,7 @@
             this.Comments = new HashSet<Comment>();
             this.OrdersPartsEmployees = new HashSet<OrderPartEmployee>();
             this.Rates = new HashSet<Rate>();
+            this.BikeModelsParts = new HashSet<BikeModelPart>();
         }
 
         [Key]
@@ -86,5 +87,7 @@
         [Required]
         [Comment("Status of the part: Deleted/Not deleted")]
         public bool IsDeleted { get; set; } = false;
+
+        public virtual ICollection<BikeModelPart> BikeModelsParts { get; set; }
     }
 }
