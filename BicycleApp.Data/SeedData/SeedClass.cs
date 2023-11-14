@@ -12,9 +12,6 @@
     {
         public List<Client> SeedClients()
         {
-            var hasher = new PasswordHasher<Client>();
-            string pass = "123456";
-
             Client client = new Client
             {
                 Id = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
@@ -35,57 +32,11 @@
                 DateDeleted = null
             };
 
+            var hasher = new PasswordHasher<Client>();
+            string pass = "123456";
             client.PasswordHash = hasher.HashPassword(client, pass);
 
-            Client client2 = new Client
-            {
-                Id = "17ce735d-6713-4d0a-8fcb-e4a71ee86f6f",
-                Email = "joro@test.bg",
-                UserName = "joro@test.bg",
-                NormalizedEmail = "joro@test.bg".ToUpper(),
-                SecurityStamp = "joro@test.bg".ToUpper(),
-                FirstName = "Georgi",
-                LastName = "Georgiev",
-                PhoneNumber = "1234567890",
-                DelivaryAddress = "Varna, Mladost 1, bl 20",
-                TownId = 2,
-                IBAN = "BG0012345678910111212",
-                Balance = 50.00M,
-                IsDeleted = false,
-                DateCreated = DateTime.Now,
-                DateUpdated = null,
-                DateDeleted = null
-            };
-
-            client2.PasswordHash = hasher.HashPassword(client2, pass);
-
-            Client client3 = new Client
-            {
-                Id = "99d3ca6f-2067-4316-a5d7-934c93789521",
-                Email = "powerranger@test.bg",
-                UserName = "powerranger@test.bg",
-                NormalizedEmail = "powerranger@test.bg".ToUpper(),
-                SecurityStamp = "powerranger@test.bg".ToUpper(),
-                FirstName = "Dimityr",
-                LastName = "Dimitrov",
-                PhoneNumber = "1234567890",
-                DelivaryAddress = "Burgas, Mladost 1, bl 20",
-                TownId = 3,
-                IBAN = "BG0012345678910111212",
-                Balance = 1246.00M,
-                IsDeleted = false,
-                DateCreated = DateTime.Now,
-                DateUpdated = null,
-                DateDeleted = null
-            };
-
-            client3.PasswordHash = hasher.HashPassword(client3, pass);
-
-            var list = new List<Client>();
-            list.Add(client);
-            list.Add(client2);
-            list.Add(client3);
-            return list;
+            return new List<Client> { client };
         }
 
         public List<Employee> SeedEmployees()
@@ -95,10 +46,10 @@
             Employee employee = new Employee()
             {
                 Id = "21003785-a275-4139-ae20-af6a6cf8fea8",
-                Email = "marinov@b-free.com",
-                UserName = "marinov@b-free.com",
-                NormalizedEmail = "marinov@b-free.com".ToUpper(),
-                SecurityStamp = "marinov@b-free.com".ToUpper(),
+                Email = "employee@test.bg",
+                UserName = "employee@test.bg",
+                NormalizedEmail = "employee@test.bg".ToUpper(),
+                SecurityStamp = "employee@test.bg".ToUpper(),
                 FirstName = "Marin",
                 LastName = "Marinov",
                 PhoneNumber = "1234567890",
@@ -108,12 +59,12 @@
                 DateUpdated = null,
                 DateOfLeave = null,
                 IsDeleted = false,
-                DepartmentId = 2,
+                DepartmentId = 1,
                 IsManeger = false
             };
 
             var hasher = new PasswordHasher<Employee>();
-            string pass = "User123!";
+            string pass = "123456";
 
             employee.PasswordHash = hasher.HashPassword(employee, pass);
 
@@ -122,10 +73,10 @@
             Employee manager = new Employee()
             {
                 Id = "406e8cf1-acaa-44a8-afec-585ff64bed34",
-                Email = "manager@b-free.com",
-                UserName = "manager@b-free.com",
-                NormalizedEmail = "manager@b-free.com".ToUpper(),
-                SecurityStamp = "manager@b-free.com".ToUpper(),
+                Email = "manager@test.bg",
+                UserName = "manager@test.bg",
+                NormalizedEmail = "manager@test.bg".ToUpper(),
+                SecurityStamp = "manager@test.bg".ToUpper(),
                 FirstName = "Kalin",
                 LastName = "Kalinov",
                 PhoneNumber = "1234567890",
@@ -137,33 +88,11 @@
                 IsDeleted = false,
                 DepartmentId = 1,
                 IsManeger = true
-            };            
+            };
+
             manager.PasswordHash = hasher.HashPassword(manager, pass);
 
             employees.Add(manager);
-
-            Employee worker2 = new Employee()
-            {
-                Id = "17063948-8fdc-417e-8fb7-2ae6bf572f94",
-                Email = "todorov@b-free.com",
-                UserName = "todorov@b-free.com",
-                NormalizedEmail = "todorov@b-free.com".ToUpper(),
-                SecurityStamp = "todorov@b-free.com".ToUpper(),
-                FirstName = "Todor",
-                LastName = "Todorov",
-                PhoneNumber = "1234567890",
-                Position = "worker",
-                DateOfHire = DateTime.Now,
-                DateCreated = DateTime.Now,
-                DateUpdated = null,
-                DateOfLeave = null,
-                IsDeleted = false,
-                DepartmentId = 2,
-                IsManeger = false
-            };
-            worker2.PasswordHash = hasher.HashPassword(worker2, pass);
-
-            employees.Add(worker2);
 
             return employees;
         }
@@ -202,26 +131,17 @@
 
         public List<Department> SeedDepartments()
         {
-            return new List<Department> {
-                new Department()
-                    {
-                        Id = 1,
-                        Name = "Administration",
-                        DateCreated = DateTime.Now,
-                        DateUpdated = null,
-                        DateDeleted = null,
-                        IsDeleted = false
-                    },
-                new Department()
-                    {
-                        Id = 2,
-                        Name = "Workshop",
-                        DateCreated = DateTime.Now,
-                        DateUpdated = null,
-                        DateDeleted = null,
-                        IsDeleted = false
-                    }
+            Department department = new Department()
+            {
+                Id = 1,
+                Name = "first department",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                DateDeleted = null,
+                IsDeleted = false
             };
+
+            return new List<Department> { department };
         }
 
         public List<ImagePart> SeedImagesParts()
@@ -280,7 +200,7 @@
                 PaidAmount = 0,
                 UnpaidAmount = 12.00M,
                 DateCreated = DateTime.Now,
-                DateUpdated = null,
+                DateUpdated = DateTime.Now,
                 DateDeleted = null,
                 IsDeleted = false,
                 DateFinish = null,
@@ -309,94 +229,40 @@
 
         public List<Part> SeedParts()
         {
-            return new List<Part> {
-                 new Part()
-                 {
-                    Id = 1,
-                    Name = "Frame OG",
-                    Description = "Best frame in the world!",
-                    OEMNumber = "oemtest",
-                    CategoryId = 1,
-                    Unit = "бр",
-                    Quantity = 3,
-                    SalePrice = 100.00M,
-                    VATCategoryId = 1,
-                    DateCreated = DateTime.Now,
-                    DateUpdated = null,
-                    DateDeleted = null,
-                    IsDeleted = false
-                 },
-                 new Part()
-                 {
-                    Id = 2,
-                    Name = "Wheel of the Year",
-                    Description = "Best wheels ever!",
-                    OEMNumber = "oemtest",
-                    CategoryId = 2,
-                    Unit = "бр",
-                    Quantity = 50,
-                    SalePrice = 75.00M,
-                    VATCategoryId = 1,
-                    DateCreated = DateTime.Now,
-                    DateUpdated = null,
-                    DateDeleted = null,
-                    IsDeleted = false
-                 },
-                 new Part()
-                 {
-                    Id = 3,
-                    Name = "Shift",
-                    Description = "Worst shift - have only one!",
-                    OEMNumber = "oemtest",
-                    CategoryId = 3,
-                    Unit = "бр",
-                    Quantity = 9,
-                    SalePrice = 250.00M,
-                    VATCategoryId = 1,
-                    DateCreated = DateTime.Now,
-                    DateUpdated = null,
-                    DateDeleted = null,
-                    IsDeleted = false
-                 }
-            };   
+            Part part = new Part()
+            {
+                Id = 1,
+                Name = "test",
+                Description = "test",
+                OEMNumber = "oemtest",
+                CategoryId = 1,
+                Unit = "бр",
+                Quantity = 1,
+                SalePrice = 10.00M,
+                VATCategoryId = 1,
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+
+            return new List<Part> { part };
         }
 
         public List<PartCategory> SeedPartCategories()
         {
-            return new List<PartCategory>()
+            PartCategory partCategory = new PartCategory()
             {
-                new PartCategory()
-                {
-                    Id = 1,
-                    Name = "Frame",
-                    ImageUrl = "test",
-                    DateCreated = DateTime.Now,
-                    DateUpdated = null,
-                    DateDeleted = null,
-                    IsDeleted = false
-                },
-                new PartCategory()
-                {
-                    Id = 2,
-                    Name = "Wheel",
-                    ImageUrl = "test",
-                    DateCreated = DateTime.Now,
-                    DateUpdated = null,
-                    DateDeleted = null,
-                    IsDeleted = false
-                },
-                new PartCategory()
-                {
-                    Id = 3,
-                    Name = "Shift",
-                    ImageUrl = "test",
-                    DateCreated = DateTime.Now,
-                    DateUpdated = null,
-                    DateDeleted = null,
-                    IsDeleted = false
-                }
+                Id = 1,
+                Name = "first",
+                ImageUrl = "test",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                DateDeleted = null,
+                IsDeleted = false
             };
 
+            return new List<PartCategory> { partCategory };
         }
 
         public List<Rate> SeedRates()
@@ -413,72 +279,17 @@
 
         public List<Status> SeedStatuses()
         {
-            return new List<Status>
+            Status status = new Status()
             {
-                new Status()
-                {
-                    Id = 1,
-                    Name = "Pending approval",
-                    DateCreated = DateTime.Now,
-                    DateUpdated = null,
-                    DateDeleted = null,
-                    IsDeleted = false
-                },
-                new Status()
-                {
-                    Id = 2,
-                    Name = "Approved order",
-                    DateCreated = DateTime.Now,
-                    DateUpdated = null,
-                    DateDeleted = null,
-                    IsDeleted = false
-                },
-                new Status()
-                {
-                    Id = 3,
-                    Name = "Frame management",
-                    DateCreated = DateTime.Now,
-                    DateUpdated = null,
-                    DateDeleted = null,
-                    IsDeleted = false
-                },
-                new Status()
-                {
-                    Id = 4,
-                    Name = "Wheel management",
-                    DateCreated = DateTime.Now,
-                    DateUpdated = null,
-                    DateDeleted = null,
-                    IsDeleted = false
-                },
-                new Status()
-                {
-                    Id = 5,
-                    Name = "Shift management",
-                    DateCreated = DateTime.Now,
-                    DateUpdated = null,
-                    DateDeleted = null,
-                    IsDeleted = false
-                },
-                new Status()
-                {
-                    Id = 6,
-                    Name = "Quality control",
-                    DateCreated = DateTime.Now,
-                    DateUpdated = null,
-                    DateDeleted = null,
-                    IsDeleted = false
-                },
-                new Status()
-                {
-                    Id = 7,
-                    Name = "Send order",
-                    DateCreated = DateTime.Now,
-                    DateUpdated = null,
-                    DateDeleted = null,
-                    IsDeleted = false
-                }
-             };
+                Id = 1,
+                Name = "first_test",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+
+            return new List<Status> { status };
         }
 
         public List<Suplier> SeedSuplieres()
@@ -503,35 +314,17 @@
 
         public List<Town> SeedTowns()
         {
-            return new List<Town> {
-                new Town()
-                    {
-                        Id = 1,
-                        Name = "Sofia",
-                        DateCreated = DateTime.Now,
-                        DateUpdated = DateTime.Now,
-                        DateDeleted = null,
-                        IsDeleted = false
-                    },
-                new Town()
-                {
-                    Id = 2,
-                        Name = "Varna",
-                        DateCreated = DateTime.Now,
-                        DateUpdated =null,
-                        DateDeleted = null,
-                        IsDeleted = false
-                },
-                new Town()
-                {
-                    Id = 3,
-                        Name = "Burgas",
-                        DateCreated = DateTime.Now,
-                        DateUpdated =null,
-                        DateDeleted = null,
-                        IsDeleted = false
-                }
+            Town town = new Town()
+            {
+                Id = 1,
+                Name = "Sofia",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                DateDeleted = null,
+                IsDeleted = false
             };
+
+            return new List<Town> { town };
         }
 
         public List<VATCategory> SeedVATCategories()
