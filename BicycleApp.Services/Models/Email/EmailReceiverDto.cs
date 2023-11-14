@@ -1,4 +1,6 @@
-﻿namespace BicycleApp.Services.Models.Email
+﻿using BicycleApp.Services.Models.Email.Contracts;
+
+namespace BicycleApp.Services.Models.Email
 {
     public class EmailReceiverDto : IEmailReceiverDto
     {

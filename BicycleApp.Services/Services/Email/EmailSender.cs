@@ -1,12 +1,16 @@
-﻿namespace BicycleApp.Services.Services
+﻿namespace BicycleApp.Services.Services.Email
 {
     using BicycleApp.Data;
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.Models.Email;
+
     using MailKit.Net.Smtp;
+
     using Microsoft.Extensions.Configuration;
+
     using MimeKit;
+
     using System;
     using System.Security.Cryptography;
     using System.Text;
@@ -69,9 +73,9 @@
                         return true;
                     }
                 }
-                
+
             }
-            catch (Exception) {  }
+            catch (Exception) { }
             return false;
         }
 
@@ -112,8 +116,8 @@
             {
             }
             return false;
-        }    
-        
+        }
+
         /// <summary>
         /// Verify user`s email.
         /// </summary>
@@ -137,10 +141,10 @@
 
                         return true;
                     }
-                }  
+                }
             }
             catch (Exception)
-            {               
+            {
             }
             return false;
         }
@@ -183,10 +187,10 @@
             }
             catch (Exception)
             {
-            }            
+            }
             return false;
         }
-        
+
         //private string RandomStringGenerator()
         //{
         //    int length = 10; 

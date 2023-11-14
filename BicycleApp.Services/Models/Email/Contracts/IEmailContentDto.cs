@@ -1,4 +1,4 @@
-﻿namespace BicycleApp.Services.Models.Email
+﻿namespace BicycleApp.Services.Models.Email.Contracts
 {
     public interface IEmailContentDto
     {
