@@ -23,8 +23,8 @@
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="userRole"></param>
-        /// <returns>byte[]</returns>
-        public async Task<byte[]> GetUserImage(string userId, string userRole)
+        /// <returns>string</returns>
+        public async Task<string?> GetUserImage(string userId, string userRole)
         {
             try
             {    
@@ -32,24 +32,18 @@
 
                 if (string.IsNullOrEmpty(userPath))
                 {
-                    return new byte[] { };
+                    return null;
                 }
 
                 var currentDirectory = Directory.GetCurrentDirectory();
                 var fullPath = Path.Combine(currentDirectory, userPath);
 
-                var file = Directory.GetFiles(fullPath).FirstOrDefault();
-
-                if (file != null && File.Exists(file))
-                {
-                    return await File.ReadAllBytesAsync(file);
-                }
+                return fullPath;
             }
             catch (Exception)
             {
-                return new byte[] { };
             }
-            return new byte[] { };
+            return null;
         }
 
         /// <summary>

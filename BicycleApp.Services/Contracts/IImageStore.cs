@@ -5,6 +5,6 @@
     public interface IImageStore
     {
         Task<bool> IsAddedOrReplacedUserImage(UserImageDto userImageDto);
-        Task<byte[]> GetUserImage(string userId, string userRole);
+        Task<string?> GetUserImage(string userId, string userRole);
     }
 }
