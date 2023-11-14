@@ -16,7 +16,7 @@
             
         }
 
-        public BicycleAppDbContext(DbContextOptions<BicycleAppDbContext> options, IConfiguration config)
+        public BicycleAppDbContext(DbContextOptions<BicycleAppDbContext> options)
             : base(options)
         {
             
