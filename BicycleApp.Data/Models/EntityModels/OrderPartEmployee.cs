@@ -23,6 +23,18 @@
         public virtual Part Part { get; set; } = null!;
 
         [Required]
+        [Comment("Name of the part")]
+        public string PartName { get; set; } = null!;
+
+        [Required]
+        [Comment("Quantity of the part")]
+        public int PartQuantity { get; set; }
+
+        [Required]
+        [Comment("Price of the part")]
+        public decimal PartPrice { get; set; }
+
+        [Required]
         [Comment("Id of the emplyee asigned to this order")]
         public string EmployeeId { get; set; } = null!;
 
