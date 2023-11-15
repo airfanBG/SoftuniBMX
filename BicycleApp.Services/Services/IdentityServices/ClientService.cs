@@ -5,7 +5,6 @@
     using System.Text;
 
     using BicycleApp.Data;
-    using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.Models.IdentityModels;
@@ -21,15 +20,24 @@
         private readonly SignInManager<Client> signInManager;
         private readonly BicycleAppDbContext dbContext;
         private readonly IConfiguration configuration;
+        private readonly IModelsFactory modelFactory;
 
-        public ClientService(UserManager<Client> userManager, SignInManager<Client> signInManager, BicycleAppDbContext dbContext, IConfiguration configuration)
+        public ClientService(UserManager<Client> userManager, SignInManager<Client> signInManager, BicycleAppDbContext dbContext, IConfiguration configuration, IModelsFactory modelFactory)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.dbContext = dbContext;
             this.configuration = configuration;
+            this.modelFactory = modelFactory;
         }
 
+        /// <summary>
+        /// This method cleates a new client entry in the database
+        /// </summary>
+        /// <param name="clientDto">Dto with information abouth the client</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">If the dto is null</exception>
+        /// <exception cref="ArgumentException">If the email is already registered</exception>
         public async Task<bool> RegisterClientAsync(ClientRegisterDto clientDto)
         {
             if (clientDto == null)
@@ -40,29 +48,13 @@
             var existingClient = await userManager.FindByEmailAsync(clientDto.Email);
             if (existingClient != null)
             {
-                throw new ArgumentException($"Cliennt with email: {clientDto.Email} already exists!");
+                throw new ArgumentException($"Client with email: {clientDto.Email} already exists!");
             }
 
-            var client = new Client()
-            {
-                FirstName = clientDto.FirstName,
-                LastName = clientDto.LastName,
-                Email = clientDto.Email,
-                NormalizedEmail = clientDto.Email.ToUpper(),
-                UserName = clientDto.Email,
-                NormalizedUserName = clientDto.Email.ToUpper(),
-                PhoneNumber = clientDto.PhoneNumber,
-                DelivaryAddress = clientDto.DelivaryAddress,
-                TownId = await this.GetTownIdAsync(clientDto.Town),
-                IBAN = clientDto.IBAN,
-                Balance = clientDto.Balance,
-                DateCreated = DateTime.UtcNow,
-                DateUpdated = null,
-                DateDeleted = null,
-                IsDeleted = false
-            };
-
+            Client client = this.modelFactory.CreateNewClientModel(clientDto);
+            client.TownId = await this.GetTownIdAsync(clientDto.Town);
             var result = await this.userManager.CreateAsync(client, clientDto.Password);
+            await userManager.AddToRoleAsync(client, clientDto.Role);
 
             if (result == null)
             {
@@ -79,6 +71,12 @@
             }
         }
 
+        /// <summary>
+        /// This method sing in the client
+        /// </summary>
+        /// <param name="clientDto">Information for the client to be sign in</param>
+        /// <returns>A responce and dto with info for the client</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public async Task<ClientReturnDto> LoginClientAsync(ClientLoginDto clientDto)
         {
             if (clientDto == null)
@@ -103,9 +101,12 @@
 
             if (result.Succeeded)
             {
+                var roles = await userManager.GetRolesAsync(client);
                 return new ClientReturnDto()
                 {
                     ClientId = client.Id,
+                    ClientFullName = $"{client.FirstName} {client.LastName}",
+                    Role = roles[0],
                     Token = this.GenerateJwtTokenAsync(client),
                     Result = true
                 };
@@ -114,10 +115,13 @@
             {
                 return new ClientReturnDto { Result = false };
             }
-
-
         }
 
+        /// <summary>
+        /// Returns information abouth the client
+        /// </summary>
+        /// <param name="Id">The id of the client</param>
+        /// <returns>Dto with information for the client</returns>
         public async Task<ClientInfoDto?> GetClientInfoAsync(string Id)
         {
             var client = await userManager.FindByIdAsync(Id);
@@ -146,6 +150,11 @@
             };
         }
 
+        /// <summary>
+        /// This methos creates a Jwt token
+        /// </summary>
+        /// <param name="client">The client model</param>
+        /// <returns>Jwt token as string</returns>
         private string GenerateJwtTokenAsync(Client client)
         {
             var claims = new List<Claim>
@@ -171,6 +180,11 @@
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
+        /// <summary>
+        /// This method returns the id of the specified town by it's name and creates in the the database if it is not preasant
+        /// </summary>
+        /// <param name="town">The name of the town</param>
+        /// <returns>Id as Integer</returns>
         private async Task<int> GetTownIdAsync(string town)
         {
             var townEntity = await dbContext.Towns
@@ -179,14 +193,7 @@
 
             if (townEntity == null)
             {
-                var newTown = new Town()
-                {
-                    Name = town,
-                    DateCreated = DateTime.UtcNow,
-                    DateUpdated = null,
-                    DateDeleted = null,
-                    IsDeleted = false
-                };
+                var newTown = this.modelFactory.CreateNewTown(town);
 
                 await dbContext.Towns.AddAsync(newTown);
                 await dbContext.SaveChangesAsync();

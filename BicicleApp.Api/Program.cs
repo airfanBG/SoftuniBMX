@@ -68,6 +68,8 @@ namespace BicicleApp.Api
             builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddScoped<IImageStore, ImageStore>();
             builder.Services.AddScoped<IPictureOrganizerServices, PictureOrganizerServices>();
+            builder.Services.AddScoped<IModelsFactory, ModelsFactory>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
