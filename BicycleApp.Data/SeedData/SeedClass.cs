@@ -331,7 +331,7 @@
         {
             VATCategory category = new VATCategory()
             {
-                Id=1,
+                Id = 1,
                 VATPercent = 20.00M,
                 DateCreated = DateTime.Now,
                 DateUpdated = DateTime.Now,

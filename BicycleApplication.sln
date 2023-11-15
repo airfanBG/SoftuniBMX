@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BicycleApp.Data", "BicycleA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BicycleApp.Common", "BicycleApp.Common\BicycleApp.Common.csproj", "{57BB8952-DA97-49C7-93CB-DA2C4390EFBE}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BicycleApp.Services", "BicycleApp.Services\BicycleApp.Services.csproj", "{8402105C-3FF7-4722-B159-D25012C37398}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BicicleApp.Api", "BicicleApp.Api\BicicleApp.Api.csproj", "{564E5410-CE5B-45AC-96D3-12071C088458}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{57BB8952-DA97-49C7-93CB-DA2C4390EFBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57BB8952-DA97-49C7-93CB-DA2C4390EFBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57BB8952-DA97-49C7-93CB-DA2C4390EFBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8402105C-3FF7-4722-B159-D25012C37398}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8402105C-3FF7-4722-B159-D25012C37398}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8402105C-3FF7-4722-B159-D25012C37398}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8402105C-3FF7-4722-B159-D25012C37398}.Release|Any CPU.Build.0 = Release|Any CPU
+		{564E5410-CE5B-45AC-96D3-12071C088458}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{564E5410-CE5B-45AC-96D3-12071C088458}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{564E5410-CE5B-45AC-96D3-12071C088458}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{564E5410-CE5B-45AC-96D3-12071C088458}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

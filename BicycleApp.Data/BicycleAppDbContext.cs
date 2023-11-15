@@ -7,16 +7,20 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
 
     public class BicycleAppDbContext : IdentityDbContext<Employee, IdentityRole<string>, string>
     {
-        public BicycleAppDbContext():base()
+        public BicycleAppDbContext() : base()
         {
-            
+
         }
 
-        public BicycleAppDbContext(DbContextOptions<BicycleAppDbContext> options)
-            : base(options) { }
+        public BicycleAppDbContext(DbContextOptions<BicycleAppDbContext> options, IConfiguration config)
+            : base(options)
+        {
+
+        }
 
         //Identity Tables
         public DbSet<Client> Clients { get; set; } = null!;
@@ -54,20 +58,16 @@
 
         public DbSet<OrderPartEmployee> OrdersPartsEmployees { get; set; } = null!;
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            var conectionString = "Server=DESKTOP-O0P5VDC\\SQLEXPRESS;Database=BicycleDB;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False";
+        public DbSet<BikeStandartModel> BikesStandartModels { get; set; } = null!;
 
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer(conectionString);
-            }
-        }
+        public DbSet<BikeModelPart> BikeModelsParts { get; set; } = null!;
+
+
 
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            
+
             //ClientEntityConfiguration
             builder.Entity<Client>(entity =>
             {
@@ -263,6 +263,24 @@
             {
                 entity
                     .Property(v => v.VATPercent).HasColumnType("decimal(6,2)");
+            });
+
+            //BikeModelPartEntityConfiguration
+            builder.Entity<BikeModelPart>(entity =>
+            {
+                entity.HasKey(b => new { b.PartId, b.BikeModelId });
+
+                entity
+                    .HasOne(bp => bp.BikeModel)
+                    .WithMany(bm => bm.BikeModelsParts)
+                    .HasForeignKey(bp => bp.BikeModelId)
+                    .OnDelete(DeleteBehavior.NoAction);
+
+                entity
+                    .HasOne(bp => bp.Part)
+                    .WithMany(p => p.BikeModelsParts)
+                    .HasForeignKey(bp => bp.BikeModelId)
+                    .OnDelete(DeleteBehavior.NoAction);
             });
 
             //Seed Test Data
