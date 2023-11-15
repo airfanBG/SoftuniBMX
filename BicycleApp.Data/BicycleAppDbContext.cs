@@ -196,7 +196,7 @@
             builder.Entity<OrderPartEmployee>(entity =>
             {
                 entity
-                    .HasKey(ope => new { ope.OrderId, ope.PartId, ope.EmployeeId });
+                    .HasKey(ope => new { ope.OrderId, ope.PartId});
 
                 entity
                     .HasOne(ope => ope.Order)
@@ -209,13 +209,7 @@
                     .WithMany(o => o.OrdersPartsEmployees)
                     .HasForeignKey(ope => ope.PartId)
                     .OnDelete(DeleteBehavior.NoAction);
-
-                entity
-                    .HasOne(ope => ope.Employee)
-                    .WithMany(o => o.OrdersPartsEmployees)
-                    .HasForeignKey(ope => ope.EmployeeId)
-                    .OnDelete(DeleteBehavior.NoAction);
-
+               
                 entity.Property(ope => ope.PartPrice).HasColumnType("decimal(18,2)");
 
                 entity.Property(ope => ope.PartQuantity).HasColumnType("float(2)");

@@ -33,12 +33,11 @@
         [Required]
         [Comment("Price of the part")]
         public decimal PartPrice { get; set; }
-
-        [Required]
+        
         [Comment("Id of the emplyee asigned to this order")]
-        public string EmployeeId { get; set; } = null!;
+        public string? EmployeeId { get; set; } 
 
-        public virtual Employee Employee { get; set; } = null!;
+        public virtual Employee? Employee { get; set; }
 
         [Required]
         [Comment("Date and time of asigned task to the employee")]
