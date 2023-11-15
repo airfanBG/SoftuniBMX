@@ -1,5 +1,6 @@
 ﻿namespace BicycleApp.Data.Models.EntityModels
 {
+    using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
@@ -16,9 +17,11 @@
         public int Id { get; set; }
 
         [Required]
+        [Comment("Name of standart bike.")]
         [MaxLength(BikeModelNameMaxLength)]
         public string ModelName { get; set; } = null!;
 
+        [Comment("Image of standart bike.")]
         public string? ImageUrl { get; set; }
 
         public virtual ICollection<BikeModelPart> BikeModelsParts { get; set; }
