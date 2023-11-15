@@ -215,6 +215,10 @@
                     .WithMany(o => o.OrdersPartsEmployees)
                     .HasForeignKey(ope => ope.EmployeeId)
                     .OnDelete(DeleteBehavior.NoAction);
+
+                entity.Property(ope => ope.PartPrice).HasColumnType("decimal(18,2)");
+
+                entity.Property(ope => ope.PartQuantity).HasColumnType("float(2)");
             });
 
             //PartEntityConfiguration
