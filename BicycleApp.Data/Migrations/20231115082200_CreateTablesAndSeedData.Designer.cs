@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BicycleApp.Data.Migrations
 {
     [DbContext(typeof(BicycleAppDbContext))]
-    [Migration("20231114200224_CreateTablesAndSeedTestData")]
-    partial class CreateTablesAndSeedTestData
+    [Migration("20231115082200_CreateTablesAndSeedData")]
+    partial class CreateTablesAndSeedData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -113,8 +113,8 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = 1,
                             ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                            DateCreated = new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(8911),
-                            DateUpdated = new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(8980),
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(2637),
+                            DateUpdated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(2658),
                             Description = "Test Description",
                             PartId = 1,
                             Title = "Test Title"
@@ -168,8 +168,8 @@ namespace BicycleApp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateDelivered = new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9045),
-                            DateUpdated = new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9048),
+                            DateDelivered = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(2737),
+                            DateUpdated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(2739),
                             Note = "text",
                             PartId = 1,
                             QuantityDelivered = 2.0,
@@ -218,10 +218,16 @@ namespace BicycleApp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9102),
-                            DateUpdated = new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9106),
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(2790),
                             IsDeleted = false,
-                            Name = "first department"
+                            Name = "Administration"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(2798),
+                            IsDeleted = false,
+                            Name = "Workshop"
                         });
                 });
 
@@ -438,18 +444,17 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = 1,
                             ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                            DateCreated = new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9295),
-                            DateUpdated = new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9299),
-                            Description = "row=1;partId=1;partName=test;partPrice=10.00,priceQty=1$",
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(2939),
+                            Description = "",
                             Discount = 0m,
-                            FinalAmount = 12.00m,
+                            FinalAmount = 750.00m,
                             IsDeleted = false,
                             PaidAmount = 0m,
-                            SaleAmount = 10.00m,
+                            SaleAmount = 625.00m,
                             SerialNumber = "BID12345678",
                             StatusId = 1,
-                            UnpaidAmount = 12.00m,
-                            VAT = 2.00m
+                            UnpaidAmount = 750.00m,
+                            VAT = 125.00m
                         });
                 });
 
@@ -484,6 +489,19 @@ namespace BicycleApp.Data.Migrations
                         .HasColumnType("bit")
                         .HasComment("Status of the task: Completed/Not completed");
 
+                    b.Property<string>("PartName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasComment("Name of the part");
+
+                    b.Property<decimal>("PartPrice")
+                        .HasColumnType("decimal(18,2)")
+                        .HasComment("Price of the part");
+
+                    b.Property<double>("PartQuantity")
+                        .HasColumnType("float(2)")
+                        .HasComment("Quantity of the part");
+
                     b.Property<DateTime?>("StartDatetime")
                         .HasColumnType("datetime2")
                         .HasComment("Date and time of start of the task from the employee");
@@ -505,9 +523,12 @@ namespace BicycleApp.Data.Migrations
                             OrderId = 1,
                             PartId = 1,
                             EmployeeId = "21003785-a275-4139-ae20-af6a6cf8fea8",
-                            DatetimeAsigned = new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9336),
+                            DatetimeAsigned = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(2977),
                             Description = "test",
-                            IsCompleted = false
+                            IsCompleted = false,
+                            PartName = "Frame OG",
+                            PartPrice = 100.00m,
+                            PartQuantity = 1.0
                         });
                 });
 
@@ -589,15 +610,42 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            DateCreated = new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9394),
-                            DateUpdated = new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9397),
-                            Description = "test",
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(3031),
+                            Description = "Best frame in the world!",
                             IsDeleted = false,
-                            Name = "test",
+                            Name = "Frame OG",
                             OEMNumber = "oemtest",
-                            Quantity = 1.0,
-                            SalePrice = 10.00m,
-                            Unit = "бр",
+                            Quantity = 3.0,
+                            SalePrice = 100.00m,
+                            Unit = "count",
+                            VATCategoryId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 2,
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(3052),
+                            Description = "Best wheels ever!",
+                            IsDeleted = false,
+                            Name = "Wheel of the Year",
+                            OEMNumber = "oemtest",
+                            Quantity = 50.0,
+                            SalePrice = 75.00m,
+                            Unit = "count",
+                            VATCategoryId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryId = 3,
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(3056),
+                            Description = "Worst shift - have only one!",
+                            IsDeleted = false,
+                            Name = "Shift",
+                            OEMNumber = "oemtest",
+                            Quantity = 9.0,
+                            SalePrice = 250.00m,
+                            Unit = "count",
                             VATCategoryId = 1
                         });
                 });
@@ -648,11 +696,26 @@ namespace BicycleApp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9530),
-                            DateUpdated = new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9534),
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(3087),
                             ImageUrl = "test",
                             IsDeleted = false,
-                            Name = "first"
+                            Name = "Frame"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(3092),
+                            ImageUrl = "test",
+                            IsDeleted = false,
+                            Name = "Wheel"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(3095),
+                            ImageUrl = "test",
+                            IsDeleted = false,
+                            Name = "Shift"
                         });
                 });
 
@@ -729,10 +792,51 @@ namespace BicycleApp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9605),
-                            DateUpdated = new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9610),
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(3160),
                             IsDeleted = false,
-                            Name = "first_test"
+                            Name = "Pending approval"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(3174),
+                            IsDeleted = false,
+                            Name = "Approved order"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(3177),
+                            IsDeleted = false,
+                            Name = "Frame management"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(3179),
+                            IsDeleted = false,
+                            Name = "Wheel management"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(3181),
+                            IsDeleted = false,
+                            Name = "Shift management"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(3183),
+                            IsDeleted = false,
+                            Name = "Quality control"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(3186),
+                            IsDeleted = false,
+                            Name = "Send order"
                         });
                 });
 
@@ -808,8 +912,8 @@ namespace BicycleApp.Data.Migrations
                             Id = 1,
                             Address = "Sofia, center",
                             ContactName = "Pesh Peshev",
-                            DateCreated = new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9646),
-                            DateUpdated = new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9650),
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(3234),
+                            DateUpdated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(3236),
                             Email = "text@test.bg",
                             IsDeleted = false,
                             Name = "X Ltd",
@@ -858,10 +962,24 @@ namespace BicycleApp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9728),
-                            DateUpdated = new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9799),
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(3276),
+                            DateUpdated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(3277),
                             IsDeleted = false,
                             Name = "Sofia"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(3283),
+                            IsDeleted = false,
+                            Name = "Varna"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(3292),
+                            IsDeleted = false,
+                            Name = "Burgas"
                         });
                 });
 
@@ -904,8 +1022,8 @@ namespace BicycleApp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9837),
-                            DateUpdated = new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9840),
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(3321),
+                            DateUpdated = new DateTime(2023, 11, 15, 10, 22, 0, 352, DateTimeKind.Local).AddTicks(3322),
                             IsDeleted = false,
                             VATPercent = 20.00m
                         });
@@ -1019,9 +1137,9 @@ namespace BicycleApp.Data.Migrations
                             Id = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
                             AccessFailedCount = 0,
                             Balance = 1000.00m,
-                            ConcurrencyStamp = "9662ffca-9b2e-4dda-b2cc-03f2a37bba6e",
-                            DateCreated = new DateTime(2023, 11, 14, 22, 2, 23, 769, DateTimeKind.Local).AddTicks(8384),
-                            DelivaryAddress = "Sofia, Mladost 1, bl 20",
+                            ConcurrencyStamp = "f69fcd8c-9234-45a8-ad3a-72dc8c083361",
+                            DateCreated = new DateTime(2023, 11, 15, 10, 21, 59, 809, DateTimeKind.Local).AddTicks(3608),
+                            DelivaryAddress = "Mladost 1, bl 20",
                             Email = "client@test.bg",
                             EmailConfirmed = false,
                             FirstName = "Ivan",
@@ -1030,13 +1148,61 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Ivanov",
                             LockoutEnabled = false,
                             NormalizedEmail = "CLIENT@TEST.BG",
-                            PasswordHash = "AQAAAAIAAYagAAAAECsOKngazYgMAV5DyFtvOLW0LmF/CfjA9mosxk+lzSZyrOtFfaVL94rvyzsRPAuuHg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEaMfoE6TGqOeAVhqyjMTiJa+y4YF/I5USSLvtS2QWT3TXYeey9xe0GAtsi9eNByTw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "CLIENT@TEST.BG",
                             TownId = 1,
                             TwoFactorEnabled = false,
                             UserName = "client@test.bg"
+                        },
+                        new
+                        {
+                            Id = "17ce735d-6713-4d0a-8fcb-e4a71ee86f6f",
+                            AccessFailedCount = 0,
+                            Balance = 50.00m,
+                            ConcurrencyStamp = "d2783be6-6552-45d9-a4e3-2dfa5cee14db",
+                            DateCreated = new DateTime(2023, 11, 15, 10, 21, 59, 884, DateTimeKind.Local).AddTicks(8315),
+                            DelivaryAddress = "Mladost 1, bl 20",
+                            Email = "joro@test.bg",
+                            EmailConfirmed = false,
+                            FirstName = "Georgi",
+                            IBAN = "BG0012345678910111212",
+                            IsDeleted = false,
+                            LastName = "Georgiev",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "JORO@TEST.BG",
+                            PasswordHash = "AQAAAAIAAYagAAAAEI2zidTKbqzS8/6GVJyOHNVAL0y2jW4N0vn/vlXylFFG+eq1/qMnu59ugJ8iCDcDqQ==",
+                            PhoneNumber = "1234567890",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "JORO@TEST.BG",
+                            TownId = 2,
+                            TwoFactorEnabled = false,
+                            UserName = "joro@test.bg"
+                        },
+                        new
+                        {
+                            Id = "99d3ca6f-2067-4316-a5d7-934c93789521",
+                            AccessFailedCount = 0,
+                            Balance = 1246.00m,
+                            ConcurrencyStamp = "c14c8128-65cc-42e0-9f08-51b085c50b9b",
+                            DateCreated = new DateTime(2023, 11, 15, 10, 21, 59, 950, DateTimeKind.Local).AddTicks(8248),
+                            DelivaryAddress = "Mladost 1, bl 20",
+                            Email = "powerranger@test.bg",
+                            EmailConfirmed = false,
+                            FirstName = "Dimityr",
+                            IBAN = "BG0012345678910111212",
+                            IsDeleted = false,
+                            LastName = "Dimitrov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "POWERRANGER@TEST.BG",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMiTFsigubI/dPwyPvK8SO8zsO/9uoIQU+O9+4xSFEU4+C0KLcFi62djdKzVY8mdlg==",
+                            PhoneNumber = "1234567890",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "POWERRANGER@TEST.BG",
+                            TownId = 3,
+                            TwoFactorEnabled = false,
+                            UserName = "powerranger@test.bg"
                         });
                 });
 
@@ -1159,51 +1325,123 @@ namespace BicycleApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "21003785-a275-4139-ae20-af6a6cf8fea8",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "6b3d6161-5239-4b1d-963f-8972f27541a5",
-                            DateCreated = new DateTime(2023, 11, 14, 22, 2, 23, 856, DateTimeKind.Local).AddTicks(4365),
-                            DateOfHire = new DateTime(2023, 11, 14, 22, 2, 23, 856, DateTimeKind.Local).AddTicks(4294),
-                            DepartmentId = 1,
-                            Email = "employee@test.bg",
-                            EmailConfirmed = false,
-                            FirstName = "Marin",
-                            IsDeleted = false,
-                            IsManeger = false,
-                            LastName = "Marinov",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "EMPLOYEE@TEST.BG",
-                            PasswordHash = "AQAAAAIAAYagAAAAENRiGGdRpnK2Aggsjw4eoBNY0Dxkwe2UYkM/t75+OPjUmiqynymsXvYZn4hIs8V36g==",
-                            PhoneNumber = "1234567890",
-                            PhoneNumberConfirmed = false,
-                            Position = "mehanik",
-                            SecurityStamp = "EMPLOYEE@TEST.BG",
-                            TwoFactorEnabled = false,
-                            UserName = "employee@test.bg"
-                        },
-                        new
-                        {
                             Id = "406e8cf1-acaa-44a8-afec-585ff64bed34",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "593a7f9c-b4f8-41c1-9ef2-240193ada3ec",
-                            DateCreated = new DateTime(2023, 11, 14, 22, 2, 23, 965, DateTimeKind.Local).AddTicks(1970),
-                            DateOfHire = new DateTime(2023, 11, 14, 22, 2, 23, 965, DateTimeKind.Local).AddTicks(1896),
+                            ConcurrencyStamp = "5c5d7f25-da7f-4511-aa74-34064b804b70",
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 20, DateTimeKind.Local).AddTicks(402),
+                            DateOfHire = new DateTime(2023, 11, 15, 10, 22, 0, 20, DateTimeKind.Local).AddTicks(370),
                             DepartmentId = 1,
-                            Email = "manager@test.bg",
+                            Email = "manager@b-free.com",
                             EmailConfirmed = false,
                             FirstName = "Kalin",
                             IsDeleted = false,
                             IsManeger = true,
                             LastName = "Kalinov",
                             LockoutEnabled = false,
-                            NormalizedEmail = "MANAGER@TEST.BG",
-                            PasswordHash = "AQAAAAIAAYagAAAAEI60ZAYv1098qisRzvqEceIa6ZYaSIeDnF06q9OOS6ZYOvWbou12BM7WZ0bOvubebw==",
+                            NormalizedEmail = "MANAGER@B-FREE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEN7JG03wJoOwWMyt/ORgkCjrWqOVar+D3XB7WNSmI91C5b3puLDUcSSowsqPVM9tQw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             Position = "manager",
-                            SecurityStamp = "MANAGER@TEST.BG",
+                            SecurityStamp = "MANAGER@B-FREE.COM",
                             TwoFactorEnabled = false,
-                            UserName = "manager@test.bg"
+                            UserName = "manager@b-free.com"
+                        },
+                        new
+                        {
+                            Id = "21003785-a275-4139-ae20-af6a6cf8fea8",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "67a83edb-4f04-4f56-a73d-1c8b8d9c1a3f",
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 85, DateTimeKind.Local).AddTicks(2819),
+                            DateOfHire = new DateTime(2023, 11, 15, 10, 22, 0, 85, DateTimeKind.Local).AddTicks(2802),
+                            DepartmentId = 2,
+                            Email = "marinov@b-free.com",
+                            EmailConfirmed = false,
+                            FirstName = "Marin",
+                            IsDeleted = false,
+                            IsManeger = false,
+                            LastName = "Marinov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MARINOV@B-FREE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEK0zCzHSPMqpjZL7XM4gi9Uh5NSR5U7wdOPAmU4yZbcLM6lcrgmw7A8a+RzAveXwkg==",
+                            PhoneNumber = "1234567890",
+                            PhoneNumberConfirmed = false,
+                            Position = "FrameWorker",
+                            SecurityStamp = "MARINOV@B-FREE.COM",
+                            TwoFactorEnabled = false,
+                            UserName = "marinov@b-free.com"
+                        },
+                        new
+                        {
+                            Id = "17063948-8fdc-417e-8fb7-2ae6bf572f94",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "ac6e009f-3f5b-45d3-a8cc-cfdddd1a8a89",
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 151, DateTimeKind.Local).AddTicks(3423),
+                            DateOfHire = new DateTime(2023, 11, 15, 10, 22, 0, 151, DateTimeKind.Local).AddTicks(3407),
+                            DepartmentId = 2,
+                            Email = "todorov@b-free.com",
+                            EmailConfirmed = false,
+                            FirstName = "Todor",
+                            IsDeleted = false,
+                            IsManeger = false,
+                            LastName = "Todorov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "TODOROV@B-FREE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEF/55qD9lOjos4uIhpsfQT1zRvns19tSqGHq8r9VNouudpRyiWNbAGezmwMVtmAXIw==",
+                            PhoneNumber = "1234567890",
+                            PhoneNumberConfirmed = false,
+                            Position = "Wheelworker",
+                            SecurityStamp = "TODOROV@B-FREE.COM",
+                            TwoFactorEnabled = false,
+                            UserName = "todorov@b-free.com"
+                        },
+                        new
+                        {
+                            Id = "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "f665771d-e21d-48dd-904e-8adbe88a8429",
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 217, DateTimeKind.Local).AddTicks(1021),
+                            DateOfHire = new DateTime(2023, 11, 15, 10, 22, 0, 217, DateTimeKind.Local).AddTicks(1004),
+                            DepartmentId = 2,
+                            Email = "ivanov@b-free.com",
+                            EmailConfirmed = false,
+                            FirstName = "Ivan",
+                            IsDeleted = false,
+                            IsManeger = false,
+                            LastName = "Ivanov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "IVANOV@B-FREE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEC1zomnuXtanWvIHU8vOEeM96apAPg5xnLZ5iRgcwoTzY8OzJoLxGMOzStc8QLVEiQ==",
+                            PhoneNumber = "1234567890",
+                            PhoneNumberConfirmed = false,
+                            Position = "Accessoriesworker",
+                            SecurityStamp = "IVANOV@B-FREE.COM",
+                            TwoFactorEnabled = false,
+                            UserName = "ivanov@b-free.com"
+                        },
+                        new
+                        {
+                            Id = "29f06920-d2ad-43d8-b362-e2b94d7a7502",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "68446f62-9be5-4375-98f3-e80ab5c3fbc2",
+                            DateCreated = new DateTime(2023, 11, 15, 10, 22, 0, 286, DateTimeKind.Local).AddTicks(1496),
+                            DateOfHire = new DateTime(2023, 11, 15, 10, 22, 0, 286, DateTimeKind.Local).AddTicks(1435),
+                            DepartmentId = 2,
+                            Email = "atanasov@b-free.com",
+                            EmailConfirmed = false,
+                            FirstName = "Atanas",
+                            IsDeleted = false,
+                            IsManeger = false,
+                            LastName = "Atanasov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ATANASOV@B-FREE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAELNbIscptDH7jvo7L4/omJ8nbfRA1b449PyYZ0tJeTv0Np6uffgb8teyfWKZBAzKfQ==",
+                            PhoneNumber = "1234567890",
+                            PhoneNumberConfirmed = false,
+                            Position = "Qualitycontrol",
+                            SecurityStamp = "ATANASOV@B-FREE.COM",
+                            TwoFactorEnabled = false,
+                            UserName = "atanasov@b-free.com"
                         });
                 });
 
