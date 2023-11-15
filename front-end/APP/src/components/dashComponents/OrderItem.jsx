@@ -1,26 +1,33 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./OrderItem.module.css";
+import { secondsToTime } from "../../util/util.js";
+import { put } from "../../util/api.js";
 
 function OrderItem({ ...product }) {
   const [item, setItem] = useState(product);
-  const [timerStarted, setTimerStarted] = useState(false);
-  const [current, setCurrent] = useState(null);
 
-  function onStart() {
-    let currentTime = Date.now();
-    console.log(currentTime);
-    setCurrent(currentTime);
-    console.log(current);
+  function onButtonClick() {
+    let currentTime = new Date();
 
-    if (!timerStarted) {
-      setTimerStarted(true);
+    if (item.startedTime === "" && item.finishedTime === "") {
       setItem({ ...item, startedTime: currentTime });
     } else {
-      setTimerStarted(false);
-      setItem({ ...item, finishedTime: currentTime });
-      const time = item.finishedTime - item.startedTime;
+      const endTime =
+        (currentTime.getTime() - item.startedTime.getTime()) / 1000;
+
+      setItem({ ...item, finishedTime: endTime });
+    }
+    console.log(item._id);
+    let id = item._id;
+    updateOrder();
+    async function updateOrder() {
+      const res = await put("/data/workerSequence/" + id, item);
+      const data = await res.json();
+      console.log(data);
     }
   }
+
+  let time = secondsToTime(item.finishedTime);
 
   return (
     <figure className={styles.order}>
@@ -38,8 +45,8 @@ function OrderItem({ ...product }) {
           {product.unitType}
         </p>
         <p className={styles.job}>
-          <span>Order for: </span>
-          {product.jobType}
+          <span>Finished in: </span>
+          {time}
         </p>
       </div>
 
@@ -48,10 +55,15 @@ function OrderItem({ ...product }) {
         {product.description}
       </div>
       <div className={styles.timer}>
-        <button className={styles.startBtn} onClick={onStart}>
-          Start
+        <button
+          className={styles.startBtn}
+          onClick={onButtonClick}
+          disabled={!!item.finishedTime}
+        >
+          {item.startedTime === "" && item.finishedTime === "" && "Start"}
+          {item.startedTime !== "" && item.finishedTime === "" && "In Progress"}
+          {item.startedTime !== "" && item.finishedTime !== "" && "Finished"}
         </button>
-        <p className={styles.pastTime}>00:00:00</p>
       </div>
     </figure>
   );

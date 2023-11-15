@@ -16,3 +16,33 @@ export function setUserData(data) {
 export function clearUserData() {
   localStorage.removeItem(itemName);
 }
+
+export function secondsToTime(time) {
+  const h = Math.floor(time / 3600)
+      .toString()
+      .padStart(2, "0"),
+    m = Math.floor((time % 3600) / 60)
+      .toString()
+      .padStart(2, "0"),
+    s = Math.floor(time % 60)
+      .toString()
+      .padStart(2, "0");
+
+  let result;
+
+  if (time === 0) {
+    result;
+  } else if (time < 60) {
+    result = " seconds.";
+  } else if (time < 3600) {
+    result = " minutes.";
+  } else if (time < 86400) {
+    result = " hours.";
+  } else if (time < 2620800) {
+    result = " days.";
+  } else if (time < 31449600) {
+    result = " months.";
+  }
+
+  return h + ":" + m + ":" + s + result;
+}

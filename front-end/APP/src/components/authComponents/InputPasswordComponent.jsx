@@ -6,7 +6,6 @@ import { useState } from "react";
 function InputPasswordComponent({
   mainValue,
   label,
-  type,
   placeholder,
   required,
   valueMode,
@@ -26,7 +25,7 @@ function InputPasswordComponent({
       <div className={`${styles["inputForm"]}`}>
         {svg(mainValue)}
         <input
-          type={isHidden ? { type } : "text"}
+          type={isHidden ? "password" : "text"}
           className={styles["input"]}
           placeholder={placeholder}
           name={mainValue}

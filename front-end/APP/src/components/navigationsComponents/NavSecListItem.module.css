@@ -11,3 +11,6 @@
 .secNavLink:active {
   color: var(--color-link-light-hover);
 }
+.secNavLink:global(.active) {
+  border-bottom: 1px solid var(--color-line);
+}

@@ -49,7 +49,7 @@ function ModelSelection() {
             </span>
           </div>
 
-          <Link to={"create"} className={styles["step-link"]}>
+          <Link to={"app"} className={styles["step-link"]}>
             Start production
           </Link>
         </div>

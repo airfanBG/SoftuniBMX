@@ -8,6 +8,10 @@ import Login from "./components/authComponents/Login.jsx";
 import Register from "./components/authComponents/Register.jsx";
 import Auth from "./pages/Auth.jsx";
 import UserProfile from "./components/UserProfile.jsx";
+import UserInfo from "./components/dashComponents/UserInfo.jsx";
+import WorkerOrders from "./components/dashComponents/WorkerOrders.jsx";
+import WorkerFinished from "./components/dashComponents/WorkerFinished.jsx";
+import CreateBike from "./components/createComponents/CreateBike.jsx";
 
 function App() {
   return (
@@ -15,8 +19,19 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="about" element={<About />} />
-        <Route path="profile" element={<UserProfile />} />
-        <Route path="app" element={<AppLayout />} />
+
+        <Route path="profile" element={<UserProfile />}>
+          <Route index element={<Navigate replace to="info" />} />
+          <Route path="info" element={<UserInfo />} />
+          <Route path="orders" element={<WorkerOrders />} />
+          <Route path={"finished"} element={<WorkerFinished />} />
+        </Route>
+
+        <Route path="app" element={<AppLayout />}>
+          <Route index element={<Navigate replace to="create" />} />
+          <Route path={"create"} element={<CreateBike />} />
+        </Route>
+
         <Route path="auth" element={<Auth />}>
           <Route index element={<Navigate replace to="login" />} />
           <Route path="login" element={<Login />} />

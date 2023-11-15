@@ -1,0 +1,31 @@
+.contactWrapper {
+}
+
+.infoHeader {
+  text-align: center;
+  font-size: 2.4rem;
+}
+
+.fullData {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  margin-top: 4rem;
+  font-size: 1.8rem;
+  color: var(--color-hd);
+  row-gap: 1rem;
+}
+
+.userData {
+  font-size: 2.2rem;
+  font-weight: 500;
+  margin-left: 1rem;
+  color: var(--color-main-dark);
+  width: fit-content;
+}
+
+.userData span {
+  font-size: 1.6rem;
+  color: var(--color-hd);
+}

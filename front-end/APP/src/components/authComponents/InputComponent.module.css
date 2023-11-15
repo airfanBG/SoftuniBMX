@@ -14,6 +14,10 @@
   margin: 18rem 0 8rem;
 } */
 
+.wrapper {
+  margin-bottom: 2rem;
+}
+
 ::placeholder {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -159,8 +163,6 @@ input.input:not([type="checkbox"]) {
   width: 127%;
   top: 10px;
   left: 200px;
-  /* background-color: var(--color-warning);
-  color: var(--color-link-light); */
   color: var(--color-warning);
   font-size: 1.6rem;
   font-weight: 700;
@@ -169,6 +171,8 @@ input.input:not([type="checkbox"]) {
   padding: 0.4rem 1rem;
   border: 1px solid var(--color-warning);
   border-radius: 6px;
+  z-index: 9999;
+  background-color: #fff;
 }
 
 .generalError {

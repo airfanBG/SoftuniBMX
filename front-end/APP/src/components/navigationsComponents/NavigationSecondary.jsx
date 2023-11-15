@@ -1,27 +1,24 @@
-import { Link, useNavigate } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
-
 import styles from "./NavigationSecondary.module.css";
 import NavSecListItem from "./navSecListItem.jsx";
-import { useEffect, useState } from "react";
-import OrderItem from "../dashComponents/OrderItem.jsx";
-import { logout } from "../../util/auth.js";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../UserProfile.jsx";
 
-function NavigationSecondary({ role }) {
+function NavigationSecondary() {
+  const { user } = useContext(UserContext);
+
   const [currentMenu, setCurrentMenu] = useState([]);
-  const navigate = useNavigate();
 
   const userMenu = {
     user: [
-      { link: "tUserLink1", textContent: "Profile" },
-      { link: "tUserLink2", textContent: "Ready" },
-      { link: "tUserLink3", textContent: "In process" },
-      { link: "UserLink4", textContent: "Past orders" },
+      { link: "info", textContent: "Profile" },
+      { link: "user-orders-ready", textContent: "Ready" },
+      { link: "user-orders-in_process", textContent: "In process" },
+      { link: "user-past-orders", textContent: "Past orders" },
     ],
     worker: [
-      { link: "testWorkerLink1", textContent: "Profile" },
-      { link: "testWorkerLink2", textContent: "Orders" },
-      { link: "testWorkerLink3", textContent: "Finished" },
+      { link: "info", textContent: "Profile" },
+      { link: "orders", textContent: "Orders" },
+      { link: "finished", textContent: "Finished" },
     ],
     manager: [
       { link: "managerLink1", textContent: "Profile" },
@@ -30,15 +27,10 @@ function NavigationSecondary({ role }) {
     ],
   };
 
-  function onLogout() {
-    const exit = logout();
-    navigate("/");
-  }
-
   useEffect(() => {
-    if (!role) return;
-    setCurrentMenu(userMenu[role]);
-  }, [role]);
+    if (!user) return;
+    setCurrentMenu(userMenu[user.role]);
+  }, [user.role]);
 
   return (
     <nav className={styles.nav}>
@@ -52,29 +44,8 @@ function NavigationSecondary({ role }) {
             />
           ))}
       </ul>
-      <button className={styles.logout} onClick={onLogout}>
-        Logout
-      </button>
     </nav>
   );
 }
 
 export default NavigationSecondary;
-
-{
-  /* <li className={styles.litItem}>
-<Link className={styles.secNavLink} to={{ role }}>
-  Profile
-</Link>
-</li>
-<li className={styles.litItem}>
-<Link className={styles.secNavLink} to={"#"}>
-  Orders
-</Link>
-</li>
-<li className={styles.litItem}>
-<Link className={styles.secNavLink} to={"#"}>
-  Finished
-</Link>
-</li>  */
-}

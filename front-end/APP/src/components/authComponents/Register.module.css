@@ -204,5 +204,5 @@ textarea {
 .fieldsGroup {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  gap: 4rem;
 }

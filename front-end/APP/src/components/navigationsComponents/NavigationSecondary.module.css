@@ -2,7 +2,7 @@
   background-color: var(--color-hd);
   width: 600px;
   padding: 0.8rem 2rem;
-  /* margin-top: 1rem; */
+  margin: 1rem 0 2rem;
   border-bottom-right-radius: 10px;
   display: flex;
   align-items: center;
@@ -14,10 +14,4 @@
   justify-content: flex-start;
   gap: 2.4rem;
   list-style: none;
-}
-
-.logout {
-  font-size: 2rem;
-  color: var(--color-link-light);
-  margin-left: auto;
 }

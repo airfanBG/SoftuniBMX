@@ -32,7 +32,6 @@ const initialState = {
   apartment: "",
   street: "",
   strNumber: "",
-  additional: "",
   role: "user",
 };
 
@@ -173,27 +172,40 @@ function Register() {
 
   async function formSubmitHandler(e) {
     e.preventDefault();
-    if (Object.values(values).some((x) => x === "")) {
-      return setIsAllowed(true);
-    }
+    // if (Object.values(values).some((x) => x === "")) {
+    //   return setIsAllowed(true);
+    // }
 
-    const user = values;
+    // const user = values;
+
+    const user = {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email,
+      password: values.password,
+      repass: values.repass,
+      iban: values.iban,
+      balance: Number(values.balance),
+      phone: values.phone,
+      city: values.city,
+      role: "user",
+      address: {
+        country: values.country,
+        city: values.city,
+        postCode: values.postCode,
+        district: values.district,
+        block: values.block,
+        floor: Number(values.floor),
+        apartment: values.apartment,
+        street: values.street,
+        strNumber: values.strNumber,
+      },
+    };
+
     try {
       setIsLoading(true);
       const regResponse = await register(user);
       console.log(user);
-
-      setValues({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        repass: "",
-        iban: "",
-        balance: "",
-        phone: "",
-        address: "",
-      });
 
       if (regResponse.code) {
         setIsLoading(false);
@@ -203,6 +215,7 @@ function Register() {
       setTimeout(() => {
         navigate("/");
         setIsLoading(false);
+        setValues(initialState);
       }, 2000);
     } catch (err) {
       setTimeout(() => {
@@ -306,14 +319,14 @@ function Register() {
       label: "District",
       type: "text",
       placeholder: "Enter District",
-      required: true,
+      required: false,
     },
     postCode: {
       mainValue: "postCode",
       label: "Post code",
       type: "text",
       placeholder: "Enter Post code",
-      required: true,
+      required: false,
     },
     block: {
       mainValue: "block",

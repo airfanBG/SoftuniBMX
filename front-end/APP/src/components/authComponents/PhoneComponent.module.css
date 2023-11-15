@@ -1,3 +1,7 @@
+.wrapper {
+  margin-bottom: 2rem;
+}
+
 .form label {
   font-size: 1.6rem;
   font-weight: 300;

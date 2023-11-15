@@ -30,7 +30,7 @@ function InputComponent({
           required={required}
           value={valueMode(mainValue)}
           onChange={(e) => onChangeHandler(e)}
-          onBlur={(e) => validateInput(e)}
+          onBlur={(e) => validateInput(e, mainValue)}
           onFocus={(e) => clearErrorState(e)}
         />
       </div>
