@@ -1,9 +1,11 @@
-﻿namespace BicycleApp.Services.Services
+﻿namespace BicycleApp.Services.Services.Image
 {
     using BicycleApp.Data;
     using BicycleApp.Services.Contracts;
-    using BicycleApp.Services.Models;
+    using BicycleApp.Services.Models.Image;
+
     using Microsoft.AspNetCore.Http;
+
     using System.Text;
     using System.Threading.Tasks;
 
@@ -27,7 +29,7 @@
         public async Task<string?> GetUserImage(string userId, string userRole)
         {
             try
-            {    
+            {
                 var userPath = await _factory.GetUserImagePathAsync(userId, userRole);
 
                 if (string.IsNullOrEmpty(userPath))
@@ -96,7 +98,7 @@
             catch (Exception)
             {
             }
-            return false;            
+            return false;
         }
 
         /// <summary>
@@ -106,7 +108,7 @@
         /// <param name="userId"></param>
         /// <returns>string</returns>
         private string GetRelativePathToUser(string role, string userId)
-        {            
+        {
             var relativePath = new StringBuilder("wwwroot\\files\\profiles");
 
             relativePath.Append($"\\{role}");
@@ -115,7 +117,7 @@
             relativePath.Append($"\\{userId}");
 
             DirectoryInfo directoryInfo = new DirectoryInfo(relativePath.ToString());
-  
+
             if (!directoryInfo.Exists)
             {
                 Directory.CreateDirectory(relativePath.ToString());
@@ -123,7 +125,7 @@
 
             return directoryInfo.ToString();
         }
-        
+
         /// <summary>
         /// Add image in file system.
         /// </summary>
@@ -145,6 +147,6 @@
                 imageToSave.CopyTo(fileStream);
             }
         }
-                
+
     }
 }

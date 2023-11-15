@@ -89,5 +89,11 @@
             public const int StatusNameMinLength = 3;
             public const int StatusNameMaxLength = 20;      
         }
+
+        public static class BikeModel
+        {
+            public const int BikeModelNameMinLength = 1;
+            public const int BikeModelNameMaxLength = 50;
+        }
     }
 }

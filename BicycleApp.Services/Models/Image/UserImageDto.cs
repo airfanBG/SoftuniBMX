@@ -1,4 +1,4 @@
-﻿namespace BicycleApp.Services.Models
+﻿namespace BicycleApp.Services.Models.Image
 {
     using Microsoft.AspNetCore.Http;
 
