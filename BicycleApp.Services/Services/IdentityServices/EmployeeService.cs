@@ -15,10 +15,11 @@
 
     using Microsoft.Extensions.Configuration;
     using Microsoft.EntityFrameworkCore;
-    using BicycleApp.Data.Models.EntityModels;
     using Microsoft.IdentityModel.Tokens;
     using System.IdentityModel.Tokens.Jwt;
     using System.Security.Claims;
+
+    using static BicycleApp.Common.ApplicationGlobalConstants;
 
     public class EmployeeService : IEmployeeService
     {
@@ -26,15 +27,24 @@
         private readonly SignInManager<Employee> signInManager;
         private readonly BicycleAppDbContext dbContext;
         private readonly IConfiguration configuration;
+        private readonly IModelsFactory modelFactory;
 
-        public EmployeeService(UserManager<Employee> userManager, SignInManager<Employee> signInManager, BicycleAppDbContext dbContext, IConfiguration configuration)
+        public EmployeeService(UserManager<Employee> userManager, SignInManager<Employee> signInManager, BicycleAppDbContext dbContext, IConfiguration configuration, IModelsFactory modelFactory)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.dbContext = dbContext;
             this.configuration = configuration;
+            this.modelFactory = modelFactory;
         }
 
+        /// <summary>
+        /// This method creates a Employee entity in the database
+        /// </summary>
+        /// <param name="employeeRegisterDto">The info for the employee</param>
+        /// <returns>True or False</returns>
+        /// <exception cref="ArgumentNullException">If input data is null</exception>
+        /// <exception cref="ArgumentException">If employee already exists</exception>
         public async Task<bool> RegisterEmployeeAsync(EmployeeRegisterDto employeeRegisterDto)
         {
             if (employeeRegisterDto == null)
@@ -42,32 +52,18 @@
                 throw new ArgumentNullException(nameof(employeeRegisterDto));
             }
 
-            var existingClient = await userManager.FindByEmailAsync(employeeRegisterDto.Email);
-            if (existingClient != null)
+            var existingEmployee = await userManager.FindByEmailAsync(employeeRegisterDto.Email);
+            if (existingEmployee != null)
             {
-                throw new ArgumentException($"Cliennt with email: {employeeRegisterDto.Email} already exists!");
+                throw new ArgumentException($"Employee with email: {employeeRegisterDto.Email} already exists!");
             }
 
-            var employee = new Employee()
-            {
-                FirstName = employeeRegisterDto.FirstName,
-                LastName = employeeRegisterDto.LastName,
-                Email = employeeRegisterDto.Email,
-                NormalizedEmail = employeeRegisterDto.Email.ToUpper(),
-                UserName = employeeRegisterDto.Email,
-                NormalizedUserName = employeeRegisterDto.Email.ToUpper(),
-                DateCreated = DateTime.UtcNow,
-                DateOfHire = DateTime.Parse(employeeRegisterDto.DateOfHire),
-                DateOfLeave = null,
-                DateUpdated = null,
-                IsManeger = employeeRegisterDto.IsManeger,
-                PhoneNumber = employeeRegisterDto.PhoneNumber,
-                Position = employeeRegisterDto.Position,
-                DepartmentId = await this.GetDepartmentIdAsync(employeeRegisterDto.Department),
-                IsDeleted = false
-            };
+            var employee = this.modelFactory.CreateNewEmployee(employeeRegisterDto);
+            employee.DepartmentId = await this.GetDepartmentIdAsync(employeeRegisterDto.Department);
 
             var result = await this.userManager.CreateAsync(employee, employeeRegisterDto.Password);
+
+            await userManager.AddToRoleAsync(employee, employeeRegisterDto.Role);
 
             if (result == null)
             {
@@ -85,6 +81,12 @@
 
         }
 
+        /// <summary>
+        /// This method sign in the employee
+        /// </summary>
+        /// <param name="employeeDto">Input data for the employee</param>
+        /// <returns>Respons as Dto</returns>
+        /// <exception cref="ArgumentNullException">If input data is null</exception>
         public async Task<EmployeeReturnDto> LoginEmployeeAsync(EmployeeLoginDto employeeDto)
         {
             if (employeeDto == null)
@@ -109,11 +111,14 @@
 
             if (result.Succeeded)
             {
+                var roles = await userManager.GetRolesAsync(employee);
                 return new EmployeeReturnDto()
                 {
                     EmployeeId = employee.Id,
+                    EmployeeFullName = $"{employee.FirstName} {employee.LastName}",
                     Token = this.GenerateJwtTokenAsync(employee),
-                    Result = true
+                    Role = roles[0],
+                    Result = true,
                 };
             }
             else
@@ -122,6 +127,11 @@
             }
         }
 
+        /// <summary>
+        /// This method returns info abouth the employee
+        /// </summary>
+        /// <param name="Id">Id of the employee</param>
+        /// <returns>Dto</returns>
         public async Task<EmployeeInfoDto?> GetEmployeeInfoAsync(string Id)
         {
             var employee = await userManager.FindByIdAsync(Id);
@@ -145,14 +155,19 @@
                 Position = employee.Position,
                 Department = department,
                 PhoneNumber = employee.PhoneNumber,
-                DateCreated = employee.DateCreated.ToString(),
-                DateOfHire = employee.DateOfHire.ToString(),
-                DateOfLeave = employee.DateOfLeave == null ? null: employee.DateOfLeave.ToString(),
-                DateUpdated = employee.DateUpdated == null ? null : employee.DateUpdated.ToString(),
+                DateCreated = employee.DateCreated.ToString(DefaultDateFormat),
+                DateOfHire = employee.DateOfHire.ToString(DefaultDateFormat),
+                DateOfLeave = employee.DateOfLeave == null ? null : employee.DateOfLeave.Value.ToString(DefaultDateFormat),
+                DateUpdated = employee.DateUpdated == null ? null : employee.DateUpdated.Value.ToString(DefaultDateFormat),
                 IsManeger = employee.IsManeger
             };
         }
 
+        /// <summary>
+        /// This method returns the id of the department and creates a department entry in the database if needed
+        /// </summary>
+        /// <param name="department">The name of the department</param>
+        /// <returns>Id as Integer</returns>
         private async Task<int> GetDepartmentIdAsync(string department)
         {
             var departmentEntity = await dbContext.Departments
@@ -161,14 +176,7 @@
 
             if (departmentEntity == null)
             {
-                var newDepartment = new Department()
-                {
-                    Name = department,
-                    DateCreated = DateTime.UtcNow,
-                    DateUpdated = null,
-                    DateDeleted = null,
-                    IsDeleted = false
-                };
+                var newDepartment = this.modelFactory.CreateNewDepartment(department);
 
                 await dbContext.Departments.AddAsync(newDepartment);
                 await dbContext.SaveChangesAsync();
@@ -186,6 +194,11 @@
             }
         }
 
+        /// <summary>
+        /// This method creates a Jwt token
+        /// </summary>
+        /// <param name="employee">The Employee entity</param>
+        /// <returns>Jwt token</returns>
         private string GenerateJwtTokenAsync(Employee employee)
         {
             var claims = new List<Claim>
@@ -209,6 +222,6 @@
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
-        }    
+        }
     }
 }

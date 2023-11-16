@@ -64,11 +64,11 @@ namespace BicicleApp.Api
             builder.Services.AddScoped<IClientService, ClientService>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
             builder.Services.AddScoped<IFactory, Factory>();
+            builder.Services.AddScoped<IModelsFactory, ModelsFactory>();
             builder.Services.AddScoped<IOrderService, OrderService>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddScoped<IImageStore, ImageStore>();
             builder.Services.AddScoped<IPictureOrganizerServices, PictureOrganizerServices>();
-            builder.Services.AddScoped<IModelsFactory, ModelsFactory>();
 
             var app = builder.Build();
 

@@ -8,6 +8,10 @@
     {
         Client CreateNewClientModel(ClientRegisterDto clientRegisterDto);
 
+        Employee CreateNewEmployee(EmployeeRegisterDto employeeRegisterDto);
+
         Town CreateNewTown(string townName);
+
+        Department CreateNewDepartment(string departmentName);
     }
 }

@@ -7,7 +7,5 @@
     public interface IHomePageService
     {
         Task<IndexPageDto?> GetIndexPageData();
-
-        Task<IndexPageDto?> GetIndexPageData(string userId);
     }
 }

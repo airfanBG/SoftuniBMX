@@ -70,6 +70,39 @@
             };
         }
 
+        public Department CreateNewDepartment(string departmentName)
+        {
+            return new Department()
+            {
+                Name = departmentName,
+                DateCreated = DateTime.UtcNow,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+        }
+
+        public Employee CreateNewEmployee(EmployeeRegisterDto employeeRegisterDto)
+        {
+            return new Employee()
+            {
+                FirstName = employeeRegisterDto.FirstName,
+                LastName = employeeRegisterDto.LastName,
+                Email = employeeRegisterDto.Email,
+                DateCreated = DateTime.UtcNow,
+                DateUpdated = null,
+                DateOfLeave = null,
+                DateOfHire = DateTime.Parse(employeeRegisterDto.DateOfHire),
+                IsDeleted = false,
+                IsManeger = employeeRegisterDto.IsManeger,
+                NormalizedEmail = employeeRegisterDto.Email.ToUpper(),
+                NormalizedUserName = employeeRegisterDto.Email.ToUpper(),
+                PhoneNumber = employeeRegisterDto.PhoneNumber,
+                UserName = employeeRegisterDto.Email,
+                Position = employeeRegisterDto.Position
+            };
+        }
+
         public Town CreateNewTown(string townName)
         {
             return new Town()

@@ -6,8 +6,6 @@
 
         public string? ModelName { get; set; }
 
-        public string? UmageUrl { get; set; }
-
-        public List<PartShortInfoDto> Parts { get; set; } = new List<PartShortInfoDto>();
+        public string? ImageUrl { get; set; }
     }
 }

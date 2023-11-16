@@ -34,19 +34,11 @@
                 var bikes = await dbContext.BikesStandartModels
                     .AsNoTracking()
                     .Include(b => b.BikeModelsParts)
-                    .ThenInclude(bp => bp.Part)
                     .Select(e => new BikeStandartTypeDto()
                     {
                         Id = e.Id,
                         ModelName = e.ModelName,
-                        UmageUrl = e.ImageUrl,
-                        Parts = e.BikeModelsParts
-                                 .Select(bp => new PartShortInfoDto()
-                                 {
-                                     PartId = bp.PartId,
-                                     PartName = bp.Part.Name
-                                 })
-                                 .ToList()
+                        ImageUrl = e.ImageUrl                      
                     })
                     .ToListAsync();
 
@@ -75,8 +67,7 @@
                         PartName = x.Part.Name,
                         ClientId = x.ClientId,
                         //To be fixed when we set the default client image
-                        ClientUmageUrl = x.Client.Images.First().ImageUrl,
-                        //To check with Front-End is the FullName of UserName
+                        ClientImageUrl = x.Client.Images.First().ImageUrl,
                         ClientFullName = $"{x.Client.FirstName} {x.Client.LastName}",
                         CommentDescription = x.Description,
                         DateCreated = x.DateCreated.ToString(DefaultDateFormat)
@@ -95,32 +86,6 @@
             }
 
             return indexDto;
-        }
-
-        /// <summary>
-        /// This method return dto for the index page with data for the bike models, comments and user
-        /// </summary>
-        /// <param name="userId">Id of the user</param>      
-        /// <returns>IndexPageDto or null</returns>
-        public async Task<IndexPageDto?> GetIndexPageData(string userId)
-        {
-            var dto = await this.GetIndexPageData();
-
-            if (dto == null)
-            {
-                return null;
-            }
-
-            string userFullName = await dbContext.Clients
-                .AsNoTracking()
-                .Where(u => u.Id == userId)
-                .Select(r => $"{r.FirstName} {r.LastName}")
-                .FirstAsync();
-
-            dto.UserId = userId;
-            dto.UserFullName = userFullName;
-
-            return dto;
         }
     }
 }

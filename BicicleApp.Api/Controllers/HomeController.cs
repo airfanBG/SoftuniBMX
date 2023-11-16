@@ -12,15 +12,14 @@
     public class HomeController : ControllerBase
     {
         private readonly IHomePageService homePageService;
-        private readonly IHttpContextAccessor httpContext;
 
-        public HomeController(IHomePageService homePageService, IHttpContextAccessor httpContext)
+        public HomeController(IHomePageService homePageService)
         {
             this.homePageService = homePageService;
-            this.httpContext = httpContext;
         }
 
-        [HttpGet(Name = "index")]
+        [HttpGet]
+        [Route("index")]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -29,17 +28,8 @@
         {
             try
             {
-                IndexPageDto? dto;
-                if (httpContext.HttpContext?.User?.Identity?.IsAuthenticated ?? false)
-                {
-                    string userId = httpContext.HttpContext.User.FindFirst("UserId")!.Value;
-                    dto = await homePageService.GetIndexPageData(userId);
-                }
-                else
-                {
-                    dto = await homePageService.GetIndexPageData();
-                }
-
+                IndexPageDto? dto = await homePageService.GetIndexPageData();
+             
                 if (dto == null)
                 {
                     return NoContent();
