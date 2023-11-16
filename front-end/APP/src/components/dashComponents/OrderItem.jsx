@@ -19,15 +19,16 @@ function OrderItem({ ...product }) {
     }
     console.log(item._id);
     let id = item._id;
-    updateOrder();
-    async function updateOrder() {
-      const res = await put("/data/workerSequence/" + id, item);
-      const data = await res.json();
-      console.log(data);
-    }
+    // updateOrder();
+    // async function updateOrder() {
+    //   const res = await put("/data/workerSequence/" + id, item);
+    //   const data = await res.json();
+    //   console.log(data);
+    // }
   }
 
   let time = secondsToTime(item.finishedTime);
+  console.log(time);
 
   return (
     <figure className={styles.order}>

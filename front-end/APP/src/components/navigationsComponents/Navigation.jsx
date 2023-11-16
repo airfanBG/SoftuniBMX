@@ -5,7 +5,6 @@ import { getUserData } from "../../util/util.js";
 
 function Navigation() {
   const [isUser, setIsUser] = useState(null);
-  const navLocation = window.location.href;
 
   useEffect(function () {
     const user = getUserData();
@@ -28,8 +27,8 @@ function Navigation() {
       <nav className={styles.nav}>
         <ul className={styles.navList} role="list">
           <li className={styles.navListItem}>
-            {navLocation === "http://localhost:5173/" ? (
-              <NavLink to={"app"} className={styles.navLink}>
+            {window.location.pathname === "/" ? (
+              <NavLink to={"/app"} className={styles.navLink}>
                 Create
               </NavLink>
             ) : (

@@ -1,3 +1,4 @@
 export const dataPath = {
-  FRAMES: "/jsonstore/frames/",
+  home_page_data: "/jsonstore/indexPage/",
+  frames: "/jsonstore/frames/",
 };
