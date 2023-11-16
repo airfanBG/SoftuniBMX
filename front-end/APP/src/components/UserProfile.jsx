@@ -9,7 +9,7 @@ import WorkerDash from "./dashComponents/WorkerDash.jsx";
 import Footer from "./Footer.jsx";
 import { createContext } from "react";
 
-export const UserContext = createContext();
+export const UserContext = createContext({});
 
 function UserProfile() {
   const user = getUserData();

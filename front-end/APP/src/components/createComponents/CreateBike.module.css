@@ -1,0 +1,78 @@
+.wrapper {
+  width: 1300px;
+  padding: 2rem 0;
+}
+
+.dashHeading {
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  color: var(--color-secondary-hd);
+  margin: 1rem 0;
+}
+
+.board {
+  width: 100%;
+  min-height: 100px;
+  border: 1px solid gray;
+  padding: 1rem;
+}
+
+.boardHeader {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 2rem 1rem;
+  border-bottom: 2px solid var(--color-line);
+}
+
+.boardHeader span {
+  font-size: 1.8rem;
+}
+.boardHeader h3 {
+  font-size: 2rem;
+  color: var(--color-main-dark);
+  margin-bottom: 2px;
+}
+/* .boardHeader h3 span {
+      font-size: 1.8rem;
+      color: var(--color-hd);
+    } */
+
+.logout {
+  font-size: 2rem;
+  color: var(--color-secondary-hd);
+  margin-left: auto;
+}
+
+.orders {
+  padding: 1rem 0;
+}
+
+.userInfoWrapper {
+  display: grid;
+  grid-template-columns: 2fr 4fr;
+  margin-top: 3rem;
+}
+.mainInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1.6rem;
+  padding: 0 0 2rem 2rem;
+}
+
+/* .imgHolder {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+  } */
+
+.usernameHeading {
+  font-size: 2.4rem;
+  font-weight: 500;
+}
+
+.userEmail {
+  font-size: 2rem;
+  line-height: 0.5;
+}

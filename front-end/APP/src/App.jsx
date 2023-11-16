@@ -12,6 +12,7 @@ import UserInfo from "./components/dashComponents/UserInfo.jsx";
 import WorkerOrders from "./components/dashComponents/WorkerOrders.jsx";
 import WorkerFinished from "./components/dashComponents/WorkerFinished.jsx";
 import CreateBike from "./components/createComponents/CreateBike.jsx";
+import ForgottenPassword from "./components/authComponents/ForgottenPassword.jsx";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route index element={<Navigate replace to="login" />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="forgotten-password" element={<ForgottenPassword />} />
         </Route>
 
         <Route path="*" element={<PageNotFound />} />

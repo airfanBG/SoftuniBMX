@@ -5,6 +5,7 @@ import { getUserData } from "../../util/util.js";
 
 function Navigation() {
   const [isUser, setIsUser] = useState(null);
+  const navLocation = window.location.href;
 
   useEffect(function () {
     const user = getUserData();
@@ -27,9 +28,15 @@ function Navigation() {
       <nav className={styles.nav}>
         <ul className={styles.navList} role="list">
           <li className={styles.navListItem}>
-            <NavLink to={"/"} className={styles.navLink}>
-              Home
-            </NavLink>
+            {navLocation === "http://localhost:5173/" ? (
+              <NavLink to={"app"} className={styles.navLink}>
+                Create
+              </NavLink>
+            ) : (
+              <NavLink to={"/"} className={styles.navLink}>
+                Home
+              </NavLink>
+            )}
           </li>
           <li className={styles.navListItem}>
             <NavLink to={"/about"} className={styles.navLink}>

@@ -3,5 +3,4 @@ export const environment = {
   LOGIN: "/users/login",
   REGISTER: "/users/register",
   LOGOUT: "/users/logout",
-  GET_PRODUCTS: "recipes",
 };

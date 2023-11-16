@@ -6,6 +6,7 @@ import { UserContext } from "../UserProfile.jsx";
 import Balance from "./Balance.jsx";
 import Category from "./Category.jsx";
 import { logout } from "../../util/auth.js";
+import Guest from "./Guest.jsx";
 
 function BoardHeader() {
   const { user } = useContext(UserContext);
@@ -17,6 +18,7 @@ function BoardHeader() {
   }
   return (
     <header className={styles.boardHeader}>
+      {user === "free" && <Guest />}
       {user.role === "user" && <Balance user={user} />}
       {user.role === "worker" && <Category user={user} />}
       <button className={styles.logout} onClick={onLogout}>

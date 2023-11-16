@@ -10,7 +10,7 @@ import BoardHeader from "./BoardHeader.jsx";
 function UserInfo() {
   const { user } = useContext(UserContext);
 
-  console.log(user);
+  // console.log(user);
 
   return (
     <>

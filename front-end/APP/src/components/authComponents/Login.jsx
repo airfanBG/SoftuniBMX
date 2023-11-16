@@ -1,7 +1,7 @@
 import styles from "./Login.module.css";
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navigation from "../navigationsComponents/Navigation.jsx";
 import Footer from "../Footer.jsx";
 
@@ -202,6 +202,12 @@ function Login() {
           <button className={styles["button-submit"]} disabled={isAllowed}>
             Sign In
           </button>
+          <Link
+            className={styles["forgotPass"]}
+            to={"/auth/forgotten-password"}
+          >
+            Forgot password<span> ?</span>
+          </Link>
 
           <p className={styles["p"]}>
             Do not have an account?
