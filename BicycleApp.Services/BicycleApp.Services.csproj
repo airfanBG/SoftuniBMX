@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BicycleApp.Common\BicycleApp.Common.csproj" />
     <ProjectReference Include="..\BicycleApp.Data\BicycleApp.Data.csproj" />
   </ItemGroup>
 

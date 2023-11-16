@@ -38,10 +38,9 @@
         public string? EmployeeId { get; set; } 
 
         public virtual Employee? Employee { get; set; }
-
-        [Required]
+                
         [Comment("Date and time of asigned task to the employee")]
-        public DateTime DatetimeAsigned { get; set; }
+        public DateTime? DatetimeAsigned { get; set; }
 
         [Comment("Date and time of start of the task from the employee")]
         public DateTime? StartDatetime { get; set; }
