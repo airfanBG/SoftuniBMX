@@ -1,28 +1,36 @@
+import { Link } from "react-router-dom";
 import styles from "./Comment.module.css";
 
-function Comment() {
+function Comment({ comment }) {
   return (
     <figure className={styles.comment}>
       <div className={`${styles["user"]} ${styles["m-bottom-20"]}`}>
         <img
-          src="https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+          src={comment.clientImageUrl}
           alt="user photo"
           className={styles.avatar}
         />
-        <div>
-          <p className={styles["user-name"]}>Wilma Flintstone</p>
-          <p className={styles["post-date"]}>09 Jun 2020</p>
+        <div className={styles.header}>
+          <div>
+            <p className={styles["user-name"]}>{comment.clientFullName}</p>
+            <p className={styles["post-date"]}>
+              {comment.dateCreated.replaceAll("/", ".")}
+            </p>
+          </div>
+
+          <p className={styles.commentedPart}>
+            <Link to={"#"} alt="Part, commented by user">
+              {comment.partId}
+            </Link>
+          </p>
         </div>
       </div>
       <div className={styles["post-content"]}>
-        <p>
-          <q>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
-            reiciendis obcaecati repellendus quibusdam nemo cum asperiores
-            ratione, dolor id error. s
-          </q>
-        </p>
-        <div className={styles.likes}>
+        {/* <p> */}
+        <q>{comment.commentDescription}</q>
+        <div className={styles.commentOverflow}></div>
+        {/* </p> */}
+        {/* <div className={styles.likes}>
           <p>
             <i className="fa-regular fa-thumbs-up likes-fa-icon" />
             <span>Like</span>
@@ -35,7 +43,7 @@ function Comment() {
             <i className="fa-regular fa-share-from-square likes-fa-icon" />
             <span>Share</span>
           </p>
-        </div>
+        </div> */}
       </div>
     </figure>
   );

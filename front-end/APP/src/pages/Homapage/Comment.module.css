@@ -2,8 +2,22 @@
   background-color: var(--color-border);
   display: flex;
   flex-direction: column;
-  padding: 3rem;
+  height: 24.5rem;
+  padding: 3rem 3rem 4rem;
+  /* text-overflow: ellipsis; */
   border-radius: 10px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+  width: 100%;
+}
+.commentedPart {
+  font-size: 1.8rem;
+  margin-left: auto;
 }
 
 .user {
@@ -32,6 +46,15 @@
   font-weight: 300;
   font-style: italic;
   color: var(--color-main-dark);
+  overflow: hidden;
+  position: relative;
+}
+.commentOverflow {
+  position: absolute;
+  top: 7.5rem;
+  width: 120%;
+  height: 10px;
+  box-shadow: -9px 23px 6px #e2e2e2;
 }
 
 .likes {

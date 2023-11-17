@@ -59,7 +59,7 @@ function ModelSelection() {
           </Link>
         </div>
       </article>
-      <p className={styles["secondary-hd"]}>or</p>
+      <p className={styles["secondary-hd"]}>or take one of our offer</p>
 
       <h3 className={styles["model-selection-hd"]}>Choose model</h3>
       <div
@@ -72,6 +72,7 @@ function ModelSelection() {
             <BikeModel
               key={x.id}
               imageUrl={x.imageUrl}
+              model={x.modelName}
               description={x.description}
               price={x.price}
               top={top}

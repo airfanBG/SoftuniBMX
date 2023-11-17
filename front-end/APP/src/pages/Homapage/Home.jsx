@@ -23,7 +23,7 @@ function Home() {
         setLoading(true);
         try {
           const data = await get(dataPath.home_page_data);
-          console.log(data);
+          // console.log(data);
 
           const brakeHeapRelation = [...data.defaultBikes];
           // const brakeHeapRelation = JSON.parse(JSON.stringify(data));

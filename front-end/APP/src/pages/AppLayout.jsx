@@ -7,6 +7,7 @@ function AppLayout() {
   return (
     <div className={styles["app-component"]}>
       <Navigation />
+      <div className={styles.spacer}></div>
       <Outlet />
       <Footer />
     </div>

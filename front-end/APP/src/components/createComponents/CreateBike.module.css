@@ -33,40 +33,65 @@
   color: var(--color-main-dark);
   margin-bottom: 2px;
 }
-/* .boardHeader h3 span {
-      font-size: 1.8rem;
-      color: var(--color-hd);
-    } */
 
-.logout {
-  font-size: 2rem;
-  color: var(--color-secondary-hd);
-  margin-left: auto;
-}
-
-.orders {
-  padding: 1rem 0;
-}
-
-.userInfoWrapper {
+.dropdownWrapper {
+  width: 100%;
+  min-height: 75rem;
   display: grid;
-  grid-template-columns: 2fr 4fr;
+  grid-template-columns: 1fr 1fr 1fr;
   margin-top: 3rem;
 }
-.mainInfo {
+
+.framesBlock {
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  gap: 1.6rem;
-  padding: 0 0 2rem 2rem;
+  align-items: center;
+  /* gap: 2rem; */
+  padding: 0 1rem 2rem;
+  margin-bottom: 2rem;
+  /* border-right: 1px solid var(--color-border); */
+}
+.heading {
+  margin-right: auto;
+  font-size: 1.6rem;
+  font-weight: 300;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-hd);
+  padding: 0 1rem 0.2rem 0;
+  margin-bottom: 2rem;
 }
 
-.usernameHeading {
-  font-size: 2.4rem;
-  font-weight: 500;
+.selection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: space-between; */
+  gap: 2rem;
 }
 
-.userEmail {
-  font-size: 2rem;
-  line-height: 0.5;
+.selectionImg {
+  /* position: absolute;
+  bottom: 0; */
+  width: 100%;
+  /* margin-top: auto; */
+  margin-top: 2rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.selectionImg img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.questionMark {
+  text-align: center;
+  font-size: 20.5rem;
+  font-weight: 700;
+  color: var(--color-link-light-hover);
+  opacity: 0.15;
+  filter: drop-shadow(1px 2px 3px var(--color-main-dark));
 }

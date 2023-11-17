@@ -1,16 +1,16 @@
 /* Center the container */
 .loaderContainer {
   width: 100%;
-  height: 50vh;
-  position: relative;
-  position: absolute;
+  height: 100vh;
+  /* position: relative; */
+  /* position: absolute; */
   display: grid;
   place-items: center;
 }
 
 img {
-  width: 250px;
-  z-index: 999;
+  width: 200px;
+  z-index: 9999;
 }
 
 /******************************************

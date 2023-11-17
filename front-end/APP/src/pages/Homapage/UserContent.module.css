@@ -50,11 +50,11 @@
 .comments {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2.2rem;
   z-index: 0;
 }
 
-.comment {
+/* .comment {
   background-color: var(--color-border);
   display: flex;
   flex-direction: column;
@@ -96,7 +96,7 @@
   gap: 2rem;
   font-size: 1.6rem;
   margin-top: 3rem;
-}
+} */
 
 .gallery {
   display: grid;
