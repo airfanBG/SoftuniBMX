@@ -34,6 +34,19 @@
   margin-bottom: 2px;
 }
 
+.totalPrice {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.1rem 4rem 0rem;
+  margin-left: auto;
+  color: var(--color-main-dark);
+  font-size: 2rem;
+  font-weight: 500;
+  border: 1px solid var(--color-main-dark);
+  border-radius: 0.3rem;
+}
+
 .dropdownWrapper {
   width: 100%;
   min-height: 75rem;
@@ -76,6 +89,7 @@
   bottom: 0; */
   width: 100%;
   /* margin-top: auto; */
+  aspect-ratio: 1/1;
   margin-top: 2rem;
   border-radius: 0.5rem;
   overflow: hidden;

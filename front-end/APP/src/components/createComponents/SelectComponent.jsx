@@ -2,17 +2,14 @@ import { useEffect, useState } from "react";
 import styles from "./SelectComponent.module.css";
 import OptionComponent from "./OptionComponent.jsx";
 
-function SelectComponent({ data, dispatch }) {
+function SelectComponent({ data, dispatch, type, disabled }) {
   const [hasData, setHasData] = useState(false);
-  const iterable = Object.values(data).sort((a, b) =>
-    a.name.localeCompare(b.name)
-  );
-  const frameResult = [...iterable, { name: "Select brand", _id: "000" }];
-  // .unshift();
-  console.log(frameResult);
+  const iterable = data.sort((a, b) => a.name.localeCompare(b.name));
+  // const frameResult = [];
+  const frameResult = [...iterable, { name: "Select brand", _id: "" }];
 
   function onSelectHandler(e) {
-    dispatch({ type: "selectedFrame", payload: e.target.value });
+    dispatch({ type: type, payload: e.target.value });
   }
 
   useEffect(() => {
@@ -22,10 +19,12 @@ function SelectComponent({ data, dispatch }) {
 
   return (
     <select
+      disabled={disabled}
       className={styles.select}
       // defaultValue={""}
       onChange={onSelectHandler}
       // value="Select"
+      placeholder={"Select"}
     >
       {frameResult.map((x) => (
         <OptionComponent optionData={x} key={x._id} />
