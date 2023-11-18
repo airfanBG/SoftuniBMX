@@ -3,6 +3,7 @@ namespace BicicleApp.Api
     using BicycleApp.Data;
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;
+    using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Services;
     using BicycleApp.Services.Services.Email;
     using BicycleApp.Services.Services.Factory;
@@ -63,8 +64,8 @@ namespace BicicleApp.Api
             builder.Services.AddScoped<IHomePageService, HomePageService>();
             builder.Services.AddScoped<IClientService, ClientService>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
-            builder.Services.AddScoped<IFactory, Factory>();
-            builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<IUserFactory, UserFactory>();
+            builder.Services.AddScoped<IOrderManagerService, OrderManagerService>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddScoped<IImageStore, ImageStore>();
             builder.Services.AddScoped<IPictureOrganizerServices, PictureOrganizerServices>();
