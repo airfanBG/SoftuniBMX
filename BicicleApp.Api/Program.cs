@@ -90,6 +90,7 @@ namespace BicicleApp.Api
             builder.Services.AddScoped<IFactory, Factory>();
             builder.Services.AddScoped<IModelsFactory, ModelsFactory>();
             builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<IEmployeeOrderService, EmployeeOrderService>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddScoped<IImageStore, ImageStore>();
             builder.Services.AddScoped<IPictureOrganizerServices, PictureOrganizerServices>();

@@ -102,10 +102,11 @@
         {
             try
             {
-                var orderPartToEmployee = await _db.OrdersPartsEmployees
-                                                   .FirstAsync(ope => ope.OrderId == managerApprovalDto.OrderId
-                                                                      && ope.PartId == managerApprovalDto.OrderParts.PartId
-                                                                      && ope.EmployeeId == null);
+                var orderPartToEmployee =
+                    await _db.OrdersPartsEmployees
+                          .FirstAsync(ope => ope.OrderId == managerApprovalDto.OrderId
+                           && ope.PartId == managerApprovalDto.OrderParts.PartId
+                           && ope.EmployeeId == null);
 
                 bool areAvailableParts = await ArePartsAvailable(managerApprovalDto.OrderParts.Quantity, managerApprovalDto.OrderParts.PartId);
                 //Checks for available quantity
