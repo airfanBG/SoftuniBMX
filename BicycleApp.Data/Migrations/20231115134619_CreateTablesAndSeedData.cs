@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BicycleApp.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateTablesAndSeedTestData : Migration
+    public partial class CreateTablesAndSeedData : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -33,8 +33,8 @@ namespace BicycleApp.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ModelName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ModelName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false, comment: "Name of standart bike."),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true, comment: "Image of standart bike.")
                 },
                 constraints: table =>
                 {
@@ -589,8 +589,11 @@ namespace BicycleApp.Data.Migrations
                 {
                     OrderId = table.Column<int>(type: "int", nullable: false, comment: "Id of the order from the client"),
                     PartId = table.Column<int>(type: "int", nullable: false, comment: "Id of the part"),
-                    EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: false, comment: "Id of the emplyee asigned to this order"),
-                    DatetimeAsigned = table.Column<DateTime>(type: "datetime2", nullable: false, comment: "Date and time of asigned task to the employee"),
+                    PartName = table.Column<string>(type: "nvarchar(max)", nullable: false, comment: "Name of the part"),
+                    PartQuantity = table.Column<double>(type: "float(2)", nullable: false, comment: "Quantity of the part"),
+                    PartPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false, comment: "Price of the part"),
+                    EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: true, comment: "Id of the emplyee asigned to this order"),
+                    DatetimeAsigned = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Date and time of asigned task to the employee"),
                     StartDatetime = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Date and time of start of the task from the employee"),
                     EndDatetime = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Date and time of finish of the task from the employee"),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false, comment: "Description of the task"),
@@ -598,7 +601,7 @@ namespace BicycleApp.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrdersPartsEmployees", x => new { x.OrderId, x.PartId, x.EmployeeId });
+                    table.PrimaryKey("PK_OrdersPartsEmployees", x => new { x.OrderId, x.PartId });
                     table.ForeignKey(
                         name: "FK_OrdersPartsEmployees_AspNetUsers_EmployeeId",
                         column: x => x.EmployeeId,
@@ -620,61 +623,97 @@ namespace BicycleApp.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Departments",
                 columns: new[] { "Id", "DateCreated", "DateDeleted", "DateUpdated", "IsDeleted", "Name" },
-                values: new object[] { 1, new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9102), null, new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9106), false, "first department" });
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(213), null, null, false, "Administration" },
+                    { 2, new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(223), null, null, false, "Workshop" }
+                });
 
             migrationBuilder.InsertData(
                 table: "PartCategories",
                 columns: new[] { "Id", "DateCreated", "DateDeleted", "DateUpdated", "ImageUrl", "IsDeleted", "Name" },
-                values: new object[] { 1, new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9530), null, new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9534), "test", false, "first" });
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(566), null, null, "test", false, "Frame" },
+                    { 2, new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(575), null, null, "test", false, "Wheel" },
+                    { 3, new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(586), null, null, "test", false, "Shift" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Statuses",
                 columns: new[] { "Id", "DateCreated", "DateDeleted", "DateUpdated", "IsDeleted", "Name" },
-                values: new object[] { 1, new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9605), null, new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9610), false, "first_test" });
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(664), null, null, false, "Pending approval" },
+                    { 2, new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(674), null, null, false, "Approved order" },
+                    { 3, new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(676), null, null, false, "Frame management" },
+                    { 4, new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(678), null, null, false, "Wheel management" },
+                    { 5, new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(680), null, null, false, "Shift management" },
+                    { 6, new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(683), null, null, false, "Quality control" },
+                    { 7, new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(685), null, null, false, "Send order" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Supliers",
                 columns: new[] { "Id", "Address", "ContactName", "DateCreated", "DateDeleted", "DateUpdated", "Email", "IsDeleted", "Name", "PhoneNumeber", "VATNumber" },
-                values: new object[] { 1, "Sofia, center", "Pesh Peshev", new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9646), null, new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9650), "text@test.bg", false, "X Ltd", "1234567890", "123456789" });
+                values: new object[] { 1, "Sofia, center", "Pesh Peshev", new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(742), null, new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(743), "text@test.bg", false, "X Ltd", "1234567890", "123456789" });
 
             migrationBuilder.InsertData(
                 table: "Towns",
                 columns: new[] { "Id", "DateCreated", "DateDeleted", "DateUpdated", "IsDeleted", "Name" },
-                values: new object[] { 1, new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9728), null, new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9799), false, "Sofia" });
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(791), null, new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(797), false, "Sofia" },
+                    { 2, new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(804), null, null, false, "Varna" },
+                    { 3, new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(806), null, null, false, "Burgas" }
+                });
 
             migrationBuilder.InsertData(
                 table: "VATCategories",
                 columns: new[] { "Id", "DateCreated", "DateDeleted", "DateUpdated", "IsDeleted", "VATPercent" },
-                values: new object[] { 1, new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9837), null, new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9840), false, 20.00m });
+                values: new object[] { 1, new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(835), null, new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(836), false, 20.00m });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DateCreated", "DateOfHire", "DateOfLeave", "DateUpdated", "DepartmentId", "Email", "EmailConfirmed", "FirstName", "IsDeleted", "IsManeger", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Position", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "21003785-a275-4139-ae20-af6a6cf8fea8", 0, "6b3d6161-5239-4b1d-963f-8972f27541a5", new DateTime(2023, 11, 14, 22, 2, 23, 856, DateTimeKind.Local).AddTicks(4365), new DateTime(2023, 11, 14, 22, 2, 23, 856, DateTimeKind.Local).AddTicks(4294), null, null, 1, "employee@test.bg", false, "Marin", false, false, "Marinov", false, null, "EMPLOYEE@TEST.BG", null, "AQAAAAIAAYagAAAAENRiGGdRpnK2Aggsjw4eoBNY0Dxkwe2UYkM/t75+OPjUmiqynymsXvYZn4hIs8V36g==", "1234567890", false, "mehanik", "EMPLOYEE@TEST.BG", false, "employee@test.bg" },
-                    { "406e8cf1-acaa-44a8-afec-585ff64bed34", 0, "593a7f9c-b4f8-41c1-9ef2-240193ada3ec", new DateTime(2023, 11, 14, 22, 2, 23, 965, DateTimeKind.Local).AddTicks(1970), new DateTime(2023, 11, 14, 22, 2, 23, 965, DateTimeKind.Local).AddTicks(1896), null, null, 1, "manager@test.bg", false, "Kalin", false, true, "Kalinov", false, null, "MANAGER@TEST.BG", null, "AQAAAAIAAYagAAAAEI60ZAYv1098qisRzvqEceIa6ZYaSIeDnF06q9OOS6ZYOvWbou12BM7WZ0bOvubebw==", "1234567890", false, "manager", "MANAGER@TEST.BG", false, "manager@test.bg" }
+                    { "17063948-8fdc-417e-8fb7-2ae6bf572f94", 0, "c39d70d3-b937-4c8e-b81d-b155760db410", new DateTime(2023, 11, 15, 15, 46, 19, 184, DateTimeKind.Local).AddTicks(7429), new DateTime(2023, 11, 15, 15, 46, 19, 184, DateTimeKind.Local).AddTicks(7408), null, null, 2, "todorov@b-free.com", false, "Todor", false, false, "Todorov", false, null, "TODOROV@B-FREE.COM", null, "AQAAAAIAAYagAAAAENk/PWxZl7rOrri4ifHfmImLXyN13g4DufaoL15jImTy1znseDcPGcrvsINbKKyNew==", "1234567890", false, "Wheelworker", "TODOROV@B-FREE.COM", false, "todorov@b-free.com" },
+                    { "21003785-a275-4139-ae20-af6a6cf8fea8", 0, "5a1666b3-5f89-4045-9503-50b0d5e64b32", new DateTime(2023, 11, 15, 15, 46, 19, 117, DateTimeKind.Local).AddTicks(8677), new DateTime(2023, 11, 15, 15, 46, 19, 117, DateTimeKind.Local).AddTicks(8659), null, null, 2, "marinov@b-free.com", false, "Marin", false, false, "Marinov", false, null, "MARINOV@B-FREE.COM", null, "AQAAAAIAAYagAAAAEPWRp7LJGSEO3pbvyY8+gUpZD+p0k7lRyxAlLoGNT3Rr8RTZyjr/zOkjFkqDDyHPTg==", "1234567890", false, "FrameWorker", "MARINOV@B-FREE.COM", false, "marinov@b-free.com" },
+                    { "29f06920-d2ad-43d8-b362-e2b94d7a7502", 0, "9e97ec1e-4e30-4ee1-b51b-81e7dc5bfe9c", new DateTime(2023, 11, 15, 15, 46, 19, 314, DateTimeKind.Local).AddTicks(9649), new DateTime(2023, 11, 15, 15, 46, 19, 314, DateTimeKind.Local).AddTicks(9629), null, null, 2, "atanasov@b-free.com", false, "Atanas", false, false, "Atanasov", false, null, "ATANASOV@B-FREE.COM", null, "AQAAAAIAAYagAAAAEBDdEyOwFoLStE5+ZUMqsrp6j6M7+zOfLiy38YOCIJTyemdM62EzQ+s3W92XxpSOGw==", "1234567890", false, "Qualitycontrol", "ATANASOV@B-FREE.COM", false, "atanasov@b-free.com" },
+                    { "406e8cf1-acaa-44a8-afec-585ff64bed34", 0, "25780084-f2ad-4acc-a0b3-13a3c94684d5", new DateTime(2023, 11, 15, 15, 46, 19, 52, DateTimeKind.Local).AddTicks(9398), new DateTime(2023, 11, 15, 15, 46, 19, 52, DateTimeKind.Local).AddTicks(9378), null, null, 1, "manager@b-free.com", false, "Kalin", false, true, "Kalinov", false, null, "MANAGER@B-FREE.COM", null, "AQAAAAIAAYagAAAAEOG6BxypAcN1f7TBS4KKjfqNCi1TmpORXxk1u17orfqy+cDsVdfqWHy4PQHepIUClg==", "1234567890", false, "manager", "MANAGER@B-FREE.COM", false, "manager@b-free.com" },
+                    { "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91", 0, "aa54a014-d5cf-45e6-8613-32d3a7129548", new DateTime(2023, 11, 15, 15, 46, 19, 249, DateTimeKind.Local).AddTicks(7455), new DateTime(2023, 11, 15, 15, 46, 19, 249, DateTimeKind.Local).AddTicks(7399), null, null, 2, "ivanov@b-free.com", false, "Ivan", false, false, "Ivanov", false, null, "IVANOV@B-FREE.COM", null, "AQAAAAIAAYagAAAAEKon4r85XoVcCG6L1FpJ0r8kUwCMNmca5X0vEz5zh4eiAwSlG0fnsy9debCENKx+og==", "1234567890", false, "Accessoriesworker", "IVANOV@B-FREE.COM", false, "ivanov@b-free.com" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Clients",
                 columns: new[] { "Id", "AccessFailedCount", "Balance", "ConcurrencyStamp", "DateCreated", "DateDeleted", "DateUpdated", "DelivaryAddress", "Email", "EmailConfirmed", "FirstName", "IBAN", "IsDeleted", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TownId", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", 0, 1000.00m, "9662ffca-9b2e-4dda-b2cc-03f2a37bba6e", new DateTime(2023, 11, 14, 22, 2, 23, 769, DateTimeKind.Local).AddTicks(8384), null, null, "Sofia, Mladost 1, bl 20", "client@test.bg", false, "Ivan", "BG0012345678910111212", false, "Ivanov", false, null, "CLIENT@TEST.BG", null, "AQAAAAIAAYagAAAAECsOKngazYgMAV5DyFtvOLW0LmF/CfjA9mosxk+lzSZyrOtFfaVL94rvyzsRPAuuHg==", "1234567890", false, "CLIENT@TEST.BG", 1, false, "client@test.bg" });
+                values: new object[,]
+                {
+                    { "17ce735d-6713-4d0a-8fcb-e4a71ee86f6f", 0, 50.00m, "ed4496d7-6c5b-4b04-bb1a-a466522e42c8", new DateTime(2023, 11, 15, 15, 46, 18, 922, DateTimeKind.Local).AddTicks(6421), null, null, "Mladost 1, bl 20", "joro@test.bg", false, "Georgi", "BG0012345678910111212", false, "Georgiev", false, null, "JORO@TEST.BG", null, "AQAAAAIAAYagAAAAEAXDWcQgRblX4AAae6FSByrh/xJ/x42GBn/Ux2ZeR42wPKDVhrlhyip7FxNXoZpB9g==", "1234567890", false, "JORO@TEST.BG", 2, false, "joro@test.bg" },
+                    { "99d3ca6f-2067-4316-a5d7-934c93789521", 0, 1246.00m, "4ae51657-5d44-46af-be94-d2abcda044a1", new DateTime(2023, 11, 15, 15, 46, 18, 987, DateTimeKind.Local).AddTicks(8822), null, null, "Mladost 1, bl 20", "powerranger@test.bg", false, "Dimityr", "BG0012345678910111212", false, "Dimitrov", false, null, "POWERRANGER@TEST.BG", null, "AQAAAAIAAYagAAAAENtpKrXUsQiPCBYaXAmBNeyHL/UfUosc39RlhVA/nLvn8Hv1ePCYT33K3PcyriWXGw==", "1234567890", false, "POWERRANGER@TEST.BG", 3, false, "powerranger@test.bg" },
+                    { "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", 0, 1000.00m, "4179d2e7-945f-43b8-9623-12c8d477e1b6", new DateTime(2023, 11, 15, 15, 46, 18, 855, DateTimeKind.Local).AddTicks(8468), null, null, "Mladost 1, bl 20", "client@test.bg", false, "Ivan", "BG0012345678910111212", false, "Ivanov", false, null, "CLIENT@TEST.BG", null, "AQAAAAIAAYagAAAAEBLJURItOeIfHIEak94EVo1cV9I2wHxJYSsN0XfS0qFjvfLjXd36XXJM5WPsqNMr8Q==", "1234567890", false, "CLIENT@TEST.BG", 1, false, "client@test.bg" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Parts",
                 columns: new[] { "Id", "CategoryId", "DateCreated", "DateDeleted", "DateUpdated", "Description", "IsDeleted", "Name", "OEMNumber", "Quantity", "SalePrice", "Unit", "VATCategoryId" },
-                values: new object[] { 1, 1, new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9394), null, new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9397), "test", false, "test", "oemtest", 1.0, 10.00m, "бр", 1 });
+                values: new object[,]
+                {
+                    { 1, 1, new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(505), null, null, "Best frame in the world!", false, "Frame OG", "oemtest", 3.0, 100.00m, "count", 1 },
+                    { 2, 2, new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(526), null, null, "Best wheels ever!", false, "Wheel of the Year", "oemtest", 50.0, 75.00m, "count", 1 },
+                    { 3, 3, new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(530), null, null, "Worst shift - have only one!", false, "Shift", "oemtest", 9.0, 250.00m, "count", 1 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Comments",
                 columns: new[] { "Id", "ClientId", "DateCreated", "DateUpdated", "Description", "PartId", "Title" },
-                values: new object[] { 1, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(8911), new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(8980), "Test Description", 1, "Test Title" });
+                values: new object[] { 1, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(55), new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(75), "Test Description", 1, "Test Title" });
 
             migrationBuilder.InsertData(
                 table: "Delivaries",
                 columns: new[] { "Id", "DateDelivered", "DateUpdated", "Note", "PartId", "QuantityDelivered", "SuplierId" },
-                values: new object[] { 1, new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9045), new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9048), "text", 1, 2.0, 1 });
+                values: new object[] { 1, new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(142), new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(144), "text", 1, 2.0, 1 });
 
             migrationBuilder.InsertData(
                 table: "ImagesClients",
@@ -694,7 +733,7 @@ namespace BicycleApp.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Orders",
                 columns: new[] { "Id", "ClientId", "DateCreated", "DateDeleted", "DateFinish", "DateUpdated", "Description", "Discount", "FinalAmount", "IsDeleted", "PaidAmount", "SaleAmount", "SerialNumber", "StatusId", "UnpaidAmount", "VAT" },
-                values: new object[] { 1, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9295), null, null, new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9299), "row=1;partId=1;partName=test;partPrice=10.00,priceQty=1$", 0m, 12.00m, false, 0m, 10.00m, "BID12345678", 1, 12.00m, 2.00m });
+                values: new object[] { 1, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(389), null, null, null, "", 0m, 750.00m, false, 0m, 625.00m, "BID12345678", 1, 750.00m, 125.00m });
 
             migrationBuilder.InsertData(
                 table: "Rates",
@@ -703,8 +742,8 @@ namespace BicycleApp.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "OrdersPartsEmployees",
-                columns: new[] { "EmployeeId", "OrderId", "PartId", "DatetimeAsigned", "Description", "EndDatetime", "IsCompleted", "StartDatetime" },
-                values: new object[] { "21003785-a275-4139-ae20-af6a6cf8fea8", 1, 1, new DateTime(2023, 11, 14, 22, 2, 24, 59, DateTimeKind.Local).AddTicks(9336), "test", null, false, null });
+                columns: new[] { "OrderId", "PartId", "DatetimeAsigned", "Description", "EmployeeId", "EndDatetime", "IsCompleted", "PartName", "PartPrice", "PartQuantity", "StartDatetime" },
+                values: new object[] { 1, 1, new DateTime(2023, 11, 15, 15, 46, 19, 380, DateTimeKind.Local).AddTicks(437), "test", "21003785-a275-4139-ae20-af6a6cf8fea8", null, false, "Frame OG", 100.00m, 1.0, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
