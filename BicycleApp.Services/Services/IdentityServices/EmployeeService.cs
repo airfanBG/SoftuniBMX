@@ -20,6 +20,7 @@
     using System.Security.Claims;
 
     using static BicycleApp.Common.ApplicationGlobalConstants;
+    using static BicycleApp.Common.EntityValidationConstants;
 
     public class EmployeeService : IEmployeeService
     {
@@ -116,7 +117,7 @@
                 {
                     EmployeeId = employee.Id,
                     EmployeeFullName = $"{employee.FirstName} {employee.LastName}",
-                    Token = this.GenerateJwtTokenAsync(employee),
+                    Token = await this.GenerateJwtTokenAsync(employee),
                     Role = roles[0],
                     Result = true,
                 };
@@ -163,6 +164,42 @@
             };
         }
 
+
+        /// <summary>
+        /// This method changes the password for an employee in the database
+        /// </summary>
+        /// <param name="employeePasswordChangeDto">Input data</param>
+        /// <returns>True/False</returns>
+        /// <exception cref="ArgumentNullException">If input data is null throws exception</exception>
+        public async Task<bool> ChangeEmployeePasswordAsync(EmployeePasswordChangeDto employeePasswordChangeDto)
+        {
+            if (employeePasswordChangeDto == null)
+            {
+                throw new ArgumentNullException(nameof(employeePasswordChangeDto));
+            }
+
+            var employee = await userManager.FindByIdAsync(employeePasswordChangeDto.EmployeeId);
+
+            if (employee == null)
+            {
+                // Employee not found
+                return false;
+            }
+
+            var result = await userManager.ChangePasswordAsync(employee, employeePasswordChangeDto.OldPassword, employeePasswordChangeDto.NewPasword);
+
+            if (result.Succeeded)
+            {
+                // Password changed successfully
+                return true;
+            }
+            else
+            {
+                // Failed to change password
+                return false;
+            }
+        }
+
         /// <summary>
         /// This method returns the id of the department and creates a department entry in the database if needed
         /// </summary>
@@ -199,13 +236,18 @@
         /// </summary>
         /// <param name="employee">The Employee entity</param>
         /// <returns>Jwt token</returns>
-        private string GenerateJwtTokenAsync(Employee employee)
+        private async Task<string> GenerateJwtTokenAsync(Employee employee)
         {
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, employee.Id.ToString()),
                 new Claim(ClaimTypes.Email, employee.Email)
             };
+            var roles = await userManager.GetRolesAsync(employee);
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
             var expires = DateTime.UtcNow.AddDays(7);
 

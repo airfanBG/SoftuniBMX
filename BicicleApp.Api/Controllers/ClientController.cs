@@ -122,7 +122,7 @@
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<ClientInfoDto>> GetClientInfo([FromQuery]string id)
+        public async Task<ActionResult<ClientInfoDto>> GetClientInfo([FromQuery] string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -139,6 +139,43 @@
                 }
 
                 return Ok(dto);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpPost]
+        [Route("password")]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> ChangePassword([FromBody] ClientPasswordChangeDto clientPasswordChangeDto)
+        {
+            if (clientPasswordChangeDto == null)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(422, clientPasswordChangeDto);
+            }
+
+            try
+            {
+                var result = await clientService.ChangeClientPasswordAsync(clientPasswordChangeDto);
+
+                if (result)
+                {
+                    return StatusCode(StatusCodes.Status202Accepted);
+                }
+                else
+                {
+                    return StatusCode(422, clientPasswordChangeDto);
+                }
             }
             catch (Exception)
             {

@@ -265,6 +265,13 @@
                     .Property(v => v.VATPercent).HasColumnType("decimal(6,2)");
             });
 
+            //BikeStandartModelEntityConfiguration
+            builder.Entity<BikeStandartModel>(entity =>
+            {
+                entity.Property(b => b.Price).HasColumnType("decimal(18,2)");
+            });
+
+
             //BikeModelPartEntityConfiguration
             builder.Entity<BikeModelPart>(entity =>
             {

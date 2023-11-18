@@ -146,5 +146,42 @@
                 return StatusCode(500);
             }
         }
+
+        [HttpPost]
+        [Route("password")]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> ChangePassword([FromBody] EmployeePasswordChangeDto employeePasswordChangeDto)
+        {
+            if (employeePasswordChangeDto == null)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(422, employeePasswordChangeDto);
+            }
+
+            try
+            {
+                var result = await employeeService.ChangeEmployeePasswordAsync(employeePasswordChangeDto);
+
+                if (result)
+                {
+                    return StatusCode(StatusCodes.Status202Accepted);
+                }
+                else
+                {
+                    return StatusCode(422, employeePasswordChangeDto);
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+        }
     }
 }

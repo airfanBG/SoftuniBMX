@@ -107,7 +107,7 @@
                     ClientId = client.Id,
                     ClientFullName = $"{client.FirstName} {client.LastName}",
                     Role = roles[0],
-                    Token = this.GenerateJwtTokenAsync(client),
+                    Token = await this.GenerateJwtTokenAsync(client),
                     Result = true
                 };
             }
@@ -151,17 +151,57 @@
         }
 
         /// <summary>
+        /// This methos changes the password for a client in the database
+        /// </summary>
+        /// <param name="clientPasswordChangeDto">Input data</param>
+        /// <returns>True/False</returns>
+        /// <exception cref="ArgumentNullException">If input data is null throws exception</exception>
+        public async Task<bool> ChangeClientPasswordAsync(ClientPasswordChangeDto clientPasswordChangeDto)
+        {
+            if (clientPasswordChangeDto == null)
+            {
+                throw new ArgumentNullException(nameof(clientPasswordChangeDto));
+            }
+
+            var client = await userManager.FindByIdAsync(clientPasswordChangeDto.ClentId);
+
+            if (client == null)
+            {
+                // Client not found
+                return false;
+            }
+
+            var result = await userManager.ChangePasswordAsync(client, clientPasswordChangeDto.OldPassword, clientPasswordChangeDto.NewPasword);
+
+            if (result.Succeeded)
+            {
+                // Password changed successfully
+                return true;
+            }
+            else
+            {
+                // Failed to change password
+                return false;
+            }
+        }
+
+        /// <summary>
         /// This methos creates a Jwt token
         /// </summary>
         /// <param name="client">The client model</param>
         /// <returns>Jwt token as string</returns>
-        private string GenerateJwtTokenAsync(Client client)
+        private async Task<string> GenerateJwtTokenAsync(Client client)
         {
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, client.Id.ToString()),
                 new Claim(ClaimTypes.Email, client.Email)
             };
+            var roles =await userManager.GetRolesAsync(client);
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
             var expires = DateTime.UtcNow.AddDays(7);
 

@@ -38,7 +38,9 @@
                     {
                         Id = e.Id,
                         ModelName = e.ModelName,
-                        ImageUrl = e.ImageUrl                      
+                        ImageUrl = e.ImageUrl,
+                        Price = e.Price,
+                        Description = e.Description
                     })
                     .ToListAsync();
 
