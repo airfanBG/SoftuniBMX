@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BicycleApp.Services.Services
 {
-    internal class DropdownsContentService : IDropdownsContentService
+    public class DropdownsContentService : IDropdownsContentService
     {
 
         private readonly BicycleAppDbContext _dbContext;
@@ -34,6 +34,8 @@ namespace BicycleApp.Services.Services
                     ImageUrl = p.ImagesParts.First().ImageUrl,
                     Quantity = p.Quantity,
                     SalePrice = p.SalePrice,
+                    OEMNumber = p.OEMNumber,
+                    Rating = p.Rates.Average(r=>r.Rating)
                 })
                 .ToListAsync();
 
@@ -65,6 +67,8 @@ namespace BicycleApp.Services.Services
                     ImageUrl = p.ImagesParts.First().ImageUrl,
                     Quantity = p.Quantity,
                     SalePrice = p.SalePrice,
+                    OEMNumber = p.OEMNumber,
+                    Rating = p.Rates.Average(r => r.Rating)
                 })
                 .ToListAsync();
 
@@ -97,6 +101,8 @@ namespace BicycleApp.Services.Services
                     ImageUrl = p.ImagesParts.First().ImageUrl,
                     Quantity = p.Quantity,
                     SalePrice = p.SalePrice,
+                    OEMNumber = p.OEMNumber,
+                    Rating = p.Rates.Average(r => r.Rating)
                 })
                 .ToListAsync();
 
@@ -133,6 +139,8 @@ namespace BicycleApp.Services.Services
                     ImageUrl = p.ImagesParts.First().ImageUrl,
                     Quantity = p.Quantity,
                     SalePrice = p.SalePrice,
+                    OEMNumber = p.OEMNumber,
+                    Rating = p.Rates.Average(r => r.Rating)
                 })
                 .FirstAsync();
 

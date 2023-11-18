@@ -9,11 +9,13 @@ namespace BicicleApp.Api
     using BicycleApp.Services.Services.IdentityServices;
     using BicycleApp.Services.Services.Image;
     using BicycleApp.Services.Services.Order;
-
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.IdentityModel.Tokens;
+    using System.Text;
 
     public class Program
     {
@@ -67,7 +69,8 @@ namespace BicicleApp.Api
             builder.Services.AddScoped<IOrderService, OrderService>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddScoped<IImageStore, ImageStore>();
-            builder.Services.AddScoped<IPictureOrganizerServices, PictureOrganizerServices>();
+            builder.Services.AddScoped<IPictureOrganizerServices, PictureOrganizerServices>();  builder.Services.AddScoped<IDropdownsContentService, DropdownsContentService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
