@@ -46,6 +46,9 @@
   border: 1px solid var(--color-main-dark);
   border-radius: 0.3rem;
 }
+.priceNumbers {
+  font-weight: 300;
+}
 
 .dropdownWrapper {
   width: 100%;
