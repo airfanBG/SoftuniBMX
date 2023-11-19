@@ -37,9 +37,10 @@
   padding: 1rem;
 }
 
-.info span {
+.label {
   position: absolute;
   top: -1.3rem;
+  left: 1rem;
   padding: 0 0.3rem;
   font-size: 1.4rem;
   color: var(--color-hd-second);

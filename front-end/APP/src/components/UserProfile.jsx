@@ -15,10 +15,21 @@ function UserProfile() {
   const userData = getUserData();
   const [user, setUser] = useState(userData);
 
-  function userBalanceHandler(value) {
+  function userBalanceHandler(action, value) {
     if (user === null) return;
-    const changedLS = { ...user, balance: user.balance - value };
-    setUser({ ...user, balance: user.balance - value });
+
+    let amount = 0;
+    if (action === "add") {
+      amount = user.balance + value;
+    } else {
+      amount = user.balance - value;
+    }
+    console.log(amount);
+    const changedLS = {
+      ...user,
+      balance: amount,
+    };
+    setUser({ ...user, balance: amount });
     setUserData(changedLS);
   }
   return (

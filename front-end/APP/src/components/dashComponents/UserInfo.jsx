@@ -7,9 +7,15 @@ import UserContactInfo from "./UserContactInfo.jsx";
 import BoardHeader from "./BoardHeader.jsx";
 
 function UserInfo() {
-  const { user } = useContext(UserContext);
+  const { user, userBalanceHandler } = useContext(UserContext);
 
   // console.log(user);
+
+  function addMoneyBtnHandler() {
+    // TODO: make request to update user balance
+    //next is only for testing
+    userBalanceHandler("add", 2345);
+  }
 
   return (
     <>
@@ -29,6 +35,11 @@ function UserInfo() {
 
             <p className={styles.userEmail}>{user.email}</p>
             <p className={styles.userEmail}>{user.phone}</p>
+            {user.role === "user" && (
+              <button className={styles.addMoney} onClick={addMoneyBtnHandler}>
+                Add money
+              </button>
+            )}
           </figure>
 
           {user.role === "user" && <UserContactInfo />}

@@ -10,9 +10,12 @@ import {
   getOnePart,
   getOneWheel,
 } from "../../bikeServices/service.js";
+import LoaderWheel from "../LoaderWheel.jsx";
 
 function Cart() {
   const { user, userBalanceHandler } = useContext(UserContext);
+
+  const [loading, setLoading] = useState(false);
   const [frame, setFrame] = useState({});
   const [wheel, setWheel] = useState({});
   const [parts, setParts] = useState({});
@@ -20,8 +23,10 @@ function Cart() {
 
   useEffect(function () {
     if (!order) return;
+    setLoading(true);
     async function getOrder() {
       const { selectedFrame, selectedWheel, selectedPart } = order;
+
       try {
         const frame = await getOneFrame(selectedFrame);
         const wheel = await getOneWheel(selectedWheel);
@@ -30,11 +35,14 @@ function Cart() {
         setWheel({ ...wheel });
         setParts({ ...parts });
         console.log(frame, wheel, parts);
+        setLoading(false);
       } catch (err) {
         console.error(err);
+        setLoading(false);
       }
     }
     getOrder();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>
@@ -42,7 +50,7 @@ function Cart() {
 
       <section className={styles.board}>
         <BoardHeader />
-
+        {loading && <LoaderWheel />}
         {order && (
           <>
             <div className={styles.userInfoWrapper}>
@@ -81,8 +89,18 @@ function Cart() {
               </figure>
             </div>
 
+            <p className={styles.totalPrice}>
+              <span>Total:</span>
+              {frame.price + wheel.price + parts.price}
+            </p>
             {/* TODO: check if user has enough money */}
-            <button className={styles.btn}>Finish order</button>
+            <button
+              className={styles.btn}
+              disabled={user.balance < frame.price + wheel.price + parts.price}
+              onClick={() => console.log("click")}
+            >
+              Finish order
+            </button>
           </>
         )}
         {!order && <h2>Your orders will appear here</h2>}
