@@ -11,7 +11,6 @@ namespace BicicleApp.Api
     using BicycleApp.Services.Services.IdentityServices;
     using BicycleApp.Services.Services.Image;
     using BicycleApp.Services.Services.Order;
-
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
@@ -92,6 +91,8 @@ namespace BicicleApp.Api
             builder.Services.AddScoped<IOrderService, OrderService>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddScoped<IImageStore, ImageStore>();
+            builder.Services.AddScoped<IPictureOrganizerServices, PictureOrganizerServices>();  builder.Services.AddScoped<IDropdownsContentService, DropdownsContentService>();
+
             builder.Services.AddScoped<IPictureOrganizerServices, PictureOrganizerServices>();
 
             var app = builder.Build();
