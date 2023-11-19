@@ -224,7 +224,7 @@ function CreateBike() {
         <section className={styles.board}>
           <header className={styles.boardHeader}>
             <h3 className={styles.cash}>Select from lists</h3>
-            <div
+            <button
               className={styles.totalPrice}
               style={
                 canBuy
@@ -238,7 +238,7 @@ function CreateBike() {
             >
               <ion-icon name="cart-outline"></ion-icon>
               <span className={styles.priceNumbers}> {total.toFixed(2)}</span>
-            </div>
+            </button>
           </header>
 
           <div className={styles.dropdownWrapper}>

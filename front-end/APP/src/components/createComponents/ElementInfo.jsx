@@ -1,5 +1,8 @@
+import StarsRating from "../Stars.jsx";
 import styles from "./ElementInfo.module.css";
-
+const color = {
+  backgroundColor: "yellow",
+};
 function ElementInfo({ data }) {
   return (
     <div className={styles.frameInfo}>
@@ -14,10 +17,18 @@ function ElementInfo({ data }) {
           {data.oem}
         </div>
       </div>
-      {/* TODO: missing rating */}
-      <div className={`${styles.info} ${styles.price}`}>
-        <span className={styles.label}>Price</span>
-        {data.price}
+      <div className={styles.price}>
+        <div className={`${styles.info} `}>
+          {/* <div className={`${styles.info} ${styles.price}`}> */}
+          <span className={styles.label}>Price</span>
+          {data.price}
+        </div>
+        <StarsRating
+          size={20}
+          defaultRating={data.rating}
+          color="#FFA81E"
+          className={"stars"}
+        />
       </div>
 
       <div className={`${styles.info} ${styles.description}`}>
