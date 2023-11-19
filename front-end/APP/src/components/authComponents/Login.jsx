@@ -99,7 +99,7 @@ function Login() {
       throw new Error(err.message);
     }
   }
-
+  // TODO: if user is worker clear local storage
   return (
     <>
       {isLoading && <LoaderWheel />}

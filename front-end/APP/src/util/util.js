@@ -8,9 +8,15 @@ export const PASS_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/;
 export function getUserData() {
   return JSON.parse(localStorage.getItem(itemName));
 }
+export function getOrderData() {
+  return JSON.parse(localStorage.getItem("order"));
+}
 
 export function setUserData(data) {
   return localStorage.setItem(itemName, JSON.stringify(data));
+}
+export function setOrderData(data) {
+  return localStorage.setItem("order", JSON.stringify(data));
 }
 
 export function clearUserData() {

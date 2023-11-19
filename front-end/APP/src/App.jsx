@@ -13,6 +13,7 @@ import WorkerOrders from "./components/dashComponents/WorkerOrders.jsx";
 import WorkerFinished from "./components/dashComponents/WorkerFinished.jsx";
 import CreateBike from "./components/createComponents/CreateBike.jsx";
 import ForgottenPassword from "./components/authComponents/ForgottenPassword.jsx";
+import Cart from "./components/dashComponents/Cart.jsx";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="profile" element={<UserProfile />}>
           <Route index element={<Navigate replace to="info" />} />
           <Route path="info" element={<UserInfo />} />
+          <Route path={"cart"} element={<Cart />} />
           <Route path="orders" element={<WorkerOrders />} />
           <Route path={"finished"} element={<WorkerFinished />} />
         </Route>

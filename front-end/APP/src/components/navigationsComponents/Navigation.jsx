@@ -1,15 +1,22 @@
 import { useEffect, useState } from "react";
 import styles from "./Navigation.module.css";
-import { NavLink } from "react-router-dom";
-import { getUserData } from "../../util/util.js";
+import { Link, NavLink } from "react-router-dom";
+import { getOrderData, getUserData } from "../../util/util.js";
 
 function Navigation() {
   const [isUser, setIsUser] = useState(null);
+  const [hasOrder, setHasOrder] = useState(false);
 
   useEffect(function () {
     const user = getUserData();
-    if (user) setIsUser(user);
-    // console.log(user);
+    if (user) {
+      setIsUser(user);
+
+      const order = getOrderData();
+      if (order) setHasOrder(true);
+
+      // console.log(order);
+    }
 
     return () => {
       setIsUser(user);
@@ -58,6 +65,13 @@ function Navigation() {
               </NavLink>
             )}
           </li>
+          {hasOrder && (
+            <li className={styles.navListItem}>
+              <Link to={"profile/cart"} className={styles.cartIcon}>
+                <ion-icon name="cart-sharp"></ion-icon>
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
     </div>

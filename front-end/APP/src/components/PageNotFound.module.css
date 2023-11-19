@@ -1,5 +1,5 @@
 .errorPage {
-  background-image: url("../../public/img/error.png");
+  background-image: url("/img/error.png");
   background-position: 0 0;
   background-size: cover;
   display: grid;

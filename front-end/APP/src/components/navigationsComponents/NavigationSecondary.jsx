@@ -11,6 +11,7 @@ function NavigationSecondary() {
   const userMenu = {
     user: [
       { link: "info", textContent: "Profile" },
+      { link: "cart", textContent: "Cart" },
       { link: "user-orders-ready", textContent: "Ready" },
       { link: "user-orders-in_process", textContent: "In process" },
       { link: "user-past-orders", textContent: "Past orders" },
@@ -30,7 +31,7 @@ function NavigationSecondary() {
   useEffect(() => {
     if (!user) return;
     setCurrentMenu(userMenu[user.role]);
-  }, [user.role]);
+  }, [user]);
 
   return (
     <nav className={styles.nav}>

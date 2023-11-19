@@ -1,0 +1,78 @@
+.dashHeading {
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  color: var(--color-secondary-hd);
+  margin: 1rem 0;
+}
+
+.board {
+  width: 100%;
+  min-height: 100px;
+  border: 1px solid gray;
+  padding: 1rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.userInfoWrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 3rem;
+  margin-top: 3rem;
+}
+.mainInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1.6rem;
+  padding: 0 2rem;
+  border: 1px solid gray;
+}
+
+.img {
+  background-color: red;
+  width: 100%;
+}
+.img img {
+  height: 25rem;
+  width: 100%;
+  object-fit: cover;
+}
+
+.btn {
+  background-color: var(--color-line);
+  color: var(--color-link-light);
+  padding: 1rem 4.5rem;
+  text-align: center;
+  margin-left: auto;
+  font-size: 1.8rem;
+  font-weight: 400;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  border-radius: 0.6rem;
+}
+
+.btn:hover {
+  color: var(--color-link-light-hover);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.heading {
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
+.price {
+  font-size: 2rem;
+}
+
+.description {
+  font-size: 1.6rem;
+  color: var(--color-hd-second);
+}

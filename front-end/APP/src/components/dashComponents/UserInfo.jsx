@@ -1,8 +1,7 @@
 import { useContext } from "react";
 
-import Balance from "./Balance.jsx";
-import Category from "./Category.jsx";
 import styles from "./UserInfo.module.css";
+
 import { UserContext } from "../UserProfile.jsx";
 import UserContactInfo from "./UserContactInfo.jsx";
 import BoardHeader from "./BoardHeader.jsx";

@@ -1,6 +1,6 @@
 import styles from "./CreateBike.module.css";
 
-import { useEffect, useReducer } from "react";
+import { useContext, useEffect, useReducer } from "react";
 
 import {
   getFrames,
@@ -14,6 +14,9 @@ import {
 import LoaderWheel from "../LoaderWheel.jsx";
 import SelectComponent from "./SelectComponent.jsx";
 import ElementInfo from "./ElementInfo.jsx";
+import { getUserData, setOrderData } from "../../util/util.js";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../UserProfile.jsx";
 
 const initialState = {
   frames: [],
@@ -31,6 +34,7 @@ const initialState = {
   partsPrice: 0,
   canBuy: false,
   total: 0,
+  order: {},
 };
 
 function reducer(state, action) {
@@ -67,6 +71,8 @@ function reducer(state, action) {
       return { ...state, canBuy: action.payload };
     case "cash":
       return { ...state, total: action.payload };
+    case "makeOrder":
+      return { ...state, order: action.payload };
     default:
       throw new Error("Action is unknown!");
   }
@@ -90,9 +96,24 @@ function CreateBike() {
       partsPrice,
       canBuy,
       total,
+      order,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
+
+  // const { user } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  function orderHandler() {
+    const data = { selectedFrame, selectedWheel, selectedPart };
+    //adding order with selected parts in local storage
+    setOrderData(data);
+    const user = getUserData();
+    console.log(user);
+    if (user) {
+      navigate("/profile/cart");
+    } else navigate("/auth");
+  }
 
   // GET ALL FRAMES
   useEffect(function () {
@@ -225,7 +246,9 @@ function CreateBike() {
           <header className={styles.boardHeader}>
             <h3 className={styles.cash}>Select from lists</h3>
             <button
+              onClick={orderHandler}
               className={styles.totalPrice}
+              disabled={!canBuy}
               style={
                 canBuy
                   ? {
