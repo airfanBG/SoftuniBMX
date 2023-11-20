@@ -1,7 +1,9 @@
 ﻿namespace BicycleApp.Services.Services.Order
 {
+    using BicicleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
     using BicycleApp.Services.Contracts;
+    using BicycleApp.Services.HelperClasses.Contracts;
     using BicycleApp.Services.Models.Order;
 
     using Microsoft.EntityFrameworkCore;
@@ -12,9 +14,15 @@
     public class OrderManagerService : IOrderManagerService
     {
         private readonly BicycleAppDbContext _db;
-        public OrderManagerService(BicycleAppDbContext db)
+        private readonly IStringManipulator _stringManipulator;
+        private readonly IDateTimeProvider _dateTimeProvider;
+        public OrderManagerService(BicycleAppDbContext db,
+                                   IStringManipulator stringManipulator,
+                                   IDateTimeProvider dateTimeProvider)
         {
             _db = db;
+            _stringManipulator = stringManipulator;
+            _dateTimeProvider = dateTimeProvider;
         }
         
 
@@ -40,13 +48,13 @@
                 }
 
                 orderPartToEmployee.EmployeeId = managerApprovalDto.EmployeeId;
-                orderPartToEmployee.DatetimeAsigned = DateTime.UtcNow;
+                orderPartToEmployee.DatetimeAsigned = _dateTimeProvider.Now;
 
                 var аvailableParts = await _db.Parts.FirstAsync(p => p.Id == managerApprovalDto.OrderParts.PartId);
                 аvailableParts.Quantity -= managerApprovalDto.OrderParts.Quantity;
 
                 var order = await _db.Orders.FirstAsync(o => o.Id == managerApprovalDto.OrderId);
-                order.DateUpdated = DateTime.UtcNow;
+                order.DateUpdated = _dateTimeProvider.Now;
 
                 _db.Orders.Update(order);
                 _db.OrdersPartsEmployees.Update(orderPartToEmployee);
@@ -77,7 +85,7 @@
                                                 .Select(orderPart => new OrderPartDto
                                                 {
                                                     PartId = orderPart.PartId,
-                                                    Description = string.IsNullOrEmpty(orderPart.Description) ? string.Empty : orderPart.Description,
+                                                    Description = _stringManipulator.GetTextFromProperty(orderPart.Description),
                                                     Discount = ope.Discount,
                                                     PartName = orderPart.PartName,
                                                     PricePerUnit = orderPart.PartPrice,
@@ -220,7 +228,7 @@
             try
             {
                 var orderToReject = await _db.Orders.FirstAsync(o => o.Id == orderId);
-                orderToReject.DateDeleted = DateTime.UtcNow;
+                orderToReject.DateDeleted = _dateTimeProvider.Now;
                 orderToReject.IsDeleted = true;
 
                 _db.Orders.Update(orderToReject);

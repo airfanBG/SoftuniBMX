@@ -5,10 +5,12 @@
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Contracts.OrderContracts;
-    using BicycleApp.Services.HelperClasses;
     using BicycleApp.Services.HelperClasses.Contracts;
     using BicycleApp.Services.Models.Order;
+    using static BicycleApp.Common.ApplicationGlobalConstants;
+
     using Microsoft.EntityFrameworkCore;
+
     using System.Text;
     public class OrderUserService : IOrderUserService
     {
@@ -98,6 +100,37 @@
             {
             }
             return false;
+        }
+
+        /// <summary>
+        /// Takes all unfinished orders for a specific user and returns information about the workmanship of the parts.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns>Task<ICollection<OrderProgretionDto>></returns>
+        public async Task<ICollection<OrderProgretionDto>> GetOrdersProgresions(string userId)
+        {
+            return await _db.Orders
+                            .Include(o => o.OrdersPartsEmployees)
+                                .ThenInclude(ope => ope.Employee)
+                            .Include(o => o.OrdersPartsEmployees)
+                                .ThenInclude(ope => ope.Part)
+                            .ThenInclude(part => part.Category)
+                            .Where(o => o.ClientId == userId && o.IsDeleted == false && o.DateFinish == null)
+                            .Select(o => new OrderProgretionDto()
+                            {
+                                OrderId = o.Id,
+                                SerialNumber = o.SerialNumber,
+                                DateCreated = o.DateCreated.ToString(DefaultDateFormat),
+                                OrderStates = o.OrdersPartsEmployees
+                                               .Select(ope => new OrderStateDto()
+                                               {
+                                                   IsProduced = ope.IsCompleted,
+                                                   NameOfEmplоyeeProducedThePart = _stringManipulator.ReturnFullName(ope.Employee.FirstName, ope.Employee.LastName),
+                                                   PartModel = ope.Part.Name,
+                                                   PartType = ope.Part.Category.Name
+                                               }).ToList()
+                            })
+                            .ToListAsync();
         }
 
         /// <summary>
