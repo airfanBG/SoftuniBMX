@@ -5,7 +5,6 @@
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Contracts.OrderContracts;
-    using BicycleApp.Services.HelperClasses;
     using BicycleApp.Services.HelperClasses.Contracts;
     using BicycleApp.Services.Models.Order;
     using Microsoft.EntityFrameworkCore;
@@ -98,6 +97,11 @@
             {
             }
             return false;
+        }
+
+        public Task<ICollection<OrderProgretionDto>> GetOrdersProgresions(string userId)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

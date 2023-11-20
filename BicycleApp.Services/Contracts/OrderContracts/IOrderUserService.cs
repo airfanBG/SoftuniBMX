@@ -5,5 +5,6 @@
     public interface IOrderUserService
     {
         Task<bool> CreateOrderByUserAsync(UserOrderDto order);
+        Task<ICollection<OrderProgretionDto>> GetOrdersProgresions(string userId);
     }
 }
