@@ -91,8 +91,8 @@ namespace BicicleApp.Api
             builder.Services.AddScoped<IOrderService, OrderService>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddScoped<IImageStore, ImageStore>();
-            builder.Services.AddScoped<IPictureOrganizerServices, PictureOrganizerServices>();  builder.Services.AddScoped<IDropdownsContentService, DropdownsContentService>();
-
+            builder.Services.AddScoped<IPictureOrganizerServices, PictureOrganizerServices>();  
+            builder.Services.AddScoped<IDropdownsContentService, DropdownsContentService>();
             builder.Services.AddScoped<IPictureOrganizerServices, PictureOrganizerServices>();
 
             var app = builder.Build();
