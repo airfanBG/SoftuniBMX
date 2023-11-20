@@ -3,6 +3,7 @@
     using BicycleApp.Data;
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;
+    using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Models.Email;
 
     using MailKit.Net.Smtp;
@@ -20,8 +21,8 @@
     {
         private readonly BicycleAppDbContext _db;
         private readonly IConfiguration _config;
-        private readonly IFactory _factory;
-        public EmailSender(BicycleAppDbContext db, IConfiguration config, IFactory factory)
+        private readonly IUserFactory _factory;
+        public EmailSender(BicycleAppDbContext db, IConfiguration config, IUserFactory factory)
         {
             _db = db;
             _config = config;
