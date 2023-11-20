@@ -40,6 +40,10 @@
         public string? OEMNumber { get; set; }
 
         [Required]
+        [Comment("Type of the part")]
+        public int Type { get; set; }
+
+        [Required]
         [Comment("Id of the category of the part")]
         public int CategoryId { get; set; }
 

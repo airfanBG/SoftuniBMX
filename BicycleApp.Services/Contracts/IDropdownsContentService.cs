@@ -9,9 +9,9 @@ namespace BicycleApp.Services.Contracts
 {
     public interface IDropdownsContentService
     {
-        Task<ICollection<PartDto>> GetAllFrames();
-        Task<ICollection<PartDto>> GetAllTyres();
-        Task<ICollection<PartDto>> GetAllAcsessories();
+        Task<ICollection<PartInfoDto>> GetAllFrames();
+        Task<ICollection<PartInfoDto>> GetAllWheels();
+        Task<ICollection<PartInfoDto>> GetAllAcsessories();
         Task<PartDto> GetPartByIdAsync(int id);
     }
 }
