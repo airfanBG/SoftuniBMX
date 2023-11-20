@@ -4,6 +4,6 @@
 
     public interface IOrderUserService
     {
-        Task<bool> CreateOrderByUserAsync(OrderDto order);
+        Task<bool> CreateOrderByUserAsync(UserOrderDto order);
     }
 }

@@ -1,6 +1,5 @@
 ﻿namespace BicycleApp.Services.Services.Image
 {
-    using BicycleApp.Data;
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Models.Image;
@@ -12,17 +11,11 @@
 
     public class ImageStore : IImageStore
     {
-        private readonly BicycleAppDbContext _db;
-        private readonly IUserFactory _userFactory;
         private readonly IUserImageFactory _userImageFactory;
 
         public ImageStore(
-            BicycleAppDbContext db,
-            IUserFactory userFactory,
             IUserImageFactory userImageFactory)
-        {
-            _db = db;
-            _userFactory = userFactory;
+        {            
             _userImageFactory = userImageFactory;
         }
 

@@ -1,18 +1,31 @@
 ﻿namespace BicycleApp.Services.Services.Orders
 {
+    using BicicleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
     using BicycleApp.Data.Models.EntityModels;
+    using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Contracts.OrderContracts;
+    using BicycleApp.Services.HelperClasses;
+    using BicycleApp.Services.HelperClasses.Contracts;
     using BicycleApp.Services.Models.Order;
     using Microsoft.EntityFrameworkCore;
     using System.Text;
-
     public class OrderUserService : IOrderUserService
     {
         private readonly BicycleAppDbContext _db;
-        public OrderUserService(BicycleAppDbContext db)
+        private readonly IStringManipulator _stringManipulator;
+        private readonly IOrderFactory _orderFactory;
+        private readonly IDateTimeProvider _dateTimeProvider;
+
+        public OrderUserService(BicycleAppDbContext db, 
+                                IStringManipulator stringManipulator,
+                                IOrderFactory orderFactory,
+                                IDateTimeProvider dateTimeProvider)
         {
             _db = db;
+            _stringManipulator = stringManipulator;
+            _orderFactory = orderFactory;
+            _dateTimeProvider = dateTimeProvider;
         }
 
         /// <summary>
@@ -20,20 +33,17 @@
         /// </summary>
         /// <param name="order"></param>
         /// <returns>Task<bool></returns>
-        public async Task<bool> CreateOrderByUserAsync(OrderDto order)
+        public async Task<bool> CreateOrderByUserAsync(UserOrderDto order)
         {
             try
             {
                 string serialNumber = SerialNumberGenerator();
 
-                var orderToSave = new Order()
-                {
-                    ClientId = order.ClientId,
-                    DateCreated = DateTime.UtcNow,
-                    Description = string.IsNullOrEmpty(order.Description) ? string.Empty : order.Description,
-                    SerialNumber = serialNumber,
-                    StatusId = 1
-                };
+                var orderToSave = _orderFactory.CreateUserOrder();
+                orderToSave.ClientId = order.ClientId;
+                orderToSave.DateCreated = _dateTimeProvider.Now;
+                orderToSave.SerialNumber = serialNumber;
+                orderToSave.StatusId = 1;
 
                 decimal totalAmount = 0M;
                 decimal totalDiscount = 0M;
@@ -73,7 +83,7 @@
                         PartPrice = part.PricePerUnit,
                         PartQuantity = part.Quantity,
                         PartName = part.PartName,
-                        Description = string.IsNullOrEmpty(order.Description) ? string.Empty : order.Description
+                        Description = _stringManipulator.GetTextFromProperty(order.Description)
                     };
 
                     orderPartEmployeeCollection.Add(ope);
@@ -110,6 +120,6 @@
             }
 
             return serialNumber.ToString();
-        }
+        }       
     }
 }

@@ -1,7 +1,6 @@
 ﻿namespace BicycleApp.Services.Services.Factory
 {
     using BicycleApp.Data;
-    using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts.Factory;
     using Microsoft.EntityFrameworkCore;

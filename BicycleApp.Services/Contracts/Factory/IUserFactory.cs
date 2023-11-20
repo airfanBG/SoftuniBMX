@@ -5,6 +5,5 @@
     public interface IUserFactory
     {
         public Task<BaseUser?> GetUserAsync(string userId, string userRole);
-        
     }
 }
