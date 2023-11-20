@@ -20,6 +20,7 @@
             this.Comments = new HashSet<Comment>();
             this.OrdersPartsEmployees = new HashSet<OrderPartEmployee>();
             this.Rates = new HashSet<Rate>();
+            this.BikeModelsParts = new HashSet<BikeModelPart>();
         }
 
         [Key]
@@ -37,6 +38,10 @@
         [MaxLength(PartOEMMaxLength)]
         [Comment("Unique number of the part from the manifacturer")]
         public string? OEMNumber { get; set; }
+
+        [Required]
+        [Comment("Type of the part")]
+        public int Type { get; set; }
 
         [Required]
         [Comment("Id of the category of the part")]
@@ -86,5 +91,7 @@
         [Required]
         [Comment("Status of the part: Deleted/Not deleted")]
         public bool IsDeleted { get; set; } = false;
+
+        public virtual ICollection<BikeModelPart> BikeModelsParts { get; set; }
     }
 }

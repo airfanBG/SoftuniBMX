@@ -10,17 +10,22 @@
     using Microsoft.Extensions.Configuration;
 
     public class BicycleAppDbContext : IdentityDbContext<Employee, IdentityRole<string>, string>
-    {        
-        public BicycleAppDbContext() :base()
+    {
+        public BicycleAppDbContext() : base()
         {
-            
+
         }
 
         public BicycleAppDbContext(DbContextOptions<BicycleAppDbContext> options, IConfiguration config)
             : base(options)
         {
-            
+
         }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("Server=DESKTOP-TP2JLNJ\\SQLEXPRESS;Database=BicycleNewDB;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False");
+        //}
 
         //Identity Tables
         public DbSet<Client> Clients { get; set; } = null!;
@@ -58,10 +63,16 @@
 
         public DbSet<OrderPartEmployee> OrdersPartsEmployees { get; set; } = null!;
 
-       
+        public DbSet<BikeStandartModel> BikesStandartModels { get; set; } = null!;
+
+        public DbSet<BikeModelPart> BikeModelsParts { get; set; } = null!;
+
+
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            
+
             //ClientEntityConfiguration
             builder.Entity<Client>(entity =>
             {
@@ -190,7 +201,7 @@
             builder.Entity<OrderPartEmployee>(entity =>
             {
                 entity
-                    .HasKey(ope => new { ope.OrderId, ope.PartId, ope.EmployeeId });
+                    .HasKey(ope => new { ope.OrderId, ope.PartId});
 
                 entity
                     .HasOne(ope => ope.Order)
@@ -203,12 +214,10 @@
                     .WithMany(o => o.OrdersPartsEmployees)
                     .HasForeignKey(ope => ope.PartId)
                     .OnDelete(DeleteBehavior.NoAction);
+               
+                entity.Property(ope => ope.PartPrice).HasColumnType("decimal(18,2)");
 
-                entity
-                    .HasOne(ope => ope.Employee)
-                    .WithMany(o => o.OrdersPartsEmployees)
-                    .HasForeignKey(ope => ope.EmployeeId)
-                    .OnDelete(DeleteBehavior.NoAction);
+                entity.Property(ope => ope.PartQuantity).HasColumnType("float(2)");
             });
 
             //PartEntityConfiguration
@@ -257,6 +266,31 @@
             {
                 entity
                     .Property(v => v.VATPercent).HasColumnType("decimal(6,2)");
+            });
+
+            //BikeStandartModelEntityConfiguration
+            builder.Entity<BikeStandartModel>(entity =>
+            {
+                entity.Property(b => b.Price).HasColumnType("decimal(18,2)");
+            });
+
+
+            //BikeModelPartEntityConfiguration
+            builder.Entity<BikeModelPart>(entity =>
+            {
+                entity.HasKey(b => new { b.PartId, b.BikeModelId });
+
+                entity
+                    .HasOne(bp => bp.BikeModel)
+                    .WithMany(bm => bm.BikeModelsParts)
+                    .HasForeignKey(bp => bp.BikeModelId)
+                    .OnDelete(DeleteBehavior.NoAction);
+
+                entity
+                    .HasOne(bp => bp.Part)
+                    .WithMany(p => p.BikeModelsParts)
+                    .HasForeignKey(bp => bp.BikeModelId)
+                    .OnDelete(DeleteBehavior.NoAction);
             });
 
             //Seed Test Data
