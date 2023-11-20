@@ -6,8 +6,10 @@
 
         public string? ModelName { get; set; }
 
-        public string? UmageUrl { get; set; }
+        public string? ImageUrl { get; set; }
 
-        public List<PartShortInfoDto> Parts { get; set; } = new List<PartShortInfoDto>();
+        public string? Description { get; set; }
+
+        public decimal? Price { get; set; }
     }
 }

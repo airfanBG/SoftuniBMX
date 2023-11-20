@@ -1,4 +1,4 @@
-﻿namespace BicycleApp.Services.Services
+﻿namespace BicycleApp.Services.Services.Image
 {
     using System;
 
@@ -13,7 +13,7 @@
         {
 
         }
-    
+
         /// <summary>
         /// This method receives a file and saves it in a specific folder in the main folder for parts
         /// </summary>
@@ -24,7 +24,7 @@
         /// <returns></returns>
         public string SavePartPicture(byte[] file, string fileType, string roothFilePath, string partIdentification)
         {
-            this.ValidateInputData(file, fileType, roothFilePath, partIdentification);
+            ValidateInputData(file, fileType, roothFilePath, partIdentification);
 
             string partsMainFolderName = Path.Combine(roothFilePath, PartsMainFolderName);
 
@@ -87,9 +87,9 @@
                 Directory.CreateDirectory(currentImageFolderName);
             }
 
-            string newFileName = this.CreateFileName(currentImageFolderName, partIdentification);
+            string newFileName = CreateFileName(currentImageFolderName, partIdentification);
 
-            string imagePath = this.SaveFile(file, fileType, newFileName, currentImageFolderName);
+            string imagePath = SaveFile(file, fileType, newFileName, currentImageFolderName);
 
             return imagePath;
         }

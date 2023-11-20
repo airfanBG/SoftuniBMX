@@ -1,5 +1,7 @@
 namespace BicicleApp.Api
 {
+    using System.Text;
+
     using BicycleApp.Data;
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;
@@ -13,10 +15,12 @@ namespace BicicleApp.Api
     using BicycleApp.Services.Services.Image;
     using BicycleApp.Services.Services.Order;
 
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.IdentityModel.Tokens;
 
     public class Program
     {
@@ -60,12 +64,35 @@ namespace BicicleApp.Api
                 .AddRoles<IdentityRole<string>>()
                 .AddEntityFrameworkStores<BicycleAppDbContext>();
 
+            var jwtSecret = builder.Configuration["JwtSecret"];
+            var key = Encoding.ASCII.GetBytes(jwtSecret);
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddScoped<SignInManager<Client>>();
             builder.Services.AddScoped<SignInManager<Employee>>();
             builder.Services.AddScoped<IHomePageService, HomePageService>();
             builder.Services.AddScoped<IClientService, ClientService>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+            builder.Services.AddScoped<IFactory, Factory>();
+            builder.Services.AddScoped<IModelsFactory, ModelsFactory>();
+            builder.Services.AddScoped<IOrderService, OrderService>();
             builder.Services.AddScoped<IUserFactory, UserFactory>();
             builder.Services.AddScoped<IOrderManagerService, OrderManagerService>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();

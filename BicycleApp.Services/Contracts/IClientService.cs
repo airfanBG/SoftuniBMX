@@ -9,5 +9,7 @@
         Task<ClientReturnDto> LoginClientAsync(ClientLoginDto clientDto);
 
         Task<ClientInfoDto?> GetClientInfoAsync(string Id);
+
+        Task<bool> ChangeClientPasswordAsync(ClientPasswordChangeDto clientPasswordChangeDto);
     }
 }

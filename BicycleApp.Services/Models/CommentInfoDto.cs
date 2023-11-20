@@ -12,7 +12,7 @@
 
         public string? ClientFullName { get; set; }
 
-        public string? ClientUmageUrl { get; set; }
+        public string? ClientImageUrl { get; set; }
 
         public string? CommentDescription { get; set;}
 

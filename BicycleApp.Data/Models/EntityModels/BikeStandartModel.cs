@@ -21,7 +21,12 @@
         [MaxLength(BikeModelNameMaxLength)]
         public string ModelName { get; set; } = null!;
 
-        [Comment("Image of standart bike.")]
+        [Required]
+        public string Description { get; set; } = null!;
+
+        [Required]
+        public decimal Price { get; set; }
+
         public string? ImageUrl { get; set; }
 
         public virtual ICollection<BikeModelPart> BikeModelsParts { get; set; }

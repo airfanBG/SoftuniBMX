@@ -11,5 +11,7 @@
         Task<EmployeeReturnDto> LoginEmployeeAsync(EmployeeLoginDto employeeDto);
 
         Task<EmployeeInfoDto?> GetEmployeeInfoAsync(string Id);
+
+        Task<bool> ChangeEmployeePasswordAsync(EmployeePasswordChangeDto employeePasswordChangeDto);
     }
 }
