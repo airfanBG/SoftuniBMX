@@ -2,6 +2,7 @@
 using BicycleApp.Services.Contracts;
 using BicycleApp.Services.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 namespace BicycleApp.Services.Services
 {
@@ -123,13 +124,16 @@ namespace BicycleApp.Services.Services
                     Id = p.Id,
                     Name = p.Name,
                     Description = p.Description,
-                    ImageUrl = p.ImagesParts.First().ImageUrl,
+                    //ImageUrl = p.ImagesParts.First().ImageUrl, - for single image (first in collection)
                     Type = p.Type,
                     SalePrice = p.SalePrice,
                     OEMNumber = p.OEMNumber,
                     Rating = p.Rates.Average(r => r.Rating)
                 })
                 .FirstAsync();
+
+                var imageUrls = GetImageUrls(id);
+                result.ImageUrls = imageUrls;
 
                 return result;
             }
@@ -138,6 +142,27 @@ namespace BicycleApp.Services.Services
 
                 throw new ArgumentException("Database can't retrive data");
             }
+        }
+        private List<string> GetImageUrls(int partId)
+        {
+            //The commented variant is for string representation of the list
+            //var sb = new StringBuilder();
+
+            //Get all imageUrls for the part
+            List<string> imageUrls = _dbContext.ImagesParts
+                .AsNoTracking()
+                .Where(p => p.Id == partId)
+                .Select(ip => ip.ImageUrl)
+                .ToList();
+
+            return imageUrls;
+
+            //foreach (var imageUrl in imageUrls)
+            //{
+            //    sb.Append(imageUrl.ToString() + "|");
+            //}
+
+            //return sb.ToString();
         }
     }
 }
