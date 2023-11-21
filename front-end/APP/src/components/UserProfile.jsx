@@ -13,7 +13,7 @@ export const UserContext = createContext({});
 
 function UserProfile() {
   const userData = getUserData();
-  const [user, setUser] = useState(userData);
+  const [user, setUser] = useState(userData.user);
 
   function userBalanceHandler(action, value) {
     if (user === null) return;
@@ -40,6 +40,7 @@ function UserProfile() {
         <div className={styles.container}>
           {user.role === "user" && <UserDash />}
           {user.role === "worker" && <WorkerDash />}
+          {user.role === "manager" && <WorkerDash />}
         </div>
         <Footer />
       </div>

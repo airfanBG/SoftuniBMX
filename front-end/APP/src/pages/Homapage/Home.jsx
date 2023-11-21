@@ -7,7 +7,8 @@ import Footer from "../../components/Footer.jsx";
 import UserContent from "./UserContent.jsx";
 import { createContext, useEffect, useState } from "react";
 import { get } from "../../util/api.js";
-import { dataPath } from "../../environments/path.js";
+import { environment } from "../../environments/environment_dev.js";
+// import { dataPath } from "../../environments/path.js";
 
 export const HomeContext = createContext();
 
@@ -22,13 +23,11 @@ function Home() {
       async function homePageData() {
         setLoading(true);
         try {
-          const data = await get(dataPath.home_page_data);
-          // console.log(data);
+          const data = await get(environment.indexPage);
 
-          const brakeHeapRelation = [...data.defaultBikes];
-          // const brakeHeapRelation = JSON.parse(JSON.stringify(data));
-
-          const currentTop = brakeHeapRelation
+          // const brakeHeapRelation = [...data.defaultBikes];
+          // const currentTop = brakeHeapRelation
+          const currentTop = [...data.defaultBikes]
             .sort((a, b) => b.price - a.price)
             .at(0).price;
           setTop(currentTop);

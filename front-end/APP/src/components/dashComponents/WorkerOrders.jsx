@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from "react";
+
 import styles from "./WorkerOrders.module.css";
+
 import { get } from "../../util/api.js";
 import OrderItem from "./OrderItem.jsx";
 import { UserContext } from "../UserProfile.jsx";
@@ -12,7 +14,7 @@ function WorkerOrders() {
 
   useEffect(function () {
     async function getJobs() {
-      const workerSequence = await get("/data/workerSequence");
+      const workerSequence = await get("/production/");
       setWorkerSequence(workerSequence);
     }
     getJobs();

@@ -61,11 +61,11 @@
   padding: 0 0 2rem 2rem;
 }
 
-/* .imgHolder {
+.imgHolder {
   width: 80%;
   display: flex;
   justify-content: center;
-} */
+}
 
 .usernameHeading {
   font-size: 2.4rem;
@@ -84,6 +84,14 @@
   background-color: var(--color-line);
   padding: 0.8rem 0;
   color: var(--color-link-light);
-  margin-top: 1rem;
   border-radius: 0.3rem;
+}
+
+.mainInfo input.addMoneyInput {
+  text-align: right;
+  margin-top: 1rem;
+  width: 177px;
+  padding: 0.1rem 1rem;
+  font-size: 1.8rem;
+  color: var(--color-main-dark);
 }

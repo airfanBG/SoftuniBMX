@@ -47,56 +47,6 @@ function WorkerDash({ user }) {
   return (
     <div className={styles.wrapper}>
       <NavigationSecondary />
-      {/* {user && <NavigationSecondary role={user.role} />} */}
-      {/* <h2
-        className={styles.dashHeading}
-      >{`${user.firstName} ${user.lastName}`}</h2>
-      {/* <h2 className={styles.dashHeading}>Orders in sequence</h2> */}
-      {/* <section className={styles.board}>
-        <header className={styles.boardHeader}>
-          <span>Category: </span>
-          <h3>  */}
-      {/* TODO: change with actual - probably user.category === 'frames' */}
-      {/* {user.role === "worker" && (
-              <>
-                <span className={`${styles.selected} ${styles.element}`}>
-                  Frames
-                </span>{" "}
-                &#10072; <span className={styles.element}>Tyres</span> &#10072;{" "}
-                <span className={styles.element}>Assembly</span>
-              </>
-            )}
-            {user.category === "tyres" && (
-              <>
-                <span className={styles.element}>Frames</span> &#10072;{" "}
-                <span className={`${styles.selected} ${styles.element}`}>
-                  {" "}
-                  Tyres
-                </span>{" "}
-                &#10072; <span className={styles.element}>Assembly</span>
-              </>
-            )}
-            {user.category === "assembly" && (
-              <>
-                <span className={styles.element}>Frames</span> &#10072;{" "}
-                <span className={styles.element}>Tyres</span> &#10072;{" "}
-                <span className={`${styles.selected} ${styles.element}`}>
-                  Assembly
-                </span>
-              </>
-            )}
-          </h3>
-        </header> */}
-      {/* <div className={styles.orders}>
-          {workerSequence.length > 0 &&
-            workerSequence.map((order) => (
-              <OrderItem {...order} key={order._id} />
-            ))}
-          {workerSequence.length === 0 && (
-            <h2>There is no orders in this category</h2>
-          )}
-        </div> */}
-      {/* </section> */}
       <Outlet />
     </div>
   );

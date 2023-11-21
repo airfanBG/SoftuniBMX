@@ -1,6 +1,7 @@
 .nav {
   background-color: var(--color-hd);
-  width: 600px;
+  width: fit-content;
+  min-width: 60rem;
   padding: 0.8rem 2rem;
   margin: 1rem 0 2rem;
   border-bottom-right-radius: 10px;

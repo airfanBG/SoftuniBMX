@@ -19,7 +19,7 @@ function InputComponent({
         <label>{label}</label>
       </div>
 
-      <div className={styles.inputForm}>
+      <div className={`${styles.inputForm}`}>
         <div className={styles.svg}>{svg(mainValue)}</div>
 
         <input
@@ -33,6 +33,7 @@ function InputComponent({
           onBlur={(e) => validateInput(e, mainValue)}
           onFocus={(e) => clearErrorState(e)}
         />
+        {required && <span className={styles.redDot}>&#10041;</span>}
       </div>
       {errorMode(mainValue) && (
         <p className={styles.warning}>{errorMode(mainValue)}</p>

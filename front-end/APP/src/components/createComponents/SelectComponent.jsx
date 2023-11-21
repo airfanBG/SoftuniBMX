@@ -6,7 +6,7 @@ function SelectComponent({ data, dispatch, type, disabled }) {
   const [hasData, setHasData] = useState(false);
   const iterable = data.sort((a, b) => a.name.localeCompare(b.name));
   // const frameResult = [];
-  const frameResult = [...iterable, { name: "Select brand", _id: "" }];
+  const frameResult = [...iterable, { name: "Select brand", id: "" }];
 
   function onSelectHandler(e) {
     dispatch({ type: type, payload: e.target.value });
@@ -27,7 +27,7 @@ function SelectComponent({ data, dispatch, type, disabled }) {
       placeholder={"Select"}
     >
       {frameResult.map((x) => (
-        <OptionComponent optionData={x} key={x._id} />
+        <OptionComponent optionData={x} key={x.id} />
       ))}
     </select>
   );

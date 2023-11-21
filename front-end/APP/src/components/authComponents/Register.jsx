@@ -172,12 +172,8 @@ function Register() {
 
   async function formSubmitHandler(e) {
     e.preventDefault();
-    // if (Object.values(values).some((x) => x === "")) {
-    //   return setIsAllowed(true);
-    // }
 
-    // const user = values;
-
+    // TODO: remove repass from response before production
     const user = {
       firstName: values.firstName,
       lastName: values.lastName,

@@ -6,9 +6,12 @@ function Category({ user }) {
       <span>Category: </span>
       <h3>
         {/* TODO: change with actual - probably user.category === 'frames' */}
+        {console.log(user)}
         <span
           className={styles.element}
-          style={user.role === "worker" ? { color: "var(--color-line)" } : null}
+          style={
+            user.category === "frames" ? { color: "var(--color-line)" } : null
+          }
         >
           Frames
         </span>{" "}
@@ -16,7 +19,7 @@ function Category({ user }) {
         <span
           className={styles.element}
           style={
-            user.category === "tyres" ? { color: "var(--color-line)" } : null
+            user.category === "wheels" ? { color: "var(--color-line)" } : null
           }
         >
           Tyres
@@ -25,7 +28,9 @@ function Category({ user }) {
         <span
           className={styles.element}
           style={
-            user.category === "assembly" ? { color: "var(--color-line)" } : null
+            user.category === "accessory"
+              ? { color: "var(--color-line)" }
+              : null
           }
         >
           Assembly

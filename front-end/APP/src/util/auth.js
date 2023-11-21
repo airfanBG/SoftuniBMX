@@ -1,10 +1,10 @@
 import { get, post } from "./api.js";
-import { clearUserData, setUserData } from "./util.js";
-import { environment } from "../environments/environment.js";
+import { clearOrderData, clearUserData, setUserData } from "./util.js";
+import { environment } from "../environments/environment_dev.js";
 
 const endpoints = {
   login: environment.LOGIN,
-  register: environment.REGISTER,
+  register: environment.REGISTER_CLIENT,
   logout: environment.LOGOUT,
 };
 
@@ -12,6 +12,9 @@ const endpoints = {
 
 export async function login(user) {
   const result = await post(endpoints.login, user);
+  if (!result.accessToken) return;
+  if (result.user.role === "worker" || result.user.role === "manager")
+    clearOrderData();
   console.log(result);
   setUserData(result);
   return result;

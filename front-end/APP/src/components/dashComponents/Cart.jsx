@@ -34,7 +34,7 @@ function Cart() {
         setFrame({ ...frame });
         setWheel({ ...wheel });
         setParts({ ...parts });
-        console.log(frame, wheel, parts);
+        // console.log(frame, wheel, parts);
         setLoading(false);
       } catch (err) {
         console.error(err);
@@ -60,7 +60,7 @@ function Cart() {
                 </div>
                 <div className={styles.header}>
                   <h2 className={styles.heading}>{frame.name}</h2>
-                  <p className={styles.price}>{frame.price}</p>
+                  <p className={styles.price}>{frame.salesPrice}</p>
                 </div>
 
                 <p className={styles.description}>{frame.description}</p>
@@ -71,7 +71,7 @@ function Cart() {
                 </div>
                 <div className={styles.header}>
                   <h2 className={styles.heading}>{wheel.name}</h2>
-                  <p className={styles.price}>{wheel.price}</p>
+                  <p className={styles.price}>{wheel.salesPrice}</p>
                 </div>
 
                 <p className={styles.description}>{wheel.description}</p>
@@ -82,7 +82,7 @@ function Cart() {
                 </div>
                 <div className={styles.header}>
                   <h2 className={styles.heading}>{parts.name}</h2>
-                  <p className={styles.price}>{parts.price}</p>
+                  <p className={styles.price}>{parts.salesPrice}</p>
                 </div>
 
                 <p className={styles.description}>{parts.description}</p>
@@ -91,12 +91,17 @@ function Cart() {
 
             <p className={styles.totalPrice}>
               <span>Total:</span>
-              {frame.price + wheel.price + parts.price}
+              {(frame.salesPrice + wheel.salesPrice + parts.salesPrice).toFixed(
+                2
+              )}
             </p>
             {/* TODO: check if user has enough money */}
             <button
               className={styles.btn}
-              disabled={user.balance < frame.price + wheel.price + parts.price}
+              disabled={
+                user.balance <
+                frame.salesPrice + wheel.salesPrice + parts.salesPrice
+              }
               onClick={() => console.log("click")}
             >
               Finish order

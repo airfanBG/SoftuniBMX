@@ -16,6 +16,7 @@
 
 .wrapper {
   margin-bottom: 2rem;
+  position: relative;
 }
 
 ::placeholder {
@@ -46,6 +47,14 @@
   padding-inline: 10px;
   transition: 0.2s ease-in-out;
 }
+.redDot {
+  color: var(--color-line);
+  font-size: 1.2rem;
+  position: absolute;
+  top: 1.8rem;
+  right: 0.8rem;
+}
+
 input.input:not([type="checkbox"]) {
   border: none;
   font-size: 2rem;

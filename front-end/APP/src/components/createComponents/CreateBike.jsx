@@ -122,6 +122,7 @@ function CreateBike() {
         dispatch({ type: "dataReceived", payload: true });
 
         const frames = await getFrames();
+        // console.log(frames);
 
         dispatch({ type: "frameList", payload: frames });
         dispatch({ type: "dataReceived", payload: false });
@@ -147,11 +148,10 @@ function CreateBike() {
           const data = await getOneFrame(selectedFrame);
 
           // get wheels depending on selected frame type
-          const wheelsData = await getWheels(`frame${data.type}`);
-          // console.log(wheelsData);
+          const wheelsData = await getWheels(data.type);
 
           dispatch({ type: "isFrameSelected", payload: data });
-          dispatch({ type: "framePrice", payload: data.price });
+          dispatch({ type: "framePrice", payload: data.salesPrice });
           dispatch({ type: "isWheelSelected", payload: {} });
           dispatch({ type: "isPartSelected", payload: {} });
           dispatch({ type: "wheelsList", payload: wheelsData });
@@ -184,11 +184,11 @@ function CreateBike() {
           // console.log(data);
 
           // get parts depending on selected wheel type
-          const partsData = await getParts(`wheelBase${data.wheelBase}`);
+          const partsData = await getParts(data.type);
           // console.log(partsData);
 
           dispatch({ type: "isWheelSelected", payload: data });
-          dispatch({ type: "wheelPrice", payload: data.price });
+          dispatch({ type: "wheelPrice", payload: data.salesPrice });
           dispatch({ type: "isPartSelected", payload: {} });
           dispatch({ type: "partsList", payload: partsData });
           dispatch({ type: "selectedPart", payload: "" });
@@ -217,7 +217,7 @@ function CreateBike() {
           // console.log(data);
 
           dispatch({ type: "isPartSelected", payload: data });
-          dispatch({ type: "partsPrice", payload: data.price });
+          dispatch({ type: "partsPrice", payload: data.salesPrice });
           dispatch({ type: "buy", payload: true });
           dispatch({ type: "dataReceived", payload: false });
         } catch (err) {
@@ -238,13 +238,15 @@ function CreateBike() {
 
   return (
     <>
-      {loading && <LoaderWheel />}
+      {/* {loading && <LoaderWheel />} */}
       <div className={styles.wrapper}>
         <h2 className={styles.dashHeading}>Create your custom</h2>
 
         <section className={styles.board}>
           <header className={styles.boardHeader}>
             <h3 className={styles.cash}>Select from lists</h3>
+            {loading && <LoaderWheel width="small" />}
+
             <button
               onClick={orderHandler}
               className={styles.totalPrice}
@@ -297,7 +299,6 @@ function CreateBike() {
                 {/* {selectedFrame && <ElementInfo frame={currentFrame} />} */}
                 <ElementInfo data={currentWheel} />
               </div>
-
               <div className={styles.selectionImg}>
                 {!selectedWheel && <p className={styles.questionMark}>?</p>}
                 {selectedWheel && (

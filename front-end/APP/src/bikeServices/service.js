@@ -1,36 +1,34 @@
-import { dataPath } from "../environments/path.js";
+import { environment } from "../environments/environment_dev.js";
 import { get } from "../util/api.js";
 
 async function getFrames() {
-  const data = await get(dataPath.frames);
+  const data = await get(environment.frames);
   return data;
 }
 
+// TODO: changed to project route without server filter. Response will return full collection. Must be filtered by criteria
 async function getWheels(criteria) {
-  const data = await get(
-    `${dataPath.wheels}?where=type%20LIKE%20%22${criteria}%22`
-  );
+  console.log(criteria);
+  const data = await get(`${environment.wheels}?type=${criteria}`);
   return data;
 }
-
+// TODO: changed to project route without server filter. Response will return full collection. Must be filtered by criteria
 async function getParts(criteria) {
-  const data = await get(
-    `${dataPath.parts}?where=type%20LIKE%20%22${criteria}%22`
-  );
+  const data = await get(`${environment.accessories}?type=${criteria}`);
   return data;
 }
 
 async function getOneFrame(id) {
-  const data = await get(dataPath.frames + id);
+  const data = await get(environment.frames + id);
   return data;
 }
 async function getOneWheel(id) {
-  const data = await get(dataPath.wheels + id);
+  const data = await get(environment.wheels + id);
   return data;
 }
 
 async function getOnePart(id) {
-  const data = await get(dataPath.parts + id);
+  const data = await get(environment.accessories + id);
   return data;
 }
 

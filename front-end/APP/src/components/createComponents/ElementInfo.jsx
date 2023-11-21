@@ -14,14 +14,14 @@ function ElementInfo({ data }) {
 
         <div className={styles.info}>
           <span className={styles.label}>Model/OEM number</span>
-          {data.oem}
+          {data.OEMNumber}
         </div>
       </div>
       <div className={styles.price}>
         <div className={`${styles.info} `}>
           {/* <div className={`${styles.info} ${styles.price}`}> */}
           <span className={styles.label}>Price</span>
-          {data.price}
+          {data.salesPrice}
         </div>
         <StarsRating
           size={20}

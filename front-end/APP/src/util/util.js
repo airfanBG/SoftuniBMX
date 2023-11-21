@@ -23,6 +23,10 @@ export function clearUserData() {
   localStorage.removeItem(itemName);
 }
 
+export function clearOrderData() {
+  localStorage.removeItem("order");
+}
+
 export function secondsToTime(time) {
   const h = Math.floor(time / 3600)
       .toString()

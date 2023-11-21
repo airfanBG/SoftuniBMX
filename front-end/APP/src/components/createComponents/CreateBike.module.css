@@ -23,6 +23,8 @@
   gap: 2rem;
   padding: 0 2rem 1rem;
   border-bottom: 2px solid var(--color-line);
+  position: relative;
+  height: 5rem;
 }
 
 .boardHeader span {
@@ -56,6 +58,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   margin-top: 3rem;
+  position: relative;
 }
 
 .framesBlock {
@@ -88,10 +91,10 @@
 }
 
 .selectionImg {
-  /* position: absolute;
-  bottom: 0; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  /* margin-top: auto; */
   aspect-ratio: 1/1;
   margin-top: 2rem;
   border-radius: 0.5rem;
