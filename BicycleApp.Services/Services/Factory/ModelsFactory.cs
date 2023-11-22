@@ -14,7 +14,7 @@
         {
             //Transform the address dto in to a string
             var sb = new StringBuilder();
-            var innerDto = clientRegisterDto.DelivaryAddress;
+            ClientAddressDto innerDto = clientRegisterDto.DelivaryAddress;
 
             if (!string.IsNullOrWhiteSpace(innerDto.Country))
             {
@@ -66,7 +66,6 @@
                 DateUpdated = null,
                 DateDeleted = null,
                 IsDeleted = false
-
             };
         }
 
