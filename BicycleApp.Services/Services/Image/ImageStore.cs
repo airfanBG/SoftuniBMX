@@ -1,7 +1,7 @@
 ﻿namespace BicycleApp.Services.Services.Image
 {
-    using BicycleApp.Data;
     using BicycleApp.Services.Contracts;
+    using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Models.Image;
 
     using Microsoft.AspNetCore.Http;
@@ -11,13 +11,12 @@
 
     public class ImageStore : IImageStore
     {
-        private readonly BicycleAppDbContext _db;
-        private readonly IFactory _factory;
+        private readonly IUserImageFactory _userImageFactory;
 
-        public ImageStore(BicycleAppDbContext db, IFactory factory)
-        {
-            _db = db;
-            _factory = factory;
+        public ImageStore(
+            IUserImageFactory userImageFactory)
+        {            
+            _userImageFactory = userImageFactory;
         }
 
         /// <summary>
@@ -30,7 +29,7 @@
         {
             try
             {
-                var userPath = await _factory.GetUserImagePathAsync(userId, userRole);
+                var userPath = await _userImageFactory.GetUserImagePathAsync(userId, userRole);
 
                 if (string.IsNullOrEmpty(userPath))
                 {
@@ -70,11 +69,11 @@
                         string fileName = Guid.NewGuid().ToString();
                         string filePath = Path.Combine(userPath, $"{fileName}.{imageExtension}");
 
-                        bool isUserImageExist = await _factory.CheckForExistingUserImage(userImageDto.Id, userImageDto.Role);
+                        bool isUserImageExist = await _userImageFactory.CheckForExistingUserImage(userImageDto.Id, userImageDto.Role);
 
                         if (isUserImageExist)
                         {
-                            var isSuccessfulUpdated = await _factory.UpdateUserImage(userImageDto.Id, userImageDto.Role, filePath);
+                            var isSuccessfulUpdated = await _userImageFactory.UpdateUserImage(userImageDto.Id, userImageDto.Role, filePath);
 
                             if (!isSuccessfulUpdated)
                             {
@@ -83,7 +82,7 @@
                         }
                         else
                         {
-                            var isSuccessfulCreated = await _factory.CreateUserImage(userImageDto.Id, userImageDto.Role, filePath, fileName);
+                            var isSuccessfulCreated = await _userImageFactory.CreateUserImage(userImageDto.Id, userImageDto.Role, filePath, fileName);
 
                             if (!isSuccessfulCreated)
                             {

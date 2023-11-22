@@ -1,16 +1,22 @@
 namespace BicicleApp.Api
 {
     using System.Text;
-
+    using BicicleApp.Common.Providers.Contracts;
+    using BicycleApp.Common;
     using BicycleApp.Data;
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;
+    using BicycleApp.Services.Contracts.Factory;
+    using BicycleApp.Services.Contracts.OrderContracts;
+    using BicycleApp.Services.HelperClasses;
+    using BicycleApp.Services.HelperClasses.Contracts;
     using BicycleApp.Services.Services;
     using BicycleApp.Services.Services.Email;
     using BicycleApp.Services.Services.Factory;
     using BicycleApp.Services.Services.IdentityServices;
     using BicycleApp.Services.Services.Image;
     using BicycleApp.Services.Services.Order;
+    using BicycleApp.Services.Services.Orders;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
@@ -85,16 +91,20 @@ namespace BicicleApp.Api
             builder.Services.AddScoped<SignInManager<Employee>>();
             builder.Services.AddScoped<IHomePageService, HomePageService>();
             builder.Services.AddScoped<IClientService, ClientService>();
+            builder.Services.AddScoped<IUserImageFactory, UserImageFactory>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
-            builder.Services.AddScoped<IFactory, Factory>();
             builder.Services.AddScoped<IModelsFactory, ModelsFactory>();
-            builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<IUserFactory, UserFactory>();
+            builder.Services.AddScoped<IOrderManagerService, OrderManagerService>();
+            builder.Services.AddScoped<IOrderUserService, OrderUserService>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddScoped<IImageStore, ImageStore>();
             builder.Services.AddScoped<IPictureOrganizerServices, PictureOrganizerServices>();  
             builder.Services.AddScoped<IDropdownsContentService, DropdownsContentService>();
             builder.Services.AddScoped<IPictureOrganizerServices, PictureOrganizerServices>();
-
+            builder.Services.AddScoped<IStringManipulator, StringManipulator>();
+            builder.Services.AddScoped<IOrderFactory, OrderFactory>();
+            builder.Services.AddScoped<IDateTimeProvider, DateTimeProvider>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
