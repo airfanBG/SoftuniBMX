@@ -2,16 +2,14 @@
 {
     using BicycleApp.Data;
     using BicycleApp.Data.Models.EntityModels;
-    using BicycleApp.Data.Models.IdentityModels;
-    using BicycleApp.Services.Contracts;
+    using BicycleApp.Services.Contracts.Factory;
     using Microsoft.EntityFrameworkCore;
     using static BicycleApp.Common.UserConstants;
 
-    public class Factory : IFactory
+    public class UserImageFactory : IUserImageFactory
     {
         private readonly BicycleAppDbContext _db;
-
-        public Factory(BicycleAppDbContext db)
+        public UserImageFactory(BicycleAppDbContext db)
         {
             _db = db;
         }
@@ -20,14 +18,13 @@
         {
             if (userRole.ToLower() != CLIENT)
             {
-                 return await _db.ImagesEmployees.AnyAsync(ie => ie.EmployeeId == userId);
+                return await _db.ImagesEmployees.AnyAsync(ie => ie.EmployeeId == userId);
             }
             else
             {
                 return await _db.ImagesClients.AnyAsync(ie => ie.ClientId == userId);
             }
         }
-
         public async Task<bool> CreateUserImage(string userId, string userRole, string filePath, string imageName)
         {
             if (!string.IsNullOrEmpty(userId)
@@ -71,27 +68,11 @@
             return false;
         }
 
-        public async Task<BaseUser?> GetUserAsync(string userId, string userRole)
-        {
-            BaseUser? user = null;
-
-            if (userRole.ToLower() != CLIENT)
-            {
-                user = await _db.Employees.FirstOrDefaultAsync(u => u.Id == userId);
-            }
-            else
-            {
-                user = await _db.Clients.FirstOrDefaultAsync(u => u.Id == userId);
-            }
-
-            return user;
-        }
-
         public async Task<string?> GetUserImagePathAsync(string userId, string userRole)
         {
             string filePath = string.Empty;
 
-            if(userRole.ToLower() != CLIENT)
+            if (userRole.ToLower() != CLIENT)
             {
                 var imageEmployee = await _db.ImagesEmployees.FirstOrDefaultAsync(ie => ie.EmployeeId == userId);
                 filePath = imageEmployee.ImageUrl;
@@ -118,7 +99,7 @@
                         imageEmployee.ImageUrl = filePath;
 
                         _db.ImagesEmployees.Update(imageEmployee);
-                    }                   
+                    }
                 }
                 else
                 {
@@ -141,6 +122,5 @@
             }
             return false;
         }
-
     }
 }
