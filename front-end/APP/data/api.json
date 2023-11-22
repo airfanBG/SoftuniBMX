@@ -83,7 +83,7 @@
   ],
   "archive": [
     {
-      "id": 62713812763127461,
+      "id": 62713812763127464,
       "frame": "dbyiaubdfja87987",
       "wheels": "hjksd8764894",
       "accessories": "lkjlkvdjlvs",
@@ -139,7 +139,6 @@
       "id": 4
     }
   ],
-
   "indexPage": {
     "defaultBikes": [
       {
@@ -176,7 +175,7 @@
         "dateCreated": "10/12/2018"
       },
       {
-        "id": 8.27328483748938e24,
+        "id": 8.27328483748938e+24,
         "partId": 984098348804580400,
         "partName": "Part Name 2",
         "clientId": "jkhsfdksdflssljdfhg",
@@ -187,6 +186,18 @@
       }
     ]
   },
+  "orders": [
+    {
+      "frameId": 3,
+      "wheelId": 5,
+      "partsId": 4,
+      "ownerId": 1,
+      "orderDate": 1700635042215,
+      "orderTotal": 1126.91,
+      "cashReserved": 225.38200000000003,
+      "id": 1
+    }
+  ],
   "production": [
     {
       "unitType": "frame",
@@ -220,16 +231,14 @@
     }
   ],
   "selected_part": [],
-
   "users": [
     {
       "email": "petar@abv.bg",
-      "password": "$2a$10$zsw6rytFO/qcz0o7lTSGHeLh7v10DKzOuohKg3YL4ubmmZ51zgmoO",
       "firstName": "Petar",
       "lastName": "Petrov",
       "repass": "Petar-1",
       "iban": "QWESADAXC456FDGH",
-      "balance": 12000.01,
+      "balance": 9774.618,
       "phone": "+3591234567890",
       "city": "Veliko Tarnowo",
       "role": "user",
@@ -243,7 +252,8 @@
         "street": "Street",
         "strNumber": "54"
       },
-      "id": 1
+      "id": 1,
+      "password": "$2a$10$D2JYqNeFgpr3.hLJIonBHe5wEZKhMN47Q5dTQ1xsOasMypClhqdm6"
     },
     {
       "email": "john@abv.bg",

@@ -7,10 +7,10 @@
 
 HOST URL is in environment.js file
 
-    - All other route endpoints are in path.js file
+    - All routes endpoints are in environment.js file
 
 - Home page fetch request
-- - [HOST/jsonstore/indexPage](http://localhost:3030/jsonstore/indexPage)
+- - [HOST/indexPage](http://localhost:3030/data/indexPage)
 - Data for index page should be changed according to project deployment service
 
 ### Create page
@@ -43,3 +43,7 @@ Registration require First and Last name, valid email, password, IBAN, amount fo
 
 - path for registration is stored in environment.js file
 - - [HOST/users/register]()
+
+### Order route
+
+[/orders]()

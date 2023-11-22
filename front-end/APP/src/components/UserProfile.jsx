@@ -33,7 +33,7 @@ function UserProfile() {
     setUserData(changedLS);
   }
   return (
-    <UserContext.Provider value={{ user, userBalanceHandler }}>
+    <UserContext.Provider value={{ user, setUser, userBalanceHandler }}>
       <div className={styles.componentBody}>
         <Navigation />
         <div className={styles.spacer}></div>

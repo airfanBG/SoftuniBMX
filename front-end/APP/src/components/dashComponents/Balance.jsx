@@ -5,7 +5,7 @@ function Balance({ user }) {
     <>
       <span>Balance: </span>
       <h3 className={styles.cash}>
-        {user.balance} <span className={styles.smaller}>BGN</span>
+        {user.balance.toFixed(2)} <span className={styles.smaller}>BGN</span>
       </h3>
     </>
   );

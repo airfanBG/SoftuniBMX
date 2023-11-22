@@ -17,8 +17,8 @@ function OrderItem({ ...product }) {
 
       setItem({ ...item, finishedTime: endTime });
     }
-    console.log(item._id);
-    let id = item._id;
+    console.log(item.id);
+    let id = item.id;
     // updateOrder();
     // async function updateOrder() {
     //   const res = await put("/data/workerSequence/" + id, item);

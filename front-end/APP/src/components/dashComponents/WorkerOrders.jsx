@@ -32,7 +32,7 @@ function WorkerOrders() {
         <div className={styles.orders}>
           {workerSequence.length > 0 &&
             workerSequence.map((order) => (
-              <OrderItem {...order} key={order._id} />
+              <OrderItem {...order} key={order.id} />
             ))}
           {workerSequence.length === 0 && (
             <h2>There is no orders in this category</h2>
