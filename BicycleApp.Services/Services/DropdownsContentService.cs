@@ -143,6 +143,12 @@ namespace BicycleApp.Services.Services
                 throw new ArgumentException("Database can't retrive data");
             }
         }
+
+        /// <summary>
+        /// Gets avaible images by partId in database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns> List of imageUrls from database</returns>
         private List<string> GetImageUrls(int partId)
         {
             //The commented variant is for string representation of the list
