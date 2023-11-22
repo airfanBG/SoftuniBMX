@@ -2,9 +2,8 @@
 {
     using BicycleApp.Services.Models.Order;
 
-    public interface IOrderService
+    public interface IOrderManagerService
     {
-        Task<bool> CreateOrderByUserAsync(OrderDto order);
         Task<bool> AcceptAndAssignOrderByManagerAsync(ManagerApprovalDto managerApprovalDto);
         Task<ICollection<OrderInfoDto>> AllPendingOrdersAsync();
         Task<ICollection<OrderInfoDto>> GetAllFinishedOrdersForPeriod(DateTime startDate, DateTime endDate);
