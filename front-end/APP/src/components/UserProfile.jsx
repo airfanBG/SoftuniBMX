@@ -7,44 +7,47 @@ import Navigation from "./navigationsComponents/Navigation.jsx";
 import UserDash from "./dashComponents/UserDash.jsx";
 import WorkerDash from "./dashComponents/WorkerDash.jsx";
 import Footer from "./Footer.jsx";
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
+import { UserContext } from "../context/GlobalUserProvider.jsx";
 
-export const UserContext = createContext({});
+// export const UserContext = createContext({});
 
 function UserProfile() {
-  const userData = getUserData();
-  const [user, setUser] = useState(userData.user);
+  // const userData = getUserData();
+  // const [user, setUser] = useState(userData.user);
 
-  function userBalanceHandler(action, value) {
-    if (user === null) return;
+  const { user } = useContext(UserContext);
 
-    let amount = 0;
-    if (action === "add") {
-      amount = user.balance + value;
-    } else {
-      amount = user.balance - value;
-    }
-    console.log(amount);
-    const changedLS = {
-      ...user,
-      balance: amount,
-    };
-    setUser({ ...user, balance: amount });
-    setUserData(changedLS);
-  }
+  // function userBalanceHandler(action, value) {
+  //   if (user === null) return;
+
+  //   let amount = 0;
+  //   if (action === "add") {
+  //     amount = user.balance + value;
+  //   } else {
+  //     amount = user.balance - value;
+  //   }
+  //   console.log(amount);
+  //   const changedLS = {
+  //     ...user,
+  //     balance: amount,
+  //   };
+  //   setUser({ ...user, balance: amount });
+  //   setUserData(changedLS);
+  // }
   return (
-    <UserContext.Provider value={{ user, setUser, userBalanceHandler }}>
-      <div className={styles.componentBody}>
-        <Navigation />
-        <div className={styles.spacer}></div>
-        <div className={styles.container}>
-          {user.role === "user" && <UserDash />}
-          {user.role === "worker" && <WorkerDash />}
-          {user.role === "manager" && <WorkerDash />}
-        </div>
-        <Footer />
+    // <UserContext.Provider value={{ user, setUser, userBalanceHandler }}>
+    <div className={styles.componentBody}>
+      <Navigation />
+      <div className={styles.spacer}></div>
+      <div className={styles.container}>
+        {user.role === "user" && <UserDash />}
+        {user.role === "worker" && <WorkerDash />}
+        {user.role === "manager" && <WorkerDash />}
       </div>
-    </UserContext.Provider>
+      <Footer />
+    </div>
+    // </UserContext.Provider>
   );
 }
 

@@ -15,8 +15,7 @@ export async function login(user) {
   if (!result.accessToken) return;
   if (result.user.role === "worker" || result.user.role === "manager")
     clearOrderData();
-  console.log(result);
-  setUserData(result);
+  // setUserData(result);
   return result;
 }
 

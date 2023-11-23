@@ -1,14 +1,12 @@
 import styles from "./Login.module.css";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Navigation from "../navigationsComponents/Navigation.jsx";
-import Footer from "../Footer.jsx";
 
 import { login } from "../../util/auth.js";
-import { clearUserData } from "../../util/util.js";
-import Loader from "../Loader.jsx";
+import { clearUserData, setUserData } from "../../util/util.js";
 import LoaderWheel from "../LoaderWheel.jsx";
+import { UserContext } from "../../context/GlobalUserProvider.jsx";
 
 const EMAIL_REGEX =
   /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
@@ -25,6 +23,8 @@ function Login() {
   const [inputError, setInputError] = useState(initialState);
   const [values, setValues] = useState(initialState);
   const [isAllowed, setIsAllowed] = useState(false);
+
+  const { updateUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -76,17 +76,29 @@ function Login() {
       setIsLoading(true);
       const result = await login(user);
 
-      setValues({
-        email: "",
-        password: "",
-      });
+      // setValues({
+      //   email: "",
+      //   password: "",
+      // });
 
       if (result.code) {
         setIsLoading(false);
         setResError({ status: true, message: result.message });
         throw new Error(result);
       }
+      const currentUser = {
+        accessToken: result.accessToken,
+        firstName: result.user.firstName,
+        lastName: result.user.lastName,
+        role: result.user.role,
+        id: result.user.id,
+      };
+      if (result.user.balance) {
+        currentUser.balance = Number(result.user.balance.toFixed(2));
+      }
 
+      updateUser(currentUser);
+      setUserData(currentUser);
       setIsLoading(false);
       navigate("/");
     } catch (err) {

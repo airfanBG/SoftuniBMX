@@ -1,7 +1,8 @@
+import { UserContext } from "../../context/GlobalUserProvider.jsx";
 import styles from "./NavigationSecondary.module.css";
 import NavSecListItem from "./navSecListItem.jsx";
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../UserProfile.jsx";
+// import { UserContext } from "../UserProfile.jsx";
 
 function NavigationSecondary() {
   const { user } = useContext(UserContext);

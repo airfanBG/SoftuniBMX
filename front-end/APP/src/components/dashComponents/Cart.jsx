@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import styles from "./Cart.module.css";
 
 import BoardHeader from "./BoardHeader.jsx";
-import { UserContext } from "../UserProfile.jsx";
+// import { UserContext } from "../UserProfile.jsx";
 import { getOrderData } from "../../util/util.js";
 import {
   getOneFrame,
@@ -13,9 +13,10 @@ import {
 import LoaderWheel from "../LoaderWheel.jsx";
 import { post, put } from "../../util/api.js";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/GlobalUserProvider.jsx";
 
 function Cart() {
-  const { user, setUser, userBalanceHandler } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const [loading, setLoading] = useState(false);
   const [frame, setFrame] = useState({});
@@ -89,7 +90,7 @@ function Cart() {
     } catch (err) {
       console.error(err);
     } finally {
-      setUser({ ...user, balance: userReducedBalance });
+      // setUser({ ...user, balance: userReducedBalance });
       setLoading(false);
       navigate("/profile");
     }

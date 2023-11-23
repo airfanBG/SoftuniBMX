@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import styles from "./WorkerContactInfo.module.css";
-import { UserContext } from "../UserProfile.jsx";
+import { UserContext } from "../../context/GlobalUserProvider.jsx";
+// import { UserContext } from "../UserProfile.jsx";
 
 function WorkerContactInfo() {
   const { user } = useContext(UserContext);

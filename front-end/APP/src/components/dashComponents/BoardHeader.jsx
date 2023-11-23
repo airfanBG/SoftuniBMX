@@ -2,18 +2,20 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./BoardHeader.module.css";
-import { UserContext } from "../UserProfile.jsx";
+// import { UserContext } from "../UserProfile.jsx";
 import Balance from "./Balance.jsx";
 import Category from "./Category.jsx";
 import { logout } from "../../util/auth.js";
 import Guest from "./Guest.jsx";
+import { UserContext } from "../../context/GlobalUserProvider.jsx";
 
 function BoardHeader() {
-  const { user } = useContext(UserContext);
+  const { user, updateUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   function onLogout() {
     const exit = logout();
+    updateUser("");
     navigate("/");
   }
   return (

@@ -8,7 +8,6 @@ async function getFrames() {
 
 // TODO: changed to project route without server filter. Response will return full collection. Must be filtered by criteria
 async function getWheels(criteria) {
-  console.log(criteria);
   const data = await get(`${environment.wheels}?type=${criteria}`);
   return data;
 }

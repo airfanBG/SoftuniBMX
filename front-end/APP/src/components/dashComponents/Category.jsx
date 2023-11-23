@@ -6,7 +6,6 @@ function Category({ user }) {
       <span>Category: </span>
       <h3>
         {/* TODO: change with actual - probably user.category === 'frames' */}
-        {console.log(user)}
         <span
           className={styles.element}
           style={

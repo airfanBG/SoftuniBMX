@@ -5,24 +5,21 @@ import { getOrderData, getUserData } from "../../util/util.js";
 import { UserContext } from "../../context/GlobalUserProvider.jsx";
 
 function Navigation() {
-  // const [isUser, setIsUser] = useState(null);
+  const [isUser, setIsUser] = useState(null);
   const [hasOrder, setHasOrder] = useState(false);
   const { user } = useContext(UserContext);
 
-  useEffect(
-    function () {
-      // if (!isUser) {
-      //   const user = getUserData();
-      if (user) {
-        // setIsUser(user);
+  useEffect(function () {
+    if (!isUser) {
+      const navUser = getUserData();
+      if (navUser) {
+        setIsUser(navUser);
 
         const order = getOrderData();
         if (order) setHasOrder(true);
       }
-      // }
-    },
-    [user]
-  );
+    }
+  }, []);
 
   return (
     <div className={styles.navigation}>
@@ -36,8 +33,9 @@ function Navigation() {
         <ul className={styles.navList} role="list">
           <li className={styles.navListItem}>
             {window.location.pathname === "/" &&
-            user.role !== "worker" &&
-            user.role !== "manager" ? (
+            isUser &&
+            isUser.role !== "worker" &&
+            isUser.role !== "manager" ? (
               <NavLink to={"/app"} className={styles.navLink}>
                 Create
               </NavLink>
@@ -48,9 +46,9 @@ function Navigation() {
             )}
           </li>
           {window.location.pathname !== "/" &&
-            user &&
-            user.role !== "worker" &&
-            user.role !== "manager" && (
+            isUser &&
+            isUser.role !== "worker" &&
+            isUser.role !== "manager" && (
               <NavLink to={"/app"} className={styles.navLink}>
                 Create
               </NavLink>
@@ -66,9 +64,9 @@ function Navigation() {
             </NavLink>
           </li>
           <li className={styles.navListItem}>
-            {user ? (
+            {isUser ? (
               <NavLink to={"/profile"} className={styles.navLink}>
-                {user.firstName} {user.lastName}
+                {isUser.firstName} {isUser.lastName}
               </NavLink>
             ) : (
               <NavLink to={"/auth"} className={styles.navLink}>

@@ -2,28 +2,29 @@ import { useContext, useState } from "react";
 
 import styles from "./UserInfo.module.css";
 
-import { UserContext } from "../UserProfile.jsx";
+import { UserContext } from "../../context/GlobalUserProvider.jsx";
+
 import UserContactInfo from "./UserContactInfo.jsx";
 import BoardHeader from "./BoardHeader.jsx";
 import WorkerContactInfo from "./WorkerContactInfo.jsx";
 
 function UserInfo() {
-  const { user, userBalanceHandler } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [add, setAdd] = useState("");
 
   // console.log(user);
 
-  function addMoneyBtnHandler() {
-    // TODO: make request to update user balance
-    //next is only for testing
+  // function addMoneyBtnHandler() {
+  //   // TODO: make request to update user balance
+  //   //next is only for testing
 
-    if (add === 0) return;
-    userBalanceHandler("add", add);
-  }
+  //   if (add === 0) return;
+  //   userBalanceHandler("add", add);
+  //   setAdd("");
+  // }
 
   return (
     <>
-      {/* <h2 className={styles.dashHeading}>Orders in sequence</h2> */}
       <h2 className={styles.dashHeading}>
         {user.firstName} {user.lastName}
       </h2>
@@ -49,7 +50,7 @@ function UserInfo() {
                 />
                 <button
                   className={styles.addMoney}
-                  onClick={addMoneyBtnHandler}
+                  // onClick={addMoneyBtnHandler}
                 >
                   Add money
                 </button>
@@ -57,8 +58,8 @@ function UserInfo() {
             )}
           </figure>
 
-          {user.role === "user" && <UserContactInfo />}
-          {user.role === "worker" && <WorkerContactInfo />}
+          {user.role === "user" && <UserContactInfo user={user} />}
+          {user.role === "worker" && <WorkerContactInfo user={user} />}
         </div>
       </section>
     </>

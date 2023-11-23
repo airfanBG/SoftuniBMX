@@ -16,7 +16,8 @@ import SelectComponent from "./SelectComponent.jsx";
 import ElementInfo from "./ElementInfo.jsx";
 import { getUserData, setOrderData } from "../../util/util.js";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../UserProfile.jsx";
+import { UserContext } from "../../context/GlobalUserProvider.jsx";
+// import { UserContext } from "../UserProfile.jsx";
 
 const initialState = {
   frames: [],
@@ -101,15 +102,15 @@ function CreateBike() {
     dispatch,
   ] = useReducer(reducer, initialState);
 
-  // const { user } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
   function orderHandler() {
     const data = { selectedFrame, selectedWheel, selectedPart };
     //adding order with selected parts in local storage
     setOrderData(data);
-    const user = getUserData();
-    console.log(user);
+    // const user = getUserData();
+    // console.log(user);
     if (user) {
       navigate("/profile/cart");
     } else navigate("/auth");
