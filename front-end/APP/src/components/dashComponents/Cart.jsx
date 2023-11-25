@@ -4,7 +4,7 @@ import styles from "./Cart.module.css";
 
 import BoardHeader from "./BoardHeader.jsx";
 // import { UserContext } from "../UserProfile.jsx";
-import { getOrderData } from "../../util/util.js";
+import { clearOrderData, getOrderData } from "../../util/util.js";
 import {
   getOneFrame,
   getOnePart,
@@ -16,12 +16,16 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/GlobalUserProvider.jsx";
 
 function Cart() {
-  const { user } = useContext(UserContext);
+  const { user, setHasOrder } = useContext(UserContext);
 
   const [loading, setLoading] = useState(false);
   const [frame, setFrame] = useState({});
   const [wheel, setWheel] = useState({});
   const [parts, setParts] = useState({});
+  const [userText, setUserText] = useState("");
+  const [select, setSelect] = useState("");
+  const [error, setError] = useState({});
+
   const order = getOrderData();
   const navigate = useNavigate();
 
@@ -48,14 +52,16 @@ function Cart() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  function onChangeHandler(e) {
+    setSelect(Number(e.target.value));
+    setError({});
+  }
+
   async function orderClickHandler(e) {
     e.preventDefault();
     if (!order) return;
     const additionalFields = {
       ownerId: user.id,
-      // orderDate: Date.now(),
-      // orderTotal: frame.salesPrice + wheel.salesPrice + parts.salesPrice,
-
       // according to documentation customer pays while ordering 20% of the total order price
       // cashReserved: (frame.salesPrice + wheel.salesPrice + parts.salesPrice) * 0.2,
     };
@@ -66,12 +72,22 @@ function Cart() {
     //   (frame.salesPrice + wheel.salesPrice + parts.salesPrice) * 0.2;
 
     const currentOrder = {
-      frameId: frame.id,
-      wheelId: wheel.id,
-      partsId: parts.id,
+      frame,
+      wheel,
+      accessory: parts,
+      userText,
+      count: select,
+      createdAt: Date.now(),
       ...additionalFields,
     };
 
+    if (
+      user.balance <
+      (frame.salesPrice + wheel.salesPrice + parts.salesPrice) * 0.2
+    ) {
+      return setError({ message: "Not enough money!" });
+    }
+    if (!select) return setError({ message: "Select quantity" });
     // TODO:
     // ONLY FOR DEV SERVER
     //DATA FOR UPDATE USER AFTER ORDER
@@ -88,13 +104,14 @@ function Cart() {
       const orderResponse = await post("/orders/", currentOrder);
       // const userAfterOrder = await put(`/users/${user.id}`, userPayment);   //TAKE MONEY FROM USER ACCOUNT
       console.log(orderResponse);
-      // console.log(userAfterOrder);
     } catch (err) {
       console.error(err);
     } finally {
       // setUser({ ...user, balance: userReducedBalance });
       setLoading(false);
       navigate("/profile");
+      clearOrderData();
+      setHasOrder(false);
     }
   }
 
@@ -143,26 +160,54 @@ function Cart() {
               </figure>
             </div>
 
-            <p className={styles.totalPrice}>
-              <span>Total:</span>
-              {!isNaN(frame.salesPrice + wheel.salesPrice + parts.salesPrice) &&
-                (
-                  frame.salesPrice +
-                  wheel.salesPrice +
-                  parts.salesPrice
-                ).toFixed(2)}
-            </p>
-            {/* TODO: check if user has enough money */}
-            <button
-              className={styles.btn}
-              disabled={
-                user.balance <
-                (frame.salesPrice + wheel.salesPrice + parts.salesPrice) * 0.2
-              }
-              onClick={orderClickHandler}
-            >
-              Finish order
-            </button>
+            <div className={styles.additionalInfo}>
+              <textarea
+                className={styles.textarea}
+                value={userText}
+                onChange={(e) => setUserText(e.target.value)}
+                maxLength={"400"}
+                cols="97"
+                rows="4"
+              ></textarea>
+              <div className={styles.control}>
+                <div className={styles.count}>
+                  <label htmlFor="qtySelect">Quantity:</label>
+                  <select
+                    className={styles.quantity}
+                    value={select}
+                    onChange={onChangeHandler}
+                    id={"qtySelect"}
+                    required
+                  >
+                    <option value=""></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+
+                <div className={styles.priceBlock}>
+                  <p className={styles.totalPrice}>
+                    <span>Total:</span>
+                    {!isNaN(
+                      frame.salesPrice + wheel.salesPrice + parts.salesPrice
+                    ) &&
+                      (
+                        frame.salesPrice +
+                        wheel.salesPrice +
+                        parts.salesPrice
+                      ).toFixed(2)}
+                  </p>
+                  {/* TODO: check if user has enough money */}
+                  <button className={styles.btn} onClick={orderClickHandler}>
+                    Finish order
+                  </button>
+                  <p className={styles.warning}>{error.message}</p>
+                </div>
+              </div>
+            </div>
           </>
         )}
         {!order && <h2>Your orders will appear here</h2>}

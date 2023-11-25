@@ -175,7 +175,7 @@
         "dateCreated": "10/12/2018"
       },
       {
-        "id": 8.27328483748938e24,
+        "id": 8.27328483748938e+24,
         "partId": 984098348804580400,
         "partName": "Part Name 2",
         "clientId": "jkhsfdksdflssljdfhg",
@@ -188,25 +188,78 @@
   },
   "orders": [
     {
-      "frameId": 3,
-      "wheelId": 5,
-      "partsId": 4,
+      "frame": {
+        "name": "Blaster",
+        "OEMNumber": "Colony",
+        "imageUrl": "https://yuchormanski.free.bg/bikes/frame2.webp",
+        "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis itaque architecto, deleniti quo omnis odio quam voluptatibus ea! Explicabo, quam.",
+        "rating": 1,
+        "salesPrice": 98.99,
+        "type": 2,
+        "id": 2
+      },
+      "wheel": {
+        "name": "SUNDAY KNOX V2",
+        "OEMNumber": "87394894",
+        "imageUrl": "https://yuchormanski.free.bg/bikes/wheel2.webp",
+        "description": "This complete front wheel allows you to change all your old parts between your fork with a single fix, as this complete wheel comes with a rim, tyre, and inner tube.",
+        "rating": 5,
+        "salesPrice": 89.45,
+        "type": 2,
+        "id": 2
+      },
+      "accessory": {
+        "name": "SUNDAY KNOX SPROCKET",
+        "OEMNumber": "8739423494",
+        "imageUrl": "https://yuchormanski.free.bg/bikes/sprocket8.webp",
+        "description": "Guard sprocket from Sunday. The Knox sprocket is made from 7075 aluminum and has been designed to fit larger chains like halflink chains.",
+        "rating": 2,
+        "salesPrice": 33.45,
+        "type": 2,
+        "id": 7
+      },
+      "userText": "",
+      "count": "1",
+      "createdAt": 1700934872505,
       "ownerId": 1,
       "id": 1
     },
     {
-      "frameId": 2,
-      "wheelId": 2,
-      "partsId": 5,
-      "ownerId": 1,
+      "frame": {
+        "name": "Zeal",
+        "OEMNumber": "96789",
+        "imageUrl": "https://yuchormanski.free.bg/bikes/frame3.webp",
+        "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis suscipit eaque id exercitationem cum! Facere doloremque dignissimos cupiditate fugit, culpa animi eveniet est blanditiis!",
+        "rating": 5,
+        "salesPrice": 1000.01,
+        "type": 3,
+        "id": 3
+      },
+      "wheel": {
+        "name": "Everest 20 Wheels",
+        "OEMNumber": "87394823",
+        "imageUrl": "https://yuchormanski.free.bg/bikes/wheel5.webp",
+        "description": "Salt has combined a killer set of parts to bring you their Everest 20 wheel. Available in a fresh range of colours and comes complete with hub, rim, rim tape, and 36 spokes.",
+        "rating": 0,
+        "salesPrice": 93.45,
+        "type": 3,
+        "id": 5
+      },
+      "accessory": {
+        "name": "ENDEAVOUR SPROCKET",
+        "OEMNumber": "873948asda94",
+        "imageUrl": "https://yuchormanski.free.bg/bikes/sprocket2.webp",
+        "description": "The Colony Endeavour BMX Sprocket that comes on most of Colony’s complete bikes is now available separately! Good quality sprocket at a great price.",
+        "rating": 1,
+        "salesPrice": 13.45,
+        "type": 3,
+        "id": 2
+      },
+      "userText": "A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisit",
+      "count": 2,
+      "createdAt": 1700940605650,
+      "ownerId": 5,
       "id": 2
-    },
-    {
-      "frameId": 4,
-      "wheelId": 4,
-      "partsId": 3,
-      "ownerId": 1,
-      "id": 3
     }
   ],
   "production": [
@@ -249,7 +302,7 @@
       "lastName": "Petrov",
       "repass": "Petar-1",
       "iban": "QWESADAXC456FDGH",
-      "balance": 12440.618,
+      "balance": 13440.618,
       "phone": "+3591234567890",
       "city": "Veliko Tarnowo",
       "role": "user",
@@ -264,7 +317,7 @@
         "strNumber": "54"
       },
       "id": 1,
-      "password": "$2a$10$jb50/13CeR/REkbtJ5RqcOcRaOpGweZ7YsDkrnkA0i/OLKwmbyJXu"
+      "password": "$2a$10$/lA2fzzo6dl3x/rfOxKpneEjovEHZ4JEMvRlX60jXDD6NNduMpkDi"
     },
     {
       "email": "john@abv.bg",
@@ -278,7 +331,7 @@
       "position": "string",
       "dateOfHire": "string",
       "department": "frames",
-      "isManeger": false
+      "isManager": false
     },
     {
       "email": "stamat@abv.bg",
@@ -292,7 +345,7 @@
       "phoneNumber": "+359567474237",
       "position": "string",
       "dateOfHire": "string",
-      "isManeger": false
+      "isManager": false
     },
     {
       "email": "manager@b-free.com",
@@ -305,7 +358,31 @@
       "phoneNumber": "+359567474237",
       "position": "string",
       "dateOfHire": "string",
-      "isManeger": true
+      "isManager": true
+    },
+    {
+      "email": "van@deribohten.com",
+      "password": "$2a$10$HbFYdBTTqy7wcqx/X38Ea.uF0.qbArepi.0mDFPUr.Cpy9.K18XKO",
+      "firstName": "Van",
+      "lastName": "Deribohten",
+      "repass": "Van-12",
+      "iban": "BG80BNBG96611020345678",
+      "balance": 1020,
+      "phone": "+359888777666",
+      "city": "Dolno chepruchane",
+      "role": "user",
+      "address": {
+        "country": "Bulgaria",
+        "city": "Dolno chepruchane",
+        "postCode": "1234",
+        "district": "",
+        "block": "",
+        "floor": 0,
+        "apartment": "",
+        "street": "Ovcha mogila",
+        "strNumber": "13"
+      },
+      "id": 5
     }
   ],
   "wheels": [

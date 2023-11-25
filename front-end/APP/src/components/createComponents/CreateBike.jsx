@@ -103,23 +103,8 @@ function CreateBike() {
     dispatch,
   ] = useReducer(reducer, initialState);
 
-  const { user } = useContext(UserContext);
+  const { user, setHasOrder } = useContext(UserContext);
   const navigate = useNavigate();
-
-  function orderHandler() {
-    const orderId = uuidv4();
-    const orderName = user.id + "_#_" + orderId;
-    const data = { selectedFrame, selectedWheel, selectedPart, id: orderId };
-
-    //adding order with selected parts in local storage
-    setOrderData("order", data);
-    // setOrderData(orderName, data);
-    // const user = getUserData();
-    // console.log(user);
-    if (user) {
-      navigate("/profile/cart");
-    } else navigate("/auth");
-  }
 
   // GET ALL FRAMES
   useEffect(function () {
@@ -241,6 +226,20 @@ function CreateBike() {
     },
     [framePrice, wheelPrice, partsPrice]
   );
+
+  function orderHandler() {
+    const orderId = uuidv4();
+    const data = { selectedFrame, selectedWheel, selectedPart, id: orderId };
+    setHasOrder(true);
+
+    //adding order with selected parts in local storage
+    setOrderData("order", data);
+    // setOrderData(orderName, data);
+    // const user = getUserData();
+    if (user) {
+      navigate("/profile/cart");
+    } else navigate("/auth");
+  }
 
   return (
     <>

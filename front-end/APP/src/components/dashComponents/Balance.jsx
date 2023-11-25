@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import styles from "./Balance.module.css";
+import { UserContext } from "../../context/GlobalUserProvider.jsx";
 
-function Balance({ user }) {
+function Balance() {
+  const { user } = useContext(UserContext);
   return (
     <>
       <span>Balance: </span>

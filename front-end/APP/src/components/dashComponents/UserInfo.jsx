@@ -6,11 +6,12 @@ import { UserContext } from "../../context/GlobalUserProvider.jsx";
 
 import UserContactInfo from "./UserContactInfo.jsx";
 import BoardHeader from "./BoardHeader.jsx";
-import WorkerContactInfo from "./WorkerContactInfo.jsx";
+import WorkerContactInfo from "./workerComponents/WorkerContactInfo.jsx";
 import { setUserData } from "../../util/util.js";
 import { updateUserData, userInfo } from "../../userServices/userService.js";
 
-import { User, PlusCircle, CameraPlus } from "@phosphor-icons/react";
+import { User, CameraPlus } from "@phosphor-icons/react";
+import ManagerContactInfo from "./managerComponents/ManagerContactInfo.jsx";
 
 function UserInfo() {
   const { user, updateUser } = useContext(UserContext);
@@ -80,6 +81,7 @@ function UserInfo() {
 
           {user.role === "user" && <UserContactInfo user={user} />}
           {user.role === "worker" && <WorkerContactInfo user={user} />}
+          {user.role === "manager" && <ManagerContactInfo />}
         </div>
       </section>
     </>

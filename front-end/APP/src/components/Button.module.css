@@ -1,0 +1,28 @@
+.btn {
+  color: var(--color-link-light);
+  font-size: 1.6rem;
+  padding: 0rem 1rem;
+  text-align: center;
+}
+
+.approve {
+  background-color: #6b9080;
+}
+.approve:hover {
+  background-color: var(--button-color-hover);
+  color: var(--color-main-dark);
+}
+.reject {
+  background-color: #7886bc;
+}
+.reject:hover {
+  background-color: var(--button-color-hover);
+  color: var(--color-main-dark);
+}
+.delete {
+  background-color: #bd765d;
+}
+.delete:hover {
+  background-color: var(--button-color-hover);
+  color: var(--color-main-dark);
+}

@@ -31,4 +31,29 @@ async function getOnePart(id) {
   return data;
 }
 
-export { getOneFrame, getFrames, getWheels, getOneWheel, getParts, getOnePart };
+async function getList(criteria) {
+  const data = await get(environment[criteria]);
+  return data;
+}
+
+async function getOrder(id) {
+  const data = await get(environment.orders + id);
+  return data;
+}
+
+async function getElement(elName, id) {
+  const data = await get(environment[elName] + id);
+  return data;
+}
+
+export {
+  getOneFrame,
+  getFrames,
+  getWheels,
+  getOneWheel,
+  getParts,
+  getOnePart,
+  getList,
+  getElement,
+  getOrder,
+};

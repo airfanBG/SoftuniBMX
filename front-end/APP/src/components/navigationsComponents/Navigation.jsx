@@ -1,28 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import styles from "./Navigation.module.css";
 import { Link, NavLink } from "react-router-dom";
-import { getOrderData, getUserData } from "../../util/util.js";
 import { UserContext } from "../../context/GlobalUserProvider.jsx";
 
 function Navigation() {
-  // const [isUser, setIsUser] = useState(null);
-  const [hasOrder, setHasOrder] = useState(false);
-  const { user } = useContext(UserContext);
-
-  useEffect(
-    function () {
-      // if (!isUser) {
-      //   const user = getUserData();
-      if (user) {
-        // setIsUser(user);
-
-        const order = getOrderData(user.id);
-        if (order) setHasOrder(true);
-      }
-      // }
-    },
-    [user]
-  );
+  const { user, hasOrder } = useContext(UserContext);
 
   return (
     <div className={styles.navigation}>
@@ -76,7 +58,7 @@ function Navigation() {
               </NavLink>
             )}
           </li>
-          {hasOrder && (
+          {user && hasOrder && (
             <li className={styles.navListItem}>
               <Link to={"/profile/cart"} className={styles.cartIcon}>
                 <ion-icon name="cart-sharp"></ion-icon>

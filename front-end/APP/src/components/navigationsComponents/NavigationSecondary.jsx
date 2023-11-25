@@ -19,11 +19,12 @@ function NavigationSecondary() {
     ],
     worker: [
       { link: "info", textContent: "Profile" },
-      { link: "orders", textContent: "Orders" },
+      { link: "workerOrders", textContent: "Orders" },
       { link: "finished", textContent: "Finished" },
     ],
     manager: [
-      { link: "managerLink2", textContent: "Orders" },
+      { link: "info", textContent: "Profile" },
+      { link: "managerOrders", textContent: "Orders" },
       { link: "managerLink4", textContent: "In production" },
       { link: "managerLink3", textContent: "Ready" },
       { link: "managerLink5", textContent: "Finished" },

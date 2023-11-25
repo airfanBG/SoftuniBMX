@@ -1,16 +1,20 @@
 import { createContext, useEffect, useState } from "react";
-import { getUserData } from "../util/util.js";
+import { getOrderData, getUserData } from "../util/util.js";
 
 export const UserContext = createContext();
 
 function GlobalUser({ children }) {
   const [user, setUser] = useState("");
+  const [hasOrder, setHasOrder] = useState(false);
 
   useEffect(function () {
     const data = getUserData();
     if (data) {
       setUser(data);
     }
+
+    const order = getOrderData();
+    if (order) setHasOrder(true);
   }, []);
 
   function updateUser(userData) {
@@ -18,7 +22,7 @@ function GlobalUser({ children }) {
   }
 
   return (
-    <UserContext.Provider value={{ user, updateUser }}>
+    <UserContext.Provider value={{ user, updateUser, hasOrder, setHasOrder }}>
       {children}
     </UserContext.Provider>
   );
