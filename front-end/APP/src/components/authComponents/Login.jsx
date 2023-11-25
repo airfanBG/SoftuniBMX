@@ -96,6 +96,9 @@ function Login() {
       if (result.user.balance) {
         currentUser.balance = Number(result.user.balance.toFixed(2));
       }
+      if (result.user.department) {
+        currentUser.department = result.user.department;
+      }
 
       updateUser(currentUser);
       setUserData(currentUser);

@@ -1,68 +1,135 @@
 import { useContext, useEffect, useState } from "react";
+
 import styles from "./UserContactInfo.module.css";
+
 import { UserContext } from "../../context/GlobalUserProvider.jsx";
 import { userInfo } from "../../userServices/userService.js";
-// import { UserContext } from "../UserProfile.jsx";
+import ContactInfoElement from "./ContactInfoElement.jsx";
 
-function UserContactInfo({ user }) {
-  // const { user } = useContext(UserContext);
+function UserContactInfo() {
+  const { user } = useContext(UserContext);
   const [info, setInfo] = useState("");
 
-  useEffect(function () {
-    async function getClientInfo() {
-      const data = await userInfo(user.id);
-      setInfo(data);
-    }
-    getClientInfo();
-  }, []);
+  useEffect(
+    function () {
+      async function getClientInfo() {
+        const data = await userInfo(user.id);
+        setInfo(data);
+      }
+      getClientInfo();
+    },
+    [user]
+  );
   return (
     <>
       {info && (
         <div className={styles.contactWrapper}>
-          <h2 className={styles.infoHeader}>Contact information</h2>
+          <h2 className={styles.infoHeader}>
+            <span>Contact information</span>
+          </h2>
           <div className={styles.fullData}>
-            <p className={styles.userData}>
-              <span>Street: </span>
-              {info.address.street}
-            </p>
-            <p className={styles.userData}>
-              <span>Street number: </span>
-              {info.address.strNumber}
-            </p>
+            <div className={styles.row}>
+              <ContactInfoElement
+                content={info.firstName}
+                label={"First Name"}
+                width={"50%"}
+              />
+              <ContactInfoElement
+                content={info.lastName}
+                label={"Last Name"}
+                width={"50%"}
+              />
+            </div>
 
-            <p className={styles.userData}>
-              <span>District: </span>
-              {info.address.district}
-            </p>
-            <p className={styles.userData}>
-              <span>City: </span>
-              {info.city}
-            </p>
+            <div className={styles.row}>
+              <ContactInfoElement
+                content={info.email}
+                label={"Email"}
+                width={"70%"}
+              />
 
-            <p className={styles.userData}>
-              <span>Post code: </span>
-              {info.address.postCode}
-            </p>
-            <p className={styles.userData}>
-              <span>Country: </span>
-              {info.address.country}
-            </p>
-            <p className={styles.userData}>
-              <span>Building: </span>
-              {info.address.block}
-            </p>
-            <p className={styles.userData}>
-              <span>Floor: </span>
-              {info.address.floor}
-            </p>
-            <p className={styles.userData}>
-              <span>Balance: </span>
-              {info.balance.toFixed(2)} BGN
-            </p>
-            <p className={styles.userData}>
-              <span>IBAN: </span>
-              {info.iban}
-            </p>
+              <ContactInfoElement
+                content={info.phone}
+                label={"Phone"}
+                width={"30%"}
+              />
+            </div>
+
+            <div className={styles.row}>
+              <ContactInfoElement
+                content={info.address.street}
+                label={"Street"}
+                width={"70%"}
+              />
+
+              <ContactInfoElement
+                content={info.address.strNumber}
+                label={"Number"}
+                width={"30%"}
+              />
+            </div>
+
+            <div className={styles.row}>
+              <ContactInfoElement
+                content={info.address.block}
+                label={"Building"}
+                width={"60%"}
+              />
+
+              <ContactInfoElement
+                content={info.address.floor}
+                label={"Floor"}
+                width={"20%"}
+              />
+              <ContactInfoElement
+                content={info.address.apartment}
+                label={"Unit/Suite"}
+                width={"20%"}
+              />
+            </div>
+
+            <div className={styles.row}>
+              <ContactInfoElement
+                content={info.city}
+                label={"City"}
+                width={"50%"}
+              />
+
+              <ContactInfoElement
+                content={info.address.district}
+                label={"State"}
+                width={"30%"}
+              />
+              <ContactInfoElement
+                content={info.address.postCode}
+                label={"ZIP"}
+                width={"20%"}
+              />
+            </div>
+
+            <div className={styles.row}>
+              <ContactInfoElement
+                content={info.address.country}
+                label={"Country"}
+              />
+            </div>
+          </div>
+          <h2 className={styles.infoHeader}>
+            <span>Account information</span>
+          </h2>
+          <div className={styles.fullData}>
+            <div className={styles.row}>
+              <ContactInfoElement
+                content={info.balance}
+                label={"Account balance"}
+                width={"40%"}
+              />
+              <ContactInfoElement
+                content={info.iban}
+                label={"IBAN"}
+                width={"60%"}
+              />
+            </div>
           </div>
         </div>
       )}

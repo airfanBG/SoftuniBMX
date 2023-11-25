@@ -8,6 +8,17 @@ export const PASS_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/;
 export function getUserData() {
   return JSON.parse(localStorage.getItem(itemName));
 }
+// export function getOrderData(userId) {
+//   const result = [];
+//   const filtered = Object.entries(localStorage).filter(
+//     (k) => k.at(0).split("_#_").at(0) == userId
+//   );
+//   filtered.forEach((x) => result.push(x));
+//   console.log(result);
+
+//   return result;
+// }
+
 export function getOrderData() {
   return JSON.parse(localStorage.getItem("order"));
 }
@@ -15,8 +26,8 @@ export function getOrderData() {
 export function setUserData(data) {
   return localStorage.setItem(itemName, JSON.stringify(data));
 }
-export function setOrderData(data) {
-  return localStorage.setItem("order", JSON.stringify(data));
+export function setOrderData(orderName, data) {
+  return localStorage.setItem(orderName, JSON.stringify(data));
 }
 
 export function clearUserData() {

@@ -17,7 +17,8 @@ import ElementInfo from "./ElementInfo.jsx";
 import { getUserData, setOrderData } from "../../util/util.js";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/GlobalUserProvider.jsx";
-// import { UserContext } from "../UserProfile.jsx";
+
+import { v4 as uuidv4 } from "uuid"; //unique ID
 
 const initialState = {
   frames: [],
@@ -106,9 +107,13 @@ function CreateBike() {
   const navigate = useNavigate();
 
   function orderHandler() {
-    const data = { selectedFrame, selectedWheel, selectedPart };
+    const orderId = uuidv4();
+    const orderName = user.id + "_#_" + orderId;
+    const data = { selectedFrame, selectedWheel, selectedPart, id: orderId };
+
     //adding order with selected parts in local storage
-    setOrderData(data);
+    setOrderData("order", data);
+    // setOrderData(orderName, data);
     // const user = getUserData();
     // console.log(user);
     if (user) {

@@ -8,6 +8,8 @@ export const environment = {
   REGISTER_EMPLOYEE: "/api/employee/register",
   // LOGOUT: "/users/logout",
   // fix in main
+  UPDATE_CLIENT: "/users/", // + id
+  UPDATE_EMPLOYEE: "/users/", // + id
   INFO_CLIENT: "/users/", // + id
   INFO_EMPLOYEE: "/users/", // + id
   // TODO: change to project path

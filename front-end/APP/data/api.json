@@ -175,7 +175,7 @@
         "dateCreated": "10/12/2018"
       },
       {
-        "id": 8.27328483748938e+24,
+        "id": 8.27328483748938e24,
         "partId": 984098348804580400,
         "partName": "Part Name 2",
         "clientId": "jkhsfdksdflssljdfhg",
@@ -192,10 +192,21 @@
       "wheelId": 5,
       "partsId": 4,
       "ownerId": 1,
-      "orderDate": 1700635042215,
-      "orderTotal": 1126.91,
-      "cashReserved": 225.38200000000003,
       "id": 1
+    },
+    {
+      "frameId": 2,
+      "wheelId": 2,
+      "partsId": 5,
+      "ownerId": 1,
+      "id": 2
+    },
+    {
+      "frameId": 4,
+      "wheelId": 4,
+      "partsId": 3,
+      "ownerId": 1,
+      "id": 3
     }
   ],
   "production": [
@@ -238,7 +249,7 @@
       "lastName": "Petrov",
       "repass": "Petar-1",
       "iban": "QWESADAXC456FDGH",
-      "balance": 9774.618,
+      "balance": 12440.618,
       "phone": "+3591234567890",
       "city": "Veliko Tarnowo",
       "role": "user",
@@ -253,7 +264,7 @@
         "strNumber": "54"
       },
       "id": 1,
-      "password": "$2a$10$D2JYqNeFgpr3.hLJIonBHe5wEZKhMN47Q5dTQ1xsOasMypClhqdm6"
+      "password": "$2a$10$jb50/13CeR/REkbtJ5RqcOcRaOpGweZ7YsDkrnkA0i/OLKwmbyJXu"
     },
     {
       "email": "john@abv.bg",
@@ -262,8 +273,12 @@
       "lastName": "Smith",
       "repass": "John-1",
       "role": "worker",
-      "category": "frames",
-      "id": 2
+      "id": 2,
+      "phoneNumber": "+359567474237",
+      "position": "string",
+      "dateOfHire": "string",
+      "department": "frames",
+      "isManeger": false
     },
     {
       "email": "stamat@abv.bg",
@@ -272,8 +287,12 @@
       "lastName": "Spiridonov",
       "repass": "Stamat-1",
       "role": "worker",
-      "category": "wheels",
-      "id": 3
+      "department": "wheels",
+      "id": 3,
+      "phoneNumber": "+359567474237",
+      "position": "string",
+      "dateOfHire": "string",
+      "isManeger": false
     },
     {
       "email": "manager@b-free.com",
@@ -282,7 +301,11 @@
       "lastName": "Manager",
       "repass": "User123",
       "role": "manager",
-      "id": 4
+      "id": 4,
+      "phoneNumber": "+359567474237",
+      "position": "string",
+      "dateOfHire": "string",
+      "isManeger": true
     }
   ],
   "wheels": [

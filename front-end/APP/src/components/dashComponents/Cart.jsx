@@ -53,16 +53,17 @@ function Cart() {
     if (!order) return;
     const additionalFields = {
       ownerId: user.id,
-      orderDate: Date.now(),
-      orderTotal: frame.salesPrice + wheel.salesPrice + parts.salesPrice,
+      // orderDate: Date.now(),
+      // orderTotal: frame.salesPrice + wheel.salesPrice + parts.salesPrice,
+
       // according to documentation customer pays while ordering 20% of the total order price
-      cashReserved:
-        (frame.salesPrice + wheel.salesPrice + parts.salesPrice) * 0.2,
+      // cashReserved: (frame.salesPrice + wheel.salesPrice + parts.salesPrice) * 0.2,
     };
+
     //user balance after order
-    const userReducedBalance =
-      user.balance -
-      (frame.salesPrice + wheel.salesPrice + parts.salesPrice) * 0.2;
+    // const userReducedBalance =
+    //   user.balance -
+    //   (frame.salesPrice + wheel.salesPrice + parts.salesPrice) * 0.2;
 
     const currentOrder = {
       frameId: frame.id,
@@ -73,20 +74,21 @@ function Cart() {
 
     // TODO:
     // ONLY FOR DEV SERVER
-    const userPayment = {
-      ...user,
-      balance: userReducedBalance,
-      password: user.repass,
-    };
+    //DATA FOR UPDATE USER AFTER ORDER
+    // const userPayment = {
+    // ...user,
+    // balance: userReducedBalance,
+    // password: user.repass,
+    // };
 
     // IN PROD
     // const userPayment = { ...user, balance: userReducedBalance };
     setLoading(true);
     try {
       const orderResponse = await post("/orders/", currentOrder);
-      const userAfterOrder = await put(`/users/${user.id}`, userPayment);
+      // const userAfterOrder = await put(`/users/${user.id}`, userPayment);   //TAKE MONEY FROM USER ACCOUNT
       console.log(orderResponse);
-      console.log(userAfterOrder);
+      // console.log(userAfterOrder);
     } catch (err) {
       console.error(err);
     } finally {

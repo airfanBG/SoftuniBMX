@@ -23,6 +23,9 @@ html {
   --button-color-hover: #a4c3b2;
   --button-font-color: #eaf4f4;
   --button-font-color-hover: #f6fff8;
+  --bg-color-dark: #1b1b1b;
+  --bg-color: #3f3f3f;
+  --bg-color-light: #5e5e5e;
 }
 
 body {

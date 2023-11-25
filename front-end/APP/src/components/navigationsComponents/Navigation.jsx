@@ -16,7 +16,7 @@ function Navigation() {
       if (user) {
         // setIsUser(user);
 
-        const order = getOrderData();
+        const order = getOrderData(user.id);
         if (order) setHasOrder(true);
       }
       // }

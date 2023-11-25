@@ -7,21 +7,34 @@ import { UserContext } from "../../context/GlobalUserProvider.jsx";
 import UserContactInfo from "./UserContactInfo.jsx";
 import BoardHeader from "./BoardHeader.jsx";
 import WorkerContactInfo from "./WorkerContactInfo.jsx";
+import { setUserData } from "../../util/util.js";
+import { updateUserData, userInfo } from "../../userServices/userService.js";
+
+import { User, PlusCircle, CameraPlus } from "@phosphor-icons/react";
 
 function UserInfo() {
-  const { user } = useContext(UserContext);
+  const { user, updateUser } = useContext(UserContext);
   const [add, setAdd] = useState("");
 
-  // console.log(user);
+  async function addMoneyBtnHandler() {
+    // TODO: make request to update user balance
+    //next is only for testing
 
-  // function addMoneyBtnHandler() {
-  //   // TODO: make request to update user balance
-  //   //next is only for testing
+    const currentUser = await userInfo(user.id);
 
-  //   if (add === 0) return;
-  //   userBalanceHandler("add", add);
-  //   setAdd("");
-  // }
+    if (add === 0) return;
+    updateUser({ ...user, balance: user.balance + add });
+    setUserData({ ...user, balance: user.balance + add });
+    setAdd("");
+
+    const data = {
+      ...currentUser,
+      password: currentUser.repass,
+      balance: currentUser.balance + add,
+    };
+
+    const result = await updateUserData(user.id, data);
+  }
 
   return (
     <>
@@ -35,7 +48,14 @@ function UserInfo() {
         <div className={styles.userInfoWrapper}>
           <figure className={styles.mainInfo}>
             <div className={styles["imgHolder"]}>
-              <img src="https://i.pravatar.cc/300" alt="User picture" />
+              {!user.img && <User size={196} color="#363636" weight="thin" />}
+
+              <CameraPlus
+                size={32}
+                color="#0a0a0a"
+                weight="thin"
+                className={styles.uploadPicture}
+              />
             </div>
 
             <p className={styles.userEmail}>{user.email}</p>
@@ -50,7 +70,7 @@ function UserInfo() {
                 />
                 <button
                   className={styles.addMoney}
-                  // onClick={addMoneyBtnHandler}
+                  onClick={addMoneyBtnHandler}
                 >
                   Add money
                 </button>
