@@ -1,6 +1,7 @@
 .wrapper {
   width: 1300px;
   padding: 2rem 0;
+  position: relative;
 }
 
 .dashHeading {
@@ -15,6 +16,7 @@
   min-height: 100px;
   border: 1px solid gray;
   padding: 1rem;
+  position: relative;
 }
 
 .boardHeader {

@@ -127,7 +127,7 @@ function Cart() {
             <div className={styles.userInfoWrapper}>
               <figure className={styles.mainInfo}>
                 <div className={styles.img}>
-                  <img src={frame.imageUrl} alt="" />
+                  <img src={frame.imageUrls} alt="" />
                 </div>
                 <div className={styles.header}>
                   <h2 className={styles.heading}>{frame.name}</h2>
@@ -138,7 +138,7 @@ function Cart() {
               </figure>
               <figure className={styles.mainInfo}>
                 <div className={styles.img}>
-                  <img src={wheel.imageUrl} alt="" />
+                  <img src={wheel.imageUrls} alt="" />
                 </div>
                 <div className={styles.header}>
                   <h2 className={styles.heading}>{wheel.name}</h2>
@@ -149,7 +149,7 @@ function Cart() {
               </figure>
               <figure className={styles.mainInfo}>
                 <div className={styles.img}>
-                  <img src={parts.imageUrl} alt="" />
+                  <img src={parts.imageUrls} alt="" />
                 </div>
                 <div className={styles.header}>
                   <h2 className={styles.heading}>{parts.name}</h2>

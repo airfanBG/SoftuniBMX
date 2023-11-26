@@ -11,7 +11,7 @@ import { EMAIL_REGEX, PASS_REGEX } from "../../util/util.js";
 import LoaderWheel from "../LoaderWheel.jsx";
 import InputComponent from "./InputComponent.jsx";
 import { inputSVG } from "./inputSVG.jsx";
-import PhoneComponent from "./PhoneCOmponent.jsx";
+import PhoneComponent from "./PhoneComponent.jsx";
 import InputPasswordComponent from "./InputPasswordComponent.jsx";
 
 const initialState = {

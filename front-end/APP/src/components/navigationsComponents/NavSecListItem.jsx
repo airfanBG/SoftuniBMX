@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import styles from "./navSecListItem.module.css";
+import styles from "./NavSecListItem.module.css";
 
 function NavSecListItem({ link, text }) {
   return (

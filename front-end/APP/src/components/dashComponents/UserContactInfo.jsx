@@ -14,7 +14,7 @@ function UserContactInfo() {
     function () {
       async function getClientInfo() {
         const data = await userInfo(user.id);
-        setInfo(data);
+        setInfo({ ...data, balance: Number(data.balance.toFixed(2)) });
       }
       getClientInfo();
     },
@@ -45,13 +45,13 @@ function UserContactInfo() {
               <ContactInfoElement
                 content={info.email}
                 label={"Email"}
-                width={"70%"}
+                width={"60%"}
               />
 
               <ContactInfoElement
                 content={info.phone}
                 label={"Phone"}
-                width={"30%"}
+                width={"40%"}
               />
             </div>
 
@@ -59,13 +59,13 @@ function UserContactInfo() {
               <ContactInfoElement
                 content={info.address.street}
                 label={"Street"}
-                width={"70%"}
+                width={"80%"}
               />
 
               <ContactInfoElement
                 content={info.address.strNumber}
                 label={"Number"}
-                width={"30%"}
+                width={"20%"}
               />
             </div>
 

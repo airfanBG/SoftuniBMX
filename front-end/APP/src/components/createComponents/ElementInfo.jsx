@@ -31,6 +31,11 @@ function ElementInfo({ data }) {
         />
       </div>
 
+      <p className={styles.intend}>
+        <span className={styles.label}>Intended for:</span>
+        {data.intend}
+      </p>
+
       <div className={`${styles.info} ${styles.description}`}>
         <span className={styles.label}>Description</span>
         {data.description}

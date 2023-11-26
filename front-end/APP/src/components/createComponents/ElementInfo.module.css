@@ -19,12 +19,22 @@
   height: 4rem;
 }
 
+.intend {
+  grid-column: 1/7;
+}
+
+.intend span {
+  font-size: 1.8;
+  font-weight: 400;
+}
+
 .description {
   grid-column: 1/7;
   min-height: 15rem;
 }
 
-.info {
+.info,
+.intend {
   font-size: 1.8rem;
   position: relative;
   padding: 0.8rem 1rem;
