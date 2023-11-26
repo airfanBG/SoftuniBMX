@@ -5,7 +5,7 @@
     public interface IEmailSender
     {
         Task<bool> ResetUserPasswordWhenForrgotenAsync(string clientId, string role);
-        bool IsSendedEmailForVerification(string code, string userEmail, string callbackUrl);
+        bool IsSendedEmailForVerification(string userEmail, string userName, string callbackUrl);
         Task<bool> IsUserVerifiedEmailAsync(UserConfirmEmailDto user);
         bool IsSuccessfulSendEmail(EmailSendInfoDto emailInfo);
     }

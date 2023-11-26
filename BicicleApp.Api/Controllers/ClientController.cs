@@ -43,7 +43,9 @@
                 }
 
                 //Register
-                bool isRegistered = await clientService.RegisterClientAsync(clientRegisterDto);
+                var httpScheme = Request.Scheme;
+                var httpHost = Request.Host.Value;
+                bool isRegistered = await clientService.RegisterClientAsync(clientRegisterDto, httpScheme, httpHost);
 
                 if (isRegistered)
                 {
@@ -181,6 +183,19 @@
             {
                 return StatusCode(500);
             }
+        }
+
+        [HttpGet]
+        [Route("emailConfirm")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> EmailConfirm([FromQuery] string userId, [FromQuery] string code)
+        {
+            await clientService.ConfirmEmail(userId, code);
+
+            return Ok();
         }
     }
 }

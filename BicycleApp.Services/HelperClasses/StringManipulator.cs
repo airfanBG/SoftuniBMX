@@ -19,5 +19,10 @@
 
             return fullname.ToString();
         }
+
+        public string UrlMaker(string httpScheme, string httpHost, string endPoint, string? values)
+        {
+            return $"{httpScheme}://{httpHost}/{endPoint}?{values}";
+        }
     }
 }

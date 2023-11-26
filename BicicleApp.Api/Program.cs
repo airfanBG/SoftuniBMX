@@ -3,6 +3,8 @@ namespace BicicleApp.Api
     using System.Text;
     using BicicleApp.Common.Providers.Contracts;
     using BicycleApp.Common;
+    using BicycleApp.Common.Providers;
+    using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;
@@ -45,6 +47,7 @@ namespace BicicleApp.Api
             builder.Services.AddIdentityCore<Client>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
+                options.SignIn.RequireConfirmedEmail = true;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
@@ -52,11 +55,13 @@ namespace BicicleApp.Api
 
             })
                 .AddRoles<IdentityRole<string>>()
-                .AddEntityFrameworkStores<BicycleAppDbContext>();
+                .AddEntityFrameworkStores<BicycleAppDbContext>()
+                .AddDefaultTokenProviders();
 
             builder.Services.AddIdentityCore<Employee>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
+                options.SignIn.RequireConfirmedEmail = true;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
@@ -103,6 +108,7 @@ namespace BicicleApp.Api
             builder.Services.AddScoped<IStringManipulator, StringManipulator>();
             builder.Services.AddScoped<IOrderFactory, OrderFactory>();
             builder.Services.AddScoped<IDateTimeProvider, DateTimeProvider>();
+            builder.Services.AddScoped<IOptionProvider, OptionProvider>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -121,6 +127,7 @@ namespace BicicleApp.Api
             app.MapControllers();
 
             app.Run();
+
         }
     }
 }
