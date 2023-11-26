@@ -113,6 +113,7 @@
             }
 
             var passwordMatches = await this.userManager.CheckPasswordAsync(client, clientDto.Password);
+
             if (!passwordMatches)
             {
                 return new ClientReturnDto() { Result = false };
