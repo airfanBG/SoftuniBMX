@@ -115,6 +115,8 @@ function Cart() {
     }
   }
 
+  function orderCancelHandler() {}
+
   return (
     <>
       <h2 className={styles.dashHeading}>Selected items</h2>
@@ -133,9 +135,9 @@ function Cart() {
                   <h2 className={styles.heading}>{frame.name}</h2>
                   <p className={styles.price}>{frame.salesPrice}</p>
                 </div>
-
                 <p className={styles.description}>{frame.description}</p>
               </figure>
+
               <figure className={styles.mainInfo}>
                 <div className={styles.img}>
                   <img src={wheel.imageUrls} alt="" />
@@ -144,9 +146,9 @@ function Cart() {
                   <h2 className={styles.heading}>{wheel.name}</h2>
                   <p className={styles.price}>{wheel.salesPrice}</p>
                 </div>
-
                 <p className={styles.description}>{wheel.description}</p>
               </figure>
+
               <figure className={styles.mainInfo}>
                 <div className={styles.img}>
                   <img src={parts.imageUrls} alt="" />
@@ -155,7 +157,6 @@ function Cart() {
                   <h2 className={styles.heading}>{parts.name}</h2>
                   <p className={styles.price}>{parts.salesPrice}</p>
                 </div>
-
                 <p className={styles.description}>{parts.description}</p>
               </figure>
             </div>
@@ -200,9 +201,17 @@ function Cart() {
                         parts.salesPrice
                       ).toFixed(2)}
                   </p>
-                  {/* TODO: check if user has enough money */}
-                  <button className={styles.btn} onClick={orderClickHandler}>
+                  <button
+                    className={`${styles.btn} ${styles.btnGreen}`}
+                    onClick={orderClickHandler}
+                  >
                     Finish order
+                  </button>
+                  <button
+                    className={`${styles.btn} ${styles.btnRed}`}
+                    onClick={orderCancelHandler}
+                  >
+                    Cancel order
                   </button>
                   <p className={styles.warning}>{error.message}</p>
                 </div>

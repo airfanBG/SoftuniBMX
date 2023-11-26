@@ -13,11 +13,8 @@
 .board {
   width: 100%;
   min-height: 100px;
-  border: 1px solid var(--color-border);
-  padding: 1rem;
-  position: relative;
-  background-color: #fff;
-  border-radius: 5px;
+  border: 1px solid gray;
+  padding: 1rem 1rem 0;
 }
 
 .boardHeader {
@@ -32,19 +29,20 @@
   font-size: 1.8rem;
 }
 .boardHeader h3 {
-  font-size: 1.4rem;
-  /* color: var(--color-hd); */
-  color: var(--color-main-dark);
-}
-/* .boardHeader h3 span.element {
   font-size: 2rem;
   color: var(--color-main-dark);
+  margin-bottom: 2px;
+}
+/* .boardHeader h3 span {
+  font-size: 1.8rem;
+  color: var(--color-hd);
 } */
 
 .orders {
   padding: 1rem 0;
 }
 
-.selected {
-  color: red;
-}
+/* .boardHeader .cash {
+  font-size: 2rem;
+  color: var(--color-main-dark);
+} */

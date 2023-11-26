@@ -1,18 +1,42 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./Order.module.css";
 
 import Button from "../../Button.jsx";
 import {
-  onApproveHandler,
   onDeleteHandler,
   onRejectHandler,
-} from "./managerActions/orderActions.js";
+  useApproveHandler,
+} from "../../../customHooks/orderActions.js";
+import { OrdersContext } from "../../../context/GlobalUserProvider.jsx";
 
 function Order({ order }) {
-  const { frame, wheel, accessory, ownerId, id } = order;
+  // const { frame, wheel, accessory, ownerId, id } = order;
+  const { orders, onOrdersChange } = useContext(OrdersContext);
+  const { frame, wheel, accessory, createdAt, count, ownerId, id } = order;
 
-  function buttonApproveHandler() {
-    onApproveHandler(order);
+  async function approveHandler(id) {
+    // const approvedOrder = {
+    //   frame,
+    //   wheel,
+    //   accessory,
+    //   frameStartedTime: "",
+    //   frameFinishedTime: "",
+    //   wheelStartedTime: "",
+    //   wheelFinishedTime: "",
+    //   accessoryStartedTime: "",
+    //   accessoryFinishedTime: "",
+    //   count,
+    //   createdAt,
+    //   id: id,
+    //   customerId: ownerId,
+    // };
+
+    // console.log(approvedOrder);
+    console.log(id);
+
+    // const approve = await del(environment.del_order + id);
+    // console.log(approve);
+    // onApprove((o) => Object.values((orders) => console.log(x)));
   }
 
   return (
@@ -69,7 +93,11 @@ function Order({ order }) {
           </div>
 
           <div className={styles.actions}>
-            <Button type={"approve"} onClick={buttonApproveHandler} id={id}>
+            <Button
+              type={"approve"}
+              onClick={() => approveHandler(order)}
+              id={id}
+            >
               Approve
             </Button>
             <Button type={"reject"} onClick={onRejectHandler} id={id}>

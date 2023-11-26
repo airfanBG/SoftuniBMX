@@ -402,8 +402,8 @@
     {
       "email": "manager@b-free.com",
       "password": "$2a$10$OO0fMLPgabdHN70WJLTTjOlfxlZaOTEU4EY1gePbpx4p6ZgAUbGES",
-      "firstName": "Manager",
-      "lastName": "Manager",
+      "firstName": "Master",
+      "lastName": "Yoda",
       "repass": "User123",
       "role": "manager",
       "id": 4,

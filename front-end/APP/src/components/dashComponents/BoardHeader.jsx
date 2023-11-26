@@ -6,8 +6,8 @@ import styles from "./BoardHeader.module.css";
 import Balance from "./Balance.jsx";
 import Category from "./Category.jsx";
 import { logout } from "../../util/auth.js";
-import Guest from "./Guest.jsx";
 import { UserContext } from "../../context/GlobalUserProvider.jsx";
+import Guest from "./userComponents/Guest.jsx";
 
 function BoardHeader() {
   const { user, updateUser } = useContext(UserContext);

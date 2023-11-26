@@ -1,38 +1,36 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import BoardHeader from "../BoardHeader.jsx";
 import styles from "./ManagerOrders.module.css";
 import { getList } from "../../../bikeServices/service.js";
 import Order from "./Order.jsx";
+import { OrdersContext } from "../../../context/GlobalUserProvider.jsx";
 
 function ManagerOrders() {
-  const [ordersList, setOrdersList] = useState([]);
+  const { orders } = useContext(OrdersContext);
 
-  useEffect(
-    function () {
-      const abortController = new AbortController();
+  // const [ordersList, setOrdersList] = useState([]);
 
-      async function ordersFunc() {
-        const orders = await getList("orders");
-        orders.sort((a, b) => a.createdAt - b.createdAt);
+  // useEffect(function () {
+  //   const abortController = new AbortController();
 
-        setOrdersList(orders);
-      }
-      ordersFunc();
+  //   async function ordersFunc() {
+  //     const orders = await getList("orders");
+  //     orders.sort((a, b) => a.createdAt - b.createdAt);
+  //     setOrdersList(orders);
+  //   }
+  //   ordersFunc();
 
-      return () => abortController.abort();
-    },
-    [ordersList]
-  );
+  //   return () => abortController.abort();
+  // }, []);
 
-  if (ordersList.length === 0)
-    return <h2>There is no orders in this category</h2>;
+  if (orders.length === 0) return <h2>There is no orders in this category</h2>;
   return (
     <>
       <h2 className={styles.dashHeading}>Orders in sequence</h2>
       <section className={styles.board}>
         <BoardHeader />
         <div className={styles.orders}>
-          {ordersList.map((order) => (
+          {orders.map((order) => (
             <Order key={order.id} order={order} />
           ))}
         </div>

@@ -21,6 +21,10 @@ html {
   --color-warning: #bf0000;
   --button-color: #6b9080;
   --button-color-hover: #a4c3b2;
+  --button-agree: #397800;
+  --button-agree-hover: #008451;
+  --button-disagree: #c92a2a;
+  --button-disagree-hover: #d93a35;
   --button-font-color: #eaf4f4;
   --button-font-color-hover: #f6fff8;
   --bg-color-dark: #1b1b1b;
@@ -34,6 +38,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   margin: 0;
+  background-color: #faf8ff;
 }
 :global(.container) {
   max-width: 130rem;
@@ -64,3 +69,15 @@ body {
   justify-content: center;
   z-index: 10;
 }
+
+/* :global(.board) {
+  width: 100%;
+  min-height: 100px;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  padding: 1rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: #fff;
+} */

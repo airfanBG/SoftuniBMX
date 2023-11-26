@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { getOrderData, getUserData } from "../util/util.js";
+import { getList } from "../bikeServices/service.js";
 
 export const UserContext = createContext();
 
@@ -28,4 +29,38 @@ function GlobalUser({ children }) {
   );
 }
 
-export { GlobalUser };
+export const OrdersContext = createContext();
+
+function OrdersManager({ children }) {
+  const [orders, setOrders] = useState({});
+
+  useEffect(function () {
+    const abortController = new AbortController();
+
+    async function getOrders() {
+      const orders = await getList("orders");
+      orders.sort((a, b) => a.createdAt - b.createdAt);
+      setOrders(orders);
+    }
+    getOrders();
+
+    return () => abortController.abort();
+  }, []);
+
+  function onOrdersChange(newData) {
+    setOrders(newData);
+  }
+
+  return (
+    <OrdersContext.Provider
+      value={{
+        orders,
+        onOrdersChange,
+      }}
+    >
+      {children}
+    </OrdersContext.Provider>
+  );
+}
+
+export { GlobalUser, OrdersManager };

@@ -8,11 +8,13 @@
 .board {
   width: 100%;
   min-height: 100px;
-  border: 1px solid gray;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
   padding: 1rem 1rem 2rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  background-color: #fff;
 }
 
 .userInfoWrapper {
@@ -54,8 +56,17 @@
   border-radius: 0.6rem;
 }
 
-.btn:hover {
-  color: var(--color-link-light-hover);
+.btnRed {
+  background-color: var(--button-disagree);
+}
+.btnRed:hover {
+  background-color: var(--button-disagree-hover);
+}
+.btnGreen {
+  background-color: var(--button-agree);
+}
+.btnGreen:hover {
+  background-color: var(--button-agree-hover);
 }
 
 .header {

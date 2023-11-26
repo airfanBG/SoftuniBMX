@@ -19,4 +19,5 @@ export const environment = {
   accessories: "/accessories/",
   selected_part: "/selected_part/",
   orders: "/orders/",
+  del_order: "/orders/",
 };

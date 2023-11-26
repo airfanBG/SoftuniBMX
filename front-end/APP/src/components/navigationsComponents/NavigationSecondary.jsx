@@ -13,9 +13,9 @@ function NavigationSecondary() {
     user: [
       { link: "info", textContent: "Profile" },
       { link: "cart", textContent: "Cart" },
-      { link: "user-orders-ready", textContent: "Ready" },
-      { link: "user-orders-in_process", textContent: "In production" },
-      { link: "user-past-orders", textContent: "Past orders" },
+      { link: "user-ready", textContent: "Ready" },
+      { link: "user-in-progress", textContent: "In production" },
+      { link: "user-archive", textContent: "Archive" },
     ],
     worker: [
       { link: "info", textContent: "Profile" },
@@ -25,11 +25,12 @@ function NavigationSecondary() {
     manager: [
       { link: "info", textContent: "Profile" },
       { link: "managerOrders", textContent: "Orders" },
-      { link: "managerLink4", textContent: "In production" },
-      { link: "managerLink3", textContent: "Ready" },
-      { link: "managerLink5", textContent: "Finished" },
-      { link: "managerLink6", textContent: "Employees" },
-      { link: "managerLink1", textContent: "Statistic" },
+      { link: "manager-in-progress", textContent: "In production" },
+      { link: "manager-ready", textContent: "Ready" },
+      { link: "manager-finished", textContent: "Finished" },
+      { link: "employers", textContent: "Employers" },
+      { link: "manager-storage", textContent: "Storage" },
+      { link: "statistic", textContent: "Statistic" },
     ],
   };
 
