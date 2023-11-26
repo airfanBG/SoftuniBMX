@@ -4,11 +4,12 @@
 
     public interface IOrderManagerService
     {
-        Task<bool> AcceptAndAssignOrderByManagerAsync(ManagerApprovalDto managerApprovalDto);
+        Task<bool> AcceptAndAssignOrderByManagerAsync(int orderId);
         Task<ICollection<OrderInfoDto>> AllPendingOrdersAsync();
         Task<ICollection<OrderInfoDto>> GetAllFinishedOrdersForPeriod(DateTime startDate, DateTime endDate);
         Task<bool> ArePartsAvailable(int partsInOrder, int partInStockId);
         Task ManagerOrderRejection(int orderId);
+        Task<string> SetEmployeeToPart(int partId);
 
         //Task<bool> ChangeStatus(int orderId, int statusId);
         //Task EmployeeEndProduction(string employeeId, int orderId, int partId);

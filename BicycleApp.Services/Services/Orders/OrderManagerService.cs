@@ -31,33 +31,30 @@
         /// </summary>
         /// <param name="managerApprovalDto"></param>
         /// <returns>Task<bool></returns>
-        public async Task<bool> AcceptAndAssignOrderByManagerAsync(ManagerApprovalDto managerApprovalDto)
+        public async Task<bool> AcceptAndAssignOrderByManagerAsync(int orderId)
         {
             try
             {
-                var orderPartToEmployee = await _db.OrdersPartsEmployees
-                                                   .FirstAsync(ope => ope.OrderId == managerApprovalDto.OrderId
-                                                                      && ope.PartId == managerApprovalDto.OrderParts.PartId
-                                                                      && ope.EmployeeId == null);
-
-                bool areAvailableParts = await ArePartsAvailable(managerApprovalDto.OrderParts.Quantity, managerApprovalDto.OrderParts.PartId);
-                //Checks for available quantity
-                if (!areAvailableParts)
+                var orderPartsEmployees = await _db.OrdersPartsEmployees.Where(o => o.OrderId == orderId
+                                                                                    && o.DatetimeAsigned == null)
+                                                                        .ToListAsync();
+                foreach (var orderPartEmployee in orderPartsEmployees)
                 {
-                    return false;
+                    bool areAvailableParts = await ArePartsAvailable(orderPartEmployee.PartQuantity, orderPartEmployee.PartId);
+                    //Checks for available quantity
+                    if (!areAvailableParts)
+                    {
+                        return false;
+                    }
+                    orderPartEmployee.DatetimeAsigned = _dateTimeProvider.Now;
+                    var аvailableParts = await _db.Parts.FirstAsync(p => p.Id == orderPartEmployee.PartId);
+                    аvailableParts.Quantity -= orderPartEmployee.PartQuantity;
+                    orderPartEmployee.EmployeeId = await SetEmployeeToPart(orderPartEmployee.PartId);
                 }
 
-                orderPartToEmployee.EmployeeId = managerApprovalDto.EmployeeId;
-                orderPartToEmployee.DatetimeAsigned = _dateTimeProvider.Now;
-
-                var аvailableParts = await _db.Parts.FirstAsync(p => p.Id == managerApprovalDto.OrderParts.PartId);
-                аvailableParts.Quantity -= managerApprovalDto.OrderParts.Quantity;
-
-                var order = await _db.Orders.FirstAsync(o => o.Id == managerApprovalDto.OrderId);
+                var order = await _db.Orders.FirstAsync(o => o.Id == orderId);
                 order.DateUpdated = _dateTimeProvider.Now;
 
-                _db.Orders.Update(order);
-                _db.OrdersPartsEmployees.Update(orderPartToEmployee);
                 await _db.SaveChangesAsync();
 
                 return true;
@@ -238,6 +235,35 @@
             {
             }
 
+        }
+
+        public async Task<string> SetEmployeeToPart(int partId)
+        {
+            try
+            {
+                var part = await _db.Parts.FirstAsync(p => p.Id == partId);
+                var partType = part.Category.Name;
+
+                if (partType.ToLower() == "frame")
+                {
+                    var employee = await _db.Employees.FirstAsync(e => e.Position == "FrameWorker");
+                    return employee.Id;
+                }
+                else if (partType.ToLower() == "wheel")
+                {
+                    var employee = await _db.Employees.FirstAsync(e => e.Position == "Wheelworker");
+                    return employee.Id;
+                }
+                else if (partType.ToLower() == "shift")
+                {
+                    var employee = await _db.Employees.FirstAsync(e => e.Position == "Accessoriesworker");
+                    return employee.Id;
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return string.Empty;
         }
     }
 }
