@@ -45,6 +45,12 @@
             public const int PartUnitMaxLength = 20;
         }
 
+        public static class CompatiblePart
+        {
+            public const int CompatiblePartNameMinLength = 3;
+            public const int CompatiblePartNameMaxLength = 100;
+        }
+
         public static class PartCategory
         {
             public const int PartCategoryNameMinLength = 3;

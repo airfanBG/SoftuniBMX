@@ -41,7 +41,7 @@ namespace BicicleApp.Api.Controllers
             {
 
                 return StatusCode(500);
-            }  
+            }
         }
 
         [HttpGet]
@@ -50,12 +50,12 @@ namespace BicicleApp.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetWheels()
+        public async Task<IActionResult> GetCompatibleWheels([FromQuery] int id)
         {
 
             try
             {
-                var model = await _dropdownsContentService.GetAllWheels();
+                var model = await _dropdownsContentService.GetAllCompatibleWheels(id);
 
                 if (model == null)
                 {
@@ -78,12 +78,12 @@ namespace BicicleApp.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetAcssessories()
+        public async Task<IActionResult> GetCompatableAcssessories([FromQuery] int id)
         {
 
             try
             {
-                var model = await _dropdownsContentService.GetAllAcsessories();
+                var model = await _dropdownsContentService.GetAllCompatibleAcsessories(id);
 
                 if (model == null)
                 {

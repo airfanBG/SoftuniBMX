@@ -2,6 +2,7 @@
 using BicycleApp.Services.Contracts;
 using BicycleApp.Services.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Text;
 
 namespace BicycleApp.Services.Services
@@ -46,16 +47,22 @@ namespace BicycleApp.Services.Services
         }
 
         /// <summary>
-        /// Gets all avaiable tyres in database
+        /// Gets all avaiable compatible tyres in database
         /// </summary>
         /// <returns>Dto's collection of all avaiable tyres in database</returns>
-        public async Task<ICollection<PartInfoDto>> GetAllWheels()
+        public async Task<ICollection<PartInfoDto>> GetAllCompatibleWheels(int selectedPartId)
         {
+
+            var selectedPart = await _dbContext.Parts
+                .Where(p => p.Id == selectedPartId)
+                .FirstOrDefaultAsync();
+
             try
             {
                 var result = await _dbContext.Parts
                 .AsNoTracking()
-                .Where(p => p.Category.Id == 2)
+                .Where(p => p.Category.Id == 2
+                        && p.Type == selectedPart.Type)
                 .Select(p => new PartInfoDto
                 {
                     Id = p.Id,
@@ -67,7 +74,7 @@ namespace BicycleApp.Services.Services
 
                 return result;
             }
-            catch (Exception ex )
+            catch (Exception ex)
             {
 
                 throw new ArgumentException("Database can't retrive data");
@@ -75,16 +82,22 @@ namespace BicycleApp.Services.Services
         }
 
         /// <summary>
-        /// Gets all avaiable acsessories in database
+        /// Gets all avaiable compatible acsessories in database
         /// </summary>
         /// <returns>Dto's collection of all avaiable acsessories in database</returns>
-        public async Task<ICollection<PartInfoDto>> GetAllAcsessories()
+        public async Task<ICollection<PartInfoDto>> GetAllCompatibleAcsessories(int selectedPartId)
         {
+
+            var selectedPart = await _dbContext.Parts
+                .Where(p => p.Id == selectedPartId)
+                .FirstOrDefaultAsync();
+
             try
             {
                 var result = await _dbContext.Parts
                 .AsNoTracking()
-                .Where(p => p.Category.Id == 3)
+                .Where(p => p.Category.Id == 3
+                        && p.Type == selectedPart.Type)
                 .Select(p => new PartInfoDto
                 {
                     Id = p.Id,
