@@ -50,11 +50,6 @@
         public virtual PartCategory Category { get; set; } = null!;
 
         [Required]
-        [MaxLength(PartUnitMaxLength)]
-        [Comment("Measuring unit of the part")]
-        public string Unit { get; set; } = null!;
-
-        [Required]
         [Comment("Current quantity of the part in the database")]
         public double Quantity { get; set; }
 
@@ -73,6 +68,8 @@
         public virtual ICollection<Delivary> Delivaries { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
+
+        public ICollection<CompatablePart> CompatableParts { get; set; } = new List<CompatablePart>();
 
         public virtual ICollection<OrderPartEmployee> OrdersPartsEmployees { get; set; }
 

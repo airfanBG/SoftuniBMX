@@ -389,13 +389,12 @@
                  new Part()
                  {
                     Id = 1,
-                    Name = "Frame OG",
-                    Description = "Best frame in the world!",
+                    Name = "Frame Road",
+                    Description = "Best frame in the road!",
                     OEMNumber = "oemtest",
                     Type = 1,
                     CategoryId = 1,
-                    Unit = "count",
-                    Quantity = 3,
+                    Quantity = 2,
                     SalePrice = 100.00M,
                     VATCategoryId = 1,
                     DateCreated = DateTime.Now,
@@ -406,12 +405,43 @@
                  new Part()
                  {
                     Id = 2,
-                    Name = "Wheel of the Year",
+                    Name = "Frame Montain",
+                    Description = "Best frame in the montain",
+                    OEMNumber = "oemtest2",
+                    Type = 2,
+                    CategoryId = 1,
+                    Quantity = 4,
+                    SalePrice = 90.00M,
+                    VATCategoryId = 1,
+                    DateCreated = DateTime.Now,
+                    DateUpdated = null,
+                    DateDeleted = null,
+                    IsDeleted = false
+                 },
+                 new Part()
+                 {
+                    Id = 3,
+                    Name = "Frame Road woman",
+                    Description = "Best frame in the road for womens",
+                    OEMNumber = "oemtest2",
+                    Type = 3,
+                    CategoryId = 1,
+                    Quantity = 3,
+                    SalePrice = 80.00M,
+                    VATCategoryId = 1,
+                    DateCreated = DateTime.Now,
+                    DateUpdated = null,
+                    DateDeleted = null,
+                    IsDeleted = false
+                 },
+                 new Part()
+                 {
+                    Id = 4,
+                    Name = "Wheel of the Year for road",
                     Description = "Best wheels ever!",
                     OEMNumber = "oemtest",
-                    Type = 2,
+                    Type = 1,
                     CategoryId = 2,
-                    Unit = "count",
                     Quantity = 50,
                     SalePrice = 75.00M,
                     VATCategoryId = 1,
@@ -422,13 +452,44 @@
                  },
                  new Part()
                  {
-                    Id = 3,
+                    Id = 5,
+                    Name = "Wheel of the Year for montain",
+                    Description = "Best wheels for a montain!",
+                    OEMNumber = "oemtest",
+                    Type = 2,
+                    CategoryId = 2,
+                    Quantity = 40,
+                    SalePrice = 85.00M,
+                    VATCategoryId = 1,
+                    DateCreated = DateTime.Now,
+                    DateUpdated = null,
+                    DateDeleted = null,
+                    IsDeleted = false
+                 },
+                 new Part()
+                 {
+                    Id = 6,
+                    Name = "Road wheel best seler",
+                    Description = "Best wheels for a road!",
+                    OEMNumber = "oemtest",
+                    Type = 3,
+                    CategoryId = 2,
+                    Quantity = 50,
+                    SalePrice = 65.00M,
+                    VATCategoryId = 1,
+                    DateCreated = DateTime.Now,
+                    DateUpdated = null,
+                    DateDeleted = null,
+                    IsDeleted = false
+                 },
+                 new Part()
+                 {
+                    Id = 7,
                     Name = "Shift",
                     Description = "Worst shift - have only one!",
                     OEMNumber = "oemtest",
                     CategoryId = 3,
-                    Type = 3,
-                    Unit = "count",
+                    Type = 1,
                     Quantity = 9,
                     SalePrice = 250.00M,
                     VATCategoryId = 1,
@@ -436,7 +497,167 @@
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
-                 }
+                 },
+                 new Part()
+                 {
+                    Id = 8,
+                    Name = "Montain Shifts",
+                    Description = "Best shifts for a montain!",
+                    OEMNumber = "oemtest",
+                    CategoryId = 3,
+                    Type = 2,
+                    Quantity = 19,
+                    SalePrice = 350.00M,
+                    VATCategoryId = 1,
+                    DateCreated = DateTime.Now,
+                    DateUpdated = null,
+                    DateDeleted = null,
+                    IsDeleted = false
+                 },
+                 new Part()
+                 {
+                    Id = 9,
+                    Name = "Road Shifts",
+                    Description = "Best shifts for a road!",
+                    OEMNumber = "oemtest",
+                    CategoryId = 3,
+                    Type = 3,
+                    Quantity = 29,
+                    SalePrice = 400.00M,
+                    VATCategoryId = 1,
+                    DateCreated = DateTime.Now,
+                    DateUpdated = null,
+                    DateDeleted = null,
+                    IsDeleted = false
+                 },
+                 new Part()
+                 {
+                    Id = 10,
+                    Name = "Road better Shifts",
+                    Description = "Better shifts for a road!",
+                    OEMNumber = "oemtest9",
+                    CategoryId = 3,
+                    Type = 3,
+                    Quantity = 21,
+                    SalePrice = 410.00M,
+                    VATCategoryId = 1,
+                    DateCreated = DateTime.Now,
+                    DateUpdated = null,
+                    DateDeleted = null,
+                    IsDeleted = false
+                 },
+                  new Part()
+                 {
+                    Id = 11,
+                    Name = "Road budget Shifts",
+                    Description = "Budget shifts for a road!",
+                    OEMNumber = "oemtest91",
+                    CategoryId = 3,
+                    Type = 3,
+                    Quantity = 21,
+                    SalePrice = 290.00M,
+                    VATCategoryId = 1,
+                    DateCreated = DateTime.Now,
+                    DateUpdated = null,
+                    DateDeleted = null,
+                    IsDeleted = false
+                 },
+                 new Part()
+                 {
+                    Id = 12,
+                    Name = "Shift",
+                    Description = "Cheap standard shift!",
+                    OEMNumber = "oemtest21",
+                    CategoryId = 3,
+                    Type = 1,
+                    Quantity = 9,
+                    SalePrice = 220.00M,
+                    VATCategoryId = 1,
+                    DateCreated = DateTime.Now,
+                    DateUpdated = null,
+                    DateDeleted = null,
+                    IsDeleted = false
+                 },
+                 new Part()
+                 {
+                    Id = 13,
+                    Name = "Montain Shifts",
+                    Description = "Budget shifts for a montain!",
+                    OEMNumber = "oemtest98",
+                    CategoryId = 3,
+                    Type = 2,
+                    Quantity = 19,
+                    SalePrice = 280.00M,
+                    VATCategoryId = 1,
+                    DateCreated = DateTime.Now,
+                    DateUpdated = null,
+                    DateDeleted = null,
+                    IsDeleted = false
+                 },
+                 new Part()
+                 {
+                    Id = 14,
+                    Name = "Budget wheel for road",
+                    Description = "Budget wheels ever!",
+                    OEMNumber = "oemtest34",
+                    Type = 1,
+                    CategoryId = 2,
+                    Quantity = 50,
+                    SalePrice = 65.00M,
+                    VATCategoryId = 1,
+                    DateCreated = DateTime.Now,
+                    DateUpdated = null,
+                    DateDeleted = null,
+                    IsDeleted = false
+                 },
+                 new Part()
+                 {
+                    Id = 15,
+                    Name = "Budget wheel for a montain",
+                    Description = "Budget wheel for a montain!",
+                    OEMNumber = "oemtest56",
+                    Type = 2,
+                    CategoryId = 2,
+                    Quantity = 40,
+                    SalePrice = 75.00M,
+                    VATCategoryId = 1,
+                    DateCreated = DateTime.Now,
+                    DateUpdated = null,
+                    DateDeleted = null,
+                    IsDeleted = false
+                 },
+                 new Part()
+                 {
+                    Id = 16,
+                    Name = "The cheapest road wheel",
+                    Description = "The cheapest wheel for a road!",
+                    OEMNumber = "oemtest",
+                    Type = 3,
+                    CategoryId = 2,
+                    Quantity = 50,
+                    SalePrice = 55.00M,
+                    VATCategoryId = 1,
+                    DateCreated = DateTime.Now,
+                    DateUpdated = null,
+                    DateDeleted = null,
+                    IsDeleted = false
+                 },
+                 new Part()
+                 {
+                    Id = 17,
+                    Name = "Road titanium wheel",
+                    Description = "The best  titanium wheel for a road!",
+                    OEMNumber = "oemtest567",
+                    Type = 3,
+                    CategoryId = 2,
+                    Quantity = 50,
+                    SalePrice = 95.00M,
+                    VATCategoryId = 1,
+                    DateCreated = DateTime.Now,
+                    DateUpdated = null,
+                    DateDeleted = null,
+                    IsDeleted = false
+                 },
             };
         }
 
