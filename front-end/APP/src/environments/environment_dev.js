@@ -12,6 +12,10 @@ export const environment = {
   UPDATE_EMPLOYEE: "/users/", // + id
   INFO_CLIENT: "/users/", // + id
   INFO_EMPLOYEE: "/users/", // + id
+
+  // TODO: for local list load
+  GET_ALL_EMPLOYERS: "/users?role=worker&role=manager",
+
   // TODO: change to project path
   indexPage: "/indexPage",
   frames: "/frames/",

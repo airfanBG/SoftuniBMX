@@ -16,7 +16,7 @@ import ManagerOrders from "./components/dashComponents/managerComponents/Manager
 import WorkerOrders from "./components/dashComponents/workerComponents/WorkerOrders.jsx";
 import WorkerFinished from "./components/dashComponents/workerComponents/WorkerFinished.jsx";
 import UserInfo from "./components/dashComponents/userComponents/UserInfo.jsx";
-import Employers from "./components/dashComponents/managerComponents/Employers.jsx";
+import EmployersList from "./components/dashComponents/managerComponents/EmployersList.jsx";
 
 function App() {
   return (
@@ -40,7 +40,7 @@ function App() {
               <Route path={"manager-in-progress"} />
               <Route path={"manager-ready"} />
               <Route path={"manager-finished"} />
-              <Route path={"employers"} element={<Employers />} />
+              <Route path={"employers"} element={<EmployersList />} />
               <Route path={"statistic"} />
             </Route>
 
