@@ -3,16 +3,18 @@
     using System.IdentityModel.Tokens.Jwt;
     using System.Security.Claims;
     using System.Text;
-
+    using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;
+    using BicycleApp.Services.HelperClasses.Contracts;
     using BicycleApp.Services.Models.IdentityModels;
-
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.WebUtilities;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.IdentityModel.Tokens;
+    using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
     public class ClientService : IClientService
     {
@@ -21,14 +23,20 @@
         private readonly BicycleAppDbContext dbContext;
         private readonly IConfiguration configuration;
         private readonly IModelsFactory modelFactory;
+        private readonly IEmailSender emailSender;
+        private readonly IStringManipulator stringManipulator;
+        private readonly IOptionProvider optionProvider;
 
-        public ClientService(UserManager<Client> userManager, SignInManager<Client> signInManager, BicycleAppDbContext dbContext, IConfiguration configuration, IModelsFactory modelFactory)
+        public ClientService(UserManager<Client> userManager, SignInManager<Client> signInManager, BicycleAppDbContext dbContext, IConfiguration configuration, IModelsFactory modelFactory, IEmailSender emailSender, IStringManipulator stringManipulator, IOptionProvider optionProvider)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.dbContext = dbContext;
             this.configuration = configuration;
             this.modelFactory = modelFactory;
+            this.emailSender = emailSender;
+            this.stringManipulator = stringManipulator;
+            this.optionProvider = optionProvider;
         }
 
         /// <summary>
@@ -38,7 +46,7 @@
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">If the dto is null</exception>
         /// <exception cref="ArgumentException">If the email is already registered</exception>
-        public async Task<bool> RegisterClientAsync(ClientRegisterDto clientDto)
+        public async Task<bool> RegisterClientAsync(ClientRegisterDto clientDto, string httpScheme, string httpHost)
         {
             if (clientDto == null)
             {
@@ -54,7 +62,7 @@
             Client client = this.modelFactory.CreateNewClientModel(clientDto);
             client.TownId = await this.GetTownIdAsync(clientDto.Town);
             var result = await this.userManager.CreateAsync(client, clientDto.Password);
-            await userManager.AddToRoleAsync(client, clientDto.Role);
+            //await userManager.AddToRoleAsync(client, clientDto.Role);
 
             if (result == null)
             {
@@ -63,7 +71,20 @@
 
             if (result.Succeeded)
             {
-                return true;
+                var confirmationToken = await userManager.GenerateEmailConfirmationTokenAsync(client);
+                confirmationToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(confirmationToken));
+                var endPointToComfirmEmail = optionProvider.ClientEmailConfirmEnpoint();
+                var routeValues = $"userId={client.Id}&code={confirmationToken}";
+                var callback = stringManipulator.UrlMaker(httpScheme, httpHost, endPointToComfirmEmail, routeValues);
+                var emailSenderResult = emailSender.IsSendedEmailForVerification(clientDto.Email, $"{clientDto.FirstName} {clientDto.LastName}", callback);
+                if (emailSenderResult)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
@@ -184,6 +205,29 @@
                 // Failed to change password
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Client confirm the email
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <param name="token"></param>
+        /// <returns>Task</returns>
+        /// <exception cref="Exception"></exception>
+        public async Task ConfirmEmail(string clientId, string code)
+        {
+            try
+            {
+                var user = await dbContext.Clients.FirstAsync(u => u.Id == clientId);
+                code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
+
+                await userManager.ConfirmEmailAsync(user, code);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            
         }
 
         /// <summary>

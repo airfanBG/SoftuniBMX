@@ -1,7 +1,7 @@
 ﻿namespace BicycleApp.Services.Models.IdentityModels
 {
     using Newtonsoft.Json;
-
+        
     public class ClientAddressDto
     {
         [JsonProperty("country")]
