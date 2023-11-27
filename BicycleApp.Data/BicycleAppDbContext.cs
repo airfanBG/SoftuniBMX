@@ -67,8 +67,7 @@
 
         public DbSet<BikeModelPart> BikeModelsParts { get; set; } = null!;
 
-
-
+        public DbSet<CompatablePart> CompatableParts { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
