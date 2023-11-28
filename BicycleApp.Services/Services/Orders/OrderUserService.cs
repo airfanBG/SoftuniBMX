@@ -38,7 +38,7 @@
                             {
                                 DateCreated = o.DateCreated.ToString(DefaultDateFormat),
                                 OrderId = o.Id,
-                                SerialNumber = o.SerialNumber
+                                SerialNumber = o.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault()
                             })
                             .ToListAsync();
         }
@@ -51,13 +51,10 @@
         public async Task<bool> CreateOrderByUserAsync(UserOrderDto order)
         {
             try
-            {
-                string serialNumber = SerialNumberGenerator();
-
+            { 
                 var orderToSave = _orderFactory.CreateUserOrder();
                 orderToSave.ClientId = order.ClientId;
                 orderToSave.DateCreated = _dateTimeProvider.Now;
-                orderToSave.SerialNumber = serialNumber;
                 orderToSave.StatusId = 1;
 
                 decimal totalAmount = 0M;
@@ -89,6 +86,8 @@
 
                 ICollection<OrderPartEmployee> orderPartEmployeeCollection = new List<OrderPartEmployee>();
 
+                string serialNumber = SerialNumberGenerator();
+
                 foreach (var part in order.OrderParts)
                 {
                     var ope = new OrderPartEmployee()
@@ -98,7 +97,8 @@
                         PartPrice = part.PricePerUnit,
                         PartQuantity = part.Quantity,
                         PartName = part.PartName,
-                        Description = _stringManipulator.GetTextFromProperty(order.Description)
+                        Description = _stringManipulator.GetTextFromProperty(order.Description),
+                        SerialNumber = serialNumber
                     };
 
                     orderPartEmployeeCollection.Add(ope);
@@ -132,7 +132,7 @@
                             .Select(o => new OrderProgretionDto()
                             {
                                 OrderId = o.Id,
-                                SerialNumber = o.SerialNumber,
+                                SerialNumber = o.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
                                 DateCreated = o.DateCreated.ToString(DefaultDateFormat),
                                 OrderStates = o.OrdersPartsEmployees
                                                .Select(ope => new OrderStateDto()

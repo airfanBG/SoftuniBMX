@@ -7,7 +7,6 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
 
     public class BicycleAppDbContext : IdentityDbContext<Employee, IdentityRole<string>, string>
     {
@@ -16,7 +15,7 @@
 
         }
 
-        public BicycleAppDbContext(DbContextOptions<BicycleAppDbContext> options, IConfiguration config)
+        public BicycleAppDbContext(DbContextOptions<BicycleAppDbContext> options)
             : base(options)
         {
 

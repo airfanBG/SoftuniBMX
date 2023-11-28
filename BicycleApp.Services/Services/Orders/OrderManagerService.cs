@@ -78,7 +78,7 @@
                                 .Select(ope => new OrderInfoDto
                                 {
                                     OrderId = ope.Id,
-                                    SerialNumber = ope.SerialNumber,
+                                    SerialNumber = ope.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
                                     OrderParts = ope.OrdersPartsEmployees
                                                 .Select(orderPart => new OrderPartDto
                                                 {
@@ -212,7 +212,7 @@
                             .Select(o => new OrderInfoDto()
                             {
                                 OrderId = o.Id,
-                                SerialNumber = o.SerialNumber
+                                SerialNumber = o.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault()
                             })
                             .ToListAsync();
         }
