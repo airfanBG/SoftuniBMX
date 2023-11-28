@@ -72,6 +72,7 @@
         public async Task<ICollection<OrderInfoDto>> AllPendingOrdersAsync()
         {
             var listOfPendingOrders = await _db.Orders
+                                .AsNoTracking()
                                 .Where(o => o.OrdersPartsEmployees.Any(ope => ope.EmployeeId == null)
                                                                               && (o.IsDeleted == false && o.DateDeleted.Equals(null)))
                                 .Select(ope => new OrderInfoDto
@@ -86,7 +87,8 @@
                                                     Discount = ope.Discount,
                                                     PartName = orderPart.PartName,
                                                     PricePerUnit = orderPart.PartPrice,
-                                                    Quantity = orderPart.PartQuantity
+                                                    Quantity = orderPart.PartQuantity,
+                                                    QuantityInStock = orderPart.Part.Quantity
                                                 })
                                                 .ToList()
                                 })

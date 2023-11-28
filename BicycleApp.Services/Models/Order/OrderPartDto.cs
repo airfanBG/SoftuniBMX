@@ -13,6 +13,9 @@
         [Range(1,int.MaxValue)]
         public int Quantity { get; set; }
 
+        [Range(0, int.MaxValue)]
+        public double QuantityInStock { get; set; }
+
         [Range(typeof(decimal), "0.00", "999999.99")]
         public decimal PricePerUnit { get; set; }
 

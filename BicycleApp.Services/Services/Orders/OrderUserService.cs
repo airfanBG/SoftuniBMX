@@ -30,6 +30,19 @@
             _dateTimeProvider = dateTimeProvider;
         }
 
+        public async Task<ICollection<OrderProgretionDto>> AllPendingApprovalOrder(string userId)
+        {
+            return await _db.Orders
+                            .Where(o => o.DateUpdated.Equals(null))
+                            .Select(o => new OrderProgretionDto()
+                            {
+                                DateCreated = o.DateCreated.ToString(DefaultDateFormat),
+                                OrderId = o.Id,
+                                SerialNumber = o.SerialNumber
+                            })
+                            .ToListAsync();
+        }
+
         /// <summary>
         /// Creating order in database.
         /// </summary>
@@ -134,6 +147,7 @@
                             })
                             .ToListAsync();
         }
+
 
         /// <summary>
         /// Generator of serial number.

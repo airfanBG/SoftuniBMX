@@ -6,5 +6,6 @@
     {
         Task<bool> CreateOrderByUserAsync(UserOrderDto order);
         Task<ICollection<OrderProgretionDto>> GetOrdersProgresions(string userId);
+        Task<ICollection<OrderProgretionDto>> AllPendingApprovalOrder(string userId);
     }
 }
