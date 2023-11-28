@@ -22,6 +22,11 @@
 
         }
 
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("Server=DESKTOP-TP2JLNJ\\SQLEXPRESS;Database=BicycleNewDB;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False");
+        //}
+
         //Identity Tables
         public DbSet<Client> Clients { get; set; } = null!;
 
@@ -62,8 +67,7 @@
 
         public DbSet<BikeModelPart> BikeModelsParts { get; set; } = null!;
 
-
-
+        public DbSet<CompatablePart> CompatableParts { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

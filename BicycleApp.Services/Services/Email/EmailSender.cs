@@ -1,31 +1,33 @@
 ﻿namespace BicycleApp.Services.Services.Email
 {
+    using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;
+    using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Models.Email;
 
     using MailKit.Net.Smtp;
-
-    using Microsoft.Extensions.Configuration;
-
     using MimeKit;
 
     using System;
     using System.Security.Cryptography;
+    using System.Security.Policy;
     using System.Text;
     using System.Text.Encodings.Web;
+    using static BicycleApp.Common.EntityValidationConstants;
+    using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
     public class EmailSender : IEmailSender
     {
         private readonly BicycleAppDbContext _db;
-        private readonly IConfiguration _config;
-        private readonly IFactory _factory;
-        public EmailSender(BicycleAppDbContext db, IConfiguration config, IFactory factory)
+        private readonly IUserFactory _factory;
+        private readonly IOptionProvider _optionProvider;
+        public EmailSender(BicycleAppDbContext db,IUserFactory factory, IOptionProvider optionProvider)
         {
             _db = db;
-            _config = config;
             _factory = factory;
+            _optionProvider = optionProvider;
         }
 
         /// <summary>
@@ -41,7 +43,7 @@
                 if (user != null)
                 {
                     //Get password form secrets.json
-                    var defaultPassword = _config.GetSection("ClientDefautPassword").Value;
+                    var defaultPassword = _optionProvider.ClientDefautPassword();
                     //The password can be random generated.
                     //var defaultPassword = RandomStringGenerator();
 
@@ -84,14 +86,13 @@
         /// </summary>
         /// <param name="userEmail"></param>
         /// <param name="userName"></param>
-        /// <param name="callbackUrl"></param>
+        /// <param name="confirmationToken"></param>
         /// <returns>bool</returns>
         public bool IsSendedEmailForVerification(string userEmail, string userName, string callbackUrl)
         {
             try
             {
-                string callabck = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.";
-
+                var callbackBody = $"Please confirm your account by clicking -> {callbackUrl}";
                 var email = new EmailSendInfoDto()
                 {
                     Receiver = new EmailReceiverDto()
@@ -102,7 +103,7 @@
                     Content = new EmailContentDto()
                     {
                         Subject = "Confirmation of email",
-                        Body = callabck
+                        Body = callbackBody
                     }
                 };
 
@@ -159,9 +160,8 @@
             try
             {
                 //Values are stored in secrets.json
-                var emailSection = _config.GetSection("Email");
-                var sender = emailSection.GetSection("Sender").Value;
-                var password = emailSection.GetSection("Password").Value;
+                var sender = _optionProvider.EmailAccoutUsername();
+                var password = _optionProvider.EmailAccoutPassword();
 
                 var email = new MimeMessage();
 

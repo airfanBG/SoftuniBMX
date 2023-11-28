@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BicycleApp.Services.Services
 {
-    internal class DropdownsContentService : IDropdownsContentService
+    public class DropdownsContentService : IDropdownsContentService
     {
 
         private readonly BicycleAppDbContext _dbContext;
@@ -19,21 +19,19 @@ namespace BicycleApp.Services.Services
         /// Gets all avaiable frames in database
         /// </summary>
         /// <returns>Dto's collection of all avaiable frames in database</returns>
-        public async Task<ICollection<PartDto>> GetAllFrames()
+        public async Task<ICollection<PartInfoDto>> GetAllFrames()
         {
             try
             {
                 var result = await _dbContext.Parts
-                .Where(p => p.Category.Name == "frames")
                 .AsNoTracking()
-                .Select(p => new PartDto
+                .Where(p => p.Category.Id == 1)
+                .Select(p => new PartInfoDto
                 {
                     Id = p.Id,
                     Name = p.Name,
                     Description = p.Description,
-                    ImageUrl = p.ImagesParts.First().ImageUrl,
-                    Quantity = p.Quantity,
-                    SalePrice = p.SalePrice,
+                    Type = p.Type,
                 })
                 .ToListAsync();
 
@@ -47,56 +45,47 @@ namespace BicycleApp.Services.Services
         }
 
         /// <summary>
-        /// Gets all avaiable tyres in database
+        /// Gets all avaiable compatible parts in database
         /// </summary>
-        /// <returns>Dto's collection of all avaiable tyres in database</returns>
-        public async Task<ICollection<PartDto>> GetAllTyres()
+        /// <returns>Dto's collection of all avaiable compatible parts in database</returns>
+        public async Task<ICollection<PartDto>> GetAllCompatibleParts(int selectedPartId)
         {
+
+            if (selectedPartId <= 0)
+            {
+                throw new ArgumentNullException(nameof(selectedPartId));
+            }
+
+            var selectedPart = await _dbContext.Parts
+                .Where(p => p.Id == selectedPartId)
+                .FirstOrDefaultAsync();
+
+            if (selectedPart == null)
+            {
+                throw new ArgumentNullException(nameof(selectedPart));
+            }
+
             try
             {
+
                 var result = await _dbContext.Parts
-                .Where(p => p.Category.Name == "tyres")
                 .AsNoTracking()
+                .Include(p => p.Rates)
+                .Where(p => p.Category.Id != 1
+                            && p.Type == selectedPart.Type)
                 .Select(p => new PartDto
                 {
                     Id = p.Id,
                     Name = p.Name,
                     Description = p.Description,
-                    ImageUrl = p.ImagesParts.First().ImageUrl,
-                    Quantity = p.Quantity,
+                    Intend = p.Intend,
+                    Type = p.Type,
                     SalePrice = p.SalePrice,
-                })
-                .ToListAsync();
+                    OEMNumber = p.OEMNumber,
+                    Rating = p.Rates
+                                    .Where(r=>r.PartId == p.Id)
+                                    .Select(r => r.Rating).ToList()
 
-                return result;
-            }
-            catch (Exception ex )
-            {
-
-                throw new ArgumentException(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Gets all avaiable acsessories in database
-        /// </summary>
-        /// <returns>Dto's collection of all avaiable acsessories in database</returns>
-        public async Task<ICollection<PartDto>> GetAllAcsessories()
-        {
-            try
-            {
-                var result = await _dbContext.Parts
-                .Where(p => p.Category.Name != "frames"
-                         && p.Category.Name != "tyres")
-                .AsNoTracking()
-                .Select(p => new PartDto
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Description = p.Description,
-                    ImageUrl = p.ImagesParts.First().ImageUrl,
-                    Quantity = p.Quantity,
-                    SalePrice = p.SalePrice,
                 })
                 .ToListAsync();
 
@@ -105,7 +94,7 @@ namespace BicycleApp.Services.Services
             catch (Exception ex)
             {
 
-                throw new ArgumentException(ex.Message);
+                throw new ArgumentException("Database can't retrive data");
             }
         }
         /// <summary>
@@ -123,26 +112,53 @@ namespace BicycleApp.Services.Services
             try
             {
                 var result = await _dbContext.Parts
-                .Where(p => p.Id == id)
                 .AsNoTracking()
+                .Include(p=>p.Rates)
+                .Where(p => p.Id == id)
                 .Select(p => new PartDto
                 {
                     Id = p.Id,
                     Name = p.Name,
                     Description = p.Description,
-                    ImageUrl = p.ImagesParts.First().ImageUrl,
-                    Quantity = p.Quantity,
+                    Intend = p.Intend,
+                    Type = p.Type,
                     SalePrice = p.SalePrice,
+                    OEMNumber = p.OEMNumber,
+                    Rating = p.Rates
+                                    .Where(r => r.PartId == p.Id)
+                                    .Select(r => r.Rating).ToList()
                 })
                 .FirstAsync();
+
+                var imageUrls = GetImageUrls(id);
+                result.ImageUrls = imageUrls;
 
                 return result;
             }
             catch (Exception ex)
             {
 
-                throw new ArgumentException(ex.Message);
+                throw new ArgumentException("Database can't retrive data");
             }
+        }
+
+        /// <summary>
+        /// Gets avaible images by partId in database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns> List of imageUrls from database</returns>
+
+        private List<string> GetImageUrls(int partId)
+        {
+
+            //Get all imageUrls for the part
+            List<string> imageUrls = _dbContext.ImagesParts
+                .AsNoTracking()
+                .Where(p => p.Id == partId)
+                .Select(ip => ip.ImageUrl)
+                .ToList();
+
+            return imageUrls;
         }
     }
 }

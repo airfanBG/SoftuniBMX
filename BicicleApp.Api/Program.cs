@@ -1,17 +1,24 @@
 namespace BicicleApp.Api
 {
     using System.Text;
-
+    using BicicleApp.Common.Providers.Contracts;
+    using BicycleApp.Common;
+    using BicycleApp.Common.Providers;
+    using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;
+    using BicycleApp.Services.Contracts.Factory;
+    using BicycleApp.Services.Contracts.OrderContracts;
+    using BicycleApp.Services.HelperClasses;
+    using BicycleApp.Services.HelperClasses.Contracts;
     using BicycleApp.Services.Services;
     using BicycleApp.Services.Services.Email;
     using BicycleApp.Services.Services.Factory;
     using BicycleApp.Services.Services.IdentityServices;
     using BicycleApp.Services.Services.Image;
     using BicycleApp.Services.Services.Order;
-
+    using BicycleApp.Services.Services.Orders;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
@@ -40,6 +47,7 @@ namespace BicicleApp.Api
             builder.Services.AddIdentityCore<Client>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
+                options.SignIn.RequireConfirmedEmail = true;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
@@ -47,11 +55,13 @@ namespace BicicleApp.Api
 
             })
                 .AddRoles<IdentityRole<string>>()
-                .AddEntityFrameworkStores<BicycleAppDbContext>();
+                .AddEntityFrameworkStores<BicycleAppDbContext>()
+                .AddDefaultTokenProviders();
 
             builder.Services.AddIdentityCore<Employee>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
+                options.SignIn.RequireConfirmedEmail = true;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
@@ -86,15 +96,22 @@ namespace BicicleApp.Api
             builder.Services.AddScoped<SignInManager<Employee>>();
             builder.Services.AddScoped<IHomePageService, HomePageService>();
             builder.Services.AddScoped<IClientService, ClientService>();
+            builder.Services.AddScoped<IUserImageFactory, UserImageFactory>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
-            builder.Services.AddScoped<IFactory, Factory>();
             builder.Services.AddScoped<IModelsFactory, ModelsFactory>();
-            builder.Services.AddScoped<IOrderService, OrderService>();
-            builder.Services.AddScoped<IEmployeeOrderService, EmployeeOrderService>();
+            builder.Services.AddScoped<IUserFactory, UserFactory>();
+            builder.Services.AddScoped<IOrderManagerService, OrderManagerService>();
+            builder.Services.AddScoped<IOrderUserService, OrderUserService>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddScoped<IImageStore, ImageStore>();
+            builder.Services.AddScoped<IPictureOrganizerServices, PictureOrganizerServices>();  
+            builder.Services.AddScoped<IDropdownsContentService, DropdownsContentService>();
             builder.Services.AddScoped<IPictureOrganizerServices, PictureOrganizerServices>();
-
+            builder.Services.AddScoped<IStringManipulator, StringManipulator>();
+            builder.Services.AddScoped<IOrderFactory, OrderFactory>();
+            builder.Services.AddScoped<IEmployeeOrderService, EmployeeOrderService>();
+            builder.Services.AddScoped<IDateTimeProvider, DateTimeProvider>();
+            builder.Services.AddScoped<IOptionProvider, OptionProvider>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -113,6 +130,7 @@ namespace BicicleApp.Api
             app.MapControllers();
 
             app.Run();
+
         }
     }
 }

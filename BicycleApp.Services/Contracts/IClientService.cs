@@ -4,12 +4,13 @@
 
     public interface IClientService
     {
-        Task<bool> RegisterClientAsync(ClientRegisterDto clientDto);
+        Task<bool> RegisterClientAsync(ClientRegisterDto clientDto, string httpScheme, string httpHost);
 
         Task<ClientReturnDto> LoginClientAsync(ClientLoginDto clientDto);
 
         Task<ClientInfoDto?> GetClientInfoAsync(string Id);
 
         Task<bool> ChangeClientPasswordAsync(ClientPasswordChangeDto clientPasswordChangeDto);
+        Task ConfirmEmail(string clientId, string code);
     }
 }

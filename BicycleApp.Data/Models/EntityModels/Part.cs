@@ -31,24 +31,29 @@
         [Comment("The name of the part")]
         public string Name { get; set; } = null!;
 
+        [Required]
         [MaxLength(PartDescriptionMaxLength)]
         [Comment("Full description of the part")]
-        public string? Description { get; set; }
+        public string Description { get; set; }
+
+        [Required]
+        [MaxLength(PartIntetionMaxLength)]
+        [Comment("Intention of the part")]
+        public string Intend { get; set; }
 
         [MaxLength(PartOEMMaxLength)]
         [Comment("Unique number of the part from the manifacturer")]
         public string? OEMNumber { get; set; }
 
         [Required]
+        [Comment("Type of the part")]
+        public int Type { get; set; }
+
+        [Required]
         [Comment("Id of the category of the part")]
         public int CategoryId { get; set; }
 
         public virtual PartCategory Category { get; set; } = null!;
-
-        [Required]
-        [MaxLength(PartUnitMaxLength)]
-        [Comment("Measuring unit of the part")]
-        public string Unit { get; set; } = null!;
 
         [Required]
         [Comment("Current quantity of the part in the database")]
@@ -69,6 +74,8 @@
         public virtual ICollection<Delivary> Delivaries { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
+
+        public ICollection<CompatablePart> CompatableParts { get; set; } = new List<CompatablePart>();
 
         public virtual ICollection<OrderPartEmployee> OrdersPartsEmployees { get; set; }
 
