@@ -37,6 +37,9 @@
             public const int PartNameMinLength = 3;
             public const int PartNameMaxLength = 100;
 
+            public const int PartIntetionMinLength = 3;
+            public const int PartIntetionMaxLength = 50;
+
             public const int PartDescriptionMaxLength = 1000;
 
             public const int PartOEMMaxLength = 50;

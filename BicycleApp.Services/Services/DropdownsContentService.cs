@@ -2,8 +2,6 @@
 using BicycleApp.Services.Contracts;
 using BicycleApp.Services.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Text;
 
 namespace BicycleApp.Services.Services
 {
@@ -47,63 +45,47 @@ namespace BicycleApp.Services.Services
         }
 
         /// <summary>
-        /// Gets all avaiable compatible tyres in database
+        /// Gets all avaiable compatible parts in database
         /// </summary>
-        /// <returns>Dto's collection of all avaiable tyres in database</returns>
-        public async Task<ICollection<PartInfoDto>> GetAllCompatibleWheels(int selectedPartId)
+        /// <returns>Dto's collection of all avaiable compatible parts in database</returns>
+        public async Task<ICollection<PartDto>> GetAllCompatibleParts(int selectedPartId)
         {
+
+            if (selectedPartId <= 0)
+            {
+                throw new ArgumentNullException(nameof(selectedPartId));
+            }
 
             var selectedPart = await _dbContext.Parts
                 .Where(p => p.Id == selectedPartId)
                 .FirstOrDefaultAsync();
 
+            if (selectedPart == null)
+            {
+                throw new ArgumentNullException(nameof(selectedPart));
+            }
+
             try
             {
+
                 var result = await _dbContext.Parts
                 .AsNoTracking()
-                .Where(p => p.Category.Id == 2
-                        && p.Type == selectedPart.Type)
-                .Select(p => new PartInfoDto
+                .Include(p => p.Rates)
+                .Where(p => p.Category.Id != 1
+                            && p.Type == selectedPart.Type)
+                .Select(p => new PartDto
                 {
                     Id = p.Id,
                     Name = p.Name,
                     Description = p.Description,
+                    Intend = p.Intend,
                     Type = p.Type,
-                })
-                .ToListAsync();
+                    SalePrice = p.SalePrice,
+                    OEMNumber = p.OEMNumber,
+                    Rating = p.Rates
+                                    .Where(r=>r.PartId == p.Id)
+                                    .Select(r => r.Rating).ToList()
 
-                return result;
-            }
-            catch (Exception ex)
-            {
-
-                throw new ArgumentException("Database can't retrive data");
-            }
-        }
-
-        /// <summary>
-        /// Gets all avaiable compatible acsessories in database
-        /// </summary>
-        /// <returns>Dto's collection of all avaiable acsessories in database</returns>
-        public async Task<ICollection<PartInfoDto>> GetAllCompatibleAcsessories(int selectedPartId)
-        {
-
-            var selectedPart = await _dbContext.Parts
-                .Where(p => p.Id == selectedPartId)
-                .FirstOrDefaultAsync();
-
-            try
-            {
-                var result = await _dbContext.Parts
-                .AsNoTracking()
-                .Where(p => p.Category.Id == 3
-                        && p.Type == selectedPart.Type)
-                .Select(p => new PartInfoDto
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Description = p.Description,
-                    Type = p.Type,
                 })
                 .ToListAsync();
 
@@ -130,18 +112,21 @@ namespace BicycleApp.Services.Services
             try
             {
                 var result = await _dbContext.Parts
-                .Where(p => p.Id == id)
                 .AsNoTracking()
+                .Include(p=>p.Rates)
+                .Where(p => p.Id == id)
                 .Select(p => new PartDto
                 {
                     Id = p.Id,
                     Name = p.Name,
                     Description = p.Description,
-                    //ImageUrl = p.ImagesParts.First().ImageUrl, - for single image (first in collection)
+                    Intend = p.Intend,
                     Type = p.Type,
                     SalePrice = p.SalePrice,
                     OEMNumber = p.OEMNumber,
-                    Rating = p.Rates.Average(r => r.Rating)
+                    Rating = p.Rates
+                                    .Where(r => r.PartId == p.Id)
+                                    .Select(r => r.Rating).ToList()
                 })
                 .FirstAsync();
 
@@ -165,8 +150,6 @@ namespace BicycleApp.Services.Services
 
         private List<string> GetImageUrls(int partId)
         {
-            //The commented variant is for string representation of the list
-            //var sb = new StringBuilder();
 
             //Get all imageUrls for the part
             List<string> imageUrls = _dbContext.ImagesParts
@@ -176,13 +159,6 @@ namespace BicycleApp.Services.Services
                 .ToList();
 
             return imageUrls;
-
-            //foreach (var imageUrl in imageUrls)
-            //{
-            //    sb.Append(imageUrl.ToString() + "|");
-            //}
-
-            //return sb.ToString();
         }
     }
 }

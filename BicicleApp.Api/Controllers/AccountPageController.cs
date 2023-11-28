@@ -45,45 +45,17 @@ namespace BicicleApp.Api.Controllers
         }
 
         [HttpGet]
-        [Route("wheels")]
+        [Route("compatible_parts")]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetCompatibleWheels([FromQuery] int id)
+        public async Task<IActionResult> GetCompatibleParts([FromQuery] int id)
         {
 
             try
             {
-                var model = await _dropdownsContentService.GetAllCompatibleWheels(id);
-
-                if (model == null)
-                {
-                    // The model object is null, so return a 204 NoContent
-                    return StatusCode(204);
-                }
-
-                return Ok(model);
-            }
-            catch (Exception)
-            {
-
-                return StatusCode(500);
-            }
-        }
-
-        [HttpGet]
-        [Route("acsessories")]
-        [AllowAnonymous]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetCompatableAcssessories([FromQuery] int id)
-        {
-
-            try
-            {
-                var model = await _dropdownsContentService.GetAllCompatibleAcsessories(id);
+                var model = await _dropdownsContentService.GetAllCompatibleParts(id);
 
                 if (model == null)
                 {
@@ -106,7 +78,7 @@ namespace BicicleApp.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)] 
         public async Task<IActionResult> GetPartByIdAsync([FromQuery] int id)
         {
 
