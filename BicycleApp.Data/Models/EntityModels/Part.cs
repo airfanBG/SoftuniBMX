@@ -31,9 +31,15 @@
         [Comment("The name of the part")]
         public string Name { get; set; } = null!;
 
+        [Required]
         [MaxLength(PartDescriptionMaxLength)]
         [Comment("Full description of the part")]
-        public string? Description { get; set; }
+        public string Description { get; set; }
+
+        [Required]
+        [MaxLength(PartIntetionMaxLength)]
+        [Comment("Intention of the part")]
+        public string Intend { get; set; }
 
         [MaxLength(PartOEMMaxLength)]
         [Comment("Unique number of the part from the manifacturer")]
