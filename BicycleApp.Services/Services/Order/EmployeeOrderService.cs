@@ -66,6 +66,10 @@
 
             order.EndDatetime = DateTime.Parse(partOrdersStartEndDto.DateTime);
             order.IsCompleted = true;
+            var mainOrder = await dbContext.Orders
+                .Where(o => o.Id == order.OrderId)
+                .FirstAsync();
+            mainOrder.StatusId++;
 
             await dbContext.SaveChangesAsync();
 
