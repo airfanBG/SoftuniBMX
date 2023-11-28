@@ -63,6 +63,9 @@
         [Required]
         [Comment("Sale price of the part before VAT")]
         public decimal SalePrice { get; set; } = 0.00M;
+                
+        [Comment("Discount for part")]
+        public decimal Discount { get; set; } = 0.00M;
 
         [Required]
         [Comment("Id of the current vat category of the part")]

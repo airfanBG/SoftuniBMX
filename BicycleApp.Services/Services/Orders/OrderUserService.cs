@@ -12,6 +12,8 @@
     using Microsoft.EntityFrameworkCore;
 
     using System.Text;
+    using BicycleApp.Services.Models.Order.Contracts;
+
     public class OrderUserService : IOrderUserService
     {
         private readonly BicycleAppDbContext _db;
@@ -30,25 +32,13 @@
             _dateTimeProvider = dateTimeProvider;
         }
 
-        public async Task<ICollection<OrderProgretionDto>> AllPendingApprovalOrder(string userId)
-        {
-            return await _db.Orders
-                            .Where(o => o.DateUpdated.Equals(null))
-                            .Select(o => new OrderProgretionDto()
-                            {
-                                DateCreated = o.DateCreated.ToString(DefaultDateFormat),
-                                OrderId = o.Id,
-                                SerialNumber = o.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault()
-                            })
-                            .ToListAsync();
-        }
 
         /// <summary>
         /// Creating order in database.
         /// </summary>
         /// <param name="order"></param>
         /// <returns>Task<bool></returns>
-        public async Task<bool> CreateOrderByUserAsync(UserOrderDto order)
+        public async Task<bool> CreateOrderByUserAsync(IUserOrderDto order)
         {
             try
             { 
@@ -65,9 +55,10 @@
 
                 foreach (var orderPart in order.OrderParts)
                 {
-                    decimal currentProductTotalPrice = Math.Round(orderPart.PricePerUnit * orderPart.Quantity, 2);
+                    var currentPart = await _db.Parts.FirstAsync(p => p.Id == orderPart.PartId);
+                    decimal currentProductTotalPrice = Math.Round(currentPart.SalePrice * order.OrderQuantity, 2);
                     totalAmount += currentProductTotalPrice;
-                    decimal currentProductTotalDiscount = Math.Round(orderPart.Discount * orderPart.Quantity, 2);
+                    decimal currentProductTotalDiscount = Math.Round(currentPart.Discount * order.OrderQuantity, 2);                   
                     totalDiscount += currentProductTotalDiscount;
                     if (currentProductTotalDiscount > currentProductTotalPrice)
                     {
@@ -86,7 +77,7 @@
 
                 ICollection<OrderPartEmployee> orderPartEmployeeCollection = new List<OrderPartEmployee>();
 
-                string serialNumber = SerialNumberGenerator();
+                string serialNumber = _stringManipulator.SerialNumberGenerator();
 
                 foreach (var part in order.OrderParts)
                 {
@@ -147,28 +138,18 @@
                             })
                             .ToListAsync();
         }
-
-
-        /// <summary>
-        /// Generator of serial number.
-        /// </summary>
-        /// <returns>string</returns>
-        private string SerialNumberGenerator()
+        public async Task<ICollection<OrderProgretionDto>> AllPendingApprovalOrder(string userId)
         {
-            StringBuilder serialNumber = new StringBuilder("BID");
-            int numberOfrandoms = 7;
-
-            string allowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
-            Random random = new Random();
-
-            for (int i = 0; i <= numberOfrandoms; i++)
-            {
-                int randomCharIndex = random.Next(0, allowedChars.Length + 1);
-                serialNumber.Append(allowedChars[randomCharIndex]);
-            }
-
-            return serialNumber.ToString();
-        }       
+            return await _db.Orders
+                            .Where(o => o.DateUpdated.Equals(null))
+                            .Select(o => new OrderProgretionDto()
+                            {
+                                DateCreated = o.DateCreated.ToString(DefaultDateFormat),
+                                OrderId = o.Id,
+                                SerialNumber = o.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault()
+                            })
+                            .ToListAsync();
+        }
+                
     }
 }

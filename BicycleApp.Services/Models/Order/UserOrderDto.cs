@@ -1,12 +1,20 @@
 ﻿namespace BicycleApp.Services.Models.Order
 {
-    public class UserOrderDto
-    {       
-        public string ClientId { get; set; } = null!;      
-        public int VATId { get; set; }      
-        public int StatusId { get; set; }
-        public string? Description { get; set; }
-        public ICollection<OrderPartDto> OrderParts { get; set; } = new List<OrderPartDto>();
+    using BicycleApp.Services.Models.Order.Contracts;
+    using System.Collections.Generic;
 
+    public class UserOrderDto : IUserOrderDto
+    {
+        public UserOrderDto()
+        {
+            this.OrderParts = new List<IOrderPartDto>();
+        }
+
+        public string ClientId { get; set; } = null!;
+        public string? Description { get; set; }
+        public int OrderQuantity { get; set; }
+        public ICollection<IOrderPartDto> OrderParts { get; set; }
+        public int VATId { get; set; }
+        public int StatusId { get; set; }
     }
 }

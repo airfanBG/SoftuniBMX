@@ -24,5 +24,27 @@
         {
             return $"{httpScheme}://{httpHost}/{endPoint}?{values}";
         }
+
+        /// <summary>
+        /// Generator of serial number.
+        /// </summary>
+        /// <returns>string</returns>
+        public string SerialNumberGenerator()
+        {
+            StringBuilder serialNumber = new StringBuilder("BID");
+            int numberOfrandoms = 7;
+
+            string allowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+            Random random = new Random();
+
+            for (int i = 0; i <= numberOfrandoms; i++)
+            {
+                int randomCharIndex = random.Next(0, allowedChars.Length + 1);
+                serialNumber.Append(allowedChars[randomCharIndex]);
+            }
+
+            return serialNumber.ToString();
+        }
     }
 }
