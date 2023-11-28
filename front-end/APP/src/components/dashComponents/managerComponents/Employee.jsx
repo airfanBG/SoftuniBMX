@@ -1,20 +1,35 @@
+import { useState } from "react";
 import styles from "./Employee.module.css";
 
-import { User, CameraPlus } from "@phosphor-icons/react";
+import { User } from "@phosphor-icons/react";
 
-function Employee({ emp }) {
+function Employee({ person, onNameClick }) {
   return (
     <figure className={styles.figure}>
       <div className={styles["imgHolder"]}>
-        <User size={96} color="#363636" weight="thin" />
+        <User
+          size={48}
+          color="#363636"
+          weight="thin"
+          className={styles.baseImg}
+        />
       </div>
 
       <section className={styles.workerInfo}>
-        <h2 className={styles.heading}>Worker Name</h2>
-        <p className={`${styles.info}`}>worker@email.com</p>
-        <p className={`${styles.info}`}>Phone: 0478493747</p>
-        <p className={`${styles.info}`}>Department: Frames</p>
-        <p className={`${styles.info}`}>Date of hiring: 03/09/2000</p>
+        <h2 className={styles.heading} onClick={() => onNameClick(person)}>
+          {person.firstName} {person.lastName}
+        </h2>
+        <div className={styles.infoBox}>
+          <p className={`${styles.info}`}>
+            <span>Department:</span>
+            {person.department}
+          </p>
+
+          <p className={`${styles.info}`}>
+            <span>Position:</span>
+            {person.position}
+          </p>
+        </div>
       </section>
     </figure>
   );

@@ -1,10 +1,55 @@
 .figure {
   display: flex;
   align-items: center;
-  gap: 2rem;
-  border: 1px solid gray;
+  /* gap: 2rem; */
+  padding: 0 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
 }
 
 .imgHolder {
   width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+}
+
+.workerInfo {
+  width: 80%;
+}
+
+.heading {
+  width: fit-content;
+  font-size: 2rem;
+  color: var(--color-main-dark);
+  margin-bottom: 1rem;
+  cursor: pointer;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.infoBox {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  column-gap: 0.5rem;
+}
+
+.info {
+  font-size: 1.8rem;
+  color: var(--color-main-dark);
+  position: relative;
+  padding: 0.3rem 0 0 3rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.3rem;
+}
+
+.info span {
+  position: absolute;
+  top: -1rem;
+  left: 0.5rem;
+  background-color: #fff;
+  padding-inline: 0.5rem;
+  font-size: 1.2rem;
+  color: var(--color-border-hover);
 }

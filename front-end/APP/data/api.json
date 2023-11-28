@@ -369,7 +369,8 @@
         "strNumber": "54"
       },
       "id": 1,
-      "password": "$2a$10$/lA2fzzo6dl3x/rfOxKpneEjovEHZ4JEMvRlX60jXDD6NNduMpkDi"
+      "password": "$2a$10$/lA2fzzo6dl3x/rfOxKpneEjovEHZ4JEMvRlX60jXDD6NNduMpkDi",
+      "imageUrl": ""
     },
     {
       "email": "john@abv.bg",
@@ -380,10 +381,11 @@
       "role": "worker",
       "id": 2,
       "phoneNumber": "+359567474237",
-      "position": "string",
-      "dateOfHire": "string",
-      "department": "frames",
-      "isManager": false
+      "position": "Junior mechanic",
+      "dateOfHire": "27/11/2000",
+      "department": "Frames",
+      "isManager": false,
+      "imageUrl": ""
     },
     {
       "email": "stamat@abv.bg",
@@ -392,12 +394,13 @@
       "lastName": "Spiridonov",
       "repass": "Stamat-1",
       "role": "worker",
-      "department": "wheels",
+      "department": "Wheels",
       "id": 3,
       "phoneNumber": "+359567474237",
-      "position": "string",
-      "dateOfHire": "string",
-      "isManager": false
+      "position": "Senior mechanic",
+      "dateOfHire": "02/10/1987",
+      "isManager": false,
+      "imageUrl": ""
     },
     {
       "email": "manager@b-free.com",
@@ -407,9 +410,10 @@
       "repass": "User123",
       "role": "manager",
       "id": 4,
+      "department": "Wheels",
       "phoneNumber": "+359567474237",
-      "position": "string",
-      "dateOfHire": "string",
+      "position": "Manager",
+      "dateOfHire": "29/02/2012",
       "isManager": true
     },
     {
@@ -434,7 +438,8 @@
         "street": "Ovcha mogila",
         "strNumber": "13"
       },
-      "id": 5
+      "id": 5,
+      "imageUrl": ""
     }
   ],
   "wheels": [

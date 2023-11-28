@@ -1,12 +1,19 @@
-import { useEffect, useState } from "react";
-import { useEmployers } from "../../../customHooks/useEmployers.js";
 import styles from "./EmployersList.module.css";
+
+import { useEffect, useState } from "react";
+
 import BoardHeader from "../BoardHeader.jsx";
 import Employee from "./Employee.jsx";
+import PopupInfo from "./PopupInfo.jsx";
+
+import { useEmployers } from "../../../customHooks/useEmployers.js";
+import { Link } from "react-router-dom";
 
 function Employers() {
   const [emp, setEmp] = useState([]);
   const [man, setMan] = useState([]);
+  const [person, setPerson] = useState({});
+  const [background, setBackground] = useState(false);
 
   const employersList = useEmployers();
 
@@ -17,7 +24,6 @@ function Employers() {
       let empArr = [];
       let manArr = [];
       const empData = data.map((x) => {
-        console.log(x.role);
         if (x.role === "worker") {
           empArr.push(x);
         } else {
@@ -32,20 +38,54 @@ function Employers() {
     return () => abortController.abort();
   }, []);
 
+  function handleClick(p) {
+    setPerson(p);
+    setBackground(true);
+  }
+
+  function close(e) {
+    setPerson({});
+    setBackground(false);
+  }
+
   return (
     <>
-      <h2 className={styles.dashHeading}>Employers list</h2>
+      {background && <PopupInfo person={person} onClose={close} />}
       <section className={styles.board}>
         <BoardHeader />
-        <div className={styles.spacer}></div>
-        <div className={styles.cardHolder}>
-          {emp && emp.map((x) => <Employee key={x.id} emp={x} />)}
-        </div>
-      </section>
-      <h2 className={styles.dashHeading}>Managers List</h2>
-      <section className={styles.board}>
-        <div className={styles.cardHolder}>
-          {man && man.map((x) => <Employee key={x.id} emp={x} />)}
+        {/* <div className={styles.spacer}></div> */}
+
+        <div className={styles.wrapper}>
+          <aside>
+            <Link to={"/profile/add-member"} className={styles.actionLink}>
+              Add employee
+            </Link>
+          </aside>
+          <main>
+            <h2 className={styles.dashHeading}>Employers list</h2>
+            <div className={styles.cardHolder}>
+              {emp &&
+                emp.map((employee) => (
+                  <Employee
+                    key={employee.id}
+                    person={employee}
+                    onNameClick={handleClick}
+                  />
+                ))}
+            </div>
+
+            <h2 className={styles.dashHeading}>Managers List</h2>
+            <div className={styles.cardHolder}>
+              {man &&
+                man.map((manager) => (
+                  <Employee
+                    key={manager.id}
+                    person={manager}
+                    onNameClick={handleClick}
+                  />
+                ))}
+            </div>
+          </main>
         </div>
       </section>
     </>
