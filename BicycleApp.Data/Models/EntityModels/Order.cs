@@ -6,9 +6,7 @@
     using BicycleApp.Data.Interfaces;
     using BicycleApp.Data.Models.IdentityModels;
 
-    using Microsoft.EntityFrameworkCore;
-
-    using static BicycleApp.Common.EntityValidationConstants.Order;
+    using Microsoft.EntityFrameworkCore;    
 
     [Comment("Table of all orders from clients in the database")]
     public class Order : IEntity
@@ -19,12 +17,7 @@
         }
 
         [Key]
-        public int Id { get; set; }
-
-        [Required]
-        [MaxLength(SerialNumberLength)]
-        [Comment("Unique serial number of the order")]
-        public string SerialNumber { get; set; } = null!;
+        public int Id { get; set; }               
 
         [Required]
         [Comment("Id of the client of this order")]

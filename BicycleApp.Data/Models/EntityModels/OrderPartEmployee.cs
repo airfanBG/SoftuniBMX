@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using BicycleApp.Data.Models.IdentityModels;
+    using static BicycleApp.Common.EntityValidationConstants.Order;
 
     using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,11 @@
         public int OrderId { get; set; }
 
         public virtual Order Order { get; set; } = null!;
+
+        [Required]
+        [MaxLength(SerialNumberLength)]
+        [Comment("Unique serial number of the order")]
+        public string SerialNumber { get; set; } = null!;
 
         [Required]
         [Comment("Id of the part")]

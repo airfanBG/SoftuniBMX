@@ -315,7 +315,6 @@
             Order order = new Order()
             {
                 Id = 1,
-                SerialNumber = "BID12345678",
                 ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
                 Description = "",
                 SaleAmount = 625.00M,
@@ -340,6 +339,7 @@
             OrderPartEmployee opeFrame = new OrderPartEmployee()
             {
                 OrderId = 1,
+                SerialNumber = "BID12345678",
                 PartId = 1,
                 EmployeeId = "21003785-a275-4139-ae20-af6a6cf8fea8",
                 PartName = "Frame OG",
@@ -354,6 +354,7 @@
             OrderPartEmployee opeWheel = new OrderPartEmployee()
             {
                 OrderId = 1,
+                SerialNumber = "BID12345678",
                 PartId = 2,
                 EmployeeId = "17063948-8fdc-417e-8fb7-2ae6bf572f94",
                 PartName = "Wheel of the YearG",
@@ -368,6 +369,7 @@
             OrderPartEmployee opeAccessories = new OrderPartEmployee()
             {
                 OrderId = 1,
+                SerialNumber = "BID12345678",
                 PartId = 3,
                 EmployeeId = "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91",
                 PartName = "Shift",
