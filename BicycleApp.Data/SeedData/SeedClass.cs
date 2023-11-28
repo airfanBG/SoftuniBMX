@@ -391,6 +391,7 @@
                     Id = 1,
                     Name = "Frame Road",
                     Description = "Best frame in the road!",
+                    Intend = "For road usage",
                     OEMNumber = "oemtest",
                     Type = 1,
                     CategoryId = 1,
@@ -407,6 +408,7 @@
                     Id = 2,
                     Name = "Frame Montain",
                     Description = "Best frame in the montain",
+                    Intend = "For montain usage",
                     OEMNumber = "oemtest2",
                     Type = 2,
                     CategoryId = 1,
@@ -423,6 +425,7 @@
                     Id = 3,
                     Name = "Frame Road woman",
                     Description = "Best frame in the road for womens",
+                    Intend = "For road usage in women bikes",
                     OEMNumber = "oemtest2",
                     Type = 3,
                     CategoryId = 1,
@@ -439,6 +442,7 @@
                     Id = 4,
                     Name = "Wheel of the Year for road",
                     Description = "Best wheels ever!",
+                    Intend = "Best wheels for a road usage",
                     OEMNumber = "oemtest",
                     Type = 1,
                     CategoryId = 2,
@@ -455,6 +459,7 @@
                     Id = 5,
                     Name = "Wheel of the Year for montain",
                     Description = "Best wheels for a montain!",
+                    Intend = "Best wheels for a montain usage",
                     OEMNumber = "oemtest",
                     Type = 2,
                     CategoryId = 2,
@@ -471,6 +476,7 @@
                     Id = 6,
                     Name = "Road wheel best seler",
                     Description = "Best wheels for a road!",
+                    Intend = "Best seler for a road usage",
                     OEMNumber = "oemtest",
                     Type = 3,
                     CategoryId = 2,
@@ -487,6 +493,7 @@
                     Id = 7,
                     Name = "Shift",
                     Description = "Worst shift - have only one!",
+                    Intend = "Base shift - have only one",
                     OEMNumber = "oemtest",
                     CategoryId = 3,
                     Type = 1,
@@ -503,6 +510,7 @@
                     Id = 8,
                     Name = "Montain Shifts",
                     Description = "Best shifts for a montain!",
+                    Intend = "Best shift for a montain usage",
                     OEMNumber = "oemtest",
                     CategoryId = 3,
                     Type = 2,
@@ -519,6 +527,7 @@
                     Id = 9,
                     Name = "Road Shifts",
                     Description = "Best shifts for a road!",
+                    Intend = "Best shift for a road usage",
                     OEMNumber = "oemtest",
                     CategoryId = 3,
                     Type = 3,
@@ -535,6 +544,7 @@
                     Id = 10,
                     Name = "Road better Shifts",
                     Description = "Better shifts for a road!",
+                    Intend = "Better shift for a road usage",
                     OEMNumber = "oemtest9",
                     CategoryId = 3,
                     Type = 3,
@@ -551,6 +561,7 @@
                     Id = 11,
                     Name = "Road budget Shifts",
                     Description = "Budget shifts for a road!",
+                    Intend = "Budget shift for a road usage",
                     OEMNumber = "oemtest91",
                     CategoryId = 3,
                     Type = 3,
@@ -567,6 +578,7 @@
                     Id = 12,
                     Name = "Shift",
                     Description = "Cheap standard shift!",
+                    Intend = "Cheap standard shift for a road usage",
                     OEMNumber = "oemtest21",
                     CategoryId = 3,
                     Type = 1,
@@ -583,6 +595,7 @@
                     Id = 13,
                     Name = "Montain Shifts",
                     Description = "Budget shifts for a montain!",
+                    Intend = "Budget shift for a montain usage",
                     OEMNumber = "oemtest98",
                     CategoryId = 3,
                     Type = 2,
@@ -598,7 +611,8 @@
                  {
                     Id = 14,
                     Name = "Budget wheel for road",
-                    Description = "Budget wheels ever!",
+                    Description = "Budget wheel ever!",
+                    Intend = "Budget wheel for a road usage",
                     OEMNumber = "oemtest34",
                     Type = 1,
                     CategoryId = 2,
@@ -615,6 +629,7 @@
                     Id = 15,
                     Name = "Budget wheel for a montain",
                     Description = "Budget wheel for a montain!",
+                    Intend = "Budget wheel for a montain usage",
                     OEMNumber = "oemtest56",
                     Type = 2,
                     CategoryId = 2,
@@ -631,6 +646,7 @@
                     Id = 16,
                     Name = "The cheapest road wheel",
                     Description = "The cheapest wheel for a road!",
+                    Intend = "The cheapest wheel for a road usage",
                     OEMNumber = "oemtest",
                     Type = 3,
                     CategoryId = 2,
@@ -646,7 +662,8 @@
                  {
                     Id = 17,
                     Name = "Road titanium wheel",
-                    Description = "The best  titanium wheel for a road!",
+                    Description = "The best titanium wheel for a road!",
+                    Intend = "The best titanium wheel for a road usage",
                     OEMNumber = "oemtest567",
                     Type = 3,
                     CategoryId = 2,
@@ -701,14 +718,129 @@
 
         public List<Rate> SeedRates()
         {
-            Rate rate = new Rate()
+            return new List<Rate>
             {
-                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                PartId = 1,
-                Rating = 5
+                new Rate()
+                {
+                    ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                    PartId = 1,
+                    Rating = 5
+                },
+                new Rate()
+                {
+                    ClientId = "99d3ca6f-2067-4316-a5d7-934c93789521",
+                    PartId = 1,
+                    Rating = 4
+                },
+                new Rate()
+                {
+                    ClientId = "17ce735d-6713-4d0a-8fcb-e4a71ee86f6f",
+                    PartId = 1,
+                    Rating = 3
+                },
+                new Rate()
+                {
+                    ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                    PartId = 2,
+                    Rating = 5
+                },
+                new Rate()
+                {
+                    ClientId = "99d3ca6f-2067-4316-a5d7-934c93789521",
+                    PartId = 2,
+                    Rating = 4
+                },
+                 new Rate()
+                {
+                    ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                    PartId = 3,
+                    Rating = 6
+                },
+                new Rate()
+                {
+                    ClientId = "99d3ca6f-2067-4316-a5d7-934c93789521",
+                    PartId = 3,
+                    Rating = 4
+                },
+                new Rate()
+                {
+                    ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                    PartId = 4,
+                    Rating = 4
+                },
+                new Rate()
+                {
+                    ClientId = "99d3ca6f-2067-4316-a5d7-934c93789521",
+                    PartId = 4,
+                    Rating = 3
+                },
+                new Rate()
+                {
+                    ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                    PartId = 5,
+                    Rating = 3
+                },
+                new Rate()
+                {
+                    ClientId = "99d3ca6f-2067-4316-a5d7-934c93789521",
+                    PartId = 5,
+                    Rating = 6
+                },
+                 new Rate()
+                {
+                    ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                    PartId = 6,
+                    Rating = 6
+                },
+                new Rate()
+                {
+                    ClientId = "99d3ca6f-2067-4316-a5d7-934c93789521",
+                    PartId = 6,
+                    Rating = 6
+                },
+                new Rate()
+                {
+                    ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                    PartId = 7,
+                    Rating = 6
+                },
+                new Rate()
+                {
+                    ClientId = "99d3ca6f-2067-4316-a5d7-934c93789521",
+                    PartId = 7,
+                    Rating = 5
+                },
+                new Rate()
+                {
+                    ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                    PartId = 8,
+                    Rating = 5
+                },
+                new Rate()
+                {
+                    ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                    PartId = 9,
+                    Rating = 5
+                },
+                new Rate()
+                {
+                    ClientId = "99d3ca6f-2067-4316-a5d7-934c93789521",
+                    PartId = 9,
+                    Rating = 5
+                },
+                new Rate()
+                {
+                    ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                    PartId = 10,
+                    Rating = 5
+                },
+                new Rate()
+                {
+                    ClientId = "99d3ca6f-2067-4316-a5d7-934c93789521",
+                    PartId = 10,
+                    Rating = 5
+                },
             };
-
-            return new List<Rate> { rate };
         }
 
         public List<Status> SeedStatuses()
