@@ -200,7 +200,7 @@
             builder.Entity<OrderPartEmployee>(entity =>
             {
                 entity
-                    .HasKey(ope => new { ope.OrderId, ope.PartId});
+                    .HasKey(ope => new { ope.OrderId, ope.PartId, ope.UniqueKeyForSerialNumber});
 
                 entity
                     .HasOne(ope => ope.Order)
@@ -233,6 +233,9 @@
 
                 entity
                     .Property(p => p.SalePrice).HasColumnType("decimal(18,2)");
+
+                entity
+                    .Property(p => p.Discount).HasColumnType("decimal(18,2)");
 
                 entity
                     .HasOne(p => p.VATCategory)

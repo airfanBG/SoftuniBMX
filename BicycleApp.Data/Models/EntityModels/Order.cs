@@ -24,10 +24,9 @@
         public string ClientId { get; set; } = null!;
 
         public virtual Client Client { get; set; } = null!;
-
-        [Required]
+                
         [Comment("All information of the ordered parts from the client, as a string")]
-        public string Description { get; set; } = null!;
+        public string? Description { get; set; }
 
         [Required]
         [Comment("The amount of the order before discount and tax")]

@@ -5,7 +5,8 @@
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.HelperClasses.Contracts;
     using BicycleApp.Services.Models.Order;
-
+    using BicycleApp.Services.Models.Order.OrderManager;
+    using BicycleApp.Services.Models.Order.OrderUser;
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Linq;
@@ -80,15 +81,13 @@
                                     OrderId = ope.Id,
                                     SerialNumber = ope.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
                                     OrderParts = ope.OrdersPartsEmployees
-                                                .Select(orderPart => new OrderPartDto
+                                                .Select(orderPart => new OrderPartInfoDto
                                                 {
                                                     PartId = orderPart.PartId,
-                                                    Description = _stringManipulator.GetTextFromProperty(orderPart.Description),
-                                                    Discount = ope.Discount,
+                                                    Descrioption = _stringManipulator.GetTextFromProperty(orderPart.Description),                                                  
                                                     PartName = orderPart.PartName,
-                                                    PricePerUnit = orderPart.PartPrice,
-                                                    Quantity = orderPart.PartQuantity,
-                                                    QuantityInStock = orderPart.Part.Quantity
+                                                    PartQuantity = orderPart.PartQuantity,
+                                                    PartQunatityInStock = orderPart.Part.Quantity
                                                 })
                                                 .ToList()
                                 })
@@ -236,7 +235,6 @@
             catch (Exception)
             {
             }
-
         }
 
         public async Task<string> SetEmployeeToPart(int partId)

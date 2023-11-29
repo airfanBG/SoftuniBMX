@@ -340,6 +340,7 @@
             {
                 OrderId = 1,
                 SerialNumber = "BID12345678",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
                 PartId = 1,
                 EmployeeId = "21003785-a275-4139-ae20-af6a6cf8fea8",
                 PartName = "Frame OG",
@@ -355,6 +356,7 @@
             {
                 OrderId = 1,
                 SerialNumber = "BID12345678",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
                 PartId = 2,
                 EmployeeId = "17063948-8fdc-417e-8fb7-2ae6bf572f94",
                 PartName = "Wheel of the YearG",
@@ -370,6 +372,7 @@
             {
                 OrderId = 1,
                 SerialNumber = "BID12345678",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
                 PartId = 3,
                 EmployeeId = "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91",
                 PartName = "Shift",
@@ -382,7 +385,7 @@
                 IsCompleted = false
             };
             return new List<OrderPartEmployee> {
-                opeFrame };
+                opeFrame, opeWheel, opeAccessories };
         }
 
         public List<Part> SeedParts()

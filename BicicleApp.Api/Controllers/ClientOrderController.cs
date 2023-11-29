@@ -1,7 +1,7 @@
 ﻿namespace BicicleApp.Api.Controllers
 {
     using BicycleApp.Services.Contracts.OrderContracts;
-    using BicycleApp.Services.Models.Order;
+    using BicycleApp.Services.Models.Order.OrderUser;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]
@@ -13,15 +13,27 @@
         {
             _userService = userService;
         }
-                              
 
-        [HttpPost("progress")]
-        public async Task<ICollection<OrderProgretionDto>> GetOrderProgress(string userId)
+        [HttpPost("create")]
+        public async Task<IActionResult> UserCreateOrder([FromBody]UserOrderDto userOrder)
         {
-            var collection = await _userService.GetOrdersProgresions(userId);
+            var createdOrder = await _userService.CreateOrderByUserAsync(userOrder);
 
-            return collection;
+            if (createdOrder!=null)
+            {
+                 var result = await _userService.CreateOrderPartEmployeeByUserOrder(createdOrder);
+            }
+
+            return Ok();
         }
+
+        //[HttpPost("progress")]
+        //public async Task<ICollection<OrderProgretionDto>> GetOrderProgress(string userId)
+        //{
+        //    var collection = await _userService.GetOrdersProgresions(userId);
+
+        //    return collection;
+        //}
 
     }
 }
