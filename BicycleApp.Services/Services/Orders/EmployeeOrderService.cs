@@ -100,6 +100,7 @@
             var orders = await dbContext.OrdersPartsEmployees
                 .Include(ep => ep.Part)
                 .Include(ep => ep.Order)
+                    .ThenInclude(ope => ope.OrdersPartsEmployees)
                 .Where(ep => ep.EmployeeId == employeeId && ep.EndDatetime == null && ep.IsCompleted == false)
                 .Select(p => new PartOrdersDto()
                 {
@@ -109,7 +110,7 @@
                     DatetimeAsigned = p.DatetimeAsigned.Value.ToString(DefaultDateWithTimeFormat),
                     DatetimeFinished = null,
                     Description = p.Description,
-                    OrderSerialNumber = p.Order.SerialNumber,
+                    OrderSerialNumber = p.Order.OrdersPartsEmployees.First(e => e.EmployeeId == employeeId).SerialNumber,
                     Quantity = p.PartQuantity
                 })
                 .ToListAsync();

@@ -4,6 +4,7 @@
     using BicycleApp.Data;
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.Contracts.Factory;
+    using BicycleApp.Services.HelperClasses.Contracts;
     using BicycleApp.Services.Models.Order.OrderUser;
     using BicycleApp.Services.Models.Order.OrderUser.Contracts;
 
@@ -11,10 +12,12 @@
     {
         private readonly BicycleAppDbContext _db;
         private readonly IDateTimeProvider _dateTimeProvider;
-        public OrderFactory(BicycleAppDbContext db, IDateTimeProvider dateTimeProvider)
+        private readonly IStringManipulator _stringManipulator;
+        public OrderFactory(BicycleAppDbContext db, IDateTimeProvider dateTimeProvider, IStringManipulator stringManipulator)
         {
-            _dateTimeProvider = dateTimeProvider;
             _db = db;
+            _dateTimeProvider = dateTimeProvider;
+            _stringManipulator = stringManipulator;
         }
         public async Task<int> CreateUserOrderAsync(IOrder order)
         {
@@ -53,7 +56,7 @@
                 PartQuantity = partQuantity,
                 PartId = partId,
                 PartPrice = productPrice,
-                Descrioption = description
+                Descrioption = _stringManipulator.GetTextFromProperty(description)
             };
         }
 
@@ -67,7 +70,7 @@
                 PartName = partName,
                 PartPrice = partPrice,
                 SerialNumber = serialNumber,
-                UniqueKeyForSerialNumber = serialNumber
+                UniqueKeyForSerialNumber = uniqueKeyForSerialNumber
             };
 
             return ope;
