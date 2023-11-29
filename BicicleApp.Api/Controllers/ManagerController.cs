@@ -45,6 +45,27 @@ namespace BicicleApp.Api.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("delete_order")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> DeleteOrder([FromQuery] int orderId)
+        {
+
+            try
+            {
+                await _orderManagerService.ManagerOrderRejection(orderId);
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(500);
+            }
+        }
+
 
         //HttpPost(with Json Attribute) - AcceptAndAssignOrder(ManagerApprovalDto managerApprovalDto)- Тошко ще преправи Dto-то и няма да ми трябва EmployeeId-то!
 
