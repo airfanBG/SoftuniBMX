@@ -221,7 +221,7 @@
         /// </summary>
         /// <param name="orderId"></param>
         /// <returns>Task</returns>
-        public async Task ManagerOrderRejection(int orderId)
+        public async Task ManagerOrderRejection(int orderId)//ManagerDeleteOrder ще стане, защото ще правя RejectOrderAsync който ще праща order-а в Pending orders (за изчакване на доставка на част)dd
         {
             if (orderId <= 0)
             {
