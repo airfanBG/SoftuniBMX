@@ -1,6 +1,6 @@
 ﻿namespace BicycleApp.Services.Contracts
 {
-    using BicycleApp.Services.Models.Order;
+    using BicycleApp.Services.Models.Order.OrderManager;
 
     public interface IOrderManagerService
     {

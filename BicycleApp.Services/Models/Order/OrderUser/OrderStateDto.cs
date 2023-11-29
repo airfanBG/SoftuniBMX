@@ -1,4 +1,4 @@
-﻿namespace BicycleApp.Services.Models.Order
+﻿namespace BicycleApp.Services.Models.Order.OrderUser
 {
     public class OrderStateDto
     {

@@ -60,7 +60,7 @@ namespace BicicleApp.Api
 
             builder.Services.AddIdentityCore<Employee>(options =>
             {
-                options.SignIn.RequireConfirmedAccount = false;
+                options.SignIn.RequireConfirmedAccount = true;
                 options.SignIn.RequireConfirmedEmail = true;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
