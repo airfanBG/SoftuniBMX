@@ -21,10 +21,10 @@
 
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=TODOR;Database=BicycleDB;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False");
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("Server=;Database=BicycleDB;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False");
+        //}
 
         //Identity Tables
         public DbSet<Client> Clients { get; set; } = null!;
