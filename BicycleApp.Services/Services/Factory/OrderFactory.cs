@@ -60,7 +60,7 @@
             };
         }
 
-        public OrderPartEmployee CreateOrderPartEmployeeProduct(int orderId, string uniqueKeyForSerialNumber, string serialNumber, int partId, string partName, int partQuantity, decimal partPrice, string? description)
+        public async Task<OrderPartEmployee> CreateOrderPartEmployeeProduct(int orderId, string uniqueKeyForSerialNumber, string serialNumber, int partId, string partName, int partQuantity, decimal partPrice, string? description)
         {
             var ope = new OrderPartEmployee()
             {
@@ -73,7 +73,7 @@
                 UniqueKeyForSerialNumber = uniqueKeyForSerialNumber
             };
 
-            return ope;
+            return  ope;
         }
     }
 }
