@@ -32,4 +32,8 @@
     <ProjectReference Include="..\BicycleApp.Data\BicycleApp.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Order\OrderManager\Contracts\" />
+  </ItemGroup>
+
 </Project>

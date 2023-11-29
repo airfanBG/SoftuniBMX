@@ -5,7 +5,8 @@
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.HelperClasses.Contracts;
     using BicycleApp.Services.Models.Order;
-
+    using BicycleApp.Services.Models.Order.OrderManager;
+    using BicycleApp.Services.Models.Order.OrderUser;
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Linq;
@@ -72,21 +73,21 @@
         public async Task<ICollection<OrderInfoDto>> AllPendingOrdersAsync()
         {
             var listOfPendingOrders = await _db.Orders
-                                .Where(o => o.OrdersPartsEmployees.Any(ope => ope.EmployeeId == null)//като се сетне от AcceptAndAssignOrderByManagerAsync изчезва от AllPendingOrders
+                                .AsNoTracking()
+                                .Where(o => o.OrdersPartsEmployees.Any(ope => ope.EmployeeId == null)
                                                                               && (o.IsDeleted == false && o.DateDeleted.Equals(null)))
                                 .Select(ope => new OrderInfoDto
                                 {
                                     OrderId = ope.Id,
-                                    SerialNumber = ope.SerialNumber,
+                                    SerialNumber = ope.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
                                     OrderParts = ope.OrdersPartsEmployees
-                                                .Select(orderPart => new OrderPartDto
+                                                .Select(orderPart => new OrderPartInfoDto
                                                 {
                                                     PartId = orderPart.PartId,
-                                                    Description = _stringManipulator.GetTextFromProperty(orderPart.Description),
-                                                    Discount = ope.Discount,
+                                                    Descrioption = _stringManipulator.GetTextFromProperty(orderPart.Description),                                                  
                                                     PartName = orderPart.PartName,
-                                                    PricePerUnit = orderPart.PartPrice,
-                                                    Quantity = orderPart.PartQuantity
+                                                    PartQuantity = orderPart.PartQuantity,
+                                                    PartQunatityInStock = orderPart.Part.Quantity
                                                 })
                                                 .ToList()
                                 })
@@ -210,7 +211,7 @@
                             .Select(o => new OrderInfoDto()
                             {
                                 OrderId = o.Id,
-                                SerialNumber = o.SerialNumber
+                                SerialNumber = o.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault()
                             })
                             .ToListAsync();
         }
@@ -239,7 +240,6 @@
             catch (Exception)
             {
             }
-
         }
 
         public async Task<string> SetEmployeeToPart(int partId)
