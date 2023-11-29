@@ -3,18 +3,19 @@
     using System.IdentityModel.Tokens.Jwt;
     using System.Security.Claims;
     using System.Text;
+
     using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.HelperClasses.Contracts;
     using BicycleApp.Services.Models.IdentityModels;
+
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.WebUtilities;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.IdentityModel.Tokens;
-    using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
     public class ClientService : IClientService
     {
@@ -214,7 +215,7 @@
         /// <param name="token"></param>
         /// <returns>Task</returns>
         /// <exception cref="Exception"></exception>
-        public async Task ConfirmEmail(string clientId, string code)
+        public async Task ConfirmEmailAsync(string clientId, string code)
         {
             try
             {
@@ -227,7 +228,7 @@
             {
                 throw new Exception(e.Message);
             }
-            
+
         }
 
         /// <summary>
@@ -242,7 +243,7 @@
                 new Claim(ClaimTypes.NameIdentifier, client.Id.ToString()),
                 new Claim(ClaimTypes.Email, client.Email)
             };
-            var roles =await userManager.GetRolesAsync(client);
+            var roles = await userManager.GetRolesAsync(client);
             foreach (var role in roles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
@@ -294,6 +295,107 @@
             {
                 return townEntity.Id;
             }
+        }
+
+        /// <summary>
+        /// This method returns the bank details for the client
+        /// </summary>
+        /// <param name="clientId">The id of the client</param>
+        /// <returns>Dto</returns>
+        /// <exception cref="NullReferenceException">If invalid data ocurs</exception>
+        public async Task<ClientBankDto> GetClientBankInfoAsync(string clientId)
+        {
+            if (string.IsNullOrWhiteSpace(clientId))
+            {
+                throw new ArgumentNullException(nameof(clientId));
+            }
+
+            Client? client = await dbContext.Clients
+                .FirstOrDefaultAsync(c => c.Id == clientId);
+
+            if (client == null)
+            {
+                throw new NullReferenceException(nameof(client));
+            }
+
+            return new ClientBankDto()
+            {
+                Id = client.Id,
+                Balance = client.Balance,
+                IBAN = client.IBAN
+            };
+        }
+
+
+        /// <summary>
+        /// This method updates the Iban and balance of a client
+        /// </summary>
+        /// <param name="clientBankDto">Input info</param>
+        /// <returns>Dto</returns>
+        /// <exception cref="ArgumentNullException">If input info is invalid throws</exception>
+        public async Task<bool> UpdateClientBankInfoAsync(ClientBankDto clientBankDto)
+        {
+            if (clientBankDto == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            if (string.IsNullOrWhiteSpace(clientBankDto.Id))
+            {
+                throw new ArgumentNullException();
+            }
+
+            Client? client = await dbContext.Clients
+                .FirstOrDefaultAsync(c => c.Id == clientBankDto.Id);
+
+            if (client == null)
+            {
+                return false;
+            }
+
+            client.IBAN = clientBankDto.IBAN;
+            client.Balance += clientBankDto.Balance;
+
+            await dbContext.SaveChangesAsync();
+
+            return true;
+        }
+
+        /// <summary>
+        /// This method changes the password of a client
+        /// </summary>
+        /// <param name="clientLoginDto">Client info</param>
+        /// <returns>Bool</returns>
+        /// <exception cref="ArgumentNullException">If info is invalid</exception>
+        public async Task<bool> ChangePassword(ClientLoginDto clientLoginDto)
+        {
+            if (clientLoginDto == null)
+            {
+                throw new ArgumentNullException(nameof(clientLoginDto));
+            }
+
+            Client? client = await userManager.FindByEmailAsync(clientLoginDto.Email);
+
+            if (client == null)
+            {
+                return false;
+            }
+
+            var result = await userManager.RemovePasswordAsync(client);
+
+            if (!result.Succeeded)
+            {
+                return false;
+            }
+
+            result = await userManager.AddPasswordAsync(client, clientLoginDto.Password);
+
+            if (!result.Succeeded)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

@@ -11,6 +11,12 @@
         Task<ClientInfoDto?> GetClientInfoAsync(string Id);
 
         Task<bool> ChangeClientPasswordAsync(ClientPasswordChangeDto clientPasswordChangeDto);
-        Task ConfirmEmail(string clientId, string code);
+        Task ConfirmEmailAsync(string clientId, string code);
+
+        Task<ClientBankDto> GetClientBankInfoAsync(string clientId);
+
+        Task<bool> UpdateClientBankInfoAsync(ClientBankDto clientBankDto);
+
+        Task<bool> ChangePassword(ClientLoginDto clientLoginDto);
     }
 }
