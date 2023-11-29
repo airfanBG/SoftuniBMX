@@ -13,6 +13,7 @@ function Employers() {
   const [emp, setEmp] = useState([]);
   const [man, setMan] = useState([]);
   const [person, setPerson] = useState({});
+
   const [background, setBackground] = useState(false);
 
   const employersList = useEmployers();
@@ -56,12 +57,12 @@ function Employers() {
         {/* <div className={styles.spacer}></div> */}
 
         <div className={styles.wrapper}>
-          <aside>
+          <aside className={styles.control}>
             <Link to={"/profile/add-member"} className={styles.actionLink}>
               Add employee
             </Link>
           </aside>
-          <main>
+          <main className={styles.main}>
             <h2 className={styles.dashHeading}>Employers list</h2>
             <div className={styles.cardHolder}>
               {emp &&

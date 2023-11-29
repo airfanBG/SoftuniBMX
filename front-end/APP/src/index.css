@@ -26,6 +26,10 @@ html {
   --button-agree-hover: #008451;
   --button-disagree: #c92a2a;
   --button-disagree-hover: #d93a35;
+  --button-gray: #798897;
+  --button-gray-hover: #778096;
+  --button-blue: #3a4856;
+  --button-blue-light: #8dafce;
   --button-font-color: #eaf4f4;
   --button-font-color-hover: #f6fff8;
   --bg-color-dark: #1b1b1b;

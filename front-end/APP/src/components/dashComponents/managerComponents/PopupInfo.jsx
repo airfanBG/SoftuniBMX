@@ -6,7 +6,7 @@ import { User } from "@phosphor-icons/react";
 function PopupInfo({ person, onClose }) {
   return (
     <div className={styles.modalBg} onClick={onClose}>
-      <figure className={styles.fullInfo}>
+      <figure className={styles.fullInfo} onClick={(e) => e.stopPropagation()}>
         <button className={styles.closeIcon} onClick={onClose}>
           <ion-icon name="close-outline"></ion-icon>
         </button>

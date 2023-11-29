@@ -13,7 +13,8 @@
   gap: 2rem;
   padding: 4rem 1rem 1rem;
 }
-aside {
+
+.control {
   background-color: var(--color-border);
   width: 12%;
   display: flex;
@@ -42,7 +43,7 @@ aside {
   border: 1px solid var(--color-line);
 }
 
-main {
+main.main {
   width: 88%;
 }
 

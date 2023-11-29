@@ -1,25 +1,29 @@
-import { useContext, useEffect, useState } from "react";
+// import { useContext, useEffect, useState } from "react";
 
 import styles from "./UserContactInfo.module.css";
 
-import { UserContext } from "../../../context/GlobalUserProvider.jsx";
-import { userInfo } from "../../../userServices/userService.js";
+// import { UserContext } from "../../../context/GlobalUserProvider.jsx";
+// import { userInfo } from "../../../userServices/userService.js";
 import ContactInfoElement from "../ContactInfoElement.jsx";
 
-function UserContactInfo() {
-  const { user } = useContext(UserContext);
-  const [info, setInfo] = useState("");
+function UserContactInfo({ info }) {
+  // const { user } = useContext(UserContext);
+  // const [info, setInfo] = useState("");
 
-  useEffect(
-    function () {
-      async function getClientInfo() {
-        const data = await userInfo(user.id);
-        setInfo({ ...data, balance: Number(data.balance.toFixed(2)) });
-      }
-      getClientInfo();
-    },
-    [user]
-  );
+  // useEffect(
+  //   function () {
+  //     async function getClientInfo() {
+  //       const data = await userInfo(user.id);
+  //       console.log(data);
+  //       setInfo({ ...data });
+  //       if (data.role === "user") {
+  //         setInfo({ ...data, balance: Number(data.balance.toFixed(2)) });
+  //       }
+  //     }
+  //     getClientInfo();
+  //   },
+  //   [user]
+  // );
   return (
     <>
       {info && (
@@ -55,82 +59,94 @@ function UserContactInfo() {
               />
             </div>
 
-            <div className={styles.row}>
-              <ContactInfoElement
-                content={info.address.street}
-                label={"Street"}
-                width={"80%"}
-              />
+            {info.role === "user" && (
+              <div className={styles.row}>
+                <ContactInfoElement
+                  content={info.address.street}
+                  label={"Street"}
+                  width={"80%"}
+                />
 
-              <ContactInfoElement
-                content={info.address.strNumber}
-                label={"Number"}
-                width={"20%"}
-              />
-            </div>
+                <ContactInfoElement
+                  content={info.address.strNumber}
+                  label={"Number"}
+                  width={"20%"}
+                />
+              </div>
+            )}
 
-            <div className={styles.row}>
-              <ContactInfoElement
-                content={info.address.block}
-                label={"Building"}
-                width={"60%"}
-              />
+            {info.role === "user" && (
+              <div className={styles.row}>
+                <ContactInfoElement
+                  content={info.address.block}
+                  label={"Building"}
+                  width={"60%"}
+                />
 
-              <ContactInfoElement
-                content={info.address.floor}
-                label={"Floor"}
-                width={"20%"}
-              />
-              <ContactInfoElement
-                content={info.address.apartment}
-                label={"Unit/Suite"}
-                width={"20%"}
-              />
-            </div>
+                <ContactInfoElement
+                  content={info.address.floor}
+                  label={"Floor"}
+                  width={"20%"}
+                />
+                <ContactInfoElement
+                  content={info.address.apartment}
+                  label={"Unit/Suite"}
+                  width={"20%"}
+                />
+              </div>
+            )}
 
-            <div className={styles.row}>
-              <ContactInfoElement
-                content={info.city}
-                label={"City"}
-                width={"50%"}
-              />
+            {info.role === " user" && (
+              <div className={styles.row}>
+                <ContactInfoElement
+                  content={info.city}
+                  label={"City"}
+                  width={"50%"}
+                />
 
-              <ContactInfoElement
-                content={info.address.district}
-                label={"State"}
-                width={"30%"}
-              />
-              <ContactInfoElement
-                content={info.address.postCode}
-                label={"ZIP"}
-                width={"20%"}
-              />
-            </div>
+                <ContactInfoElement
+                  content={info.address.district}
+                  label={"State"}
+                  width={"30%"}
+                />
+                <ContactInfoElement
+                  content={info.address.postCode}
+                  label={"ZIP"}
+                  width={"20%"}
+                />
+              </div>
+            )}
 
-            <div className={styles.row}>
-              <ContactInfoElement
-                content={info.address.country}
-                label={"Country"}
-              />
-            </div>
+            {info.role === "user" && (
+              <div className={styles.row}>
+                <ContactInfoElement
+                  content={info.address.country}
+                  label={"Country"}
+                />
+              </div>
+            )}
           </div>
-          <h2 className={styles.infoHeader}>
-            <span>Account information</span>
-          </h2>
-          <div className={styles.fullData}>
-            <div className={styles.row}>
-              <ContactInfoElement
-                content={info.balance}
-                label={"Account balance"}
-                width={"40%"}
-              />
-              <ContactInfoElement
-                content={info.iban}
-                label={"IBAN"}
-                width={"60%"}
-              />
+          {info.role === "user" && (
+            <h2 className={styles.infoHeader}>
+              <span>Account information</span>
+            </h2>
+          )}
+          {info.role === "user" && (
+            <div className={styles.fullData}>
+              <div className={styles.row}>
+                <ContactInfoElement
+                  content={info.balance}
+                  label={"Account balance"}
+                  width={"40%"}
+                />
+                <ContactInfoElement
+                  content={info.iban}
+                  label={"IBAN"}
+                  width={"60%"}
+                />
+              </div>
             </div>
-          </div>
+          )}
         </div>
       )}
     </>
