@@ -72,7 +72,7 @@
         public async Task<ICollection<OrderInfoDto>> AllPendingOrdersAsync()
         {
             var listOfPendingOrders = await _db.Orders
-                                .Where(o => o.OrdersPartsEmployees.Any(ope => ope.EmployeeId == null)
+                                .Where(o => o.OrdersPartsEmployees.Any(ope => ope.EmployeeId == null)//като се сетне от AcceptAndAssignOrderByManagerAsync изчезва от AllPendingOrders
                                                                               && (o.IsDeleted == false && o.DateDeleted.Equals(null)))
                                 .Select(ope => new OrderInfoDto
                                 {
@@ -202,7 +202,7 @@
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <returns>Task</returns>
-        public async Task<ICollection<OrderInfoDto>> GetAllFinishedOrdersForPeriod(DateTime startDate, DateTime endDate)
+        public async Task<ICollection<OrderInfoDto>> GetAllFinishedOrdersForPeriod(DateTime startDate, DateTime endDate)//FinishedOrdersDto with startDate and ndDate have to make!?
         {
             return await _db.Orders
                             .AsNoTracking()
@@ -222,6 +222,11 @@
         /// <returns>Task</returns>
         public async Task ManagerOrderRejection(int orderId)
         {
+            if (orderId <= 0)
+            {
+                throw new ArgumentNullException(nameof(orderId));
+            }
+
             try
             {
                 var orderToReject = await _db.Orders.FirstAsync(o => o.Id == orderId);
