@@ -109,7 +109,7 @@
                     DatetimeAsigned = p.DatetimeAsigned.Value.ToString(DefaultDateWithTimeFormat),
                     DatetimeFinished = null,
                     Description = p.Description,
-                    OrderSerialNumber = p.Order.SerialNumber,
+                    OrderSerialNumber = p.SerialNumber,
                     Quantity = p.PartQuantity
                 })
                 .ToListAsync();

@@ -2,7 +2,6 @@
 {
     using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
-    using BicycleApp.Data.Interfaces;
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Contracts.OrderContracts;
@@ -42,6 +41,7 @@
                 var newOrder = new OrderDto();
                 newOrder.ClientId = order.ClientId;
                 newOrder.StatusId = 1;
+                newOrder.OrderQuantity = order.OrderQuantity;
 
                 decimal totalAmount = 0M;
                 decimal totalDiscount = 0M;
@@ -61,14 +61,15 @@
                         return null;
                     }
                     totalVAT += Math.Round(((currentProductTotalPrice - currentProductTotalDiscount) * vatCategory.VATPercent) / (100 + vatCategory.VATPercent), 2);
-                    decimal productPrice = currentProductTotalPrice - currentProductTotalDiscount;
-                    var currentOrderPartToSave = _orderFactory.CreateOrderPartFromUserOrder(currentPart.Name, order.OrderQuantity, orderPart.PartId, productPrice, order.Description);
+                    decimal productPrice = currentPart.SalePrice - currentPart.Discount;
+                    var currentOrderPartToSave = _orderFactory.CreateOrderPartFromUserOrder(currentPart.Name, 1, orderPart.PartId, productPrice, order.Description);
                     newOrder.OrderParts.Add(currentOrderPartToSave);
                 }
 
                 newOrder.Discount = totalDiscount;
                 newOrder.FinalAmount = totalAmount - totalDiscount;
                 newOrder.VAT = totalVAT;
+                newOrder.Description = _stringManipulator.GetTextFromProperty(order.Description);
                 newOrder.SaleAmount = totalAmount - totalDiscount - totalVAT;
 
                 var newOrderId = await _orderFactory.CreateUserOrderAsync(newOrder);
@@ -124,7 +125,7 @@
             {               
                 var orderPartEmployeeCollection = new List<OrderPartEmployee>();
                 
-                int quntityOfPart = newOrder.OrderParts.Select(op => op.PartQuantity).First();
+                int quntityOfPart = newOrder.OrderQuantity;
 
                 for (int i = 0; i < quntityOfPart; i++)
                 {
@@ -133,7 +134,7 @@
 
                     foreach (var orderPart in newOrder.OrderParts)
                     {
-                        var ope = _orderFactory.CreateOrderPartEmployeeProduct(newOrder.OrderId, guidKey, serialNumber, orderPart.PartId, orderPart.PartName, orderPart.PartQuantity, orderPart.PartPrice, orderPart.Descrioption);
+                        var ope = await _orderFactory.CreateOrderPartEmployeeProduct(newOrder.OrderId, guidKey, serialNumber, orderPart.PartId, orderPart.PartName, orderPart.PartQuantity, orderPart.PartPrice, orderPart.Descrioption);
                         
                         orderPartEmployeeCollection.Add(ope);
                     }
@@ -161,7 +162,5 @@
                             })
                             .ToListAsync();
         }
-
-       
     }
 }
