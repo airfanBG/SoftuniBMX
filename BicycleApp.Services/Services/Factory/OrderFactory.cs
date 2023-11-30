@@ -75,5 +75,29 @@
 
             return  ope;
         }
+
+        public ISuccessOrderInfo CreateSuccessOrderItems(IOrderPartsEmplyee successOrder)
+        {
+            return new SuccessOrderInfo()
+            {
+                OrderId = successOrder.OrderId,
+                ClientId = successOrder.ClientId,
+                FinalAmount = successOrder.FinalAmount,
+                PaidAmount = successOrder.PaidAmount,
+                SaleAmount = successOrder.SaleAmount,
+                UnpaidAmount = successOrder.UnpaidAmount,
+                VAT = successOrder.VAT,
+                Description = _stringManipulator.GetTextFromProperty(successOrder.Description),
+                Discount = successOrder.Discount,
+                OrderParts = successOrder.OrderParts.Select(op => new OrderPartDto()
+                {
+                    Descrioption = op.Descrioption,
+                    PartId = op.PartId,
+                    PartName = op.PartName,
+                    PartPrice = op.PartPrice * successOrder.OrderQuantity,
+                    PartQuantity = successOrder.OrderQuantity
+                }).ToList()
+            };
+        }
     }
 }

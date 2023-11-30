@@ -8,6 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Order\OrderManager\Contracts\**" />
+    <EmbeddedResource Remove="Models\Order\OrderManager\Contracts\**" />
+    <None Remove="Models\Order\OrderManager\Contracts\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="appsettings.json" />
   </ItemGroup>
 
@@ -30,10 +36,6 @@
   <ItemGroup>
     <ProjectReference Include="..\BicycleApp.Common\BicycleApp.Common.csproj" />
     <ProjectReference Include="..\BicycleApp.Data\BicycleApp.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\Order\OrderManager\Contracts\" />
   </ItemGroup>
 
 </Project>
