@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { login } from "../../util/auth.js";
-import { clearUserData, setUserData } from "../../util/util.js";
+import { clearOrderData, clearUserData, setUserData } from "../../util/util.js";
 import LoaderWheel from "../LoaderWheel.jsx";
 import { UserContext } from "../../context/GlobalUserProvider.jsx";
 
@@ -24,7 +24,7 @@ function Login() {
   const [values, setValues] = useState(initialState);
   const [isAllowed, setIsAllowed] = useState(false);
 
-  const { updateUser } = useContext(UserContext);
+  const { updateUser, setHasOrder } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -98,6 +98,11 @@ function Login() {
       }
       if (result.user.department) {
         currentUser.department = result.user.department;
+      }
+
+      if (currentUser.role !== "user") {
+        setHasOrder(false);
+        clearOrderData();
       }
 
       updateUser(currentUser);

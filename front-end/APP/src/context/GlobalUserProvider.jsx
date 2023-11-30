@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { getOrderData, getUserData } from "../util/util.js";
+import { clearOrderData, getOrderData, getUserData } from "../util/util.js";
 import { getList } from "../bikeServices/service.js";
 
 export const UserContext = createContext();
@@ -15,7 +15,12 @@ function GlobalUser({ children }) {
     }
 
     const order = getOrderData();
-    if (order) setHasOrder(true);
+    if (order && user.role === "user") {
+      setHasOrder(true);
+    } else {
+      clearOrderData();
+      setHasOrder(false);
+    }
   }, []);
 
   function updateUser(userData) {
