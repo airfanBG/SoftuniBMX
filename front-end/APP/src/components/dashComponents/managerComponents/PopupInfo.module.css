@@ -38,6 +38,7 @@ button.closeIcon {
 }
 
 .baseImg {
+  max-width: 35rem;
   background-color: #fff;
   display: flex;
   flex-direction: column;

@@ -1,15 +1,17 @@
+import { useContext } from "react";
 import styles from "./Category.module.css";
+import { UserContext } from "../../context/GlobalUserProvider.jsx";
 
-function Category({ user }) {
+function Category() {
+  const { user } = useContext(UserContext);
   return (
     <>
       <span>Category: </span>
       <h3>
-        {/* TODO: change with actual - probably user.category === 'frames' */}
         <span
           className={styles.element}
           style={
-            user.department === "frames" ? { color: "var(--color-line)" } : null
+            user.department === "Frames" ? { color: "var(--color-line)" } : null
           }
         >
           Frames
@@ -18,7 +20,7 @@ function Category({ user }) {
         <span
           className={styles.element}
           style={
-            user.department === "wheels" ? { color: "var(--color-line)" } : null
+            user.department === "Wheels" ? { color: "var(--color-line)" } : null
           }
         >
           Tyres

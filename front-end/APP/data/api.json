@@ -349,43 +349,43 @@
   "selected_part": [],
   "users": [
     {
+      "password": "$2a$10$PnIpdLtBuDwaiJBcR6NVIOBf3Y1nf3He6gUUdQ7XeRdo0rYO0bevm",
+      "repass": "Petar-1",
+      "role": "user",
       "email": "petar@abv.bg",
       "firstName": "Petar",
       "lastName": "Petrov",
-      "repass": "Petar-1",
       "iban": "QWESADAXC456FDGH",
-      "balance": 13440.618,
+      "balance": 10000,
       "phone": "+3591234567890",
-      "city": "Veliko Tarnowo",
-      "role": "user",
+      "city": "Veliko Tarnovo",
+      "imageUrl": "",
       "address": {
-        "country": "Bulgaria",
-        "postCode": "1000",
-        "district": "Veliko Tarnowo",
-        "block": "10B",
-        "floor": 6,
+        "country": "Greece",
+        "district": "Veliko Tarnovo",
+        "postCode": "222",
+        "block": "4c",
         "apartment": "21",
-        "street": "Street",
-        "strNumber": "54"
+        "street": "New Street",
+        "strNumber": "2",
+        "floor": "21"
       },
-      "id": 1,
-      "password": "$2a$10$/lA2fzzo6dl3x/rfOxKpneEjovEHZ4JEMvRlX60jXDD6NNduMpkDi",
-      "imageUrl": ""
+      "id": 1
     },
     {
-      "email": "john@abv.bg",
-      "password": "$2a$10$QbI6pq/5jhgjy.v8MTOtOusSMFNQAZo/vj2B990HSrnTwbjdNSFCu",
-      "firstName": "John",
-      "lastName": "Smith",
-      "repass": "John-1",
-      "role": "worker",
-      "id": 2,
+      "department": "Wheels",
       "phoneNumber": "+359567474237",
       "position": "Junior mechanic",
-      "dateOfHire": "27/11/2000",
-      "department": "Frames",
+      "dateOfHire": "24/05/1987",
       "isManager": false,
-      "imageUrl": ""
+      "password": "$2a$10$fbE1mEpjtiS11c2hth/fL./tqLLx9AppbhaeZYdNSPtMBWTGIg4ra",
+      "repass": "John-1",
+      "role": "worker",
+      "email": "john@abv.bg",
+      "firstName": "John",
+      "lastName": "Smith",
+      "imageUrl": "",
+      "id": 2
     },
     {
       "email": "stamat@abv.bg",
@@ -403,18 +403,19 @@
       "imageUrl": ""
     },
     {
-      "email": "manager@b-free.com",
-      "password": "$2a$10$OO0fMLPgabdHN70WJLTTjOlfxlZaOTEU4EY1gePbpx4p6ZgAUbGES",
-      "firstName": "Master",
-      "lastName": "Yoda",
+      "imageUrl": "",
+      "password": "$2a$10$0ukyVgaoPQxJdANgXMmj.eXeKgoEx8qzGB0TnkwIP1Pf558J4KVEi",
       "repass": "User123",
       "role": "manager",
-      "id": 4,
+      "email": "manager@b-free.com",
+      "firstName": "Master",
+      "lastName": "Yoda",
       "department": "Wheels",
       "phoneNumber": "+359567474237",
       "position": "Manager",
       "dateOfHire": "29/02/2012",
-      "isManager": true
+      "isManager": true,
+      "id": 4
     },
     {
       "email": "van@deribohten.com",

@@ -72,7 +72,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 4rem 2rem 12rem;
+  padding: 4rem 2rem 4.5rem 2rem;
   border: 1px solid var(--color-border-hover);
   border-radius: 0.3rem;
 }
@@ -113,42 +113,59 @@
 
 .userInfoControl {
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
-  gap: 2rem;
+  height: 8rem;
+  align-items: flex-end;
+  padding-left: 2rem;
+  /* margin-bottom: 6rem; */
 }
 
 .infoWrapper {
-  width: 15rem;
+  /* width: 15rem; */
   display: flex;
   flex-direction: column;
+  gap: 0.8rem;
+  /* margin-left: auto; */
 }
 .addMoney,
-.editBtn {
-  width: 100%;
+.editBtn,
+.backBtn {
   text-align: center;
   font-size: 1.8rem;
+  font-weight: 300;
   padding: 0.8rem 0;
   color: var(--color-link-light);
   border-radius: 0.3rem;
   background-color: var(--button-blue);
+  text-transform: uppercase;
 }
 
-.addMoney {
+.addMoney,
+.editBtn {
+  width: 200px;
 }
 
+.backBtn {
+  width: 200px;
+  /* margin: auto auto 0 1.5rem; */
+}
+/* 
 .userInfoControl input.addMoneyInput {
   text-align: right;
-  margin-bottom: 1rem;
-  width: 90%;
+  width: 187px;
   height: 3.8rem;
   padding: 0 0.5rem;
   font-size: 1.8rem;
   color: var(--color-main-dark);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-border-hover);
   border-radius: 0.3rem;
 }
 
-.editBtn {
-  margin-top: 5rem;
+.userInfoControl input.addMoneyInput::-webkit-outer-spin-button,
+.userInfoControl input.addMoneyInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
+
+.userInfoControl input.addMoneyInput[type="number"] {
+  -moz-appearance: textfield;
+} */

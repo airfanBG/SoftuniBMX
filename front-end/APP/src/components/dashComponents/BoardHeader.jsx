@@ -22,7 +22,7 @@ function BoardHeader() {
     <header className={styles.boardHeader}>
       {user === "free" && <Guest />}
       {user.role === "user" && <Balance user={user} />}
-      {user.role === "worker" && <Category user={user} />}
+      {user.role === "worker" && <Category />}
       <button className={styles.logout} onClick={onLogout}>
         Logout
       </button>
