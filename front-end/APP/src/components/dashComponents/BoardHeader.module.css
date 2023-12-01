@@ -14,10 +14,6 @@
   color: var(--color-main-dark);
   margin-bottom: 2px;
 }
-/* .boardHeader h3 span {
-      font-size: 1.8rem;
-      color: var(--color-hd);
-    } */
 
 .logout {
   font-size: 2rem;

@@ -17,6 +17,7 @@ export const environment = {
   GET_ALL_EMPLOYERS: "/users?role=worker&role=manager",
 
   // TODO: change to project path
+  GET_ALL_IN_PROGRESS: "/inProgress/",
   indexPage: "/indexPage",
   frames: "/frames/",
   wheels: "/wheels/",

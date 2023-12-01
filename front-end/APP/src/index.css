@@ -75,14 +75,31 @@ body {
   z-index: 10;
 }
 
-/* :global(.board) {
+/* :global(.wrapper) {
+  width: 1300px;
+  padding: 2rem 0;
+}
+
+:global(.dashHeading) {
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  color: var(--color-secondary-hd);
+  margin: 1rem 0;
+}
+
+:global(.board) {
   width: 100%;
   min-height: 100px;
   border: 1px solid var(--color-border);
+  padding: 1rem;
+  position: relative;
+  background-color: #fff;
   border-radius: 5px;
-  padding: 1rem 1rem 2rem;
+}
+
+:global(.orders) {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  background-color: #fff;
+  align-items: center;
+  padding: 1rem 0;
 } */
