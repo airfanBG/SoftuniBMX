@@ -240,11 +240,13 @@
             }
         }
 
-        public async Task<string> SetEmployeeToPart(int partId)
+        private async Task<string> SetEmployeeToPart(int partId)
         {
             try
             {
-                var part = await _db.Parts.FirstAsync(p => p.Id == partId);
+                var part = await _db.Parts
+                                    .Include(p => p.Category)
+                                    .FirstAsync(p => p.Id == partId);
                 var partType = part.Category.Name;
 
                 if (partType.ToLower() == "frame")
