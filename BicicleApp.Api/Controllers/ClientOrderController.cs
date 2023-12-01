@@ -2,6 +2,7 @@
 {
     using BicycleApp.Services.Contracts.OrderContracts;
     using BicycleApp.Services.Models.Order.OrderUser;
+    using Newtonsoft.Json;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]
@@ -38,9 +39,9 @@
         }
 
         [HttpPost("progress")]
-        public async Task<ActionResult<ICollection<OrderProgretionDto>>> GetOrderProgress(string userId)
+        public async Task<ActionResult<ICollection<OrderProgretionDto>>> GetOrderProgress([FromQuery]string id)
         {           
-            var userOrdersProgression = await _userService.GetOrdersProgresions(userId);
+            var userOrdersProgression = await _userService.GetOrdersProgresions(id);
 
             if (userOrdersProgression != null)
             {

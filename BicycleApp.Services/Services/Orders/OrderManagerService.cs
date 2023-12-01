@@ -4,9 +4,7 @@
     using BicycleApp.Data;
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.HelperClasses.Contracts;
-    using BicycleApp.Services.Models.Order;
     using BicycleApp.Services.Models.Order.OrderManager;
-    using BicycleApp.Services.Models.Order.OrderUser;
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Linq;
@@ -78,7 +76,7 @@
                                                                               && (o.IsDeleted == false && o.DateDeleted.Equals(null)))
                                 .Select(ope => new OrderInfoDto
                                 {
-                                    OrderId = ope.Id,
+                                    Id = ope.Id,
                                     SerialNumber = ope.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
                                     OrderParts = ope.OrdersPartsEmployees
                                                 .Select(orderPart => new OrderPartInfoDto
@@ -210,7 +208,7 @@
                             .Where(o => o.DateCreated >= startDate && o.DateFinish <= endDate)
                             .Select(o => new OrderInfoDto()
                             {
-                                OrderId = o.Id,
+                                Id = o.Id,
                                 SerialNumber = o.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault()
                             })
                             .ToListAsync();

@@ -12,12 +12,10 @@
     {
         private readonly BicycleAppDbContext _db;
         private readonly IDateTimeProvider _dateTimeProvider;
-        private readonly IStringManipulator _stringManipulator;
-        public OrderFactory(BicycleAppDbContext db, IDateTimeProvider dateTimeProvider, IStringManipulator stringManipulator)
+        public OrderFactory(BicycleAppDbContext db, IDateTimeProvider dateTimeProvider)
         {
             _db = db;
             _dateTimeProvider = dateTimeProvider;
-            _stringManipulator = stringManipulator;
         }
         public async Task<int> CreateUserOrderAsync(IOrder order)
         {
@@ -48,19 +46,18 @@
             }
             return 0;
         }
-        public IOrderPartDto CreateOrderPartFromUserOrder(string partName, int partQuantity, int partId, decimal productPrice, string? description)
+        public IOrderPartDto CreateOrderPartFromUserOrder(string partName, int partQuantity, int partId, decimal productPrice)
         {
             return new OrderPartDto()
             {
                 PartName = partName,
                 PartQuantity = partQuantity,
                 PartId = partId,
-                PartPrice = productPrice,
-                Descrioption = _stringManipulator.GetTextFromProperty(description)
+                PartPrice = productPrice
             };
         }
 
-        public async Task<OrderPartEmployee> CreateOrderPartEmployeeProduct(int orderId, string uniqueKeyForSerialNumber, string serialNumber, int partId, string partName, int partQuantity, decimal partPrice, string? description)
+        public async Task<OrderPartEmployee> CreateOrderPartEmployeeProduct(int orderId, string uniqueKeyForSerialNumber, string serialNumber, int partId, string partName, int partQuantity, decimal partPrice)
         {
             var ope = new OrderPartEmployee()
             {
@@ -87,11 +84,10 @@
                 SaleAmount = successOrder.SaleAmount,
                 UnpaidAmount = successOrder.UnpaidAmount,
                 VAT = successOrder.VAT,
-                Description = _stringManipulator.GetTextFromProperty(successOrder.Description),
                 Discount = successOrder.Discount,
+                Description = successOrder.Description,
                 OrderParts = successOrder.OrderParts.Select(op => new OrderPartDto()
                 {
-                    Descrioption = op.Descrioption,
                     PartId = op.PartId,
                     PartName = op.PartName,
                     PartPrice = op.PartPrice * successOrder.OrderQuantity,
