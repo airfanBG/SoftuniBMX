@@ -20,9 +20,6 @@
 
 .fullInfo {
   background-color: #fff;
-  display: grid;
-  grid-template-columns: 2fr 3fr;
-  gap: 2rem;
   position: relative;
   padding: 4rem 2rem 2rem 2rem;
   color: var(--color-main-dark);

@@ -12,12 +12,13 @@
 
 ## MANAGER
 
-    [ ] - New Orders
+    [X] - New Orders
     [ ] - Orders in production
     [ ] - Finished orders
     [ ] - Employees list
             [X] - employee info ( profile info, category, orders )
-            [ ] - add employee form
+            [X] - add employee form
+            [ ] - validate employee form
     [ ] - Statistic
 
 ## CLIENT
@@ -27,4 +28,4 @@
 
 ## LOGIN
 
-според ролята се изпраща заявка на разли1ни ендпоийнти
+според ролята се изпраща заявка на различни ендпоийнти

@@ -22,6 +22,10 @@ function NavigationSecondary() {
       { link: "workerOrders", textContent: "Orders" },
       { link: "finished", textContent: "Finished" },
     ],
+    qControl: [
+      { link: "info", textContent: "Profile" },
+      { link: "#", textContent: "Quality Control" },
+    ],
     manager: [
       { link: "info", textContent: "Profile" },
       { link: "managerOrders", textContent: "Orders" },

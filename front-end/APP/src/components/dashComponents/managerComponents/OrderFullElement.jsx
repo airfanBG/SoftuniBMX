@@ -4,26 +4,57 @@ function OrderElement({ order }) {
   const { serialNumber, orderId, dateCreated, orderStates } = order;
   return (
     <div className={styles.container}>
-      <h2>
-        <span className={styles.label}>SN:</span>
-        {serialNumber}
-      </h2>
-      <p className={styles.orderId}>
-        <span>ID:</span>
-        {orderId}
+      <p className={styles.logo}>
+        <p className={styles.logoFirstLine}>
+          e<span>&#10006;</span>treme - BMX
+        </p>
+        <span className={styles.logoSecondary}>Bicycle Management</span>
       </p>
-      <p className={styles.date}>
-        <span>Date created:</span>
-        {dateCreated}
-      </p>
+
+      <header className={styles.header}>
+        <p className={styles.heading}>
+          <span className={styles.label}>SN:</span>
+          {serialNumber}
+        </p>
+        <p className={styles.orderId}>
+          <span className={styles.label}>ID:</span>
+          {orderId}
+        </p>
+        <p className={styles.date}>
+          <span className={styles.label}>Date:</span>
+          {dateCreated.replaceAll("/", ".")}
+        </p>
+      </header>
+
       <div className={styles.orderStatesList}>
         {orderStates.map((s, i) => (
-          <div key={i}>
-            <p>{s.partId}</p>
-            <p>{s.partType}</p>
-            <p>{s.partModel}</p>
-            <p>{s.nameOfEmplоyeeProducedThePart}</p>
-            <p>{s.isProduced}</p>
+          <div key={i} className={styles.sector}>
+            <div className={styles.block}>
+              <h3 className={styles.line}>{s.partType}</h3>
+
+              <p className={styles.field}>
+                <span className={styles.fieldLabel}>Model:</span>
+                {s.partModel}
+              </p>
+
+              <div className={styles.metaData}>
+                <p className={styles.field}>
+                  <span className={styles.fieldLabel}>Employee Name:</span>
+                  {s.nameOfEmplоyeeProducedThePart}
+                </p>
+                <p
+                  className={styles.field}
+                  style={
+                    s.isProduced
+                      ? { color: "var(--button-agree)" }
+                      : { color: "var(--color-main-dark)" }
+                  }
+                >
+                  <span className={styles.fieldLabel}>Status:</span>
+                  {s.isProduced ? "Finished" : "In Process"}
+                </p>
+              </div>
+            </div>
           </div>
         ))}
       </div>

@@ -53,3 +53,7 @@
   font-size: 1.2rem;
   color: var(--color-border-hover);
 }
+
+.tumbs {
+  z-index: 0;
+}

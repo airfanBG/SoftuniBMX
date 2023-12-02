@@ -14,7 +14,7 @@ export const environment = {
   INFO_EMPLOYEE: "/users/", // + id
 
   // TODO: for local list load
-  GET_ALL_EMPLOYERS: "/users?role=worker&role=manager",
+  GET_ALL_EMPLOYERS: "/users?role=worker&role=manager&role=qControl",
 
   // TODO: change to project path
   GET_ALL_IN_PROGRESS: "/inProgress/",

@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 
 function Employers() {
   const [emp, setEmp] = useState([]);
+  const [con, setCon] = useState([]);
   const [man, setMan] = useState([]);
   const [person, setPerson] = useState({});
 
@@ -23,15 +24,19 @@ function Employers() {
     async function getEmps() {
       const data = await employersList;
       let empArr = [];
+      let conArr = [];
       let manArr = [];
       const empData = data.map((x) => {
         if (x.role === "worker") {
           empArr.push(x);
+        } else if (x.role === "qControl") {
+          conArr.push(x);
         } else {
           manArr.push(x);
         }
       });
       setEmp(empArr);
+      setCon(conArr);
       setMan(manArr);
     }
     getEmps();
@@ -52,6 +57,8 @@ function Employers() {
   return (
     <>
       {background && <PopupInfo person={person} onClose={close} />}
+      <h2 className={styles.dashHeadingMain}>Employees List</h2>
+
       <section className={styles.board}>
         <BoardHeader />
         {/* <div className={styles.spacer}></div> */}
@@ -74,7 +81,17 @@ function Employers() {
                   />
                 ))}
             </div>
-
+            <h2 className={styles.dashHeading}>QC list</h2>
+            <div className={styles.cardHolder}>
+              {con &&
+                con.map((qControl) => (
+                  <Employee
+                    key={qControl.id}
+                    person={qControl}
+                    onNameClick={handleClick}
+                  />
+                ))}
+            </div>
             <h2 className={styles.dashHeading}>Managers List</h2>
             <div className={styles.cardHolder}>
               {man &&

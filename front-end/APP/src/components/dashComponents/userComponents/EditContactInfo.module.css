@@ -2,7 +2,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-  column-gap: 2rem;
+  align-self: start;
+  gap: 2rem;
   margin-bottom: 1.2rem;
 }
 
