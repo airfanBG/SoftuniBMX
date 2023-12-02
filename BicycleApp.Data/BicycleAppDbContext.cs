@@ -15,15 +15,10 @@
 
         }
 
-        //public BicycleAppDbContext(DbContextOptions<BicycleAppDbContext> options)
-        //    : base(options)
-        //{
-
-        //}
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public BicycleAppDbContext(DbContextOptions<BicycleAppDbContext> options)
+            : base(options)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-TP2JLNJ\\SQLEXPRESS;Database=BicycleNewDB;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False");
+
         }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
