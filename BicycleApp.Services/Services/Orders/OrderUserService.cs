@@ -1,32 +1,35 @@
 ﻿namespace BicycleApp.Services.Services.Orders
 {
     using BicicleApp.Common.Providers.Contracts;
+    using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Contracts.OrderContracts;
     using BicycleApp.Services.HelperClasses.Contracts;
-    using BicycleApp.Services.Models.Order;
+    using BicycleApp.Services.Models.Order.OrderUser;
+    using BicycleApp.Services.Models.Order.OrderUser.Contracts;
+    using Microsoft.EntityFrameworkCore;
     using static BicycleApp.Common.ApplicationGlobalConstants;
 
-    using Microsoft.EntityFrameworkCore;
-
-    using System.Text;
     public class OrderUserService : IOrderUserService
     {
         private readonly BicycleAppDbContext _db;
         private readonly IStringManipulator _stringManipulator;
         private readonly IOrderFactory _orderFactory;
+        private readonly IGuidProvider _guidProvider;
         private readonly IDateTimeProvider _dateTimeProvider;
 
-        public OrderUserService(BicycleAppDbContext db, 
+        public OrderUserService(BicycleAppDbContext db,
                                 IStringManipulator stringManipulator,
                                 IOrderFactory orderFactory,
+                                IGuidProvider guidProvider,
                                 IDateTimeProvider dateTimeProvider)
         {
             _db = db;
             _stringManipulator = stringManipulator;
             _orderFactory = orderFactory;
+            _guidProvider = guidProvider;
             _dateTimeProvider = dateTimeProvider;
         }
 
@@ -34,18 +37,15 @@
         /// Creating order in database.
         /// </summary>
         /// <param name="order"></param>
-        /// <returns>Task<bool></returns>
-        public async Task<bool> CreateOrderByUserAsync(UserOrderDto order)
+        /// <returns>Task<int></returns>
+        public async Task<IOrderPartsEmplyee?> CreateOrderByUserAsync(IUserOrderDto order)
         {
             try
             {
-                string serialNumber = SerialNumberGenerator();
-
-                var orderToSave = _orderFactory.CreateUserOrder();
-                orderToSave.ClientId = order.ClientId;
-                orderToSave.DateCreated = _dateTimeProvider.Now;
-                orderToSave.SerialNumber = serialNumber;
-                orderToSave.StatusId = 1;
+                var newOrder = new OrderDto();
+                newOrder.ClientId = order.ClientId;
+                newOrder.StatusId = 1;
+                newOrder.OrderQuantity = order.OrderQuantity;
 
                 decimal totalAmount = 0M;
                 decimal totalDiscount = 0M;
@@ -55,51 +55,39 @@
 
                 foreach (var orderPart in order.OrderParts)
                 {
-                    decimal currentProductTotalPrice = Math.Round(orderPart.PricePerUnit * orderPart.Quantity, 2);
+                    var currentPart = await _db.Parts.FirstAsync(p => p.Id == orderPart.PartId);
+                    decimal currentProductTotalPrice = Math.Round(currentPart.SalePrice * order.OrderQuantity, 2);
                     totalAmount += currentProductTotalPrice;
-                    decimal currentProductTotalDiscount = Math.Round(orderPart.Discount * orderPart.Quantity, 2);
+                    decimal currentProductTotalDiscount = Math.Round(currentPart.Discount * order.OrderQuantity, 2);
                     totalDiscount += currentProductTotalDiscount;
                     if (currentProductTotalDiscount > currentProductTotalPrice)
                     {
-                        return false;
+                        return null;
                     }
                     totalVAT += Math.Round(((currentProductTotalPrice - currentProductTotalDiscount) * vatCategory.VATPercent) / (100 + vatCategory.VATPercent), 2);
+                    decimal productPrice = currentPart.SalePrice - currentPart.Discount;
+                    var currentOrderPartToSave = _orderFactory.CreateOrderPartFromUserOrder(currentPart.Name, 1, orderPart.PartId, productPrice, order.Description);
+                    newOrder.OrderParts.Add(currentOrderPartToSave);
                 }
 
-                orderToSave.Discount = totalDiscount;
-                orderToSave.FinalAmount = totalAmount - totalDiscount;
-                orderToSave.VAT = totalVAT;
-                orderToSave.SaleAmount = totalAmount - totalDiscount - totalVAT;
+                newOrder.Discount = totalDiscount;
+                newOrder.FinalAmount = totalAmount - totalDiscount;
+                newOrder.VAT = totalVAT;
+                newOrder.Description = _stringManipulator.GetTextFromProperty(order.Description);
+                newOrder.SaleAmount = totalAmount - totalDiscount - totalVAT;
 
-                await _db.Orders.AddAsync(orderToSave);
-                await _db.SaveChangesAsync();
+                var newOrderId = await _orderFactory.CreateUserOrderAsync(newOrder);
+                newOrder.OrderId = newOrderId;
 
-                ICollection<OrderPartEmployee> orderPartEmployeeCollection = new List<OrderPartEmployee>();
-
-                foreach (var part in order.OrderParts)
+                if (newOrderId != 0)
                 {
-                    var ope = new OrderPartEmployee()
-                    {
-                        OrderId = orderToSave.Id,
-                        PartId = part.PartId,
-                        PartPrice = part.PricePerUnit,
-                        PartQuantity = part.Quantity,
-                        PartName = part.PartName,
-                        Description = _stringManipulator.GetTextFromProperty(order.Description)
-                    };
-
-                    orderPartEmployeeCollection.Add(ope);
+                    return newOrder;
                 }
-
-                await _db.OrdersPartsEmployees.AddRangeAsync(orderPartEmployeeCollection);
-                await _db.SaveChangesAsync();
-
-                return true;
             }
             catch (Exception)
             {
             }
-            return false;
+            return null;
         }
 
         /// <summary>
@@ -119,7 +107,7 @@
                             .Select(o => new OrderProgretionDto()
                             {
                                 OrderId = o.Id,
-                                SerialNumber = o.SerialNumber,
+                                SerialNumber = o.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
                                 DateCreated = o.DateCreated.ToString(DefaultDateFormat),
                                 OrderStates = o.OrdersPartsEmployees
                                                .Select(ope => new OrderStateDto()
@@ -129,32 +117,95 @@
                                                    PartModel = ope.Part.Name,
                                                    PartType = ope.Part.Category.Name,
                                                    PartId = ope.PartId
-                                                   
+
                                                }).ToList()
                             })
                             .ToListAsync();
         }
 
         /// <summary>
-        /// Generator of serial number.
+        /// Create order in OrdersPartsEmployee for future processing.
         /// </summary>
-        /// <returns>string</returns>
-        private string SerialNumberGenerator()
+        /// <param name="newOrder"></param>
+        /// <returns>Task<bool></returns>
+        public async Task<bool> CreateOrderPartEmployeeByUserOrder(IOrderPartsEmplyee newOrder)
         {
-            StringBuilder serialNumber = new StringBuilder("BID");
-            int numberOfrandoms = 7;
-
-            string allowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
-            Random random = new Random();
-
-            for (int i = 0; i <= numberOfrandoms; i++)
+            try
             {
-                int randomCharIndex = random.Next(0, allowedChars.Length + 1);
-                serialNumber.Append(allowedChars[randomCharIndex]);
-            }
+                var orderPartEmployeeCollection = new List<OrderPartEmployee>();
 
-            return serialNumber.ToString();
-        }       
+                int quntityOfPart = newOrder.OrderQuantity;
+
+                for (int i = 0; i < quntityOfPart; i++)
+                {
+                    string serialNumber = _stringManipulator.SerialNumberGenerator();
+                    string guidKey = _guidProvider.CreateGuid();
+
+                    foreach (var orderPart in newOrder.OrderParts)
+                    {
+                        var ope = await _orderFactory.CreateOrderPartEmployeeProduct(newOrder.OrderId, guidKey, serialNumber, orderPart.PartId, orderPart.PartName, orderPart.PartQuantity, orderPart.PartPrice, orderPart.Descrioption);
+
+                        orderPartEmployeeCollection.Add(ope);
+                    }
+                }
+
+                await _db.OrdersPartsEmployees.AddRangeAsync(orderPartEmployeeCollection);
+                await _db.SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception)
+            {
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// All orders made by user which are not started manifacturing.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public async Task<ICollection<OrderProgretionDto>> AllPendingApprovalOrder(string userId)
+        {
+            return await _db.Orders
+                            .Where(o => o.ClientId == userId && o.DateUpdated.Equals(null))
+                            .Select(o => new OrderProgretionDto()
+                            {
+                                DateCreated = o.DateCreated.ToString(DefaultDateFormat),
+                                OrderId = o.Id
+                            })
+                            .ToListAsync();
+        }
+
+        /// <summary>
+        /// Return order detail if order is successful.
+        /// </summary>
+        /// <param name="successOrder"></param>
+        /// <returns>ISuccessOrderInfo</returns>
+        public ISuccessOrderInfo SuccessCreatedOrder(IOrderPartsEmplyee successOrder)
+        {
+            var successOrderItems = _orderFactory.CreateSuccessOrderItems(successOrder);
+
+            return successOrderItems;
+        }
+
+        /// <summary>
+        /// Order is deleted by user selection.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="orderId"></param>
+        /// <returns>Task</returns>
+        public async Task DeleteOrder(string userId, int orderId)
+        {
+            var orderToDelete = await _db.Orders.FirstOrDefaultAsync(o => o.ClientId == userId && o.Id == orderId && o.StatusId == 1);
+
+            if (orderToDelete != null)
+            {
+                orderToDelete.IsDeleted = true;
+                orderToDelete.DateDeleted = _dateTimeProvider.Now;
+
+                await _db.SaveChangesAsync();
+            }
+        }
     }
 }

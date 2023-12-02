@@ -4,8 +4,10 @@
     using System.ComponentModel.DataAnnotations;
 
     using BicycleApp.Data.Models.IdentityModels;
+    using static BicycleApp.Common.EntityValidationConstants.Order;
 
     using Microsoft.EntityFrameworkCore;
+    using BicycleApp.Data.Interfaces;
 
     [Comment("Table conecting all the parts in an order with the employee responsible for the mounting")]
     public class OrderPartEmployee
@@ -15,6 +17,15 @@
         public int OrderId { get; set; }
 
         public virtual Order Order { get; set; } = null!;
+
+        [Required]
+        [Comment("Separate unique products by serial number in one order")]
+        public string UniqueKeyForSerialNumber { get; set; } = null!;
+
+        [Required]
+        [MaxLength(SerialNumberLength)]
+        [Comment("Unique serial number of the order")]
+        public string SerialNumber { get; set; } = null!;
 
         [Required]
         [Comment("Id of the part")]
@@ -48,9 +59,8 @@
         [Comment("Date and time of finish of the task from the employee")]
         public DateTime? EndDatetime { get; set; }
 
-        [Required]
         [Comment("Description of the task")]
-        public string Description { get; set; } = null!;
+        public string? Description { get; set; }
 
         [Required]
         [Comment("Status of the task: Completed/Not completed")]

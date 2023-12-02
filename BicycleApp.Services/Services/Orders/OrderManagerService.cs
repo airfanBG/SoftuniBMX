@@ -4,8 +4,7 @@
     using BicycleApp.Data;
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.HelperClasses.Contracts;
-    using BicycleApp.Services.Models.Order;
-
+    using BicycleApp.Services.Models.Order.OrderManager;
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Linq;
@@ -24,12 +23,12 @@
             _stringManipulator = stringManipulator;
             _dateTimeProvider = dateTimeProvider;
         }
-        
+
 
         /// <summary>
         /// Manager accept order and assign it to employee.
         /// </summary>
-        /// <param name="managerApprovalDto"></param>
+        /// <param name="orderId"></param>
         /// <returns>Task<bool></returns>
         public async Task<bool> AcceptAndAssignOrderByManagerAsync(int orderId)
         {
@@ -40,9 +39,11 @@
                                                                         .ToListAsync();
                 foreach (var orderPartEmployee in orderPartsEmployees)
                 {
-                    bool areAvailableParts = await ArePartsAvailable(orderPartEmployee.PartQuantity, orderPartEmployee.PartId);
+
+                    int arePartsNeeded = await ArePartsNeeded(orderPartEmployee.PartQuantity, orderPartEmployee.PartId);
+
                     //Checks for available quantity
-                    if (!areAvailableParts)
+                    if (arePartsNeeded <= 0)
                     {
                         return false;
                     }
@@ -72,21 +73,21 @@
         public async Task<ICollection<OrderInfoDto>> AllPendingOrdersAsync()
         {
             var listOfPendingOrders = await _db.Orders
-                                .Where(o => o.OrdersPartsEmployees.Any(ope => ope.EmployeeId == null)//като се сетне от AcceptAndAssignOrderByManagerAsync изчезва от AllPendingOrders
+                                .AsNoTracking()
+                                .Where(o => o.OrdersPartsEmployees.Any(ope => ope.EmployeeId == null)
                                                                               && (o.IsDeleted == false && o.DateDeleted.Equals(null)))
                                 .Select(ope => new OrderInfoDto
                                 {
                                     OrderId = ope.Id,
-                                    SerialNumber = ope.SerialNumber,
+                                    SerialNumber = ope.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
                                     OrderParts = ope.OrdersPartsEmployees
-                                                .Select(orderPart => new OrderPartDto
+                                                .Select(orderPart => new OrderPartInfoDto
                                                 {
                                                     PartId = orderPart.PartId,
-                                                    Description = _stringManipulator.GetTextFromProperty(orderPart.Description),
-                                                    Discount = ope.Discount,
+                                                    Descrioption = _stringManipulator.GetTextFromProperty(orderPart.Description),
                                                     PartName = orderPart.PartName,
-                                                    PricePerUnit = orderPart.PartPrice,
-                                                    Quantity = orderPart.PartQuantity
+                                                    PartQuantity = orderPart.PartQuantity,
+                                                    PartQunatityInStock = orderPart.Part.Quantity
                                                 })
                                                 .ToList()
                                 })
@@ -100,117 +101,44 @@
         /// </summary>
         /// <param name="partsInOrder"></param>
         /// <param name="partInStockId"></param>
-        /// <returns>Task<bool></returns>
-        public async Task<bool> ArePartsAvailable(int partsInOrder, int partInStockId)
+        /// <returns>Task<int></returns>
+        public async Task<int> ArePartsNeeded(int partsInOrder, int partInStockId)
         {
             try
             {
                 var аvailableParts = await _db.Parts
                                               .AsNoTracking()
                                               .FirstAsync(p => p.Id == partInStockId);
+
                 int quantityOfPartInStock = (int)аvailableParts.Quantity;
 
-                if (quantityOfPartInStock >= partsInOrder)
-                {
-                    return true;
-                }
+                int partsNeeded = partsInOrder - quantityOfPartInStock;
+
+                return partsNeeded;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                throw new ApplicationException("Database can't retrive data", ex);
             }
-            return false;
+
         }
-
-        ///// <summary>
-        ///// Change status of existing order.
-        ///// </summary>
-        ///// <param name="orderId"></param>
-        ///// <param name="newStatusId"></param>
-        ///// <returns>Task<bool></returns>
-        //public async Task<bool> ChangeStatus(int orderId, int newStatusId)
-        //{
-        //    try
-        //    {
-        //        var order = await _db.Orders.FirstAsync(o => o.Id == orderId);
-        //        order.StatusId = newStatusId;
-        //        order.DateUpdated = DateTime.UtcNow;
-
-        //        _db.Orders.Update(order);
-        //        await _db.SaveChangesAsync();
-
-        //        return true;
-        //    }
-        //    catch (Exception)
-        //    {
-        //    }
-        //    return false;
-        //}
-        //public async Task EmployeeEndProduction(string employeeId, int orderId, int partId)
-        //{
-        //    try
-        //    {
-        //        var finishedPart = await _db.OrdersPartsEmployees
-        //                                .FirstAsync(ope => ope.EmployeeId == employeeId
-        //                                                   && ope.OrderId == orderId
-        //                                                   && ope.PartId == partId);
-
-        //        finishedPart.EndDatetime = DateTime.UtcNow;
-        //        finishedPart.IsCompleted = true;
-
-        //        _db.OrdersPartsEmployees.Update(finishedPart);
-        //        await _db.SaveChangesAsync();
-        //    }
-        //    catch (Exception)
-        //    {
-        //    }
-        //}
-        //public async Task EmployeeStartProduction(string employeeId, int orderId, int partId)
-        //{
-        //    try
-        //    {
-        //        var finishedPart = await _db.OrdersPartsEmployees
-        //                                .FirstAsync(ope => ope.EmployeeId == employeeId
-        //                                                   && ope.OrderId == orderId
-        //                                                   && ope.PartId == partId);
-
-        //        finishedPart.StartDatetime = DateTime.UtcNow;
-
-        //        _db.OrdersPartsEmployees.Update(finishedPart);
-        //        await _db.SaveChangesAsync();
-        //    }
-        //    catch (Exception)
-        //    {
-        //    }
-        //}
-
-        //public async Task<ICollection<EmployeePartTaskDto>> EmployeeUnfinishedTask(string employeeId)
-        //{
-        //    var listOfTask = await _db.OrdersPartsEmployees
-        //                              .AsNoTracking()
-        //                              .Where(ope => ope.EmployeeId == employeeId && ope.EndDatetime == null && ope.IsCompleted == false)
-        //                              .Select(ope => new EmployeePartTaskDto
-        //                              {
-        //                                  PartName = ope.Part.Name
-        //                              })
-        //                              .ToListAsync();
-        //    return listOfTask;
-        //}
 
         /// <summary>
         /// Get orders in specific period.
         /// </summary>
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
-        /// <returns>Task</returns>
-        public async Task<ICollection<OrderInfoDto>> GetAllFinishedOrdersForPeriod(DateTime startDate, DateTime endDate)//FinishedOrdersDto with startDate and ndDate have to make!?
+        /// <returns>Task<ICollection<OrderInfoDto>></returns>
+        public async Task<ICollection<OrderInfoDto>> GetAllFinishedOrdersForPeriod(FinishedOrdersDto datesPeriod)
         {
             return await _db.Orders
                             .AsNoTracking()
-                            .Where(o => o.DateCreated >= startDate && o.DateFinish <= endDate)
+                            .Where(o => o.DateCreated >= datesPeriod.StartDate
+                                     && o.DateFinish <= datesPeriod.EndDate)
                             .Select(o => new OrderInfoDto()
                             {
                                 OrderId = o.Id,
-                                SerialNumber = o.SerialNumber
+                                SerialNumber = o.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault()
                             })
                             .ToListAsync();
         }
@@ -220,7 +148,7 @@
         /// </summary>
         /// <param name="orderId"></param>
         /// <returns>Task</returns>
-        public async Task ManagerOrderRejection(int orderId)
+        public async Task ManagerDeleteOrder(int orderId)
         {
             if (orderId <= 0)
             {
@@ -236,17 +164,102 @@
                 _db.Orders.Update(orderToReject);
                 await _db.SaveChangesAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                throw new ApplicationException("Database can't retrive data", ex);
             }
-
         }
 
+        /// <summary>
+        /// The method checks for available parts, Sets EmployeeId only to available part and return collection of partsForPurchase
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns>Task<ICollection<OrderPartDeliveryDto>> - the parts for purchaise</returns>
+        public async Task<ICollection<OrderPartDeliveryDto>> RejectOrderAsync(int orderId)
+        {
+            var partsForPurchase = new List<OrderPartDeliveryDto>();
+
+            try
+            {
+                var orderPartsEmployees = await _db.OrdersPartsEmployees.Where(o => o.OrderId == orderId
+                                                                                    && o.DatetimeAsigned == null)
+                                                                        .ToListAsync();
+                foreach (var orderPartEmployee in orderPartsEmployees)
+                {
+
+                    int arePartsNeeded = await ArePartsNeeded(orderPartEmployee.PartQuantity, orderPartEmployee.PartId);
+
+                    //Checks for available quantity
+                    if (arePartsNeeded > 0)
+                    {
+                        var partForPurchase = new OrderPartDeliveryDto
+                        {
+                            PartId = orderPartEmployee.PartId,
+                            Name = orderPartEmployee.PartName,
+                            Note = string.Empty,
+                            NeededQuantity = arePartsNeeded
+                        };
+
+                        partsForPurchase.Add(partForPurchase);
+                    }
+
+                    orderPartEmployee.EmployeeId = await SetEmployeeToPart(orderPartEmployee.PartId);
+                }
+
+                await _db.SaveChangesAsync();
+
+                return partsForPurchase;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Database can't retrive data", ex);
+            }
+        }
+
+        /// <summary>
+        /// The method returns all rejected orders (painding for a part delivery)
+        /// </summary>
+        /// <returns>Task<ICollection<OrderInfoDto>>- the Rejected Orders (painding for a part delivery or payment)</returns>
+        public async Task<ICollection<OrderInfoDto>> AllRejectedOrdersAsync()
+        {
+            var listOfPendingOrders = await _db.Orders
+                                .AsNoTracking()
+                                .Where(o => o.OrdersPartsEmployees.Any(ope => ope.EmployeeId != null && ope.DatetimeAsigned == null)
+                                                                              && (o.IsDeleted == false
+                                                                              && o.DateDeleted.Equals(null)))
+                                .Select(ope => new OrderInfoDto
+                                {
+                                    OrderId = ope.Id,
+                                    SerialNumber = ope.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
+                                    OrderParts = ope.OrdersPartsEmployees
+                                                .Select(orderPart => new OrderPartInfoDto
+                                                {
+                                                    PartId = orderPart.PartId,
+                                                    Descrioption = _stringManipulator.GetTextFromProperty(orderPart.Description),
+                                                    PartName = orderPart.PartName,
+                                                    PartQuantity = orderPart.PartQuantity,
+                                                    PartQunatityInStock = orderPart.Part.Quantity
+                                                })
+                                                .ToList()
+                                })
+                                .ToListAsync();
+
+            return listOfPendingOrders;
+        }
+
+        /// <summary>
+        /// The method sets employee to appropriate part
+        /// </summary>
+        /// <param name="partId"></param>
+        /// <returns>Task<string></returns>
         public async Task<string> SetEmployeeToPart(int partId)
         {
             try
             {
-                var part = await _db.Parts.FirstAsync(p => p.Id == partId);
+                var part = await _db.Parts
+                    .Include(pc => pc.Category)
+                    .FirstAsync(p => p.Id == partId);
+
                 var partType = part.Category.Name;
 
                 if (partType.ToLower() == "frame")
@@ -269,6 +282,47 @@
             {
             }
             return string.Empty;
+        }
+
+        /// <summary>
+        /// Manager accept rejected order and assign it to employee.
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns>Task<bool></returns>
+        public async Task<bool> AcceptAndAssignRejectedOrderByManagerAsync(int orderId)
+        {
+            try
+            {
+                var orderPartsEmployees = await _db.OrdersPartsEmployees.Where(o => o.OrderId == orderId
+                                                                                    && o.DatetimeAsigned == null)
+                                                                        .ToListAsync();
+
+                foreach (var orderPartEmployee in orderPartsEmployees)
+                {
+
+                    int arePartsNeeded = await ArePartsNeeded(orderPartEmployee.PartQuantity, orderPartEmployee.PartId);
+
+                    //Checks for available quantity
+                    if (arePartsNeeded > 0)
+                    {
+                        return false;
+                    }
+                    orderPartEmployee.DatetimeAsigned = _dateTimeProvider.Now;
+                    var аvailableParts = await _db.Parts.FirstAsync(p => p.Id == orderPartEmployee.PartId);
+                    аvailableParts.Quantity -= orderPartEmployee.PartQuantity;
+                }
+
+                var order = await _db.Orders.FirstAsync(o => o.Id == orderId);
+                order.DateUpdated = _dateTimeProvider.Now;
+
+                await _db.SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception)
+            {
+            }
+            return false;
         }
     }
 }

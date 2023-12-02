@@ -30,7 +30,7 @@
                 if (clientRegisterDto == null)
                 {
                     // The clientRegisterDto object is null, so return a 400 Bad Request response
-                    return BadRequest();
+                    return StatusCode(400);       
                 }
 
                 if (!ModelState.IsValid)
@@ -56,7 +56,7 @@
                 clientRegisterDto.Email = "";
                 clientRegisterDto.Password = "";
                 clientRegisterDto.ConfirmPassword = "";
-                return BadRequest(clientRegisterDto);
+                return StatusCode(400, clientRegisterDto);
             }
             catch (Exception e)
             {
@@ -88,7 +88,7 @@
                 if (clientLoginDto == null)
                 {
                     // The clientLoginDto object is null, so return a 400 Bad Request response
-                    return BadRequest();
+                    return StatusCode(400);
                 }
 
                 if (!ModelState.IsValid)
@@ -108,7 +108,7 @@
                 }
                 else
                 {
-                    return BadRequest(responce);
+                    return StatusCode(400, responce);
                 }
             }
             catch (Exception)
@@ -128,7 +128,7 @@
         {
             if (string.IsNullOrWhiteSpace(id))
             {
-                return BadRequest();
+                return StatusCode(400);
             }
 
             try
@@ -158,7 +158,7 @@
         {
             if (clientPasswordChangeDto == null)
             {
-                return BadRequest();
+                return StatusCode(400);
             }
 
             if (!ModelState.IsValid)

@@ -12,7 +12,7 @@
     {
         private readonly IEmployeeService employeeService;
 
-        public EmployeeController(IEmployeeService employeeService)
+        public EmployeeController(IEmployeeService employeeService)     
         {
             this.employeeService = employeeService;
         }
@@ -31,7 +31,7 @@
                 if (employeeRegisterDto == null)
                 {
                     // The clientRegisterDto object is null, so return a 400 Bad Request response
-                    return BadRequest();
+                    return StatusCode(400);
                 }
 
                 if (!ModelState.IsValid)
@@ -55,7 +55,7 @@
                 employeeRegisterDto.Email = "";
                 employeeRegisterDto.Password = "";
                 employeeRegisterDto.ConfirmPassword = "";
-                return BadRequest(employeeRegisterDto);
+                return StatusCode(400, employeeRegisterDto);
             }
             catch (Exception e)
             {
@@ -87,7 +87,7 @@
                 if (employeeLoginDto == null)
                 {
                     // The clientLoginDto object is null, so return a 400 Bad Request response
-                    return BadRequest();
+                    return StatusCode(400);
                 }
 
                 if (!ModelState.IsValid)
@@ -127,7 +127,7 @@
         {
             if (string.IsNullOrWhiteSpace(id))
             {
-                return BadRequest();
+                return StatusCode(400);
             }
 
             try
@@ -157,7 +157,7 @@
         {
             if (employeePasswordChangeDto == null)
             {
-                return BadRequest();
+                return StatusCode(400);
             }
 
             if (!ModelState.IsValid)
