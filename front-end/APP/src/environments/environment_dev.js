@@ -11,6 +11,8 @@ export const environment = {
   UPDATE_CLIENT: "/users/", // + id
   UPDATE_EMPLOYEE: "/users/", // + id
   INFO_CLIENT: "/users/", // + id
+  //    /api/client/info/:id
+
   INFO_EMPLOYEE: "/users/", // + id
 
   // TODO: for local list load
@@ -18,6 +20,7 @@ export const environment = {
 
   // TODO: change to project path
   GET_ALL_IN_PROGRESS: "/inProgress/",
+  GET_ALL_INTENDED: "/",
   indexPage: "/indexPage",
   frames: "/frames/",
   wheels: "/wheels/",

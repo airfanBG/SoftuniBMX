@@ -29,12 +29,12 @@ function Category() {
         <span
           className={styles.element}
           style={
-            user.department === "accessory"
+            user.department === "Accessory"
               ? { color: "var(--color-line)" }
               : null
           }
         >
-          Assembly
+          Accessory
         </span>
       </h3>
     </>

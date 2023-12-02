@@ -10,6 +10,8 @@ const endpoints = {
 
 //TODO Change user object according to project requirements
 
+//TODO: different endpoints for user and employee!!!!
+
 export async function login(user) {
   const result = await post(endpoints.login, user);
   if (!result.accessToken) return;

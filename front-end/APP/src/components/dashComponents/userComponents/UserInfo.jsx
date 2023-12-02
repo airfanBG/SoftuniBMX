@@ -26,7 +26,7 @@ function UserInfo() {
     function () {
       async function getClientInfo() {
         const data = await userInfo(user.id);
-        // console.log(data);
+        console.log(data);
         setInfo({ ...data });
         if (data.role === "user") {
           setInfo({ ...data, balance: Number(data.balance.toFixed(2)) });
