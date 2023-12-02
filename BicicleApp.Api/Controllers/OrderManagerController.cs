@@ -195,13 +195,13 @@ namespace BicicleApp.Api.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("finished_orders")]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> FinishedOrdersForPeriod([FromBody] FinishedOrdersDto datesPeriod)
+        public async Task<ActionResult> FinishedOrdersForPeriod([FromQuery] FinishedOrdersDto datesPeriod)
         {
             if (datesPeriod == null)
             {
@@ -219,7 +219,7 @@ namespace BicicleApp.Api.Controllers
 
                 if (result != null)
                 {
-                    return StatusCode(StatusCodes.Status202Accepted);
+                    return StatusCode(StatusCodes.Status202Accepted, result);
                 }
                 else
                 {
