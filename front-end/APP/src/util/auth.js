@@ -2,18 +2,12 @@ import { get, post } from "./api.js";
 import { clearOrderData, clearUserData, setUserData } from "./util.js";
 import { environment } from "../environments/environment_dev.js";
 
-const endpoints = {
-  login: environment.LOGIN,
-  register: environment.REGISTER_CLIENT,
-  logout: environment.LOGOUT,
-};
-
 //TODO Change user object according to project requirements
 
 //TODO: different endpoints for user and employee!!!!
 
 export async function login(user) {
-  const result = await post(endpoints.login, user);
+  const result = await post(environment.login, user);
   if (!result.accessToken) return;
   if (result.user.role === "worker" || result.user.role === "manager")
     clearOrderData();
@@ -22,11 +16,16 @@ export async function login(user) {
 }
 
 export async function register(user) {
-  const result = await post(endpoints.register, user);
+  let result;
+  if (user.email.includes("@b-free.com")) {
+    result = await post(environment.register_employee, user);
+  } else {
+    result = await post(environment.register_client, user);
+  }
   return result;
 }
 
 export async function logout() {
-  get(endpoints.logout);
+  get(environment.logout);
   clearUserData();
 }

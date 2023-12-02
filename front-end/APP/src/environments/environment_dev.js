@@ -1,25 +1,22 @@
 export const environment = {
   // TODO: fix routes in services
   BASE_URL: "http://localhost:9000",
-  // fix in main
-  // TODO:
-  LOGIN: "/login",
-  REGISTER_CLIENT: "/api/client/register",
-  REGISTER_EMPLOYEE: "/api/employee/register",
-  // LOGOUT: "/users/logout",
-  // fix in main
-  UPDATE_CLIENT: "/users/", // + id
-  UPDATE_EMPLOYEE: "/users/", // + id
-  INFO_CLIENT: "/users/", // + id
-  //    /api/client/info/:id
 
-  INFO_EMPLOYEE: "/users/", // + id
+  login: "/login",
+  register_client: "/api/client/register",
+  register_employee: "/api/employee/register",
+
+  update_client: "/users/", // + id
+  update_employee: "/users/", // + id
+  info_client: "/users/", // + id
+
+  info_employee: "/users/", // + id
 
   // TODO: for local list load
-  GET_ALL_EMPLOYERS: "/users?role=worker&role=manager&role=qControl",
+  get_all_employers: "/users?role=worker&role=manager&role=qControl",
 
   // TODO: change to project path
-  GET_ALL_IN_PROGRESS: "/inProgress/",
+  get_all_in_progress: "/inProgress/",
   GET_ALL_INTENDED: "/",
   indexPage: "/indexPage",
   frames: "/frames/",

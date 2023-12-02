@@ -56,7 +56,7 @@ function AddMember() {
       finalState.position = position;
     }
 
-    const result = await post(environment.REGISTER_EMPLOYEE, finalState);
+    const result = await post(environment.register_employee, finalState);
     console.log(result);
 
     navigate("/profile/employers");

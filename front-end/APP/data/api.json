@@ -586,6 +586,43 @@
       "dateOfHire": "12/2/2023",
       "isManager": false,
       "id": 7
+    },
+    {
+      "email": "test@worker.com",
+      "password": "$2a$10$5p/AR0nQ6jbWCpIz15zE8eaUF1KKeewdpEtWi9n3Ff/LfO8BQzUeu",
+      "firstName": "Test",
+      "lastName": " User",
+      "repass": "IsWorker1",
+      "iban": "FDSVGDSFG",
+      "balance": 234234,
+      "phone": "+359324234",
+      "city": "Solt Lake City",
+      "role": "user",
+      "address": {
+        "country": "USA",
+        "city": "Solt Lake City",
+        "postCode": "",
+        "district": "",
+        "block": "",
+        "floor": 0,
+        "apartment": "",
+        "street": "Match",
+        "strNumber": "2"
+      },
+      "id": 8
+    },
+    {
+      "email": "palpatine@b-free.com@b-free.com",
+      "password": "$2a$10$tCLqcHEBc5N9fv0.atuWGuzi1fU5T9Gz5BmvG0Lfi6Ck8yvxEQfhm",
+      "firstName": "Senator",
+      "lastName": "Palpatine",
+      "repass": "Palpatine1",
+      "role": "manager",
+      "phoneNumber": "+3599999999",
+      "isManager": true,
+      "dateOfHire": "12/3/2023",
+      "imageUrl": "",
+      "id": 9
     }
   ],
   "wheels": [
