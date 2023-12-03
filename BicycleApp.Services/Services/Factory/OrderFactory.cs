@@ -9,7 +9,7 @@
     using BicycleApp.Services.Models.Order.OrderUser.Contracts;
 
     public class OrderFactory : IOrderFactory
-    {
+    {       
         private readonly BicycleAppDbContext _db;
         private readonly IDateTimeProvider _dateTimeProvider;
         public OrderFactory(BicycleAppDbContext db, IDateTimeProvider dateTimeProvider)
@@ -87,7 +87,7 @@
                 Discount = successOrder.Discount,
                 Description = successOrder.Description,
                 OrderParts = successOrder.OrderParts.Select(op => new OrderPartDto()
-                {
+        {
                     PartId = op.PartId,
                     PartName = op.PartName,
                     PartPrice = op.PartPrice * successOrder.OrderQuantity,

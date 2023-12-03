@@ -3,6 +3,7 @@
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.Models.IdentityModels;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/client")]
@@ -178,6 +179,126 @@
                 {
                     return StatusCode(422, clientPasswordChangeDto);
                 }
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpGet]
+        [Route("emailConfirm")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> EmailConfirm([FromQuery] string userId, [FromQuery] string code)
+        {
+            await clientService.ConfirmEmailAsync(userId, code);
+
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("bankInfo")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<ClientBankDto>> GetBankInfo([FromQuery] string clientId)
+        {
+            if (string.IsNullOrWhiteSpace(clientId))
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                var dto = await clientService.GetClientBankInfoAsync(clientId);
+
+                return Ok(dto);
+            }
+            catch (ArgumentNullException)
+            {
+                return BadRequest();
+            }
+            catch (NullReferenceException)
+            {
+                return NotFound();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpPut]
+        [Route("bankUpdate")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> UpdateClientBankInfo([FromBody] ClientBankDto clientBankInfo)
+        {
+            if (clientBankInfo == null)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(clientBankInfo);
+            }
+
+            try
+            {
+                var result = await clientService.UpdateClientBankInfoAsync(clientBankInfo);
+
+                if (result)
+                {
+                    return StatusCode(204);
+                }
+
+                return BadRequest();
+            }
+            catch (ArgumentNullException)
+            {
+                return NotFound();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpPut]
+        [AllowAnonymous]
+        [Route("passChange")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> ChangePassword([FromBody] ClientLoginDto clientDto)
+        {
+            if (clientDto == null)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(clientDto);
+            }
+
+            try
+            {
+                var result = await clientService.ChangePassword(clientDto);
+
+                if (result)
+                {
+                    return NoContent();
+                }
+
+                return BadRequest();
             }
             catch (Exception)
             {
