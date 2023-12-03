@@ -1,7 +1,7 @@
 import styles from "./OrderFullElement.module.css";
 
 function OrderElement({ order }) {
-  const { serialNumber, orderId, dateCreated, orderStates } = order;
+  const { serialNumber, id, dateCreated, orderStates } = order;
   return (
     <div className={styles.container}>
       <p className={styles.logo}>
@@ -18,7 +18,7 @@ function OrderElement({ order }) {
         </p>
         <p className={styles.orderId}>
           <span className={styles.label}>ID:</span>
-          {orderId}
+          {id}
         </p>
         <p className={styles.date}>
           <span className={styles.label}>Date:</span>

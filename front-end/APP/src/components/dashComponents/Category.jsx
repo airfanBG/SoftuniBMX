@@ -23,7 +23,7 @@ function Category() {
             user.department === "Wheels" ? { color: "var(--color-line)" } : null
           }
         >
-          Tyres
+          Wheels
         </span>{" "}
         &#10072;{" "}
         <span

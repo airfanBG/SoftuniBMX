@@ -11,13 +11,18 @@ function WorkerOrders() {
   const { user } = useContext(UserContext);
   const [workerList, setWorkerList] = useState([]);
   const [isFinished, setIsFinished] = useState(false);
+  const [meta, setMeta] = useState({});
 
   useEffect(
     function () {
       let orderArray;
       const abortController = new AbortController();
+
       async function getJobs() {
         const workerSequence = await get("/production/");
+
+        setMeta({ id: workerSequence.id });
+
         // Worker will see only his own work
         if (user.department === "Frames") {
           orderArray = workerSequence.filter(

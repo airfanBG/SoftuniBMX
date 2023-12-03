@@ -14,28 +14,43 @@ function OrderInProgress({ order, i, onOrderButtonClick }) {
           <div className={styles.circle}>
             {order.orderStates[0].isProduced ? (
               <span className={styles.icon}>&#10004;</span>
+            ) : order.orderStates[0].startedTime ? (
+              <span className={styles.ionIcon}>
+                <ion-icon name="hourglass-outline"></ion-icon>
+              </span>
             ) : (
               ""
             )}
-            <span>{order.orderStates[0].partType}</span>
+            {/* <span>{order.orderStates[0].partType}</span> */}
+            <span>Frame</span>
           </div>
           <div className={styles.line}></div>
           <div className={styles.circle}>
             {order.orderStates[1].isProduced ? (
               <span className={styles.icon}>&#10004;</span>
+            ) : order.orderStates[1].startedTime ? (
+              <span className={styles.ionIcon}>
+                <ion-icon name="hourglass-outline"></ion-icon>
+              </span>
             ) : (
               ""
             )}
-            <span>{order.orderStates[1].partType}</span>
+            {/* <span>{order.orderStates[1].partType}</span> */}
+            <span>Wheels</span>
           </div>
           <div className={styles.line}></div>
           <div className={styles.circle}>
             {order.orderStates[2].isProduced ? (
               <span className={styles.icon}>&#10004;</span>
+            ) : order.orderStates[2].startedTime ? (
+              <span className={styles.ionIcon}>
+                <ion-icon name="hourglass-outline"></ion-icon>
+              </span>
             ) : (
               ""
             )}
-            <span>{order.orderStates[2].partType}</span>
+            {/* <span>{order.orderStates[2].partType}</span> */}
+            <span>Accessory</span>
           </div>
         </div>
 

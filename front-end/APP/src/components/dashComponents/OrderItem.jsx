@@ -11,19 +11,28 @@ function OrderItem({ product, onBtnHandler, orderId }) {
   const { user } = useContext(UserContext);
   const [index, setIndex] = useState(null);
   const [item, setItem] = useState("");
-  const [id, setId] = useState("");
+  // const [id, setId] = useState("");
+  const [firstCall, setFirstCall] = useState(false);
   const [isDone, setIsDone] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [meta, setMeta] = useState({});
 
   let newProduct = {};
 
   useEffect(function () {
     const abortController = new AbortController();
+    // setId(product.id);
+    console.log(product);
+
+    setMeta({
+      id: product.id,
+      dateCreated: product.dateCreated,
+      serialNumber: product.serialNumber,
+    });
 
     if (user.department === "Frames") {
       setItem(product.orderStates[0]);
       setIndex(0);
-      setId(product.id);
     }
     if (user.department === "Wheels") {
       setItem(product.orderStates[1]);
@@ -39,7 +48,7 @@ function OrderItem({ product, onBtnHandler, orderId }) {
 
   useEffect(
     function () {
-      if (item.isProduced) {
+      if (item.isProduced || firstCall) {
         // make copy on original object
         newProduct = { ...product };
 
@@ -48,16 +57,17 @@ function OrderItem({ product, onBtnHandler, orderId }) {
         // console.log(newProduct);
 
         // write data to database
-        finishedJob(id);
+        finishedJob(meta.id);
         // rerender parent component
         onBtnHandler();
       }
     },
-    [isDone]
+    [isDone, firstCall]
   );
 
   function onButtonClick() {
-    let currentDate = new Date();
+    let currentDate = new Date().getTime();
+    // let currentDate = new Date();
     // console.log("in btn");
 
     if (item.startedTime === "" && item.finishedTime === "") {
@@ -66,10 +76,10 @@ function OrderItem({ product, onBtnHandler, orderId }) {
         startedTime: currentDate,
         nameOfEmplоyeeProducedThePart: `${user.firstName} ${user.lastName}`,
       });
-    }
-    if (item.startedTime !== "" && item.finishedTime === "") {
+      setFirstCall(!firstCall);
+    } else if (item.startedTime !== "" && item.finishedTime === "") {
       setItem({ ...item, finishedTime: currentDate, isProduced: true });
-      setIsDone(true);
+      setIsDone(!isDone);
     }
   }
 
@@ -91,33 +101,39 @@ function OrderItem({ product, onBtnHandler, orderId }) {
     <>
       {loading && <LoaderWheel />}
       <figure className={styles.order}>
-        <div className={styles.info}>
-          <h3 className={styles.brand}>
-            <span>Brand: </span>
-            {item.partType}
-          </h3>
+        <header className={styles.header}>
           <p className={styles.model}>
-            <span>Model: </span>
-            {item.partModel}
-          </p>
-        </div>
-        <div className={styles.info}>
-          <p className={styles.model}>
-            <span>Started on: </span>
-            {item.startedTime &&
-              item.startedTime
-                .toLocaleString()
-                .split(", ")[0]
-                .replaceAll("/", ".")}
+            <span>SN: </span>
+            {meta.serialNumber}
           </p>
           <p className={styles.model}>
-            <span>Finished on: </span>
-            {item.finishedTime &&
-              item.finishedTime.toLocaleString().split(", ")[0]}
+            <span>Date created: </span>
+            {meta.dateCreated}
           </p>
-          {/* <p className={styles.partId}>ID# {item.partId}</p> */}
-          <p className={styles.partId}>ID# {orderId + "-" + item.partId}</p>
-        </div>
+        </header>
+
+        {/* <div className={styles.info}> */}
+        <h3 className={styles.brand}>
+          <span>Brand: </span>
+          {item.partType}
+        </h3>
+        <p className={styles.model}>
+          <span>Model: </span>
+          {item.partModel}
+        </p>
+        {/* </div> */}
+        {/* <div className={styles.info}> */}
+        <p className={styles.model}>
+          <span>Started on: </span>
+          {item.startedTime && new Date(item.startedTime).toDateString()}
+        </p>
+        <p className={`${styles.model} ${styles.shortLine}`}>
+          <span>Finished on: </span>
+          {item.finishedTime && new Date(item.finishedTime).toDateString()}
+        </p>
+        {/* <p className={styles.partId}>ID# {item.partId}</p> */}
+        <p className={styles.partId}>ID# {orderId + "-" + item.partId}</p>
+        {/* </div> */}
 
         <div className={styles.timer}>
           <p className={styles.prod}>
@@ -144,13 +160,3 @@ function OrderItem({ product, onBtnHandler, orderId }) {
 }
 
 export default OrderItem;
-
-// {
-//   "partId": 2,
-//   "partType": "Wheel",
-//   "partModel": "Wheel of the Year",
-//   "nameOfEmplоyeeProducedThePart": " ",
-//   "isProduced": false,
-//   "startedTime": "",
-//   "finishedTime": ""
-// }
