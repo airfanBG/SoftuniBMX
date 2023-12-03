@@ -4,7 +4,6 @@
     using BicycleApp.Data;
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.Contracts.Factory;
-    using BicycleApp.Services.HelperClasses.Contracts;
     using BicycleApp.Services.Models.Order.OrderUser;
     using BicycleApp.Services.Models.Order.OrderUser.Contracts;
 
@@ -95,5 +94,6 @@
                 }).ToList()
             };
         }
+
     }
 }

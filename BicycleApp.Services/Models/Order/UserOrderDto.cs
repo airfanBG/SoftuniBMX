@@ -1,5 +1,7 @@
 ﻿namespace BicycleApp.Services.Models.Order
 {
+    using BicycleApp.Services.Models.Order.OrderUser;
+
     public class UserOrderDto
     {       
         public string ClientId { get; set; } = null!;      
