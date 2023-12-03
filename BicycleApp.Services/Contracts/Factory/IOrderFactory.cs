@@ -1,7 +1,7 @@
 ﻿namespace BicycleApp.Services.Contracts.Factory
 {
     using BicycleApp.Data.Models.EntityModels;
-    using BicycleApp.Services.Models.Order.OrderUser.Contracts;
+    using BicycleApp.Services.Models.Order;
 
     public interface IOrderFactory
     {
