@@ -26,7 +26,6 @@ function UserInfo() {
     function () {
       async function getClientInfo() {
         const data = await userInfo(user.id);
-        console.log(data);
         setInfo({ ...data });
         if (data.role === "user") {
           setInfo({ ...data, balance: Number(data.balance.toFixed(2)) });
@@ -56,37 +55,6 @@ function UserInfo() {
       reader.readAsDataURL(file);
     }
   }
-
-  // const handleFileUpload = (e) => {
-  //   const file = e.target.files[0];
-  //   if (file) {// https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_applications
-  //     const reader = new FileReader();
-  //     reader.onloadend = () => {
-  //       onUserImageUpload(reader.result);
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
-
-  // async function addMoneyBtnHandler() {
-  //   // TODO: make request to update user balance
-  //   //next is only for testing
-
-  //   const currentUser = await userInfo(user.id);
-
-  //   if (add === 0) return;
-  //   updateUser({ ...user, balance: user.balance + add });
-  //   setUserData({ ...user, balance: user.balance + add });
-  //   setAdd("");
-
-  //   const data = {
-  //     ...currentUser,
-  //     password: currentUser.repass,
-  //     balance: currentUser.balance + add,
-  //   };
-
-  //   const result = await updateUserData(user.id, data);
-  // }
 
   function addMoneyBtnHandler() {}
 
@@ -138,35 +106,10 @@ function UserInfo() {
           {!edit && <UserContactInfo info={info} setInfo={setInfo} />}
           {edit && (
             <EditContactInfo info={info} setInfo={setInfo} base64={base64} />
-            // <EditContactInfo  />
           )}
-          {/* {user.role === "user" && <UserContactInfo user={user} />} */}
-          {/* {user.role === "worker" && <WorkerContactInfo user={user} />} */}
-          {/* {user.role === "manager" && <ManagerContactInfo />} */}
         </div>
         <div className={styles.userInfoControl}>
           <div className={styles.infoWrapper}>
-            {/* {user.role === "user" && (
-              <>
-                {edit && (
-                  <input
-                    className={styles.addMoneyInput}
-                    type="number"
-                    value={add}
-                    onChange={(e) => setAdd(Number(e.target.value))}
-                    placeholder="00.00"
-                  />
-                )}
-                {edit && (
-                  <button
-                    className={styles.addMoney}
-                    onClick={addMoneyBtnHandler}
-                  >
-                    Add money
-                  </button>
-                )}
-              </>
-            )} */}
             <button
               className={styles.editBtn}
               onClick={!edit ? editBtnHandler : () => setEdit(false)}

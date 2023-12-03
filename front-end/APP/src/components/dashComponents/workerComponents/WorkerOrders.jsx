@@ -14,15 +14,34 @@ function WorkerOrders() {
   const [workerSequence, setWorkerSequence] = useState([]);
 
   useEffect(function () {
+    let orderArray;
+    const abortController = new AbortController();
     async function getJobs() {
       const workerSequence = await get("/production/");
-      setWorkerSequence(workerSequence);
+      // Worker will see only his own work
+      if (user.department === "Frames") {
+        orderArray = workerSequence.filter((x) => !x.orderStates[0].isProduced);
+      }
+      if (user.department === "Wheels") {
+        orderArray = workerSequence.filter(
+          (x) => x.orderStates[0].isProduced && !x.orderStates[1].isProduced
+        );
+      }
+      if (user.department === "Accessory") {
+        orderArray = workerSequence.filter(
+          (x) =>
+            x.orderStates[0].isProduced &&
+            x.orderStates[1].isProduced &&
+            !x.orderStates[2].isProduced
+        );
+      }
+      console.log(orderArray);
+
+      setWorkerSequence(orderArray);
     }
     getJobs();
 
-    return () => {
-      getJobs();
-    };
+    return () => abortController.abort();
   }, []);
 
   return (

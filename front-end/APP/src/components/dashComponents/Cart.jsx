@@ -25,31 +25,31 @@ function Cart() {
   const [userText, setUserText] = useState("");
   const [select, setSelect] = useState("");
   const [error, setError] = useState({});
+  const [headImg, setHeadImg] = useState({ frame: "", wheel: "", parts: "" });
 
-  const order = getOrderData();
   const navigate = useNavigate();
 
-  useEffect(function () {
-    if (!order) return;
-    setLoading(true);
-    async function getOrder() {
-      const { selectedFrame, selectedWheel, selectedPart } = order;
+  const order = getOrderData();
 
-      try {
-        const frame = await getOneFrame(Number(selectedFrame));
-        const wheel = await getOneWheel(Number(selectedWheel));
-        const parts = await getOnePart(Number(selectedPart));
-        setFrame({ ...frame });
-        setWheel({ ...wheel });
-        setParts({ ...parts });
-        setLoading(false);
-      } catch (err) {
-        console.error(err);
-        setLoading(false);
-      }
+  useEffect(function () {
+    const abortController = new AbortController();
+    setLoading(true);
+    const { frame, wheel, parts } = order;
+    if (!order) {
+      return setLoading(false);
     }
-    getOrder();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    setHeadImg({
+      ...headImg,
+      frame: frame.imageUrls[0],
+      wheel: wheel.imageUrls[0],
+      parts: parts.imageUrls[0],
+    });
+    setFrame({ ...frame });
+    setWheel({ ...wheel });
+    setParts({ ...parts });
+    setLoading(false);
+    return () => abortController.abort();
   }, []);
 
   function onChangeHandler(e) {
@@ -129,7 +129,7 @@ function Cart() {
             <div className={styles.userInfoWrapper}>
               <figure className={styles.mainInfo}>
                 <div className={styles.img}>
-                  <img src={frame.imageUrls[0]} alt="" />
+                  <img src={headImg.frame} alt="" />
                 </div>
                 <div className={styles.header}>
                   <h2 className={styles.heading}>{frame.name}</h2>
@@ -140,7 +140,7 @@ function Cart() {
 
               <figure className={styles.mainInfo}>
                 <div className={styles.img}>
-                  <img src={wheel.imageUrls} alt="" />
+                  <img src={headImg.wheel} alt="" />
                 </div>
                 <div className={styles.header}>
                   <h2 className={styles.heading}>{wheel.name}</h2>
@@ -151,7 +151,7 @@ function Cart() {
 
               <figure className={styles.mainInfo}>
                 <div className={styles.img}>
-                  <img src={parts.imageUrls} alt="" />
+                  <img src={headImg.parts} alt="" />
                 </div>
                 <div className={styles.header}>
                   <h2 className={styles.heading}>{parts.name}</h2>
