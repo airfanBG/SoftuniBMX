@@ -330,8 +330,44 @@
                 DateFinish = null,
                 StatusId = 1
             };
+            Order order2 = new Order()
+            {
+                Id = 2,
+                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                Description = "test2",
+                SaleAmount = 725.00M,
+                Discount = 0,
+                VAT = 125.00M,
+                FinalAmount = 850.00M,
+                PaidAmount = 0,
+                UnpaidAmount = 850.00M,
+                DateCreated = DateTime.Now,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false,
+                DateFinish = null,
+                StatusId = 1
+            };
+            Order order3 = new Order()
+            {
+                Id = 3,
+                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                Description = "test3",
+                SaleAmount = 825.00M,
+                Discount = 0,
+                VAT = 125.00M,
+                FinalAmount = 950.00M,
+                PaidAmount = 0,
+                UnpaidAmount = 750.00M,
+                DateCreated = DateTime.Now,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false,
+                DateFinish = null,
+                StatusId = 1
+            };
 
-            return new List<Order> { order };
+            return new List<Order> { order, order2, order3 };
         }
 
         public List<OrderPartEmployee> SeedOrdersPartsEmployees()
@@ -384,8 +420,105 @@
                 Description = "test",
                 IsCompleted = false
             };
+            OrderPartEmployee opeFrame2 = new OrderPartEmployee()
+            {
+                OrderId = 2,
+                SerialNumber = "BID12345679",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
+                PartId = 1,
+                EmployeeId = "21003785-a275-4139-ae20-af6a6cf8fea8",
+                PartName = "Frame OG",
+                PartPrice = 100.00M,
+                PartQuantity = 1,
+                DatetimeAsigned = DateTime.Now,
+                StartDatetime = null,
+                EndDatetime = null,
+                Description = "test",
+                IsCompleted = false
+            };
+            OrderPartEmployee opeWheel2 = new OrderPartEmployee()
+            {
+                OrderId = 2,
+                SerialNumber = "BID12345679",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
+                PartId = 4,
+                EmployeeId = "17063948-8fdc-417e-8fb7-2ae6bf572f94",
+                PartName = "Wheel of the Year for road",
+                PartPrice = 75.00M,
+                PartQuantity = 2,
+                DatetimeAsigned = null,
+                StartDatetime = null,
+                EndDatetime = null,
+                Description = "test",
+                IsCompleted = false
+            };
+            OrderPartEmployee opeAccessories2 = new OrderPartEmployee()
+            {
+                OrderId = 2,
+                SerialNumber = "BID12345679",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
+                PartId = 12,
+                EmployeeId = "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91",
+                PartName = "Shift",
+                PartPrice = 220.00M,
+                PartQuantity = 2,
+                DatetimeAsigned = null,
+                StartDatetime = null,
+                EndDatetime = null,
+                Description = "test",
+                IsCompleted = false
+            };
+            OrderPartEmployee opeFrame3 = new OrderPartEmployee()
+            {
+                OrderId = 3,
+                SerialNumber = "BID12345680",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
+                PartId = 1,
+                EmployeeId = null,
+                PartName = "Frame OG",
+                PartPrice = 100.00M,
+                PartQuantity = 1,
+                DatetimeAsigned = null,
+                StartDatetime = null,
+                EndDatetime = null,
+                Description = "test",
+                IsCompleted = false
+            };
+            OrderPartEmployee opeWheel3 = new OrderPartEmployee()
+            {
+                OrderId = 3,
+                SerialNumber = "BID12345680",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
+                PartId = 5,
+                EmployeeId = null,
+                PartName = "Wheel of the Year for montain",
+                PartPrice = 85.00M,
+                PartQuantity = 6,
+                DatetimeAsigned = null,
+                StartDatetime = null,
+                EndDatetime = null,
+                Description = "test",
+                IsCompleted = false
+            };
+            OrderPartEmployee opeAccessories3 = new OrderPartEmployee()
+            {
+                OrderId = 3,
+                SerialNumber = "BID12345680",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
+                PartId = 11,
+                EmployeeId = null,
+                PartName = "Road budget Shifts",
+                PartPrice = 290.00M,
+                PartQuantity = 4,
+                DatetimeAsigned = null,
+                StartDatetime = null,
+                EndDatetime = null,
+                Description = "test",
+                IsCompleted = false
+            };
             return new List<OrderPartEmployee> {
-                opeFrame, opeWheel, opeAccessories };
+                opeFrame, opeWheel, opeAccessories, opeFrame2, opeWheel2, opeAccessories2, opeFrame3, opeWheel3, opeAccessories3
+            };
         }
 
         public List<Part> SeedParts()

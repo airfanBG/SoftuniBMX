@@ -26,7 +26,7 @@
         {
             if (string.IsNullOrWhiteSpace(id))
             {
-                return BadRequest();
+                return StatusCode(400);
             }
 
             try
@@ -59,10 +59,10 @@
 
                 if (result)
                 {
-                    return NoContent();
+                    return StatusCode(204);
                 }
 
-                return BadRequest();
+                return StatusCode(400);       
             }
             catch (Exception)
             {
@@ -89,10 +89,10 @@
 
                 if (result)
                 {
-                    return NoContent();
+                    return StatusCode(204);
                 }
 
-                return BadRequest();
+                return StatusCode(400);
             }
             catch (Exception)
             {
