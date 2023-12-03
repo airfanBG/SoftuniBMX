@@ -843,7 +843,7 @@
                 new PartCategory()
                 {
                     Id = 3,
-                    Name = "Shift",
+                    Name = "Acsessories",
                     ImageUrl = "test",
                     DateCreated = DateTime.Now,
                     DateUpdated = null,
@@ -977,6 +977,90 @@
                     ClientId = "99d3ca6f-2067-4316-a5d7-934c93789521",
                     PartId = 10,
                     Rating = 5
+                },
+                new Rate()
+                {
+                    ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                    PartId = 11,
+                    Rating = 5
+                },
+                new Rate()
+                {
+                    ClientId = "99d3ca6f-2067-4316-a5d7-934c93789521",
+                    PartId = 11,
+                    Rating = 3
+                },
+                                new Rate()
+                {
+                    ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                    PartId = 12,
+                    Rating = 5
+                },
+                new Rate()
+                {
+                    ClientId = "99d3ca6f-2067-4316-a5d7-934c93789521",
+                    PartId = 12,
+                    Rating = 4
+                },
+                new Rate()
+                {
+                    ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                    PartId = 13,
+                    Rating = 4
+                },
+                new Rate()
+                {
+                    ClientId = "99d3ca6f-2067-4316-a5d7-934c93789521",
+                    PartId = 13,
+                    Rating = 5
+                },
+                new Rate()
+                {
+                    ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                    PartId = 14,
+                    Rating = 3
+                },
+                new Rate()
+                {
+                    ClientId = "99d3ca6f-2067-4316-a5d7-934c93789521",
+                    PartId = 14,
+                    Rating = 5
+                },
+                new Rate()
+                {
+                    ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                    PartId = 15,
+                    Rating = 4
+                },
+                new Rate()
+                {
+                    ClientId = "99d3ca6f-2067-4316-a5d7-934c93789521",
+                    PartId = 15,
+                    Rating = 4
+                },
+                new Rate()
+                {
+                    ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                    PartId = 16,
+                    Rating = 3
+                },
+                new Rate()
+                {
+                    ClientId = "99d3ca6f-2067-4316-a5d7-934c93789521",
+                    PartId = 16,
+                    Rating = 5
+                },
+                new Rate()
+                {
+                    ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                    PartId = 17,
+                    Rating = 3
+                },
+                new Rate()
+                {
+                    ClientId = "99d3ca6f-2067-4316-a5d7-934c93789521",
+                    PartId = 17,
+                    Rating = 2
                 },
             };
         }
