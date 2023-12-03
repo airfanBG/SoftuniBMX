@@ -66,7 +66,7 @@
                     }
                     totalVAT += Math.Round(((currentProductTotalPrice - currentProductTotalDiscount) * vatCategory.VATPercent) / (100 + vatCategory.VATPercent), 2);
                     decimal productPrice = currentPart.SalePrice - currentPart.Discount;
-                    var currentOrderPartToSave = _orderFactory.CreateOrderPartFromUserOrder(currentPart.Name, 1, orderPart.PartId, productPrice, order.Description);
+                    var currentOrderPartToSave = _orderFactory.CreateOrderPartFromUserOrder(currentPart.Name, 1, orderPart.PartId, productPrice);
                     newOrder.OrderParts.Add(currentOrderPartToSave);
                 }
 
@@ -143,7 +143,7 @@
 
                     foreach (var orderPart in newOrder.OrderParts)
                     {
-                        var ope = await _orderFactory.CreateOrderPartEmployeeProduct(newOrder.OrderId, guidKey, serialNumber, orderPart.PartId, orderPart.PartName, orderPart.PartQuantity, orderPart.PartPrice, orderPart.Descrioption);
+                        var ope = await _orderFactory.CreateOrderPartEmployeeProduct(newOrder.OrderId, guidKey, serialNumber, orderPart.PartId, orderPart.PartName, orderPart.PartQuantity, orderPart.PartPrice);
 
                         orderPartEmployeeCollection.Add(ope);
                     }
@@ -207,5 +207,6 @@
                 await _db.SaveChangesAsync();
             }
         }
+
     }
 }

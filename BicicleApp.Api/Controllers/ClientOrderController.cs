@@ -4,7 +4,7 @@
     using BicycleApp.Services.Models.Order.OrderUser;
     using Microsoft.AspNetCore.Mvc;
 
-    [Route("api/[controller]")]
+    [Route("api/client_order")]
     [ApiController]
     public class ClientOrderController : ControllerBase
     {
@@ -13,6 +13,7 @@
         {
             _userService = userService;
         }
+
 
         [HttpPost("create")]
         public async Task<ActionResult<SuccessOrderInfo>> UserCreateOrder([FromBody]UserOrderDto userOrder)
@@ -38,12 +39,12 @@
         }
 
         [HttpPost("progress")]
-        public async Task<ActionResult<ICollection<OrderProgretionDto>>> GetOrderProgress(string userId)
+        public async Task<ActionResult<ICollection<OrderProgretionDto>>> GetOrderProgress([FromQuery]string id)
         {           
-            var userOrdersProgression = await _userService.GetOrdersProgresions(userId);
+            var userOrdersProgression = await _userService.GetOrdersProgresions(id);
 
             if (userOrdersProgression != null)
-            {
+        {
                 return Ok(userOrdersProgression);
             }
 
@@ -57,5 +58,6 @@
 
             return Ok();
         }
+
     }
 }

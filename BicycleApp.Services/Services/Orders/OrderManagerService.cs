@@ -23,7 +23,7 @@
             _stringManipulator = stringManipulator;
             _dateTimeProvider = dateTimeProvider;
         }
-
+        
 
         /// <summary>
         /// Manager accept order and assign it to employee.
@@ -78,7 +78,7 @@
                                                                               && (o.IsDeleted == false && o.DateDeleted.Equals(null)))
                                 .Select(ope => new OrderInfoDto
                                 {
-                                    OrderId = ope.Id,
+                                    Id = ope.Id,
                                     SerialNumber = ope.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
                                     OrderParts = ope.OrdersPartsEmployees
                                                 .Select(orderPart => new OrderPartInfoDto
@@ -115,13 +115,88 @@
                 int partsNeeded = partsInOrder - quantityOfPartInStock;
 
                 return partsNeeded;
-            }
+                }
             catch (Exception ex)
             {
                 throw new ApplicationException("Database can't retrive data", ex);
             }
 
         }
+
+        ///// <summary>
+        ///// Change status of existing order.
+        ///// </summary>
+        ///// <param name="orderId"></param>
+        ///// <param name="newStatusId"></param>
+        ///// <returns>Task<bool></returns>
+        //public async Task<bool> ChangeStatus(int orderId, int newStatusId)
+        //{
+        //    try
+        //    {
+        //        var order = await _db.Orders.FirstAsync(o => o.Id == orderId);
+        //        order.StatusId = newStatusId;
+        //        order.DateUpdated = DateTime.UtcNow;
+
+        //        _db.Orders.Update(order);
+        //        await _db.SaveChangesAsync();
+
+        //        return true;
+        //    }
+        //    catch (Exception)
+        //    {
+        //    }
+        //    return false;
+        //}
+        //public async Task EmployeeEndProduction(string employeeId, int orderId, int partId)
+        //{
+        //    try
+        //    {
+        //        var finishedPart = await _db.OrdersPartsEmployees
+        //                                .FirstAsync(ope => ope.EmployeeId == employeeId
+        //                                                   && ope.OrderId == orderId
+        //                                                   && ope.PartId == partId);
+
+        //        finishedPart.EndDatetime = DateTime.UtcNow;
+        //        finishedPart.IsCompleted = true;
+
+        //        _db.OrdersPartsEmployees.Update(finishedPart);
+        //        await _db.SaveChangesAsync();
+        //    }
+        //    catch (Exception)
+        //    {
+        //    }
+        //}
+        //public async Task EmployeeStartProduction(string employeeId, int orderId, int partId)
+        //{
+        //    try
+        //    {
+        //        var finishedPart = await _db.OrdersPartsEmployees
+        //                                .FirstAsync(ope => ope.EmployeeId == employeeId
+        //                                                   && ope.OrderId == orderId
+        //                                                   && ope.PartId == partId);
+
+        //        finishedPart.StartDatetime = DateTime.UtcNow;
+
+        //        _db.OrdersPartsEmployees.Update(finishedPart);
+        //        await _db.SaveChangesAsync();
+        //    }
+        //    catch (Exception)
+        //    {
+        //    }
+        //}
+
+        //public async Task<ICollection<EmployeePartTaskDto>> EmployeeUnfinishedTask(string employeeId)
+        //{
+        //    var listOfTask = await _db.OrdersPartsEmployees
+        //                              .AsNoTracking()
+        //                              .Where(ope => ope.EmployeeId == employeeId && ope.EndDatetime == null && ope.IsCompleted == false)
+        //                              .Select(ope => new EmployeePartTaskDto
+        //                              {
+        //                                  PartName = ope.Part.Name
+        //                              })
+        //                              .ToListAsync();
+        //    return listOfTask;
+        //}
 
         /// <summary>
         /// Get orders in specific period.
@@ -137,7 +212,7 @@
                                      && o.DateFinish <= datesPeriod.EndDate)
                             .Select(o => new OrderInfoDto()
                             {
-                                OrderId = o.Id,
+                                Id = o.Id,
                                 SerialNumber = o.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault()
                             })
                             .ToListAsync();
@@ -214,7 +289,7 @@
             {
                 throw new ApplicationException("Database can't retrive data", ex);
             }
-        }
+            }
 
         /// <summary>
         /// The method returns all rejected orders (painding for a part delivery)
@@ -229,7 +304,7 @@
                                                                               && o.DateDeleted.Equals(null)))
                                 .Select(ope => new OrderInfoDto
                                 {
-                                    OrderId = ope.Id,
+                                    Id = ope.Id,
                                     SerialNumber = ope.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
                                     OrderParts = ope.OrdersPartsEmployees
                                                 .Select(orderPart => new OrderPartInfoDto
@@ -324,5 +399,6 @@
             }
             return false;
         }
+       
     }
 }
