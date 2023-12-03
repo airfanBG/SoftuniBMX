@@ -1,18 +1,17 @@
 ﻿namespace BicycleApp.Services.Contracts
 {
-    using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.Models.Order.OrderManager;
 
     public interface IOrderManagerService
     {
         Task<bool> AcceptAndAssignOrderByManagerAsync(int orderId);
         Task<ICollection<OrderInfoDto>> AllPendingOrdersAsync();
-        Task<ICollection<OrderInfoDto>> GetAllFinishedOrdersForPeriod(FinishedOrdersDto datesPeriod);
         Task<int> ArePartsNeeded(int partsInOrder, int partInStockId);
+        Task<ICollection<OrderInfoDto>> GetAllFinishedOrdersForPeriod(FinishedOrdersDto datesPeriod);
         Task ManagerDeleteOrder(int orderId);
-        Task<string> SetEmployeeToPart(int partId);
         Task <ICollection<OrderPartDeliveryDto>> RejectOrderAsync(int orderId);
         Task<ICollection<OrderInfoDto>> AllRejectedOrdersAsync();
+        Task<string> SetEmployeeToPart(int partId);
 
         Task<bool> AcceptAndAssignRejectedOrderByManagerAsync(int orderId);
 

@@ -4,7 +4,7 @@
 
     public class OrderProgretionDto
     {
-        [JsonPropertyName("id")]
+        [JsonPropertyName("orderId")]
         public int OrderId { get; set; }
         public string SerialNumber { get; set; } = null!;
         public string DateCreated { get; set; } = null!;

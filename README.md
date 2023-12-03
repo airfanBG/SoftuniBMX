@@ -20,9 +20,9 @@
 ### [`GET /api/accountpage/selected_part`](/ReadMeFiles/AccountPage/SelectedPart.md)
 - ClientOrderController дава възсможността на потребителя на създава, преглежда и изтрива поръчки, направени от него.
 
-### [`POST /api/ClientOrder/create`](/ReadMeFiles/ClientOrder/Create.md)
-### [`POST /api/ClientOrder/progress`](/ReadMeFiles/ClientOrder/Progress.md)
-### [`POST /api/ClientOrder/delete`](/ReadMeFiles/ClientOrder/Delete.md)
+### [`POST /api/client_order/create`](/ReadMeFiles/ClientOrder/Create.md)
+### [`POST /api/client_order/progress`](/ReadMeFiles/ClientOrder/Progress.md)
+### [`POST /api/client_order/delete`](/ReadMeFiles/ClientOrder/Delete.md)
 
 
 1. Response:

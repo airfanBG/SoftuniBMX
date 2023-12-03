@@ -1,5 +1,6 @@
+[Обратно към ReadMe](/README.md)
 
-# `POST /api/ClientOrder/progress`
+# `POST /api/client_order/progress`
 Екшън, следящ прогреса на поръчките, направени от клиент.
 
 ## Request
@@ -57,3 +58,4 @@ https://localhost:7047/api/ClientOrder/progress?id=17ce735d-6713-4d0a-8fcb-e4a71
     }
 ]
 ```
+[Обратно към ReadMe](/README.md)
