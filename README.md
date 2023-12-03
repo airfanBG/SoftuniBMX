@@ -61,58 +61,58 @@ GET /api/accountpage/compatible_parts?id=1
 
 ```json
 	
+se body
 Download
 [
   {
     "id": 4,
     "name": "Wheel of the Year for road",
+    "category": "Wheel",
     "description": "Best wheels ever!",
     "intend": "Best wheels for a road usage",
     "imageUrls": [],
     "oemNumber": "oemtest",
-    "rating": [
-      3,
-      4
-    ],
+    "rating": 4,
     "type": 1,
     "salePrice": 75
   },
   {
     "id": 7,
     "name": "Shift",
+    "category": "Acsessories",
     "description": "Worst shift - have only one!",
     "intend": "Base shift - have only one",
     "imageUrls": [],
     "oemNumber": "oemtest",
-    "rating": [
-      5,
-      6
-    ],
+    "rating": 6,
     "type": 1,
     "salePrice": 250
   },
   {
     "id": 12,
     "name": "Shift",
+    "category": "Acsessories",
     "description": "Cheap standard shift!",
     "intend": "Cheap standard shift for a road usage",
     "imageUrls": [],
     "oemNumber": "oemtest21",
-    "rating": [],
+    "rating": 5,
     "type": 1,
     "salePrice": 220
   },
   {
     "id": 14,
     "name": "Budget wheel for road",
+    "category": "Wheel",
     "description": "Budget wheel ever!",
     "intend": "Budget wheel for a road usage",
     "imageUrls": [],
     "oemNumber": "oemtest34",
-    "rating": [],
+    "rating": 4,
     "type": 1,
     "salePrice": 65
- ]
+  }
+]
 
 ```
 
@@ -125,20 +125,20 @@ GET /api/accountpage/selected_part?id=1
 3. Response:
 
 ```json
+	
+Response body
+Download
 {
   "id": 1,
   "name": "Frame Road",
+  "category": "Frame",
   "description": "Best frame in the road!",
   "intend": "For road usage",
   "imageUrls": [
     "test"
   ],
   "oemNumber": "oemtest",
-  "rating": [
-    3,
-    4,
-    5
-  ],
+  "rating": 4,
   "type": 1,
   "salePrice": 100
 }
