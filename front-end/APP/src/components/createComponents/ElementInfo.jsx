@@ -14,7 +14,7 @@ function ElementInfo({ data }) {
 
         <div className={styles.info}>
           <span className={styles.label}>Model/OEM number</span>
-          {data.OEMNumber}
+          {data.oemNumber}
         </div>
       </div>
       <div className={styles.price}>

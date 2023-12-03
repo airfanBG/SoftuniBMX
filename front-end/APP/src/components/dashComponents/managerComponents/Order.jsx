@@ -62,7 +62,7 @@ function Order({ order }) {
               </p>
               <p className={styles.content}>
                 <span>OEM Number:</span>
-                {frame.OEMNumber}
+                {frame.oemNumber}
               </p>
               <p className={styles.qty}>Qty: 2</p>
             </div>
@@ -74,7 +74,7 @@ function Order({ order }) {
               </p>
               <p className={styles.content}>
                 <span>OEM Number:</span>
-                {wheel.OEMNumber}
+                {wheel.oemNumber}
               </p>
               <p className={styles.qty}>Qty: 2</p>
             </div>
@@ -86,7 +86,7 @@ function Order({ order }) {
               </p>
               <p className={styles.content}>
                 <span>OEM Number:</span>
-                {accessory.OEMNumber}
+                {accessory.oemNumber}
               </p>
               <p className={styles.qty}>Qty: 2</p>
             </div>

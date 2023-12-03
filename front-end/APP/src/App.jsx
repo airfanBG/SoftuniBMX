@@ -36,7 +36,7 @@ function App() {
               <Route path={"user-ready"} element={<Cart />} />
               <Route path={"user-in-progress"} element={<Cart />} />
               <Route path={"user-archive"} element={<Cart />} />
-              <Route path="workerOrders" element={<WorkerOrders />} />
+              <Route path="worker-orders" element={<WorkerOrders />} />
               <Route path={"finished"} element={<WorkerFinished />} />
               <Route path={"managerOrders"} element={<ManagerOrders />} />
               <Route path={"manager-in-progress"} element={<InProgress />} />

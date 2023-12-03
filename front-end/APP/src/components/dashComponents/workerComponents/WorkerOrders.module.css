@@ -38,9 +38,9 @@
 }
 
 .orders {
-  padding: 1rem 0;
-}
-
-.selected {
-  color: red;
+  /* background-color: aqua; */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 4rem 0;
 }

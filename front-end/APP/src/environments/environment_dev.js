@@ -17,6 +17,7 @@ export const environment = {
 
   // TODO: change to project path
   get_all_in_progress: "/inProgress/",
+  in_progress: "/production/",
   GET_ALL_INTENDED: "/",
   indexPage: "/indexPage",
   frames: "/frames/",

@@ -75,7 +75,7 @@ function Login() {
     try {
       setIsLoading(true);
       const result = await login(user);
-      console.log(result);
+      // console.log(result);
 
       // setValues({
       //   email: "",

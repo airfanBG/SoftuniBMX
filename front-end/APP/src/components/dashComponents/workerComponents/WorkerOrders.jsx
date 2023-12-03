@@ -4,57 +4,66 @@ import styles from "./WorkerOrders.module.css";
 
 import { get } from "../../../util/api.js";
 import OrderItem from "../OrderItem.jsx";
-// import { UserContext } from "../UserProfile.jsx";
-import Category from "../Category.jsx";
 import BoardHeader from "../BoardHeader.jsx";
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 
 function WorkerOrders() {
   const { user } = useContext(UserContext);
-  const [workerSequence, setWorkerSequence] = useState([]);
+  const [workerList, setWorkerList] = useState([]);
+  const [isFinished, setIsFinished] = useState(false);
 
-  useEffect(function () {
-    let orderArray;
-    const abortController = new AbortController();
-    async function getJobs() {
-      const workerSequence = await get("/production/");
-      // Worker will see only his own work
-      if (user.department === "Frames") {
-        orderArray = workerSequence.filter((x) => !x.orderStates[0].isProduced);
+  useEffect(
+    function () {
+      let orderArray;
+      const abortController = new AbortController();
+      async function getJobs() {
+        const workerSequence = await get("/production/");
+        // Worker will see only his own work
+        if (user.department === "Frames") {
+          orderArray = workerSequence.filter(
+            (x) => !x.orderStates[0].isProduced
+          );
+        } else if (user.department === "Wheels") {
+          orderArray = workerSequence.filter(
+            (x) => x.orderStates[0].isProduced && !x.orderStates[1].isProduced
+          );
+        } else if (user.department === "Accessory") {
+          orderArray = workerSequence.filter(
+            (x) =>
+              x.orderStates[0].isProduced &&
+              x.orderStates[1].isProduced &&
+              !x.orderStates[2].isProduced
+          );
+        }
+        // console.log(workerSequence);
+        setWorkerList(orderArray);
       }
-      if (user.department === "Wheels") {
-        orderArray = workerSequence.filter(
-          (x) => x.orderStates[0].isProduced && !x.orderStates[1].isProduced
-        );
-      }
-      if (user.department === "Accessory") {
-        orderArray = workerSequence.filter(
-          (x) =>
-            x.orderStates[0].isProduced &&
-            x.orderStates[1].isProduced &&
-            !x.orderStates[2].isProduced
-        );
-      }
-      console.log(orderArray);
+      getJobs();
 
-      setWorkerSequence(orderArray);
-    }
-    getJobs();
-
-    return () => abortController.abort();
-  }, []);
-
+      return () => abortController.abort();
+    },
+    [isFinished]
+  );
+  function onBtnHandler() {
+    setIsFinished(!isFinished);
+    console.log("rerender");
+  }
   return (
     <>
       <h2 className={styles.dashHeading}>Orders in sequence</h2>
       <section className={styles.board}>
         <BoardHeader />
         <div className={styles.orders}>
-          {workerSequence.length > 0 &&
-            workerSequence.map((order) => (
-              <OrderItem {...order} key={order.id} />
+          {workerList.length > 0 &&
+            workerList.map((order) => (
+              <OrderItem
+                product={order}
+                key={order.id}
+                onBtnHandler={onBtnHandler}
+                orderId={order.id}
+              />
             ))}
-          {workerSequence.length === 0 && (
+          {workerList.length === 0 && (
             <h2>There is no orders in this category</h2>
           )}
         </div>

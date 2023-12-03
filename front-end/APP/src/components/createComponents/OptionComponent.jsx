@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./OptionComponent.module.css";
 
 function OptionComponent({ optionData }) {
-  const { description, salesPrice, id, name, OEMNumber, imageUrl, rating } =
+  const { description, salesPrice, id, name, oemNumber, imageUrl, rating } =
     optionData;
 
   return (
