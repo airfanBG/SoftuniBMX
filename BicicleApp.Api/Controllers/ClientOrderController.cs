@@ -3,10 +3,9 @@
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.Contracts.OrderContracts;
     using BicycleApp.Services.Models.Order.OrderUser;
-    using Newtonsoft.Json;
     using Microsoft.AspNetCore.Mvc;
 
-    [Route("api/[controller]")]
+    [Route("api/client_order")]
     [ApiController]
     public class ClientOrderController : ControllerBase
     {

@@ -55,7 +55,7 @@ namespace BicicleApp.Api.Controllers
 
             try
             {
-                await _orderManagerService.ManagerOrderRejection(orderId);
+                await _orderManagerService.ManagerDeleteOrder(orderId);
 
                 return Ok();
             }

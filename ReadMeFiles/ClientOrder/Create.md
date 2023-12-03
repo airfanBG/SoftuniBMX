@@ -1,5 +1,7 @@
 
-# `POST /api/ClientOrder/create`
+[Обратно към ReadMe](/README.md)
+
+# `POST /api/client_order/create`
 Екшън, който създрава поръчка, на база избраните части и тяхното количество от клиент.
 
 ## Request
@@ -85,3 +87,5 @@
     ]
 }
 ```
+
+[Обратно към ReadMe](/README.md)
