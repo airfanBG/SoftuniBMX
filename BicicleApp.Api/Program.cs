@@ -103,9 +103,15 @@ namespace BicicleApp.Api
             builder.Services.AddScoped<IUserFactory, UserFactory>();
             builder.Services.AddScoped<IOrderManagerService, OrderManagerService>();
             builder.Services.AddScoped<IOrderUserService, OrderUserService>();
+            builder.Services.AddScoped<IOrderFactory, OrderFactory>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddScoped<IImageStore, ImageStore>();
             builder.Services.AddScoped<IPictureOrganizerServices, PictureOrganizerServices>();
+            builder.Services.AddScoped<IOptionProvider, OptionProvider>();
+            builder.Services.AddScoped<IStringManipulator, StringManipulator>();
+            builder.Services.AddScoped<IDateTimeProvider, DateTimeProvider>();
+            builder.Services.AddScoped<IDateTimeProvider, DateTimeProvider>();
+            builder.Services.AddScoped<IGuidProvider, GuidProvider>();
 
             var app = builder.Build();
 

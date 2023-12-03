@@ -1,6 +1,5 @@
 ﻿namespace BicicleApp.Api.Controllers
 {
-    using BicycleApp.Services.Contracts;
     using BicycleApp.Services.Contracts.OrderContracts;
     using BicycleApp.Services.Models.Order.OrderUser;
     using Microsoft.AspNetCore.Mvc;
@@ -13,7 +12,6 @@
         public ClientOrderController(IOrderUserService userService)
         {
             _userService = userService;
-            _emailSender = emailSender;
         }
 
 
