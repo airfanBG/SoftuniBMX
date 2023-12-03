@@ -87,12 +87,12 @@ namespace BicicleApp.Api.Controllers
                 if (id <= 0)
                 {
                     // The id is not valid, so return a 400 Bad Request response
-                    return StatusCode(400);
+                    return BadRequest();
                 }
 
                 var model = await _dropdownsContentService.GetPartByIdAsync(id);
 
-                return StatusCode(200, model);
+                return Ok(model);
             }
             catch (Exception)
             {

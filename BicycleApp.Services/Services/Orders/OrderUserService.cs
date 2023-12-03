@@ -12,6 +12,9 @@
     using Microsoft.EntityFrameworkCore;
     using static BicycleApp.Common.ApplicationGlobalConstants;
 
+    using Microsoft.EntityFrameworkCore;
+
+    using System.Text;
     public class OrderUserService : IOrderUserService
     {
         private readonly BicycleAppDbContext _db;
@@ -20,7 +23,7 @@
         private readonly IGuidProvider _guidProvider;
         private readonly IDateTimeProvider _dateTimeProvider;
 
-        public OrderUserService(BicycleAppDbContext db,
+        public OrderUserService(BicycleAppDbContext db, 
                                 IStringManipulator stringManipulator,
                                 IOrderFactory orderFactory,
                                 IGuidProvider guidProvider,
@@ -46,6 +49,12 @@
                 newOrder.ClientId = order.ClientId;
                 newOrder.StatusId = 1;
                 newOrder.OrderQuantity = order.OrderQuantity;
+
+                var orderToSave = _orderFactory.CreateUserOrder();
+                orderToSave.ClientId = order.ClientId;
+                orderToSave.DateCreated = _dateTimeProvider.Now;
+                orderToSave.SerialNumber = serialNumber;
+                orderToSave.StatusId = 1;
 
                 decimal totalAmount = 0M;
                 decimal totalDiscount = 0M;
@@ -83,6 +92,11 @@
                 {
                     return newOrder;
                 }
+
+                await _db.OrdersPartsEmployees.AddRangeAsync(orderPartEmployeeCollection);
+                await _db.SaveChangesAsync();
+
+                return true;
             }
             catch (Exception)
             {
@@ -117,7 +131,7 @@
                                                    PartModel = ope.Part.Name,
                                                    PartType = ope.Part.Category.Name,
                                                    PartId = ope.PartId
-
+                                                   
                                                }).ToList()
                             })
                             .ToListAsync();
@@ -142,7 +156,7 @@
                     string guidKey = _guidProvider.CreateGuid();
 
                     foreach (var orderPart in newOrder.OrderParts)
-                    {
+        {
                         var ope = await _orderFactory.CreateOrderPartEmployeeProduct(newOrder.OrderId, guidKey, serialNumber, orderPart.PartId, orderPart.PartName, orderPart.PartQuantity, orderPart.PartPrice);
 
                         orderPartEmployeeCollection.Add(ope);
@@ -183,11 +197,11 @@
         /// <param name="successOrder"></param>
         /// <returns>ISuccessOrderInfo</returns>
         public ISuccessOrderInfo SuccessCreatedOrder(IOrderPartsEmplyee successOrder)
-        {
+            {
             var successOrderItems = _orderFactory.CreateSuccessOrderItems(successOrder);
 
             return successOrderItems;
-        }
+            }
 
         /// <summary>
         /// Order is deleted by user selection.
@@ -206,7 +220,7 @@
 
                 await _db.SaveChangesAsync();
             }
-        }
+        }       
 
     }
 }

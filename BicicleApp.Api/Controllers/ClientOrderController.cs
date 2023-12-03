@@ -1,5 +1,6 @@
 ﻿namespace BicicleApp.Api.Controllers
 {
+    using BicycleApp.Services.Contracts;
     using BicycleApp.Services.Contracts.OrderContracts;
     using BicycleApp.Services.Models.Order.OrderUser;
     using Newtonsoft.Json;
@@ -13,6 +14,7 @@
         public ClientOrderController(IOrderUserService userService)
         {
             _userService = userService;
+            _emailSender = emailSender;
         }
 
         [HttpPost("create")]
@@ -44,7 +46,7 @@
             var userOrdersProgression = await _userService.GetOrdersProgresions(id);
 
             if (userOrdersProgression != null)
-            {
+        {
                 return Ok(userOrdersProgression);
             }
 
@@ -58,5 +60,6 @@
 
             return Ok();
         }
+
     }
 }

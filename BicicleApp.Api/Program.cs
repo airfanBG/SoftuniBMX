@@ -105,15 +105,7 @@ namespace BicicleApp.Api
             builder.Services.AddScoped<IOrderUserService, OrderUserService>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddScoped<IImageStore, ImageStore>();
-            builder.Services.AddScoped<IPictureOrganizerServices, PictureOrganizerServices>();  
-            builder.Services.AddScoped<IDropdownsContentService, DropdownsContentService>();
             builder.Services.AddScoped<IPictureOrganizerServices, PictureOrganizerServices>();
-            builder.Services.AddScoped<IStringManipulator, StringManipulator>();
-            builder.Services.AddScoped<IOrderFactory, OrderFactory>();
-            builder.Services.AddScoped<IEmployeeOrderService, EmployeeOrderService>();
-            builder.Services.AddScoped<IDateTimeProvider, DateTimeProvider>();
-            builder.Services.AddScoped<IOptionProvider, OptionProvider>();
-            builder.Services.AddScoped<IGuidProvider, GuidProvider>();
 
             var app = builder.Build();
 
@@ -133,6 +125,7 @@ namespace BicicleApp.Api
             app.MapControllers();
 
             app.Run();
+
         }
     }
 }
