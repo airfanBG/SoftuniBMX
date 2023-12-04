@@ -84,7 +84,9 @@
         {
             try
             {
-                var partToManufacturing = await _db.OrdersPartsEmployees.FirstAsync(ope => ope.OrderId == remanufacturingOrderPartDto.OrderId 
+                var partToManufacturing = await _db.OrdersPartsEmployees
+                                                   .Include(e => e.Employee)
+                                                   .FirstAsync(ope => ope.OrderId == remanufacturingOrderPartDto.OrderId 
                                                                                            && ope.PartId == remanufacturingOrderPartDto.PartId);
 
                 partToManufacturing.StartDatetime = null;
