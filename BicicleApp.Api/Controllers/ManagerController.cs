@@ -25,7 +25,6 @@ namespace BicicleApp.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> PendingOrders()
         {
-
             try
             {
                 var model = await _orderManagerService.AllPendingOrdersAsync();

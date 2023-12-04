@@ -112,6 +112,8 @@ namespace BicicleApp.Api
             builder.Services.AddScoped<IDateTimeProvider, DateTimeProvider>();
             builder.Services.AddScoped<IDateTimeProvider, DateTimeProvider>();
             builder.Services.AddScoped<IGuidProvider, GuidProvider>();
+            builder.Services.AddScoped<IQualityAssuranceService, QualityAssuranceService>();
+            builder.Services.AddScoped<IEmployeeOrderService, EmployeeOrderService>();
 
             var app = builder.Build();
 

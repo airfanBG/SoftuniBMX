@@ -55,6 +55,7 @@
 
                 var order = await _db.Orders.FirstAsync(o => o.Id == orderId);
                 order.DateUpdated = _dateTimeProvider.Now;
+                order.StatusId++;
 
                 await _db.SaveChangesAsync();
 
