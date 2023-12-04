@@ -43,7 +43,7 @@
                     int arePartsNeeded = await ArePartsNeeded(orderPartEmployee.PartQuantity, orderPartEmployee.PartId);
 
                     //Checks for available quantity
-                    if (arePartsNeeded <= 0)
+                    if (arePartsNeeded > 0)
                     {
                         return false;
                     }
@@ -68,7 +68,7 @@
         }
 
         /// <summary>
-        /// Return order, where all parts are assign to employee.
+        /// Return orders, where all waiting for a manager approvement.
         /// </summary>
         /// <returns>Task<ICollection<OrderInfoDto>></returns>
         public async Task<ICollection<OrderInfoDto>> AllPendingOrdersAsync()
@@ -97,6 +97,36 @@
             return listOfPendingOrders;
         }
 
+        /// <summary>
+        /// Return orders, where all parts are assign to employee.
+        /// </summary>
+        /// <returns>Task<ICollection<OrderInfoDto>></returns>
+        public async Task<ICollection<OrderInfoDto>> AllOrdersInProgressAsync()
+        {
+            var listOfPendingOrders = await _db.Orders
+                                .AsNoTracking()
+                                .Where(o => o.OrdersPartsEmployees.Any(ope => ope.EmployeeId != null
+                                                                              && ope.DatetimeAsigned != null)
+                                                                              && (o.IsDeleted == false && o.DateDeleted.Equals(null)))
+                                .Select(ope => new OrderInfoDto
+                                {
+                                    OrderId = ope.Id,
+                                    SerialNumber = ope.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
+                                    OrderParts = ope.OrdersPartsEmployees
+                                                .Select(orderPart => new OrderPartInfoDto
+                                                {
+                                                    PartId = orderPart.PartId,
+                                                    Descrioption = _stringManipulator.GetTextFromProperty(orderPart.Description),
+                                                    PartName = orderPart.PartName,
+                                                    PartQuantity = orderPart.PartQuantity,
+                                                    PartQunatityInStock = orderPart.Part.Quantity
+                                                })
+                                                .ToList()
+                                })
+                                .ToListAsync();
+
+            return listOfPendingOrders;
+        }
         /// <summary>
         /// Check for available parts in store for current order.
         /// </summary>
@@ -207,7 +237,7 @@
         /// <returns>Task<ICollection<OrderInfoDto>></returns>
         public async Task<ICollection<OrderInfoDto>> GetAllFinishedOrdersForPeriod(FinishedOrdersDto datesPeriod)
         {
-            return await _db.Orders
+            var result =  await _db.Orders
                             .AsNoTracking()
                             .Where(o => o.DateCreated >= datesPeriod.StartDate
                                      && o.DateFinish <= datesPeriod.EndDate)
@@ -217,6 +247,8 @@
                                 SerialNumber = o.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault()
                             })
                             .ToListAsync();
+
+            return result;
         }
 
         /// <summary>
@@ -348,7 +380,7 @@
                     var employee = await _db.Employees.FirstAsync(e => e.Position == "Wheelworker");
                     return employee.Id;
                 }
-                else if (partType.ToLower() == "shift")
+                else if (partType.ToLower() == "acsessories")
                 {
                     var employee = await _db.Employees.FirstAsync(e => e.Position == "Accessoriesworker");
                     return employee.Id;
