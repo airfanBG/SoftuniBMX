@@ -77,14 +77,16 @@ namespace BicycleApp.Services.Services
                 {
                     Id = p.Id,
                     Name = p.Name,
+                    Category = p.Category.Name,
                     Description = p.Description,
                     Intend = p.Intend,
                     Type = p.Type,
                     SalePrice = p.SalePrice,
                     OEMNumber = p.OEMNumber,
-                    Rating = p.Rates
-                                    .Where(r=>r.PartId == p.Id)
-                                    .Select(r => r.Rating).ToList()
+                    Rating = (int)Math.Ceiling(p.Rates
+                                    .Where(r => r.PartId == p.Id)
+                                    .Select(r => r.Rating)
+                                    .Average())
 
                 })
                 .ToListAsync();
@@ -94,7 +96,7 @@ namespace BicycleApp.Services.Services
             catch (Exception ex)
             {
 
-                throw new ArgumentException("Database can't retrive data");
+                throw new ArgumentException("Database can't retrive data", ex);
             }
         }
         /// <summary>
@@ -119,14 +121,16 @@ namespace BicycleApp.Services.Services
                 {
                     Id = p.Id,
                     Name = p.Name,
+                    Category = p.Category.Name,
                     Description = p.Description,
                     Intend = p.Intend,
                     Type = p.Type,
                     SalePrice = p.SalePrice,
                     OEMNumber = p.OEMNumber,
-                    Rating = p.Rates
+                    Rating = (int)Math.Ceiling(p.Rates
                                     .Where(r => r.PartId == p.Id)
-                                    .Select(r => r.Rating).ToList()
+                                    .Select(r => r.Rating)
+                                    .Average())
                 })
                 .FirstAsync();
 
@@ -138,7 +142,7 @@ namespace BicycleApp.Services.Services
             catch (Exception ex)
             {
 
-                throw new ArgumentException("Database can't retrive data");
+                throw new ArgumentException("Database can't retrive data", ex);
             }
         }
 
