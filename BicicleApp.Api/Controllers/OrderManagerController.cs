@@ -45,6 +45,34 @@ namespace BicicleApp.Api.Controllers
         }
 
         [HttpGet]
+        [Route("orders_in_progress")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> OrdersInProgress()
+        {
+
+            try
+            {
+                var model = await _orderManagerService.AllOrdersInProgressAsync();
+
+                if (model == null)
+                {
+                    // The model object is null, so return a 204 NoContent
+                    return StatusCode(204);
+                }
+
+                return StatusCode(200, model);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(500);
+            }
+        }
+
+        [HttpGet]
         [Route("rejected_orders")]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
