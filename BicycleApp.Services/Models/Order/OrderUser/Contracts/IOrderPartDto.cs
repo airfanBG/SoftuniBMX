@@ -6,7 +6,6 @@
         public decimal PartPrice { get; set; }
         public int  PartQuantity { get; set; }
         public int  PartId { get; set; }
-        public string?  Descrioption { get; set; }
 
     }
 }

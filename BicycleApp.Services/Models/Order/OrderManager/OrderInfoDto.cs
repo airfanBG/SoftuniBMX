@@ -2,7 +2,7 @@
 {
     public class OrderInfoDto
     {
-        public int OrderId { get; set; }
+        public int Id { get; set; }
         public string SerialNumber { get; set; } = null!;
         public ICollection<OrderPartInfoDto> OrderParts { get; set; } = new List<OrderPartInfoDto>();
     }

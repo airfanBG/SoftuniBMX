@@ -4,7 +4,7 @@
     using BicycleApp.Services.Models.Order.OrderUser;
     using Microsoft.AspNetCore.Mvc;
 
-    [Route("api/[controller]")]
+    [Route("api/client_order")]
     [ApiController]
     public class ClientOrderController : ControllerBase
     {
@@ -14,25 +14,50 @@
             _userService = userService;
         }
 
+
         [HttpPost("create")]
-        public async Task<IActionResult> UserCreateOrder([FromBody]UserOrderDto userOrder)
+        public async Task<ActionResult<SuccessOrderInfo>> UserCreateOrder([FromBody]UserOrderDto userOrder)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
             var createdOrder = await _userService.CreateOrderByUserAsync(userOrder);
 
-            if (createdOrder!=null)
+            if (createdOrder != null)
             {
-                 var result = await _userService.CreateOrderPartEmployeeByUserOrder(createdOrder);
+                var result = await _userService.CreateOrderPartEmployeeByUserOrder(createdOrder);
+
+                if (result)
+                {
+                    var successOrder = (SuccessOrderInfo)_userService.SuccessCreatedOrder(createdOrder);
+
+                    return Ok(successOrder);
+                }
             }
+            return BadRequest();
+        }
+
+        [HttpPost("progress")]
+        public async Task<ActionResult<ICollection<OrderProgretionDto>>> GetOrderProgress([FromQuery]string id)
+        {           
+            var userOrdersProgression = await _userService.GetOrdersProgresions(id);
+
+            if (userOrdersProgression != null)
+        {
+                return Ok(userOrdersProgression);
+            }
+
+            return BadRequest();
+        }
+
+        [HttpPost("delete")]
+        public async Task<IActionResult> DeleteOrder([FromQuery] string userId, [FromQuery] int orderId)
+        {
+            await _userService.DeleteOrder(userId, orderId);
 
             return Ok();
         }
 
-        //[HttpPost("progress")]
-        //public async Task<ICollection<OrderProgretionDto>> GetOrderProgress(string userId)
-        //{
-        //    var collection = await _userService.GetOrdersProgresions(userId);
-
-        //    return collection;
-        //}
     }
 }
