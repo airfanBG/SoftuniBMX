@@ -10,17 +10,21 @@
 
     using System.Threading.Tasks;
     using BicicleApp.Common.Providers.Contracts;
+    using BicycleApp.Services.Models.Order;
+    using BicycleApp.Services.Contracts.Factory;
 
     public class QualityAssuranceService : IQualityAssuranceService
     {
         private readonly BicycleAppDbContext _db;
         private readonly IStringManipulator _stringManipulator;
         private readonly IDateTimeProvider _dateTimeProvider;
-        public QualityAssuranceService(BicycleAppDbContext db, IStringManipulator stringManipulator, IDateTimeProvider dateTimeProvider)
+        private readonly IEmployeeFactory _employeeFactory;
+        public QualityAssuranceService(BicycleAppDbContext db, IStringManipulator stringManipulator, IDateTimeProvider dateTimeProvider, IEmployeeFactory employeeFactory)
         {
             _db = db;
             _stringManipulator = stringManipulator;
             _dateTimeProvider = dateTimeProvider;
+            _employeeFactory = employeeFactory;
         }
 
         /// <summary>
@@ -74,6 +78,33 @@
             {
             }
             return false;
+        }
+
+        public async Task<RemanufacturingPartEmployeeInfoDto?> RemanufacturingPart(RemanufacturingOrderPartDto remanufacturingOrderPartDto)
+        {
+            try
+            {
+                var partToManufacturing = await _db.OrdersPartsEmployees.FirstAsync(ope => ope.OrderId == remanufacturingOrderPartDto.OrderId 
+                                                                                           && ope.PartId == remanufacturingOrderPartDto.PartId);
+
+                partToManufacturing.StartDatetime = null;
+                partToManufacturing.EndDatetime = null;
+                partToManufacturing.Description = _stringManipulator.GetTextFromProperty(remanufacturingOrderPartDto.Description);
+                partToManufacturing.IsCompleted = false;
+
+                var employeeName = _stringManipulator.ReturnFullName(partToManufacturing.Employee.FirstName, partToManufacturing.Employee.LastName);
+
+                await _db.SaveChangesAsync();
+
+                var partToManufacturingView = _employeeFactory.CreateRemanufacturingOrderPart(employeeName, partToManufacturing.PartName, partToManufacturing.SerialNumber, partToManufacturing.Description);
+
+                return partToManufacturingView;
+            }
+            catch (Exception)
+            {
+            }
+
+            return null;
         }
     }
 }

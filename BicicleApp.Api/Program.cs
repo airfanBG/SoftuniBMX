@@ -114,6 +114,7 @@ namespace BicicleApp.Api
             builder.Services.AddScoped<IGuidProvider, GuidProvider>();
             builder.Services.AddScoped<IQualityAssuranceService, QualityAssuranceService>();
             builder.Services.AddScoped<IEmployeeOrderService, EmployeeOrderService>();
+            builder.Services.AddScoped<IEmployeeFactory, EmployeeFactory>();
 
             var app = builder.Build();
 

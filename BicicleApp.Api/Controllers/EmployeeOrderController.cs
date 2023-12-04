@@ -104,7 +104,7 @@
         }
 
         [HttpGet]
-        [Route("quality_assurance_collection")]
+        [Route("quality_assurance")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<ICollection<OrderProgretionDto>>> GetReadyOrdersForQualityAssurance()
@@ -135,6 +135,20 @@
             return BadRequest();
         }
 
+        [HttpPut]
+        [Route("quality_assurance")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<RemanufacturingPartEmployeeInfoDto>> PassedQualityAssurancrder([FromBody] RemanufacturingOrderPartDto remanufacturingOrderPartDto)
+        {
+            var infoForPart = await qualityAssuranceService.RemanufacturingPart(remanufacturingOrderPartDto);
 
+            if (infoForPart != null)
+            {
+                return Ok(infoForPart);
+            }
+
+            return StatusCode(500);
+        }
     }
 }
