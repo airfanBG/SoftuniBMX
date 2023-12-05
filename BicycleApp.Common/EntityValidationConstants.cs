@@ -72,13 +72,20 @@
             public const int AddressMaxLength = 100;
 
             public const int PhoneNumberMaxLength = 20;
+            public const int PhoneNumberMinLength = 8;
 
             public const int EmailMaxLength = 50;
+            public const int EmailMinLength = 8;
 
             public const int ContactNameMinLength = 3;
             public const int ContactNameMaxLength = 100;
         }
 
+        public static class Delivery
+        {
+            public const int NoteMinLength = 3;
+            public const int NoteMaxLength = 100;
+        }
         public static class Coment
         {
             public const int TitleMinLength = 3;
