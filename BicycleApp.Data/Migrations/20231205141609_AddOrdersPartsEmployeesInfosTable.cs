@@ -12,34 +12,463 @@ namespace BicycleApp.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_OrderPartEmployeeInfo_OrdersPartsEmployees_OrderPartEmployeeOrderId_OrderPartEmployeePartId_OrderPartEmployeeUniqueKeyForSer~",
-                table: "OrderPartEmployeeInfo");
+                name: "FK_OrdersPartsEmployeesInfos_OrdersPartsEmployees_OrderPartEmployeeOrderId_OrderPartEmployeePartId_OrderPartEmployeeUniqueKeyFo~",
+                table: "OrdersPartsEmployeesInfos");
 
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_OrderPartEmployeeInfo",
-                table: "OrderPartEmployeeInfo");
+            migrationBuilder.DropIndex(
+                name: "IX_OrdersPartsEmployeesInfos_OrderPartEmployeeOrderId_OrderPartEmployeePartId_OrderPartEmployeeUniqueKeyForSerialNumber",
+                table: "OrdersPartsEmployeesInfos");
+
+            migrationBuilder.DropColumn(
+                name: "OrderPartEmployeeOrderId",
+                table: "OrdersPartsEmployeesInfos");
+
+            migrationBuilder.DropColumn(
+                name: "OrderPartEmployeePartId",
+                table: "OrdersPartsEmployeesInfos");
+
+            migrationBuilder.DropColumn(
+                name: "OrderPartEmployeeUniqueKeyForSerialNumber",
+                table: "OrdersPartsEmployeesInfos");
+
+            migrationBuilder.AddColumn<int>(
+                name: "OrderId",
+                table: "OrdersPartsEmployeesInfos",
+                type: "int",
+                nullable: false,
+                defaultValue: 0,
+                comment: "Id of the order from the client");
+
+            migrationBuilder.AddColumn<int>(
+                name: "PartId",
+                table: "OrdersPartsEmployeesInfos",
+                type: "int",
+                nullable: false,
+                defaultValue: 0,
+                comment: "Id of the part");
+
+            migrationBuilder.AddColumn<string>(
+                name: "UniqueKeyForSerialNumber",
+                table: "OrdersPartsEmployeesInfos",
+                type: "nvarchar(450)",
+                nullable: false,
+                defaultValue: "",
+                comment: "Separate unique products by serial number in one order");
+
+            migrationBuilder.UpdateData(
+                table: "AspNetUsers",
+                keyColumn: "Id",
+                keyValue: "17063948-8fdc-417e-8fb7-2ae6bf572f94",
+                columns: new[] { "ConcurrencyStamp", "DateCreated", "DateOfHire", "PasswordHash" },
+                values: new object[] { "aba88914-3322-46da-b197-1f0dc8c3f244", new DateTime(2023, 12, 5, 16, 16, 9, 17, DateTimeKind.Local).AddTicks(4913), new DateTime(2023, 12, 5, 16, 16, 9, 17, DateTimeKind.Local).AddTicks(4894), "AQAAAAIAAYagAAAAELo5A5UZEmIwOtD2QC1uBZx+jIG/Wk7XxwJf87QPEzpsfff1EtggRxRqDUpxVDfG5w==" });
+
+            migrationBuilder.UpdateData(
+                table: "AspNetUsers",
+                keyColumn: "Id",
+                keyValue: "21003785-a275-4139-ae20-af6a6cf8fea8",
+                columns: new[] { "ConcurrencyStamp", "DateCreated", "DateOfHire", "PasswordHash" },
+                values: new object[] { "e3e8c96c-ebe6-46c2-8290-3b7ab6f8b569", new DateTime(2023, 12, 5, 16, 16, 8, 950, DateTimeKind.Local).AddTicks(9591), new DateTime(2023, 12, 5, 16, 16, 8, 950, DateTimeKind.Local).AddTicks(9573), "AQAAAAIAAYagAAAAEPO3ZMzc/QwlCnXqZoCGFTN/NVPvP/ZhfKxtPwA3HJ5NuQhlZEp9ltlJ32vMPXiAdg==" });
+
+            migrationBuilder.UpdateData(
+                table: "AspNetUsers",
+                keyColumn: "Id",
+                keyValue: "29f06920-d2ad-43d8-b362-e2b94d7a7502",
+                columns: new[] { "ConcurrencyStamp", "DateCreated", "DateOfHire", "PasswordHash" },
+                values: new object[] { "0a486f9a-3d1f-4a55-a7f3-5d69a6b2bd04", new DateTime(2023, 12, 5, 16, 16, 9, 149, DateTimeKind.Local).AddTicks(9358), new DateTime(2023, 12, 5, 16, 16, 9, 149, DateTimeKind.Local).AddTicks(9334), "AQAAAAIAAYagAAAAEHHcHQhgz6fVKTM0oXEdeFQk1GbOTzHAMgk+Rk1dkwhsFeC4TNZkkmwYH0iwz++hXA==" });
+
+            migrationBuilder.UpdateData(
+                table: "AspNetUsers",
+                keyColumn: "Id",
+                keyValue: "406e8cf1-acaa-44a8-afec-585ff64bed34",
+                columns: new[] { "ConcurrencyStamp", "DateCreated", "DateOfHire", "PasswordHash" },
+                values: new object[] { "923a9822-231e-4593-afe9-d0c06ef19ab3", new DateTime(2023, 12, 5, 16, 16, 8, 884, DateTimeKind.Local).AddTicks(5474), new DateTime(2023, 12, 5, 16, 16, 8, 884, DateTimeKind.Local).AddTicks(5454), "AQAAAAIAAYagAAAAEN8k+RrIzxQi3nAeelFO2bYjSLNRxTq2Te+HroYfgyhn1+w+UeQjAKGcZB+8gpbHJQ==" });
+
+            migrationBuilder.UpdateData(
+                table: "AspNetUsers",
+                keyColumn: "Id",
+                keyValue: "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91",
+                columns: new[] { "ConcurrencyStamp", "DateCreated", "DateOfHire", "PasswordHash" },
+                values: new object[] { "314d83f3-7633-4411-aac4-7654a9d51359", new DateTime(2023, 12, 5, 16, 16, 9, 83, DateTimeKind.Local).AddTicks(7589), new DateTime(2023, 12, 5, 16, 16, 9, 83, DateTimeKind.Local).AddTicks(7530), "AQAAAAIAAYagAAAAEPR1LRGW65k0zX3XHiOGqiYlZqhj2jmiTlMhAsk1JPw4EaDf8sln+7+U0pqk8xRlxA==" });
+
+            migrationBuilder.UpdateData(
+                table: "Clients",
+                keyColumn: "Id",
+                keyValue: "17ce735d-6713-4d0a-8fcb-e4a71ee86f6f",
+                columns: new[] { "ConcurrencyStamp", "DateCreated", "PasswordHash" },
+                values: new object[] { "e7b5dd45-8e2d-4112-92d7-9a0bf1b215d6", new DateTime(2023, 12, 5, 16, 16, 8, 751, DateTimeKind.Local).AddTicks(5177), "AQAAAAIAAYagAAAAEDU4T3VF/ra1/fds69BgDnzrgtgqNdcF82ne1oUqeSSKboaTvcqofBMZNJ/VwHGdfg==" });
+
+            migrationBuilder.UpdateData(
+                table: "Clients",
+                keyColumn: "Id",
+                keyValue: "99d3ca6f-2067-4316-a5d7-934c93789521",
+                columns: new[] { "ConcurrencyStamp", "DateCreated", "PasswordHash" },
+                values: new object[] { "68067d55-97e6-4b16-be61-1732b6fe13b5", new DateTime(2023, 12, 5, 16, 16, 8, 818, DateTimeKind.Local).AddTicks(214), "AQAAAAIAAYagAAAAEBRNgwTVF/fvb8Ld4XhhLuxrceSJmW+ARvXboCmoI8V4QjfTiffYnFo/1U5EYHGVBQ==" });
+
+            migrationBuilder.UpdateData(
+                table: "Clients",
+                keyColumn: "Id",
+                keyValue: "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                columns: new[] { "ConcurrencyStamp", "DateCreated", "PasswordHash" },
+                values: new object[] { "3cc13cd5-f952-4dd3-87ce-d0a87ff4a36b", new DateTime(2023, 12, 5, 16, 16, 8, 684, DateTimeKind.Local).AddTicks(9527), "AQAAAAIAAYagAAAAEMnBodjLFknJkhinb8Zn4vVye9ptJWEwBxtzJ5U03T/LMhpZ7no5t6HiKiMWa5VdGw==" });
+
+            migrationBuilder.UpdateData(
+                table: "Comments",
+                keyColumn: "Id",
+                keyValue: 1,
+                columns: new[] { "DateCreated", "DateUpdated" },
+                values: new object[] { new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2138), new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2156) });
+
+            migrationBuilder.UpdateData(
+                table: "Delivaries",
+                keyColumn: "Id",
+                keyValue: 1,
+                columns: new[] { "DateDelivered", "DateUpdated" },
+                values: new object[] { new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2214), new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2216) });
+
+            migrationBuilder.UpdateData(
+                table: "Departments",
+                keyColumn: "Id",
+                keyValue: 1,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2269));
+
+            migrationBuilder.UpdateData(
+                table: "Departments",
+                keyColumn: "Id",
+                keyValue: 2,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2275));
+
+            migrationBuilder.UpdateData(
+                table: "Orders",
+                keyColumn: "Id",
+                keyValue: 1,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2679));
+
+            migrationBuilder.UpdateData(
+                table: "Orders",
+                keyColumn: "Id",
+                keyValue: 2,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2684));
+
+            migrationBuilder.UpdateData(
+                table: "Orders",
+                keyColumn: "Id",
+                keyValue: 3,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2687));
+
+            migrationBuilder.UpdateData(
+                table: "OrdersPartsEmployees",
+                keyColumns: new[] { "OrderId", "PartId", "UniqueKeyForSerialNumber" },
+                keyValues: new object[] { 1, 1, "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb" },
+                column: "DatetimeAsigned",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2739));
+
+            migrationBuilder.UpdateData(
+                table: "OrdersPartsEmployees",
+                keyColumns: new[] { "OrderId", "PartId", "UniqueKeyForSerialNumber" },
+                keyValues: new object[] { 1, 2, "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb" },
+                column: "DatetimeAsigned",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2767));
+
+            migrationBuilder.UpdateData(
+                table: "OrdersPartsEmployees",
+                keyColumns: new[] { "OrderId", "PartId", "UniqueKeyForSerialNumber" },
+                keyValues: new object[] { 1, 3, "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb" },
+                column: "DatetimeAsigned",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2770));
+
+            migrationBuilder.UpdateData(
+                table: "OrdersPartsEmployees",
+                keyColumns: new[] { "OrderId", "PartId", "UniqueKeyForSerialNumber" },
+                keyValues: new object[] { 2, 1, "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb" },
+                column: "DatetimeAsigned",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2773));
+
+            migrationBuilder.UpdateData(
+                table: "PartCategories",
+                keyColumn: "Id",
+                keyValue: 1,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2998));
+
+            migrationBuilder.UpdateData(
+                table: "PartCategories",
+                keyColumn: "Id",
+                keyValue: 2,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3007));
+
+            migrationBuilder.UpdateData(
+                table: "PartCategories",
+                keyColumn: "Id",
+                keyValue: 3,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3009));
+
+            migrationBuilder.UpdateData(
+                table: "Parts",
+                keyColumn: "Id",
+                keyValue: 1,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2864));
+
+            migrationBuilder.UpdateData(
+                table: "Parts",
+                keyColumn: "Id",
+                keyValue: 2,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2873));
+
+            migrationBuilder.UpdateData(
+                table: "Parts",
+                keyColumn: "Id",
+                keyValue: 3,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2876));
+
+            migrationBuilder.UpdateData(
+                table: "Parts",
+                keyColumn: "Id",
+                keyValue: 4,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2880));
+
+            migrationBuilder.UpdateData(
+                table: "Parts",
+                keyColumn: "Id",
+                keyValue: 5,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2883));
+
+            migrationBuilder.UpdateData(
+                table: "Parts",
+                keyColumn: "Id",
+                keyValue: 6,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2887));
+
+            migrationBuilder.UpdateData(
+                table: "Parts",
+                keyColumn: "Id",
+                keyValue: 7,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2891));
+
+            migrationBuilder.UpdateData(
+                table: "Parts",
+                keyColumn: "Id",
+                keyValue: 8,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2895));
+
+            migrationBuilder.UpdateData(
+                table: "Parts",
+                keyColumn: "Id",
+                keyValue: 9,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2906));
+
+            migrationBuilder.UpdateData(
+                table: "Parts",
+                keyColumn: "Id",
+                keyValue: 10,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2909));
+
+            migrationBuilder.UpdateData(
+                table: "Parts",
+                keyColumn: "Id",
+                keyValue: 11,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2913));
+
+            migrationBuilder.UpdateData(
+                table: "Parts",
+                keyColumn: "Id",
+                keyValue: 12,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2916));
+
+            migrationBuilder.UpdateData(
+                table: "Parts",
+                keyColumn: "Id",
+                keyValue: 13,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2919));
+
+            migrationBuilder.UpdateData(
+                table: "Parts",
+                keyColumn: "Id",
+                keyValue: 14,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2937));
+
+            migrationBuilder.UpdateData(
+                table: "Parts",
+                keyColumn: "Id",
+                keyValue: 15,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2941));
+
+            migrationBuilder.UpdateData(
+                table: "Parts",
+                keyColumn: "Id",
+                keyValue: 16,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2944));
+
+            migrationBuilder.UpdateData(
+                table: "Parts",
+                keyColumn: "Id",
+                keyValue: 17,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2947));
+
+            migrationBuilder.UpdateData(
+                table: "Statuses",
+                keyColumn: "Id",
+                keyValue: 1,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3118));
+
+            migrationBuilder.UpdateData(
+                table: "Statuses",
+                keyColumn: "Id",
+                keyValue: 2,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3127));
+
+            migrationBuilder.UpdateData(
+                table: "Statuses",
+                keyColumn: "Id",
+                keyValue: 3,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3129));
+
+            migrationBuilder.UpdateData(
+                table: "Statuses",
+                keyColumn: "Id",
+                keyValue: 4,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3130));
+
+            migrationBuilder.UpdateData(
+                table: "Statuses",
+                keyColumn: "Id",
+                keyValue: 5,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3132));
+
+            migrationBuilder.UpdateData(
+                table: "Statuses",
+                keyColumn: "Id",
+                keyValue: 6,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3135));
+
+            migrationBuilder.UpdateData(
+                table: "Statuses",
+                keyColumn: "Id",
+                keyValue: 7,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3137));
+
+            migrationBuilder.UpdateData(
+                table: "Supliers",
+                keyColumn: "Id",
+                keyValue: 1,
+                columns: new[] { "DateCreated", "DateUpdated" },
+                values: new object[] { new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3197), new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3199) });
+
+            migrationBuilder.UpdateData(
+                table: "Towns",
+                keyColumn: "Id",
+                keyValue: 1,
+                columns: new[] { "DateCreated", "DateUpdated" },
+                values: new object[] { new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3238), new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3239) });
+
+            migrationBuilder.UpdateData(
+                table: "Towns",
+                keyColumn: "Id",
+                keyValue: 2,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3246));
+
+            migrationBuilder.UpdateData(
+                table: "Towns",
+                keyColumn: "Id",
+                keyValue: 3,
+                column: "DateCreated",
+                value: new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3248));
+
+            migrationBuilder.UpdateData(
+                table: "VATCategories",
+                keyColumn: "Id",
+                keyValue: 1,
+                columns: new[] { "DateCreated", "DateUpdated" },
+                values: new object[] { new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3275), new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3276) });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrdersPartsEmployeesInfos_OrderId_PartId_UniqueKeyForSerialNumber",
+                table: "OrdersPartsEmployeesInfos",
+                columns: new[] { "OrderId", "PartId", "UniqueKeyForSerialNumber" });
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_OrdersPartsEmployeesInfos_OrdersPartsEmployees_OrderId_PartId_UniqueKeyForSerialNumber",
+                table: "OrdersPartsEmployeesInfos",
+                columns: new[] { "OrderId", "PartId", "UniqueKeyForSerialNumber" },
+                principalTable: "OrdersPartsEmployees",
+                principalColumns: new[] { "OrderId", "PartId", "UniqueKeyForSerialNumber" },
+                onDelete: ReferentialAction.Cascade);
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropForeignKey(
+                name: "FK_OrdersPartsEmployeesInfos_OrdersPartsEmployees_OrderId_PartId_UniqueKeyForSerialNumber",
+                table: "OrdersPartsEmployeesInfos");
+
+            migrationBuilder.DropIndex(
+                name: "IX_OrdersPartsEmployeesInfos_OrderId_PartId_UniqueKeyForSerialNumber",
+                table: "OrdersPartsEmployeesInfos");
 
             migrationBuilder.DropColumn(
                 name: "OrderId",
-                table: "OrderPartEmployeeInfo");
+                table: "OrdersPartsEmployeesInfos");
 
             migrationBuilder.DropColumn(
                 name: "PartId",
-                table: "OrderPartEmployeeInfo");
+                table: "OrdersPartsEmployeesInfos");
 
-            migrationBuilder.RenameTable(
-                name: "OrderPartEmployeeInfo",
-                newName: "OrdersPartsEmployeesInfos");
+            migrationBuilder.DropColumn(
+                name: "UniqueKeyForSerialNumber",
+                table: "OrdersPartsEmployeesInfos");
 
-            migrationBuilder.RenameIndex(
-                name: "IX_OrderPartEmployeeInfo_OrderPartEmployeeOrderId_OrderPartEmployeePartId_OrderPartEmployeeUniqueKeyForSerialNumber",
+            migrationBuilder.AddColumn<int>(
+                name: "OrderPartEmployeeOrderId",
                 table: "OrdersPartsEmployeesInfos",
-                newName: "IX_OrdersPartsEmployeesInfos_OrderPartEmployeeOrderId_OrderPartEmployeePartId_OrderPartEmployeeUniqueKeyForSerialNumber");
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
 
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_OrdersPartsEmployeesInfos",
+            migrationBuilder.AddColumn<int>(
+                name: "OrderPartEmployeePartId",
                 table: "OrdersPartsEmployeesInfos",
-                column: "Id");
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
+
+            migrationBuilder.AddColumn<string>(
+                name: "OrderPartEmployeeUniqueKeyForSerialNumber",
+                table: "OrdersPartsEmployeesInfos",
+                type: "nvarchar(450)",
+                nullable: false,
+                defaultValue: "");
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
@@ -398,416 +827,14 @@ namespace BicycleApp.Data.Migrations
                 columns: new[] { "DateCreated", "DateUpdated" },
                 values: new object[] { new DateTime(2023, 12, 5, 10, 20, 49, 321, DateTimeKind.Local).AddTicks(7734), new DateTime(2023, 12, 5, 10, 20, 49, 321, DateTimeKind.Local).AddTicks(7736) });
 
+            migrationBuilder.CreateIndex(
+                name: "IX_OrdersPartsEmployeesInfos_OrderPartEmployeeOrderId_OrderPartEmployeePartId_OrderPartEmployeeUniqueKeyForSerialNumber",
+                table: "OrdersPartsEmployeesInfos",
+                columns: new[] { "OrderPartEmployeeOrderId", "OrderPartEmployeePartId", "OrderPartEmployeeUniqueKeyForSerialNumber" });
+
             migrationBuilder.AddForeignKey(
                 name: "FK_OrdersPartsEmployeesInfos_OrdersPartsEmployees_OrderPartEmployeeOrderId_OrderPartEmployeePartId_OrderPartEmployeeUniqueKeyFo~",
                 table: "OrdersPartsEmployeesInfos",
-                columns: new[] { "OrderPartEmployeeOrderId", "OrderPartEmployeePartId", "OrderPartEmployeeUniqueKeyForSerialNumber" },
-                principalTable: "OrdersPartsEmployees",
-                principalColumns: new[] { "OrderId", "PartId", "UniqueKeyForSerialNumber" },
-                onDelete: ReferentialAction.Cascade);
-        }
-
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropForeignKey(
-                name: "FK_OrdersPartsEmployeesInfos_OrdersPartsEmployees_OrderPartEmployeeOrderId_OrderPartEmployeePartId_OrderPartEmployeeUniqueKeyFo~",
-                table: "OrdersPartsEmployeesInfos");
-
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_OrdersPartsEmployeesInfos",
-                table: "OrdersPartsEmployeesInfos");
-
-            migrationBuilder.RenameTable(
-                name: "OrdersPartsEmployeesInfos",
-                newName: "OrderPartEmployeeInfo");
-
-            migrationBuilder.RenameIndex(
-                name: "IX_OrdersPartsEmployeesInfos_OrderPartEmployeeOrderId_OrderPartEmployeePartId_OrderPartEmployeeUniqueKeyForSerialNumber",
-                table: "OrderPartEmployeeInfo",
-                newName: "IX_OrderPartEmployeeInfo_OrderPartEmployeeOrderId_OrderPartEmployeePartId_OrderPartEmployeeUniqueKeyForSerialNumber");
-
-            migrationBuilder.AddColumn<int>(
-                name: "OrderId",
-                table: "OrderPartEmployeeInfo",
-                type: "int",
-                nullable: false,
-                defaultValue: 0,
-                comment: "Id of the order from the client");
-
-            migrationBuilder.AddColumn<int>(
-                name: "PartId",
-                table: "OrderPartEmployeeInfo",
-                type: "int",
-                nullable: false,
-                defaultValue: 0,
-                comment: "Id of the part from the order");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_OrderPartEmployeeInfo",
-                table: "OrderPartEmployeeInfo",
-                column: "Id");
-
-            migrationBuilder.UpdateData(
-                table: "AspNetUsers",
-                keyColumn: "Id",
-                keyValue: "17063948-8fdc-417e-8fb7-2ae6bf572f94",
-                columns: new[] { "ConcurrencyStamp", "DateCreated", "DateOfHire", "PasswordHash" },
-                values: new object[] { "51c8d4cf-fc72-4e2a-9331-aaf592c1dd65", new DateTime(2023, 12, 5, 9, 36, 35, 181, DateTimeKind.Local).AddTicks(4706), new DateTime(2023, 12, 5, 9, 36, 35, 181, DateTimeKind.Local).AddTicks(4687), "AQAAAAIAAYagAAAAELfZ3MXUjaf0b6rHPKr4UqVJMcT2ubROhF+8NWAo6cm8qNLUUXu4vuAh5+p7i23DXQ==" });
-
-            migrationBuilder.UpdateData(
-                table: "AspNetUsers",
-                keyColumn: "Id",
-                keyValue: "21003785-a275-4139-ae20-af6a6cf8fea8",
-                columns: new[] { "ConcurrencyStamp", "DateCreated", "DateOfHire", "PasswordHash" },
-                values: new object[] { "1673b321-5fe8-437f-8b46-091e145b235a", new DateTime(2023, 12, 5, 9, 36, 35, 115, DateTimeKind.Local).AddTicks(5594), new DateTime(2023, 12, 5, 9, 36, 35, 115, DateTimeKind.Local).AddTicks(5579), "AQAAAAIAAYagAAAAEBh6Q6Znwcv06KD6aQdOHiLjEJE0ybv4j9F8krHNe9d8bZf/coYJYeSIsE/mjHAn7A==" });
-
-            migrationBuilder.UpdateData(
-                table: "AspNetUsers",
-                keyColumn: "Id",
-                keyValue: "29f06920-d2ad-43d8-b362-e2b94d7a7502",
-                columns: new[] { "ConcurrencyStamp", "DateCreated", "DateOfHire", "PasswordHash" },
-                values: new object[] { "fb54f750-f52b-4d6f-a5b5-2b0933590728", new DateTime(2023, 12, 5, 9, 36, 35, 314, DateTimeKind.Local).AddTicks(2236), new DateTime(2023, 12, 5, 9, 36, 35, 314, DateTimeKind.Local).AddTicks(2215), "AQAAAAIAAYagAAAAEHieebae3xYblGX6IwARYomDizESYSN6H96X19wN2G7WyD/iP+uC47jXmGN95CwbdQ==" });
-
-            migrationBuilder.UpdateData(
-                table: "AspNetUsers",
-                keyColumn: "Id",
-                keyValue: "406e8cf1-acaa-44a8-afec-585ff64bed34",
-                columns: new[] { "ConcurrencyStamp", "DateCreated", "DateOfHire", "PasswordHash" },
-                values: new object[] { "48cab80a-2533-4ff1-bd7d-5b70b8630bd3", new DateTime(2023, 12, 5, 9, 36, 35, 49, DateTimeKind.Local).AddTicks(1228), new DateTime(2023, 12, 5, 9, 36, 35, 49, DateTimeKind.Local).AddTicks(1206), "AQAAAAIAAYagAAAAEJIgorF40cQ9kFWN7OnkmRWb6CqtOg8njIP6T2F0SWp32QWLXUvDEFoEF5XsoTiEUA==" });
-
-            migrationBuilder.UpdateData(
-                table: "AspNetUsers",
-                keyColumn: "Id",
-                keyValue: "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91",
-                columns: new[] { "ConcurrencyStamp", "DateCreated", "DateOfHire", "PasswordHash" },
-                values: new object[] { "b6a96c64-7c8b-43fe-8ff3-5f1267096937", new DateTime(2023, 12, 5, 9, 36, 35, 247, DateTimeKind.Local).AddTicks(7035), new DateTime(2023, 12, 5, 9, 36, 35, 247, DateTimeKind.Local).AddTicks(6981), "AQAAAAIAAYagAAAAEJNgtAEU7aeMrsTc5YwON0HttYeGI2sc02YTFp0H5A4Ydqv1tOflpEzJbqgg4BwyUA==" });
-
-            migrationBuilder.UpdateData(
-                table: "Clients",
-                keyColumn: "Id",
-                keyValue: "17ce735d-6713-4d0a-8fcb-e4a71ee86f6f",
-                columns: new[] { "ConcurrencyStamp", "DateCreated", "PasswordHash" },
-                values: new object[] { "5f833fc6-997f-439f-a63c-baafe216c94f", new DateTime(2023, 12, 5, 9, 36, 34, 913, DateTimeKind.Local).AddTicks(7614), "AQAAAAIAAYagAAAAEJAXN9Yc8i8sKmgJS0+tchxcLnxDbsZAdJmJnJepIJKsl0YcY/Af+4/l5tImFFye5Q==" });
-
-            migrationBuilder.UpdateData(
-                table: "Clients",
-                keyColumn: "Id",
-                keyValue: "99d3ca6f-2067-4316-a5d7-934c93789521",
-                columns: new[] { "ConcurrencyStamp", "DateCreated", "PasswordHash" },
-                values: new object[] { "e7c767d1-8be1-4943-8a96-155399f18038", new DateTime(2023, 12, 5, 9, 36, 34, 982, DateTimeKind.Local).AddTicks(3181), "AQAAAAIAAYagAAAAEKPNVPCUqpZ+qzsU5/FTAWVKzbi0UNoZOykITsrQ0yY4DthMeA7RkRQOZWT50HPfjw==" });
-
-            migrationBuilder.UpdateData(
-                table: "Clients",
-                keyColumn: "Id",
-                keyValue: "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                columns: new[] { "ConcurrencyStamp", "DateCreated", "PasswordHash" },
-                values: new object[] { "73986fa1-2ac1-4658-90c7-d13d6d650336", new DateTime(2023, 12, 5, 9, 36, 34, 847, DateTimeKind.Local).AddTicks(5986), "AQAAAAIAAYagAAAAEFqmmjlaOFr2PPsipK0aasWhFTBG+AmUUkGAkSXeIu9Xb9m9mCvTWjkbE/s2K6A+Yw==" });
-
-            migrationBuilder.UpdateData(
-                table: "Comments",
-                keyColumn: "Id",
-                keyValue: 1,
-                columns: new[] { "DateCreated", "DateUpdated" },
-                values: new object[] { new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8082), new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8107) });
-
-            migrationBuilder.UpdateData(
-                table: "Delivaries",
-                keyColumn: "Id",
-                keyValue: 1,
-                columns: new[] { "DateDelivered", "DateUpdated" },
-                values: new object[] { new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8168), new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8170) });
-
-            migrationBuilder.UpdateData(
-                table: "Departments",
-                keyColumn: "Id",
-                keyValue: 1,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8213));
-
-            migrationBuilder.UpdateData(
-                table: "Departments",
-                keyColumn: "Id",
-                keyValue: 2,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8222));
-
-            migrationBuilder.UpdateData(
-                table: "Orders",
-                keyColumn: "Id",
-                keyValue: 1,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8615));
-
-            migrationBuilder.UpdateData(
-                table: "Orders",
-                keyColumn: "Id",
-                keyValue: 2,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8620));
-
-            migrationBuilder.UpdateData(
-                table: "Orders",
-                keyColumn: "Id",
-                keyValue: 3,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8624));
-
-            migrationBuilder.UpdateData(
-                table: "OrdersPartsEmployees",
-                keyColumns: new[] { "OrderId", "PartId", "UniqueKeyForSerialNumber" },
-                keyValues: new object[] { 1, 1, "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb" },
-                column: "DatetimeAsigned",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8671));
-
-            migrationBuilder.UpdateData(
-                table: "OrdersPartsEmployees",
-                keyColumns: new[] { "OrderId", "PartId", "UniqueKeyForSerialNumber" },
-                keyValues: new object[] { 1, 2, "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb" },
-                column: "DatetimeAsigned",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8675));
-
-            migrationBuilder.UpdateData(
-                table: "OrdersPartsEmployees",
-                keyColumns: new[] { "OrderId", "PartId", "UniqueKeyForSerialNumber" },
-                keyValues: new object[] { 1, 3, "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb" },
-                column: "DatetimeAsigned",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8678));
-
-            migrationBuilder.UpdateData(
-                table: "OrdersPartsEmployees",
-                keyColumns: new[] { "OrderId", "PartId", "UniqueKeyForSerialNumber" },
-                keyValues: new object[] { 2, 1, "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb" },
-                column: "DatetimeAsigned",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8680));
-
-            migrationBuilder.UpdateData(
-                table: "PartCategories",
-                keyColumn: "Id",
-                keyValue: 1,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8959));
-
-            migrationBuilder.UpdateData(
-                table: "PartCategories",
-                keyColumn: "Id",
-                keyValue: 2,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(9044));
-
-            migrationBuilder.UpdateData(
-                table: "PartCategories",
-                keyColumn: "Id",
-                keyValue: 3,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(9046));
-
-            migrationBuilder.UpdateData(
-                table: "Parts",
-                keyColumn: "Id",
-                keyValue: 1,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8758));
-
-            migrationBuilder.UpdateData(
-                table: "Parts",
-                keyColumn: "Id",
-                keyValue: 2,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8767));
-
-            migrationBuilder.UpdateData(
-                table: "Parts",
-                keyColumn: "Id",
-                keyValue: 3,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8773));
-
-            migrationBuilder.UpdateData(
-                table: "Parts",
-                keyColumn: "Id",
-                keyValue: 4,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8776));
-
-            migrationBuilder.UpdateData(
-                table: "Parts",
-                keyColumn: "Id",
-                keyValue: 5,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8815));
-
-            migrationBuilder.UpdateData(
-                table: "Parts",
-                keyColumn: "Id",
-                keyValue: 6,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8819));
-
-            migrationBuilder.UpdateData(
-                table: "Parts",
-                keyColumn: "Id",
-                keyValue: 7,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8823));
-
-            migrationBuilder.UpdateData(
-                table: "Parts",
-                keyColumn: "Id",
-                keyValue: 8,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8826));
-
-            migrationBuilder.UpdateData(
-                table: "Parts",
-                keyColumn: "Id",
-                keyValue: 9,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8830));
-
-            migrationBuilder.UpdateData(
-                table: "Parts",
-                keyColumn: "Id",
-                keyValue: 10,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8835));
-
-            migrationBuilder.UpdateData(
-                table: "Parts",
-                keyColumn: "Id",
-                keyValue: 11,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8838));
-
-            migrationBuilder.UpdateData(
-                table: "Parts",
-                keyColumn: "Id",
-                keyValue: 12,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8842));
-
-            migrationBuilder.UpdateData(
-                table: "Parts",
-                keyColumn: "Id",
-                keyValue: 13,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8845));
-
-            migrationBuilder.UpdateData(
-                table: "Parts",
-                keyColumn: "Id",
-                keyValue: 14,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8864));
-
-            migrationBuilder.UpdateData(
-                table: "Parts",
-                keyColumn: "Id",
-                keyValue: 15,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8868));
-
-            migrationBuilder.UpdateData(
-                table: "Parts",
-                keyColumn: "Id",
-                keyValue: 16,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8871));
-
-            migrationBuilder.UpdateData(
-                table: "Parts",
-                keyColumn: "Id",
-                keyValue: 17,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(8875));
-
-            migrationBuilder.UpdateData(
-                table: "Statuses",
-                keyColumn: "Id",
-                keyValue: 1,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(9145));
-
-            migrationBuilder.UpdateData(
-                table: "Statuses",
-                keyColumn: "Id",
-                keyValue: 2,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(9164));
-
-            migrationBuilder.UpdateData(
-                table: "Statuses",
-                keyColumn: "Id",
-                keyValue: 3,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(9166));
-
-            migrationBuilder.UpdateData(
-                table: "Statuses",
-                keyColumn: "Id",
-                keyValue: 4,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(9168));
-
-            migrationBuilder.UpdateData(
-                table: "Statuses",
-                keyColumn: "Id",
-                keyValue: 5,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(9170));
-
-            migrationBuilder.UpdateData(
-                table: "Statuses",
-                keyColumn: "Id",
-                keyValue: 6,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(9172));
-
-            migrationBuilder.UpdateData(
-                table: "Statuses",
-                keyColumn: "Id",
-                keyValue: 7,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(9174));
-
-            migrationBuilder.UpdateData(
-                table: "Supliers",
-                keyColumn: "Id",
-                keyValue: 1,
-                columns: new[] { "DateCreated", "DateUpdated" },
-                values: new object[] { new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(9227), new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(9228) });
-
-            migrationBuilder.UpdateData(
-                table: "Towns",
-                keyColumn: "Id",
-                keyValue: 1,
-                columns: new[] { "DateCreated", "DateUpdated" },
-                values: new object[] { new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(9350), new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(9352) });
-
-            migrationBuilder.UpdateData(
-                table: "Towns",
-                keyColumn: "Id",
-                keyValue: 2,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(9358));
-
-            migrationBuilder.UpdateData(
-                table: "Towns",
-                keyColumn: "Id",
-                keyValue: 3,
-                column: "DateCreated",
-                value: new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(9360));
-
-            migrationBuilder.UpdateData(
-                table: "VATCategories",
-                keyColumn: "Id",
-                keyValue: 1,
-                columns: new[] { "DateCreated", "DateUpdated" },
-                values: new object[] { new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(9391), new DateTime(2023, 12, 5, 9, 36, 35, 380, DateTimeKind.Local).AddTicks(9392) });
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_OrderPartEmployeeInfo_OrdersPartsEmployees_OrderPartEmployeeOrderId_OrderPartEmployeePartId_OrderPartEmployeeUniqueKeyForSer~",
-                table: "OrderPartEmployeeInfo",
                 columns: new[] { "OrderPartEmployeeOrderId", "OrderPartEmployeePartId", "OrderPartEmployeeUniqueKeyForSerialNumber" },
                 principalTable: "OrdersPartsEmployees",
                 principalColumns: new[] { "OrderId", "PartId", "UniqueKeyForSerialNumber" },

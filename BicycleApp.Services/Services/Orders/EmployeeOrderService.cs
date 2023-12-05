@@ -7,6 +7,7 @@
     using BicycleApp.Data;
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;
+    using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Models.Order;
 
     using Microsoft.AspNetCore.Identity;
@@ -18,11 +19,13 @@
     {
         private readonly BicycleAppDbContext dbContext;
         private readonly UserManager<Employee> userManager;
+        private readonly IEmployeeFactory employeeFactory;
 
-        public EmployeeOrderService(BicycleAppDbContext dbContext, UserManager<Employee> userManager)
+        public EmployeeOrderService(BicycleAppDbContext dbContext, UserManager<Employee> userManager, IEmployeeFactory employeeFactory)
         {
             this.dbContext = dbContext;
             this.userManager = userManager;
+            this.employeeFactory = employeeFactory;
         }
 
         /// <summary>
@@ -71,9 +74,20 @@
                 .FirstAsync();
             mainOrder.StatusId++;
 
-            await dbContext.SaveChangesAsync();
+            TimeSpan partProductionTime = (TimeSpan)(order.EndDatetime - order.StartDatetime);
+            TimeSpan minimumSpan = TimeSpan.Parse("00:00:00.0000000");
 
-            return true;
+            if (partOrdersStartEndDto != null && partProductionTime > minimumSpan)
+            {
+                var partInfo = employeeFactory.CreateOrderPartEmployeeInfo(partProductionTime, order.OrderId, order.UniqueKeyForSerialNumber, order.PartId);
+
+                await dbContext.OrdersPartsEmployeesInfos.AddAsync(partInfo);
+                await dbContext.SaveChangesAsync();
+
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>

@@ -2,6 +2,7 @@
 {
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class OrderPartEmployeeInfo
     {
@@ -15,7 +16,17 @@
         [Required]
         [Comment("Timespan for production on part.")]
         public TimeSpan ProductionТime { get; set; }
-               
+
+        [Required]
+        [Comment("Id of the order from the client")]
+        public int OrderId { get; set; }
+        [Required]
+        [Comment("Separate unique products by serial number in one order")]
+        public string UniqueKeyForSerialNumber { get; set; } = null!;
+
+        [Required]
+        [Comment("Id of the part")]        
+        public int PartId { get; set; }
         [Required]
         public virtual OrderPartEmployee OrderPartEmployee { get; set; } = null!;
     }
