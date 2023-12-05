@@ -3,9 +3,11 @@ import BoardHeader from "../BoardHeader.jsx";
 import styles from "./ManagerOrders.module.css";
 import { getOrdersList } from "../../../bikeServices/service.js";
 import Order from "./Order.jsx";
+import Paginator from "../../Paginator.jsx";
 
 function ManagerOrders() {
   const [orders, setOrders] = useState({});
+  const [page, setPage] = useState(1);
 
   useEffect(function () {
     const abortController = new AbortController();
@@ -24,6 +26,11 @@ function ManagerOrders() {
     setOrders(newData);
   }
 
+  function handlePage(page) {
+    console.log(page);
+    setPage(page);
+  }
+
   if (orders.length === 0) return <h2>There is no orders in this category</h2>;
   if (orders.length > 0)
     return (
@@ -36,6 +43,18 @@ function ManagerOrders() {
               <Order key={order.orderId} order={order} />
             ))}
           </div>
+          <Paginator
+            // pages={orders.length}
+            page={page}
+            pages={30}
+            countOnPage={4}
+            size={24}
+            fontSize={1.6}
+            // bgColor=""
+            // brColor=""
+            handlePage={handlePage}
+            // selected="red"
+          />
         </section>
       </>
     );
