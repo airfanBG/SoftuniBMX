@@ -35,6 +35,10 @@ async function getList(criteria) {
   const data = await get(environment[criteria]);
   return data;
 }
+async function getOrdersList() {
+  const data = await get(environment.orders);
+  return data;
+}
 
 async function getOrder(id) {
   const data = await get(environment.orders + id);
@@ -56,4 +60,5 @@ export {
   getList,
   getElement,
   getOrder,
+  getOrdersList,
 };

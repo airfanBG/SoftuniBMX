@@ -19,54 +19,73 @@ import UserInfo from "./components/dashComponents/userComponents/UserInfo.jsx";
 import EmployersList from "./components/dashComponents/managerComponents/EmployersList.jsx";
 import AddMember from "./components/dashComponents/managerComponents/AddMember.jsx";
 import InProgress from "./components/dashComponents/managerComponents/InProgress.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
+import ProtectedRoute from "./pages/ProtectedRoute.jsx";
+import LimitedRoute from "./pages/LimitedRoute.jsx";
 
 function App() {
   return (
-    <GlobalUser>
-      <OrdersManager>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="about" element={<About />} />
+    <AuthProvider>
+      <GlobalUser>
+        <OrdersManager>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="about" element={<About />} />
 
-            <Route path="profile" element={<UserProfile />}>
-              <Route index element={<Navigate replace to="info" />} />
-              <Route path="info" element={<UserInfo />} />
-              <Route path={"cart"} element={<Cart />} />
-              <Route path={"user-ready"} element={<Cart />} />
-              <Route path={"user-in-progress"} element={<Cart />} />
-              <Route path={"user-archive"} element={<Cart />} />
-              <Route path="worker-orders" element={<WorkerOrders />} />
-              <Route path={"finished"} element={<WorkerFinished />} />
-              <Route path={"managerOrders"} element={<ManagerOrders />} />
-              <Route path={"manager-in-progress"} element={<InProgress />} />
-              <Route path={"manager-ready"} />
-              <Route path={"manager-finished"} />
-              <Route path={"employers"} element={<EmployersList />} />
-              <Route path={"statistic"} />
-              <Route path={"add-member"} element={<AddMember />} />
-            </Route>
-
-            <Route path="app" element={<AppLayout />}>
-              <Route index element={<Navigate replace to="create" />} />
-              <Route path={"create"} element={<CreateBike />} />
-            </Route>
-
-            <Route path="auth" element={<Auth />}>
-              <Route index element={<Navigate replace to="login" />} />
-              <Route path="login" element={<Login />} />
-              <Route path="register" element={<Register />} />
               <Route
-                path="forgotten-password"
-                element={<ForgottenPassword />}
-              />
-            </Route>
+                path="profile"
+                element={
+                  <ProtectedRoute>
+                    <UserProfile />
+                  </ProtectedRoute>
+                }
+              >
+                <Route index element={<Navigate replace to="info" />} />
+                <Route path="info" element={<UserInfo />} />
+                <Route path={"cart"} element={<Cart />} />
+                <Route path={"user-ready"} element={<Cart />} />
+                <Route path={"user-in-progress"} element={<Cart />} />
+                <Route path={"user-archive"} element={<Cart />} />
+                <Route path="worker-orders" element={<WorkerOrders />} />
+                <Route path={"finished"} element={<WorkerFinished />} />
+                <Route path={"managerOrders"} element={<ManagerOrders />} />
+                <Route path={"manager-in-progress"} element={<InProgress />} />
+                <Route path={"manager-ready"} />
+                <Route path={"manager-finished"} />
+                <Route path={"employers"} element={<EmployersList />} />
+                <Route path={"statistic"} />
+                <Route path={"add-member"} element={<AddMember />} />
+              </Route>
 
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </OrdersManager>
-    </GlobalUser>
+              <Route path="app" element={<AppLayout />}>
+                <Route index element={<Navigate replace to="create" />} />
+                <Route
+                  path={"create"}
+                  element={
+                    <LimitedRoute>
+                      <CreateBike />
+                    </LimitedRoute>
+                  }
+                />
+              </Route>
+
+              <Route path="auth" element={<Auth />}>
+                <Route index element={<Navigate replace to="login" />} />
+                <Route path="login" element={<Login />} />
+                <Route path="register" element={<Register />} />
+                <Route
+                  path="forgotten-password"
+                  element={<ForgottenPassword />}
+                />
+              </Route>
+
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </OrdersManager>
+      </GlobalUser>
+    </AuthProvider>
   );
 }
 

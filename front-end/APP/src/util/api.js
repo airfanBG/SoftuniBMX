@@ -38,10 +38,9 @@ async function request(method, url, data) {
 
     return result;
   } catch (error) {
-    // alert(error.message);
-
     clearUserData();
-    return error;
+    throw new Error(error.message);
+    // return error;
     // throw error;
   }
 }

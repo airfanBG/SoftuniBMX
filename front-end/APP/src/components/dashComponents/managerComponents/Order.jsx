@@ -11,8 +11,12 @@ import { OrdersContext } from "../../../context/GlobalUserProvider.jsx";
 
 function Order({ order }) {
   // const { frame, wheel, accessory, ownerId, id } = order;
-  const { orders, onOrdersChange } = useContext(OrdersContext);
-  const { frame, wheel, accessory, createdAt, count, ownerId, id } = order;
+  // const { orders, onOrdersChange } = useContext(OrdersContext);
+
+  const { orderId, serialNumber, orderParts } = order;
+  const frame = orderParts[0];
+  const wheel = orderParts[1];
+  const accessory = orderParts[2];
 
   async function approveHandler(id) {
     // const approvedOrder = {
@@ -45,11 +49,11 @@ function Order({ order }) {
         <div className={styles.additional}>
           <p>
             <span>Order ID: </span>
-            {id}
+            {orderId}
           </p>
           <p>
-            <span>Customer ID: </span>
-            {ownerId}
+            <span>SN: </span>
+            {serialNumber}
           </p>
         </div>
 
@@ -58,37 +62,64 @@ function Order({ order }) {
             <div className={styles.info}>
               <p className={styles.content}>
                 <span>Frame:</span>
-                {frame.name}
+                {frame.partName}
               </p>
               <p className={styles.content}>
-                <span>OEM Number:</span>
-                {frame.oemNumber}
+                <span>Client request:</span>
+                {frame.descrioption}
               </p>
-              <p className={styles.qty}>Qty: 2</p>
+              <div className={styles.qtyBlock}>
+                <p className={styles.qty}>
+                  <span>Available:</span>
+                  {frame.partQunatityInStock}
+                </p>
+                <p className={styles.qty}>
+                  <span>Qty:</span>
+                  {frame.partQuantity}
+                </p>
+              </div>
             </div>
 
-            <div id={"wheel"} className={styles.info}>
+            <div className={styles.info}>
               <p className={styles.content}>
-                <span>Wheels:</span>
-                {wheel.name}
+                <span>Wheel:</span>
+                {wheel.partName}
               </p>
               <p className={styles.content}>
-                <span>OEM Number:</span>
-                {wheel.oemNumber}
+                <span>Client request:</span>
+                {wheel.descrioption}
               </p>
-              <p className={styles.qty}>Qty: 2</p>
+              <div className={styles.qtyBlock}>
+                <p className={styles.qty}>
+                  <span>Available:</span>
+                  {wheel.partQunatityInStock}
+                </p>
+                <p className={styles.qty}>
+                  <span>Qty:</span>
+                  {wheel.partQuantity}
+                </p>
+              </div>
             </div>
 
             <div id={"accessory"} className={styles.info}>
               <p className={styles.content}>
                 <span>Accessory:</span>
-                {accessory.name}
+                {accessory.partName}
               </p>
               <p className={styles.content}>
-                <span>OEM Number:</span>
-                {accessory.oemNumber}
+                <span>Client request:</span>
+                {accessory.descrioption}
               </p>
-              <p className={styles.qty}>Qty: 2</p>
+              <div className={styles.qtyBlock}>
+                <p className={styles.qty}>
+                  <span>Available:</span>
+                  {accessory.partQunatityInStock}
+                </p>
+                <p className={styles.qty}>
+                  <span>Qty:</span>
+                  {accessory.partQuantity}
+                </p>
+              </div>
             </div>
           </div>
 
@@ -96,14 +127,19 @@ function Order({ order }) {
             <Button
               type={"approve"}
               onClick={() => approveHandler(order)}
-              id={id}
+              id={orderId}
+              disabled={
+                frame.partQuantity > frame.partQunatityInStock ||
+                wheel.partQuantity > wheel.partQunatityInStock ||
+                accessory.partQuantity > accessory.partQunatityInStock
+              }
             >
               Approve
             </Button>
-            <Button type={"reject"} onClick={onRejectHandler} id={id}>
+            <Button type={"reject"} onClick={onRejectHandler} id={orderId}>
               Reject
             </Button>
-            <Button type={"delete"} onClick={onDeleteHandler} id={id}>
+            <Button type={"delete"} onClick={onDeleteHandler} id={orderId}>
               Delete
             </Button>
           </div>
@@ -114,3 +150,33 @@ function Order({ order }) {
 }
 
 export default Order;
+
+// [
+//   {
+//       "orderId": 3,
+//       "serialNumber": "BID12345680",
+//       "orderParts": [
+//           {
+//               "partId": 1,
+//               "descrioption": "test",
+//               "partName": "Frame OG",
+//               "partQuantity": 1,
+//               "partQunatityInStock": 2
+//           },
+//           {
+//               "partId": 5,
+//               "descrioption": "test",
+//               "partName": "Wheel of the Year for montain",
+//               "partQuantity": 6,
+//               "partQunatityInStock": 40
+//           },
+//           {
+//               "partId": 11,
+//               "descrioption": "test",
+//               "partName": "Road budget Shifts",
+//               "partQuantity": 4,
+//               "partQunatityInStock": 21
+//           }
+//       ]
+//   }
+// ]

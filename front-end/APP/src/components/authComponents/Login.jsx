@@ -1,12 +1,13 @@
 import styles from "./Login.module.css";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { login } from "../../util/auth.js";
 import { clearOrderData, clearUserData, setUserData } from "../../util/util.js";
 import LoaderWheel from "../LoaderWheel.jsx";
 import { UserContext } from "../../context/GlobalUserProvider.jsx";
+import { useAuth } from "../../context/AuthContext.jsx";
 
 const EMAIL_REGEX =
   /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
@@ -24,9 +25,21 @@ function Login() {
   const [values, setValues] = useState(initialState);
   const [isAllowed, setIsAllowed] = useState(false);
 
+  const { loginUser, isAuthenticated } = useAuth();
   const { updateUser, setHasOrder } = useContext(UserContext);
 
   const navigate = useNavigate();
+
+  useEffect(
+    function () {
+      if (isAuthenticated) {
+        // console.log("login");
+        navigate("/", { replace: true });
+        setIsLoading(false);
+      }
+    },
+    [isAuthenticated, navigate]
+  );
 
   function onChangeHandler(e) {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -74,14 +87,8 @@ function Login() {
 
     try {
       setIsLoading(true);
+      // login in app
       const result = await login(user);
-      // console.log(result);
-
-      // setValues({
-      //   email: "",
-      //   password: "",
-      // });
-
       if (result.code) {
         setIsLoading(false);
         setResError({ status: true, message: result.message });
@@ -106,24 +113,28 @@ function Login() {
         clearOrderData();
       }
 
+      loginUser(currentUser);
       updateUser(currentUser);
       setUserData(currentUser);
-      setIsLoading(false);
-      navigate("/");
+      // setIsLoading(false);
+      // navigate("/");
     } catch (err) {
+      setResError({
+        status: true,
+        message: "Email or Password do not match",
+      });
+
       setTimeout(() => {
         navigate("/");
         clearUserData();
-
-        setResError({ status: false, message: "" });
-      }, "5000");
+      }, "3000");
       throw new Error(err.message);
     }
   }
-  // TODO: if user is worker clear local storage
   return (
     <>
       {isLoading && <LoaderWheel />}
+      {resError.status && <h3>{resError.message}</h3>}
       <div className="modal">
         <form className={styles.form} onSubmit={formSubmitHandler}>
           <h2 className={styles.heading}>Login</h2>

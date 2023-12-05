@@ -26,6 +26,7 @@ export async function register(user) {
 }
 
 export async function logout() {
-  get(environment.logout);
+  // TODO: разбери се с Краси какво ще става тук!!!
+  // get(environment.logout);
   clearUserData();
 }

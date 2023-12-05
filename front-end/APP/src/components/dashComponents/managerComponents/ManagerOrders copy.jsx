@@ -1,10 +1,28 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import BoardHeader from "../BoardHeader.jsx";
 import styles from "./ManagerOrders.module.css";
-import { getOrdersList } from "../../../bikeServices/service.js";
+import { getList, getOrdersList } from "../../../bikeServices/service.js";
 import Order from "./Order.jsx";
+// import { OrdersContext } from "../../../context/GlobalUserProvider.jsx";
 
 function ManagerOrders() {
+  // const { orders } = useContext(OrdersContext);
+
+  // const [ordersList, setOrdersList] = useState([]);
+
+  // useEffect(function () {
+  //   const abortController = new AbortController();
+
+  //   async function ordersFunc() {
+  //     const orders = await getList("orders");
+  //     orders.sort((a, b) => a.createdAt - b.createdAt);
+  //     setOrdersList(orders);
+  //   }
+  //   ordersFunc();
+
+  //   return () => abortController.abort();
+  // }, []);
+
   const [orders, setOrders] = useState({});
 
   useEffect(function () {
@@ -33,7 +51,7 @@ function ManagerOrders() {
           <BoardHeader />
           <div className={styles.orders}>
             {orders.map((order) => (
-              <Order key={order.orderId} order={order} />
+              <Order key={order.id} order={order} />
             ))}
           </div>
         </section>

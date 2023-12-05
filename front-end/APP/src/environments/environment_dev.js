@@ -25,6 +25,7 @@ export const environment = {
   wheels: "/wheels/",
   accessories: "/accessories/",
   selected_part: "/selected_part/",
-  orders: "/orders/",
+  // orders: "/orders/",
+  orders: "/order_to_be_approved/",
   del_order: "/orders/",
 };

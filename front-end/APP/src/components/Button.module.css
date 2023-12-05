@@ -27,3 +27,12 @@
   background-color: var(--button-color-hover);
   color: var(--color-main-dark);
 }
+
+.disabled {
+  background-color: var(--button-color-hover);
+  color: var(--color-link-light);
+  cursor: not-allowed;
+}
+.disabled:hover {
+  color: var(--color-link-light);
+}

@@ -8,13 +8,16 @@ import Category from "./Category.jsx";
 import { logout } from "../../util/auth.js";
 import { UserContext } from "../../context/GlobalUserProvider.jsx";
 import Guest from "./userComponents/Guest.jsx";
+import { useAuth } from "../../context/AuthContext.jsx";
 
 function BoardHeader() {
+  const { logoutUser } = useAuth();
   const { user, updateUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   function onLogout() {
     const exit = logout();
+    logoutUser();
     updateUser("");
     navigate("/");
   }

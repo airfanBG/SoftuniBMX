@@ -1,6 +1,7 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { clearOrderData, getOrderData, getUserData } from "../util/util.js";
 import { getList } from "../bikeServices/service.js";
+import { useAuth } from "./AuthContext.jsx";
 
 export const UserContext = createContext();
 
