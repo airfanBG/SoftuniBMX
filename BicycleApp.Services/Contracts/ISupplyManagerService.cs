@@ -29,5 +29,7 @@ namespace BicycleApp.Services.Contracts
         Task DeleteSuplier(int suplierId);
 
         Task DeleteDelivedry(int deliveryId);
+
+        Task UpdateSuplierPartsInStock(int suplierId, int[] suppliedPartsOemNums);
     }
 }

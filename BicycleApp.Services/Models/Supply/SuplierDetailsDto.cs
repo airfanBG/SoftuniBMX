@@ -20,7 +20,7 @@ namespace BicycleApp.Services.Models.Supply
         public string? PhoneNumeber { get; set; }
 
         public string Email { get; set; } = null!;
-]
+
         public string ContactName { get; set; } = null!;
     }
 }

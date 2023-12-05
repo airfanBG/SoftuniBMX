@@ -65,6 +65,9 @@
             public const int SuplierNameMinLength = 3;
             public const int SuplierNameMaxLength = 100;
 
+            public const int CategoryNameMinLength = 3;
+            public const int CategoryNameMaxLength = 100;
+
             public const int VATNumberMinLength = 9;
             public const int VATNumberMaxLength = 20;
 

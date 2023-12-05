@@ -78,7 +78,7 @@
                                                                               && (o.IsDeleted == false && o.DateDeleted.Equals(null)))
                                 .Select(ope => new OrderInfoDto
                                 {
-                                    Id = ope.Id,
+                                    OrderId = ope.Id,
                                     SerialNumber = ope.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
                                     OrderParts = ope.OrdersPartsEmployees
                                                 .Select(orderPart => new OrderPartInfoDto
@@ -242,7 +242,7 @@
                                      && o.DateFinish <= datesPeriod.EndDate)
                             .Select(o => new OrderInfoDto()
                             {
-                                Id = o.Id,
+                                OrderId = o.Id,
                                 SerialNumber = o.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault()
                             })
                             .ToListAsync();
@@ -336,7 +336,7 @@
                                                                               && o.DateDeleted.Equals(null)))
                                 .Select(ope => new OrderInfoDto
                                 {
-                                    Id = ope.Id,
+                                    OrderId = ope.Id,
                                     SerialNumber = ope.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
                                     OrderParts = ope.OrdersPartsEmployees
                                                 .Select(orderPart => new OrderPartInfoDto
