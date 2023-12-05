@@ -15,15 +15,7 @@
         [Required]
         [Comment("Timespan for production on part.")]
         public TimeSpan ProductionТime { get; set; }
-
-        [Required]
-        [Comment("Id of the order from the client")]
-        public int OrderId { get; set; }
-
-        [Required]
-        [Comment("Id of the part from the order")]
-        public int PartId { get; set; }
-
+               
         [Required]
         public virtual OrderPartEmployee OrderPartEmployee { get; set; } = null!;
     }

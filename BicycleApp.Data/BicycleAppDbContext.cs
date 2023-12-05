@@ -61,6 +61,7 @@
         public DbSet<Status> Statuses { get; set; } = null!;
 
         public DbSet<OrderPartEmployee> OrdersPartsEmployees { get; set; } = null!;
+        public DbSet<OrderPartEmployeeInfo> OrdersPartsEmployeesInfos { get; set; } = null!;
 
         public DbSet<BikeStandartModel> BikesStandartModels { get; set; } = null!;
 
