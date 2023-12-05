@@ -6,6 +6,6 @@
     public interface IEmployeeFactory
     {
         RemanufacturingPartEmployeeInfoDto CreateRemanufacturingOrderPart(string EmployeeName, string PartName, string SerialNumber, string? Description);
-        OrderPartEmployeeInfo CreateOrderPartEmployeeInfo(TimeSpan partProductionTime, int orderId, string uniqueKeyForSerialNumber, int partId);
+        Task<OrderPartEmployeeInfo> CreateOrderPartEmployeeInfo(TimeSpan partProductionTime, int orderId, string uniqueKeyForSerialNumber, int partId);
     }
 }

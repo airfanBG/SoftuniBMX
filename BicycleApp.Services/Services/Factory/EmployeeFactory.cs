@@ -7,7 +7,7 @@
 
     public class EmployeeFactory : IEmployeeFactory
     {
-        public OrderPartEmployeeInfo CreateOrderPartEmployeeInfo(TimeSpan partProductionTime, int orderId, string uniqueKeyForSerialNumber, int partId)
+        public async Task<OrderPartEmployeeInfo> CreateOrderPartEmployeeInfo(TimeSpan partProductionTime, int orderId, string uniqueKeyForSerialNumber, int partId)
         {
             return new OrderPartEmployeeInfo()
             {

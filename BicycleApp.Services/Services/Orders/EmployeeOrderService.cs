@@ -72,14 +72,14 @@
             var mainOrder = await dbContext.Orders
                 .Where(o => o.Id == order.OrderId)
                 .FirstAsync();
-            mainOrder.StatusId++;
+            mainOrder.StatusId = 7;           
 
             TimeSpan partProductionTime = (TimeSpan)(order.EndDatetime - order.StartDatetime);
             TimeSpan minimumSpan = TimeSpan.Parse("00:00:00.0000000");
 
             if (partOrdersStartEndDto != null && partProductionTime > minimumSpan)
             {
-                var partInfo = employeeFactory.CreateOrderPartEmployeeInfo(partProductionTime, order.OrderId, order.UniqueKeyForSerialNumber, order.PartId);
+                var partInfo = await employeeFactory.CreateOrderPartEmployeeInfo(partProductionTime, order.OrderId, order.UniqueKeyForSerialNumber, order.PartId);
 
                 await dbContext.OrdersPartsEmployeesInfos.AddAsync(partInfo);
                 await dbContext.SaveChangesAsync();
@@ -114,6 +114,7 @@
             var orders = await dbContext.OrdersPartsEmployees
                 .Include(ep => ep.Part)
                 .Include(ep => ep.Order)
+                .Include(opei => opei.OrdersPartsEmployeesInfos)
                 .Where(ep => ep.EmployeeId == employeeId && ep.EndDatetime == null && ep.IsCompleted == false)
                 .Select(p => new PartOrdersDto()
                 {
@@ -122,7 +123,7 @@
                     PartOEMNumber = p.Part.OEMNumber,
                     DatetimeAsigned = p.DatetimeAsigned.Value.ToString(DefaultDateWithTimeFormat),
                     DatetimeFinished = null,
-                    Description = p.Description,
+                    Description = p.OrdersPartsEmployeesInfos.FirstOrDefault(o => p.OrderId == o.OrderId && p.PartId == o.PartId && p.UniqueKeyForSerialNumber == o.UniqueKeyForSerialNumber).DescriptionForWorker,
                     OrderSerialNumber = p.SerialNumber,
                     Quantity = p.PartQuantity
                 })

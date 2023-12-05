@@ -86,12 +86,16 @@
             {
                 var partToManufacturing = await _db.OrdersPartsEmployees
                                                    .Include(e => e.Employee)
+                                                   .Include(opei => opei.OrdersPartsEmployeesInfos)
                                                    .FirstAsync(ope => ope.OrderId == remanufacturingOrderPartDto.OrderId 
                                                                                            && ope.PartId == remanufacturingOrderPartDto.PartId);
 
                 partToManufacturing.StartDatetime = null;
-                partToManufacturing.EndDatetime = null;
-                partToManufacturing.Description = _stringManipulator.GetTextFromProperty(remanufacturingOrderPartDto.Description);
+                partToManufacturing.EndDatetime = null;                 
+                var descriptionFromQualityControl = partToManufacturing.OrdersPartsEmployeesInfos
+                                                                       .First(o => o.OrderId == remanufacturingOrderPartDto.OrderId 
+                                                                                   && o.PartId == remanufacturingOrderPartDto.PartId);
+                descriptionFromQualityControl.DescriptionForWorker = _stringManipulator.GetTextFromProperty(remanufacturingOrderPartDto.Description);
                 partToManufacturing.IsCompleted = false;
 
                 var employeeName = _stringManipulator.ReturnFullName(partToManufacturing.Employee.FirstName, partToManufacturing.Employee.LastName);
