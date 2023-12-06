@@ -80,11 +80,12 @@
                                 {
                                     OrderId = ope.Id,
                                     SerialNumber = ope.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
+                                    DateCreated = ope.DateCreated.ToString(),
                                     OrderParts = ope.OrdersPartsEmployees
                                                 .Select(orderPart => new OrderPartInfoDto
                                                 {
                                                     PartId = orderPart.PartId,
-                                                    Descrioption = _stringManipulator.GetTextFromProperty(orderPart.Description),
+                                                    Description = _stringManipulator.GetTextFromProperty(orderPart.Description),
                                                     PartName = orderPart.PartName,
                                                     PartQuantity = orderPart.PartQuantity,
                                                     PartQunatityInStock = orderPart.Part.Quantity
@@ -111,11 +112,12 @@
                                 {
                                     OrderId = ope.Id,
                                     SerialNumber = ope.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
+                                    DateCreated = ope.DateCreated.ToString(),
                                     OrderParts = ope.OrdersPartsEmployees
                                                 .Select(orderPart => new OrderPartInfoDto
                                                 {
                                                     PartId = orderPart.PartId,
-                                                    Descrioption = _stringManipulator.GetTextFromProperty(orderPart.Description),
+                                                    Description = _stringManipulator.GetTextFromProperty(orderPart.Description),
                                                     PartName = orderPart.PartName,
                                                     PartQuantity = orderPart.PartQuantity,
                                                     PartQunatityInStock = orderPart.Part.Quantity
@@ -243,8 +245,22 @@
                             .Select(o => new OrderInfoDto()
                             {
                                 OrderId = o.Id,
-                                SerialNumber = o.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault()
+                                SerialNumber = o.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
+                                DateCreated = o.DateCreated.ToString(),
+                                DateFinished = o.DateFinish.ToString(),
+                                OrderParts = o.OrdersPartsEmployees
+                                                .Select(orderPart => new OrderPartInfoDto
+                                                {
+                                                    PartId = orderPart.PartId,
+                                                    Description = _stringManipulator.GetTextFromProperty(orderPart.Description),
+                                                    PartName = orderPart.PartName,
+                                                    PartQuantity = orderPart.PartQuantity,
+                                                    PartQunatityInStock = orderPart.Part.Quantity
+                                                })
+                                                .ToList()
+
                             })
+
                             .ToListAsync();
 
             return result;
@@ -338,11 +354,12 @@
                                 {
                                     OrderId = ope.Id,
                                     SerialNumber = ope.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
+                                    DateCreated = ope.DateCreated.ToString(),
                                     OrderParts = ope.OrdersPartsEmployees
                                                 .Select(orderPart => new OrderPartInfoDto
                                                 {
                                                     PartId = orderPart.PartId,
-                                                    Descrioption = _stringManipulator.GetTextFromProperty(orderPart.Description),
+                                                    Description = _stringManipulator.GetTextFromProperty(orderPart.Description),
                                                     PartName = orderPart.PartName,
                                                     PartQuantity = orderPart.PartQuantity,
                                                     PartQunatityInStock = orderPart.Part.Quantity
@@ -431,6 +448,5 @@
             }
             return false;
         }
-       
     }
 }

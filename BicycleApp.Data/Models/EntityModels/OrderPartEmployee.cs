@@ -65,5 +65,22 @@
         [Required]
         [Comment("Status of the task: Completed/Not completed")]
         public bool IsCompleted { get; set; } = false;
+
+        [Required]
+        [Comment("Date of the creation of the order")]
+        public DateTime DateCreated { get; set; }
+
+        [Comment("Date of the completion of the order")]
+        public DateTime? DateFinish { get; set; }
+
+        [Comment("Date of last update of the order")]
+        public DateTime? DateUpdated { get; set; }
+
+        [Comment("Date of the deletion of the order")]
+        public DateTime? DateDeleted { get; set; }
+
+        [Required]
+        [Comment("Is the order deleted: Yes/No")]
+        public bool IsDeleted { get; set; } = false;
     }
 }

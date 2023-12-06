@@ -25,5 +25,7 @@
         public string EmployeeId { get; set; } = null!;
 
         public virtual Employee Employee { get; set; } = null!;
+
+        public bool IsDeleted { get; set; } = false;
     }
 }

@@ -3,6 +3,6 @@
 public enum DeliveriesSorting
 {
     Newest = 0,
-    Price = 1,
-    Rating = 2
+    Supplier = 1,
+    PartName = 2
 }
