@@ -53,6 +53,14 @@
         public decimal UnpaidAmount { get; set; }
 
         [Required]
+        [Comment("Id of the current status of the order")]
+        public int StatusId { get; set; }
+
+        public virtual Status Status { get; set; } = null!;
+
+        public virtual ICollection<OrderPartEmployee> OrdersPartsEmployees { get; set; }
+
+        [Required]
         [Comment("Date of the creation of the order")]
         public DateTime DateCreated { get; set; }
 
@@ -68,13 +76,5 @@
         [Required]
         [Comment("Is the order deleted: Yes/No")]
         public bool IsDeleted { get; set; } = false;
-
-        [Required]
-        [Comment("Id of the current status of the order")]
-        public int StatusId { get; set; }
-
-        public virtual Status Status { get; set; } = null!;
-
-        public virtual ICollection<OrderPartEmployee> OrdersPartsEmployees { get; set; }
     }
 }

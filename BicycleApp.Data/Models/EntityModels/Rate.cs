@@ -24,5 +24,22 @@
         [Required]
         [Comment("The last rating for the part given by the client")]
         public int Rating { get; set; }
+
+        [Required]
+        [Comment("Date of the creation of the order")]
+        public DateTime DateCreated { get; set; }
+
+        [Comment("Date of the completion of the order")]
+        public DateTime? DateFinish { get; set; }
+
+        [Comment("Date of last update of the order")]
+        public DateTime? DateUpdated { get; set; }
+
+        [Comment("Date of the deletion of the order")]
+        public DateTime? DateDeleted { get; set; }
+
+        [Required]
+        [Comment("Is the order deleted: Yes/No")]
+        public bool IsDeleted { get; set; } = false;
     }
 }

@@ -35,5 +35,12 @@
         public int SuplierId { get; set; }
 
         public virtual Suplier Suplier { get; set; } = null!;
+
+        [Comment("Date of deletion of the entity")]
+        public DateTime? DateDeleted { get; set; }
+
+        [Required]
+        [Comment("Status of the department: Active/Inactive")]
+        public bool IsDeleted { get; set; } = false;
     }
 }

@@ -38,10 +38,17 @@
         public string Description { get; set; } = null!;
 
         [Required]
-        [Comment("Date of the creation of the comment")]
+        [Comment("Date of the creation of the entity")]
         public DateTime DateCreated { get; set; }
 
-        [Comment("Date of last update of the comment")]
+        [Comment("Date of the last update of the entity")]
         public DateTime? DateUpdated { get; set; }
+
+        [Comment("Date of deletion of the entity")]
+        public DateTime? DateDeleted { get; set; }
+
+        [Required]
+        [Comment("Status of the department: Active/Inactive")]
+        public bool IsDeleted { get; set; } = false;
     }
 }
