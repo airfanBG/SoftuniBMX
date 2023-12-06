@@ -66,8 +66,9 @@
         public DbSet<BikeStandartModel> BikesStandartModels { get; set; } = null!;
 
         public DbSet<BikeModelPart> BikeModelsParts { get; set; } = null!;
-
-        public DbSet<CompatablePart> CompatableParts { get; set; } = null!;
+        public DbSet<PartOrder> PartOrders { get; set; } = null!; 
+        public DbSet<PartInStock> PartsInStock { get; set; } = null!;
+        public DbSet<CompatiblePart> CompatableParts { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -253,6 +254,16 @@
                     .OnDelete(DeleteBehavior.NoAction);
             });
 
+            //PartOrderEntityConfiguration
+            builder.Entity<PartOrder>(entity =>
+            {
+                entity
+                    .HasOne(po => po.Part)
+                    .WithMany()
+                    .HasForeignKey(p => p.PartId)
+                    .OnDelete(DeleteBehavior.NoAction);
+            });
+
             //RateEntityConfiguration
             builder.Entity<Rate>(entity =>
             {
@@ -324,6 +335,8 @@
             builder.Entity<Suplier>(entity => entity.HasData(seeder.SeedSuplieres()));
             builder.Entity<Town>(entity => entity.HasData(seeder.SeedTowns()));
             builder.Entity<VATCategory>(entity => entity.HasData(seeder.SeedVATCategories()));
+            builder.Entity<PartInStock>(entity => entity.HasData(seeder.SeedPartsInStock()));
+            builder.Entity<PartOrder>(entity => entity.HasData(seeder.SeedPartOrders()));
 
             base.OnModelCreating(builder);
         }
