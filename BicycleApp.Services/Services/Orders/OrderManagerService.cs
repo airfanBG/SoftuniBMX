@@ -108,7 +108,7 @@
                                                                               && (o.IsDeleted == false && o.DateDeleted.Equals(null)))
                                 .Select(ope => new OrderInfoDto
                                 {
-                                    Id = ope.Id,
+                                    OrderId = ope.Id,
                                     SerialNumber = ope.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
                                     DateCreated = ope.DateCreated.ToString(),
                                     OrderParts = ope.OrdersPartsEmployees

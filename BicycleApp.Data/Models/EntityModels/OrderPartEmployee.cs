@@ -70,6 +70,9 @@
         [Comment("Status of the task: Completed/Not completed")]
         public bool IsCompleted { get; set; } = false;
 
+        [Comment("Information about manufacturing current part between quality control and worker.")]
+        public virtual ICollection<OrderPartEmployeeInfo> OrdersPartsEmployeesInfos { get; set; }
+
         [Required]
         [Comment("Date of the creation of the order")]
         public DateTime DateCreated { get; set; }
