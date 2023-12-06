@@ -43,8 +43,9 @@
 .content {
   display: block;
   width: 35%;
-  max-height: 70px;
+  height: 30px;
   font-size: 1.6rem;
+  line-height: 1;
   overflow: hidden;
 }
 

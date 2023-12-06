@@ -107,14 +107,6 @@
     {
       "orderId": 3,
       "id": 1
-    },
-    {
-      "orderId": 3,
-      "id": 2
-    },
-    {
-      "orderId": 3,
-      "id": 3
     }
   ],
   "client": [],
@@ -458,24 +450,25 @@
     {
       "id": 3,
       "serialNumber": "BID12345680",
+      "dateCreated": "2023-12-05 18:49:21.4383743",
       "orderParts": [
         {
           "partId": 1,
-          "descrioption": "test",
+          "description": "test",
           "partName": "Frame OG",
           "partQuantity": 2,
           "partQunatityInStock": 2
         },
         {
           "partId": 5,
-          "descrioption": "единственто мястно на кsdsdf sfdgsdfg dsfgsdfgsdf sdf sdfgsdf оето",
+          "description": "единственто мястно на кsdsdf sfdgsdfg dsfgsdfgsdf sdf sdfgsdf оето",
           "partName": "Wheel of the Year for montain",
           "partQuantity": 2,
           "partQunatityInStock": 30
         },
         {
           "partId": 11,
-          "descrioption": "test",
+          "description": "test",
           "partName": "Road budget Shifts",
           "partQuantity": 2,
           "partQunatityInStock": 9
@@ -485,24 +478,26 @@
     {
       "id": 2,
       "serialNumber": "BID12345640",
+      "dateCreated": "2023-12-05 18:49:21.4383743",
+
       "orderParts": [
         {
           "partId": 1,
-          "descrioption": "test",
+          "description": "test",
           "partName": "Frame OG",
           "partQuantity": 1,
           "partQunatityInStock": 12
         },
         {
           "partId": 5,
-          "descrioption": "единственто мястно на кs",
+          "description": "единственто мястно на кs",
           "partName": "Wheel of the Year",
           "partQuantity": 1,
           "partQunatityInStock": 20
         },
         {
           "partId": 11,
-          "descrioption": "test",
+          "description": "test",
           "partName": "Road budget Shifts",
           "partQuantity": 1,
           "partQunatityInStock": 21
@@ -512,24 +507,25 @@
     {
       "id": 23,
       "serialNumber": "BID12115640",
+      "dateCreated": "2023-12-05 18:49:21.4383743",
       "orderParts": [
         {
           "partId": 1,
-          "descrioption": "test",
+          "description": "test",
           "partName": "Frame OG",
           "partQuantity": 4,
           "partQunatityInStock": 3
         },
         {
           "partId": 5,
-          "descrioption": "единственто мястно на кs",
+          "description": "единственто мястно на кs",
           "partName": "Wheel of the Year",
           "partQuantity": 4,
           "partQunatityInStock": 20
         },
         {
           "partId": 11,
-          "descrioption": "test",
+          "description": "test",
           "partName": "Road budget Shifts",
           "partQuantity": 4,
           "partQunatityInStock": 21
@@ -539,24 +535,25 @@
     {
       "id": 20,
       "serialNumber": "BID11115640",
+      "dateCreated": "2023-12-05 18:49:21.4383743",
       "orderParts": [
         {
           "partId": 1,
-          "descrioption": "test",
+          "description": "test",
           "partName": "Frame OG",
           "partQuantity": 2,
           "partQunatityInStock": 3
         },
         {
           "partId": 5,
-          "descrioption": "единственто мястно на кs",
+          "description": "единственто мястно на кs",
           "partName": "Wheel of the Year",
           "partQuantity": 2,
           "partQunatityInStock": 20
         },
         {
           "partId": 11,
-          "descrioption": "test",
+          "description": "test",
           "partName": "Road budget Shifts",
           "partQuantity": 2,
           "partQunatityInStock": 21
@@ -566,24 +563,25 @@
     {
       "id": 73,
       "serialNumber": "BID12105640",
+      "dateCreated": "2023-12-05 18:49:21.4383743",
       "orderParts": [
         {
           "partId": 1,
-          "descrioption": "test",
+          "description": "test",
           "partName": "Frame OG",
           "partQuantity": 1,
           "partQunatityInStock": 3
         },
         {
           "partId": 5,
-          "descrioption": "единственто мястно на кs",
+          "description": "единственто мястно на кs",
           "partName": "Wheel of the Year",
           "partQuantity": 1,
           "partQunatityInStock": 20
         },
         {
           "partId": 11,
-          "descrioption": "test",
+          "description": "test",
           "partName": "Road budget Shifts",
           "partQuantity": 1,
           "partQunatityInStock": 21

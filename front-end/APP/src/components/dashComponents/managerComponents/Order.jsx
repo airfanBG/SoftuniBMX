@@ -10,7 +10,7 @@ import {
 
 function Order({ order, onStatusChange }) {
   // const { orderId, serialNumber, orderParts } = order;
-  const { id, serialNumber, orderParts } = order;
+  const { id, dateCreated, serialNumber, orderParts } = order;
   // const id = orderId;
   const frame = orderParts[0];
   const wheel = orderParts[1];
@@ -49,6 +49,10 @@ function Order({ order, onStatusChange }) {
             {id}
           </p>
           <p>
+            <span>Order date </span>
+            {dateCreated.split(" ")[0]}
+          </p>
+          <p>
             <span>SN# </span>
             {serialNumber}
           </p>
@@ -63,7 +67,7 @@ function Order({ order, onStatusChange }) {
               </p>
               <p className={styles.content}>
                 <span>Client request:</span>
-                {frame.descrioption}
+                {frame.description}
               </p>
               <div className={styles.qtyBlock}>
                 <p
@@ -98,7 +102,7 @@ function Order({ order, onStatusChange }) {
               </p>
               <p className={styles.content}>
                 <span>Client request:</span>
-                {wheel.descrioption}
+                {wheel.description}
               </p>
               <div className={styles.qtyBlock}>
                 <p
@@ -133,7 +137,7 @@ function Order({ order, onStatusChange }) {
               </p>
               <p className={styles.content}>
                 <span>Client request:</span>
-                {accessory.descrioption}
+                {accessory.description}
               </p>
               <div className={styles.qtyBlock}>
                 <p

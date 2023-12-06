@@ -35,4 +35,8 @@ export const environment = {
   approve_order: `/approved/`, // + id
   // TODO: Uncomment approved in orderActions
   //approve_order: `/api/manager/approve_order?orderId=`, // + id
+
+  reject_order: `/rejected_orders/`, // + id
+  // TODO: Uncomment approved in orderActions
+  //reject_order: `/api/manager/reject_order?orderId=`, // + id
 };

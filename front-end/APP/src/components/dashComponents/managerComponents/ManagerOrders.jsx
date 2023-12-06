@@ -1,17 +1,48 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer } from "react";
 import BoardHeader from "../BoardHeader.jsx";
 import styles from "./ManagerOrders.module.css";
 import Order from "./Order.jsx";
 import Paginator from "../../Paginator.jsx";
 import { usePagination } from "../../../customHooks/usePaginationArray.js";
 import { environment } from "../../../environments/environment_dev.js";
+import LoaderWheel from "../../LoaderWheel.jsx";
+
+const initialState = {
+  orders: {},
+  dataReceived: [],
+  length: 0,
+  page: 1,
+  rerender: false,
+  loading: false,
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "orders/received":
+      return { ...state, orders: action.payload };
+    case "data/received":
+      return {
+        ...state,
+        dataReceived: action.payload,
+        length: action.payload.length,
+      };
+    case "length/isSet":
+      return { ...state, length: action.payload };
+    case "page/isChanged":
+      return { ...state, page: action.payload };
+    case "toRerender":
+      return { ...state, rerender: !state.rerender };
+    case "isLoading":
+      return { ...state, loading: action.payload };
+
+    default:
+      throw new Error("Unknown action type");
+  }
+}
 
 function ManagerOrders() {
-  const [orders, setOrders] = useState({});
-  const [dataReceived, setDataReceived] = useState([]);
-  const [length, setLength] = useState(0);
-  const [page, setPage] = useState(1);
-  const [rerender, setRerender] = useState(false);
+  const [{ orders, dataReceived, length, page, rerender, loading }, dispatch] =
+    useReducer(reducer, initialState);
 
   // useEffect(function () {
   //   const abortController = new AbortController();
@@ -32,18 +63,18 @@ function ManagerOrders() {
 
   const path = environment.orders;
   const itemPerPage = 2;
-  // console.log(orders);
 
   const data = usePagination(path);
   const dataArray = [];
 
   useEffect(
     function () {
+      dispatch({ type: "isLoading", payload: true });
       const abortController = new AbortController();
       async function getOrdersPagination() {
         const list = await data;
-        setLength(list.length);
-        setDataReceived(list);
+        dispatch({ type: "data/received", payload: list });
+        dispatch({ type: "isLoading", payload: false });
       }
       getOrdersPagination();
 
@@ -55,23 +86,27 @@ function ManagerOrders() {
   useEffect(
     function () {
       if (dataReceived.length > 0) {
+        dispatch({ type: "isLoading", payload: true });
+
         for (let i = 0; i < dataReceived.length; i += itemPerPage) {
           const chunk = dataReceived.slice(i, i + itemPerPage);
           dataArray.push(chunk);
         }
-        setOrders(dataArray[page - 1]);
+        dispatch({ type: "orders/received", payload: dataArray[page - 1] });
+        dispatch({ type: "isLoading", payload: false });
       }
     },
     [dataReceived, page, rerender]
   );
 
   function handlePage(page) {
-    // console.log(page);
-    setPage(page);
+    dispatch({ type: "page/isChanged", payload: page });
   }
 
   function onStatusChange() {
-    setRerender(!rerender);
+    dispatch({ type: "isLoading", payload: true });
+    dispatch({ type: "toRerender" });
+    dispatch({ type: "isLoading", payload: false });
   }
 
   if (orders.length === 0) return <h2>There is no orders in this category</h2>;
@@ -81,6 +116,7 @@ function ManagerOrders() {
         <h2 className={styles.dashHeading}>Orders in sequence</h2>
         <section className={styles.board}>
           <BoardHeader />
+          {loading && <LoaderWheel />}
           <div className={styles.orders}>
             {orders.map((order) => (
               <Order
@@ -91,7 +127,6 @@ function ManagerOrders() {
             ))}
           </div>
           <Paginator
-            // pages={orders.length}
             page={page}
             pages={length}
             countOnPage={itemPerPage}
@@ -99,6 +134,7 @@ function ManagerOrders() {
             fontSize={1.6}
             // bgColor=""
             // brColor=""
+            brRadius={3}
             handlePage={handlePage}
             // selected="red"
           />
