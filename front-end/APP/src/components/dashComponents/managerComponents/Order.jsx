@@ -9,7 +9,9 @@ import {
 } from "../../../customHooks/orderActions.js";
 
 function Order({ order, onStatusChange }) {
+  // const { orderId, serialNumber, orderParts } = order;
   const { id, serialNumber, orderParts } = order;
+  // const id = orderId;
   const frame = orderParts[0];
   const wheel = orderParts[1];
   const accessory = orderParts[2];
@@ -17,10 +19,14 @@ function Order({ order, onStatusChange }) {
   async function approveHandler(id) {
     approveHandlerAction(id);
     onStatusChange();
-
-    // const approve = await del(environment.del_order + id);
-    // console.log(approve);
-    // onApprove((o) => Object.values((orders) => console.log(x)));
+  }
+  async function rejectHandler(id) {
+    onRejectHandler(id);
+    onStatusChange();
+  }
+  async function deleteHandler(id) {
+    onDeleteHandler(id);
+    onStatusChange();
   }
 
   return (
@@ -158,10 +164,10 @@ function Order({ order, onStatusChange }) {
             >
               Approve
             </Button>
-            <Button type={"reject"} onClick={onRejectHandler} id={id}>
+            <Button type={"reject"} onClick={() => rejectHandler(id)} id={id}>
               Reject
             </Button>
-            <Button type={"delete"} onClick={onDeleteHandler} id={id}>
+            <Button type={"delete"} onClick={() => deleteHandler(id)} id={id}>
               Delete
             </Button>
           </div>

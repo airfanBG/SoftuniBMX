@@ -27,9 +27,12 @@ export const environment = {
   selected_part: "/selected_part/",
   // orders: "/orders/",
   orders: "/order_to_be_approved/",
-  del_order: "/order_to_be_approved/",
-  // del_order: "/orders/",
 
-  // TODO: Uncomment in orderActions approved
-  approve_order: `/api/manager/approve_order?orderId=`, // + id
+  del_order: "/order_to_be_approved/",
+  // del_order: `/api/manager/delete_order?orderId=`, // +id
+  // TODO: Uncomment when delete in orderActions
+
+  approve_order: `/approved/`, // + id
+  // TODO: Uncomment approved in orderActions
+  //approve_order: `/api/manager/approve_order?orderId=`, // + id
 };

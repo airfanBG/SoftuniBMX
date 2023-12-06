@@ -6,7 +6,7 @@ function Button({ children, type, onClick, id, disabled }) {
       className={`${styles.btn} ${styles[type]} ${
         disabled ? styles.disabled : null
       }`}
-      onClick={() => onClick(id)}
+      onClick={() => onClick(id, type)}
       disabled={disabled}
     >
       {children}
