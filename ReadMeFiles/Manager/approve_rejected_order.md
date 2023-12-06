@@ -7,7 +7,7 @@
 ## Request:
 
 ```
-POST /api/accountpage/approve_rejected_order?orderId=1
+POST /api/manager/approve_rejected_order?orderId=1
 ```
 
 ## Response:
