@@ -29,21 +29,21 @@ GET /api/manager/pending_orders
     "orderParts": [
       {
         "partId": 1,
-        "descrioption": "test",
+        "description": "test",
         "partName": "Frame OG",
         "partQuantity": 1,
         "partQunatityInStock": 2
       },
       {
         "partId": 5,
-        "descrioption": "test",
+        "description": "test",
         "partName": "Wheel of the Year for montain",
         "partQuantity": 6,
         "partQunatityInStock": 40
       },
       {
         "partId": 11,
-        "descrioption": "test",
+        "description": "test",
         "partName": "Road budget Shifts",
         "partQuantity": 4,
         "partQunatityInStock": 21

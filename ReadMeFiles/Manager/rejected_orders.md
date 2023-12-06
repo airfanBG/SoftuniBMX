@@ -29,21 +29,21 @@ GET /api/manager/rejected_orders
     "orderParts": [
       {
         "partId": 1,
-        "descrioption": "test",
+        "description": "test",
         "partName": "Frame OG",
         "partQuantity": 1,
         "partQunatityInStock": 2
       },
       {
         "partId": 4,
-        "descrioption": "test",
+        "description": "test",
         "partName": "Wheel of the Year for road",
         "partQuantity": 2,
         "partQunatityInStock": 50
       },
       {
         "partId": 12,
-        "descrioption": "test",
+        "description": "test",
         "partName": "Shift",
         "partQuantity": 2,
         "partQunatityInStock": 9
