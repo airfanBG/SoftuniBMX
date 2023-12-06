@@ -6,10 +6,22 @@
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;
+    using BicycleApp.Services.Models;
     using BicycleApp.Services.Models.IdentityModels;
 
     public class ModelsFactory : IModelsFactory
     {
+        public BikeStandartModel CreateNewBikeStandartModel(BikeStandartTypeAddDto bikeStandartTypeAddDto)
+        {
+            return new BikeStandartModel()
+            {
+                ModelName = bikeStandartTypeAddDto.ModelName,
+                Description = bikeStandartTypeAddDto.Description,
+                ImageUrl = bikeStandartTypeAddDto.ImageUrl,
+                Price = bikeStandartTypeAddDto.Price
+            };
+        }
+
         public Client CreateNewClientModel(ClientRegisterDto clientRegisterDto)
         {
             //Transform the address dto in to a string
@@ -69,6 +81,19 @@
             };
         }
 
+        public Comment CreateNewComment(CommentAddDto commentAddDto)
+        {
+            return new Comment()
+            {
+                ClientId = commentAddDto.ClientId,
+                PartId = commentAddDto.PartId,
+                DateCreated = DateTime.UtcNow,
+                Description = commentAddDto.Description,
+                Title = commentAddDto.Title,
+                DateUpdated = null
+            };
+        }
+
         public Department CreateNewDepartment(string departmentName)
         {
             return new Department()
@@ -111,6 +136,26 @@
                 DateUpdated = null,
                 DateDeleted = null,
                 IsDeleted = false
+            };
+        }
+
+        public Part CreatePart(PartAddDto partAddDto)
+        {
+            return new Part()
+            {
+                Name = partAddDto.Name,
+                Description = partAddDto.Description,
+                VATCategoryId = partAddDto.VATCategoryId,
+                CategoryId = partAddDto.CategoryId,
+                SalePrice = partAddDto.SalePrice,
+                DateCreated = DateTime.UtcNow,
+                DateDeleted = null,
+                DateUpdated = null,
+                IsDeleted = false,
+                Intend = partAddDto.Intend,
+                OEMNumber = partAddDto.OEMNumber,
+                Quantity = partAddDto.Quantity,
+                Type = partAddDto.Type
             };
         }
     }

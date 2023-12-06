@@ -114,6 +114,12 @@ namespace BicicleApp.Api
             builder.Services.AddScoped<IGuidProvider, GuidProvider>();
             builder.Services.AddScoped<IQualityAssuranceService, QualityAssuranceService>();
             builder.Services.AddScoped<IEmployeeOrderService, EmployeeOrderService>();
+            builder.Services.AddScoped<IDateTimeProvider, DateTimeProvider>();
+            builder.Services.AddScoped<IOptionProvider, OptionProvider>();
+            builder.Services.AddScoped<IBikeService, BikeService>();
+            builder.Services.AddScoped<ICommentService, CommentService>();
+            builder.Services.AddScoped<IPartService, PartService>();
+
             builder.Services.AddScoped<IEmployeeFactory, EmployeeFactory>();
             builder.Services.AddScoped<ISupplyManagerService, SupplyManagerService>();
 
