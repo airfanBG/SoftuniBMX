@@ -7,7 +7,7 @@
 ## Request:
 
 ```
-GET /api/manager/approve_order?orderId=1
+POST /api/manager/approve_order?orderId=1
 ```
 
 ## Response:

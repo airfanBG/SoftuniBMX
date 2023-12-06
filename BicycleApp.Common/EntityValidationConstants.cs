@@ -65,6 +65,9 @@
             public const int SuplierNameMinLength = 3;
             public const int SuplierNameMaxLength = 100;
 
+            public const int CategoryNameMinLength = 3;
+            public const int CategoryNameMaxLength = 100;
+
             public const int VATNumberMinLength = 9;
             public const int VATNumberMaxLength = 20;
 
@@ -72,13 +75,20 @@
             public const int AddressMaxLength = 100;
 
             public const int PhoneNumberMaxLength = 20;
+            public const int PhoneNumberMinLength = 8;
 
             public const int EmailMaxLength = 50;
+            public const int EmailMinLength = 8;
 
             public const int ContactNameMinLength = 3;
             public const int ContactNameMaxLength = 100;
         }
 
+        public static class Delivery
+        {
+            public const int NoteMinLength = 3;
+            public const int NoteMaxLength = 100;
+        }
         public static class Coment
         {
             public const int TitleMinLength = 3;

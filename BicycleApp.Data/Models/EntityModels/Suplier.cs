@@ -16,6 +16,8 @@
         public Suplier()
         {
             this.Delivaries = new HashSet<Delivary>();
+            this.PartsInStock = new HashSet<PartInStock>();
+            this.PartsInOrder = new HashSet<PartOrder>();
         }
 
         [Key]
@@ -45,11 +47,18 @@
         public string Email { get; set; } = null!;
 
         [Required]
+        [MaxLength(CategoryNameMaxLength)]
+        [Comment("The category name of the suplied part")]
+        public string CategoryName { get; set; } = null!;
+
+        [Required]
         [MaxLength(ContactNameMaxLength)]
         [Comment("The name of the main person for contact with the suplier")]
         public string ContactName { get; set; } = null!;
 
         public virtual ICollection<Delivary> Delivaries { get; set; }
+        public virtual ICollection<PartInStock> PartsInStock { get; set; }
+        public virtual ICollection<PartOrder> PartsInOrder { get; set; }
 
         [Required]
         [Comment("Date of the creation of the entry")]
