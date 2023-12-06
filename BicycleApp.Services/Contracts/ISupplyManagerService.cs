@@ -6,7 +6,7 @@ namespace BicycleApp.Services.Contracts
     {
         Task<bool> DeliveryExists(int deliveryId);
         Task<bool> SuplierExists(int suplierId);
-        Task<DeliveryInfoDto> AllDeliveries(//by client
+        Task<DeliveryQueryDto> AllDeliveries(//by client
                             string category_suplier = null,
                             string searchTerm_client = null,
                             DeliveriesSorting sorting = DeliveriesSorting.Newest,
