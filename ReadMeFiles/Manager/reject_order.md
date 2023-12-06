@@ -12,7 +12,7 @@
 ## Request:
 
 ```
-POST /api/accountpage/reject_order?orderId=1
+POST /api/manager/reject_order?orderId=1
 ```
 
 ## Response:
