@@ -61,6 +61,7 @@
         public DbSet<Status> Statuses { get; set; } = null!;
 
         public DbSet<OrderPartEmployee> OrdersPartsEmployees { get; set; } = null!;
+        public DbSet<OrderPartEmployeeInfo> OrdersPartsEmployeesInfos { get; set; } = null!;
 
         public DbSet<BikeStandartModel> BikesStandartModels { get; set; } = null!;
 
@@ -213,14 +214,23 @@
                     .WithMany(o => o.OrdersPartsEmployees)
                     .HasForeignKey(ope => ope.PartId)
                     .OnDelete(DeleteBehavior.NoAction);
-               
+                               
                 entity.Property(ope => ope.PartPrice).HasColumnType("decimal(18,2)");
 
                 entity.Property(ope => ope.PartQuantity).HasColumnType("float(2)");
             });
 
-            //PartEntityConfiguration
-            builder.Entity<Part>(entity =>
+            //OrderPartEmployeeInfoEntityConfiguration
+            builder.Entity<OrderPartEmployeeInfo>(entity =>
+            {
+                entity
+                     .HasOne(p => p.OrderPartEmployee)
+                     .WithMany(p => p.OrdersPartsEmployeesInfos)
+                     .HasForeignKey(k => new { k.OrderId, k.PartId, k.UniqueKeyForSerialNumber });
+            });
+
+           //PartEntityConfiguration
+           builder.Entity<Part>(entity =>
             {
                 entity
                     .HasOne(p => p.Category)

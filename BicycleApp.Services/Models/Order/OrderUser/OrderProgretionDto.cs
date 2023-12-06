@@ -1,8 +1,9 @@
 ﻿namespace BicycleApp.Services.Models.Order.OrderUser
 {
+    using BicycleApp.Services.Models.Order.OrderUser.Contracts;
     using System.Text.Json.Serialization;
 
-    public class OrderProgretionDto
+    public class OrderProgretionDto : IOrderProgretionDto
     {
         [JsonPropertyName("orderId")]
         public int OrderId { get; set; }

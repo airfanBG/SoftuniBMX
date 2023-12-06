@@ -1,8 +1,10 @@
 ### Отговор
 
-### `GET /api/manager/rejected_orders` Връща колекция от JSON обекти със следните пропъртита:
+### `GET /api/manager/finished_orders` Връща колекция от JSON обекти със следните пропъртита:
 - `orderId"`: Уникален идентификатор на поръчката.
 - `serialNumber"`: Уникален идентификатор на велосипеда.
+- `dateCreated`: Дата и час на създаване на поръчката.
+- `dateFinished`: Дата и час на завършване на поръчката.
 - `orderParts`: Колекция от поръчаните части.
 - `partId`: Уникален идентификатор на частта.
 - `description`: Описание на частта.
@@ -15,7 +17,7 @@
 ## Request:
 
 ```
-GET /api/manager/rejected_orders
+GET /api/manager/finished_orders
 ```
 
 ## Response:
@@ -24,29 +26,31 @@ GET /api/manager/rejected_orders
 	
 [
   {
-    "orderId": 2,
-    "serialNumber": "BID12345679",
+    "orderId": 1,
+    "serialNumber": "BID12345678",
+    "dateCreated": "2023-12-05 18:49:21.4383734",
+    "dateFinished": "2023-12-05 20:49:21.0000000",
     "orderParts": [
       {
         "partId": 1,
-        "descrioption": "test",
+        "description": "test",
         "partName": "Frame OG",
         "partQuantity": 1,
         "partQunatityInStock": 2
       },
       {
-        "partId": 4,
-        "descrioption": "test",
-        "partName": "Wheel of the Year for road",
+        "partId": 2,
+        "description": "test",
+        "partName": "Wheel of the YearG",
         "partQuantity": 2,
-        "partQunatityInStock": 50
+        "partQunatityInStock": 4
       },
       {
-        "partId": 12,
-        "descrioption": "test",
+        "partId": 3,
+        "description": "test",
         "partName": "Shift",
         "partQuantity": 2,
-        "partQunatityInStock": 9
+        "partQunatityInStock": 3
       }
     ]
   }
