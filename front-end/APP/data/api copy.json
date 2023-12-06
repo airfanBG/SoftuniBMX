@@ -103,7 +103,6 @@
       "time": "04:35:00h"
     }
   ],
-  "approved": [],
   "client": [],
   "employee": [],
   "frames": [
@@ -443,7 +442,7 @@
   ],
   "order_to_be_approved": [
     {
-      "id": 3,
+      "orderId": 3,
       "serialNumber": "BID12345680",
       "orderParts": [
         {
@@ -470,7 +469,7 @@
       ]
     },
     {
-      "id": 2,
+      "orderId": 2,
       "serialNumber": "BID12345640",
       "orderParts": [
         {
@@ -497,7 +496,7 @@
       ]
     },
     {
-      "id": 23,
+      "orderId": 23,
       "serialNumber": "BID12115640",
       "orderParts": [
         {
@@ -524,7 +523,7 @@
       ]
     },
     {
-      "id": 20,
+      "orderId": 20,
       "serialNumber": "BID11115640",
       "orderParts": [
         {
@@ -551,7 +550,7 @@
       ]
     },
     {
-      "id": 73,
+      "orderId": 73,
       "serialNumber": "BID12105640",
       "orderParts": [
         {

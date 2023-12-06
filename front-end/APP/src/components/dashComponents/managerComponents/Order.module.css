@@ -82,3 +82,10 @@
   flex-direction: column;
   justify-content: space-evenly;
 }
+
+.notEnough,
+.qty span.notEnough {
+  /* font-size: 1.6rem; */
+  font-weight: 500;
+  color: red;
+}
