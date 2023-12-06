@@ -3,7 +3,7 @@
 ### `GET /api/manager/orders_in_progress` Връща колекция от JSON обекти със следните пропъртита:
 - `orderId"`: Уникален идентификатор на поръчката.
 - `serialNumber"`: Уникален идентификатор на велосипеда.
-- `dateCreated`: Дата на създаване на поръчката.
+- `dateCreated`: Дата и час на създаване на поръчката.
 - `orderParts`: Колекция от поръчаните части.
 - `partId`: Уникален идентификатор на частта.
 - `description`: Описание на частта.
@@ -16,7 +16,7 @@
 ## Request:
 
 ```
-GET /api/manager/rders_in_progress
+GET /api/manager/оrders_in_progress
 ```
 
 ## Response:
