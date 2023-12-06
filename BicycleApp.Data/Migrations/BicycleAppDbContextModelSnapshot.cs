@@ -1083,6 +1083,10 @@ namespace BicycleApp.Data.Migrations
                             Id = 10,
                             CategoryId = 3,
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(3986),
+                            DateCreated = new DateTime(2023, 12, 5, 17, 59, 30, 424, DateTimeKind.Local).AddTicks(2665),
+=========
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2909),
+>>>>>>>>> Temporary merge branch 2
                             Description = "Better shifts for a road!",
                             Discount = 0.00m,
                             Intend = "Better shift for a road usage",
@@ -1094,11 +1098,11 @@ namespace BicycleApp.Data.Migrations
                             Type = 3,
                             VATCategoryId = 1
                         },
-                        new
-                        {
-                            Id = 11,
-                            CategoryId = 3,
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(3991),
+                            DateCreated = new DateTime(2023, 12, 5, 17, 59, 30, 424, DateTimeKind.Local).AddTicks(2670),
+=========
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2913),
+>>>>>>>>> Temporary merge branch 2
                             Description = "Budget shifts for a road!",
                             Discount = 0.00m,
                             Intend = "Budget shift for a road usage",
@@ -1110,11 +1114,11 @@ namespace BicycleApp.Data.Migrations
                             Type = 3,
                             VATCategoryId = 1
                         },
-                        new
-                        {
-                            Id = 12,
-                            CategoryId = 3,
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(3995),
+                            DateCreated = new DateTime(2023, 12, 5, 17, 59, 30, 424, DateTimeKind.Local).AddTicks(2686),
+=========
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2916),
+>>>>>>>>> Temporary merge branch 2
                             Description = "Cheap standard shift!",
                             Discount = 0.00m,
                             Intend = "Cheap standard shift for a road usage",
@@ -1126,11 +1130,11 @@ namespace BicycleApp.Data.Migrations
                             Type = 1,
                             VATCategoryId = 1
                         },
-                        new
-                        {
-                            Id = 13,
-                            CategoryId = 3,
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(4000),
+                            DateCreated = new DateTime(2023, 12, 5, 17, 59, 30, 424, DateTimeKind.Local).AddTicks(2691),
+=========
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2919),
+>>>>>>>>> Temporary merge branch 2
                             Description = "Budget shifts for a montain!",
                             Discount = 0.00m,
                             Intend = "Budget shift for a montain usage",
@@ -1142,11 +1146,11 @@ namespace BicycleApp.Data.Migrations
                             Type = 2,
                             VATCategoryId = 1
                         },
-                        new
-                        {
-                            Id = 14,
-                            CategoryId = 2,
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(4004),
+                            DateCreated = new DateTime(2023, 12, 5, 17, 59, 30, 424, DateTimeKind.Local).AddTicks(2697),
+=========
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2937),
+>>>>>>>>> Temporary merge branch 2
                             Description = "Budget wheel ever!",
                             Discount = 0.00m,
                             Intend = "Budget wheel for a road usage",
@@ -1158,11 +1162,11 @@ namespace BicycleApp.Data.Migrations
                             Type = 1,
                             VATCategoryId = 1
                         },
-                        new
-                        {
-                            Id = 15,
-                            CategoryId = 2,
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(4008),
+                            DateCreated = new DateTime(2023, 12, 5, 17, 59, 30, 424, DateTimeKind.Local).AddTicks(2715),
+=========
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2941),
+>>>>>>>>> Temporary merge branch 2
                             Description = "Budget wheel for a montain!",
                             Discount = 0.00m,
                             Intend = "Budget wheel for a montain usage",
@@ -1174,11 +1178,11 @@ namespace BicycleApp.Data.Migrations
                             Type = 2,
                             VATCategoryId = 1
                         },
-                        new
-                        {
-                            Id = 16,
-                            CategoryId = 2,
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(4012),
+                            DateCreated = new DateTime(2023, 12, 5, 17, 59, 30, 424, DateTimeKind.Local).AddTicks(2720),
+=========
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2944),
+>>>>>>>>> Temporary merge branch 2
                             Description = "The cheapest wheel for a road!",
                             Discount = 0.00m,
                             Intend = "The cheapest wheel for a road usage",
@@ -1190,11 +1194,11 @@ namespace BicycleApp.Data.Migrations
                             Type = 3,
                             VATCategoryId = 1
                         },
-                        new
-                        {
-                            Id = 17,
-                            CategoryId = 2,
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(4016),
+                            DateCreated = new DateTime(2023, 12, 5, 17, 59, 30, 424, DateTimeKind.Local).AddTicks(2726),
+=========
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2947),
+>>>>>>>>> Temporary merge branch 2
                             Description = "The best titanium wheel for a road!",
                             Discount = 0.00m,
                             Intend = "The best titanium wheel for a road usage",
@@ -1250,27 +1254,27 @@ namespace BicycleApp.Data.Migrations
                             t.HasComment("Table of all categories for a part in the database");
                         });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(4065),
+                            DateCreated = new DateTime(2023, 12, 5, 17, 59, 30, 424, DateTimeKind.Local).AddTicks(2792),
+=========
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(2998),
+>>>>>>>>> Temporary merge branch 2
                             ImageUrl = "test",
                             IsDeleted = false,
                             Name = "Frame"
-                        },
-                        new
-                        {
-                            Id = 2,
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(4072),
+                            DateCreated = new DateTime(2023, 12, 5, 17, 59, 30, 424, DateTimeKind.Local).AddTicks(2804),
+=========
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3007),
+>>>>>>>>> Temporary merge branch 2
                             ImageUrl = "test",
                             IsDeleted = false,
                             Name = "Wheel"
-                        },
-                        new
-                        {
-                            Id = 3,
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(4075),
+                            DateCreated = new DateTime(2023, 12, 5, 17, 59, 30, 424, DateTimeKind.Local).AddTicks(2807),
+=========
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3009),
+>>>>>>>>> Temporary merge branch 2
                             ImageUrl = "test",
                             IsDeleted = false,
                             Name = "Acsessories"
@@ -1869,53 +1873,53 @@ namespace BicycleApp.Data.Migrations
                             t.HasComment("Table with all the statuses for the orders");
                         });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(4362),
+                            DateCreated = new DateTime(2023, 12, 5, 17, 59, 30, 424, DateTimeKind.Local).AddTicks(2958),
+=========
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3118),
+>>>>>>>>> Temporary merge branch 2
                             IsDeleted = false,
                             Name = "Pending approval"
-                        },
-                        new
-                        {
-                            Id = 2,
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(4369),
+                            DateCreated = new DateTime(2023, 12, 5, 17, 59, 30, 424, DateTimeKind.Local).AddTicks(2973),
+=========
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3127),
+>>>>>>>>> Temporary merge branch 2
                             IsDeleted = false,
                             Name = "Approved order"
-                        },
-                        new
-                        {
-                            Id = 3,
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(4371),
+                            DateCreated = new DateTime(2023, 12, 5, 17, 59, 30, 424, DateTimeKind.Local).AddTicks(2976),
+=========
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3129),
+>>>>>>>>> Temporary merge branch 2
                             IsDeleted = false,
                             Name = "Frame management"
-                        },
-                        new
-                        {
-                            Id = 4,
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(4373),
+                            DateCreated = new DateTime(2023, 12, 5, 17, 59, 30, 424, DateTimeKind.Local).AddTicks(2978),
+=========
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3130),
+>>>>>>>>> Temporary merge branch 2
                             IsDeleted = false,
                             Name = "Wheel management"
-                        },
-                        new
-                        {
-                            Id = 5,
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(4375),
+                            DateCreated = new DateTime(2023, 12, 5, 17, 59, 30, 424, DateTimeKind.Local).AddTicks(2980),
+=========
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3132),
+>>>>>>>>> Temporary merge branch 2
                             IsDeleted = false,
                             Name = "Shift management"
-                        },
-                        new
-                        {
-                            Id = 6,
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(4378),
+                            DateCreated = new DateTime(2023, 12, 5, 17, 59, 30, 424, DateTimeKind.Local).AddTicks(2983),
+=========
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3135),
+>>>>>>>>> Temporary merge branch 2
                             IsDeleted = false,
                             Name = "Quality control"
-                        },
-                        new
-                        {
-                            Id = 7,
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(4380),
+                            DateCreated = new DateTime(2023, 12, 5, 17, 59, 30, 424, DateTimeKind.Local).AddTicks(2985),
+=========
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3137),
+>>>>>>>>> Temporary merge branch 2
                             IsDeleted = false,
                             Name = "Send order"
                         });
@@ -1996,12 +2000,12 @@ namespace BicycleApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            Address = "Sofia, center",
-                            CategoryName = "Frame",
-                            ContactName = "Pesh Peshev",
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(4420),
                             DateUpdated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(4421),
+=========
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3197),
+                            DateUpdated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3199),
+>>>>>>>>> Temporary merge branch 2
                             Email = "text@test.bg",
                             IsDeleted = false,
                             Name = "X Ltd",
@@ -2074,26 +2078,26 @@ namespace BicycleApp.Data.Migrations
                             t.HasComment("Table of all towns registered in the database");
                         });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(4495),
                             DateUpdated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(4496),
+=========
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3238),
+                            DateUpdated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3239),
+>>>>>>>>> Temporary merge branch 2
                             IsDeleted = false,
                             Name = "Sofia"
-                        },
-                        new
-                        {
-                            Id = 2,
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(4505),
+                            DateCreated = new DateTime(2023, 12, 5, 17, 59, 30, 424, DateTimeKind.Local).AddTicks(3093),
+=========
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3246),
+>>>>>>>>> Temporary merge branch 2
                             IsDeleted = false,
                             Name = "Varna"
-                        },
-                        new
-                        {
-                            Id = 3,
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(4508),
+                            DateCreated = new DateTime(2023, 12, 5, 17, 59, 30, 424, DateTimeKind.Local).AddTicks(3096),
+=========
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3248),
+>>>>>>>>> Temporary merge branch 2
                             IsDeleted = false,
                             Name = "Burgas"
                         });
@@ -2134,12 +2138,12 @@ namespace BicycleApp.Data.Migrations
                             t.HasComment("Table of all vat categories in the database");
                         });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(4538),
                             DateUpdated = new DateTime(2023, 12, 5, 18, 49, 21, 438, DateTimeKind.Local).AddTicks(4540),
+=========
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3275),
+                            DateUpdated = new DateTime(2023, 12, 5, 16, 16, 9, 216, DateTimeKind.Local).AddTicks(3276),
+>>>>>>>>> Temporary merge branch 2
                             IsDeleted = false,
                             VATPercent = 20.00m
                         });
@@ -2249,22 +2253,22 @@ namespace BicycleApp.Data.Migrations
 
                     b.HasData(
                         new
-                        {
-                            Id = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                            AccessFailedCount = 0,
-                            Balance = 1000.00m,
                             ConcurrencyStamp = "07422309-d4f4-4020-956c-3d31e634dd65",
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 20, 859, DateTimeKind.Local).AddTicks(1078),
+=========
+                            ConcurrencyStamp = "3cc13cd5-f952-4dd3-87ce-d0a87ff4a36b",
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 8, 684, DateTimeKind.Local).AddTicks(9527),
+>>>>>>>>> Temporary merge branch 2
                             DelivaryAddress = "Mladost 1, bl 20",
                             Email = "client@test.bg",
                             EmailConfirmed = false,
                             FirstName = "Ivan",
                             IBAN = "BG0012345678910111212",
-                            IsDeleted = false,
-                            LastName = "Ivanov",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "CLIENT@TEST.BG",
                             PasswordHash = "AQAAAAIAAYagAAAAEBBYUHeB+ZdEqu+Dyx3ynnET2fsgF4lVueN5QYQZQ/qOFrkQ0UCjCbnBLE23fAHyew==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFZ7LsSFPu02ygOY6v3jMDeV7xR/6G/0i94CMugGa1dm7laa3Jv81BFNGOnNFzX9DA==",
+=========
+                            PasswordHash = "AQAAAAIAAYagAAAAEMnBodjLFknJkhinb8Zn4vVye9ptJWEwBxtzJ5U03T/LMhpZ7no5t6HiKiMWa5VdGw==",
+>>>>>>>>> Temporary merge branch 2
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "CLIENT@TEST.BG",
@@ -2273,22 +2277,22 @@ namespace BicycleApp.Data.Migrations
                             UserName = "client@test.bg"
                         },
                         new
-                        {
-                            Id = "17ce735d-6713-4d0a-8fcb-e4a71ee86f6f",
-                            AccessFailedCount = 0,
-                            Balance = 50.00m,
                             ConcurrencyStamp = "1bf535ce-3389-4f6b-a03f-377619cd16c8",
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 20, 948, DateTimeKind.Local).AddTicks(4199),
+=========
+                            ConcurrencyStamp = "e7b5dd45-8e2d-4112-92d7-9a0bf1b215d6",
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 8, 751, DateTimeKind.Local).AddTicks(5177),
+>>>>>>>>> Temporary merge branch 2
                             DelivaryAddress = "Mladost 1, bl 20",
                             Email = "joro@test.bg",
                             EmailConfirmed = false,
                             FirstName = "Georgi",
                             IBAN = "BG0012345678910111212",
-                            IsDeleted = false,
-                            LastName = "Georgiev",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "JORO@TEST.BG",
                             PasswordHash = "AQAAAAIAAYagAAAAEOUEGmovOEvft1qhBA5HIjsVJKpdD01GGyYQPZnhCVX/u20zKWLQl4KygUKO+K8r4w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIhUuYPEw/haLQDTmh/BgZZzSJ+UO6FaKR0KuKzWVZLXV9g+tiQVcw2HEzGnDvieFQ==",
+=========
+                            PasswordHash = "AQAAAAIAAYagAAAAEDU4T3VF/ra1/fds69BgDnzrgtgqNdcF82ne1oUqeSSKboaTvcqofBMZNJ/VwHGdfg==",
+>>>>>>>>> Temporary merge branch 2
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "JORO@TEST.BG",
@@ -2297,22 +2301,22 @@ namespace BicycleApp.Data.Migrations
                             UserName = "joro@test.bg"
                         },
                         new
-                        {
-                            Id = "99d3ca6f-2067-4316-a5d7-934c93789521",
-                            AccessFailedCount = 0,
-                            Balance = 1246.00m,
                             ConcurrencyStamp = "0217f11a-f8b1-441b-95fa-03da16f586fe",
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 37, DateTimeKind.Local).AddTicks(3906),
+=========
+                            ConcurrencyStamp = "68067d55-97e6-4b16-be61-1732b6fe13b5",
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 8, 818, DateTimeKind.Local).AddTicks(214),
+>>>>>>>>> Temporary merge branch 2
                             DelivaryAddress = "Mladost 1, bl 20",
                             Email = "powerranger@test.bg",
                             EmailConfirmed = false,
                             FirstName = "Dimityr",
                             IBAN = "BG0012345678910111212",
-                            IsDeleted = false,
-                            LastName = "Dimitrov",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "POWERRANGER@TEST.BG",
                             PasswordHash = "AQAAAAIAAYagAAAAEHHATPU3LF/+LT1xOdogwNQafakkli+Ew7YGDUwu7dA194ufv34ZLihznruk1zj2Ew==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPTDZakkGadrpvgGjwtviSoSUwI/2NWzpd+s9DgUub1sKfNqH/zLHJEJt63y2mvyiw==",
+=========
+                            PasswordHash = "AQAAAAIAAYagAAAAEBRNgwTVF/fvb8Ld4XhhLuxrceSJmW+ARvXboCmoI8V4QjfTiffYnFo/1U5EYHGVBQ==",
+>>>>>>>>> Temporary merge branch 2
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "POWERRANGER@TEST.BG",
@@ -2439,23 +2443,23 @@ namespace BicycleApp.Data.Migrations
                         });
 
                     b.HasData(
-                        new
-                        {
-                            Id = "406e8cf1-acaa-44a8-afec-585ff64bed34",
-                            AccessFailedCount = 0,
                             ConcurrencyStamp = "6d82ec8a-f0d1-468e-bb2a-e0696e7e9952",
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 106, DateTimeKind.Local).AddTicks(8779),
                             DateOfHire = new DateTime(2023, 12, 5, 18, 49, 21, 106, DateTimeKind.Local).AddTicks(8752),
+                            ConcurrencyStamp = "923a9822-231e-4593-afe9-d0c06ef19ab3",
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 8, 884, DateTimeKind.Local).AddTicks(5474),
+                            DateOfHire = new DateTime(2023, 12, 5, 16, 16, 8, 884, DateTimeKind.Local).AddTicks(5454),
+>>>>>>>>> Temporary merge branch 2
                             DepartmentId = 1,
                             Email = "manager@b-free.com",
                             EmailConfirmed = false,
                             FirstName = "Kalin",
                             IsDeleted = false,
-                            IsManeger = true,
-                            LastName = "Kalinov",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "MANAGER@B-FREE.COM",
                             PasswordHash = "AQAAAAIAAYagAAAAEIvXIGS2lc4pR1RcGXH8zcVyWGKluTwezObN+xkHu/CnRr2Ttn6H0jNxErTaJQtRoA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELAY1G3JAQa1F6ddLhJVEwsmMfb2C3yaP9UZ8tIttdXs3kTHqHqLlE84iDvz7g7A1w==",
+=========
+                            PasswordHash = "AQAAAAIAAYagAAAAEN8k+RrIzxQi3nAeelFO2bYjSLNRxTq2Te+HroYfgyhn1+w+UeQjAKGcZB+8gpbHJQ==",
+>>>>>>>>> Temporary merge branch 2
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             Position = "manager",
@@ -2463,23 +2467,23 @@ namespace BicycleApp.Data.Migrations
                             TwoFactorEnabled = false,
                             UserName = "manager@b-free.com"
                         },
-                        new
-                        {
-                            Id = "21003785-a275-4139-ae20-af6a6cf8fea8",
-                            AccessFailedCount = 0,
                             ConcurrencyStamp = "79000688-9bf9-47e1-860d-3b94985b823d",
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 170, DateTimeKind.Local).AddTicks(7663),
                             DateOfHire = new DateTime(2023, 12, 5, 18, 49, 21, 170, DateTimeKind.Local).AddTicks(7643),
+                            ConcurrencyStamp = "e3e8c96c-ebe6-46c2-8290-3b7ab6f8b569",
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 8, 950, DateTimeKind.Local).AddTicks(9591),
+                            DateOfHire = new DateTime(2023, 12, 5, 16, 16, 8, 950, DateTimeKind.Local).AddTicks(9573),
+>>>>>>>>> Temporary merge branch 2
                             DepartmentId = 2,
                             Email = "marinov@b-free.com",
                             EmailConfirmed = false,
                             FirstName = "Marin",
                             IsDeleted = false,
-                            IsManeger = false,
-                            LastName = "Marinov",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "MARINOV@B-FREE.COM",
                             PasswordHash = "AQAAAAIAAYagAAAAEL0EGCcdMy/+kTjMMK6g9fHEa5HHbyKb69fvRsJrpy4rN0AEcOnDqfNbMdbT2lZOig==",
+                            PasswordHash = "AQAAAAIAAYagAAAAED5d4w8gkOYvK6soBM1baBCKleAq3fRobYcFjQBQAOHVhGxEsqaBhvSPW2X/WR+xGA==",
+=========
+                            PasswordHash = "AQAAAAIAAYagAAAAEPO3ZMzc/QwlCnXqZoCGFTN/NVPvP/ZhfKxtPwA3HJ5NuQhlZEp9ltlJ32vMPXiAdg==",
+>>>>>>>>> Temporary merge branch 2
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             Position = "FrameWorker",
@@ -2487,23 +2491,23 @@ namespace BicycleApp.Data.Migrations
                             TwoFactorEnabled = false,
                             UserName = "marinov@b-free.com"
                         },
-                        new
-                        {
-                            Id = "17063948-8fdc-417e-8fb7-2ae6bf572f94",
-                            AccessFailedCount = 0,
                             ConcurrencyStamp = "d41244c7-f826-4f1c-8ff8-1a31057ac66d",
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 234, DateTimeKind.Local).AddTicks(7439),
                             DateOfHire = new DateTime(2023, 12, 5, 18, 49, 21, 234, DateTimeKind.Local).AddTicks(7415),
+                            ConcurrencyStamp = "aba88914-3322-46da-b197-1f0dc8c3f244",
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 17, DateTimeKind.Local).AddTicks(4913),
+                            DateOfHire = new DateTime(2023, 12, 5, 16, 16, 9, 17, DateTimeKind.Local).AddTicks(4894),
+>>>>>>>>> Temporary merge branch 2
                             DepartmentId = 2,
                             Email = "todorov@b-free.com",
                             EmailConfirmed = false,
                             FirstName = "Todor",
                             IsDeleted = false,
-                            IsManeger = false,
-                            LastName = "Todorov",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "TODOROV@B-FREE.COM",
                             PasswordHash = "AQAAAAIAAYagAAAAEJtvZNnsvZdw8pa/DFeaqdY4dAahsBJt8S4UM1k1pGynOFVhtrzlehHILzSOA3VoQw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJlAIenPhIFsYQbsMPe6BOU1cI6YiqzqLTKuzWjhQEHIE6FSr1C/mxEVItJlSslsdw==",
+=========
+                            PasswordHash = "AQAAAAIAAYagAAAAELo5A5UZEmIwOtD2QC1uBZx+jIG/Wk7XxwJf87QPEzpsfff1EtggRxRqDUpxVDfG5w==",
+>>>>>>>>> Temporary merge branch 2
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             Position = "Wheelworker",
@@ -2511,23 +2515,23 @@ namespace BicycleApp.Data.Migrations
                             TwoFactorEnabled = false,
                             UserName = "todorov@b-free.com"
                         },
-                        new
-                        {
-                            Id = "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91",
-                            AccessFailedCount = 0,
                             ConcurrencyStamp = "b8533e57-ccd7-481c-a1c6-c8b4b79d27ff",
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 298, DateTimeKind.Local).AddTicks(5217),
                             DateOfHire = new DateTime(2023, 12, 5, 18, 49, 21, 298, DateTimeKind.Local).AddTicks(5131),
+                            ConcurrencyStamp = "314d83f3-7633-4411-aac4-7654a9d51359",
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 83, DateTimeKind.Local).AddTicks(7589),
+                            DateOfHire = new DateTime(2023, 12, 5, 16, 16, 9, 83, DateTimeKind.Local).AddTicks(7530),
+>>>>>>>>> Temporary merge branch 2
                             DepartmentId = 2,
                             Email = "ivanov@b-free.com",
                             EmailConfirmed = false,
                             FirstName = "Ivan",
                             IsDeleted = false,
-                            IsManeger = false,
-                            LastName = "Ivanov",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "IVANOV@B-FREE.COM",
                             PasswordHash = "AQAAAAIAAYagAAAAENnKXORGcb5NIsaiYAGxoI6kVe2ttXfpeslyTBNxOhJX5yP8E+SoK2kPjGc4hdXWCw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGRdn3V8XvghvEqG/agivnm3x1YT99Q2C38eyAHmMdLzz2ZRqOkWQNaGZGAupHaLsA==",
+=========
+                            PasswordHash = "AQAAAAIAAYagAAAAEPR1LRGW65k0zX3XHiOGqiYlZqhj2jmiTlMhAsk1JPw4EaDf8sln+7+U0pqk8xRlxA==",
+>>>>>>>>> Temporary merge branch 2
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             Position = "Accessoriesworker",
@@ -2535,23 +2539,23 @@ namespace BicycleApp.Data.Migrations
                             TwoFactorEnabled = false,
                             UserName = "ivanov@b-free.com"
                         },
-                        new
-                        {
-                            Id = "29f06920-d2ad-43d8-b362-e2b94d7a7502",
-                            AccessFailedCount = 0,
                             ConcurrencyStamp = "b9535911-58cb-4afa-9006-d96bee805330",
                             DateCreated = new DateTime(2023, 12, 5, 18, 49, 21, 360, DateTimeKind.Local).AddTicks(5889),
                             DateOfHire = new DateTime(2023, 12, 5, 18, 49, 21, 360, DateTimeKind.Local).AddTicks(5860),
+                            ConcurrencyStamp = "0a486f9a-3d1f-4a55-a7f3-5d69a6b2bd04",
+                            DateCreated = new DateTime(2023, 12, 5, 16, 16, 9, 149, DateTimeKind.Local).AddTicks(9358),
+                            DateOfHire = new DateTime(2023, 12, 5, 16, 16, 9, 149, DateTimeKind.Local).AddTicks(9334),
+>>>>>>>>> Temporary merge branch 2
                             DepartmentId = 2,
                             Email = "atanasov@b-free.com",
                             EmailConfirmed = false,
                             FirstName = "Atanas",
                             IsDeleted = false,
-                            IsManeger = false,
-                            LastName = "Atanasov",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ATANASOV@B-FREE.COM",
                             PasswordHash = "AQAAAAIAAYagAAAAEN/8UzDosfjnRmuWlX3GWVFFrR8Pfqtt18J2hseUkCjkIHebHiRHo10QHo5+P5rEYQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIkyMwR5PEWBZ7ytoxmPlqyyE5MzmCP3mqH9y+SSre0IuMsG+19mRfuZp7yXzNDMrg==",
+=========
+                            PasswordHash = "AQAAAAIAAYagAAAAEHHcHQhgz6fVKTM0oXEdeFQk1GbOTzHAMgk+Rk1dkwhsFeC4TNZkkmwYH0iwz++hXA==",
+>>>>>>>>> Temporary merge branch 2
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             Position = "Qualitycontrol",
