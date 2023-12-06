@@ -3,6 +3,7 @@
 ### `GET /api/manager/orders_in_progress` Връща колекция от JSON обекти със следните пропъртита:
 - `orderId"`: Уникален идентификатор на поръчката.
 - `serialNumber"`: Уникален идентификатор на велосипеда.
+- `dateCreated`: Дата и час на създаване на поръчката.
 - `orderParts`: Колекция от поръчаните части.
 - `partId`: Уникален идентификатор на частта.
 - `description`: Описание на частта.
@@ -15,7 +16,8 @@
 ## Request:
 
 ```
-GET /api/manager/orders_in_progress
+GET /api/manager/оrders_in_progress
+
 ```
 
 ## Response:
@@ -26,24 +28,25 @@ GET /api/manager/orders_in_progress
   {
     "orderId": 1,
     "serialNumber": "BID12345678",
+    "dateCreated": "2023-12-05 18:49:21.4383734",
     "orderParts": [
       {
         "partId": 1,
-        "descrioption": "test",
+        "description": "test",
         "partName": "Frame OG",
         "partQuantity": 1,
-        "partQunatityInStock": 1
+        "partQunatityInStock": 2
       },
       {
         "partId": 2,
-        "descrioption": "test",
+        "description": "test",
         "partName": "Wheel of the YearG",
         "partQuantity": 2,
         "partQunatityInStock": 4
       },
       {
         "partId": 3,
-        "descrioption": "test",
+        "description": "test",
         "partName": "Shift",
         "partQuantity": 2,
         "partQunatityInStock": 3
@@ -53,27 +56,28 @@ GET /api/manager/orders_in_progress
   {
     "orderId": 2,
     "serialNumber": "BID12345679",
+    "dateCreated": "2023-12-05 18:49:21.4383739",
     "orderParts": [
       {
         "partId": 1,
-        "descrioption": "test",
+        "description": "test",
         "partName": "Frame OG",
         "partQuantity": 1,
-        "partQunatityInStock": 1
+        "partQunatityInStock": 2
       },
       {
         "partId": 4,
-        "descrioption": "test",
+        "description": "test",
         "partName": "Wheel of the Year for road",
         "partQuantity": 2,
-        "partQunatityInStock": 48
+        "partQunatityInStock": 50
       },
       {
         "partId": 12,
-        "descrioption": "test",
+        "description": "test",
         "partName": "Shift",
         "partQuantity": 2,
-        "partQunatityInStock": 7
+        "partQunatityInStock": 9
       }
     ]
   }

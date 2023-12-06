@@ -10,7 +10,7 @@ namespace BicycleApp.Services.Models.Order.OrderManager
         public DateTime StartDate { get; set; } 
 
         [Required]
-        [JsonProperty("start_date")]
+        [JsonProperty("end_date")]
         public DateTime EndDate { get; set; } 
     }
 }

@@ -1,8 +1,9 @@
 ﻿namespace BicicleApp.Api.Controllers
 {
     using BicycleApp.Services.Contracts;
+    using BicycleApp.Services.Contracts.OrderContracts;
     using BicycleApp.Services.Models.Order;
-
+    using BicycleApp.Services.Models.Order.OrderUser;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
@@ -11,10 +12,12 @@
     public class EmployeeOrderController : ControllerBase
     {
         private readonly IEmployeeOrderService employeeOrderService;
+        private readonly IQualityAssuranceService qualityAssuranceService;
 
-        public EmployeeOrderController(IEmployeeOrderService employeeOrderService)
+        public EmployeeOrderController(IEmployeeOrderService employeeOrderService, IQualityAssuranceService qualityAssuranceService)
         {
             this.employeeOrderService = employeeOrderService;
+            this.qualityAssuranceService = qualityAssuranceService;
         }
 
         [HttpGet]
@@ -98,6 +101,54 @@
             {
                 return StatusCode(500);
             }
+        }
+
+        [HttpGet]
+        [Route("quality_assurance")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<ICollection<OrderProgretionDto>>> GetReadyOrdersForQualityAssurance()
+        {
+            var qualityAssuranceOrders = await qualityAssuranceService.GetAllReadyOrder();
+
+            if (qualityAssuranceOrders != null)
+            {
+                return Ok(qualityAssuranceOrders);
+            }
+
+            return StatusCode(500);
+        }
+
+        [HttpPost]
+        [Route("quality_assurance_pass")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> PassedQualityAssuranceOrder([FromQuery] int orderId)
+        {
+            var isPassed = await qualityAssuranceService.OrderPassQualityAssurance(orderId);
+
+            if (isPassed)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
+        [HttpPut]
+        [Route("quality_assurance")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<RemanufacturingPartEmployeeInfoDto>> PassedQualityAssurancrder([FromBody] RemanufacturingOrderPartDto remanufacturingOrderPartDto)
+        {
+            var infoForPart = await qualityAssuranceService.RemanufacturingPart(remanufacturingOrderPartDto);
+
+            if (infoForPart != null)
+            {
+                return Ok(infoForPart);
+            }
+
+            return StatusCode(500);
         }
     }
 }

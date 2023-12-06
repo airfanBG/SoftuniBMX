@@ -39,22 +39,20 @@
                                                                         .ToListAsync();
                 foreach (var orderPartEmployee in orderPartsEmployees)
                 {
-
-                    int arePartsNeeded = await ArePartsNeeded(orderPartEmployee.PartQuantity, orderPartEmployee.PartId);
-
+                    var аvailableParts = await _db.Parts.FirstAsync(p => p.Id == orderPartEmployee.PartId);
                     //Checks for available quantity
-                    if (arePartsNeeded <= 0)
+                    if (orderPartEmployee.PartQuantity > аvailableParts.Quantity)
                     {
                         return false;
                     }
                     orderPartEmployee.DatetimeAsigned = _dateTimeProvider.Now;
-                    var аvailableParts = await _db.Parts.FirstAsync(p => p.Id == orderPartEmployee.PartId);
                     аvailableParts.Quantity -= orderPartEmployee.PartQuantity;
                     orderPartEmployee.EmployeeId = await SetEmployeeToPart(orderPartEmployee.PartId);
                 }
 
                 var order = await _db.Orders.FirstAsync(o => o.Id == orderId);
                 order.DateUpdated = _dateTimeProvider.Now;
+                order.StatusId++;
 
                 await _db.SaveChangesAsync();
 
@@ -67,7 +65,7 @@
         }
 
         /// <summary>
-        /// Return order, where all parts are assign to employee.
+        /// Return orders, where all waiting for a manager approvement.
         /// </summary>
         /// <returns>Task<ICollection<OrderInfoDto>></returns>
         public async Task<ICollection<OrderInfoDto>> AllPendingOrdersAsync()
@@ -97,6 +95,36 @@
         }
 
         /// <summary>
+        /// Return orders, where all parts are assign to employee.
+        /// </summary>
+        /// <returns>Task<ICollection<OrderInfoDto>></returns>
+        public async Task<ICollection<OrderInfoDto>> AllOrdersInProgressAsync()
+        {
+            var listOfPendingOrders = await _db.Orders
+                                .AsNoTracking()
+                                .Where(o => o.OrdersPartsEmployees.Any(ope => ope.EmployeeId != null
+                                                                              && ope.DatetimeAsigned != null)
+                                                                              && (o.IsDeleted == false && o.DateDeleted.Equals(null)))
+                                .Select(ope => new OrderInfoDto
+                                {
+                                    Id = ope.Id,
+                                    SerialNumber = ope.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
+                                    OrderParts = ope.OrdersPartsEmployees
+                                                .Select(orderPart => new OrderPartInfoDto
+                                                {
+                                                    PartId = orderPart.PartId,
+                                                    Descrioption = _stringManipulator.GetTextFromProperty(orderPart.Description),
+                                                    PartName = orderPart.PartName,
+                                                    PartQuantity = orderPart.PartQuantity,
+                                                    PartQunatityInStock = orderPart.Part.Quantity
+                                                })
+                                                .ToList()
+                                })
+                                .ToListAsync();
+
+            return listOfPendingOrders;
+        }
+        /// <summary>
         /// Check for available parts in store for current order.
         /// </summary>
         /// <param name="partsInOrder"></param>
@@ -123,81 +151,6 @@
 
         }
 
-        ///// <summary>
-        ///// Change status of existing order.
-        ///// </summary>
-        ///// <param name="orderId"></param>
-        ///// <param name="newStatusId"></param>
-        ///// <returns>Task<bool></returns>
-        //public async Task<bool> ChangeStatus(int orderId, int newStatusId)
-        //{
-        //    try
-        //    {
-        //        var order = await _db.Orders.FirstAsync(o => o.Id == orderId);
-        //        order.StatusId = newStatusId;
-        //        order.DateUpdated = DateTime.UtcNow;
-
-        //        _db.Orders.Update(order);
-        //        await _db.SaveChangesAsync();
-
-        //        return true;
-        //    }
-        //    catch (Exception)
-        //    {
-        //    }
-        //    return false;
-        //}
-        //public async Task EmployeeEndProduction(string employeeId, int orderId, int partId)
-        //{
-        //    try
-        //    {
-        //        var finishedPart = await _db.OrdersPartsEmployees
-        //                                .FirstAsync(ope => ope.EmployeeId == employeeId
-        //                                                   && ope.OrderId == orderId
-        //                                                   && ope.PartId == partId);
-
-        //        finishedPart.EndDatetime = DateTime.UtcNow;
-        //        finishedPart.IsCompleted = true;
-
-        //        _db.OrdersPartsEmployees.Update(finishedPart);
-        //        await _db.SaveChangesAsync();
-        //    }
-        //    catch (Exception)
-        //    {
-        //    }
-        //}
-        //public async Task EmployeeStartProduction(string employeeId, int orderId, int partId)
-        //{
-        //    try
-        //    {
-        //        var finishedPart = await _db.OrdersPartsEmployees
-        //                                .FirstAsync(ope => ope.EmployeeId == employeeId
-        //                                                   && ope.OrderId == orderId
-        //                                                   && ope.PartId == partId);
-
-        //        finishedPart.StartDatetime = DateTime.UtcNow;
-
-        //        _db.OrdersPartsEmployees.Update(finishedPart);
-        //        await _db.SaveChangesAsync();
-        //    }
-        //    catch (Exception)
-        //    {
-        //    }
-        //}
-
-        //public async Task<ICollection<EmployeePartTaskDto>> EmployeeUnfinishedTask(string employeeId)
-        //{
-        //    var listOfTask = await _db.OrdersPartsEmployees
-        //                              .AsNoTracking()
-        //                              .Where(ope => ope.EmployeeId == employeeId && ope.EndDatetime == null && ope.IsCompleted == false)
-        //                              .Select(ope => new EmployeePartTaskDto
-        //                              {
-        //                                  PartName = ope.Part.Name
-        //                              })
-        //                              .ToListAsync();
-        //    return listOfTask;
-        //}
-
         /// <summary>
         /// Get orders in specific period.
         /// </summary>
@@ -206,7 +159,7 @@
         /// <returns>Task<ICollection<OrderInfoDto>></returns>
         public async Task<ICollection<OrderInfoDto>> GetAllFinishedOrdersForPeriod(FinishedOrdersDto datesPeriod)
         {
-            return await _db.Orders
+            var result =  await _db.Orders
                             .AsNoTracking()
                             .Where(o => o.DateCreated >= datesPeriod.StartDate
                                      && o.DateFinish <= datesPeriod.EndDate)
@@ -216,6 +169,8 @@
                                 SerialNumber = o.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault()
                             })
                             .ToListAsync();
+
+            return result;
         }
 
         /// <summary>
@@ -347,7 +302,7 @@
                     var employee = await _db.Employees.FirstAsync(e => e.Position == "Wheelworker");
                     return employee.Id;
                 }
-                else if (partType.ToLower() == "shift")
+                else if (partType.ToLower() == "acsessories")
                 {
                     var employee = await _db.Employees.FirstAsync(e => e.Position == "Accessoriesworker");
                     return employee.Id;
