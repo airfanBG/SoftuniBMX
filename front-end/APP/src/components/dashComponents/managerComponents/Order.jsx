@@ -12,7 +12,6 @@ import { OrdersContext } from "../../../context/GlobalUserProvider.jsx";
 function Order({ order }) {
   // const { frame, wheel, accessory, ownerId, id } = order;
   // const { orders, onOrdersChange } = useContext(OrdersContext);
-
   const { orderId, serialNumber, orderParts } = order;
   const frame = orderParts[0];
   const wheel = orderParts[1];

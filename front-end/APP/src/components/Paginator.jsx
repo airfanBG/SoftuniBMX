@@ -22,7 +22,7 @@ function Paginator({
       //   className={`${styles.pagesBlock}`}
       style={paginatorLine}
     >
-      {Array.from({ length: Math.round(pages / countOnPage) }, (_, i) => (
+      {Array.from({ length: Math.ceil(pages / countOnPage) }, (_, i) => (
         <Page
           currentPage={page === i + 1}
           number={i + 1}
