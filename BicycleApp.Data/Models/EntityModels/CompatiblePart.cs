@@ -5,7 +5,7 @@ using static BicycleApp.Common.EntityValidationConstants.CompatiblePart;
 
 namespace BicycleApp.Data.Models.EntityModels
 {
-    public class CompatablePart
+    public class CompatiblePart
     {
         [Key]
         public int Id { get; set; }
@@ -18,6 +18,6 @@ namespace BicycleApp.Data.Models.EntityModels
         [Required]
         [Comment("Type of the part")]
         public int Type { get; set; }
-        public ICollection<Part> Parts { get; set; } = new List<Part>();
+        public virtual ICollection<Part> Parts { get; set; } = new List<Part>();
     }
 }

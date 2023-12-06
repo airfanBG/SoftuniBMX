@@ -4,8 +4,8 @@
 
     using Microsoft.EntityFrameworkCore;
 
-    [Comment("Table of all delivaries of all parts in the database")]
-    public class Delivary
+    [Comment("Table of all orders of parts in the database")]
+    public class PartOrder
     {
         [Key]
         public int Id { get; set; }
@@ -18,29 +18,28 @@
 
         [Required]
         [Comment("Quantity delivered of the current part")]
-        public double QuantityDelivered { get; set; }
+        public int QuantityDelivered { get; set; }
 
-        [Comment("Additional info for the current delivary")]
-        public string? Note { get; set; }
-
-        [Required]
-        [Comment("Date of the creation of the entry")]
-        public DateTime DateDelivered { get; set; }
-
-        [Comment("Date of last update of the entry")]
-        public DateTime? DateUpdated { get; set; }
+        [Comment("Additional info for the current order")]
+        public string? Note { get; set; } 
 
         [Required]
         [Comment("Id of the suplier for this delivary")]
         public int SuplierId { get; set; }
-
         public virtual Suplier Suplier { get; set; } = null!;
 
-        [Comment("Date of deletion of the entity")]
+        [Required]
+        [Comment("Date of the creation of the entry")]
+        public DateTime DateCreated { get; set; }
+
+        [Comment("Date of last update of the entry")]
+        public DateTime? DateUpdated { get; set; }
+
+        [Comment("Date of the deletion of the entry")]
         public DateTime? DateDeleted { get; set; }
 
         [Required]
-        [Comment("Status of the department: Active/Inactive")]
+        [Comment("Status of the entry: Active/Inactive")]
         public bool IsDeleted { get; set; } = false;
     }
 }
