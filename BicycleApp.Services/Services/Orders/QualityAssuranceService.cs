@@ -80,6 +80,11 @@
             return false;
         }
 
+        /// <summary>
+        /// Returns a manufactured part back to the worker.
+        /// </summary>
+        /// <param name="remanufacturingOrderPartDto"></param>
+        /// <returns>Task<RemanufacturingPartEmployeeInfoDto?></returns>
         public async Task<RemanufacturingPartEmployeeInfoDto?> RemanufacturingPart(RemanufacturingOrderPartDto remanufacturingOrderPartDto)
         {
             try

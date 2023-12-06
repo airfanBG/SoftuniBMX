@@ -39,16 +39,13 @@
                                                                         .ToListAsync();
                 foreach (var orderPartEmployee in orderPartsEmployees)
                 {
-
-                    int arePartsNeeded = await ArePartsNeeded(orderPartEmployee.PartQuantity, orderPartEmployee.PartId);
-
+                    var аvailableParts = await _db.Parts.FirstAsync(p => p.Id == orderPartEmployee.PartId);
                     //Checks for available quantity
-                    if (arePartsNeeded > 0)
+                    if (orderPartEmployee.PartQuantity > аvailableParts.Quantity)
                     {
                         return false;
                     }
                     orderPartEmployee.DatetimeAsigned = _dateTimeProvider.Now;
-                    var аvailableParts = await _db.Parts.FirstAsync(p => p.Id == orderPartEmployee.PartId);
                     аvailableParts.Quantity -= orderPartEmployee.PartQuantity;
                     orderPartEmployee.EmployeeId = await SetEmployeeToPart(orderPartEmployee.PartId);
                 }
@@ -153,81 +150,6 @@
             }
 
         }
-
-        ///// <summary>
-        ///// Change status of existing order.
-        ///// </summary>
-        ///// <param name="orderId"></param>
-        ///// <param name="newStatusId"></param>
-        ///// <returns>Task<bool></returns>
-        //public async Task<bool> ChangeStatus(int orderId, int newStatusId)
-        //{
-        //    try
-        //    {
-        //        var order = await _db.Orders.FirstAsync(o => o.Id == orderId);
-        //        order.StatusId = newStatusId;
-        //        order.DateUpdated = DateTime.UtcNow;
-
-        //        _db.Orders.Update(order);
-        //        await _db.SaveChangesAsync();
-
-        //        return true;
-        //    }
-        //    catch (Exception)
-        //    {
-        //    }
-        //    return false;
-        //}
-        //public async Task EmployeeEndProduction(string employeeId, int orderId, int partId)
-        //{
-        //    try
-        //    {
-        //        var finishedPart = await _db.OrdersPartsEmployees
-        //                                .FirstAsync(ope => ope.EmployeeId == employeeId
-        //                                                   && ope.OrderId == orderId
-        //                                                   && ope.PartId == partId);
-
-        //        finishedPart.EndDatetime = DateTime.UtcNow;
-        //        finishedPart.IsCompleted = true;
-
-        //        _db.OrdersPartsEmployees.Update(finishedPart);
-        //        await _db.SaveChangesAsync();
-        //    }
-        //    catch (Exception)
-        //    {
-        //    }
-        //}
-        //public async Task EmployeeStartProduction(string employeeId, int orderId, int partId)
-        //{
-        //    try
-        //    {
-        //        var finishedPart = await _db.OrdersPartsEmployees
-        //                                .FirstAsync(ope => ope.EmployeeId == employeeId
-        //                                                   && ope.OrderId == orderId
-        //                                                   && ope.PartId == partId);
-
-        //        finishedPart.StartDatetime = DateTime.UtcNow;
-
-        //        _db.OrdersPartsEmployees.Update(finishedPart);
-        //        await _db.SaveChangesAsync();
-        //    }
-        //    catch (Exception)
-        //    {
-        //    }
-        //}
-
-        //public async Task<ICollection<EmployeePartTaskDto>> EmployeeUnfinishedTask(string employeeId)
-        //{
-        //    var listOfTask = await _db.OrdersPartsEmployees
-        //                              .AsNoTracking()
-        //                              .Where(ope => ope.EmployeeId == employeeId && ope.EndDatetime == null && ope.IsCompleted == false)
-        //                              .Select(ope => new EmployeePartTaskDto
-        //                              {
-        //                                  PartName = ope.Part.Name
-        //                              })
-        //                              .ToListAsync();
-        //    return listOfTask;
-        //}
 
         /// <summary>
         /// Get orders in specific period.
