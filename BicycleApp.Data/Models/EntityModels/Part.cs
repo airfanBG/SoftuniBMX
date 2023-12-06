@@ -21,6 +21,7 @@
             this.OrdersPartsEmployees = new HashSet<OrderPartEmployee>();
             this.Rates = new HashSet<Rate>();
             this.BikeModelsParts = new HashSet<BikeModelPart>();
+            this.CompatableParts = new HashSet<CompatablePart>();
         }
 
         [Key]
@@ -34,12 +35,12 @@
         [Required]
         [MaxLength(PartDescriptionMaxLength)]
         [Comment("Full description of the part")]
-        public string Description { get; set; }
+        public string Description { get; set; } = null!;
 
         [Required]
         [MaxLength(PartIntetionMaxLength)]
         [Comment("Intention of the part")]
-        public string Intend { get; set; }
+        public string Intend { get; set; } = null!;
 
         [MaxLength(PartOEMMaxLength)]
         [Comment("Unique number of the part from the manifacturer")]
@@ -75,7 +76,7 @@
 
         public virtual ICollection<Comment> Comments { get; set; }
 
-        public ICollection<CompatablePart> CompatableParts { get; set; } = new List<CompatablePart>();
+        public virtual ICollection<CompatablePart> CompatableParts { get; set; }
 
         public virtual ICollection<OrderPartEmployee> OrdersPartsEmployees { get; set; }
 

@@ -112,6 +112,10 @@ namespace BicicleApp.Api
             builder.Services.AddScoped<IEmployeeOrderService, EmployeeOrderService>();
             builder.Services.AddScoped<IDateTimeProvider, DateTimeProvider>();
             builder.Services.AddScoped<IOptionProvider, OptionProvider>();
+            builder.Services.AddScoped<IBikeService, BikeService>();
+            builder.Services.AddScoped<ICommentService, CommentService>();
+            builder.Services.AddScoped<IPartService, PartService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
