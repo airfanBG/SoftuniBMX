@@ -6,7 +6,7 @@ import { OrdersContext } from "../context/GlobalUserProvider.jsx";
 
 async function approveHandlerAction(id) {
   // TODO: uncomment approved when in production
-  // const approved = post(`${environment.approve_order}`, { orderId:id });
+  // const approved = await post(`${environment.approve_order}`, { orderId: id });
   onDeleteHandler(id);
   // return approved;
   return;
@@ -21,7 +21,8 @@ async function onDeleteHandler(id) {
 
   // TODO: uncomment when in production
   // await post(`${environment.del_order}${id}`);
-  return res;
+  // return res;
+  return;
 }
 
 export { approveHandlerAction, onRejectHandler, onDeleteHandler };

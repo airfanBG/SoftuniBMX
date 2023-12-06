@@ -103,7 +103,20 @@
       "time": "04:35:00h"
     }
   ],
-  "approved": [],
+  "approved": [
+    {
+      "orderId": 3,
+      "id": 1
+    },
+    {
+      "orderId": 3,
+      "id": 2
+    },
+    {
+      "orderId": 3,
+      "id": 3
+    }
+  ],
   "client": [],
   "employee": [],
   "frames": [

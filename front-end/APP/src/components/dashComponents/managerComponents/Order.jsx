@@ -16,16 +16,27 @@ function Order({ order, onStatusChange }) {
   const wheel = orderParts[1];
   const accessory = orderParts[2];
 
-  async function approveHandler(id) {
-    approveHandlerAction(id);
-    onStatusChange();
-  }
-  async function rejectHandler(id) {
-    onRejectHandler(id);
-    onStatusChange();
-  }
-  async function deleteHandler(id) {
-    onDeleteHandler(id);
+  // async function approveHandler(id) {
+  //   approveHandlerAction(id);
+  //   onStatusChange();
+  // }
+  // async function rejectHandler(id) {
+  //   onRejectHandler(id);
+  //   onStatusChange();
+  // }
+  // async function deleteHandler(id) {
+  //   onDeleteHandler(id);
+  //   onStatusChange();
+  // }
+
+  async function onBtnClickHandler(type, id) {
+    if (type === "approve") {
+      approveHandlerAction(id);
+    } else if (type === "reject") {
+      onRejectHandler(id);
+    } else if (type === "delete") {
+      onDeleteHandler(id);
+    }
     onStatusChange();
   }
 
@@ -154,7 +165,8 @@ function Order({ order, onStatusChange }) {
           <div className={styles.actions}>
             <Button
               type={"approve"}
-              onClick={() => approveHandler(id)}
+              onClick={onBtnClickHandler}
+              // onClick={() => approveHandler(id)}
               id={id}
               disabled={
                 frame.partQuantity > frame.partQunatityInStock ||
@@ -164,10 +176,12 @@ function Order({ order, onStatusChange }) {
             >
               Approve
             </Button>
-            <Button type={"reject"} onClick={() => rejectHandler(id)} id={id}>
+            <Button type={"reject"} onClick={onBtnClickHandler} id={id}>
+              {/* <Button type={"reject"} onClick={() => rejectHandler(id)} id={id}> */}
               Reject
             </Button>
-            <Button type={"delete"} onClick={() => deleteHandler(id)} id={id}>
+            <Button type={"delete"} onClick={onBtnClickHandler} id={id}>
+              {/* <Button type={"delete"} onClick={() => deleteHandler(id)} id={id}> */}
               Delete
             </Button>
           </div>
