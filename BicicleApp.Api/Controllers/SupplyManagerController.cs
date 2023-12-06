@@ -13,7 +13,7 @@ namespace BicicleApp.Api.Controllers
     {
         private readonly ISupplyManagerService _supplyManagerService;
 
-        public SupplyManagerController(ISupplyManagerService                    supplyManagerService)
+        public SupplyManagerController(ISupplyManagerService supplyManagerService)
         {
             _supplyManagerService = supplyManagerService;
         }
@@ -24,22 +24,19 @@ namespace BicicleApp.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Deliveries([FromQuery] AllDeliveriesQueryModel deliveriesQuery)
+        public async Task<IActionResult> Deliveries([FromQuery] int page = 1)
         {
+
+            if (page <= 0)
+            {
+                return StatusCode(400);
+            }
 
             try
             {
 
-                var result = await _supplyManagerService.AllDeliveries(
-                                        deliveriesQuery.Supplier,
-                                        deliveriesQuery.SearchTerm,
-                                        deliveriesQuery.Sorting,
-                                        deliveriesQuery.CurrentPage,
-                                       AllDeliveriesQueryModel.DeliveriesPerPage
-                                        );
+                var result = await _supplyManagerService.AllDeliveries(page);
 
-                deliveriesQuery.TotalDeliveriesCount = result.TotalDeliveriesCount; 
-                deliveriesQuery.Deliveries = result.Deliveries;
 
                 if (result == null)
                 {
