@@ -7,11 +7,15 @@
     using static BicycleApp.Common.EntityValidationConstants.Order;
 
     using Microsoft.EntityFrameworkCore;
-    using BicycleApp.Data.Interfaces;
 
     [Comment("Table conecting all the parts in an order with the employee responsible for the mounting")]
     public class OrderPartEmployee
     {
+        public OrderPartEmployee()
+        {
+            this.OrdersPartsEmployeesInfos = new HashSet<OrderPartEmployeeInfo>();
+        }
+
         [Required]
         [Comment("Id of the order from the client")]
         public int OrderId { get; set; }

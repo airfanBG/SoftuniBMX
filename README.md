@@ -6,7 +6,7 @@
 ## Сървиси
 
 - DropdownsContentService е сървис, който взима записите на частите от категория рамки от базата и ги връща под формата на колекция от ДТО обекти. Също така на база Id на избрана рамка връща колекция от съвместимите за нея части под формата на колекция от ДТО обекти. При подадено Id има функционалността да вземе от базата и върне цялата налична информация за частта записана под този Id номер под формата на ДТО обект.
-- OrderManagerService е сървис, който взима записите на изчакващите одобрение поръчки (pending orders), отказаните (rejected orders) и завършените (finished orders) от базата и ги връща под формата на колекция от ДТО обекти. Също така при подадено Id има функционалността да одобри (approve) изчакващите одобрение поръчки (pending orders) и отказаните (rejected orders) или да отхвърли поръчка (reject order).
+- OrderManagerService е сървис, който взима записите на изчакващите одобрение поръчки (pending orders), отказаните поръчки (rejected orders), одобрените и вкарани в производство поръчки (orders_in_progress) и завършените (finished orders) от базата и ги връща под формата на колекция от ДТО обекти. Също така при подадено Id има функционалността да одобри (approve) изчакващите одобрение поръчки (pending orders) и отказаните (rejected orders) или да отхвърли поръчка (reject order).
 
 ## Базов (основен) URL
 Базовия URL е общ за всички API заявки и е:
@@ -28,6 +28,7 @@
 
 ### [`GET /api/manager/pending_orders`](/ReadMeFiles/Manager/pending_orders.md)
 ### [`GET /api/manager/rejected_orders`](/ReadMeFiles/Manager/rejected_orders.md)
+### [`GET /api/manager/orders_in_progress`](/ReadMeFiles/Manager/orders_in_progress.md)
 ### [`POST /api/manager/delete_order?orderId=3`](/ReadMeFiles/Manager/delete_order.md)
 ### [`POST /api/manager/approve_order?orderId=3`](/ReadMeFiles/Manager/approve_order.md)
 ### [`POST /api/manager/approve_rejected_order?orderId=3`](/ReadMeFiles/Manager/approve_rejected_order.md)
