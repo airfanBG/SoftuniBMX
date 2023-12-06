@@ -3,6 +3,7 @@
 ### `GET /api/manager/pending_orders` Връща колекция от JSON обекти със следните пропъртита:
 - `orderId"`: Уникален идентификатор на поръчката.
 - `serialNumber"`: Уникален идентификатор на велосипеда.
+- `dateCreated`: Дата на създаване на поръчката.
 - `orderParts`: Колекция от поръчаните части.
 - `partId`: Уникален идентификатор на частта.
 - `description`: Описание на частта.
@@ -26,6 +27,7 @@ GET /api/manager/pending_orders
   {
     "orderId": 3,
     "serialNumber": "BID12345680",
+    "dateCreated": "2023-12-05 18:49:21.4383743",
     "orderParts": [
       {
         "partId": 1,
