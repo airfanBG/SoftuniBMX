@@ -17,6 +17,7 @@
 
 ```
 GET /api/manager/оrders_in_progress
+
 ```
 
 ## Response:
