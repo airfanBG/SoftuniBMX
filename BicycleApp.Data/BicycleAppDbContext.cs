@@ -23,7 +23,7 @@
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
-        //    optionsBuilder.UseSqlServer("Server=DESKTOP-TP2JLNJ\\SQLEXPRESS;Database=BicycleNewDB;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False");
+        //    optionsBuilder.UseSqlServer("Server=DESKTOP-O0P5VDC\\SQLEXPRESS;Database=BicycleNewDB;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False");
         //}
 
         //Identity Tables
@@ -66,7 +66,8 @@
         public DbSet<BikeStandartModel> BikesStandartModels { get; set; } = null!;
 
         public DbSet<BikeModelPart> BikeModelsParts { get; set; } = null!;
-
+        public DbSet<PartOrder> PartOrders { get; set; } = null!;
+        public DbSet<PartInStock> PartsInStock { get; set; } = null!;
         public DbSet<CompatablePart> CompatableParts { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -200,7 +201,7 @@
             builder.Entity<OrderPartEmployee>(entity =>
             {
                 entity
-                    .HasKey(ope => new { ope.OrderId, ope.PartId, ope.UniqueKeyForSerialNumber});
+                    .HasKey(ope => new { ope.OrderId, ope.PartId, ope.UniqueKeyForSerialNumber });
 
                 entity
                     .HasOne(ope => ope.Order)
@@ -213,7 +214,7 @@
                     .WithMany(o => o.OrdersPartsEmployees)
                     .HasForeignKey(ope => ope.PartId)
                     .OnDelete(DeleteBehavior.NoAction);
-                               
+
                 entity.Property(ope => ope.PartPrice).HasColumnType("decimal(18,2)");
 
                 entity.Property(ope => ope.PartQuantity).HasColumnType("float(2)");
@@ -228,28 +229,38 @@
                      .HasForeignKey(k => new { k.OrderId, k.PartId, k.UniqueKeyForSerialNumber });
             });
 
-           //PartEntityConfiguration
-           builder.Entity<Part>(entity =>
+            //PartEntityConfiguration
+            builder.Entity<Part>(entity =>
+             {
+                 entity
+                     .HasOne(p => p.Category)
+                     .WithMany(pc => pc.Parts)
+                     .HasForeignKey(p => p.CategoryId)
+                     .OnDelete(DeleteBehavior.NoAction);
+
+                 entity
+                     .Property(p => p.Quantity).HasColumnType("float(2)");
+
+                 entity
+                     .Property(p => p.SalePrice).HasColumnType("decimal(18,2)");
+
+                 entity
+                     .Property(p => p.Discount).HasColumnType("decimal(18,2)");
+
+                 entity
+                     .HasOne(p => p.VATCategory)
+                     .WithMany(v => v.Parts)
+                     .HasForeignKey(p => p.VATCategoryId)
+                     .OnDelete(DeleteBehavior.NoAction);
+             });
+
+            //PartOrderEntityConfiguration
+            builder.Entity<PartOrder>(entity =>
             {
                 entity
-                    .HasOne(p => p.Category)
-                    .WithMany(pc => pc.Parts)
-                    .HasForeignKey(p => p.CategoryId)
-                    .OnDelete(DeleteBehavior.NoAction);
-
-                entity
-                    .Property(p => p.Quantity).HasColumnType("float(2)");
-
-                entity
-                    .Property(p => p.SalePrice).HasColumnType("decimal(18,2)");
-
-                entity
-                    .Property(p => p.Discount).HasColumnType("decimal(18,2)");
-
-                entity
-                    .HasOne(p => p.VATCategory)
-                    .WithMany(v => v.Parts)
-                    .HasForeignKey(p => p.VATCategoryId)
+                    .HasOne(po => po.Part)
+                    .WithMany()
+                    .HasForeignKey(p => p.PartId)
                     .OnDelete(DeleteBehavior.NoAction);
             });
 
@@ -324,6 +335,8 @@
             builder.Entity<Suplier>(entity => entity.HasData(seeder.SeedSuplieres()));
             builder.Entity<Town>(entity => entity.HasData(seeder.SeedTowns()));
             builder.Entity<VATCategory>(entity => entity.HasData(seeder.SeedVATCategories()));
+            builder.Entity<PartInStock>(entity => entity.HasData(seeder.SeedPartsInStock()));
+            builder.Entity<PartOrder>(entity => entity.HasData(seeder.SeedPartOrders()));
 
             base.OnModelCreating(builder);
         }

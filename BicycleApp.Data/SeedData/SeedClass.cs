@@ -233,7 +233,7 @@
 
         public List<Delivary> SeedDelivaries()
         {
-            Delivary delivary = new Delivary()
+            Delivary delivary1 = new Delivary()
             {
                 Id = 1,
                 PartId = 1,
@@ -243,8 +243,88 @@
                 DateUpdated = DateTime.Now,
                 SuplierId = 1
             };
+            Delivary delivary2 = new Delivary()
+            {
+                Id = 2,
+                PartId = 4,
+                QuantityDelivered = 2,
+                Note = "text2",
+                DateDelivered = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                SuplierId = 2
+            };
+            Delivary delivary3 = new Delivary()
+            {
+                Id = 3,
+                PartId = 7,
+                QuantityDelivered = 1,
+                Note = "text2",
+                DateDelivered = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                SuplierId = 3
+            };
+            Delivary delivary4 = new Delivary()
+            {
+                Id = 4,
+                PartId = 1,
+                QuantityDelivered = 4,
+                Note = "text4",
+                DateDelivered = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                SuplierId = 1
+            };
+            Delivary delivary5 = new Delivary()
+            {
+                Id = 5,
+                PartId = 4,
+                QuantityDelivered = 4,
+                Note = "text5",
+                DateDelivered = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                SuplierId = 2
+            };
+            Delivary delivary6 = new Delivary()
+            {
+                Id = 6,
+                PartId = 7,
+                QuantityDelivered = 2,
+                Note = "text6",
+                DateDelivered = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                SuplierId = 3
+            };
+            Delivary delivary7 = new Delivary()
+            {
+                Id = 7,
+                PartId = 1,
+                QuantityDelivered = 3,
+                Note = "text7",
+                DateDelivered = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                SuplierId = 1
+            };
+            Delivary delivary8 = new Delivary()
+            {
+                Id = 8,
+                PartId = 4,
+                QuantityDelivered = 5,
+                Note = "text8",
+                DateDelivered = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                SuplierId = 2
+            };
+            Delivary delivary9 = new Delivary()
+            {
+                Id = 9,
+                PartId = 7,
+                QuantityDelivered = 4,
+                Note = "text9",
+                DateDelivered = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                SuplierId = 3
+            };
 
-            return new List<Delivary> { delivary };
+            return new List<Delivary> { delivary1, delivary2, delivary3, delivary4, delivary5, delivary6, delivary7, delivary8, delivary9 };
         }
 
         public List<Department> SeedDepartments()
@@ -366,8 +446,116 @@
                 DateFinish = null,
                 StatusId = 1
             };
+            Order order4 = new Order()
+            {
+                Id = 4,
+                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                Description = "test4",
+                SaleAmount = 525.00M,
+                Discount = 0,
+                VAT = 125.00M,
+                FinalAmount = 650.00M,
+                PaidAmount = 0,
+                UnpaidAmount = 750.00M,
+                DateCreated = DateTime.Now,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false,
+                DateFinish = null,
+                StatusId = 1
+            };
+            Order order5 = new Order()
+            {
+                Id = 5,
+                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                Description = "test5",
+                SaleAmount = 725.00M,
+                Discount = 0,
+                VAT = 125.00M,
+                FinalAmount = 850.00M,
+                PaidAmount = 0,
+                UnpaidAmount = 850.00M,
+                DateCreated = DateTime.Now,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false,
+                DateFinish = null,
+                StatusId = 1
+            };
+            Order order6 = new Order()
+            {
+                Id = 6,
+                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                Description = "test6",
+                SaleAmount = 525.00M,
+                Discount = 0,
+                VAT = 125.00M,
+                FinalAmount = 850.00M,
+                PaidAmount = 0,
+                UnpaidAmount = 650.00M,
+                DateCreated = DateTime.Now,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false,
+                DateFinish = null,
+                StatusId = 1
+            };
+            Order order7 = new Order()
+            {
+                Id = 7,
+                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                Description = "test7",
+                SaleAmount = 525.00M,
+                Discount = 0,
+                VAT = 125.00M,
+                FinalAmount = 650.00M,
+                PaidAmount = 0,
+                UnpaidAmount = 750.00M,
+                DateCreated = DateTime.Now,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false,
+                DateFinish = null,
+                StatusId = 1
+            };
+            Order order8 = new Order()
+            {
+                Id = 8,
+                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                Description = "test8",
+                SaleAmount = 725.00M,
+                Discount = 0,
+                VAT = 125.00M,
+                FinalAmount = 850.00M,
+                PaidAmount = 0,
+                UnpaidAmount = 850.00M,
+                DateCreated = DateTime.Now,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false,
+                DateFinish = null,
+                StatusId = 1
+            };
+            Order order9 = new Order()
+            {
+                Id = 9,
+                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                Description = "test9",
+                SaleAmount = 525.00M,
+                Discount = 0,
+                VAT = 125.00M,
+                FinalAmount = 850.00M,
+                PaidAmount = 0,
+                UnpaidAmount = 650.00M,
+                DateCreated = DateTime.Now,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false,
+                DateFinish = null,
+                StatusId = 1
+            };
 
-            return new List<Order> { order, order2, order3 };
+            return new List<Order> { order, order2, order3, order4, order5, order6, order7, order8, order9 };
         }
 
         public List<OrderPartEmployee> SeedOrdersPartsEmployees()
@@ -516,8 +704,298 @@
                 Description = "test",
                 IsCompleted = false
             };
+            OrderPartEmployee opeFrame4 = new OrderPartEmployee()
+            {
+                OrderId = 4,
+                SerialNumber = "BID12345680",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
+                PartId = 1,
+                EmployeeId = null,
+                PartName = "Frame OG",
+                PartPrice = 100.00M,
+                PartQuantity = 1,
+                DatetimeAsigned = null,
+                StartDatetime = null,
+                EndDatetime = null,
+                Description = "test",
+                IsCompleted = false
+            };
+            OrderPartEmployee opeWheel4 = new OrderPartEmployee()
+            {
+                OrderId = 4,
+                SerialNumber = "BID12345680",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
+                PartId = 5,
+                EmployeeId = null,
+                PartName = "Wheel of the Year for montain",
+                PartPrice = 85.00M,
+                PartQuantity = 6,
+                DatetimeAsigned = null,
+                StartDatetime = null,
+                EndDatetime = null,
+                Description = "test",
+                IsCompleted = false
+            };
+            OrderPartEmployee opeAccessories4 = new OrderPartEmployee()
+            {
+                OrderId = 4,
+                SerialNumber = "BID12345680",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
+                PartId = 11,
+                EmployeeId = null,
+                PartName = "Road budget Shifts",
+                PartPrice = 290.00M,
+                PartQuantity = 4,
+                DatetimeAsigned = null,
+                StartDatetime = null,
+                EndDatetime = null,
+                Description = "test",
+                IsCompleted = false
+            };
+            OrderPartEmployee opeFrame5 = new OrderPartEmployee()
+            {
+                OrderId = 5,
+                SerialNumber = "BID12345680",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
+                PartId = 1,
+                EmployeeId = null,
+                PartName = "Frame OG",
+                PartPrice = 100.00M,
+                PartQuantity = 1,
+                DatetimeAsigned = null,
+                StartDatetime = null,
+                EndDatetime = null,
+                Description = "test",
+                IsCompleted = false
+            };
+            OrderPartEmployee opeWheel5 = new OrderPartEmployee()
+            {
+                OrderId = 5,
+                SerialNumber = "BID12345680",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
+                PartId = 5,
+                EmployeeId = null,
+                PartName = "Wheel of the Year for montain",
+                PartPrice = 85.00M,
+                PartQuantity = 6,
+                DatetimeAsigned = null,
+                StartDatetime = null,
+                EndDatetime = null,
+                Description = "test",
+                IsCompleted = false
+            };
+            OrderPartEmployee opeAccessories5 = new OrderPartEmployee()
+            {
+                OrderId = 5,
+                SerialNumber = "BID12345680",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
+                PartId = 11,
+                EmployeeId = null,
+                PartName = "Road budget Shifts",
+                PartPrice = 290.00M,
+                PartQuantity = 4,
+                DatetimeAsigned = null,
+                StartDatetime = null,
+                EndDatetime = null,
+                Description = "test",
+                IsCompleted = false
+            };
+            OrderPartEmployee opeFrame6 = new OrderPartEmployee()
+            {
+                OrderId = 6,
+                SerialNumber = "BID12345680",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
+                PartId = 1,
+                EmployeeId = null,
+                PartName = "Frame OG",
+                PartPrice = 100.00M,
+                PartQuantity = 1,
+                DatetimeAsigned = null,
+                StartDatetime = null,
+                EndDatetime = null,
+                Description = "test",
+                IsCompleted = false
+            };
+            OrderPartEmployee opeWheel6 = new OrderPartEmployee()
+            {
+                OrderId = 6,
+                SerialNumber = "BID12345680",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
+                PartId = 5,
+                EmployeeId = null,
+                PartName = "Wheel of the Year for montain",
+                PartPrice = 85.00M,
+                PartQuantity = 6,
+                DatetimeAsigned = null,
+                StartDatetime = null,
+                EndDatetime = null,
+                Description = "test",
+                IsCompleted = false
+            };
+            OrderPartEmployee opeAccessories6 = new OrderPartEmployee()
+            {
+                OrderId = 6,
+                SerialNumber = "BID12345680",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
+                PartId = 11,
+                EmployeeId = null,
+                PartName = "Road budget Shifts",
+                PartPrice = 290.00M,
+                PartQuantity = 4,
+                DatetimeAsigned = null,
+                StartDatetime = null,
+                EndDatetime = null,
+                Description = "test",
+                IsCompleted = false
+            };
+            OrderPartEmployee opeFrame7 = new OrderPartEmployee()
+            {
+                OrderId = 7,
+                SerialNumber = "BID12345680",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
+                PartId = 1,
+                EmployeeId = null,
+                PartName = "Frame OG",
+                PartPrice = 100.00M,
+                PartQuantity = 1,
+                DatetimeAsigned = null,
+                StartDatetime = null,
+                EndDatetime = null,
+                Description = "test",
+                IsCompleted = false
+            };
+            OrderPartEmployee opeWheel7 = new OrderPartEmployee()
+            {
+                OrderId = 7,
+                SerialNumber = "BID12345680",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
+                PartId = 5,
+                EmployeeId = null,
+                PartName = "Wheel of the Year for montain",
+                PartPrice = 85.00M,
+                PartQuantity = 6,
+                DatetimeAsigned = null,
+                StartDatetime = null,
+                EndDatetime = null,
+                Description = "test",
+                IsCompleted = false
+            };
+            OrderPartEmployee opeAccessories7 = new OrderPartEmployee()
+            {
+                OrderId = 7,
+                SerialNumber = "BID12345680",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
+                PartId = 11,
+                EmployeeId = null,
+                PartName = "Road budget Shifts",
+                PartPrice = 290.00M,
+                PartQuantity = 4,
+                DatetimeAsigned = null,
+                StartDatetime = null,
+                EndDatetime = null,
+                Description = "test",
+                IsCompleted = false
+            };
+            OrderPartEmployee opeFrame8 = new OrderPartEmployee()
+            {
+                OrderId = 8,
+                SerialNumber = "BID12345680",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
+                PartId = 1,
+                EmployeeId = null,
+                PartName = "Frame OG",
+                PartPrice = 100.00M,
+                PartQuantity = 1,
+                DatetimeAsigned = null,
+                StartDatetime = null,
+                EndDatetime = null,
+                Description = "test",
+                IsCompleted = false
+            };
+            OrderPartEmployee opeWheel8 = new OrderPartEmployee()
+            {
+                OrderId = 8,
+                SerialNumber = "BID12345680",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
+                PartId = 5,
+                EmployeeId = null,
+                PartName = "Wheel of the Year for montain",
+                PartPrice = 85.00M,
+                PartQuantity = 6,
+                DatetimeAsigned = null,
+                StartDatetime = null,
+                EndDatetime = null,
+                Description = "test",
+                IsCompleted = false
+            };
+            OrderPartEmployee opeAccessories8 = new OrderPartEmployee()
+            {
+                OrderId = 8,
+                SerialNumber = "BID12345680",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
+                PartId = 11,
+                EmployeeId = null,
+                PartName = "Road budget Shifts",
+                PartPrice = 290.00M,
+                PartQuantity = 4,
+                DatetimeAsigned = null,
+                StartDatetime = null,
+                EndDatetime = null,
+                Description = "test",
+                IsCompleted = false
+            };
+            OrderPartEmployee opeFrame9 = new OrderPartEmployee()
+            {
+                OrderId = 9,
+                SerialNumber = "BID12345680",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
+                PartId = 1,
+                EmployeeId = null,
+                PartName = "Frame OG",
+                PartPrice = 100.00M,
+                PartQuantity = 1,
+                DatetimeAsigned = null,
+                StartDatetime = null,
+                EndDatetime = null,
+                Description = "test",
+                IsCompleted = false
+            };
+            OrderPartEmployee opeWheel9 = new OrderPartEmployee()
+            {
+                OrderId = 9,
+                SerialNumber = "BID12345680",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
+                PartId = 5,
+                EmployeeId = null,
+                PartName = "Wheel of the Year for montain",
+                PartPrice = 85.00M,
+                PartQuantity = 6,
+                DatetimeAsigned = null,
+                StartDatetime = null,
+                EndDatetime = null,
+                Description = "test",
+                IsCompleted = false
+            };
+            OrderPartEmployee opeAccessories9 = new OrderPartEmployee()
+            {
+                OrderId = 9,
+                SerialNumber = "BID12345680",
+                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
+                PartId = 11,
+                EmployeeId = null,
+                PartName = "Road budget Shifts",
+                PartPrice = 290.00M,
+                PartQuantity = 4,
+                DatetimeAsigned = null,
+                StartDatetime = null,
+                EndDatetime = null,
+                Description = "test",
+                IsCompleted = false
+            };
             return new List<OrderPartEmployee> {
-                opeFrame, opeWheel, opeAccessories, opeFrame2, opeWheel2, opeAccessories2, opeFrame3, opeWheel3, opeAccessories3
+                opeFrame, opeWheel, opeAccessories, opeFrame2, opeWheel2, opeAccessories2, opeFrame3, opeWheel3, opeAccessories3,
+                opeFrame4, opeWheel4, opeAccessories4, opeFrame5, opeWheel5, opeAccessories5, opeFrame6, opeWheel6, opeAccessories6,
+                opeFrame7, opeWheel7, opeAccessories7, opeFrame8, opeWheel8, opeAccessories8, opeFrame9, opeWheel9, opeAccessories9
             };
         }
 
@@ -530,7 +1008,7 @@
                     Name = "Frame Road",
                     Description = "Best frame in the road!",
                     Intend = "For road usage",
-                    OEMNumber = "oemtest",
+                    OEMNumber = "oemtest1",
                     Type = 1,
                     CategoryId = 1,
                     Quantity = 2,
@@ -564,7 +1042,7 @@
                     Name = "Frame Road woman",
                     Description = "Best frame in the road for womens",
                     Intend = "For road usage in women bikes",
-                    OEMNumber = "oemtest2",
+                    OEMNumber = "oemtest3",
                     Type = 3,
                     CategoryId = 1,
                     Quantity = 3,
@@ -581,7 +1059,7 @@
                     Name = "Wheel of the Year for road",
                     Description = "Best wheels ever!",
                     Intend = "Best wheels for a road usage",
-                    OEMNumber = "oemtest",
+                    OEMNumber = "oemtest4",
                     Type = 1,
                     CategoryId = 2,
                     Quantity = 50,
@@ -598,7 +1076,7 @@
                     Name = "Wheel of the Year for montain",
                     Description = "Best wheels for a montain!",
                     Intend = "Best wheels for a montain usage",
-                    OEMNumber = "oemtest",
+                    OEMNumber = "oemtest5",
                     Type = 2,
                     CategoryId = 2,
                     Quantity = 40,
@@ -615,7 +1093,7 @@
                     Name = "Road wheel best seler",
                     Description = "Best wheels for a road!",
                     Intend = "Best seler for a road usage",
-                    OEMNumber = "oemtest",
+                    OEMNumber = "oemtest6",
                     Type = 3,
                     CategoryId = 2,
                     Quantity = 50,
@@ -632,7 +1110,7 @@
                     Name = "Shift",
                     Description = "Worst shift - have only one!",
                     Intend = "Base shift - have only one",
-                    OEMNumber = "oemtest",
+                    OEMNumber = "oemtest7",
                     CategoryId = 3,
                     Type = 1,
                     Quantity = 9,
@@ -649,7 +1127,7 @@
                     Name = "Montain Shifts",
                     Description = "Best shifts for a montain!",
                     Intend = "Best shift for a montain usage",
-                    OEMNumber = "oemtest",
+                    OEMNumber = "oemtest8",
                     CategoryId = 3,
                     Type = 2,
                     Quantity = 19,
@@ -666,7 +1144,7 @@
                     Name = "Road Shifts",
                     Description = "Best shifts for a road!",
                     Intend = "Best shift for a road usage",
-                    OEMNumber = "oemtest",
+                    OEMNumber = "oemtest9",
                     CategoryId = 3,
                     Type = 3,
                     Quantity = 29,
@@ -683,7 +1161,7 @@
                     Name = "Road better Shifts",
                     Description = "Better shifts for a road!",
                     Intend = "Better shift for a road usage",
-                    OEMNumber = "oemtest9",
+                    OEMNumber = "oemtest10",
                     CategoryId = 3,
                     Type = 3,
                     Quantity = 21,
@@ -700,7 +1178,7 @@
                     Name = "Road budget Shifts",
                     Description = "Budget shifts for a road!",
                     Intend = "Budget shift for a road usage",
-                    OEMNumber = "oemtest91",
+                    OEMNumber = "oemtest11",
                     CategoryId = 3,
                     Type = 3,
                     Quantity = 21,
@@ -717,7 +1195,7 @@
                     Name = "Shift",
                     Description = "Cheap standard shift!",
                     Intend = "Cheap standard shift for a road usage",
-                    OEMNumber = "oemtest21",
+                    OEMNumber = "oemtest12",
                     CategoryId = 3,
                     Type = 1,
                     Quantity = 9,
@@ -734,7 +1212,7 @@
                     Name = "Montain Shifts",
                     Description = "Budget shifts for a montain!",
                     Intend = "Budget shift for a montain usage",
-                    OEMNumber = "oemtest98",
+                    OEMNumber = "oemtest13",
                     CategoryId = 3,
                     Type = 2,
                     Quantity = 19,
@@ -751,7 +1229,7 @@
                     Name = "Budget wheel for road",
                     Description = "Budget wheel ever!",
                     Intend = "Budget wheel for a road usage",
-                    OEMNumber = "oemtest34",
+                    OEMNumber = "oemtest14",
                     Type = 1,
                     CategoryId = 2,
                     Quantity = 50,
@@ -768,7 +1246,7 @@
                     Name = "Budget wheel for a montain",
                     Description = "Budget wheel for a montain!",
                     Intend = "Budget wheel for a montain usage",
-                    OEMNumber = "oemtest56",
+                    OEMNumber = "oemtest15",
                     Type = 2,
                     CategoryId = 2,
                     Quantity = 40,
@@ -785,7 +1263,7 @@
                     Name = "The cheapest road wheel",
                     Description = "The cheapest wheel for a road!",
                     Intend = "The cheapest wheel for a road usage",
-                    OEMNumber = "oemtest",
+                    OEMNumber = "oemtest16",
                     Type = 3,
                     CategoryId = 2,
                     Quantity = 50,
@@ -802,7 +1280,7 @@
                     Name = "Road titanium wheel",
                     Description = "The best titanium wheel for a road!",
                     Intend = "The best titanium wheel for a road usage",
-                    OEMNumber = "oemtest567",
+                    OEMNumber = "oemtest17",
                     Type = 3,
                     CategoryId = 2,
                     Quantity = 50,
@@ -1137,7 +1615,7 @@
 
         public List<Suplier> SeedSuplieres()
         {
-            Suplier suplier = new Suplier()
+            Suplier suplier1 = new Suplier()
             {
                 Id = 1,
                 Name = "X Ltd",
@@ -1146,13 +1624,44 @@
                 PhoneNumeber = "1234567890",
                 Email = "text@test.bg",
                 ContactName = "Pesh Peshev",
+                CategoryName = "Frame",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            Suplier suplier2 = new Suplier()
+            {
+                Id = 2,
+                Name = "XX Ltd",
+                VATNumber = "123456788",
+                Address = "Sofia, east",
+                PhoneNumeber = "1234567899",
+                Email = "text2@test.bg",
+                ContactName = "Pesho Peshev",
+                CategoryName = "Wheel",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            Suplier suplier3 = new Suplier()
+            {
+                Id = 3,
+                Name = "XXX Ltd",
+                VATNumber = "123456787",
+                Address = "Sofia, west",
+                PhoneNumeber = "1234567897",
+                Email = "text3@test.bg",
+                ContactName = "Ivan Peshev",
+                CategoryName = "Acsessories",
                 DateCreated = DateTime.Now,
                 DateUpdated = DateTime.Now,
                 DateDeleted = null,
                 IsDeleted = false
             };
 
-            return new List<Suplier> { suplier };
+            return new List<Suplier> { suplier1, suplier2, suplier3 };
         }
 
         public List<Town> SeedTowns()
@@ -1201,6 +1710,164 @@
             };
 
             return new List<VATCategory> { category };
+        }
+        public List<PartInStock> SeedPartsInStock()
+        {
+            PartInStock partInStock1 = new PartInStock()
+            {
+                Id = 1,
+                OemPartNumber = "oemtest1",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            PartInStock partInStock2 = new PartInStock()
+            {
+                Id = 2,
+                OemPartNumber = "oemtest2",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                DateDeleted = null,
+                IsDeleted = false
+            }; PartInStock partInStock3 = new PartInStock()
+            {
+                Id = 3,
+                OemPartNumber = "oemtest3",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                DateDeleted = null,
+                IsDeleted = false
+            }; PartInStock partInStock4 = new PartInStock()
+            {
+                Id = 4,
+                OemPartNumber = "oemtest4",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                DateDeleted = null,
+                IsDeleted = false
+            }; PartInStock partInStock5 = new PartInStock()
+            {
+                Id = 5,
+                OemPartNumber = "oemtest5",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                DateDeleted = null,
+                IsDeleted = false
+            }; PartInStock partInStock6 = new PartInStock()
+            {
+                Id = 6,
+                OemPartNumber = "oemtest6",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                DateDeleted = null,
+                IsDeleted = false
+            }; PartInStock partInStock7 = new PartInStock()
+            {
+                Id = 7,
+                OemPartNumber = "oemtest7",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                DateDeleted = null,
+                IsDeleted = false
+            }; PartInStock partInStock8 = new PartInStock()
+            {
+                Id = 8,
+                OemPartNumber = "oemtest8",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                DateDeleted = null,
+                IsDeleted = false
+            }; PartInStock partInStock9 = new PartInStock()
+            {
+                Id = 9,
+                OemPartNumber = "oemtest9",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                DateDeleted = null,
+                IsDeleted = false
+            }; PartInStock partInStock10 = new PartInStock()
+            {
+                Id = 10,
+                OemPartNumber = "oemtest10",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                DateDeleted = null,
+                IsDeleted = false
+            }; PartInStock partInStock11 = new PartInStock()
+            {
+                Id = 11,
+                OemPartNumber = "oemtest11",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                DateDeleted = null,
+                IsDeleted = false
+            }; PartInStock partInStock12 = new PartInStock()
+            {
+                Id = 12,
+                OemPartNumber = "oemtest12",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                DateDeleted = null,
+                IsDeleted = false
+            }; PartInStock partInStock13 = new PartInStock()
+            {
+                Id = 13,
+                OemPartNumber = "oemtest13",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            return new List<PartInStock> { partInStock1,
+                partInStock2,
+                partInStock3,
+                partInStock4,
+                partInStock5,
+                partInStock6,
+                partInStock7,
+                partInStock8,
+                partInStock9,
+                partInStock10,
+                partInStock11,
+                partInStock12,
+                partInStock13,
+            };
+        }
+        public List<PartOrder> SeedPartOrders()
+        {
+            PartOrder partOrder1 = new PartOrder()
+            {
+                Id = 1,
+                PartId = 1,
+                QuantityDelivered = 2,
+                Note = "text",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                SuplierId = 1
+            };
+            PartOrder partOrder2 = new PartOrder()
+            {
+                Id = 2,
+                PartId = 4,
+                QuantityDelivered = 2,
+                Note = "text2",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                SuplierId = 2
+            };
+            PartOrder partOrder3 = new PartOrder()
+            {
+                Id = 3,
+                PartId = 7,
+                QuantityDelivered = 1,
+                Note = "text2",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                SuplierId = 3
+            };
+
+            return new List<PartOrder> { partOrder1, partOrder2, partOrder3 };
         }
     }
 }

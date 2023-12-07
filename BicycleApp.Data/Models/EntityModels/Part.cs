@@ -21,6 +21,7 @@
             this.OrdersPartsEmployees = new HashSet<OrderPartEmployee>();
             this.Rates = new HashSet<Rate>();
             this.BikeModelsParts = new HashSet<BikeModelPart>();
+            this.CompatableParts = new HashSet<CompatablePart>();
         }
 
         [Key]
@@ -34,16 +35,16 @@
         [Required]
         [MaxLength(PartDescriptionMaxLength)]
         [Comment("Full description of the part")]
-        public string Description { get; set; }
+        public string Description { get; set; } = null!;
 
         [Required]
         [MaxLength(PartIntetionMaxLength)]
         [Comment("Intention of the part")]
-        public string Intend { get; set; }
+        public string Intend { get; set; } = null!;
 
         [MaxLength(PartOEMMaxLength)]
         [Comment("Unique number of the part from the manifacturer")]
-        public string? OEMNumber { get; set; }
+        public string OEMNumber { get; set; } = null!;
 
         [Required]
         [Comment("Type of the part")]
@@ -78,11 +79,13 @@
 
         public virtual ICollection<Comment> Comments { get; set; }
 
-        public ICollection<CompatablePart> CompatableParts { get; set; } = new List<CompatablePart>();
+        public virtual ICollection<CompatablePart> CompatableParts { get; set; }
 
         public virtual ICollection<OrderPartEmployee> OrdersPartsEmployees { get; set; }
 
         public virtual ICollection<Rate> Rates { get; set; }
+        public virtual ICollection<BikeModelPart> BikeModelsParts { get; set; }
+        public virtual ICollection<PartOrder> PartsInOrder { get; set; }
 
         [Required]
         [Comment("Date of the creation of the entry in tha database")]
@@ -97,7 +100,5 @@
         [Required]
         [Comment("Status of the part: Deleted/Not deleted")]
         public bool IsDeleted { get; set; } = false;
-
-        public virtual ICollection<BikeModelPart> BikeModelsParts { get; set; }
     }
 }
