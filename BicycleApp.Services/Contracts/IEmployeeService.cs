@@ -13,5 +13,7 @@
         Task<EmployeeInfoDto?> GetEmployeeInfoAsync(string Id);
 
         Task<bool> ChangeEmployeePasswordAsync(EmployeePasswordChangeDto employeePasswordChangeDto);
+
+        Task<bool> ResetPasswordToDefault(string email);
     }
 }
