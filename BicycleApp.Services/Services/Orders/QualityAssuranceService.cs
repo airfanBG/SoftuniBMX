@@ -51,7 +51,11 @@
                                                    NameOfEmplоyeeProducedThePart = _stringManipulator.ReturnFullName(ope.Employee.FirstName, ope.Employee.LastName),
                                                    EmployeeId = ope.EmployeeId,
                                                    SerialNumber = ope.SerialNumber,
-                                                   IsProduced = ope.IsCompleted
+                                                   IsProduced = ope.IsCompleted,
+                                                   ElementProduceTimeInMinutes = ope.OrdersPartsEmployeesInfos.Where(opei => opei.OrderId == ope.OrderId 
+                                                                                                               && opei.PartId == ope.PartId 
+                                                                                                               && opei.UniqueKeyForSerialNumber == ope.UniqueKeyForSerialNumber)
+                                                                                                     .Sum(opeis => opeis.ProductionТime.Minutes)
                                                })
                                                .ToList()
                             })

@@ -11,5 +11,6 @@
         public bool IsProduced { get; set; }
         public string? SerialNumber { get; set; }
         public string? EmployeeId { get; set; }
+        public int? ElementProduceTimeInMinutes { get; set; }
     }
 }
