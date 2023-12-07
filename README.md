@@ -18,11 +18,22 @@
 ### [`GET /api/accountpage/frames`](/ReadMeFiles/AccountPage/Frames.md)
 ### [`GET /api/accountpage/compatible_parts`](/ReadMeFiles/AccountPage/CompatibleParts.md)
 ### [`GET /api/accountpage/selected_part`](/ReadMeFiles/AccountPage/SelectedPart.md)
+- ClientController дава възсможността на потребителя - клиент да управлява личните си данни.
+
+### [`POST /api/client/reset`](/ReadMeFiles/Client/ResetPassword.md)
 - ClientOrderController дава възсможността на потребителя на създава, преглежда и изтрива поръчки, направени от него.
 
 ### [`POST /api/client_order/create`](/ReadMeFiles/ClientOrder/Create.md)
 ### [`POST /api/client_order/progress`](/ReadMeFiles/ClientOrder/Progress.md)
 ### [`POST /api/client_order/delete`](/ReadMeFiles/ClientOrder/Delete.md)
+- EmployeeController дава възсможността на потребителя - работник да управлява личните си данни.
+
+### [`POST /api/employee/reset`](/ReadMeFiles/Employee/ResetPassword.md)
+- EmployeeOrderController управляват поръчките между рабониците. 
+
+### [`GET /api/employee_оrder/quality_assurance`](/ReadMeFiles/EmployeeOrder/QualityAssurance/GetReadyOrdersForQualityAssurance.md)
+### [`POST /api/employee_оrder/quality_assurance`](/ReadMeFiles/EmployeeOrder/QualityAssurance/PassedQualityAssuranceOrder.md)
+### [`POST /api/employee_оrder/quality_assurance_return`](/ReadMeFiles/EmployeeOrder/QualityAssurance/RemanufacturingPart.md)
 
 - OrderManagerController дава възсможността да се ползва функционалността на OrderManagerService. 
 

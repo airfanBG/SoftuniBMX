@@ -98,16 +98,16 @@
                 partToManufacturing.StartDatetime = null;
                 partToManufacturing.EndDatetime = null;                 
                 var descriptionFromQualityControl = partToManufacturing.OrdersPartsEmployeesInfos
-                                                                       .First(o => o.OrderId == remanufacturingOrderPartDto.OrderId 
+                                                                       .FirstOrDefault(o => o.OrderId == remanufacturingOrderPartDto.OrderId 
                                                                                    && o.PartId == remanufacturingOrderPartDto.PartId);
-                descriptionFromQualityControl.DescriptionForWorker = _stringManipulator.GetTextFromProperty(remanufacturingOrderPartDto.Description);
+                descriptionFromQualityControl.DescriptionForWorker = remanufacturingOrderPartDto.Description;
                 partToManufacturing.IsCompleted = false;
 
                 var employeeName = _stringManipulator.ReturnFullName(partToManufacturing.Employee.FirstName, partToManufacturing.Employee.LastName);
 
                 await _db.SaveChangesAsync();
 
-                var partToManufacturingView = _employeeFactory.CreateRemanufacturingOrderPart(employeeName, partToManufacturing.PartName, partToManufacturing.SerialNumber, partToManufacturing.Description);
+                var partToManufacturingView = _employeeFactory.CreateRemanufacturingOrderPart(employeeName, partToManufacturing.PartName, partToManufacturing.SerialNumber, remanufacturingOrderPartDto.Description);
 
                 return partToManufacturingView;
             }
