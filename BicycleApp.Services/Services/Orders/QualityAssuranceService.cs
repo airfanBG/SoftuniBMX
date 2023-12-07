@@ -98,7 +98,7 @@
                 partToManufacturing.StartDatetime = null;
                 partToManufacturing.EndDatetime = null;                 
                 var descriptionFromQualityControl = partToManufacturing.OrdersPartsEmployeesInfos
-                                                                       .FirstOrDefault(o => o.OrderId == remanufacturingOrderPartDto.OrderId 
+                                                                       .LastOrDefault(o => o.OrderId == remanufacturingOrderPartDto.OrderId 
                                                                                    && o.PartId == remanufacturingOrderPartDto.PartId);
                 descriptionFromQualityControl.DescriptionForWorker = remanufacturingOrderPartDto.Description;
                 partToManufacturing.IsCompleted = false;
