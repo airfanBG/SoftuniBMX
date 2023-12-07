@@ -22,6 +22,7 @@ import InProgress from "./components/dashComponents/managerComponents/InProgress
 import { AuthProvider } from "./context/AuthContext.jsx";
 import ProtectedRoute from "./pages/ProtectedRoute.jsx";
 import LimitedRoute from "./pages/LimitedRoute.jsx";
+import QControlOrders from "./components/dashComponents/qControlComponents/QControlOrders.jsx";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
                 <Route path={"employers"} element={<EmployersList />} />
                 <Route path={"statistic"} />
                 <Route path={"add-member"} element={<AddMember />} />
+                <Route path={"q-control-orders"} element={<QControlOrders />} />
               </Route>
 
               <Route path="app" element={<AppLayout />}>
