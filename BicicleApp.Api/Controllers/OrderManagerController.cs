@@ -22,12 +22,17 @@ namespace BicicleApp.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> PendingOrders()
+        public async Task<IActionResult> PendingOrders([FromQuery] int page = 1)
         {
+
+            if (page <= 0)
+            {
+                return StatusCode(400);
+            }
 
             try
             {
-                var model = await _orderManagerService.AllPendingOrdersAsync();
+                var model = await _orderManagerService.AllPendingOrdersAsync(page);
 
                 if (model == null)
                 {

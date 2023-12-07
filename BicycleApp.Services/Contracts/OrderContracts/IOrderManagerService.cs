@@ -1,13 +1,14 @@
 ﻿namespace BicycleApp.Services.Contracts
 {
     using BicycleApp.Data.Models.EntityModels;
+    using BicycleApp.Services.Models.Order;
     using BicycleApp.Services.Models.Order.OrderManager;
     using System.Threading.Tasks;
 
     public interface IOrderManagerService
     {
         Task<bool> AcceptAndAssignOrderByManagerAsync(int orderId);
-        Task<ICollection<OrderInfoDto>> AllPendingOrdersAsync();
+        Task<OrderQueryDto> AllPendingOrdersAsync(int currentPage);
         Task<ICollection<OrderInfoDto>> GetAllFinishedOrdersForPeriod(FinishedOrdersDto datesPeriod);
         Task<int> ArePartsNeeded(int partsInOrder, int partInStockId);
         Task ManagerDeleteOrder(int orderId);

@@ -1,0 +1,15 @@
+﻿namespace BicycleApp.Services.Contracts
+{
+    using System.Threading.Tasks;
+
+    using BicycleApp.Services.Models;
+
+    public interface IPartService
+    {
+        Task<bool> AddNewPart(PartAddDto partAddDto);
+
+        Task<bool> EditPart(PartEditDto partEditDto);
+
+        Task<PartGetDto> GetCategoties();
+    }
+}

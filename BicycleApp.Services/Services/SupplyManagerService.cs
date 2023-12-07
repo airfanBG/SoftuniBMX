@@ -1,4 +1,5 @@
-﻿using BicycleApp.Data;
+﻿using Azure;
+using BicycleApp.Data;
 using BicycleApp.Services.Contracts;
 using BicycleApp.Services.Models.Supply;
 using Microsoft.EntityFrameworkCore;
@@ -14,49 +15,14 @@ namespace BicycleApp.Services.Services
         {
             _dbContext = dbContext;
         }
-        public async Task<DeliveryQueryDto> AllDeliveries(string suplier = null, 
-                                                    string searchTerm = null, 
-                                                    DeliveriesSorting sorting = DeliveriesSorting.Newest, 
-                                                    int currentPage = 1, 
-                                                    int deliveriesPerPage = 1)
+        public async Task<DeliveryQueryDto> AllDeliveries(int currentPage)
         {
+            int deliveriesPerPage = 6;
 
             var result = new DeliveryQueryDto();
 
-            var deliveries = _dbContext.Delivaries
-               .Where(v => v.IsDeleted == false);
-
-
-            if (!string.IsNullOrEmpty(suplier))
-            {
-                deliveries = deliveries
-                    .Where(d => d.Suplier.Name == suplier);
-            }
-
-            if (!string.IsNullOrEmpty(searchTerm))
-            {
-                searchTerm = $"%{searchTerm.ToLower()}";
-                deliveries = deliveries
-                    .Where(d => EF.Functions.Like(d.Part.Name.ToLower(), searchTerm) ||
-                   EF.Functions.Like(d.Suplier.Name.ToLower(), searchTerm) ||
-                   EF.Functions.Like(d.Note.ToLower(), searchTerm));
-
-            }
-
-            switch (sorting)
-            {
-                case DeliveriesSorting.Supplier:
-                    deliveries = deliveries.OrderBy(d => d.Suplier.Name);
-                    break;
-                case DeliveriesSorting.PartName:
-                    deliveries = deliveries.OrderByDescending(d => d.Part.Name);
-                    break;
-                default:
-                    deliveries = deliveries.OrderByDescending(d => d.Id);
-                    break;
-            }
-
-            result.Deliveries = await deliveries
+            result.Deliveries  = await _dbContext.Delivaries.AsQueryable()
+                .AsNoTracking()
                 .Skip((currentPage - 1) * deliveriesPerPage)
                 .Take(deliveriesPerPage)
                 .Select(d => new DeliveryDetailsDto
@@ -70,7 +36,7 @@ namespace BicycleApp.Services.Services
                 })
                 .ToListAsync();
 
-            result.TotalDeliveriesCount = await deliveries.CountAsync();
+            result.TotalDeliveriesCount = await _dbContext.Delivaries.CountAsync();
 
 
             return result;
