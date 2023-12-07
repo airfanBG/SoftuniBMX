@@ -1,7 +1,7 @@
 
 [Обратно към ReadMe](/README.md)
 
-# `PUT /api/employee_оrder/quality_assurance`
+# `POST /api/employee_оrder/quality_assurance_return`
 Екшън, който връща част, която не преминава изискванията към този, който я е изработил.
 
 ## Request
