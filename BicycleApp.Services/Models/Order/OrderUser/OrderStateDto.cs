@@ -12,5 +12,6 @@
         public string? SerialNumber { get; set; }
         public string? EmployeeId { get; set; }
         public int? ElementProduceTimeInMinutes { get; set; }
+        public  string? Description { get; set; }
     }
 }

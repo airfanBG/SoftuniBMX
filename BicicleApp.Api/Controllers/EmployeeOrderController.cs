@@ -139,9 +139,9 @@
         [Route("quality_assurance_return")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<RemanufacturingPartEmployeeInfoDto>> RemanufacturingPart([FromBody] RemanufacturingOrderPartDto remanufacturingOrderPartDto)
+        public async Task<ActionResult<ICollection<RemanufacturingPartEmployeeInfoDto>>> RemanufacturingPart([FromBody] OrderProgretionDto orderProgretionDto)
         {
-            var infoForPart = await qualityAssuranceService.RemanufacturingPart(remanufacturingOrderPartDto);
+            var infoForPart = await qualityAssuranceService.RemanufacturingPart(orderProgretionDto);
 
             if (infoForPart != null)
             {
