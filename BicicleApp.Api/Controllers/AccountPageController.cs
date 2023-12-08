@@ -35,7 +35,7 @@ namespace BicicleApp.Api.Controllers
                     return StatusCode(204);
                 }
 
-                return Ok(model);
+                return StatusCode(200, model);
             }
             catch (Exception)
             {
@@ -63,7 +63,7 @@ namespace BicicleApp.Api.Controllers
                     return StatusCode(204);
                 }
 
-                return Ok(model);
+                return StatusCode(200, model);
             }
             catch (Exception)
             {
@@ -92,7 +92,7 @@ namespace BicicleApp.Api.Controllers
 
                 var model = await _dropdownsContentService.GetPartByIdAsync(id);
 
-                return Ok(model);
+                return StatusCode(200, model);
             }
             catch (Exception)
             {

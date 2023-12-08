@@ -8,6 +8,8 @@
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.Models;
     using BicycleApp.Services.Models.IdentityModels;
+    using BicycleApp.Services.Models.Order.OrderUser.Contracts;
+    using BicycleApp.Services.Models.Supply;
 
     public class ModelsFactory : IModelsFactory
     {
@@ -94,6 +96,21 @@
             };
         }
 
+        public Delivary CreateNewDelivery(CreateDelivedryDto createDelivedryDto)
+        {
+            return new Delivary()
+            {
+                PartId = createDelivedryDto.PartId,
+                Note = createDelivedryDto.Note,
+                QuantityDelivered = createDelivedryDto.QuantityDelivered,
+                SuplierId = createDelivedryDto.SuplierId,
+                DateDelivered = DateTime.UtcNow,
+                DateDeleted = null,
+                DateUpdated = null,
+                IsDeleted=false
+            };
+        }
+
         public Department CreateNewDepartment(string departmentName)
         {
             return new Department()
@@ -124,6 +141,23 @@
                 PhoneNumber = employeeRegisterDto.PhoneNumber,
                 UserName = employeeRegisterDto.Email,
                 Position = employeeRegisterDto.Position
+            };
+        }
+
+        public Suplier CreateNewSuplier(CreateSuplierDto createSuplierDto)
+        {
+            return new Suplier()
+            {
+                Name= createSuplierDto.Name,
+                DateCreated = DateTime.UtcNow,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false,
+                CategoryName = createSuplierDto.CategoryName,
+                Address = createSuplierDto.Address,
+                ContactName = createSuplierDto.ContactName,
+                Email = createSuplierDto.Email,
+                PhoneNumeber = createSuplierDto.PhoneNumeber
             };
         }
 

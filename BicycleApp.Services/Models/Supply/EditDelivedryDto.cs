@@ -6,8 +6,10 @@ using static BicycleApp.Common.EntityValidationConstants.Delivery;
 
 namespace BicycleApp.Services.Models.Supply
 {
-    public class CreateDelivedryDto
+    public class EditDelivedryDto
     {
+        public int Id { get; set; }
+
         [Required]
         [Comment("Id of the part")]
         [JsonPropertyName("part_id")]

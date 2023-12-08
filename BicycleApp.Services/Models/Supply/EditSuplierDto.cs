@@ -6,8 +6,10 @@ using static BicycleApp.Common.EntityValidationConstants.Suplier;
 
 namespace BicycleApp.Services.Models.Supply
 {
-    public class CreateSuplierDto
+    public class EditSuplierDto
     {
+        public int Id { get; set; }
+
         [Required]
         [MaxLength(SuplierNameMaxLength)]
         [MinLength(SuplierNameMinLength)]
