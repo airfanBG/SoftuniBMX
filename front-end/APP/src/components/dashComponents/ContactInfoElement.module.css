@@ -1,0 +1,18 @@
+.userData {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--color-main-dark);
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+.twoColumn {
+  width: 50%;
+}
+
+.userData span {
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--color-hd);
+  margin-right: 1rem;
+}
