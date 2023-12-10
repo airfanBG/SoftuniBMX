@@ -1,13 +1,12 @@
-// import { useContext, useEffect, useState } from "react";
-
 import styles from "./UserContactInfo.module.css";
 
-// import { UserContext } from "../../../context/GlobalUserProvider.jsx";
+import { useContext } from "react";
+import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 // import { userInfo } from "../../../userServices/userService.js";
 import ContactInfoElement from "../ContactInfoElement.jsx";
 
 function UserContactInfo({ info }) {
-  // const { user } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   // const [info, setInfo] = useState("");
 
   // useEffect(
@@ -53,7 +52,7 @@ function UserContactInfo({ info }) {
               />
 
               <ContactInfoElement
-                content={info.phone}
+                content={info.phoneNumber}
                 label={"Phone"}
                 width={"40%"}
               />
@@ -135,7 +134,7 @@ function UserContactInfo({ info }) {
             <div className={styles.fullData}>
               <div className={styles.row}>
                 <ContactInfoElement
-                  content={info.balance}
+                  content={user.balance.toFixed(2)}
                   label={"Account balance"}
                   width={"40%"}
                 />

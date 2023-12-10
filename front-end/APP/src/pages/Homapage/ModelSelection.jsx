@@ -68,7 +68,7 @@ function ModelSelection() {
 
       <div className={styles.cards}>
         {bikes.length > 0 &&
-          bikes.map((x) => (
+          bikes.map((x, i) => (
             <BikeModel
               key={x.id}
               imageUrl={x.imageUrl}
@@ -76,6 +76,7 @@ function ModelSelection() {
               description={x.description}
               price={x.price}
               top={top}
+              id={x.id}
             />
           ))}
       </div>

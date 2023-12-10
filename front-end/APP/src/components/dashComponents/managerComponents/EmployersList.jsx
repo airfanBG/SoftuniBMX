@@ -1,12 +1,15 @@
 import styles from "./EmployersList.module.css";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import BoardHeader from "../BoardHeader.jsx";
 import Employee from "./Employee.jsx";
 import PopupInfo from "./PopupInfo.jsx";
 
-import { useEmployers } from "../../../customHooks/useEmployers.js";
+import {
+  useEmployers,
+  getEmployers,
+} from "../../../customHooks/useEmployers.js";
 import { Link } from "react-router-dom";
 
 function Employers() {
@@ -17,32 +20,37 @@ function Employers() {
 
   const [background, setBackground] = useState(false);
 
-  const employersList = useEmployers();
-
-  useEffect(function () {
-    const abortController = new AbortController();
-    async function getEmps() {
-      const data = await employersList;
-      let empArr = [];
-      let conArr = [];
-      let manArr = [];
-      const empData = data.map((x) => {
-        if (x.role === "worker") {
-          empArr.push(x);
-        } else if (x.role === "qControl") {
-          conArr.push(x);
-        } else {
-          manArr.push(x);
-        }
-      });
-      setEmp(empArr);
-      setCon(conArr);
-      setMan(manArr);
-    }
-    getEmps();
-
-    return () => abortController.abort();
+  const employersList = useMemo(() => {
+    return getEmployers();
   }, []);
+
+  useEffect(
+    function () {
+      const abortController = new AbortController();
+      async function getEmps() {
+        const data = await employersList;
+        let empArr = [];
+        let conArr = [];
+        let manArr = [];
+        const empData = data.map((x) => {
+          if (x.role === "worker") {
+            empArr.push(x);
+          } else if (x.role === "qControl") {
+            conArr.push(x);
+          } else {
+            manArr.push(x);
+          }
+        });
+        setEmp(empArr);
+        setCon(conArr);
+        setMan(manArr);
+      }
+      getEmps();
+
+      return () => abortController.abort();
+    },
+    [employersList]
+  );
 
   function handleClick(p) {
     setPerson(p);
@@ -81,7 +89,7 @@ function Employers() {
                   />
                 ))}
             </div>
-            <h2 className={styles.dashHeading}>QC list</h2>
+            <h2 className={styles.dashHeading}>Quality Control list</h2>
             <div className={styles.cardHolder}>
               {con &&
                 con.map((qControl) => (

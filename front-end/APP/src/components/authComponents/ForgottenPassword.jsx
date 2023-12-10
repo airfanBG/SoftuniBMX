@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { EMAIL_REGEX } from "../../util/util.js";
 import { post } from "../../util/api.js";
 import LoaderWheel from "../LoaderWheel.jsx";
+import Paginator from "../Paginator.jsx";
 
 function ForgottenPassword() {
   const { isAuthenticated } = useAuth();
@@ -48,7 +49,13 @@ function ForgottenPassword() {
     e.preventDefault();
     setIsLoading(true);
 
-    // const reset = await post("/reset/", email);
+    if (email.split("@")[1] === "b-free.com") {
+      // const reset = await post(`/api/employee/reset?email=${email}`, email);
+      console.log("worker");
+    } else {
+      console.log("user");
+      // const reset = await post(`/api/client/reset?email=${email}`, email);
+    }
 
     setTimeout(function info() {
       navigate("/auth/login");

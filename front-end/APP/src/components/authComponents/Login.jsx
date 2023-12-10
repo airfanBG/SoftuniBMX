@@ -8,6 +8,7 @@ import { clearOrderData, clearUserData, setUserData } from "../../util/util.js";
 import LoaderWheel from "../LoaderWheel.jsx";
 import { UserContext } from "../../context/GlobalUserProvider.jsx";
 import { useAuth } from "../../context/AuthContext.jsx";
+import { useError } from "../../context/ErrorContext.jsx";
 
 const EMAIL_REGEX =
   /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
@@ -27,6 +28,7 @@ function Login() {
 
   const { loginUser, isAuthenticated } = useAuth();
   const { updateUser, setHasOrder } = useContext(UserContext);
+  const { error, message, errorHandler } = useError();
 
   const navigate = useNavigate();
 
@@ -42,7 +44,7 @@ function Login() {
   );
 
   function onChangeHandler(e) {
-    setValues({ ...values, [e.target.name]: e.target.value });
+    setValues({ ...values, [e.target.name]: e.target.value.trim() });
   }
 
   function validateInput(e) {
@@ -92,6 +94,7 @@ function Login() {
       if (result.code) {
         setIsLoading(false);
         setResError({ status: true, message: result.message });
+        errorHandler(result.message);
         throw new Error(result);
       }
       const currentUser = {
@@ -136,6 +139,7 @@ function Login() {
       {isLoading && <LoaderWheel />}
       {resError.status && <h3>{resError.message}</h3>}
       <div className="modal">
+        {error && <p>ERROR</p>}
         <form className={styles.form} onSubmit={formSubmitHandler}>
           <h2 className={styles.heading}>Login</h2>
           <div className={styles.wrapper}>

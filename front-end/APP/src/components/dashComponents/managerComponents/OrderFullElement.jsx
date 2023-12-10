@@ -4,12 +4,12 @@ function OrderElement({ order }) {
   const { serialNumber, id, dateCreated, orderStates } = order;
   return (
     <div className={styles.container}>
-      <p className={styles.logo}>
+      <div className={styles.logo}>
         <p className={styles.logoFirstLine}>
           e<span>&#10006;</span>treme - BMX
         </p>
         <span className={styles.logoSecondary}>Bicycle Management</span>
-      </p>
+      </div>
 
       <header className={styles.header}>
         <p className={styles.heading}>

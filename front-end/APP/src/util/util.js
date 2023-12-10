@@ -23,11 +23,18 @@ export function getOrderData() {
   return JSON.parse(localStorage.getItem("order"));
 }
 
+export function getStockData() {
+  return JSON.parse(localStorage.getItem("stockBikeSelection"));
+}
+
 export function setUserData(data) {
   return localStorage.setItem(itemName, JSON.stringify(data));
 }
 export function setOrderData(orderName, data) {
   return localStorage.setItem(orderName, JSON.stringify(data));
+}
+export function setStockBike(data) {
+  return localStorage.setItem("stockBikeSelection", JSON.stringify(data));
 }
 
 export function clearUserData() {
@@ -36,6 +43,10 @@ export function clearUserData() {
 
 export function clearOrderData() {
   localStorage.removeItem("order");
+}
+
+export function clearStockData() {
+  localStorage.removeItem("stockBikeSelection");
 }
 
 export function secondsToTime(time) {

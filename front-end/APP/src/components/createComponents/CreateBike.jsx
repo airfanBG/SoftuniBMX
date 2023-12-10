@@ -115,7 +115,7 @@ function CreateBike() {
         dispatch({ type: "dataReceived", payload: true });
 
         const frames = await getFrames();
-        console.log(frames);
+        // console.log(frames);
 
         dispatch({ type: "frameList", payload: frames });
         dispatch({ type: "dataReceived", payload: false });

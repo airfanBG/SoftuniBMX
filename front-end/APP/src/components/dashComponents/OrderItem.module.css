@@ -16,9 +16,6 @@
   font-weight: 500;
 }
 
-.info {
-}
-
 .brand {
   text-transform: uppercase;
   margin-top: 1rem;
@@ -90,6 +87,12 @@
 .startBtn:hover {
   background-color: var(--button-blue-light);
   color: var(--button-font-color-hover);
+}
+
+.startBtn:disabled {
+  background-color: var(--button-blue-light);
+  color: var(--button-font-color-hover);
+  cursor: not-allowed;
 }
 
 .pastTime {

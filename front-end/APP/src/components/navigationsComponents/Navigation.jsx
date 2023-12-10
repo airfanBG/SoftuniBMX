@@ -19,7 +19,8 @@ function Navigation() {
           <li className={styles.navListItem}>
             {window.location.pathname === "/" &&
             user.role !== "worker" &&
-            user.role !== "manager" ? (
+            user.role !== "manager" &&
+            user.role !== "qControl" ? (
               <NavLink to={"/app"} className={styles.navLink}>
                 Create
               </NavLink>
@@ -32,7 +33,8 @@ function Navigation() {
           {window.location.pathname !== "/" &&
             user &&
             user.role !== "worker" &&
-            user.role !== "manager" && (
+            user.role !== "manager" &&
+            user.role !== "qControl" && (
               <NavLink to={"/app"} className={styles.navLink}>
                 Create
               </NavLink>
@@ -42,11 +44,11 @@ function Navigation() {
               About
             </NavLink>
           </li>
-          <li className={styles.navListItem}>
+          {/* <li className={styles.navListItem}>
             <NavLink to={"/contacts"} className={styles.navLink}>
               Contacts
             </NavLink>
-          </li>
+          </li> */}
           <li className={styles.navListItem}>
             {user ? (
               <NavLink to={"/profile"} className={styles.navLink}>

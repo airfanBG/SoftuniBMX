@@ -35,6 +35,10 @@ html {
   --bg-color-dark: #1b1b1b;
   --bg-color: #3f3f3f;
   --bg-color-light: #5e5e5e;
+  --qControl-pass: #4d8076;
+  --qControl-pass-hover: #4d8076;
+  --qControl-rej: #a55331;
+  --qControl-rej-hover: #d27955;
 }
 
 body {

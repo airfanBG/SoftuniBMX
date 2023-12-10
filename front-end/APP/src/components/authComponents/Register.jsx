@@ -54,9 +54,12 @@ function Register() {
         [e.target.name]: Number(e.target.value),
       });
     } else if (e.target.name === "iban") {
-      setValues({ ...values, [e.target.name]: e.target.value.toUpperCase() });
+      setValues({
+        ...values,
+        [e.target.name]: e.target.value.trim().toUpperCase(),
+      });
     } else {
-      setValues({ ...values, [e.target.name]: e.target.value });
+      setValues({ ...values, [e.target.name]: e.target.value.trim() });
     }
   }
 
@@ -182,7 +185,7 @@ function Register() {
       repass: values.repass,
       iban: values.iban,
       balance: Number(values.balance),
-      phone: values.phone,
+      phoneNumber: values.phone,
       city: values.city,
       role: "user",
       address: {

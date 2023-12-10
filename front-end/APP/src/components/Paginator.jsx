@@ -1,6 +1,5 @@
 function Paginator({
-  // default
-  page,
+  page = 1,
   pages,
   size = 25,
   bgColor = "#ededed",
@@ -9,7 +8,7 @@ function Paginator({
   brRadius = 2,
   fontSize = 1.6,
   handlePage,
-  countOnPage = 4,
+  countOnPage,
 }) {
   const paginatorLine = {
     display: "flex",
@@ -18,10 +17,7 @@ function Paginator({
     gap: "0.5rem",
   };
   return (
-    <div
-      //   className={`${styles.pagesBlock}`}
-      style={paginatorLine}
-    >
+    <div style={paginatorLine}>
       {Array.from({ length: Math.ceil(pages / countOnPage) }, (_, i) => (
         <Page
           currentPage={page === i + 1}

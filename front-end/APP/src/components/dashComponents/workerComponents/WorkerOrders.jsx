@@ -20,6 +20,7 @@ function WorkerOrders() {
 
       async function getJobs() {
         const workerSequence = await get("/production/");
+        workerSequence.sort((a, b) => a.dateCreated - b.dateCreated);
 
         setMeta({ id: workerSequence.id });
 
@@ -60,12 +61,13 @@ function WorkerOrders() {
         <BoardHeader />
         <div className={styles.orders}>
           {workerList.length > 0 &&
-            workerList.map((order) => (
+            workerList.map((order, i) => (
               <OrderItem
                 product={order}
                 key={order.id}
                 onBtnHandler={onBtnHandler}
                 orderId={order.id}
+                orderIndex={i}
               />
             ))}
           {workerList.length === 0 && (

@@ -16,7 +16,7 @@ function EditContactInfo({ info, setInfo, base64 }) {
     lastName: info.lastName,
     iban: info?.iban,
     balance: info?.balance,
-    phone: info.phone,
+    phone: info.phoneNumber,
     city: info?.city,
     role: info.role,
     country: info.address?.country,

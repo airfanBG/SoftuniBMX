@@ -61,7 +61,6 @@ function UserInfo() {
   function editBtnHandler() {
     setEdit(true);
   }
-
   return (
     <>
       <h2 className={styles.dashHeading}>

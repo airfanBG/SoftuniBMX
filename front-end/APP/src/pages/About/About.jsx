@@ -2,9 +2,12 @@ import styles from "./About.module.css";
 
 import Navigation from "../../components/navigationsComponents/Navigation.jsx";
 import Footer from "../../components/Footer.jsx";
+import StarsRating from "../../components/Stars.jsx";
+import { useState } from "react";
 // import Form from "../../components/Form.jsx";
 
 function About() {
+  const [movieRating, setMovieRating] = useState(0);
   return (
     <div className={styles.compBody}>
       <Navigation />

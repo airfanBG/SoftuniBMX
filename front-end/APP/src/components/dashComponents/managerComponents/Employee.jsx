@@ -27,7 +27,7 @@ function Employee({ person, onNameClick }) {
         <h2 className={styles.heading} onClick={() => onNameClick(person)}>
           {person.firstName} {person.lastName}
         </h2>
-        {person.role !== "qControl" && (
+        {person.role !== "qControl" && person.role !== "manager" && (
           <div className={styles.infoBox}>
             <p className={`${styles.info}`}>
               <span>Department:</span>

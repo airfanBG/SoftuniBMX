@@ -19,6 +19,7 @@ export const environment = {
   // get_all_in_progress: "/inProgress/",
   get_all_in_progress: "/production/",
   in_progress: "/production/",
+  user_in_progress: "/production?ownerId=",
   GET_ALL_INTENDED: "/",
   indexPage: "/indexPage",
   frames: "/frames/",
@@ -39,4 +40,7 @@ export const environment = {
   reject_order: `/rejected_orders/`, // + id
   // TODO: Uncomment approved in orderActions
   //reject_order: `/api/manager/reject_order?orderId=`, // + id
+
+  quality_assurance: "/quality_assurance/",
+  post_qControl: `/api/employee_оrder/quality_assurance?orderId=`,
 };

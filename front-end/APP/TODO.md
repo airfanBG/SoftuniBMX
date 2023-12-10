@@ -13,7 +13,7 @@
 ## MANAGER
 
     [X] - New Orders
-    [ ] - Orders in production
+    [X] - Orders in production
     [ ] - Finished orders
     [ ] - Employees list
             [X] - employee info ( profile info, category, orders )
@@ -23,7 +23,7 @@
 
 ## CLIENT
 
-    [ ] - add orders in profile list
+    [X] - add orders in profile list
     [X] - after successful order remove cart icon from navbar
 
 ## LOGIN

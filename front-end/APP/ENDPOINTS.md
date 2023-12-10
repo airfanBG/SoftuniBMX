@@ -179,7 +179,7 @@ BASE_URL: "http://localhost:9000",
 }
 ```
 
-## CLient
+## Client
 
 #### Order by ID client model
 

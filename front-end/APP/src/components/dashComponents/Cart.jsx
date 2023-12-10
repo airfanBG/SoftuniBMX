@@ -4,19 +4,20 @@ import styles from "./Cart.module.css";
 
 import BoardHeader from "./BoardHeader.jsx";
 // import { UserContext } from "../UserProfile.jsx";
-import { clearOrderData, getOrderData } from "../../util/util.js";
+import { clearOrderData, getOrderData, getStockData } from "../../util/util.js";
 import {
   getOneFrame,
   getOnePart,
   getOneWheel,
 } from "../../bikeServices/service.js";
 import LoaderWheel from "../LoaderWheel.jsx";
-import { post, put } from "../../util/api.js";
+import { get, post, put } from "../../util/api.js";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/GlobalUserProvider.jsx";
+import { environment } from "../../environments/environment_dev.js";
 
 function Cart() {
-  const { user, setHasOrder } = useContext(UserContext);
+  const { user, setHasOrder, updateUser } = useContext(UserContext);
 
   const [loading, setLoading] = useState(false);
   const [frame, setFrame] = useState({});
@@ -30,14 +31,17 @@ function Cart() {
   const navigate = useNavigate();
 
   const order = getOrderData();
+  const defaultBike = getStockData();
+
+  // if (defaultBike) navigate("/profile/get-stock");
 
   useEffect(function () {
     const abortController = new AbortController();
     setLoading(true);
-    const { frame, wheel, parts } = order;
     if (!order) {
       return setLoading(false);
     }
+    const { frame, wheel, parts } = order;
 
     setHeadImg({
       ...headImg,
@@ -67,9 +71,9 @@ function Cart() {
     };
 
     //user balance after order
-    // const userReducedBalance =
-    //   user.balance -
-    //   (frame.salesPrice + wheel.salesPrice + parts.salesPrice) * 0.2;
+    const userReducedBalance =
+      user.balance -
+      (frame.salesPrice + wheel.salesPrice + parts.salesPrice) * 0.2 * select;
 
     const currentOrder = {
       frame,
@@ -83,7 +87,7 @@ function Cart() {
 
     if (
       user.balance <
-      (frame.salesPrice + wheel.salesPrice + parts.salesPrice) * 0.2
+      (frame.salesPrice + wheel.salesPrice + parts.salesPrice) * 0.2 * select
     ) {
       return setError({ message: "Not enough money!" });
     }
@@ -91,23 +95,27 @@ function Cart() {
     // TODO:
     // ONLY FOR DEV SERVER
     //DATA FOR UPDATE USER AFTER ORDER
-    // const userPayment = {
-    // ...user,
-    // balance: userReducedBalance,
-    // password: user.repass,
-    // };
+    const currentUser = await get(environment.info_client + user.id);
+    console.log(currentUser);
+    const userPayment = {
+      ...currentUser,
+      balance: userReducedBalance,
+      password: currentUser.repass,
+    };
+
+    console.log(userPayment);
 
     // IN PROD
     // const userPayment = { ...user, balance: userReducedBalance };
     setLoading(true);
     try {
       const orderResponse = await post("/orders/", currentOrder);
-      // const userAfterOrder = await put(`/users/${user.id}`, userPayment);   //TAKE MONEY FROM USER ACCOUNT
-      console.log(orderResponse);
+      const userAfterOrder = await put(`/users/${user.id}`, userPayment); //TAKE MONEY FROM USER ACCOUNT
+      console.log(userAfterOrder);
     } catch (err) {
       console.error(err);
     } finally {
-      // setUser({ ...user, balance: userReducedBalance });
+      updateUser({ ...user, balance: userReducedBalance });
       setLoading(false);
       navigate("/profile");
       clearOrderData();
@@ -196,9 +204,11 @@ function Cart() {
                       frame.salesPrice + wheel.salesPrice + parts.salesPrice
                     ) &&
                       (
-                        frame.salesPrice +
-                        wheel.salesPrice +
-                        parts.salesPrice
+                        (frame.salesPrice +
+                          wheel.salesPrice +
+                          parts.salesPrice) *
+                          select ||
+                        frame.salesPrice + wheel.salesPrice + parts.salesPrice
                       ).toFixed(2)}
                   </p>
                   <button
@@ -207,12 +217,12 @@ function Cart() {
                   >
                     Finish order
                   </button>
-                  <button
+                  {/* <button
                     className={`${styles.btn} ${styles.btnRed}`}
                     onClick={orderCancelHandler}
                   >
                     Cancel order
-                  </button>
+                  </button> */}
                   <p className={styles.warning}>{error.message}</p>
                 </div>
               </div>
