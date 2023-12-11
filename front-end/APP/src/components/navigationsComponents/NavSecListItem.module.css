@@ -1,0 +1,16 @@
+.secNavLink:link,
+.secNavLink:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--color-link-light);
+}
+
+.secNavLink:hover,
+.secNavLink:active {
+  color: var(--color-link-light-hover);
+}
+.secNavLink:global(.active) {
+  border-bottom: 1px solid var(--color-line);
+}

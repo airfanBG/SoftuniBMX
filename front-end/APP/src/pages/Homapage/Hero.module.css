@@ -1,0 +1,34 @@
+.container {
+  max-width: 130rem;
+  position: relative;
+}
+
+.hero {
+  width: 100%;
+  position: relative;
+  margin-top: 100px;
+}
+
+.hero-img {
+  width: 100%;
+}
+
+.hero-text {
+  width: 60rem;
+  position: absolute;
+  top: 50%;
+  left: 60%;
+  color: var(--color-link-light);
+  transform: translate(0%, -50%);
+}
+
+.hero-hd {
+  font-size: 4.4rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.hero-pf {
+  font-size: 2rem;
+  line-height: 1.6;
+}

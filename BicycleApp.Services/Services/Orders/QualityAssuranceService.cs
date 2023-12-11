@@ -12,6 +12,7 @@
     using BicicleApp.Common.Providers.Contracts;
     using BicycleApp.Services.Models.Order;
     using BicycleApp.Services.Contracts.Factory;
+    using BicycleApp.Services.Models.Order.OrderUser.Contracts;
 
     public class QualityAssuranceService : IQualityAssuranceService
     {
@@ -51,7 +52,11 @@
                                                    NameOfEmplоyeeProducedThePart = _stringManipulator.ReturnFullName(ope.Employee.FirstName, ope.Employee.LastName),
                                                    EmployeeId = ope.EmployeeId,
                                                    SerialNumber = ope.SerialNumber,
-                                                   IsProduced = ope.IsCompleted
+                                                   IsProduced = ope.IsCompleted,
+                                                   ElementProduceTimeInMinutes = ope.OrdersPartsEmployeesInfos.Where(opei => opei.OrderId == ope.OrderId 
+                                                                                                               && opei.PartId == ope.PartId 
+                                                                                                               && opei.UniqueKeyForSerialNumber == ope.UniqueKeyForSerialNumber)
+                                                                                                     .Sum(opeis => opeis.ProductionТime.Minutes)
                                                })
                                                .ToList()
                             })
@@ -85,31 +90,43 @@
         /// </summary>
         /// <param name="remanufacturingOrderPartDto"></param>
         /// <returns>Task<RemanufacturingPartEmployeeInfoDto?></returns>
-        public async Task<RemanufacturingPartEmployeeInfoDto?> RemanufacturingPart(RemanufacturingOrderPartDto remanufacturingOrderPartDto)
+        public async Task<ICollection<RemanufacturingPartEmployeeInfoDto>> RemanufacturingPart(IOrderProgretionDto orderProgretionDto)
         {
             try
             {
-                var partToManufacturing = await _db.OrdersPartsEmployees
-                                                   .Include(e => e.Employee)
-                                                   .Include(opei => opei.OrdersPartsEmployeesInfos)
-                                                   .FirstAsync(ope => ope.OrderId == remanufacturingOrderPartDto.OrderId 
-                                                                                           && ope.PartId == remanufacturingOrderPartDto.PartId);
+                var returnedParts = new List<RemanufacturingPartEmployeeInfoDto>();
 
-                partToManufacturing.StartDatetime = null;
-                partToManufacturing.EndDatetime = null;                 
-                var descriptionFromQualityControl = partToManufacturing.OrdersPartsEmployeesInfos
-                                                                       .First(o => o.OrderId == remanufacturingOrderPartDto.OrderId 
-                                                                                   && o.PartId == remanufacturingOrderPartDto.PartId);
-                descriptionFromQualityControl.DescriptionForWorker = _stringManipulator.GetTextFromProperty(remanufacturingOrderPartDto.Description);
-                partToManufacturing.IsCompleted = false;
+                foreach (var orderState in orderProgretionDto.OrderStates)
+                {
+                    if (!orderState.IsProduced)
+                    {
+                        var partToManufacturing = await _db.OrdersPartsEmployees
+                                                  .Include(e => e.Employee)
+                                                  .Include(opei => opei.OrdersPartsEmployeesInfos)
+                                                  .FirstAsync(ope => ope.OrderId == orderProgretionDto.OrderId
+                                                                                          && ope.PartId == orderState.PartId);
 
-                var employeeName = _stringManipulator.ReturnFullName(partToManufacturing.Employee.FirstName, partToManufacturing.Employee.LastName);
+                        partToManufacturing.StartDatetime = null;
+                        partToManufacturing.EndDatetime = null;
 
+                        var descriptionFromQualityControl = partToManufacturing.OrdersPartsEmployeesInfos
+                                                                           .LastOrDefault(o => o.OrderId == orderProgretionDto.OrderId
+                                                                                       && o.PartId == orderState.PartId);
+                        descriptionFromQualityControl.DescriptionForWorker = orderState.Description;
+                        partToManufacturing.IsCompleted = false;
+                        var employeeName = _stringManipulator.ReturnFullName(partToManufacturing.Employee.FirstName, partToManufacturing.Employee.LastName);
+
+                        _db.OrdersPartsEmployees.Update(partToManufacturing);
+
+                        var partToManufacturingView = _employeeFactory.CreateRemanufacturingOrderPart(employeeName, partToManufacturing.PartName, partToManufacturing.SerialNumber, orderState.Description);
+
+                        returnedParts.Add(partToManufacturingView);
+                    }
+
+                }
                 await _db.SaveChangesAsync();
 
-                var partToManufacturingView = _employeeFactory.CreateRemanufacturingOrderPart(employeeName, partToManufacturing.PartName, partToManufacturing.SerialNumber, partToManufacturing.Description);
-
-                return partToManufacturingView;
+                return returnedParts;
             }
             catch (Exception)
             {
