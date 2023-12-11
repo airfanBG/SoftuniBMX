@@ -35,7 +35,7 @@
 ### [`POST /api/manager/reject_order?orderId=3`](/ReadMeFiles/Manager/reject_order.md)
 ### [`GET /api/manager/finished_orders`](/ReadMeFiles/Manager/finished_orders.md)
 
-- SuplyManagerController дава възможността да се ползва функционалността на OrderManagerService. 
+- SuplyManagerController дава възможността да се ползва функционалността на SuplyManagerService. 
 
 ### [`GET /api/supplys_manager/deliveries`](/ReadMeFiles/SuplyManager/deliveries.md)
 ### [`GET /api/supplys_manager/supliers`](/ReadMeFiles/SuplyManager/supliers.md)
