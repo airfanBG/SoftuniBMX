@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { getElement, getOrder } from "../bikeServices/service.js";
-import { environment } from "../environments/environment_dev.js";
+import { environment } from "../environments/environment.js";
 import { del, post } from "../util/api.js";
 import { OrdersContext } from "../context/GlobalUserProvider.jsx";
 

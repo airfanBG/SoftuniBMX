@@ -1,4 +1,4 @@
-import { environment } from "../environments/environment_dev.js";
+import { environment } from "../environments/environment.js";
 import { get } from "../util/api.js";
 
 async function useEmployers() {

@@ -1,6 +1,6 @@
 import { get, post } from "./api.js";
 import { clearOrderData, clearUserData, setUserData } from "./util.js";
-import { environment } from "../environments/environment_dev.js";
+import { environment } from "../environments/environment.js";
 
 //TODO Change user object according to project requirements
 
