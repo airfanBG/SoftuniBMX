@@ -35,6 +35,7 @@
             await dbContext.BikesStandartModels.AddAsync(bikeModel);
 
             List<BikeModelPart> bikeModelParts = new List<BikeModelPart>();
+
             foreach (var id in bikeStandartTypeAddDto.Parts)
             {
                 Part? part = await dbContext.Parts.FirstOrDefaultAsync(p => p.Id == id);
