@@ -51,6 +51,66 @@ namespace BicicleApp.Api.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("supliers")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Supliers()
+        {
+
+            try
+            {
+
+                var result = await _supplyManagerService.AllSupliers();
+
+
+                if (result == null)
+                {
+                    // The model object is null, so return a 204 NoContent
+                    return StatusCode(204);
+                }
+
+                return StatusCode(200, result);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(500);
+            }
+        }
+
+        [HttpGet]
+        [Route("part_orders")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> PartOrders()
+        {
+
+            try
+            {
+
+                var result = await _supplyManagerService.AllPartOrders();
+
+
+                if (result == null)
+                {
+                    // The model object is null, so return a 204 NoContent
+                    return StatusCode(204);
+                }
+
+                return StatusCode(200, result);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(500);
+            }
+        }
+
         [HttpPost]
         [Route("create_delivery")]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -112,6 +172,40 @@ namespace BicicleApp.Api.Controllers
                 }
 
                 return StatusCode(400, createSuplierDto);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpPost]
+        [Route("create_part_order")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> CreatePartOrder([FromBody] CreatePartOrderDto createPartOrderDto)
+        {
+            if (createPartOrderDto == null)
+            {
+                return StatusCode(400, createPartOrderDto);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400, createPartOrderDto);
+            }
+
+            try
+            {
+                var result = await _supplyManagerService.CreatePartOrder(createPartOrderDto);
+
+                if (result)
+                {
+                    return StatusCode(201);
+                }
+
+                return StatusCode(400, createPartOrderDto);
             }
             catch (Exception)
             {
@@ -183,6 +277,38 @@ namespace BicicleApp.Api.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("get_part_order")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetPartOrder([FromQuery] int partOrderId)
+        {
+
+            if (partOrderId <= 0)
+            {
+                return StatusCode(400);
+            }
+
+            if (await _supplyManagerService.PartOrderExists(partOrderId) == false)
+            {
+                return StatusCode(400);
+            }
+
+            try
+            {
+                var model = await _supplyManagerService.PartOrderDetailsById(partOrderId);
+
+                return StatusCode(200, model);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(500);
+            }
+        }
+
         [HttpPost]
         [Route("delete_suplier")]
         [AllowAnonymous]
@@ -235,6 +361,37 @@ namespace BicicleApp.Api.Controllers
             try
             {
                 await _supplyManagerService.DeleteDeliveryById(deliveryId);
+
+                return StatusCode(200);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(500);
+            }
+        }
+
+        [HttpPost]
+        [Route("delete_part_order")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> DeletePartOrder([FromQuery] int partOrderId)
+        {
+            if (partOrderId <= 0)
+            {
+                return StatusCode(400);
+            }
+
+            if (await _supplyManagerService.PartOrderExists(partOrderId) == false)
+            {
+                return StatusCode(400);
+            }
+
+            try
+            {
+                await _supplyManagerService.DeletePartOrderById(partOrderId);
 
                 return StatusCode(200);
             }
@@ -317,6 +474,46 @@ namespace BicicleApp.Api.Controllers
                 }
 
                 return StatusCode(400, editSuplierDto);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpPut]
+        [Route("edit_part_order")]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> EditPartOrder([FromBody] EditPartOrderDto editPartOrderDto)
+        {
+
+            if (await _supplyManagerService.PartOrderExists(editPartOrderDto.Id) == false)
+            {
+                return StatusCode(400);
+            }
+
+            if (editPartOrderDto == null)
+            {
+                return StatusCode(400, editPartOrderDto);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400, editPartOrderDto);
+            }
+
+            try
+            {
+                var result = await _supplyManagerService.EditPartOrderById(editPartOrderDto);
+
+                if (result)
+                {
+                    return StatusCode(202);
+                }
+
+                return StatusCode(400, editPartOrderDto);
             }
             catch (Exception)
             {

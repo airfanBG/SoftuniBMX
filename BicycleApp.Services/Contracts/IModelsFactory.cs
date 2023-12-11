@@ -25,5 +25,7 @@
         Delivary CreateNewDelivery(CreateDelivedryDto createDelivedryDto);
 
         Suplier CreateNewSuplier(CreateSuplierDto createSuplierDto);
+
+        PartOrder CreateNewPartOrder(CreatePartOrderDto createPartOrderDto);
     }
 }

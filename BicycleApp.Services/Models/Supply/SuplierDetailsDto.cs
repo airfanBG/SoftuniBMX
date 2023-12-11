@@ -1,30 +1,17 @@
-﻿using BicycleApp.Services.Models.Order.OrderManager;
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
-
-using static BicycleApp.Common.EntityValidationConstants.Suplier;
 
 namespace BicycleApp.Services.Models.Supply
 {
-    public class SuplierDetailsDto
+    public class SuplierDetailsDto : SuplierInfoDto
     {
-        [Key]
-        public int Id { get; set; }
-
-        public string Name { get; set; } = null!;
-
+        [Required]
         public string VATNumber { get; set; } = null!;
 
+        [Required]
         public string Address { get; set; } = null!;
 
-        public string? PhoneNumeber { get; set; }
-
-        public string Email { get; set; } = null!;
-
-        public string ContactName { get; set; } = null!;
-        public string CategoryName { get; set; } = null!;
-
+        [Required]
         public ICollection<PartInStockInfoDto> OrderParts { get; set; } = new List<PartInStockInfoDto>();
     }
 }
