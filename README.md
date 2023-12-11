@@ -49,8 +49,9 @@
 ### [`POST /api/supplys_manager/delete_suplier`](/ReadMeFiles/SuplyManager/delete_suplier.md)
 ### [`POST /api/supplys_manager/delete_delivery`](/ReadMeFiles/SuplyManager/delete_delivery.md)
 ### [`POST /api/supplys_manager/delete_part_order`](/ReadMeFiles/SuplyManager/delete_part_order.md)
-### [`POST /api/supplys_manager/edit_delivery`](/ReadMeFiles/SuplyManager/edit_delivery.md)
-### [`GET /api/supplys_manager/edit_suplier`](/ReadMeFiles/SuplyManager/edit_suplier.md)
+### [`PUT /api/supplys_manager/edit_delivery`](/ReadMeFiles/SuplyManager/edit_delivery.md)
+### [`PUT /api/supplys_manager/edit_suplier`](/ReadMeFiles/SuplyManager/edit_suplier.md)
+### [`PUT /api/supplys_manager/edit_part_order`](/ReadMeFiles/SuplyManager/edit_part_order.md)
 
 ## Errors
 
