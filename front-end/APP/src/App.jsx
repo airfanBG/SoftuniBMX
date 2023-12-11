@@ -2,7 +2,8 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Suspense, lazy } from "react";
 
 import Auth from "./pages/Auth.jsx";
-import { GlobalUser, OrdersManager } from "./context/GlobalUserProvider.jsx";
+// import { GlobalUser, OrdersManager } from "./context/GlobalUserProvider.jsx";
+import { GlobalUser } from "./context/GlobalUserProvider.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import ProtectedRoute from "./pages/ProtectedRoute.jsx";
 import LimitedRoute from "./pages/LimitedRoute.jsx";
@@ -46,81 +47,81 @@ function App() {
   return (
     <AuthProvider>
       <GlobalUser>
-        <OrdersManager>
-          <ErrorProvider>
-            <BrowserRouter>
-              <Suspense fallback={<LoaderWheel />}>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="about" element={<About />} />
+        {/* <OrdersManager> */}
+        <ErrorProvider>
+          <BrowserRouter>
+            <Suspense fallback={<LoaderWheel />}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="about" element={<About />} />
 
+                <Route
+                  path="profile"
+                  element={
+                    <ProtectedRoute>
+                      <UserProfile />
+                    </ProtectedRoute>
+                  }
+                >
+                  <Route index element={<Navigate replace to="info" />} />
+                  <Route path="info" element={<UserInfo />} />
+                  <Route path={"cart"} element={<Cart />} />
+                  <Route path={"user-ready"} element={<Cart />} />
                   <Route
-                    path="profile"
-                    element={
-                      <ProtectedRoute>
-                        <UserProfile />
-                      </ProtectedRoute>
-                    }
-                  >
-                    <Route index element={<Navigate replace to="info" />} />
-                    <Route path="info" element={<UserInfo />} />
-                    <Route path={"cart"} element={<Cart />} />
-                    <Route path={"user-ready"} element={<Cart />} />
-                    <Route
-                      path={"user-in-progress"}
-                      element={<UserTrackOrder />}
-                    />
-                    <Route path={"user-archive"} element={<Cart />} />
-                    <Route
-                      path={"get-stock"}
-                      element={<UserHomeScreenSelection />}
-                    />
-                    <Route path="worker-orders" element={<WorkerOrders />} />
-                    <Route path={"finished"} element={<WorkerFinished />} />
-                    <Route path={"managerOrders"} element={<ManagerOrders />} />
-                    <Route
-                      path={"manager-in-progress"}
-                      element={<InProgress />}
-                    />
-                    <Route path={"manager-ready"} />
-                    <Route path={"manager-finished"} />
-                    <Route path={"employers"} element={<EmployersList />} />
-                    <Route path={"statistic"} />
-                    <Route path={"add-member"} element={<AddMember />} />
-                    <Route
-                      path={"q-control-orders"}
-                      element={<QControlOrders />}
-                    />
-                  </Route>
-
+                    path={"user-in-progress"}
+                    element={<UserTrackOrder />}
+                  />
+                  <Route path={"user-archive"} element={<Cart />} />
                   <Route
-                    path="app"
-                    element={
-                      <LimitedRoute>
-                        <AppLayout />
-                      </LimitedRoute>
-                    }
-                  >
-                    <Route index element={<Navigate replace to="create" />} />
-                    <Route path={"create"} element={<CreateBike />} />
-                  </Route>
+                    path={"get-stock"}
+                    element={<UserHomeScreenSelection />}
+                  />
+                  <Route path="worker-orders" element={<WorkerOrders />} />
+                  <Route path={"finished"} element={<WorkerFinished />} />
+                  <Route path={"managerOrders"} element={<ManagerOrders />} />
+                  <Route
+                    path={"manager-in-progress"}
+                    element={<InProgress />}
+                  />
+                  <Route path={"manager-ready"} />
+                  <Route path={"manager-finished"} />
+                  <Route path={"employers"} element={<EmployersList />} />
+                  <Route path={"statistic"} />
+                  <Route path={"add-member"} element={<AddMember />} />
+                  <Route
+                    path={"q-control-orders"}
+                    element={<QControlOrders />}
+                  />
+                </Route>
 
-                  <Route path="auth" element={<Auth />}>
-                    <Route index element={<Navigate replace to="login" />} />
-                    <Route path="login" element={<Login />} />
-                    <Route path="register" element={<Register />} />
-                    <Route
-                      path="forgotten-password"
-                      element={<ForgottenPassword />}
-                    />
-                  </Route>
+                <Route
+                  path="app"
+                  element={
+                    <LimitedRoute>
+                      <AppLayout />
+                    </LimitedRoute>
+                  }
+                >
+                  <Route index element={<Navigate replace to="create" />} />
+                  <Route path={"create"} element={<CreateBike />} />
+                </Route>
 
-                  <Route path="*" element={<PageNotFound />} />
-                </Routes>
-              </Suspense>
-            </BrowserRouter>
-          </ErrorProvider>
-        </OrdersManager>
+                <Route path="auth" element={<Auth />}>
+                  <Route index element={<Navigate replace to="login" />} />
+                  <Route path="login" element={<Login />} />
+                  <Route path="register" element={<Register />} />
+                  <Route
+                    path="forgotten-password"
+                    element={<ForgottenPassword />}
+                  />
+                </Route>
+
+                <Route path="*" element={<PageNotFound />} />
+              </Routes>
+            </Suspense>
+          </BrowserRouter>
+        </ErrorProvider>
+        {/* </OrdersManager> */}
       </GlobalUser>
     </AuthProvider>
   );
