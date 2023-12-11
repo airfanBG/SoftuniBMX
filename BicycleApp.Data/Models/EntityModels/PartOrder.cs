@@ -18,7 +18,7 @@
 
         [Required]
         [Comment("Quantity delivered of the current part")]
-        public int QuantityDelivered { get; set; }
+        public int Quantity { get; set; }
 
         [Comment("Additional info for the current order")]
         public string? Note { get; set; } 

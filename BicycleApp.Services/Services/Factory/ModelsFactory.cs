@@ -1,15 +1,13 @@
 ﻿namespace BicycleApp.Services.Services.Factory
 {
-    using System;
-    using System.Text;
-
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.Models;
     using BicycleApp.Services.Models.IdentityModels;
-    using BicycleApp.Services.Models.Order.OrderUser.Contracts;
     using BicycleApp.Services.Models.Supply;
+    using System;
+    using System.Text;
 
     public class ModelsFactory : IModelsFactory
     {
@@ -106,7 +104,7 @@
                 SuplierId = createDelivedryDto.SuplierId,
                 DateDelivered = DateTime.UtcNow,
                 DateDeleted = null,
-                DateUpdated = null,
+                DateUpdated = DateTime.UtcNow,
                 IsDeleted=false
             };
         }
@@ -149,8 +147,9 @@
             return new Suplier()
             {
                 Name= createSuplierDto.Name,
+                VATNumber= createSuplierDto.VATNumber,
                 DateCreated = DateTime.UtcNow,
-                DateUpdated = null,
+                DateUpdated = DateTime.UtcNow,
                 DateDeleted = null,
                 IsDeleted = false,
                 CategoryName = createSuplierDto.CategoryName,
@@ -190,6 +189,21 @@
                 OEMNumber = partAddDto.OEMNumber,
                 Quantity = partAddDto.Quantity,
                 Type = partAddDto.Type
+            };
+        }
+
+        public PartOrder CreateNewPartOrder(CreatePartOrderDto partOrderDto)
+        {
+            return new PartOrder()
+            {
+                PartId = partOrderDto.PartId,
+                Quantity = partOrderDto.Quantity,
+                SuplierId = partOrderDto.SuplierId,
+                Note = partOrderDto.Note,
+                DateCreated = DateTime.UtcNow,
+                DateDeleted = null,
+                DateUpdated = DateTime.UtcNow,
+                IsDeleted = false,
             };
         }
     }
