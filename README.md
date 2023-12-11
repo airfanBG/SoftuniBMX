@@ -37,20 +37,20 @@
 
 - SuplyManagerController дава възможността да се ползва функционалността на OrderManagerService. 
 
-### [`GET /api/supplys_manager/deliveries`](/ReadMeFiles/Manager/deliveries.md)
-### [`GET /api/supplys_manager/supliers`](/ReadMeFiles/Manager/supliers.md)
-### [`GET /api/supplys_manager/part_orders`](/ReadMeFiles/Manager/part_orders.md)
-### [`POST /api/supplys_manager/create_delivery`](/ReadMeFiles/Manager/create_delivery.md)
-### [`POST /api/supplys_manager/create_suplier`](/ReadMeFiles/Manager/create_suplier.md)
-### [`POST /api/supplys_manager/create_part_order`](/ReadMeFiles/Manager/create_part_order.md)
-### [`GET /api/supplys_manager/get_suplier`](/ReadMeFiles/Manager/get_suplier.md)
-### [`GET /api/supplys_manager/get_delivery`](/ReadMeFiles/Manager/get_delivery.md)
-### [`GET /api/supplys_manager/get_part_order`](/ReadMeFiles/Manager/get_part_order.md)
-### [`POST /api/supplys_manager/delete_suplier`](/ReadMeFiles/Manager/delete_suplier.md)
-### [`POST /api/supplys_manager/delete_delivery`](/ReadMeFiles/Manager/delete_delivery.md)
-### [`POST /api/supplys_manager/delete_part_order`](/ReadMeFiles/Manager/delete_part_order.md)
-### [`POST /api/supplys_manager/edit_delivery`](/ReadMeFiles/Manager/edit_delivery.md)
-### [`GET /api/supplys_manager/edit_suplier`](/ReadMeFiles/Manager/edit_suplier.md)
+### [`GET /api/supplys_manager/deliveries`](/ReadMeFiles/SuplyManager/deliveries.md)
+### [`GET /api/supplys_manager/supliers`](/ReadMeFiles/SuplyManager/supliers.md)
+### [`GET /api/supplys_manager/part_orders`](/ReadMeFiles/SuplyManager/part_orders.md)
+### [`POST /api/supplys_manager/create_delivery`](/ReadMeFiles/SuplyManager/create_delivery.md)
+### [`POST /api/supplys_manager/create_suplier`](/ReadMeFiles/SuplyManager/create_suplier.md)
+### [`POST /api/supplys_manager/create_part_order`](/ReadMeFiles/SuplyManager/create_part_order.md)
+### [`GET /api/supplys_manager/get_suplier`](/ReadMeFiles/SuplyManager/get_suplier.md)
+### [`GET /api/supplys_manager/get_delivery`](/ReadMeFiles/SuplyManager/get_delivery.md)
+### [`GET /api/supplys_manager/get_part_order`](/ReadMeFiles/SuplyManager/get_part_order.md)
+### [`POST /api/supplys_manager/delete_suplier`](/ReadMeFiles/SuplyManager/delete_suplier.md)
+### [`POST /api/supplys_manager/delete_delivery`](/ReadMeFiles/SuplyManager/delete_delivery.md)
+### [`POST /api/supplys_manager/delete_part_order`](/ReadMeFiles/SuplyManager/delete_part_order.md)
+### [`POST /api/supplys_manager/edit_delivery`](/ReadMeFiles/SuplyManager/edit_delivery.md)
+### [`GET /api/supplys_manager/edit_suplier`](/ReadMeFiles/SuplyManager/edit_suplier.md)
 
 ## Errors
 
