@@ -18,5 +18,7 @@
         Task<bool> UpdateClientBankInfoAsync(ClientBankDto clientBankDto);
 
         Task<bool> ChangePassword(ClientLoginDto clientLoginDto);
+
+        Task<bool> ResetPasswordToDefault(string email);
     }
 }

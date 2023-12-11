@@ -1,0 +1,18 @@
+.nav {
+  background-color: var(--color-hd);
+  width: fit-content;
+  min-width: 60rem;
+  padding: 0.8rem 2rem;
+  margin: 1rem 0 2rem;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.lists {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2.4rem;
+  list-style: none;
+}

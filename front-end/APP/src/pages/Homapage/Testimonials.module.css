@@ -1,0 +1,29 @@
+.container {
+  max-width: 130rem;
+  position: relative;
+}
+
+.testimonials {
+  display: flex;
+  justify-content: center;
+}
+
+.testimonials-content {
+  text-align: center;
+  padding: 10rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.testimonials-hd {
+  font-size: 3.6rem;
+  color: var(--color-main-dark);
+  margin-bottom: 3rem;
+}
+
+.testimonials-pf {
+  font-size: 2rem;
+  color: var(--color-main-dark);
+}

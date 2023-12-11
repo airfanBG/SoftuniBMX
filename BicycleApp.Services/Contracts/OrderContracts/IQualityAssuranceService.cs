@@ -2,11 +2,12 @@
 {
     using BicycleApp.Services.Models.Order;
     using BicycleApp.Services.Models.Order.OrderUser;
+    using BicycleApp.Services.Models.Order.OrderUser.Contracts;
 
     public interface IQualityAssuranceService
     {
         Task<ICollection<OrderProgretionDto>> GetAllReadyOrder();
         Task<bool> OrderPassQualityAssurance(int orderId);
-        Task<RemanufacturingPartEmployeeInfoDto?> RemanufacturingPart(RemanufacturingOrderPartDto remanufacturingOrderPartDto);
+        Task<ICollection<RemanufacturingPartEmployeeInfoDto>> RemanufacturingPart(IOrderProgretionDto orderProgretionDto);
     }
 }

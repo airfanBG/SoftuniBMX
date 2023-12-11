@@ -14,7 +14,7 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.IdentityModel.Tokens;
-    using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
+    using static BicycleApp.Common.UserConstants;
 
     public class ClientService : IClientService
     {
@@ -230,28 +230,6 @@
 
         }
 
-        /// <summary>
-        /// Client confirm the email
-        /// </summary>
-        /// <param name="clientId"></param>
-        /// <param name="token"></param>
-        /// <returns>Task</returns>
-        /// <exception cref="Exception"></exception>
-        public async Task ConfirmEmail(string clientId, string code)
-        {
-            try
-            {
-                var user = await dbContext.Clients.FirstAsync(u => u.Id == clientId);
-                code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
-
-                await userManager.ConfirmEmailAsync(user, code);
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-            
-        }
 
         /// <summary>
         /// This methos creates a Jwt token
@@ -418,6 +396,37 @@
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Reset forrgoten password.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>Task<bool></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public async Task<bool> ResetPasswordToDefault(string email)
+        {
+            try
+            {
+                var client = await dbContext.Clients.FirstAsync(c => c.Email == email);
+                //var roles = await userManager.GetRolesAsync(client);
+                //string roleName = roles.First(r => r == CLIENT);
+
+                var result = await emailSender.ResetUserPasswordWhenForrgotenAsync(client.Id, CLIENT);
+
+                if (result)
+                {
+                    return true;
+                }
+            }
+            catch (ArgumentNullException)
+            {
+                throw new ArgumentNullException();
+            }
+            catch(Exception)
+            {
+            }
+            return false;
         }
     }
 }
