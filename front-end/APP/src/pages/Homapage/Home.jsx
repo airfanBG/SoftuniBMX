@@ -23,6 +23,7 @@ function Home() {
         setLoading(true);
         try {
           const data = await get(environment.indexPage);
+          console.log(data);
 
           // const brakeHeapRelation = [...data.defaultBikes];
           // const currentTop = brakeHeapRelation
