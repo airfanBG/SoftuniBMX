@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BicycleApp.Services.Models.Order.OrderManager;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
@@ -22,5 +23,8 @@ namespace BicycleApp.Services.Models.Supply
         public string Email { get; set; } = null!;
 
         public string ContactName { get; set; } = null!;
+        public string CategoryName { get; set; } = null!;
+
+        public ICollection<PartInStockInfoDto> OrderParts { get; set; } = new List<PartInStockInfoDto>();
     }
 }

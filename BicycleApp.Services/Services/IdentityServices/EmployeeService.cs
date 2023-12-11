@@ -20,7 +20,7 @@
     using System.Security.Claims;
 
     using static BicycleApp.Common.ApplicationGlobalConstants;
-    using static BicycleApp.Common.EntityValidationConstants;
+    using static BicycleApp.Common.UserConstants;
 
     public class EmployeeService : IEmployeeService
     {
@@ -29,14 +29,16 @@
         private readonly BicycleAppDbContext dbContext;
         private readonly IConfiguration configuration;
         private readonly IModelsFactory modelFactory;
+        private readonly IEmailSender emailSender;
 
-        public EmployeeService(UserManager<Employee> userManager, SignInManager<Employee> signInManager, BicycleAppDbContext dbContext, IConfiguration configuration, IModelsFactory modelFactory)
+        public EmployeeService(UserManager<Employee> userManager, SignInManager<Employee> signInManager, BicycleAppDbContext dbContext, IConfiguration configuration, IModelsFactory modelFactory, IEmailSender emailSender)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.dbContext = dbContext;
             this.configuration = configuration;
             this.modelFactory = modelFactory;
+            this.emailSender = emailSender;
         }
 
         /// <summary>
@@ -198,6 +200,36 @@
                 // Failed to change password
                 return false;
             }
+        }
+        /// <summary>
+        /// Reset forrgoten password.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>Task<bool></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public async Task<bool> ResetPasswordToDefault(string email)
+        {
+            try
+            {
+                var employee = await dbContext.Employees.FirstAsync(c => c.Email == email);
+                //var roles = await userManager.GetRolesAsync(client);
+                //string roleName = roles.First(r => r == EMPLOYEE);
+
+                var result = await emailSender.ResetUserPasswordWhenForrgotenAsync(employee.Id, EMPLOYEE);
+
+                if (result)
+                {
+                    return true;
+                }
+            }
+            catch (ArgumentNullException)
+            {
+                throw new ArgumentNullException();
+            }
+            catch (Exception)
+            {
+            }
+            return false;
         }
 
         /// <summary>

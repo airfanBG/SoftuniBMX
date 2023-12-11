@@ -1,0 +1,73 @@
+.orderBlock {
+  align-self: center;
+  width: 80%;
+  border: 1px solid var(--color-border);
+  border-radius: 0.3rem;
+  margin-bottom: 4rem;
+}
+
+.orderServiceInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.serviceInfo {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--color-main-dark);
+}
+
+.label {
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: var(--color-hd);
+  margin-right: 0.5rem;
+}
+
+.product {
+  width: 90%;
+  font-size: 1.8rem;
+  display: flex;
+  padding: 0.3rem 1rem;
+}
+.container {
+  display: flex;
+  padding: 0.5rem 1rem;
+}
+.container:nth-of-type(even) {
+  background-color: var(--button-font-color);
+}
+
+.title {
+  width: 10%;
+  font-size: 1.8rem;
+  font-weight: 500;
+  border-right: 1px solid var(--color-border);
+}
+.element {
+  width: 28%;
+  position: relative;
+}
+.element:last-child {
+  width: 15%;
+}
+
+span.icon {
+  color: green;
+  font-size: 2.4rem;
+  font-weight: 700;
+  position: absolute;
+  top: -0.8rem;
+  left: 5.6rem;
+}
+span.ionIcon {
+  color: rgb(246, 152, 0);
+  font-size: 2.4rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-52%, -46%);
+}

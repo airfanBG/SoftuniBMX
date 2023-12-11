@@ -1,0 +1,121 @@
+.wrapper {
+  width: 1300px;
+  padding: 2rem 0;
+  position: relative;
+}
+
+.dashHeading {
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  color: var(--color-secondary-hd);
+  margin: 1rem 0;
+}
+
+.board {
+  width: 100%;
+  min-height: 100px;
+  border: 1px solid var(--color-border);
+  padding: 1rem;
+  position: relative;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.boardHeader {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 2rem 1rem;
+  border-bottom: 2px solid var(--color-line);
+  position: relative;
+  height: 5rem;
+}
+
+.boardHeader span {
+  font-size: 1.8rem;
+}
+.boardHeader h3 {
+  font-size: 2rem;
+  color: var(--color-main-dark);
+  margin-bottom: 2px;
+}
+
+.totalPrice {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.1rem 4rem 0rem;
+  margin-left: auto;
+  color: var(--color-main-dark);
+  font-size: 2rem;
+  font-weight: 500;
+  border: 1px solid var(--color-main-dark);
+  border-radius: 0.3rem;
+}
+.priceNumbers {
+  font-weight: 300;
+}
+
+.dropdownWrapper {
+  width: 100%;
+  min-height: 75rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 3rem;
+  position: relative;
+}
+
+.framesBlock {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* gap: 2rem; */
+  padding: 0 1rem 2rem;
+  margin-bottom: 2rem;
+  /* border-right: 1px solid var(--color-border); */
+}
+.heading {
+  margin-right: auto;
+  font-size: 1.6rem;
+  font-weight: 300;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-hd);
+  padding: 0 1rem 0.2rem 0;
+  margin-bottom: 2rem;
+}
+
+.selection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: space-between; */
+  gap: 2rem;
+}
+
+.selectionImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1/1;
+  margin-top: 2rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.selectionImg img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.questionMark {
+  text-align: center;
+  font-size: 20.5rem;
+  font-weight: 700;
+  color: var(--color-link-light-hover);
+  opacity: 0.15;
+  filter: drop-shadow(1px 2px 3px var(--color-main-dark));
+}

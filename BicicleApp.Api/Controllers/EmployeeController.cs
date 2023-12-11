@@ -183,5 +183,21 @@
                 return StatusCode(500);
             }
         }
+
+        [HttpPost]
+        [Route("reset")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> ResetPassword([FromQuery] string email)
+        {
+            var result = await employeeService.ResetPasswordToDefault(email);
+
+            if (result)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
     }
 }

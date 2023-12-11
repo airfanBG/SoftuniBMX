@@ -1,0 +1,92 @@
+.dashHeading {
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  color: var(--color-secondary-hd);
+  margin: 1rem 0;
+}
+
+.board {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  padding: 1rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: #fff;
+}
+
+.result {
+  width: 100%;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  column-gap: 2rem;
+  overflow: hidden;
+}
+.imageBox {
+  z-index: 1;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem 2rem;
+  z-index: 1;
+}
+.imgBG {
+  position: absolute;
+  top: -383px;
+  right: -327px;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+iconBox {
+}
+
+.heading {
+  width: fit-content;
+  font-size: 2.2rem;
+  color: var(--color-main-dark);
+  border-bottom: 1px solid var(--color-line);
+}
+.description {
+  background-color: #fff;
+  height: 100%;
+  padding: 1rem;
+  font-size: 1.8rem;
+  color: var(--color-main-dark);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  opacity: 0.7;
+}
+.price {
+  font-size: 3.4rem;
+  align-self: flex-end;
+  margin-top: auto;
+  border-bottom: 2px solid var(--color-line);
+}
+.btn {
+  background-color: var(--button-agree-hover);
+
+  align-self: flex-end;
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  color: var(--color-link-light);
+  padding: 0.6rem 4rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  transition: all 0.2s ease-in;
+}
+
+.btn:hover {
+  background-color: var(--qControl-pass);
+}

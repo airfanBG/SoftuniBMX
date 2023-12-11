@@ -1,0 +1,10 @@
+select.select {
+  width: 100%;
+  padding: 0.3rem 1.2rem;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  border: 1px solid #caced1;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  outline: 0;
+}

@@ -1,0 +1,127 @@
+.order {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--color-main-dark);
+  padding: 1.5rem;
+  position: relative;
+  border: 1px solid var(--color-main-dark);
+  border-radius: 0.3rem;
+  overflow: hidden;
+  z-index: 1;
+  margin-top: 4rem;
+}
+
+.headerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-weight: 500;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.catHeader {
+  width: fit-content;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.brand {
+  text-transform: uppercase;
+  margin-top: 1rem;
+  width: 100%;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--color-main-dark);
+  /* border-bottom: 1px solid var(--color-border); */
+}
+
+.model {
+  font-size: 1.8rem;
+  color: var(--color-main-dark);
+}
+
+.model span {
+  font-size: 1.4rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: var(--color-hd);
+  margin-right: 2rem;
+}
+
+.header .headerSpan {
+  margin-right: 0;
+}
+.partInfo {
+  padding: 1rem 0;
+}
+.type {
+  font-size: 2rem;
+  color: var(--color-hd);
+}
+
+.part {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  gap: 2rem;
+  font-size: 1.8rem;
+}
+.label {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  color: var(--color-hd);
+  margin-right: 0.5rem;
+}
+.textContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+.textarea {
+  width: 100%;
+  font-size: 1.6rem;
+  line-height: normal;
+  padding: 0.5rem;
+  border: 1px solid var(--color-border);
+}
+.checkbox {
+  align-self: flex-start;
+  width: 25px;
+  height: 25px;
+}
+.infoBlock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.qControlInfo {
+  font-size: 1.8rem;
+  color: var(--color-hd);
+}
+.btn {
+  width: fit-content;
+  padding: 0.3rem 1rem;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  color: var(--color-link-light);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  z-index: 1;
+  margin-left: auto;
+}
+
+.final {
+  margin-top: 1rem;
+  text-align: right;
+  background-color: var(--color-main-dark);
+}

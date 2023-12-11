@@ -1,8 +1,9 @@
 ﻿namespace BicycleApp.Services.Models.Supply
 {
-    public class SupplierInfoDto
+    public class SuplierInfoDto
     {
-        public string SupplierName { get; set; } = null!;
+        public int Id { get; set; }
+        public string Name { get; set; } = null!;
 
         public string PartCategoryName { get; set; } = null!;
 
