@@ -6,29 +6,19 @@ namespace BicycleApp.Services.Contracts
     {
         Task<bool> DeliveryExists(int deliveryId);
         Task<bool> SuplierExists(int suplierId);
-        Task<DeliveryQueryDto> AllDeliveries(//by client
-                            string category_suplier = null,
-                            string searchTerm_client = null,
-                            DeliveriesSorting sorting = DeliveriesSorting.Newest,
-                            int currentPage = 1,
-                            int deliveriesPerPage = 1);
-        Task<SupplierInfoDto> AllSuppliers();
+        Task<DeliveryQueryDto> AllDeliveries(int currPage);
+        Task<ICollection<SuplierInfoDto>> AllSupliers();
+        Task<bool> CreateSuplier(CreateSuplierDto createSuplierDto);
+        Task<bool> CreateDelivedry(CreateDelivedryDto createDelivedryDto);
+        Task<DeliveryDetailsDto> DeliveryDetailsById(int deliveryId);
+        Task<SuplierDetailsDto> SuplierDetailsById(int suplierId);
+        Task<bool> EditSuplierById(EditSuplierDto editSuplierDto);
 
-        Task<DeliveryDetailsDto> DeliveryDetails(int deliveryId);
+        Task<bool> EditDeliveryById(EditDelivedryDto editeDelivedryDto);
 
-        Task<SuplierDetailsDto> SuplierDetails(int suplierId);
+        Task DeleteSuplierById(int suplierId);
 
-        Task CreateSuplier(CreateSuplierDto createSuplierDto);
-
-        Task CreateDelivedry(CreateDelivedryDto createDelivedryDto);
-
-        Task EditSuplier(int suplierId, CreateSuplierDto createSuplierDto);
-
-        Task EditDelivedry(int vehicleId, CreateDelivedryDto createDelivedryDto);
-
-        Task DeleteSuplier(int suplierId);
-
-        Task DeleteDelivedry(int deliveryId);
+        Task DeleteDeliveryById(int deliveryId);
 
         Task UpdateSuplierPartsInStock(int suplierId, int[] suppliedPartsOemNums);
     }

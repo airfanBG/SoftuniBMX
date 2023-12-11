@@ -6,10 +6,24 @@
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;
+    using BicycleApp.Services.Models;
     using BicycleApp.Services.Models.IdentityModels;
+    using BicycleApp.Services.Models.Order.OrderUser.Contracts;
+    using BicycleApp.Services.Models.Supply;
 
     public class ModelsFactory : IModelsFactory
     {
+        public BikeStandartModel CreateNewBikeStandartModel(BikeStandartTypeAddDto bikeStandartTypeAddDto)
+        {
+            return new BikeStandartModel()
+            {
+                ModelName = bikeStandartTypeAddDto.ModelName,
+                Description = bikeStandartTypeAddDto.Description,
+                ImageUrl = bikeStandartTypeAddDto.ImageUrl,
+                Price = bikeStandartTypeAddDto.Price
+            };
+        }
+
         public Client CreateNewClientModel(ClientRegisterDto clientRegisterDto)
         {
             //Transform the address dto in to a string
@@ -69,6 +83,34 @@
             };
         }
 
+        public Comment CreateNewComment(CommentAddDto commentAddDto)
+        {
+            return new Comment()
+            {
+                ClientId = commentAddDto.ClientId,
+                PartId = commentAddDto.PartId,
+                DateCreated = DateTime.UtcNow,
+                Description = commentAddDto.Description,
+                Title = commentAddDto.Title,
+                DateUpdated = null
+            };
+        }
+
+        public Delivary CreateNewDelivery(CreateDelivedryDto createDelivedryDto)
+        {
+            return new Delivary()
+            {
+                PartId = createDelivedryDto.PartId,
+                Note = createDelivedryDto.Note,
+                QuantityDelivered = createDelivedryDto.QuantityDelivered,
+                SuplierId = createDelivedryDto.SuplierId,
+                DateDelivered = DateTime.UtcNow,
+                DateDeleted = null,
+                DateUpdated = null,
+                IsDeleted=false
+            };
+        }
+
         public Department CreateNewDepartment(string departmentName)
         {
             return new Department()
@@ -102,6 +144,23 @@
             };
         }
 
+        public Suplier CreateNewSuplier(CreateSuplierDto createSuplierDto)
+        {
+            return new Suplier()
+            {
+                Name= createSuplierDto.Name,
+                DateCreated = DateTime.UtcNow,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false,
+                CategoryName = createSuplierDto.CategoryName,
+                Address = createSuplierDto.Address,
+                ContactName = createSuplierDto.ContactName,
+                Email = createSuplierDto.Email,
+                PhoneNumeber = createSuplierDto.PhoneNumeber
+            };
+        }
+
         public Town CreateNewTown(string townName)
         {
             return new Town()
@@ -111,6 +170,26 @@
                 DateUpdated = null,
                 DateDeleted = null,
                 IsDeleted = false
+            };
+        }
+
+        public Part CreatePart(PartAddDto partAddDto)
+        {
+            return new Part()
+            {
+                Name = partAddDto.Name,
+                Description = partAddDto.Description,
+                VATCategoryId = partAddDto.VATCategoryId,
+                CategoryId = partAddDto.CategoryId,
+                SalePrice = partAddDto.SalePrice,
+                DateCreated = DateTime.UtcNow,
+                DateDeleted = null,
+                DateUpdated = null,
+                IsDeleted = false,
+                Intend = partAddDto.Intend,
+                OEMNumber = partAddDto.OEMNumber,
+                Quantity = partAddDto.Quantity,
+                Type = partAddDto.Type
             };
         }
     }

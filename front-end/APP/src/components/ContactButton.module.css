@@ -1,0 +1,12 @@
+.modal {
+  position: fixed;
+  top: 10.3%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  z-index: 1040;
+  width: 100%;
+  height: 100vh;
+  background-color: #888b935b;
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+}

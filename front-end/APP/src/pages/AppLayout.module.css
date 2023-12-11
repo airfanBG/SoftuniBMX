@@ -1,0 +1,11 @@
+.app-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.spacer {
+  height: 9rem;
+}

@@ -7,7 +7,7 @@
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
-    [Route("api/employeeOrder")]
+    [Route("api/employee_оrder")]
     [ApiController]
     public class EmployeeOrderController : ControllerBase
     {
@@ -120,7 +120,7 @@
         }
 
         [HttpPost]
-        [Route("quality_assurance_pass")]
+        [Route("quality_assurance")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> PassedQualityAssuranceOrder([FromQuery] int orderId)
@@ -135,13 +135,13 @@
             return BadRequest();
         }
 
-        [HttpPut]
-        [Route("quality_assurance")]
+        [HttpPost]
+        [Route("quality_assurance_return")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<RemanufacturingPartEmployeeInfoDto>> PassedQualityAssurancrder([FromBody] RemanufacturingOrderPartDto remanufacturingOrderPartDto)
+        public async Task<ActionResult<ICollection<RemanufacturingPartEmployeeInfoDto>>> RemanufacturingPart([FromBody] OrderProgretionDto orderProgretionDto)
         {
-            var infoForPart = await qualityAssuranceService.RemanufacturingPart(remanufacturingOrderPartDto);
+            var infoForPart = await qualityAssuranceService.RemanufacturingPart(orderProgretionDto);
 
             if (infoForPart != null)
             {

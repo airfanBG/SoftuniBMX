@@ -72,7 +72,7 @@
             var mainOrder = await dbContext.Orders
                 .Where(o => o.Id == order.OrderId)
                 .FirstAsync();
-            mainOrder.StatusId = 7;           
+            mainOrder.StatusId = 7;
 
             TimeSpan partProductionTime = (TimeSpan)(order.EndDatetime - order.StartDatetime);
             TimeSpan minimumSpan = TimeSpan.Parse("00:00:00.0000000");
@@ -112,22 +112,22 @@
             }
 
             var orders = await dbContext.OrdersPartsEmployees
-                .Include(ep => ep.Part)
-                .Include(ep => ep.Order)
-                .Include(opei => opei.OrdersPartsEmployeesInfos)
-                .Where(ep => ep.EmployeeId == employeeId && ep.EndDatetime == null && ep.IsCompleted == false)
-                .Select(p => new PartOrdersDto()
-                {
-                    PartId = p.PartId,
-                    PartName = p.Part.Name,
-                    PartOEMNumber = p.Part.OEMNumber,
-                    DatetimeAsigned = p.DatetimeAsigned.Value.ToString(DefaultDateWithTimeFormat),
-                    DatetimeFinished = null,
-                    Description = p.OrdersPartsEmployeesInfos.FirstOrDefault(o => p.OrderId == o.OrderId && p.PartId == o.PartId && p.UniqueKeyForSerialNumber == o.UniqueKeyForSerialNumber).DescriptionForWorker,
-                    OrderSerialNumber = p.SerialNumber,
-                    Quantity = p.PartQuantity
-                })
-                .ToListAsync();
+            .Include(ep => ep.Part)
+            .Include(ep => ep.Order)
+            .Include(opei => opei.OrdersPartsEmployeesInfos)
+            .Where(ep => ep.EmployeeId == employeeId && ep.EndDatetime == null && ep.IsCompleted == false)
+            .Select(p => new PartOrdersDto()
+            {
+                PartId = p.PartId,
+                PartName = p.Part.Name,
+                PartOEMNumber = p.Part.OEMNumber,
+                DatetimeAsigned = p.DatetimeAsigned.Value.ToString(DefaultDateWithTimeFormat),
+                DatetimeFinished = null,
+                Description = p.OrdersPartsEmployeesInfos.Where(o => p.OrderId == o.OrderId && p.PartId == o.PartId && p.UniqueKeyForSerialNumber == o.UniqueKeyForSerialNumber).OrderBy(id => id.Id).LastOrDefault().DescriptionForWorker,
+                OrderSerialNumber = p.SerialNumber,
+                Quantity = p.PartQuantity
+            })
+            .ToListAsync();
 
             EmployeePartOrdersDto ordersDto = new EmployeePartOrdersDto()
             {

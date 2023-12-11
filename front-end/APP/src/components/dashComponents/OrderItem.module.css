@@ -1,0 +1,111 @@
+.order {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--color-main-dark);
+  padding: 1.5rem;
+  position: relative;
+  border: 1px solid var(--color-border);
+  border-radius: 0.3rem;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  width: 85%;
+  font-weight: 500;
+}
+
+.brand {
+  text-transform: uppercase;
+  margin-top: 1rem;
+  width: 100%;
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: var(--color-main-dark);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.model,
+.unitType,
+.job,
+.prod {
+  font-size: 1.8rem;
+  color: var(--color-main-dark);
+  width: 100%;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.prod,
+.shortLine {
+  width: 62%;
+}
+
+.brand span,
+.model span,
+.unitType span,
+.job span,
+.prod span {
+  font-size: 1.4rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: var(--color-hd);
+  margin-right: 2rem;
+}
+
+.timer {
+  display: flex;
+  align-items: center;
+  /* padding: 1.5rem 0 0; */
+}
+
+.partId {
+  position: absolute;
+  top: 1.7rem;
+  right: 1.7rem;
+  font-size: 1.6rem;
+  padding-left: 1rem;
+  border-bottom: 2px solid var(--color-line);
+}
+
+.startBtn {
+  width: 30%;
+  align-self: flex-end;
+  padding: 0.8rem 1.6rem;
+  background-color: var(--button-blue);
+  color: var(--button-font-color);
+  font-size: 1.8rem;
+  font-weight: 300;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+  z-index: 1;
+  /* margin-left: auto; */
+  margin: -15px 0px 0 auto;
+}
+.startBtn:hover {
+  background-color: var(--button-blue-light);
+  color: var(--button-font-color-hover);
+}
+
+.startBtn:disabled {
+  background-color: var(--button-blue-light);
+  color: var(--button-font-color-hover);
+  cursor: not-allowed;
+}
+
+.pastTime {
+  width: 70%;
+  background-color: var(--color-border);
+  text-align: center;
+  padding: 0.8rem 0;
+}
+
+img.background {
+  position: absolute;
+  top: -12rem;
+  z-index: 0;
+  opacity: 0.05;
+  left: -16rem;
+}

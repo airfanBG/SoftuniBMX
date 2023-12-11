@@ -1,0 +1,22 @@
+.boardHeader {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 2rem 1rem;
+  border-bottom: 2px solid var(--color-line);
+}
+
+.boardHeader span {
+  font-size: 1.8rem;
+}
+.boardHeader h3 {
+  font-size: 2rem;
+  color: var(--color-main-dark);
+  margin-bottom: 2px;
+}
+
+.logout {
+  font-size: 2rem;
+  color: var(--color-secondary-hd);
+  margin-left: auto;
+}
