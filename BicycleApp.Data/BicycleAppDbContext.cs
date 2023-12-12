@@ -338,6 +338,8 @@
             builder.Entity<VATCategory>(entity => entity.HasData(seeder.SeedVATCategories()));
             builder.Entity<PartInStock>(entity => entity.HasData(seeder.SeedPartsInStock()));
             builder.Entity<PartOrder>(entity => entity.HasData(seeder.SeedPartOrders()));
+            builder.Entity<IdentityRole>(entity => entity.HasData(seeder.SeedRoles()));
+            builder.Entity<IdentityUserRole<string>>(entity => entity.HasData(seeder.SeedRolesUsers()));
 
             base.OnModelCreating(builder);
         }
