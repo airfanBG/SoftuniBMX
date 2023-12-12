@@ -21,6 +21,9 @@
 
     using static BicycleApp.Common.ApplicationGlobalConstants;
     using static BicycleApp.Common.UserConstants;
+    using Microsoft.AspNetCore.WebUtilities;
+    using BicycleApp.Common.Providers.Contracts;
+    using BicycleApp.Services.HelperClasses.Contracts;
 
     public class EmployeeService : IEmployeeService
     {
@@ -31,8 +34,10 @@
         private readonly IConfiguration configuration;
         private readonly IModelsFactory modelFactory;
         private readonly IEmailSender emailSender;
+        private readonly IOptionProvider optionProvider;
+        private readonly IStringManipulator stringManipulator;
 
-        public EmployeeService(UserManager<Employee> userManager, SignInManager<Employee> signInManager, RoleManager<IdentityRole> roleManager, BicycleAppDbContext dbContext, IConfiguration configuration, IModelsFactory modelFactory, IEmailSender emailSender)
+        public EmployeeService(UserManager<Employee> userManager, SignInManager<Employee> signInManager, RoleManager<IdentityRole> roleManager, BicycleAppDbContext dbContext, IConfiguration configuration, IModelsFactory modelFactory, IEmailSender emailSender, IOptionProvider optionProvider, IStringManipulator stringManipulator)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -41,6 +46,8 @@
             this.configuration = configuration;
             this.modelFactory = modelFactory;
             this.emailSender = emailSender;
+            this.optionProvider = optionProvider;
+            this.stringManipulator = stringManipulator;
         }
 
         /// <summary>
@@ -50,7 +57,7 @@
         /// <returns>True or False</returns>
         /// <exception cref="ArgumentNullException">If input data is null</exception>
         /// <exception cref="ArgumentException">If employee already exists</exception>
-        public async Task<bool> RegisterEmployeeAsync(EmployeeRegisterDto employeeRegisterDto)
+        public async Task<bool> RegisterEmployeeAsync(EmployeeRegisterDto employeeRegisterDto, string httpScheme, string httpHost)
         {
             if (employeeRegisterDto == null)
             {
@@ -68,18 +75,7 @@
 
             var result = await this.userManager.CreateAsync(employee, employeeRegisterDto.Password);
 
-            //var roleExists = await roleManager.RoleExistsAsync(employeeRegisterDto.Role);
-            //if (!roleExists)
-            //{
-            //    await roleManager.CreateAsync(new IdentityRole(employeeRegisterDto.Role));
-            //}
-            //var role = await roleManager.FindByNameAsync(employeeRegisterDto.Role);
-
-            //if (role != null)
-            //{
-            //    await userManager.AddToRoleAsync(employee, role.Name);
-            //}
-            
+            //await userManager.AddToRoleAsync(employee, employeeRegisterDto.Role);
 
             if (result == null)
             {
@@ -88,13 +84,18 @@
 
             if (result.Succeeded)
             {
-                return true;
+                var confirmationToken = await userManager.GenerateEmailConfirmationTokenAsync(employee);
+                confirmationToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(confirmationToken));
+                var endPointToComfirmEmail = optionProvider.EmployeeEmailConfirmEnpoint();
+                var routeValues = $"userId={employee.Id}&code={confirmationToken}";
+                var callback = stringManipulator.UrlMaker(httpScheme, httpHost, endPointToComfirmEmail, routeValues);
+                var emailSenderResult = emailSender.IsSendedEmailForVerification(employee.Email, $"{employee.FirstName} {employee.LastName}", callback);
+                if (emailSenderResult)
+                {
+                    return true;
+                }
             }
-            else
-            {
-                return false;
-            }
-
+            return false;
         }
 
         /// <summary>
@@ -274,6 +275,22 @@
             {
                 return departmentEntity.Id;
             }
+        }
+
+        public async Task ConfirmEmailAsync(string emmployeeId, string code)
+        {
+            try
+            {
+                var user = await dbContext.Employees.FirstAsync(u => u.Id == emmployeeId);
+                code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
+
+                await userManager.ConfirmEmailAsync(user, code);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
         }
 
         /// <summary>

@@ -44,8 +44,9 @@
                 }
 
                 //Register
-                bool isRegistered = await employeeService.RegisterEmployeeAsync(employeeRegisterDto);
-
+                var httpScheme = Request.Scheme;
+                var httpHost = Request.Host.Value;
+                bool isRegistered = await employeeService.RegisterEmployeeAsync(employeeRegisterDto, httpScheme, httpHost);
                 if (isRegistered)
                 {
                     return Ok();
