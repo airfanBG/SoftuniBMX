@@ -1876,7 +1876,7 @@
             {
                 Id = 1,
                 PartId = 1,
-                QuantityDelivered = 2,
+                Quantity = 2,
                 Note = "text",
                 DateCreated = DateTime.Now,
                 DateUpdated = DateTime.Now,
@@ -1886,7 +1886,7 @@
             {
                 Id = 2,
                 PartId = 4,
-                QuantityDelivered = 2,
+                Quantity = 2,
                 Note = "text2",
                 DateCreated = DateTime.Now,
                 DateUpdated = DateTime.Now,
@@ -1896,7 +1896,7 @@
             {
                 Id = 3,
                 PartId = 7,
-                QuantityDelivered = 1,
+                Quantity = 1,
                 Note = "text2",
                 DateCreated = DateTime.Now,
                 DateUpdated = DateTime.Now,

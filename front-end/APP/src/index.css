@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css");
+
+html {
+  font-size: 62.5%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  /* font-family: "Rubik", sans-serif; */
+}
+
+:root {
+  --color-main-dark: #0a0a0a;
+  --color-link-light: #f8f9fa;
+  --color-link-light-hover: #dee6de;
+  --color-hd: #6c6c6c;
+  --color-hd-second: #898989;
+  --color-secondary-hd: #363636;
+  --color-line: #c92a2a;
+  --color-border: #e2e2e2;
+  --color-border-hover: #b6b6b6;
+  --color-warning: #bf0000;
+  --color-heading-red: #a12222;
+  --button-color: #6b9080;
+  --button-color-hover: #a4c3b2;
+  --button-agree: #397800;
+  --button-agree-hover: #008451;
+  --button-disagree: #c92a2a;
+  --button-disagree-hover: #d93a35;
+  --button-gray: #798897;
+  --button-gray-hover: #778096;
+  --button-blue: #3a4856;
+  --button-blue-light: #48596b;
+  --button-font-color: #eaf4f4;
+  --button-font-color-hover: #f6fff8;
+  --bg-color-dark: #1b1b1b;
+  --bg-color: #3f3f3f;
+  --bg-color-light: #5e5e5e;
+  --qControl-pass: #4d8076;
+  --qControl-pass-hover: #4d8076;
+  --qControl-rej: #a55331;
+  --qControl-rej-hover: #d27955;
+}
+
+body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #faf8ff;
+}
+:global(.container) {
+  max-width: 130rem;
+  position: relative;
+}
+
+:global(.m-bottom-20) {
+  margin-bottom: 2rem;
+}
+:global(.m-bottom-30) {
+  margin-bottom: 3rem;
+}
+:global(.m-bottom-50) {
+  margin-bottom: 5rem;
+}
+:global(.m-bottom-80) {
+  margin-bottom: 8rem;
+}
+:global(.m-bottom-10) {
+  margin-bottom: 10rem;
+}
+
+.modal {
+  width: 100%;
+  min-height: 72.2vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+/* :global(.wrapper) {
+  width: 1300px;
+  padding: 2rem 0;
+}
+
+:global(.dashHeading) {
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  color: var(--color-secondary-hd);
+  margin: 1rem 0;
+}
+
+:global(.board) {
+  width: 100%;
+  min-height: 100px;
+  border: 1px solid var(--color-border);
+  padding: 1rem;
+  position: relative;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+:global(.orders) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0;
+} */

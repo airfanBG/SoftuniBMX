@@ -18,24 +18,13 @@
 ### [`GET /api/accountpage/frames`](/ReadMeFiles/AccountPage/Frames.md)
 ### [`GET /api/accountpage/compatible_parts`](/ReadMeFiles/AccountPage/CompatibleParts.md)
 ### [`GET /api/accountpage/selected_part`](/ReadMeFiles/AccountPage/SelectedPart.md)
-- ClientController дава възсможността на потребителя - клиент да управлява личните си данни.
-
-### [`POST /api/client/reset`](/ReadMeFiles/Client/ResetPassword.md)
 - ClientOrderController дава възсможността на потребителя на създава, преглежда и изтрива поръчки, направени от него.
 
 ### [`POST /api/client_order/create`](/ReadMeFiles/ClientOrder/Create.md)
 ### [`POST /api/client_order/progress`](/ReadMeFiles/ClientOrder/Progress.md)
 ### [`POST /api/client_order/delete`](/ReadMeFiles/ClientOrder/Delete.md)
-- EmployeeController дава възсможността на потребителя - работник да управлява личните си данни.
 
-### [`POST /api/employee/reset`](/ReadMeFiles/Employee/ResetPassword.md)
-- EmployeeOrderController управляват поръчките между рабониците. 
-
-### [`GET /api/employee_оrder/quality_assurance`](/ReadMeFiles/EmployeeOrder/QualityAssurance/GetReadyOrdersForQualityAssurance.md)
-### [`POST /api/employee_оrder/quality_assurance`](/ReadMeFiles/EmployeeOrder/QualityAssurance/PassedQualityAssuranceOrder.md)
-### [`POST /api/employee_оrder/quality_assurance_return`](/ReadMeFiles/EmployeeOrder/QualityAssurance/RemanufacturingPart.md)
-
-- OrderManagerController дава възсможността да се ползва функционалността на OrderManagerService. 
+- OrderManagerController дава възможността да се ползва функционалността на OrderManagerService. 
 
 ### [`GET /api/manager/pending_orders`](/ReadMeFiles/Manager/pending_orders.md)
 ### [`GET /api/manager/rejected_orders`](/ReadMeFiles/Manager/rejected_orders.md)
@@ -45,6 +34,24 @@
 ### [`POST /api/manager/approve_rejected_order?orderId=3`](/ReadMeFiles/Manager/approve_rejected_order.md)
 ### [`POST /api/manager/reject_order?orderId=3`](/ReadMeFiles/Manager/reject_order.md)
 ### [`GET /api/manager/finished_orders`](/ReadMeFiles/Manager/finished_orders.md)
+
+- SuplyManagerController дава възможността да се ползва функционалността на SuplyManagerService. 
+
+### [`GET /api/supplys_manager/deliveries`](/ReadMeFiles/SuplyManager/deliveries.md)
+### [`GET /api/supplys_manager/supliers`](/ReadMeFiles/SuplyManager/supliers.md)
+### [`GET /api/supplys_manager/part_orders`](/ReadMeFiles/SuplyManager/part_orders.md)
+### [`POST /api/supplys_manager/create_delivery`](/ReadMeFiles/SuplyManager/create_delivery.md)
+### [`POST /api/supplys_manager/create_suplier`](/ReadMeFiles/SuplyManager/create_suplier.md)
+### [`POST /api/supplys_manager/create_part_order`](/ReadMeFiles/SuplyManager/create_part_order.md)
+### [`GET /api/supplys_manager/get_suplier`](/ReadMeFiles/SuplyManager/get_suplier.md)
+### [`GET /api/supplys_manager/get_delivery`](/ReadMeFiles/SuplyManager/get_delivery.md)
+### [`GET /api/supplys_manager/get_part_order`](/ReadMeFiles/SuplyManager/get_part_order.md)
+### [`POST /api/supplys_manager/delete_suplier`](/ReadMeFiles/SuplyManager/delete_suplier.md)
+### [`POST /api/supplys_manager/delete_delivery`](/ReadMeFiles/SuplyManager/delete_delivery.md)
+### [`POST /api/supplys_manager/delete_part_order`](/ReadMeFiles/SuplyManager/delete_part_order.md)
+### [`PUT /api/supplys_manager/edit_delivery`](/ReadMeFiles/SuplyManager/edit_delivery.md)
+### [`PUT /api/supplys_manager/edit_suplier`](/ReadMeFiles/SuplyManager/edit_suplier.md)
+### [`PUT /api/supplys_manager/edit_part_order`](/ReadMeFiles/SuplyManager/edit_part_order.md)
 
 ## Errors
 

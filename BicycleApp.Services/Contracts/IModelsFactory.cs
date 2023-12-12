@@ -4,6 +4,7 @@
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Models;
     using BicycleApp.Services.Models.IdentityModels;
+    using BicycleApp.Services.Models.Supply;
 
     public interface IModelsFactory
     {
@@ -20,5 +21,11 @@
         Comment CreateNewComment(CommentAddDto commentAddDto);
 
         Part CreatePart(PartAddDto partAddDto);
+
+        Delivary CreateNewDelivery(CreateDelivedryDto createDelivedryDto);
+
+        Suplier CreateNewSuplier(CreateSuplierDto createSuplierDto);
+
+        PartOrder CreateNewPartOrder(CreatePartOrderDto createPartOrderDto);
     }
 }

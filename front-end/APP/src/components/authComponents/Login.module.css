@@ -1,0 +1,192 @@
+.modal {
+  position: relative;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #ffffff;
+  padding: 0 30px;
+  width: 450px;
+  border-radius: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  margin: 18rem 0 8rem;
+}
+
+.heading {
+  display: inline-block;
+  width: fit-content;
+  font-size: 2.4rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  padding: 0 0.5rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+::placeholder {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 1.4rem;
+}
+.form label {
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: #999;
+}
+.form button {
+  align-self: flex-end;
+}
+
+.flex-column > label {
+  color: #171516;
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+
+.inputForm {
+  border: 1.5px solid #ecedec;
+  border-radius: 10px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding-inline: 10px;
+  transition: 0.2s ease-in-out;
+}
+
+.form input.input {
+  margin: 0 10px;
+  border-radius: 10px;
+  border: none;
+  width: 85%;
+  height: 100%;
+  font-size: 2rem;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.inputForm:focus-within {
+  border: 1.5px solid #393a3c;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.flex-row > div > label {
+  font-size: 14px;
+  color: black;
+  font-weight: 400;
+}
+
+.span {
+  font-size: 1.6rem;
+  margin-left: 5px;
+  /* color: #2d79f3; */
+  color: var(--color-line);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button-submit {
+  margin: 20px 0 10px 0;
+  background-color: #151717;
+  border: none;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 10px;
+  height: 50px;
+  width: 100%;
+  cursor: pointer;
+  text-align: center;
+}
+
+.button-submit:hover {
+  background-color: #252727;
+}
+
+.p {
+  text-align: center;
+  color: black;
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.btn {
+  margin-top: 10px;
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  gap: 10px;
+  border: 1px solid #ededef;
+  background-color: white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.btn:hover {
+  border: 1px solid #2d79f3;
+}
+
+.svg {
+  font-size: 2rem;
+  width: 22px;
+  height: 22px;
+}
+
+.wrapper {
+  position: relative;
+}
+
+.warning {
+  position: absolute;
+  width: 127%;
+  top: 10px;
+  left: 200px;
+  /* background-color: var(--color-warning);
+  color: var(--color-link-light); */
+  color: var(--color-warning);
+  font-size: 1.6rem;
+  font-weight: 700;
+  /* transform: translate(103%, -150%); */
+  text-align: center;
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--color-warning);
+  border-radius: 6px;
+}
+
+.generalError {
+  background-color: var(--color-warning);
+  color: var(--color-link-light);
+  font-size: 1.8rem;
+  text-align: center;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+}
+
+a.forgotPass:link,
+a.forgotPass:visited {
+  text-align: right;
+  width: fit-content;
+  font-size: 1.4rem;
+  color: var(--color-secondary-hd);
+  border-bottom: 1px solid var(--color-line);
+  margin-left: auto;
+  cursor: pointer;
+  text-decoration: none;
+}
+a.forgotPass span {
+  color: var(--color-line);
+}

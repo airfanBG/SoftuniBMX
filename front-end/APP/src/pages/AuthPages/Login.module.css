@@ -1,0 +1,10 @@
+.container {
+  max-width: 130rem;
+  position: relative;
+  margin: 0 auto;
+}
+
+.content {
+  margin-top: 10rem;
+  min-height: 670px;
+}
