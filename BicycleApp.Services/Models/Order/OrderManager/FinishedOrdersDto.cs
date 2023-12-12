@@ -1,16 +1,17 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace BicycleApp.Services.Models.Order.OrderManager
 {
     public class FinishedOrdersDto
     {
         [Required]
-        [JsonProperty("start_date")]
+        [JsonPropertyName("start_date")]
         public DateTime StartDate { get; set; } 
 
         [Required]
-        [JsonProperty("end_date")]
+        [JsonPropertyName("end_date")]
         public DateTime EndDate { get; set; } 
     }
 }

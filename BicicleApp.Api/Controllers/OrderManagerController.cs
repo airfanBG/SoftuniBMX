@@ -122,7 +122,7 @@ namespace BicicleApp.Api.Controllers
             {
                 await _orderManagerService.ManagerDeleteOrder(orderId);
 
-                return Ok();
+                return StatusCode(200);
             }
             catch (Exception)
             {

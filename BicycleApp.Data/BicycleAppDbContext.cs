@@ -8,7 +8,7 @@
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
-    public class BicycleAppDbContext : IdentityDbContext<Employee, IdentityRole<string>, string>
+    public class BicycleAppDbContext : IdentityDbContext
     {
         public BicycleAppDbContext() : base()
         {
@@ -21,12 +21,10 @@
 
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-IEFLHVR\\SQLEXPRESS;Database=BicycleNewDB;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False");
-        }
+
 
         //Identity Tables
+        public DbSet<BaseUser> BaseUsers { get; set; } = null!;
         public DbSet<Client> Clients { get; set; } = null!;
 
         public DbSet<Employee> Employees { get; set; } = null!;
@@ -337,6 +335,8 @@
             builder.Entity<VATCategory>(entity => entity.HasData(seeder.SeedVATCategories()));
             builder.Entity<PartInStock>(entity => entity.HasData(seeder.SeedPartsInStock()));
             builder.Entity<PartOrder>(entity => entity.HasData(seeder.SeedPartOrders()));
+            builder.Entity<IdentityRole>(entity => entity.HasData(seeder.SeedRoles()));
+            builder.Entity<IdentityUserRole<string>>(entity => entity.HasData(seeder.SeedRolesUsers()));
 
             base.OnModelCreating(builder);
         }

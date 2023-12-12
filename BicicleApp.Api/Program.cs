@@ -25,7 +25,6 @@ namespace BicicleApp.Api
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
-    using Newtonsoft.Json;
 
     public class Program
     {
@@ -45,7 +44,7 @@ namespace BicicleApp.Api
             builder.Services
                 .AddDbContext<BicycleAppDbContext>(options => options.UseSqlServer(connectionString));
 
-            builder.Services.AddIdentityCore<Client>(options =>
+            builder.Services.AddDefaultIdentity<BaseUser>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
                 options.SignIn.RequireConfirmedEmail = true;
@@ -53,23 +52,15 @@ namespace BicicleApp.Api
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 5;
-
             })
-                .AddRoles<IdentityRole<string>>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<BicycleAppDbContext>()
                 .AddDefaultTokenProviders();
 
-            builder.Services.AddIdentityCore<Employee>(options =>
-            {
-                options.SignIn.RequireConfirmedAccount = true;
-                options.SignIn.RequireConfirmedEmail = true;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequiredLength = 5;
+            builder.Services.AddIdentityCore<Client>()
+                .AddEntityFrameworkStores<BicycleAppDbContext>();
 
-            })
-                .AddRoles<IdentityRole<string>>()
+            builder.Services.AddIdentityCore<Employee>()
                 .AddEntityFrameworkStores<BicycleAppDbContext>();
 
             var jwtSecret = builder.Configuration["JwtSecret"];
@@ -93,8 +84,6 @@ namespace BicicleApp.Api
             });
 
             builder.Services.AddHttpContextAccessor();
-            builder.Services.AddScoped<SignInManager<Client>>();
-            builder.Services.AddScoped<SignInManager<Employee>>();
             builder.Services.AddScoped<IHomePageService, HomePageService>();
             builder.Services.AddScoped<IClientService, ClientService>();
             builder.Services.AddScoped<IUserImageFactory, UserImageFactory>();

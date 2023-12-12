@@ -26,5 +26,10 @@ namespace BicycleApp.Data.Models.EntityModels
         [Required]
         [Comment("Status of the entry: Active/Inactive")]
         public bool IsDeleted { get; set; } = false;
+
+        //[Required]
+        //[Comment("Id of the suplier for this delivary")]-without this FK the SuplierId exists and is set to null
+        //public int SuplierId { get; set; }
+        //public virtual Suplier Suplier { get; set; } = null!;
     }
 }

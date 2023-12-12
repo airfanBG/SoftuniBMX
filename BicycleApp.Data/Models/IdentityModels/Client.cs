@@ -8,7 +8,6 @@
 
     using static BicycleApp.Common.EntityValidationConstants.User;
 
-    [Comment("Table of all clients registered in the database")]
     public class Client : BaseUser
     {
         public Client()
@@ -19,16 +18,6 @@
             this.Images = new HashSet<ImageClient>();
         }
 
-        [MaxLength(FirstNameMaxLength)]
-        [Comment("The first name of the client")]
-        public string? FirstName { get; set; }
-
-        [MaxLength(LastNameMaxLength)]
-        [Comment("The last name of the client")]
-        public string? LastName { get; set; }
-
-        [MaxLength(PhoneNumberMaxLength)]
-        public override string? PhoneNumber { get => base.PhoneNumber; set => base.PhoneNumber = value; }
 
         [MaxLength(DelivaryAddressMaxLength)]
         [Comment("The default address of the client for deliveries")]
@@ -46,20 +35,6 @@
         [Required]
         [Comment("The amount of the deposited money in this client account")]
         public decimal Balance { get; set; } = 0.00M;
-
-        [Required]
-        [Comment("Status of the account: Active/Inactive")]
-        public bool IsDeleted { get; set; } = false;
-
-        [Required]
-        [Comment("Date of the creation of the account")]
-        public DateTime DateCreated { get; set; }
-
-        [Comment("Date of last update of account data")]
-        public DateTime? DateUpdated { get; set; }
-
-        [Comment("Date of the deletion of the account")]
-        public DateTime? DateDeleted { get; set; }
 
         public virtual ICollection<Rate> Rates { get; set; }
 
