@@ -5,7 +5,7 @@ import { PhoneInput } from "react-international-phone";
 import { useReducer, useState } from "react";
 import { initialState, reducer } from "./managerUtil/addMemberReducer.js";
 import { post } from "../../../util/api.js";
-import { environment } from "../../../environments/environment_dev.js";
+import { environment } from "../../../environments/environment.js";
 import { useNavigate } from "react-router-dom";
 
 function AddMember() {

@@ -5,7 +5,7 @@ import { clearStockData, getStockData } from "../../../util/util.js";
 import LoaderWheel from "../../LoaderWheel.jsx";
 import BoardHeader from "../BoardHeader.jsx";
 import { get } from "../../../util/api.js";
-import { environment } from "../../../environments/environment_dev.js";
+import { environment } from "../../../environments/environment.js";
 import { useNavigate } from "react-router-dom";
 
 function UserHomeScreenSelection() {

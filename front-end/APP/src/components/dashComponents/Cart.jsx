@@ -14,7 +14,7 @@ import LoaderWheel from "../LoaderWheel.jsx";
 import { get, post, put } from "../../util/api.js";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/GlobalUserProvider.jsx";
-import { environment } from "../../environments/environment_dev.js";
+import { environment } from "../../environments/environment.js";
 
 function Cart() {
   const { user, setHasOrder, updateUser } = useContext(UserContext);

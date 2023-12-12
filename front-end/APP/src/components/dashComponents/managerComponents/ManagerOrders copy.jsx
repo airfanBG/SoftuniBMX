@@ -4,7 +4,7 @@ import styles from "./ManagerOrders.module.css";
 import Order from "./Order.jsx";
 import Paginator from "../../Paginator.jsx";
 import { usePagination } from "../../../customHooks/usePaginationArray.js";
-import { environment } from "../../../environments/environment_dev.js";
+import { environment } from "../../../environments/environment.js";
 import LoaderWheel from "../../LoaderWheel.jsx";
 
 const initialState = {

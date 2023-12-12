@@ -26,7 +26,7 @@ function ForgottenPassword() {
   );
 
   function onInputHandler(e) {
-    setEmail(e.target.value);
+    setEmail(e.target.value.trim());
   }
 
   function validateInput(e) {
@@ -48,14 +48,15 @@ function ForgottenPassword() {
   async function onSubmitHandler(e) {
     e.preventDefault();
     setIsLoading(true);
+    let reset = "";
 
     if (email.split("@")[1] === "b-free.com") {
-      // const reset = await post(`/api/employee/reset?email=${email}`, email);
-      console.log("worker");
+      reset = await post(`/api/employee/reset?email=${email}`, email);
     } else {
-      console.log("user");
-      // const reset = await post(`/api/client/reset?email=${email}`, email);
+      console.log("fsdsdf");
+      reset = await post(`/api/client/reset?email=${email}`, email);
     }
+    console.log(reset);
 
     setTimeout(function info() {
       navigate("/auth/login");

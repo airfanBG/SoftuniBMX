@@ -3,7 +3,7 @@ import styles from "./InProgress.module.css";
 import { useEffect, useState } from "react";
 
 import { get } from "../../../util/api.js";
-import { environment } from "../../../environments/environment_dev.js";
+import { environment } from "../../../environments/environment.js";
 
 import BoardHeader from "../BoardHeader.jsx";
 import OrderInProgress from "./OrderInProgress.jsx";

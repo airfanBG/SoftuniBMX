@@ -4,7 +4,7 @@ import { useReducer, useState } from "react";
 import LoaderWheel from "../../LoaderWheel.jsx";
 import { timeResolver } from "../../../util/resolvers.js";
 import { del, post } from "../../../util/api.js";
-import { environment } from "../../../environments/environment_dev.js";
+import { environment } from "../../../environments/environment.js";
 import { v4 as uuidv4 } from "uuid"; //unique ID
 
 const initialState = {
