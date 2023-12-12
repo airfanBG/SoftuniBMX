@@ -20,6 +20,7 @@
     {
         private readonly UserManager<BaseUser> userManager;
         private readonly SignInManager<BaseUser> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly BicycleAppDbContext dbContext;
         private readonly IConfiguration configuration;
         private readonly IModelsFactory modelFactory;
@@ -27,10 +28,19 @@
         private readonly IStringManipulator stringManipulator;
         private readonly IOptionProvider optionProvider;
 
-        public ClientService(UserManager<BaseUser> userManager, SignInManager<BaseUser> signInManager, BicycleAppDbContext dbContext, IConfiguration configuration, IModelsFactory modelFactory, IEmailSender emailSender, IStringManipulator stringManipulator, IOptionProvider optionProvider)
+        public ClientService(UserManager<BaseUser> userManager, 
+                             SignInManager<BaseUser> signInManager, 
+                             RoleManager<IdentityRole> roleManager,
+                             BicycleAppDbContext dbContext,
+                             IConfiguration configuration, 
+                             IModelsFactory modelFactory,
+                             IEmailSender emailSender,
+                             IStringManipulator stringManipulator, 
+                             IOptionProvider optionProvider)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.roleManager = roleManager;
             this.dbContext = dbContext;
             this.configuration = configuration;
             this.modelFactory = modelFactory;
@@ -62,7 +72,16 @@
             Client client = this.modelFactory.CreateNewClientModel(clientDto);
             client.TownId = await this.GetTownIdAsync(clientDto.Town);
             var result = await this.userManager.CreateAsync(client, clientDto.Password);
-            //await userManager.AddToRoleAsync(client, clientDto.Role);
+
+            //TODO: Remove client role management. DB don`t need so much records.
+            var isRoleExists = await roleManager.RoleExistsAsync(clientDto.Role.ToLower());
+            var identityRole = new IdentityRole(clientDto.Role.ToLower());
+            if (!isRoleExists)
+            {
+                await roleManager.CreateAsync(identityRole);
+            }
+            var roleName = await roleManager.GetRoleNameAsync(identityRole);
+            await userManager.AddToRoleAsync(client, roleName);
 
             if (result == null)
             {

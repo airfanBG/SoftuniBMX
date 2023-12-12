@@ -24,11 +24,13 @@
     using Microsoft.AspNetCore.WebUtilities;
     using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Services.HelperClasses.Contracts;
+    using static BicycleApp.Common.EntityValidationConstants;
 
     public class EmployeeService : IEmployeeService
     {
         private readonly UserManager<BaseUser> userManager;
         private readonly SignInManager<BaseUser> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly BicycleAppDbContext dbContext;
         private readonly IConfiguration configuration;
         private readonly IModelsFactory modelFactory;
@@ -36,10 +38,19 @@
         private readonly IOptionProvider optionProvider;
         private readonly IStringManipulator stringManipulator;
 
-        public EmployeeService(UserManager<BaseUser> userManager, SignInManager<BaseUser> signInManager, BicycleAppDbContext dbContext, IConfiguration configuration, IModelsFactory modelFactory, IEmailSender emailSender, IOptionProvider optionProvider, IStringManipulator stringManipulator)
+        public EmployeeService(UserManager<BaseUser> userManager, 
+                               SignInManager<BaseUser> signInManager,
+                               RoleManager<IdentityRole> roleManager,
+                               BicycleAppDbContext dbContext, 
+                               IConfiguration configuration, 
+                               IModelsFactory modelFactory, 
+                               IEmailSender emailSender, 
+                               IOptionProvider optionProvider, 
+                               IStringManipulator stringManipulator)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.roleManager = roleManager;
             this.dbContext = dbContext;
             this.configuration = configuration;
             this.modelFactory = modelFactory;
@@ -73,7 +84,14 @@
 
             var result = await this.userManager.CreateAsync(employee, employeeRegisterDto.Password);
 
-            //await userManager.AddToRoleAsync(employee, employeeRegisterDto.Role);
+            var isRoleExists = await roleManager.RoleExistsAsync(employeeRegisterDto.Role.ToLower());
+            var identityRole = new IdentityRole(employeeRegisterDto.Role.ToLower());
+            if (!isRoleExists)
+            {
+                await roleManager.CreateAsync(identityRole);
+            }
+            var roleName = await roleManager.GetRoleNameAsync(identityRole);
+            await userManager.AddToRoleAsync(employee, roleName);
 
             if (result == null)
             {
