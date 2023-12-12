@@ -144,13 +144,13 @@
 
             if (result.Succeeded)
             {
-                //var roles = await userManager.GetRolesAsync(employee);
+                var roles = await userManager.GetRolesAsync(employee);
                 return new EmployeeReturnDto()
                 {
                     EmployeeId = employee.Id,
                     EmployeeFullName = $"{employee.FirstName} {employee.LastName}",
                     Token = await this.GenerateJwtTokenAsync(employee),
-                    //Role = roles[0],
+                    Role = roles[0],
                     Result = true,
                 };
             }
@@ -323,11 +323,11 @@
                 new Claim(ClaimTypes.NameIdentifier, employee.Id.ToString()),
                 new Claim(ClaimTypes.Email, employee.Email)
             };
-            //var roles = await userManager.GetRolesAsync(employee);
-            //foreach (var role in roles)
-            //{
-            //    claims.Add(new Claim(ClaimTypes.Role, role));
-            //}
+            var roles = await userManager.GetRolesAsync(employee);
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
             var expires = DateTime.UtcNow.AddDays(7);
 
