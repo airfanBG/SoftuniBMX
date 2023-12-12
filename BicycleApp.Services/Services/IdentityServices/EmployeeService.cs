@@ -27,9 +27,8 @@
 
     public class EmployeeService : IEmployeeService
     {
-        private readonly UserManager<Employee> userManager;
-        private readonly SignInManager<Employee> signInManager;
-        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly UserManager<BaseUser> userManager;
+        private readonly SignInManager<BaseUser> signInManager;
         private readonly BicycleAppDbContext dbContext;
         private readonly IConfiguration configuration;
         private readonly IModelsFactory modelFactory;
@@ -37,11 +36,10 @@
         private readonly IOptionProvider optionProvider;
         private readonly IStringManipulator stringManipulator;
 
-        public EmployeeService(UserManager<Employee> userManager, SignInManager<Employee> signInManager, RoleManager<IdentityRole> roleManager, BicycleAppDbContext dbContext, IConfiguration configuration, IModelsFactory modelFactory, IEmailSender emailSender, IOptionProvider optionProvider, IStringManipulator stringManipulator)
+        public EmployeeService(UserManager<BaseUser> userManager, SignInManager<BaseUser> signInManager, BicycleAppDbContext dbContext, IConfiguration configuration, IModelsFactory modelFactory, IEmailSender emailSender, IOptionProvider optionProvider, IStringManipulator stringManipulator)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.roleManager = roleManager;
             this.dbContext = dbContext;
             this.configuration = configuration;
             this.modelFactory = modelFactory;
@@ -124,7 +122,6 @@
                 return new EmployeeReturnDto() { Result = false };
             }
 
-            //var result = await signInManager.PasswordSignInAsync(employeeDto.Email, employeeDto.Password, false, lockoutOnFailure: false);
             var result = await signInManager.CheckPasswordSignInAsync(employee, employeeDto.Password, false);
 
             if (result.Succeeded)
@@ -135,6 +132,7 @@
                     EmployeeId = employee.Id,
                     EmployeeFullName = $"{employee.FirstName} {employee.LastName}",
                     Token = await this.GenerateJwtTokenAsync(employee),
+                    //Role = roles[0],
                     Result = true,
                 };
             }
@@ -151,33 +149,35 @@
         /// <returns>Dto</returns>
         public async Task<EmployeeInfoDto?> GetEmployeeInfoAsync(string Id)
         {
-            var employee = await userManager.FindByIdAsync(Id);
+            //var employee = await userManager.FindByIdAsync(Id);
 
-            if (employee == null)
-            {
-                return null;
-            }
+            //if (employee == null)
+            //{
+            //    return null;
+            //}
 
-            string? department = await dbContext.Departments
-                .Where(d => d.Id == employee.DepartmentId)
-                .Select(d => d.Name)
-                .FirstOrDefaultAsync();
+            //string? department = await dbContext.Departments
+            //    .Where(d => d.Id == employee.DepartmentId)
+            //    .Select(d => d.Name)
+            //    .FirstOrDefaultAsync();
 
-            return new EmployeeInfoDto()
-            {
-                Id = employee.Id,
-                FirstName = employee.FirstName,
-                LastName = employee.LastName,
-                Email = employee.Email,
-                Position = employee.Position,
-                Department = department,
-                PhoneNumber = employee.PhoneNumber,
-                DateCreated = employee.DateCreated.ToString(DefaultDateFormat),
-                DateOfHire = employee.DateOfHire.ToString(DefaultDateFormat),
-                DateOfLeave = employee.DateOfLeave == null ? null : employee.DateOfLeave.Value.ToString(DefaultDateFormat),
-                DateUpdated = employee.DateUpdated == null ? null : employee.DateUpdated.Value.ToString(DefaultDateFormat),
-                IsManeger = employee.IsManeger
-            };
+            //return new EmployeeInfoDto()
+            //{
+            //    Id = employee.Id,
+            //    FirstName = employee.FirstName,
+            //    LastName = employee.LastName,
+            //    Email = employee.Email,
+            //    Position = employee.Position,
+            //    Department = department,
+            //    PhoneNumber = employee.PhoneNumber,
+            //    DateCreated = employee.DateCreated.ToString(DefaultDateFormat),
+            //    DateOfHire = employee.DateOfHire.ToString(DefaultDateFormat),
+            //    DateOfLeave = employee.DateOfLeave == null ? null : employee.DateOfLeave.Value.ToString(DefaultDateFormat),
+            //    DateUpdated = employee.DateUpdated == null ? null : employee.DateUpdated.Value.ToString(DefaultDateFormat),
+            //    IsManeger = employee.IsManeger
+            //};
+
+            throw new ArgumentNullException();
         }
 
 
@@ -298,18 +298,18 @@
         /// </summary>
         /// <param name="employee">The Employee entity</param>
         /// <returns>Jwt token</returns>
-        private async Task<string> GenerateJwtTokenAsync(Employee employee)
+        private async Task<string> GenerateJwtTokenAsync(BaseUser employee)
         {
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, employee.Id.ToString()),
                 new Claim(ClaimTypes.Email, employee.Email)
             };
-            var roles = await userManager.GetRolesAsync(employee);
-            foreach (var role in roles)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, role));
-            }
+            //var roles = await userManager.GetRolesAsync(employee);
+            //foreach (var role in roles)
+            //{
+            //    claims.Add(new Claim(ClaimTypes.Role, role));
+            //}
 
             var expires = DateTime.UtcNow.AddDays(7);
 

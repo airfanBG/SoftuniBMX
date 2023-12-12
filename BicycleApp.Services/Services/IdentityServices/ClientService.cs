@@ -18,9 +18,8 @@
 
     public class ClientService : IClientService
     {
-        private readonly UserManager<Client> userManager;
-        private readonly SignInManager<Client> signInManager;
-        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly UserManager<BaseUser> userManager;
+        private readonly SignInManager<BaseUser> signInManager;
         private readonly BicycleAppDbContext dbContext;
         private readonly IConfiguration configuration;
         private readonly IModelsFactory modelFactory;
@@ -28,11 +27,10 @@
         private readonly IStringManipulator stringManipulator;
         private readonly IOptionProvider optionProvider;
 
-        public ClientService(UserManager<Client> userManager, SignInManager<Client> signInManager, RoleManager<IdentityRole> roleManager, BicycleAppDbContext dbContext, IConfiguration configuration, IModelsFactory modelFactory, IEmailSender emailSender, IStringManipulator stringManipulator, IOptionProvider optionProvider)
+        public ClientService(UserManager<BaseUser> userManager, SignInManager<BaseUser> signInManager, BicycleAppDbContext dbContext, IConfiguration configuration, IModelsFactory modelFactory, IEmailSender emailSender, IStringManipulator stringManipulator, IOptionProvider optionProvider)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.roleManager = roleManager;
             this.dbContext = dbContext;
             this.configuration = configuration;
             this.modelFactory = modelFactory;
@@ -64,19 +62,7 @@
             Client client = this.modelFactory.CreateNewClientModel(clientDto);
             client.TownId = await this.GetTownIdAsync(clientDto.Town);
             var result = await this.userManager.CreateAsync(client, clientDto.Password);
-
-            //var roleExists = await roleManager.RoleExistsAsync(clientDto.Role);
-            //if (!roleExists)
-            //{
-            //    await roleManager.CreateAsync(new IdentityRole(clientDto.Role));
-            //}
-
-            //var role = await roleManager.FindByNameAsync(clientDto.Role);
-
-            //if (role != null)
-            //{
-            //    await userManager.AddToRoleAsync(client, role.Name);
-            //}
+            //await userManager.AddToRoleAsync(client, clientDto.Role);
 
             if (result == null)
             {
@@ -133,7 +119,6 @@
                 return new ClientReturnDto() { Result = false };
             }
 
-            //var result = await signInManager.PasswordSignInAsync(clientDto.Email, clientDto.Password, false, lockoutOnFailure: false);
             var result = await signInManager.CheckPasswordSignInAsync(client, clientDto.Password, false);
 
             if (result.Succeeded)
@@ -143,6 +128,7 @@
                 {
                     ClientId = client.Id,
                     ClientFullName = $"{client.FirstName} {client.LastName}",
+                    //Role = roles[0],
                     Token = await this.GenerateJwtTokenAsync(client),
                     Result = true
                 };
@@ -160,30 +146,31 @@
         /// <returns>Dto with information for the client</returns>
         public async Task<ClientInfoDto?> GetClientInfoAsync(string Id)
         {
-            var client = await userManager.FindByIdAsync(Id);
+            //var client = await userManager.FindByIdAsync(Id);
 
-            if (client == null)
-            {
-                return null;
-            }
+            //if (client == null)
+            //{
+            //    return null;
+            //}
 
-            string? town = await dbContext.Towns
-                .Where(t => t.Id == client.TownId)
-                .Select(t => t.Name)
-                .FirstOrDefaultAsync();
+            //string? town = await dbContext.Towns
+            //    .Where(t => t.Id == client.TownId)
+            //    .Select(t => t.Name)
+            //    .FirstOrDefaultAsync();
 
-            return new ClientInfoDto()
-            {
-                Id = client.Id,
-                FirstName = client.FirstName,
-                LastName = client.LastName,
-                Email = client.Email,
-                DelivaryAddress = client.DelivaryAddress,
-                Balance = client.Balance,
-                IBAN = client.IBAN,
-                PhoneNumber = client.PhoneNumber,
-                Town = town
-            };
+            //return new ClientInfoDto()
+            //{
+            //    Id = client.Id,
+            //    FirstName = client.FirstName,
+            //    LastName = client.LastName,
+            //    Email = client.Email,
+            //    DelivaryAddress = client.DelivaryAddress,
+            //    Balance = client.Balance,
+            //    IBAN = client.IBAN,
+            //    PhoneNumber = client.PhoneNumber,
+            //    Town = town
+            //};
+            throw new ArgumentNullException();
         }
 
         /// <summary>
@@ -250,18 +237,18 @@
         /// </summary>
         /// <param name="client">The client model</param>
         /// <returns>Jwt token as string</returns>
-        private async Task<string> GenerateJwtTokenAsync(Client client)
+        private async Task<string> GenerateJwtTokenAsync(BaseUser client)
         {
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, client.Id.ToString()),
                 new Claim(ClaimTypes.Email, client.Email)
             };
-            var roles = await userManager.GetRolesAsync(client);
-            foreach (var role in roles)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, role));
-            }
+            //var roles = await userManager.GetRolesAsync(client);
+            //foreach (var role in roles)
+            //{
+            //    claims.Add(new Claim(ClaimTypes.Role, role));
+            //}
 
             var expires = DateTime.UtcNow.AddDays(7);
 
@@ -388,7 +375,7 @@
                 throw new ArgumentNullException(nameof(clientLoginDto));
             }
 
-            Client? client = await userManager.FindByEmailAsync(clientLoginDto.Email);
+            var client = await userManager.FindByEmailAsync(clientLoginDto.Email);
 
             if (client == null)
             {
@@ -437,7 +424,7 @@
             {
                 throw new ArgumentNullException();
             }
-            catch(Exception)
+            catch (Exception)
             {
             }
             return false;

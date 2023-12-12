@@ -199,5 +199,18 @@
 
             return BadRequest();
         }
+
+        [HttpGet]
+        [Route("emailConfirm")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> EmailConfirm([FromQuery] string userId, [FromQuery] string code)
+        {
+            await employeeService.ConfirmEmailAsync(userId, code);
+
+            return Ok();
+        }
     }
 }
