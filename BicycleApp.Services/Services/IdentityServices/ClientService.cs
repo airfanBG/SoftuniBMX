@@ -165,31 +165,30 @@
         /// <returns>Dto with information for the client</returns>
         public async Task<ClientInfoDto?> GetClientInfoAsync(string Id)
         {
-            //var client = await userManager.FindByIdAsync(Id);
+            var client = await dbContext.Clients.FirstOrDefaultAsync(c => c.Id == Id);
 
-            //if (client == null)
-            //{
-            //    return null;
-            //}
+            if (client == null)
+            {
+                return null;
+            }
 
-            //string? town = await dbContext.Towns
-            //    .Where(t => t.Id == client.TownId)
-            //    .Select(t => t.Name)
-            //    .FirstOrDefaultAsync();
+            string? town = await dbContext.Towns
+                .Where(t => t.Id == client.TownId)
+                .Select(t => t.Name)
+                .FirstOrDefaultAsync();
 
-            //return new ClientInfoDto()
-            //{
-            //    Id = client.Id,
-            //    FirstName = client.FirstName,
-            //    LastName = client.LastName,
-            //    Email = client.Email,
-            //    DelivaryAddress = client.DelivaryAddress,
-            //    Balance = client.Balance,
-            //    IBAN = client.IBAN,
-            //    PhoneNumber = client.PhoneNumber,
-            //    Town = town
-            //};
-            throw new ArgumentNullException();
+            return new ClientInfoDto()
+            {
+                Id = client.Id,
+                FirstName = client.FirstName,
+                LastName = client.LastName,
+                Email = client.Email,
+                DelivaryAddress = client.DelivaryAddress,
+                Balance = client.Balance,
+                IBAN = client.IBAN,
+                PhoneNumber = client.PhoneNumber,
+                Town = town
+            };
         }
 
         /// <summary>

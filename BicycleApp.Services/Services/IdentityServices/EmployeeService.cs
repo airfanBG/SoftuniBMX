@@ -167,35 +167,33 @@
         /// <returns>Dto</returns>
         public async Task<EmployeeInfoDto?> GetEmployeeInfoAsync(string Id)
         {
-            //var employee = await userManager.FindByIdAsync(Id);
+            var employee = await dbContext.Employees.FirstOrDefaultAsync(e => e.Id == Id);
 
-            //if (employee == null)
-            //{
-            //    return null;
-            //}
+            if (employee == null)
+            {
+                return null;
+            }
 
-            //string? department = await dbContext.Departments
-            //    .Where(d => d.Id == employee.DepartmentId)
-            //    .Select(d => d.Name)
-            //    .FirstOrDefaultAsync();
+            string? department = await dbContext.Departments
+                .Where(d => d.Id == employee.DepartmentId)
+                .Select(d => d.Name)
+                .FirstOrDefaultAsync();
 
-            //return new EmployeeInfoDto()
-            //{
-            //    Id = employee.Id,
-            //    FirstName = employee.FirstName,
-            //    LastName = employee.LastName,
-            //    Email = employee.Email,
-            //    Position = employee.Position,
-            //    Department = department,
-            //    PhoneNumber = employee.PhoneNumber,
-            //    DateCreated = employee.DateCreated.ToString(DefaultDateFormat),
-            //    DateOfHire = employee.DateOfHire.ToString(DefaultDateFormat),
-            //    DateOfLeave = employee.DateOfLeave == null ? null : employee.DateOfLeave.Value.ToString(DefaultDateFormat),
-            //    DateUpdated = employee.DateUpdated == null ? null : employee.DateUpdated.Value.ToString(DefaultDateFormat),
-            //    IsManeger = employee.IsManeger
-            //};
-
-            throw new ArgumentNullException();
+            return new EmployeeInfoDto()
+            {
+                Id = employee.Id,
+                FirstName = employee.FirstName,
+                LastName = employee.LastName,
+                Email = employee.Email,
+                Position = employee.Position,
+                Department = department,
+                PhoneNumber = employee.PhoneNumber,
+                DateCreated = employee.DateCreated.ToString(DefaultDateFormat),
+                DateOfHire = employee.DateOfHire.ToString(DefaultDateFormat),
+                DateOfLeave = employee.DateOfLeave == null ? null : employee.DateOfLeave.Value.ToString(DefaultDateFormat),
+                DateUpdated = employee.DateUpdated == null ? null : employee.DateUpdated.Value.ToString(DefaultDateFormat),
+                IsManeger = employee.IsManeger
+            };
         }
 
 
