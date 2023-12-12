@@ -28,10 +28,11 @@ export const environment = {
   // MANAGER
 
   // BIKE_SERVICES
-  // frames: "/frames/",
+  frames: "/api/accountpage/frames",
+  compatible_parts: "/api/accountpage/compatible_parts",
+  selected_part: "/api/accountpage/selected_part",
   // wheels: "/wheels/",
   // accessories: "/accessories/",
-  // selected_part: "/selected_part/",
 };
 
 // indexPage: "/indexPage",
