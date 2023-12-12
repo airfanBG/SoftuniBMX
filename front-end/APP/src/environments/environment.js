@@ -6,6 +6,8 @@ export const environment = {
   login_employee: "/api/employee/login",
   register_client: "/api/client/register",
   register_employee: "/api/employee/register",
+  reset_client: "/api/client/reset?email=", // + user email
+  reset_employee: "/api/employee/reset?email=", // + user email,
 
   // INDEX_PAGE
   indexPage: "/api/home/index",
@@ -15,17 +17,18 @@ export const environment = {
   // info_client: "/users/", // + id
 
   // EMPLOYEE
-  post_qControl: `/api/employee_order/quality_assurance?orderId=`,
-  del_order: `/api/manager/delete_order?orderId=`, // +id
-  approve_order: `/api/manager/approve_order?orderId=`, // + id
-  reject_order: `/api/manager/reject_order?orderId=`, // + id
   // update_employee: "/users/", // + id
   // info_employee: "/users/", // + id
   // get_all_employers: "/users?role=worker&role=manager&role=qControl",
+  worker_order_queue: "/api/employee_оrder/myOrders",
 
   // QUALITY_CONTROL
+  post_qControl: `/api/employee_order/quality_assurance?orderId=`,
 
   // MANAGER
+  approve_order: `/api/manager/approve_order?orderId=`, // + id
+  reject_order: `/api/manager/reject_order?orderId=`, // + id
+  del_order: `/api/manager/delete_order?orderId=`, // +id
 
   // BIKE_SERVICES
   frames: "/api/accountpage/frames",
