@@ -8,7 +8,7 @@
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
-    public class BicycleAppDbContext : IdentityDbContext<Employee, IdentityRole<string>, string>
+    public class BicycleAppDbContext : IdentityDbContext<Employee, IdentityRole, string>
     {
         public BicycleAppDbContext() : base()
         {

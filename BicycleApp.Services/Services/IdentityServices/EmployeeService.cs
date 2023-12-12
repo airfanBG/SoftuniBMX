@@ -26,15 +26,17 @@
     {
         private readonly UserManager<Employee> userManager;
         private readonly SignInManager<Employee> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly BicycleAppDbContext dbContext;
         private readonly IConfiguration configuration;
         private readonly IModelsFactory modelFactory;
         private readonly IEmailSender emailSender;
 
-        public EmployeeService(UserManager<Employee> userManager, SignInManager<Employee> signInManager, BicycleAppDbContext dbContext, IConfiguration configuration, IModelsFactory modelFactory, IEmailSender emailSender)
+        public EmployeeService(UserManager<Employee> userManager, SignInManager<Employee> signInManager, RoleManager<IdentityRole> roleManager, BicycleAppDbContext dbContext, IConfiguration configuration, IModelsFactory modelFactory, IEmailSender emailSender)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.roleManager = roleManager;
             this.dbContext = dbContext;
             this.configuration = configuration;
             this.modelFactory = modelFactory;
@@ -66,7 +68,18 @@
 
             var result = await this.userManager.CreateAsync(employee, employeeRegisterDto.Password);
 
-            //await userManager.AddToRoleAsync(employee, employeeRegisterDto.Role);
+            //var roleExists = await roleManager.RoleExistsAsync(employeeRegisterDto.Role);
+            //if (!roleExists)
+            //{
+            //    await roleManager.CreateAsync(new IdentityRole(employeeRegisterDto.Role));
+            //}
+            //var role = await roleManager.FindByNameAsync(employeeRegisterDto.Role);
+
+            //if (role != null)
+            //{
+            //    await userManager.AddToRoleAsync(employee, role.Name);
+            //}
+            
 
             if (result == null)
             {

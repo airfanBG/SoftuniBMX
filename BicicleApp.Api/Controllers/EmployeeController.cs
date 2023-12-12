@@ -81,7 +81,6 @@
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<EmployeeLoginDto>> LoginEmployee([FromBody] EmployeeLoginDto employeeLoginDto)
         {
-
             try
             {
                 if (employeeLoginDto == null)

@@ -55,7 +55,7 @@ namespace BicicleApp.Api
                 options.Password.RequiredLength = 5;
 
             })
-                .AddRoles<IdentityRole<string>>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<BicycleAppDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -69,8 +69,8 @@ namespace BicicleApp.Api
                 options.Password.RequiredLength = 5;
 
             })
-                .AddRoles<IdentityRole<string>>()
-                .AddEntityFrameworkStores<BicycleAppDbContext>();            
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<BicycleAppDbContext>();
 
             var jwtSecret = builder.Configuration["JwtSecret"];
             var key = Encoding.ASCII.GetBytes(jwtSecret);

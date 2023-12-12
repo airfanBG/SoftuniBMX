@@ -20,6 +20,7 @@
     {
         private readonly UserManager<Client> userManager;
         private readonly SignInManager<Client> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly BicycleAppDbContext dbContext;
         private readonly IConfiguration configuration;
         private readonly IModelsFactory modelFactory;
@@ -27,10 +28,11 @@
         private readonly IStringManipulator stringManipulator;
         private readonly IOptionProvider optionProvider;
 
-        public ClientService(UserManager<Client> userManager, SignInManager<Client> signInManager, BicycleAppDbContext dbContext, IConfiguration configuration, IModelsFactory modelFactory, IEmailSender emailSender, IStringManipulator stringManipulator, IOptionProvider optionProvider)
+        public ClientService(UserManager<Client> userManager, SignInManager<Client> signInManager, RoleManager<IdentityRole> roleManager, BicycleAppDbContext dbContext, IConfiguration configuration, IModelsFactory modelFactory, IEmailSender emailSender, IStringManipulator stringManipulator, IOptionProvider optionProvider)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.roleManager = roleManager;
             this.dbContext = dbContext;
             this.configuration = configuration;
             this.modelFactory = modelFactory;
@@ -62,7 +64,19 @@
             Client client = this.modelFactory.CreateNewClientModel(clientDto);
             client.TownId = await this.GetTownIdAsync(clientDto.Town);
             var result = await this.userManager.CreateAsync(client, clientDto.Password);
-            //await userManager.AddToRoleAsync(client, clientDto.Role);
+
+            //var roleExists = await roleManager.RoleExistsAsync(clientDto.Role);
+            //if (!roleExists)
+            //{
+            //    await roleManager.CreateAsync(new IdentityRole(clientDto.Role));
+            //}
+
+            //var role = await roleManager.FindByNameAsync(clientDto.Role);
+
+            //if (role != null)
+            //{
+            //    await userManager.AddToRoleAsync(client, role.Name);
+            //}
 
             if (result == null)
             {
