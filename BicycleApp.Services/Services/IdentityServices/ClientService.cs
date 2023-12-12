@@ -119,16 +119,16 @@
                 return new ClientReturnDto() { Result = false };
             }
 
-            var result = await signInManager.PasswordSignInAsync(clientDto.Email, clientDto.Password, false, lockoutOnFailure: false);
+            //var result = await signInManager.PasswordSignInAsync(clientDto.Email, clientDto.Password, false, lockoutOnFailure: false);
+            var result = await signInManager.CheckPasswordSignInAsync(client, clientDto.Password, false);
 
             if (result.Succeeded)
             {
-                var roles = await userManager.GetRolesAsync(client);
+                //var roles = await userManager.GetRolesAsync(client);
                 return new ClientReturnDto()
                 {
                     ClientId = client.Id,
                     ClientFullName = $"{client.FirstName} {client.LastName}",
-                    Role = roles[0],
                     Token = await this.GenerateJwtTokenAsync(client),
                     Result = true
                 };

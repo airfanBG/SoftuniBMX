@@ -66,7 +66,7 @@
 
             var result = await this.userManager.CreateAsync(employee, employeeRegisterDto.Password);
 
-            await userManager.AddToRoleAsync(employee, employeeRegisterDto.Role);
+            //await userManager.AddToRoleAsync(employee, employeeRegisterDto.Role);
 
             if (result == null)
             {
@@ -110,17 +110,17 @@
                 return new EmployeeReturnDto() { Result = false };
             }
 
-            var result = await signInManager.PasswordSignInAsync(employeeDto.Email, employeeDto.Password, false, lockoutOnFailure: false);
+            //var result = await signInManager.PasswordSignInAsync(employeeDto.Email, employeeDto.Password, false, lockoutOnFailure: false);
+            var result = await signInManager.CheckPasswordSignInAsync(employee, employeeDto.Password, false);
 
             if (result.Succeeded)
             {
-                var roles = await userManager.GetRolesAsync(employee);
+                //var roles = await userManager.GetRolesAsync(employee);
                 return new EmployeeReturnDto()
                 {
                     EmployeeId = employee.Id,
                     EmployeeFullName = $"{employee.FirstName} {employee.LastName}",
                     Token = await this.GenerateJwtTokenAsync(employee),
-                    Role = roles[0],
                     Result = true,
                 };
             }

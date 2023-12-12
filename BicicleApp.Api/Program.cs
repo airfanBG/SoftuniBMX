@@ -70,7 +70,7 @@ namespace BicicleApp.Api
 
             })
                 .AddRoles<IdentityRole<string>>()
-                .AddEntityFrameworkStores<BicycleAppDbContext>();
+                .AddEntityFrameworkStores<BicycleAppDbContext>();            
 
             var jwtSecret = builder.Configuration["JwtSecret"];
             var key = Encoding.ASCII.GetBytes(jwtSecret);

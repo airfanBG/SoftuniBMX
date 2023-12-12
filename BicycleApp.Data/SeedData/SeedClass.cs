@@ -32,7 +32,8 @@
                 IsDeleted = false,
                 DateCreated = DateTime.Now,
                 DateUpdated = null,
-                DateDeleted = null
+                DateDeleted = null,
+                EmailConfirmed = true
             };
 
             client.PasswordHash = hasher.HashPassword(client, pass);
@@ -54,7 +55,8 @@
                 IsDeleted = false,
                 DateCreated = DateTime.Now,
                 DateUpdated = null,
-                DateDeleted = null
+                DateDeleted = null,
+                EmailConfirmed = true
             };
 
             client2.PasswordHash = hasher.HashPassword(client2, pass);
@@ -76,7 +78,8 @@
                 IsDeleted = false,
                 DateCreated = DateTime.Now,
                 DateUpdated = null,
-                DateDeleted = null
+                DateDeleted = null,
+                EmailConfirmed = true
             };
 
             client3.PasswordHash = hasher.HashPassword(client3, pass);
@@ -114,7 +117,8 @@
                 DateOfLeave = null,
                 IsDeleted = false,
                 DepartmentId = 1,
-                IsManeger = true
+                IsManeger = true,
+                EmailConfirmed = true
             };
             manager.PasswordHash = hasher.HashPassword(manager, pass);
 
@@ -137,7 +141,8 @@
                 DateOfLeave = null,
                 IsDeleted = false,
                 DepartmentId = 2,
-                IsManeger = false
+                IsManeger = false,
+                EmailConfirmed = true
             };
             employee.PasswordHash = hasher.HashPassword(employee, pass);
 
@@ -160,7 +165,8 @@
                 DateOfLeave = null,
                 IsDeleted = false,
                 DepartmentId = 2,
-                IsManeger = false
+                IsManeger = false,
+                EmailConfirmed = true
             };
             worker2.PasswordHash = hasher.HashPassword(worker2, pass);
 
@@ -183,7 +189,8 @@
                 DateOfLeave = null,
                 IsDeleted = false,
                 DepartmentId = 2,
-                IsManeger = false
+                IsManeger = false,
+                EmailConfirmed = true
             };
             worker3.PasswordHash = hasher.HashPassword(worker3, pass);
 
@@ -206,7 +213,8 @@
                 DateOfLeave = null,
                 IsDeleted = false,
                 DepartmentId = 2,
-                IsManeger = false
+                IsManeger = false,
+                EmailConfirmed = true
             };
             worker4.PasswordHash = hasher.HashPassword(worker4, pass);
 
