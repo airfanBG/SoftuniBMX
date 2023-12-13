@@ -21,7 +21,7 @@ function UserInfo() {
     // TODO: make request to update user balance
     //next is only for testing
 
-    const currentUser = await userInfo(user.id);
+    const currentUser = await userInfo(user.id, user.role);
 
     if (add === 0) return;
     updateUser({ ...user, balance: user.balance + add });

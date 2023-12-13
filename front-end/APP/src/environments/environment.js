@@ -14,11 +14,11 @@ export const environment = {
 
   // CLIENT
   // update_client: "/users/", // + id
-  // info_client: "/users/", // + id
+  info_client: "/api/client/info?id=", // + id
 
   // EMPLOYEE
   // update_employee: "/users/", // + id
-  // info_employee: "/users/", // + id
+  info_employee: "/api/employee/info?id=", // + id
   // get_all_employers: "/users?role=worker&role=manager&role=qControl",
   worker_order_queue: "/api/employee_order/myOrders",
 
