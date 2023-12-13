@@ -67,21 +67,26 @@ function OrderItem({ product, onBtnHandler, orderId, orderIndex }) {
   );
 
   function onButtonClick() {
-    let currentDate = new Date().getTime();
-    // let currentDate = new Date();
-    // console.log("in btn");
+    let currentDate = new Date().toISOString();
 
-    if (item.startedTime === "" && item.finishedTime === "") {
-      setItem({
-        ...item,
-        startedTime: currentDate,
-        nameOfEmplоyeeProducedThePart: `${user.firstName} ${user.lastName}`,
-      });
-      setFirstCall(!firstCall);
-    } else if (item.startedTime !== "" && item.finishedTime === "") {
-      setItem({ ...item, finishedTime: currentDate, isProduced: true });
-      setIsDone(!isDone);
-    }
+    const model = {
+      partId: product.partId,
+      employeeId: user.id,
+      dateTime: currentDate,
+    };
+    console.log(model);
+
+    // if (item.startedTime === "" && item.finishedTime === "") {
+    //   setItem({
+    //     ...item,
+    //     startedTime: currentDate,
+    //     nameOfEmplоyeeProducedThePart: `${user.firstName} ${user.lastName}`,
+    //   });
+    //   setFirstCall(!firstCall);
+    // } else if (item.startedTime !== "" && item.finishedTime === "") {
+    //   setItem({ ...item, finishedTime: currentDate, isProduced: true });
+    //   setIsDone(!isDone);
+    // }
   }
 
   async function finishedJob(id) {
