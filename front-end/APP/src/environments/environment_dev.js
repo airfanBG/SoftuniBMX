@@ -1,8 +1,8 @@
 export const environment = {
   // TODO: fix routes in services
-  BASE_URL: "http://localhost:9000",
+  BASE_URL: "http://localhost:7047",
 
-  login: "/login",
+  login: "/api/employee/login",
   register_client: "/api/client/register",
   register_employee: "/api/employee/register",
 
