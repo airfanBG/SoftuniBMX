@@ -12,7 +12,6 @@ function OrderItem({ product, onBtnHandler, orderId, orderIndex }) {
   const { user } = useContext(UserContext);
   const [index, setIndex] = useState(null);
   const [item, setItem] = useState("");
-  // const [id, setId] = useState("");
   const [firstCall, setFirstCall] = useState(false);
   const [isDone, setIsDone] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -20,32 +19,33 @@ function OrderItem({ product, onBtnHandler, orderId, orderIndex }) {
 
   let newProduct = {};
 
-  useEffect(function () {
-    const abortController = new AbortController();
-    // setId(product.id);
-    // console.log(product);
+  // useEffect(function () {
+  //   const abortController = new AbortController();
+  //   // setId(product.id);
+  //   console.log(product);
 
-    setMeta({
-      id: product.id,
-      dateCreated: product.dateCreated,
-      serialNumber: product.serialNumber,
-    });
+  //   setMeta({
+  //     id: product.partId,
+  //     dateCreated: product.datetimeAsigned,
+  //     serialNumber: product.orderSerialNumber,
+  //   });
 
-    if (user.department === "Frames") {
-      setItem(product.orderStates[0]);
-      setIndex(0);
-    }
-    if (user.department === "Wheels") {
-      setItem(product.orderStates[1]);
-      setIndex(1);
-    }
-    if (user.department === "Accessory") {
-      setItem(product.orderStates[2]);
-      setIndex(2);
-    }
+  //   setItem(product);
+  //   setIndex(0);
 
-    return () => abortController.abort();
-  }, []);
+  //   return () => abortController.abort();
+  // }, []);
+
+  //   {
+  //     "orderSerialNumber": "BID12345679",
+  //     "partId": 1,
+  //     "partName": "Frame Road",
+  //     "partOEMNumber": "oemtest1",
+  //     "quantity": 1,
+  //     "datetimeAsigned": "13/12/2023 20:40",
+  //     "datetimeFinished": null,
+  //     "description": null
+  // }
 
   useEffect(
     function () {
@@ -97,7 +97,6 @@ function OrderItem({ product, onBtnHandler, orderId, orderIndex }) {
       setLoading(false);
     }
   }
-
   return (
     <>
       {loading && <LoaderWheel />}
@@ -105,36 +104,38 @@ function OrderItem({ product, onBtnHandler, orderId, orderIndex }) {
         <header className={styles.header}>
           <p className={styles.model}>
             <span>SN: </span>
-            {meta.serialNumber}
+            {product.orderSerialNumber}
           </p>
-          <p className={styles.model}>
+          {/* <p className={styles.model}>
             <span>Date created: </span>
-            {meta.dateCreated}
-          </p>
+            {product.dateCreated}
+          </p> */}
         </header>
 
         {/* <div className={styles.info}> */}
         <h3 className={styles.brand}>
           <span>Brand: </span>
-          {item.partType}
+          {product.partName}
         </h3>
         <p className={styles.model}>
-          <span>Model: </span>
-          {item.partModel}
+          <span>OEM Number: </span>
+          {product.partOEMNumber}
         </p>
         <div className={styles.model}>
           <span>Description:</span>
-          {item.description}
+          {product.description}
         </div>
         {/* </div> */}
         {/* <div className={styles.info}> */}
         <p className={styles.model}>
           <span>Started on: </span>
-          {item.startedTime && new Date(item.startedTime).toDateString()}
+          {product.datetimeAsigned &&
+            product.datetimeAsigned.replaceAll("/", ".")}
         </p>
         <p className={`${styles.model} ${styles.shortLine}`}>
           <span>Finished on: </span>
-          {item.finishedTime && new Date(item.finishedTime).toDateString()}
+          {product.datetimeFinished &&
+            product.datetimeFinished.replaceAll("/", ".")}
         </p>
         {/* <p className={styles.partId}>ID# {item.partId}</p> */}
         <p className={styles.partId}>ID# {orderId + "-" + item.partId}</p>
@@ -143,25 +144,30 @@ function OrderItem({ product, onBtnHandler, orderId, orderIndex }) {
         <div className={styles.timer}>
           <p className={styles.prod}>
             <span>Produced by: </span>
-            {item.nameOfEmplоyeeProducedThePart}
+            {`${user.firstName} ${user.lastName}`}
           </p>
           <button
             className={styles.startBtn}
             onClick={onButtonClick}
-            disabled={item.isProduced || orderIndex !== 0}
+            disabled={orderIndex !== 0}
           >
-            {item.startedTime === "" &&
-              item.finishedTime === "" &&
+            {/* {product.datetimeAsigned === "" &&
+              product.datetimeFinished === "" &&
               orderIndex !== 0 &&
               "to Queue"}
-            {item.startedTime === "" &&
-              item.finishedTime === "" &&
+            {product.datetimeAsigned === "" &&
+              product.datetimeFinished === "" &&
               orderIndex === 0 &&
               "Start"}
-            {item.startedTime !== "" &&
-              item.finishedTime === "" &&
+            {product.datetimeAsigned !== "" &&
+              product.datetimeFinished === "" &&
               "In Progress"}
-            {item.startedTime !== "" && item.finishedTime !== "" && "Finished"}
+            {product.datetimeAsigned !== "" &&
+              product.datetimeFinished !== "" &&
+              "Finished"} */}
+            {orderIndex === 0 && !product.datetimeAsigned && "Start"}
+            {orderIndex === 0 && product.datetimeAsigned && "In Progress"}
+            {orderIndex !== 0 && "to Queue"}
           </button>
         </div>
 
