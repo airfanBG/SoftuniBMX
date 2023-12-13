@@ -31,6 +31,7 @@ export const environment = {
   approve_order: "/api/manager/approve_order?orderId=", // + id
   reject_order: "/api/manager/reject_order?orderId=", // + id
   del_order: "/api/manager/delete_order?orderId=", // +id
+  in_progress_orders: "/api/manager/orders_in_progress",
 
   // BIKE_SERVICES
   frames: "/api/accountpage/frames",
