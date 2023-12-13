@@ -7,7 +7,7 @@
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
-    [Route("api/employee_оrder")]
+    [Route("api/employee_order")]
     [ApiController]
     public class EmployeeOrderController : ControllerBase
     {
