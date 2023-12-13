@@ -14,7 +14,7 @@
         {
             return new List<IdentityRole>
             {
-                new IdentityRole(){ Id = "6ac1cb3c-2457-4aff-8fa2-c7052ebcea9e", Name = "client", NormalizedName = "client".ToUpper()},
+                new IdentityRole(){ Id = "6ac1cb3c-2457-4aff-8fa2-c7052ebcea9e", Name = "user", NormalizedName = "user".ToUpper()},
                 new IdentityRole(){ Id = "f0d2cbfa-cdca-4936-9d85-f9a697d39f2b", Name = "manager", NormalizedName = "manager".ToUpper()},
                 new IdentityRole(){ Id = "fa8f997a-4e15-475f-a028-87a9b6e6be56", Name = "frameworker", NormalizedName = "frameworker".ToUpper()},
                 new IdentityRole(){ Id = "a9618213-7ba0-48cf-81d4-00cd16910ec7", Name = "wheelworker", NormalizedName = "wheelworker".ToUpper()},
