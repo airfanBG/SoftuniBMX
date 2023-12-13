@@ -202,8 +202,7 @@ const MOCK_DATA = [
 ];
 
 function WorkerOrders() {
-  // TODO: докато оправят сървъра
-  // const { user } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [workerList, setWorkerList] = useState([]);
   const [isFinished, setIsFinished] = useState(false);
   const [meta, setMeta] = useState({});
@@ -215,9 +214,7 @@ function WorkerOrders() {
 
       async function getJobs() {
         // TODO: докато оправят сървъра
-        // const workerSequence = await get(environment.worker_order_queue);
-        const workerSequence = MOCK_DATA;
-        const user = { department: "Frames" };
+        const workerSequence = await get(environment.worker_order_queue);
 
         workerSequence.sort((a, b) => a.dateCreated - b.dateCreated);
 
@@ -240,7 +237,6 @@ function WorkerOrders() {
               !x.orderStates[2].isProduced
           );
         }
-        console.log(workerSequence);
         setWorkerList(orderArray);
       }
       getJobs();

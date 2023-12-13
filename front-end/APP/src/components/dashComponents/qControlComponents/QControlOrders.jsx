@@ -1,6 +1,6 @@
 import styles from "./QControlOrders.module.css";
 
-import { useEffect, useReducer } from "react";
+import { useEffect, useMemo, useReducer } from "react";
 import LoaderWheel from "../../LoaderWheel.jsx";
 import Paginator from "../../Paginator.jsx";
 import BoardHeader from "../BoardHeader.jsx";
@@ -40,12 +40,50 @@ function reducer(state, action) {
   }
 }
 
+const MOCK_DATA = {
+  totalOrdersCount: 7,
+  orders: [
+    {
+      orderId: 3,
+      serialNumber: "BID12345680",
+      dateCreated: "2023-12-12 18:09:55.3200734",
+      dateFinished: null,
+      orderParts: [
+        {
+          partId: 1,
+          description: "test",
+          partName: "Frame OG",
+          partQuantity: 1,
+          partQunatityInStock: 2,
+        },
+        {
+          partId: 5,
+          description: "test",
+          partName: "Wheel of the Year for montain",
+          partQuantity: 6,
+          partQunatityInStock: 40,
+        },
+        {
+          partId: 11,
+          description: "test",
+          partName: "Road budget Shifts",
+          partQuantity: 4,
+          partQunatityInStock: 21,
+        },
+      ],
+    },
+  ],
+};
+
 function QControlOrders() {
   const [
     { loading, orderList, error, page, itemPerPage, length, chunkData, status },
     dispatch,
   ] = useReducer(reducer, initialState);
-  const dataArray = [];
+
+  const dataArray = useMemo(() => {
+    return [];
+  }, []);
 
   useEffect(
     function () {
@@ -80,7 +118,7 @@ function QControlOrders() {
 
       return () => abortController.abort();
     },
-    [status]
+    [status, dataArray]
   );
 
   useEffect(
