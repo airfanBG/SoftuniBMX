@@ -12,7 +12,8 @@ export async function login(user) {
       : environment.login_client;
 
   const result = await post(path, user);
-  if (!result.accessToken) return;
+  console.log(result);
+  if (!result.token) return;
   if (result.user.role === "worker" || result.user.role === "manager")
     clearOrderData();
   // setUserData(result);
