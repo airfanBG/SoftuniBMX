@@ -176,7 +176,6 @@ function Register() {
   async function formSubmitHandler(e) {
     e.preventDefault();
 
-    // TODO: remove repass from response before production
     const user = {
       firstName: values.firstName,
       lastName: values.lastName,
@@ -186,11 +185,10 @@ function Register() {
       iban: values.iban,
       balance: Number(values.balance),
       phoneNumber: values.phone,
-      city: values.city,
+      town: values.city,
       role: "user",
-      address: {
+      deliveryAddress: {
         country: values.country,
-        city: values.city,
         postCode: values.postCode,
         district: values.district,
         block: values.block,
