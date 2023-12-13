@@ -37,36 +37,37 @@ function GlobalUser({ children }) {
 
 export const OrdersContext = createContext();
 
-function OrdersManager({ children }) {
-  const [orders, setOrders] = useState({});
+// function OrdersManager({ children }) {
+//   const [orders, setOrders] = useState({});
 
-  useEffect(function () {
-    const abortController = new AbortController();
+//   useEffect(function () {
+//     const abortController = new AbortController();
 
-    async function getOrders() {
-      const orders = await getList("orders");
-      orders.sort((a, b) => a.createdAt - b.createdAt);
-      setOrders(orders);
-    }
-    getOrders();
+//     async function getOrders() {
+//       const orders = await getList("orders");
+//       orders.sort((a, b) => a.createdAt - b.createdAt);
+//       setOrders(orders);
+//     }
+//     getOrders();
 
-    return () => abortController.abort();
-  }, []);
+//     return () => abortController.abort();
+//   }, []);
 
-  function onOrdersChange(newData) {
-    setOrders(newData);
-  }
+//   function onOrdersChange(newData) {
+//     setOrders(newData);
+//   }
 
-  return (
-    <OrdersContext.Provider
-      value={{
-        orders,
-        onOrdersChange,
-      }}
-    >
-      {children}
-    </OrdersContext.Provider>
-  );
-}
+//   return (
+//     <OrdersContext.Provider
+//       value={{
+//         orders,
+//         onOrdersChange,
+//       }}
+//     >
+//       {children}
+//     </OrdersContext.Provider>
+//   );
+// }
 
-export { GlobalUser, OrdersManager };
+// export { GlobalUser, OrdersManager };
+export { GlobalUser };

@@ -44,11 +44,11 @@ function Navigation() {
               About
             </NavLink>
           </li>
-          {/* <li className={styles.navListItem}>
+          <li className={styles.navListItem}>
             <NavLink to={"/contacts"} className={styles.navLink}>
               Contacts
             </NavLink>
-          </li> */}
+          </li>
           <li className={styles.navListItem}>
             {user ? (
               <NavLink to={"/profile"} className={styles.navLink}>

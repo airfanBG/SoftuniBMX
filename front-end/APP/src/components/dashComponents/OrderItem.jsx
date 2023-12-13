@@ -5,7 +5,7 @@ import { secondsToTime } from "../../util/util.js";
 import { UserContext } from "../../context/GlobalUserProvider.jsx";
 import { useNavigate } from "react-router-dom";
 import { put } from "../../util/api.js";
-import { environment } from "../../environments/environment_dev.js";
+import { environment } from "../../environments/environment.js";
 import LoaderWheel from "../LoaderWheel.jsx";
 
 function OrderItem({ product, onBtnHandler, orderId, orderIndex }) {

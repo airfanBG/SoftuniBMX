@@ -6,6 +6,200 @@ import { get } from "../../../util/api.js";
 import OrderItem from "../OrderItem.jsx";
 import BoardHeader from "../BoardHeader.jsx";
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
+import { environment } from "../../../environments/environment.js";
+
+const MOCK_DATA = [
+  {
+    id: 4,
+    ownerId: 1,
+    serialNumber: "BID28YUOCH0",
+    dateCreated: "15/09/2023",
+    orderStates: [
+      {
+        partId: 1,
+        partType: "Frame 4",
+        partModel: "First Frame OG 4",
+        nameOfEmplоyeeProducedThePart: "Jaba The Hut",
+        isProduced: true,
+        startedTime: 1701974864834,
+        finishedTime: 1701974877891,
+        description: "",
+      },
+      {
+        partId: 2,
+        partType: "Wheel from ID 4",
+        partModel: "Wheel of the Year",
+        nameOfEmplоyeeProducedThePart: "",
+        isProduced: false,
+        startedTime: "",
+        finishedTime: "",
+        description: "",
+      },
+      {
+        partId: 3,
+        partType: "Shift from ID 4",
+        partModel: "Shift from ID 4",
+        nameOfEmplоyeeProducedThePart: "",
+        isProduced: false,
+        startedTime: "",
+        finishedTime: "",
+        description: "",
+      },
+    ],
+  },
+  {
+    id: 1,
+    ownerId: 2,
+    serialNumber: "BID28YUOCH0",
+    dateCreated: "15/11/2023",
+    orderStates: [
+      {
+        partId: 1,
+        partType: " Second Frame 1",
+        partModel: "Frame OG 1",
+        nameOfEmplоyeeProducedThePart: "Jaba The Hut",
+        isProduced: true,
+        startedTime: 1701634811501,
+        finishedTime: 1701635050418,
+        description: "",
+      },
+      {
+        partId: 2,
+        partType: "Wheel from ID 1",
+        partModel: "Wheel of the Year",
+        nameOfEmplоyeeProducedThePart: "Luke Skywalker",
+        isProduced: true,
+        startedTime: 1701635767403,
+        finishedTime: 1701635806376,
+        description: "",
+      },
+      {
+        partId: 3,
+        partType: "Shift  from ID 1",
+        partModel: "Shift  from ID 1",
+        nameOfEmplоyeeProducedThePart: "Lea Organa",
+        isProduced: false,
+        startedTime: 1701635970424,
+        finishedTime: "",
+        description: "",
+      },
+    ],
+  },
+  {
+    id: 2,
+    ownerId: 3,
+    serialNumber: "BID28YUOCH0",
+    dateCreated: "06/01/2023",
+    orderStates: [
+      {
+        partId: 1,
+        partType: "Some Frame 2",
+        partModel: "Frame OG 2",
+        nameOfEmplоyeeProducedThePart: "Jaba The Hut",
+        isProduced: true,
+        startedTime: 1702195213128,
+        finishedTime: 1702195266837,
+        description: "",
+      },
+      {
+        partId: 2,
+        partType: "Wheel 2",
+        partModel: "Wheel of the Year 2",
+        nameOfEmplоyeeProducedThePart: "",
+        isProduced: false,
+        startedTime: "",
+        finishedTime: "",
+        description: "",
+      },
+      {
+        partId: 3,
+        partType: "Shift 2",
+        partModel: "Shift 2",
+        nameOfEmplоyeeProducedThePart: " ",
+        isProduced: false,
+        startedTime: "",
+        finishedTime: "",
+        description: "",
+      },
+    ],
+  },
+  {
+    id: 6,
+    ownerId: 1,
+    serialNumber: "BID28YUOCH0",
+    dateCreated: "06/01/2023",
+    orderStates: [
+      {
+        partId: 1,
+        partType: "Some Frame 2",
+        partModel: "Frame OG 2",
+        nameOfEmplоyeeProducedThePart: "Jaba The Hut",
+        isProduced: true,
+        startedTime: 1701635897633,
+        finishedTime: 1701642057452,
+        description: "",
+      },
+      {
+        partId: 2,
+        partType: "Wheel 2",
+        partModel: "Wheel of the Year",
+        nameOfEmplоyeeProducedThePart: "Luke Skywalker",
+        isProduced: true,
+        startedTime: 1701642100907,
+        finishedTime: 1701642100917,
+        description: "",
+      },
+      {
+        partId: 3,
+        partType: "Shift 2",
+        partModel: "Shift 2",
+        nameOfEmplоyeeProducedThePart: "Lea Organa",
+        isProduced: true,
+        startedTime: 1901635899633,
+        finishedTime: 1901635899633,
+        description: "",
+      },
+    ],
+  },
+  {
+    id: 14,
+    ownerId: 3,
+    serialNumber: "BID28YUOCH0",
+    dateCreated: "18/10/2023",
+    orderStates: [
+      {
+        partId: 1,
+        partType: "Some Frame",
+        partModel: "Frame OG",
+        nameOfEmplоyeeProducedThePart: "",
+        isProduced: false,
+        startedTime: "",
+        finishedTime: "",
+        description: "",
+      },
+      {
+        partId: 2,
+        partType: "Wheel 2",
+        partModel: "Wheel of the Year 2",
+        nameOfEmplоyeeProducedThePart: "",
+        isProduced: false,
+        startedTime: "",
+        finishedTime: "",
+        description: "",
+      },
+      {
+        partId: 3,
+        partType: "Shift 2",
+        partModel: "Shift 2",
+        nameOfEmplоyeeProducedThePart: " ",
+        isProduced: false,
+        startedTime: "",
+        finishedTime: "",
+        description: "",
+      },
+    ],
+  },
+];
 
 function WorkerOrders() {
   const { user } = useContext(UserContext);
@@ -19,7 +213,9 @@ function WorkerOrders() {
       const abortController = new AbortController();
 
       async function getJobs() {
-        const workerSequence = await get("/production/");
+        // TODO: докато оправят сървъра
+        const workerSequence = await get(environment.worker_order_queue);
+
         workerSequence.sort((a, b) => a.dateCreated - b.dateCreated);
 
         setMeta({ id: workerSequence.id });
@@ -41,7 +237,6 @@ function WorkerOrders() {
               !x.orderStates[2].isProduced
           );
         }
-        // console.log(workerSequence);
         setWorkerList(orderArray);
       }
       getJobs();

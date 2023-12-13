@@ -30,13 +30,15 @@ function Order({ order, onStatusChange }) {
   // }
 
   async function onBtnClickHandler(type, id) {
+    let result = {};
     if (type === "approve") {
-      approveHandlerAction(id);
+      result = approveHandlerAction(id);
     } else if (type === "reject") {
-      onRejectHandler(id);
+      result = onRejectHandler(id);
     } else if (type === "delete") {
-      onDeleteHandler(id);
+      result = onDeleteHandler(id);
     }
+    console.log(result);
     onStatusChange();
   }
 
