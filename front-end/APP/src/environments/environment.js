@@ -20,7 +20,7 @@ export const environment = {
   // update_employee: "/users/", // + id
   // info_employee: "/users/", // + id
   // get_all_employers: "/users?role=worker&role=manager&role=qControl",
-  worker_order_queue: "/api/employee_оrder/myOrders",
+  worker_order_queue: "/api/employee_order/myOrders",
 
   // QUALITY_CONTROL
   quality_assurance: "/api/employee_order/quality_assurance",
