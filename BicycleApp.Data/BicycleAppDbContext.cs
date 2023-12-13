@@ -337,6 +337,8 @@
             builder.Entity<PartOrder>(entity => entity.HasData(seeder.SeedPartOrders()));
             builder.Entity<IdentityRole>(entity => entity.HasData(seeder.SeedRoles()));
             builder.Entity<IdentityUserRole<string>>(entity => entity.HasData(seeder.SeedRolesUsers()));
+            builder.Entity<BikeStandartModel>(entity => entity.HasData(seeder.SeedBikeStandartModels()));
+            builder.Entity<BikeModelPart>(entity => entity.HasData(seeder.SeedBikeModelPartls()));
 
             base.OnModelCreating(builder);
         }
