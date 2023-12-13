@@ -24,7 +24,7 @@ function InProgress() {
     const abortController = new AbortController();
 
     async function getInProgressOrders() {
-      const result = await get(environment.get_all_in_progress);
+      const result = await get(environment.in_progress_orders);
       if (!result) {
         setLoading(false);
         return setError({

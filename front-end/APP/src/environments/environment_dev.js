@@ -1,6 +1,6 @@
 export const environment = {
   // TODO: fix routes in services
-  BASE_URL: "https://localhost:7047",
+  BASE_URL: "http://localhost:9000",
 
   indexPage: "/api/home/index",
   register_client: "/api/client/register",

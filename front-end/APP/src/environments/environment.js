@@ -23,12 +23,15 @@ export const environment = {
   worker_order_queue: "/api/employee_order/myOrders",
 
   // QUALITY_CONTROL
-  post_qControl: `/api/employee_order/quality_assurance?orderId=`,
+  quality_assurance: "/api/employee_order/quality_assurance",
+  pass_qControl: "/api/employee_order/quality_assurance?orderId=",
+  return_qControl: "/api/employee_order/quality_assurance_return",
 
   // MANAGER
-  approve_order: `/api/manager/approve_order?orderId=`, // + id
-  reject_order: `/api/manager/reject_order?orderId=`, // + id
-  del_order: `/api/manager/delete_order?orderId=`, // +id
+  approve_order: "/api/manager/approve_order?orderId=", // + id
+  reject_order: "/api/manager/reject_order?orderId=", // + id
+  del_order: "/api/manager/delete_order?orderId=", // +id
+  in_progress_orders: "/api/manager/orders_in_progress",
 
   // BIKE_SERVICES
   frames: "/api/accountpage/frames",
@@ -60,5 +63,4 @@ export const environment = {
 // // TODO: Uncomment approved in orderActions
 // //reject_order: `/api/manager/reject_order?orderId=`, // + id
 
-// quality_assurance: "/quality_assurance/",
 // post_qControl: `/api/employee_оrder/quality_assurance?orderId=`,
