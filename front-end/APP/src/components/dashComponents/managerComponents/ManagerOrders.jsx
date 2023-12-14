@@ -57,12 +57,15 @@ function ManagerOrders() {
         dispatch({ type: "length/isSet", payload: data.totalOrdersCount });
         dispatch({ type: "orders/received", payload: data.orders });
         dispatch({ type: "isLoading", payload: false });
+        if (Math.ceil(data.totalOrdersCount / itemPerPage) < page) {
+          dispatch({ type: "page/hasChanged", payload: 1 });
+        }
       }
       getOrdersPagination();
 
       return () => abortController.abort();
     },
-    [rerender, page]
+    [rerender, page, itemPerPage]
   );
 
   function handlePage(page) {
@@ -73,6 +76,7 @@ function ManagerOrders() {
     dispatch({ type: "isLoading", payload: true });
     dispatch({ type: "toRerender" });
     dispatch({ type: "isLoading", payload: false });
+    console.log("re-render");
   }
 
   if (orders.length === 0) return <h2>There is no orders in this category</h2>;
@@ -86,7 +90,7 @@ function ManagerOrders() {
           <div className={styles.orders}>
             {orders.map((order) => (
               <Order
-                key={order.id}
+                key={order.orderId}
                 order={order}
                 onStatusChange={onStatusChange}
               />
