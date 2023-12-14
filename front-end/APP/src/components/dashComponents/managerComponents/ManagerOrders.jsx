@@ -6,6 +6,7 @@ import Paginator from "../../Paginator.jsx";
 import { usePagination } from "../../../customHooks/usePaginationArray.js";
 import { environment } from "../../../environments/environment.js";
 import LoaderWheel from "../../LoaderWheel.jsx";
+import { get } from "../../../util/api.js";
 
 const initialState = {
   orders: {},
@@ -14,6 +15,7 @@ const initialState = {
   page: 1,
   rerender: false,
   loading: false,
+  itemPerPage: 6,
 };
 
 function reducer(state, action) {
@@ -28,7 +30,7 @@ function reducer(state, action) {
       };
     case "length/isSet":
       return { ...state, length: action.payload };
-    case "page/isChanged":
+    case "page/hasChanged":
       return { ...state, page: action.payload };
     case "toRerender":
       return { ...state, rerender: !state.rerender };
@@ -41,66 +43,30 @@ function reducer(state, action) {
 }
 
 function ManagerOrders() {
-  const [{ orders, dataReceived, length, page, rerender, loading }, dispatch] =
+  const [{ orders, length, page, rerender, loading, itemPerPage }, dispatch] =
     useReducer(reducer, initialState);
-
-  // useEffect(function () {
-  //   const abortController = new AbortController();
-
-  //   async function getOrders() {
-  //     const orders = await getOrdersList();
-  //     orders.sort((a, b) => a.createdAt - b.createdAt);
-  //     setOrders(orders);
-  //   }
-  //   getOrders();
-
-  //   return () => abortController.abort();
-  // }, []);
-
-  // function onOrdersChange(newData) {
-  //   setOrders(newData);
-  // }
-
-  const path = environment.orders;
-  const itemPerPage = 2;
-
-  const data = usePagination(path);
-  const dataArray = [];
 
   useEffect(
     function () {
       dispatch({ type: "isLoading", payload: true });
       const abortController = new AbortController();
       async function getOrdersPagination() {
-        const list = await data;
-        dispatch({ type: "data/received", payload: list });
+        const data = await get(environment.pending_orders + page);
+        console.log(data);
+
+        dispatch({ type: "length/isSet", payload: data.totalOrdersCount });
+        dispatch({ type: "orders/received", payload: data.orders });
         dispatch({ type: "isLoading", payload: false });
       }
       getOrdersPagination();
 
       return () => abortController.abort();
     },
-    [rerender]
-  );
-
-  useEffect(
-    function () {
-      if (dataReceived.length > 0) {
-        dispatch({ type: "isLoading", payload: true });
-
-        for (let i = 0; i < dataReceived.length; i += itemPerPage) {
-          const chunk = dataReceived.slice(i, i + itemPerPage);
-          dataArray.push(chunk);
-        }
-        dispatch({ type: "orders/received", payload: dataArray[page - 1] });
-        dispatch({ type: "isLoading", payload: false });
-      }
-    },
-    [dataReceived, page, rerender]
+    [rerender, page]
   );
 
   function handlePage(page) {
-    dispatch({ type: "page/isChanged", payload: page });
+    dispatch({ type: "page/hasChanged", payload: page });
   }
 
   function onStatusChange() {

@@ -28,6 +28,7 @@ export const environment = {
   return_qControl: "/api/employee_order/quality_assurance_return",
 
   // MANAGER
+  pending_orders: "/api/manager/pending_orders?page=",
   approve_order: "/api/manager/approve_order?orderId=", // + id
   reject_order: "/api/manager/reject_order?orderId=", // + id
   del_order: "/api/manager/delete_order?orderId=", // +id
