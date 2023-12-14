@@ -37,7 +37,7 @@ export const environment = {
   // BIKE_SERVICES
   frames: "/api/accountpage/frames",
   compatible_parts: "/api/accountpage/compatible_parts",
-  selected_part: "/api/accountpage/selected_part",
+  selected_part: "/api/accountpage/selected_part?id=",
   // wheels: "/wheels/",
   // accessories: "/accessories/",
 };

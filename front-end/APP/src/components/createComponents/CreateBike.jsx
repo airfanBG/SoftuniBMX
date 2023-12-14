@@ -82,27 +82,6 @@ function reducer(state, action) {
   }
 }
 
-const MOCK_DATA = [
-  {
-    id: 1,
-    name: "Frame Road",
-    description: "Best frame in the road!",
-    type: 1,
-  },
-  {
-    id: 2,
-    name: "Frame Montain",
-    description: "Best frame in the montain",
-    type: 2,
-  },
-  {
-    id: 3,
-    name: "Frame Road woman",
-    description: "Best frame in the road for womens",
-    type: 3,
-  },
-];
-
 function CreateBike() {
   const [
     {
@@ -135,10 +114,7 @@ function CreateBike() {
       try {
         dispatch({ type: "dataReceived", payload: true });
 
-        // TODO: докато оправят сървъра
-        // const frames = await getFrames();
-        const frames = MOCK_DATA;
-        console.log(frames);
+        const frames = await getFrames();
 
         dispatch({ type: "frameList", payload: frames });
         dispatch({ type: "dataReceived", payload: false });
@@ -162,6 +138,7 @@ function CreateBike() {
 
           // get selected frame
           const data = await getOneFrame(selectedFrame);
+          console.log(data);
           // get wheels depending on selected frame type
           const wheelsData = await getWheels(data.type);
 

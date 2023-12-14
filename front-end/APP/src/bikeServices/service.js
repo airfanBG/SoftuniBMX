@@ -18,7 +18,7 @@ async function getParts(criteria) {
 }
 
 async function getOneFrame(id) {
-  const data = await get(environment.frames + id);
+  const data = await get(environment.selected_part + id);
   return data;
 }
 async function getOneWheel(id) {
