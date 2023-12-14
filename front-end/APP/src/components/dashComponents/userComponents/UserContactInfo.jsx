@@ -1,33 +1,13 @@
 import styles from "./UserContactInfo.module.css";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
-// import { userInfo } from "../../../userServices/userService.js";
 import ContactInfoElement from "../ContactInfoElement.jsx";
 import { userInfo } from "../../../userServices/userService.js";
 
-// function UserContactInfo({ info }) {
-function UserContactInfo() {
+function UserContactInfo({ info }) {
   const { user } = useContext(UserContext);
-  const [info, setInfo] = useState("");
 
-  useEffect(
-    function () {
-      async function getClientInfo() {
-        // const data = await userInfo(user.id);
-
-        const data = await userInfo(user.id, user.role);
-
-        // console.log(data);
-        setInfo({ ...data });
-        if (data.role === "user") {
-          setInfo({ ...data, balance: Number(data.balance.toFixed(2)) });
-        }
-      }
-      getClientInfo();
-    },
-    [user]
-  );
   return (
     <>
       {info && (

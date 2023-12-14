@@ -1,11 +1,11 @@
 import { environment } from "../environments/environment.js";
 import { get, put } from "../util/api.js";
 
-function userInfo(id, role) {
-  let result = {};
-  role === "user"
-    ? (result = get(environment.info_client + id))
-    : (result = get(environment.info_employee + id));
+async function userInfo(id, role) {
+  const result =
+    role === "user"
+      ? await get(environment.info_client + id)
+      : await get(environment.info_employee + id);
   return result;
 }
 

@@ -187,7 +187,7 @@ function Register() {
       phoneNumber: values.phone,
       town: values.city,
       role: "user",
-      deliveryAddress: {
+      address: {
         country: values.country,
         postCode: values.postCode,
         district: values.district,
@@ -199,10 +199,12 @@ function Register() {
       },
     };
 
+    const regResponse = await register(user);
+    console.log(user);
+    console.log(regResponse);
     try {
       setIsLoading(true);
       const regResponse = await register(user);
-      console.log(user);
 
       if (regResponse.code) {
         setIsLoading(false);

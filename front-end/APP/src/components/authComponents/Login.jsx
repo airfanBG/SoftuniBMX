@@ -90,26 +90,27 @@ function Login() {
     try {
       setIsLoading(true);
       const result = await login(user);
-      console.log(result);
-      // if (result.code) {
-      //   setIsLoading(false);
-      //   setResError({ status: true, message: result.message });
-      //   errorHandler(result.message);
-      //   throw new Error(result);
-      // }
+      // console.log(result);
+
+      const balance = 1000; //remove this
       const currentUser = {
+        balance, //remove this
         accessToken: result.token,
-        firstName: result.employeeFullName.split(" ").at(0),
-        lastName: result.employeeFullName.split(" ").at(1),
+        firstName: result.employeeFullName
+          ? result.employeeFullName.split(" ").at(0)
+          : result.clientFullName.split(" ").at(0),
+        lastName: result.employeeFullName
+          ? result.employeeFullName.split(" ").at(1)
+          : result.clientFullName.split(" ").at(1),
         role: result.role,
-        id: result.employeeId,
+        id: result.employeeId ? result.employeeId : result.clientId,
       };
-      if (result.balance) {
-        currentUser.balance = Number(result.balance.toFixed(2));
-      }
-      if (result.department) {
-        currentUser.department = result.department;
-      }
+      // if (result.balance) {
+      //   currentUser.balance = Number(result.balance.toFixed(2));
+      // }
+      // if (result.department) {
+      //   currentUser.department = result.department;
+      // }
 
       if (currentUser.role !== "user") {
         setHasOrder(false);
