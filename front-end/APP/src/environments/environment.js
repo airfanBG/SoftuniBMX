@@ -23,7 +23,7 @@ export const environment = {
   worker_order_queue: "/api/employee_order/myOrders?id=",
 
   // QUALITY_CONTROL
-  quality_assurance: "/api/employee_order/quality_assurance",
+  quality_assurance: "/api/employee_оrder/quality_assurance",
   pass_qControl: "/api/employee_order/quality_assurance?orderId=",
   return_qControl: "/api/employee_order/quality_assurance_return",
 

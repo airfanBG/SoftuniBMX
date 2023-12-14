@@ -91,6 +91,7 @@ function QControlOrders() {
       const abortController = new AbortController();
       async function getOrders() {
         const result = await get(environment.quality_assurance);
+
         if (!result) {
           dispatch({ type: "isLoading", payload: false });
           return dispatch({
@@ -118,7 +119,7 @@ function QControlOrders() {
 
       return () => abortController.abort();
     },
-    [status, dataArray]
+    [status, dataArray, itemPerPage]
   );
 
   useEffect(
