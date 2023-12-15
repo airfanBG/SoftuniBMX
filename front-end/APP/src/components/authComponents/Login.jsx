@@ -92,9 +92,7 @@ function Login() {
       const result = await login(user);
       // console.log(result);
 
-      const balance = 1000; //remove this
       const currentUser = {
-        balance, //remove this
         accessToken: result.token,
         firstName: result.employeeFullName
           ? result.employeeFullName.split(" ").at(0)
