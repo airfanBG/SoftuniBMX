@@ -25,7 +25,6 @@ namespace BicicleApp.Api
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
-    using Newtonsoft.Json;
 
     public class Program
     {
@@ -33,10 +32,20 @@ namespace BicicleApp.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            var bmxCors = "_bmxCors";
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(bmxCors,
+                                  policy =>
+                                  {
+                                      policy.WithOrigins("http://localhost:5173")
+                                            .AllowAnyHeader()
+                                            .AllowAnyMethod();
+                                  });
+            });
+
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -45,7 +54,7 @@ namespace BicicleApp.Api
             builder.Services
                 .AddDbContext<BicycleAppDbContext>(options => options.UseSqlServer(connectionString));
 
-            builder.Services.AddIdentityCore<Client>(options =>
+            builder.Services.AddDefaultIdentity<BaseUser>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
                 options.SignIn.RequireConfirmedEmail = true;
@@ -53,25 +62,18 @@ namespace BicicleApp.Api
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 5;
-
             })
-                .AddRoles<IdentityRole<string>>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<BicycleAppDbContext>()
                 .AddDefaultTokenProviders();
 
-            builder.Services.AddIdentityCore<Employee>(options =>
-            {
-                options.SignIn.RequireConfirmedAccount = true;
-                options.SignIn.RequireConfirmedEmail = true;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequiredLength = 5;
-
-            })
-                .AddRoles<IdentityRole<string>>()
+            builder.Services.AddIdentityCore<Client>()
                 .AddEntityFrameworkStores<BicycleAppDbContext>();
 
+            builder.Services.AddIdentityCore<Employee>()
+                .AddEntityFrameworkStores<BicycleAppDbContext>();
+
+            builder.Services.AddAuthorization();
             var jwtSecret = builder.Configuration["JwtSecret"];
             var key = Encoding.ASCII.GetBytes(jwtSecret);
             builder.Services.AddAuthentication(options =>
@@ -93,8 +95,6 @@ namespace BicicleApp.Api
             });
 
             builder.Services.AddHttpContextAccessor();
-            builder.Services.AddScoped<SignInManager<Client>>();
-            builder.Services.AddScoped<SignInManager<Employee>>();
             builder.Services.AddScoped<IHomePageService, HomePageService>();
             builder.Services.AddScoped<IClientService, ClientService>();
             builder.Services.AddScoped<IUserImageFactory, UserImageFactory>();
@@ -119,7 +119,7 @@ namespace BicicleApp.Api
             builder.Services.AddScoped<IBikeService, BikeService>();
             builder.Services.AddScoped<ICommentService, CommentService>();
             builder.Services.AddScoped<IPartService, PartService>();
-
+            builder.Services.AddScoped<IDropdownsContentService, DropdownsContentService>();
             builder.Services.AddScoped<IEmployeeFactory, EmployeeFactory>();
             builder.Services.AddScoped<ISupplyManagerService, SupplyManagerService>();
 
@@ -134,6 +134,10 @@ namespace BicicleApp.Api
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseCors(bmxCors);
 
             app.UseAuthentication();
             app.UseAuthorization();

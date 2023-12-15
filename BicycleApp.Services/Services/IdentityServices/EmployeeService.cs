@@ -21,24 +21,42 @@
 
     using static BicycleApp.Common.ApplicationGlobalConstants;
     using static BicycleApp.Common.UserConstants;
+    using Microsoft.AspNetCore.WebUtilities;
+    using BicycleApp.Common.Providers.Contracts;
+    using BicycleApp.Services.HelperClasses.Contracts;
+    using static BicycleApp.Common.EntityValidationConstants;
 
     public class EmployeeService : IEmployeeService
     {
-        private readonly UserManager<Employee> userManager;
-        private readonly SignInManager<Employee> signInManager;
+        private readonly UserManager<BaseUser> userManager;
+        private readonly SignInManager<BaseUser> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly BicycleAppDbContext dbContext;
         private readonly IConfiguration configuration;
         private readonly IModelsFactory modelFactory;
         private readonly IEmailSender emailSender;
+        private readonly IOptionProvider optionProvider;
+        private readonly IStringManipulator stringManipulator;
 
-        public EmployeeService(UserManager<Employee> userManager, SignInManager<Employee> signInManager, BicycleAppDbContext dbContext, IConfiguration configuration, IModelsFactory modelFactory, IEmailSender emailSender)
+        public EmployeeService(UserManager<BaseUser> userManager, 
+                               SignInManager<BaseUser> signInManager,
+                               RoleManager<IdentityRole> roleManager,
+                               BicycleAppDbContext dbContext, 
+                               IConfiguration configuration, 
+                               IModelsFactory modelFactory, 
+                               IEmailSender emailSender, 
+                               IOptionProvider optionProvider, 
+                               IStringManipulator stringManipulator)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.roleManager = roleManager;
             this.dbContext = dbContext;
             this.configuration = configuration;
             this.modelFactory = modelFactory;
             this.emailSender = emailSender;
+            this.optionProvider = optionProvider;
+            this.stringManipulator = stringManipulator;
         }
 
         /// <summary>
@@ -48,7 +66,7 @@
         /// <returns>True or False</returns>
         /// <exception cref="ArgumentNullException">If input data is null</exception>
         /// <exception cref="ArgumentException">If employee already exists</exception>
-        public async Task<bool> RegisterEmployeeAsync(EmployeeRegisterDto employeeRegisterDto)
+        public async Task<bool> RegisterEmployeeAsync(EmployeeRegisterDto employeeRegisterDto, string httpScheme, string httpHost)
         {
             if (employeeRegisterDto == null)
             {
@@ -66,7 +84,14 @@
 
             var result = await this.userManager.CreateAsync(employee, employeeRegisterDto.Password);
 
-            await userManager.AddToRoleAsync(employee, employeeRegisterDto.Role);
+            var isRoleExists = await roleManager.RoleExistsAsync(employeeRegisterDto.Role.ToLower());
+            var identityRole = new IdentityRole(employeeRegisterDto.Role.ToLower());
+            if (!isRoleExists)
+            {
+                await roleManager.CreateAsync(identityRole);
+            }
+            var roleName = await roleManager.GetRoleNameAsync(identityRole);
+            await userManager.AddToRoleAsync(employee, roleName);
 
             if (result == null)
             {
@@ -75,13 +100,18 @@
 
             if (result.Succeeded)
             {
-                return true;
+                var confirmationToken = await userManager.GenerateEmailConfirmationTokenAsync(employee);
+                confirmationToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(confirmationToken));
+                var endPointToComfirmEmail = optionProvider.EmployeeEmailConfirmEnpoint();
+                var routeValues = $"userId={employee.Id}&code={confirmationToken}";
+                var callback = stringManipulator.UrlMaker(httpScheme, httpHost, endPointToComfirmEmail, routeValues);
+                var emailSenderResult = emailSender.IsSendedEmailForVerification(employee.Email, $"{employee.FirstName} {employee.LastName}", callback);
+                if (emailSenderResult)
+                {
+                    return true;
+                }
             }
-            else
-            {
-                return false;
-            }
-
+            return false;
         }
 
         /// <summary>
@@ -110,7 +140,7 @@
                 return new EmployeeReturnDto() { Result = false };
             }
 
-            var result = await signInManager.PasswordSignInAsync(employeeDto.Email, employeeDto.Password, false, lockoutOnFailure: false);
+            var result = await signInManager.CheckPasswordSignInAsync(employee, employeeDto.Password, false);
 
             if (result.Succeeded)
             {
@@ -137,7 +167,7 @@
         /// <returns>Dto</returns>
         public async Task<EmployeeInfoDto?> GetEmployeeInfoAsync(string Id)
         {
-            var employee = await userManager.FindByIdAsync(Id);
+            var employee = await dbContext.Employees.FirstOrDefaultAsync(e => e.Id == Id);
 
             if (employee == null)
             {
@@ -263,12 +293,28 @@
             }
         }
 
+        public async Task ConfirmEmailAsync(string emmployeeId, string code)
+        {
+            try
+            {
+                var user = await dbContext.Employees.FirstAsync(u => u.Id == emmployeeId);
+                code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
+
+                await userManager.ConfirmEmailAsync(user, code);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+        }
+
         /// <summary>
         /// This method creates a Jwt token
         /// </summary>
         /// <param name="employee">The Employee entity</param>
         /// <returns>Jwt token</returns>
-        private async Task<string> GenerateJwtTokenAsync(Employee employee)
+        private async Task<string> GenerateJwtTokenAsync(BaseUser employee)
         {
             var claims = new List<Claim>
             {

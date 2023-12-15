@@ -114,5 +114,10 @@
             public const int BikeModelNameMinLength = 1;
             public const int BikeModelNameMaxLength = 50;
         }
+        public static class Rate
+        {
+            public const int RateMinValue = 1;
+            public const int RateMaxValue = 5;
+        }
     }
 }
