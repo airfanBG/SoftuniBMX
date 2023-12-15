@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 import ContactInfoElement from "../ContactInfoElement.jsx";
 import { userInfo } from "../../../userServices/userService.js";
+import { formatCurrency } from "../../../util/resolvers.js";
 
 function UserContactInfo({ info }) {
   const { user } = useContext(UserContext);
@@ -119,7 +120,8 @@ function UserContactInfo({ info }) {
             <div className={styles.fullData}>
               <div className={styles.row}>
                 <ContactInfoElement
-                  content={user.balance.toFixed(2)}
+                  // content={user.balance.toFixed(2)}
+                  content={formatCurrency(user.balance)}
                   label={"Account balance"}
                   width={"40%"}
                 />
