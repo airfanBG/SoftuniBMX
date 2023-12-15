@@ -4,7 +4,7 @@ import { useReducer, useState } from "react";
 import LoaderWheel from "../../LoaderWheel.jsx";
 import { timeResolver } from "../../../util/resolvers.js";
 import { del, post } from "../../../util/api.js";
-import { environment } from "../../../environments/environment_dev.js";
+import { environment } from "../../../environments/environment.js";
 import { v4 as uuidv4 } from "uuid"; //unique ID
 
 const initialState = {
@@ -70,6 +70,9 @@ function QControlOrderItem({ product, onReBuild }) {
   }
 
   async function onControl() {
+    let result = {};
+    const valuesCheck = { frameCheck, wheelCheck, accessoryCheck };
+
     finalResult.orderStates[0].isProduced = frameCheck;
     finalResult.orderStates[0].description = textFrame;
     finalResult.orderStates[1].isProduced = wheelCheck;
@@ -79,12 +82,16 @@ function QControlOrderItem({ product, onReBuild }) {
 
     console.log(finalResult);
 
-    // TODO: only for json server
-    await del(environment.quality_assurance + product.orderId);
-    onReBuild();
-    // NEXT is for production
-    // const result = await post(environment.post_qControl + product.orderId);
+    if (Object.values(valuesCheck).every((x) => x === true)) {
+      result = await post(environment.pass_qControl + product.orderId);
+    } else if (Object.value(valuesCheck).every((x) => x === false)) {
+      // TODO: отива за брак - ендпоинт
+    } else {
+      result = await post(environment.return_qControl, finalResult);
+    }
+    console.log(result);
   }
+
   return (
     <>
       {loading && <LoaderWheel />}

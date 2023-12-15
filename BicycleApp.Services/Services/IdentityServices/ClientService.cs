@@ -18,8 +18,9 @@
 
     public class ClientService : IClientService
     {
-        private readonly UserManager<Client> userManager;
-        private readonly SignInManager<Client> signInManager;
+        private readonly UserManager<BaseUser> userManager;
+        private readonly SignInManager<BaseUser> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly BicycleAppDbContext dbContext;
         private readonly IConfiguration configuration;
         private readonly IModelsFactory modelFactory;
@@ -27,10 +28,19 @@
         private readonly IStringManipulator stringManipulator;
         private readonly IOptionProvider optionProvider;
 
-        public ClientService(UserManager<Client> userManager, SignInManager<Client> signInManager, BicycleAppDbContext dbContext, IConfiguration configuration, IModelsFactory modelFactory, IEmailSender emailSender, IStringManipulator stringManipulator, IOptionProvider optionProvider)
+        public ClientService(UserManager<BaseUser> userManager, 
+                             SignInManager<BaseUser> signInManager, 
+                             RoleManager<IdentityRole> roleManager,
+                             BicycleAppDbContext dbContext,
+                             IConfiguration configuration, 
+                             IModelsFactory modelFactory,
+                             IEmailSender emailSender,
+                             IStringManipulator stringManipulator, 
+                             IOptionProvider optionProvider)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.roleManager = roleManager;
             this.dbContext = dbContext;
             this.configuration = configuration;
             this.modelFactory = modelFactory;
@@ -62,7 +72,16 @@
             Client client = this.modelFactory.CreateNewClientModel(clientDto);
             client.TownId = await this.GetTownIdAsync(clientDto.Town);
             var result = await this.userManager.CreateAsync(client, clientDto.Password);
-            //await userManager.AddToRoleAsync(client, clientDto.Role);
+
+            //TODO: Remove client role management. DB don`t need so much records.
+            var isRoleExists = await roleManager.RoleExistsAsync(clientDto.Role.ToLower());
+            var identityRole = new IdentityRole(clientDto.Role.ToLower());
+            if (!isRoleExists)
+            {
+                await roleManager.CreateAsync(identityRole);
+            }
+            var roleName = await roleManager.GetRoleNameAsync(identityRole);
+            await userManager.AddToRoleAsync(client, roleName);
 
             if (result == null)
             {
@@ -119,7 +138,7 @@
                 return new ClientReturnDto() { Result = false };
             }
 
-            var result = await signInManager.PasswordSignInAsync(clientDto.Email, clientDto.Password, false, lockoutOnFailure: false);
+            var result = await signInManager.CheckPasswordSignInAsync(client, clientDto.Password, false);
 
             if (result.Succeeded)
             {
@@ -146,7 +165,7 @@
         /// <returns>Dto with information for the client</returns>
         public async Task<ClientInfoDto?> GetClientInfoAsync(string Id)
         {
-            var client = await userManager.FindByIdAsync(Id);
+            var client = await dbContext.Clients.FirstOrDefaultAsync(c => c.Id == Id);
 
             if (client == null)
             {
@@ -236,7 +255,7 @@
         /// </summary>
         /// <param name="client">The client model</param>
         /// <returns>Jwt token as string</returns>
-        private async Task<string> GenerateJwtTokenAsync(Client client)
+        private async Task<string> GenerateJwtTokenAsync(BaseUser client)
         {
             var claims = new List<Claim>
             {
@@ -374,7 +393,7 @@
                 throw new ArgumentNullException(nameof(clientLoginDto));
             }
 
-            Client? client = await userManager.FindByEmailAsync(clientLoginDto.Email);
+            var client = await userManager.FindByEmailAsync(clientLoginDto.Email);
 
             if (client == null)
             {
@@ -423,7 +442,7 @@
             {
                 throw new ArgumentNullException();
             }
-            catch(Exception)
+            catch (Exception)
             {
             }
             return false;

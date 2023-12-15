@@ -1,4 +1,4 @@
-import { environment } from "../environments/environment_dev.js";
+import { environment } from "../environments/environment.js";
 import { clearUserData, getUserData } from "./util.js";
 
 const host = environment.BASE_URL;

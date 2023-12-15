@@ -8,25 +8,26 @@
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
-    public class BicycleAppDbContext : IdentityDbContext<Employee, IdentityRole<string>, string>
+    public class BicycleAppDbContext : IdentityDbContext
     {
         public BicycleAppDbContext() : base()
         {
 
         }
 
-        public BicycleAppDbContext(DbContextOptions<BicycleAppDbContext> options)
-            : base(options)
-        {
-
-        }
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //public BicycleAppDbContext(DbContextOptions<BicycleAppDbContext> options)
+        //    : base(options)
         //{
-        //    optionsBuilder.UseSqlServer("Server=DESKTOP-O0P5VDC\\SQLEXPRESS;Database=BicycleNewDB;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False");
+
         //}
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Server=DESKTOP-TP2JLNJ\\SQLEXPRESS;Database=BicycleNewDB;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False");
+        }
+
         //Identity Tables
+        public DbSet<BaseUser> BaseUsers { get; set; } = null!;
         public DbSet<Client> Clients { get; set; } = null!;
 
         public DbSet<Employee> Employees { get; set; } = null!;
@@ -337,6 +338,10 @@
             builder.Entity<VATCategory>(entity => entity.HasData(seeder.SeedVATCategories()));
             builder.Entity<PartInStock>(entity => entity.HasData(seeder.SeedPartsInStock()));
             builder.Entity<PartOrder>(entity => entity.HasData(seeder.SeedPartOrders()));
+            builder.Entity<IdentityRole>(entity => entity.HasData(seeder.SeedRoles()));
+            builder.Entity<IdentityUserRole<string>>(entity => entity.HasData(seeder.SeedRolesUsers()));
+            builder.Entity<BikeStandartModel>(entity => entity.HasData(seeder.SeedBikeStandartModels()));
+            builder.Entity<BikeModelPart>(entity => entity.HasData(seeder.SeedBikeModelPartls()));
 
             base.OnModelCreating(builder);
         }

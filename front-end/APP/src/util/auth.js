@@ -1,14 +1,19 @@
 import { get, post } from "./api.js";
 import { clearOrderData, clearUserData, setUserData } from "./util.js";
-import { environment } from "../environments/environment_dev.js";
+import { environment } from "../environments/environment.js";
 
 //TODO Change user object according to project requirements
 
-//TODO: different endpoints for user and employee!!!!
-
 export async function login(user) {
-  const result = await post(environment.login, user);
-  if (!result.accessToken) return;
+  // Clients and Employers has different login paths
+  const path =
+    user.email.split("@").at(1) === "b-free.com"
+      ? environment.login_employee
+      : environment.login_client;
+
+  const result = await post(path, user);
+  console.log(result);
+  if (!result.token) return;
   if (result.user.role === "worker" || result.user.role === "manager")
     clearOrderData();
   // setUserData(result);

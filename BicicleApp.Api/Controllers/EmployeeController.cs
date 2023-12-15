@@ -44,8 +44,9 @@
                 }
 
                 //Register
-                bool isRegistered = await employeeService.RegisterEmployeeAsync(employeeRegisterDto);
-
+                var httpScheme = Request.Scheme;
+                var httpHost = Request.Host.Value;
+                bool isRegistered = await employeeService.RegisterEmployeeAsync(employeeRegisterDto, httpScheme, httpHost);
                 if (isRegistered)
                 {
                     return Ok();
@@ -81,7 +82,6 @@
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<EmployeeLoginDto>> LoginEmployee([FromBody] EmployeeLoginDto employeeLoginDto)
         {
-
             try
             {
                 if (employeeLoginDto == null)
@@ -198,6 +198,19 @@
             }
 
             return BadRequest();
+        }
+
+        [HttpGet]
+        [Route("emailConfirm")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> EmailConfirm([FromQuery] string userId, [FromQuery] string code)
+        {
+            await employeeService.ConfirmEmailAsync(userId, code);
+
+            return Ok();
         }
     }
 }

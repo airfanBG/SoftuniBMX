@@ -10,6 +10,34 @@
 
     public class SeedClass
     {
+        public ICollection<IdentityRole> SeedRoles()
+        {
+            return new List<IdentityRole>
+            {
+                new IdentityRole(){ Id = "6ac1cb3c-2457-4aff-8fa2-c7052ebcea9e", Name = "user", NormalizedName = "user".ToUpper()},
+                new IdentityRole(){ Id = "f0d2cbfa-cdca-4936-9d85-f9a697d39f2b", Name = "manager", NormalizedName = "manager".ToUpper()},
+                new IdentityRole(){ Id = "fa8f997a-4e15-475f-a028-87a9b6e6be56", Name = "frameworker", NormalizedName = "frameworker".ToUpper()},
+                new IdentityRole(){ Id = "a9618213-7ba0-48cf-81d4-00cd16910ec7", Name = "wheelworker", NormalizedName = "wheelworker".ToUpper()},
+                new IdentityRole(){ Id = "566110d3-06fe-4ca2-b34b-9334a842c88f", Name = "accessoriesworker", NormalizedName = "accessoriesworker".ToUpper()},
+                new IdentityRole(){ Id = "ac558b05-a97b-42c8-bd62-dbd33f36d795", Name = "qualitycontrol", NormalizedName = "qualitycontrol".ToUpper()}
+              
+            };
+        }
+
+        public ICollection<IdentityUserRole<string>> SeedRolesUsers()
+        {
+            return new List<IdentityUserRole<string>>
+            {
+                new IdentityUserRole<string>(){RoleId = "6ac1cb3c-2457-4aff-8fa2-c7052ebcea9e", UserId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd"},
+                new IdentityUserRole<string>(){RoleId = "6ac1cb3c-2457-4aff-8fa2-c7052ebcea9e", UserId = "17ce735d-6713-4d0a-8fcb-e4a71ee86f6f"},
+                new IdentityUserRole<string>(){RoleId = "6ac1cb3c-2457-4aff-8fa2-c7052ebcea9e", UserId = "99d3ca6f-2067-4316-a5d7-934c93789521"},
+                new IdentityUserRole<string>(){RoleId = "f0d2cbfa-cdca-4936-9d85-f9a697d39f2b", UserId = "406e8cf1-acaa-44a8-afec-585ff64bed34"},
+                new IdentityUserRole<string>(){RoleId = "fa8f997a-4e15-475f-a028-87a9b6e6be56", UserId = "21003785-a275-4139-ae20-af6a6cf8fea8"},
+                new IdentityUserRole<string>(){RoleId = "a9618213-7ba0-48cf-81d4-00cd16910ec7", UserId = "17063948-8fdc-417e-8fb7-2ae6bf572f94"},
+                new IdentityUserRole<string>(){RoleId = "566110d3-06fe-4ca2-b34b-9334a842c88f", UserId = "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91"},
+                new IdentityUserRole<string>(){RoleId = "ac558b05-a97b-42c8-bd62-dbd33f36d795", UserId = "29f06920-d2ad-43d8-b362-e2b94d7a7502"},
+            };
+        }
         public List<Client> SeedClients()
         {
             var hasher = new PasswordHasher<Client>();
@@ -32,7 +60,8 @@
                 IsDeleted = false,
                 DateCreated = DateTime.Now,
                 DateUpdated = null,
-                DateDeleted = null
+                DateDeleted = null,
+                EmailConfirmed = true
             };
 
             client.PasswordHash = hasher.HashPassword(client, pass);
@@ -54,7 +83,8 @@
                 IsDeleted = false,
                 DateCreated = DateTime.Now,
                 DateUpdated = null,
-                DateDeleted = null
+                DateDeleted = null,
+                EmailConfirmed = true
             };
 
             client2.PasswordHash = hasher.HashPassword(client2, pass);
@@ -76,7 +106,8 @@
                 IsDeleted = false,
                 DateCreated = DateTime.Now,
                 DateUpdated = null,
-                DateDeleted = null
+                DateDeleted = null,
+                EmailConfirmed = true
             };
 
             client3.PasswordHash = hasher.HashPassword(client3, pass);
@@ -114,7 +145,8 @@
                 DateOfLeave = null,
                 IsDeleted = false,
                 DepartmentId = 1,
-                IsManeger = true
+                IsManeger = true,
+                EmailConfirmed = true
             };
             manager.PasswordHash = hasher.HashPassword(manager, pass);
 
@@ -137,7 +169,8 @@
                 DateOfLeave = null,
                 IsDeleted = false,
                 DepartmentId = 2,
-                IsManeger = false
+                IsManeger = false,
+                EmailConfirmed = true
             };
             employee.PasswordHash = hasher.HashPassword(employee, pass);
 
@@ -160,7 +193,8 @@
                 DateOfLeave = null,
                 IsDeleted = false,
                 DepartmentId = 2,
-                IsManeger = false
+                IsManeger = false,
+                EmailConfirmed = true
             };
             worker2.PasswordHash = hasher.HashPassword(worker2, pass);
 
@@ -183,7 +217,8 @@
                 DateOfLeave = null,
                 IsDeleted = false,
                 DepartmentId = 2,
-                IsManeger = false
+                IsManeger = false,
+                EmailConfirmed = true
             };
             worker3.PasswordHash = hasher.HashPassword(worker3, pass);
 
@@ -206,7 +241,8 @@
                 DateOfLeave = null,
                 IsDeleted = false,
                 DepartmentId = 2,
-                IsManeger = false
+                IsManeger = false,
+                EmailConfirmed = true
             };
             worker4.PasswordHash = hasher.HashPassword(worker4, pass);
 
@@ -1011,7 +1047,7 @@
                     OEMNumber = "oemtest1",
                     Type = 1,
                     CategoryId = 1,
-                    Quantity = 2,
+                    Quantity = 32,
                     SalePrice = 100.00M,
                     VATCategoryId = 1,
                     DateCreated = DateTime.Now,
@@ -1028,7 +1064,7 @@
                     OEMNumber = "oemtest2",
                     Type = 2,
                     CategoryId = 1,
-                    Quantity = 4,
+                    Quantity = 43,
                     SalePrice = 90.00M,
                     VATCategoryId = 1,
                     DateCreated = DateTime.Now,
@@ -1045,7 +1081,7 @@
                     OEMNumber = "oemtest3",
                     Type = 3,
                     CategoryId = 1,
-                    Quantity = 3,
+                    Quantity = 32,
                     SalePrice = 80.00M,
                     VATCategoryId = 1,
                     DateCreated = DateTime.Now,
@@ -1113,7 +1149,7 @@
                     OEMNumber = "oemtest7",
                     CategoryId = 3,
                     Type = 1,
-                    Quantity = 9,
+                    Quantity = 29,
                     SalePrice = 250.00M,
                     VATCategoryId = 1,
                     DateCreated = DateTime.Now,
@@ -1198,7 +1234,7 @@
                     OEMNumber = "oemtest12",
                     CategoryId = 3,
                     Type = 1,
-                    Quantity = 9,
+                    Quantity = 29,
                     SalePrice = 220.00M,
                     VATCategoryId = 1,
                     DateCreated = DateTime.Now,
@@ -1840,7 +1876,7 @@
             {
                 Id = 1,
                 PartId = 1,
-                QuantityDelivered = 2,
+                Quantity = 2,
                 Note = "text",
                 DateCreated = DateTime.Now,
                 DateUpdated = DateTime.Now,
@@ -1850,7 +1886,7 @@
             {
                 Id = 2,
                 PartId = 4,
-                QuantityDelivered = 2,
+                Quantity = 2,
                 Note = "text2",
                 DateCreated = DateTime.Now,
                 DateUpdated = DateTime.Now,
@@ -1860,7 +1896,7 @@
             {
                 Id = 3,
                 PartId = 7,
-                QuantityDelivered = 1,
+                Quantity = 1,
                 Note = "text2",
                 DateCreated = DateTime.Now,
                 DateUpdated = DateTime.Now,
@@ -1868,6 +1904,87 @@
             };
 
             return new List<PartOrder> { partOrder1, partOrder2, partOrder3 };
+        }
+        public ICollection<BikeStandartModel> SeedBikeStandartModels()
+        {
+            return new List<BikeStandartModel>
+            {
+                new BikeStandartModel()
+                {
+                    Id = 1,
+                    ModelName = "Bike 1",
+                    ImageUrl = "https://yuchormanski.free.bg/bikes/bike-1.webp",
+                    Price = 575M,
+                    Description = "Slow Initial Rendering: Since the data is fetched from the server before rendering, initial load times can be slow, resulting in a less-than-ideal user experience."
+                },
+                 new BikeStandartModel()
+                {
+                    Id = 2,
+                    ModelName = "Bike 2",
+                    ImageUrl = "https://yuchormanski.free.bg/bikes/bike-2.webp",
+                    Price = 365M,
+                    Description = "Loading States: Users may experience an in-between or loading state, as they wait for the data to be rendered on the page."
+                },
+                 new BikeStandartModel()
+                {
+                    Id = 3,
+                    ModelName = "Bike 3",
+                    ImageUrl = "https://yuchormanski.free.bg/bikes/bike-3.webp",
+                    Price = 455M,
+                    Description = "Lack of Interactivity: There isn’t much opportunity for interactivity with the user until the data has been fully loaded and rendered on the page."
+                },
+            };
+        }
+        public ICollection<BikeModelPart> SeedBikeModelPartls()
+        {
+            return new List<BikeModelPart>
+            {
+                new BikeModelPart()
+                {
+                    BikeModelId = 1,
+                    PartId = 1
+                },
+                new BikeModelPart()
+                {
+                    BikeModelId = 1,
+                    PartId = 4
+                },
+                new BikeModelPart()
+                {
+                    BikeModelId = 1,
+                    PartId = 9
+                },
+                new BikeModelPart()
+                {
+                    BikeModelId = 2,
+                    PartId = 3
+                },
+                new BikeModelPart()
+                {
+                    BikeModelId = 2,
+                    PartId = 14
+                },
+                 new BikeModelPart()
+                {
+                    BikeModelId = 2,
+                    PartId = 12
+                },
+                 new BikeModelPart()
+                {
+                    BikeModelId = 3,
+                    PartId = 2
+                },
+                  new BikeModelPart()
+                {
+                    BikeModelId = 3,
+                    PartId = 5
+                },
+                  new BikeModelPart()
+                {
+                    BikeModelId = 3,
+                    PartId = 13
+                }
+            };
         }
     }
 }

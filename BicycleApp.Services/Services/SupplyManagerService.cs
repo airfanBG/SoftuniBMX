@@ -7,6 +7,7 @@ using BicycleApp.Services.Models;
 using BicycleApp.Services.Models.Supply;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using static BicycleApp.Common.EntityValidationConstants;
 
 namespace BicycleApp.Services.Services
 {
@@ -17,10 +18,13 @@ namespace BicycleApp.Services.Services
         private readonly IModelsFactory _modelsFactory;
         private readonly IDateTimeProvider _dateTimeProvider;
 
-        public SupplyManagerService(BicycleAppDbContext dbContext, IModelsFactory modelsFactory)
+        public SupplyManagerService(BicycleAppDbContext dbContext,
+                                     IModelsFactory modelsFactory,
+                                     IDateTimeProvider dateTimeProvider)
         {
             _dbContext = dbContext;
             _modelsFactory = modelsFactory;
+            _dateTimeProvider = dateTimeProvider;
         }
 
         /// <summary>
@@ -50,6 +54,8 @@ namespace BicycleApp.Services.Services
                     DateDelivered = d.DateDelivered,
                     SuplierId = d.SuplierId,
                     Note = d.Note,
+                    SupplierName = d.Suplier.Name,
+                    PartName = d.Part.Name,
                 })
                 .ToListAsync();
 
@@ -74,7 +80,7 @@ namespace BicycleApp.Services.Services
                     Id = s.Id,
                     Name = s.Name,
                     ContactName = s.ContactName,
-                    PartCategoryName = s.CategoryName,
+                    CategoryName = s.CategoryName,
                     Email = s.Email,
                     PhoneNumeber = s.PhoneNumeber,
                 })
@@ -89,7 +95,42 @@ namespace BicycleApp.Services.Services
             }
         }
 
-        public async Task<bool> CreateDelivedry(CreateDelivedryDto createDelivedryDto)// here I have to update partsQuantity in Db!
+        /// <summary>
+        /// Gets all avaiable partOrders in database
+        /// </summary>
+        /// <returns>Dto's collection of all avaiable partOrders in database</returns>
+        public async Task<ICollection<PartOrderInfoDto>> AllPartOrders()
+        {
+            try
+            {
+                var result = await _dbContext.PartOrders
+                .AsNoTracking()
+                .Select(po => new PartOrderInfoDto
+                {
+                    Id = po.Id,
+                    PartName = po.Part.Name,
+                    SuplierName = po.Suplier.Name,
+                    Quantity = po.Quantity,
+                })
+                .ToListAsync();
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Database can't retrive data", ex);
+            }
+        }
+
+        /// <summary>
+        /// Creates delivery record and update delivered part quantity in Db
+        /// </summary>
+        /// <param name="createDelivedryDto"></param>
+        /// <returns>bool</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="Exception"></exception>
+        public async Task<bool> CreateDelivedry(CreateDelivedryDto createDelivedryDto)
         {
             if (createDelivedryDto == null)
             {
@@ -102,6 +143,16 @@ namespace BicycleApp.Services.Services
 
                 await _dbContext.Delivaries.AddAsync(delivery);
 
+                var deliveredPart = await _dbContext.Parts.Where(p => p.Id == createDelivedryDto.PartId)
+                    .FirstOrDefaultAsync();
+
+                if (deliveredPart == null)
+                {
+                    throw new ArgumentNullException(nameof(createDelivedryDto.PartId));
+                }
+
+                deliveredPart.Quantity += createDelivedryDto.QuantityDelivered;
+
                 await _dbContext.SaveChangesAsync();
 
                 return true;
@@ -113,6 +164,12 @@ namespace BicycleApp.Services.Services
             }
         }
 
+        /// <summary>
+        /// Creates suplier make record in Db
+        /// </summary>
+        /// <param name="createDelivedryDto"></param>
+        /// <returns>bool</returns>
+        /// <exception cref="Exception"></exception>
         public async Task<bool> CreateSuplier(CreateSuplierDto createSuplierDto)
         {
             if (createSuplierDto == null)
@@ -125,6 +182,36 @@ namespace BicycleApp.Services.Services
                 var suplier = _modelsFactory.CreateNewSuplier(createSuplierDto);
 
                 await _dbContext.Supliers.AddAsync(suplier);
+
+                await _dbContext.SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Database can't save data", ex);
+            }
+        }
+
+        /// <summary>
+        /// Create Part Order make record in Db
+        /// </summary>
+        /// <param name="createPartOrderryDto"></param>
+        /// <returns>bool</returns>
+        /// <exception cref="Exception"></exception>
+        public async Task<bool> CreatePartOrder(CreatePartOrderDto createPartOrderryDto)
+        {
+            if (createPartOrderryDto == null)
+            {
+                return false;
+            }
+
+            try
+            {
+                var partOrder = _modelsFactory.CreateNewPartOrder(createPartOrderryDto);
+
+                await _dbContext.AddAsync(partOrder);
 
                 await _dbContext.SaveChangesAsync();
 
@@ -151,11 +238,11 @@ namespace BicycleApp.Services.Services
 
             try
             {
-                var deliveryToReject = await _dbContext.Supliers.FirstAsync(o => o.Id == deliveryId);
+                var deliveryToReject = await _dbContext.Delivaries.FirstAsync(o => o.Id == deliveryId);
                 deliveryToReject.DateDeleted = _dateTimeProvider.Now;
                 deliveryToReject.IsDeleted = true;
 
-                _dbContext.Supliers.Update(deliveryToReject);
+                _dbContext.Delivaries.Update(deliveryToReject);
                 await _dbContext.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -192,6 +279,42 @@ namespace BicycleApp.Services.Services
             }
         }
 
+        /// <summary>
+        /// Manager set isDeleted proeprty to true and DateDeleted property is filled.
+        /// </summary>
+        /// <param name="partOrderId"></param>
+        /// <returns>Task</returns>
+        public async Task DeletePartOrderById(int partOrderId)
+        {
+            if (partOrderId <= 0)
+            {
+                throw new ArgumentNullException(nameof(partOrderId));
+            }
+
+            try
+            {
+
+                var partOrderToReject = await _dbContext.PartOrders.FirstAsync(po=>po.Id == partOrderId);
+                partOrderToReject.DateDeleted = _dateTimeProvider.Now;
+                partOrderToReject.IsDeleted = true;
+
+                _dbContext.PartOrders.Update(partOrderToReject);
+
+                await _dbContext.SaveChangesAsync();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Database can't delete data", ex);
+            }
+        }
+
+        /// <summary>
+        /// Returns DeliveryDetailsDto by deliveryId drom Db.
+        /// </summary>
+        /// <param name="deliveryId"></param>
+        /// <returns>Task</returns>
         public async Task<DeliveryDetailsDto> DeliveryDetailsById(int deliveryId)
         {
 
@@ -212,7 +335,9 @@ namespace BicycleApp.Services.Services
                     PartId = p.PartId,
                     QuantityDelivered = p.QuantityDelivered,
                     Note = p.Note,
-                    SuplierId = p.SuplierId
+                    SuplierId = p.SuplierId,
+                    SupplierName = p.Suplier.Name,
+                    PartName = p.Part.Name,
                 })
                 .FirstAsync();
 
@@ -226,9 +351,13 @@ namespace BicycleApp.Services.Services
 
         }
 
-        public async Task<SuplierDetailsDto> SuplierDetailsById(int suplierId)//Has to shows avaiable parts!
+        /// <summary>
+        /// Returns SuplierDetailsDto by suplierId from Db.
+        /// </summary>
+        /// <param name="suplierId"></param>
+        /// <returns>Task</returns>
+        public async Task<SuplierDetailsDto> SuplierDetailsById(int suplierId)
         {
-
 
             if (suplierId <= 0)
             {
@@ -239,8 +368,6 @@ namespace BicycleApp.Services.Services
             {
                 var result = await _dbContext.Supliers
                 .AsNoTracking()
-                .Include(p => p.PartsInStock)
-                .Include(p => p.PartsInOrder)
                 .Where(p => p.Id == suplierId)
                 .Select(p => new SuplierDetailsDto
                 {
@@ -252,15 +379,6 @@ namespace BicycleApp.Services.Services
                     Email = p.Email,
                     PhoneNumeber = p.PhoneNumeber,
                     CategoryName = p.CategoryName,
-                    //OrderParts = p.PartsInStock
-                    //.Where(p => p.SuplierId == suplierId)//да го измисля по просто !
-                    //.Select(pis => new PartInStockInfoDto
-                    //{
-                    //    Id = pis.Id,
-                    //    OemNumber = pis.OemPartNumber,
-                    //    SuplierId = pis.SuplierId,
-
-                    //}).ToList(),
                 })
                 .FirstAsync();
 
@@ -272,6 +390,48 @@ namespace BicycleApp.Services.Services
                 throw new ArgumentException("Database can't retrive data", ex);
             }
         }
+
+        /// <summary>
+        /// Returns PartOrderDetailsDto by partOrderId from Db.
+        /// </summary>
+        /// <param name="partOrderId"></param>
+        /// <returns>Task</returns>
+        public async Task<PartOrderDetailsDto> PartOrderDetailsById(int partOrderId)
+        {
+            if (partOrderId <= 0)
+            {
+                throw new ArgumentNullException(nameof(partOrderId));
+            }
+
+            try
+            {
+                var result = await _dbContext.PartOrders
+                    .AsNoTracking()
+                    .Where(po => po.Id == partOrderId)
+                    .Select(po => new PartOrderDetailsDto
+                    {
+                        Id = po.Id,
+                        PartName = po.Part.Name,
+                        Note = po.Note,
+                        Quantity = po.Quantity,
+                        SuplierName = po.Suplier.Name,
+                        DateCreated = po.DateCreated,
+                    })
+                    .FirstAsync();
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException("Database can't retrive data", ex);
+            }
+        }
+
+        /// <summary>
+        /// Update Delivery by Id in Db.
+        /// </summary>
+        /// <param name="editDelivedryDto"></param>
+        /// <returns>bool</returns
         public async Task<bool> EditDeliveryById(EditDelivedryDto editDelivedryDto)
         {
             if (editDelivedryDto == null)
@@ -298,6 +458,11 @@ namespace BicycleApp.Services.Services
             return true;
         }
 
+        /// <summary>
+        /// Update Suplier by Id in Db.
+        /// </summary>
+        /// <param name="editSuplierDto"></param>
+        /// <returns>bool</returns
         public async Task<bool> EditSuplierById(EditSuplierDto editSuplierDto)
         {
             if (editSuplierDto == null)
@@ -325,21 +490,76 @@ namespace BicycleApp.Services.Services
             return true;
         }
 
-        public Task UpdateSuplierPartsInStock(int suplierId, int[] suppliedPartsOemNums)
+        /// <summary>
+        /// Update PartOrde by Id in Db.
+        /// </summary>
+        /// <param name="editePartOrderDto"></param>
+        /// <returns>bool</returns
+        public async Task<bool> EditPartOrderById(EditPartOrderDto editePartOrderDto)
         {
-            throw new NotImplementedException();
+            if (editePartOrderDto == null)
+            {
+                return false;
+            };
+
+            var partOrder = await _dbContext.PartOrders
+                .FirstOrDefaultAsync(po => po.Id == editePartOrderDto.Id);
+
+            if (partOrder == null)
+            {
+                return false;
+            }
+
+            partOrder.Note = editePartOrderDto.Note == null? partOrder.Note : editePartOrderDto.Note;
+            partOrder.PartId = editePartOrderDto.PartId == null ? partOrder.PartId : editePartOrderDto.PartId;
+            partOrder.Quantity = editePartOrderDto.Quantity == null? partOrder.Quantity : editePartOrderDto.Quantity;
+            partOrder.SuplierId = editePartOrderDto.SuplierId == null? partOrder.SuplierId : editePartOrderDto.SuplierId;
+
+            await _dbContext.SaveChangesAsync();
+
+            return true;
         }
+
+        /// <summary>
+        /// Returns if delivery exists.
+        /// </summary>
+        /// <param name="deliveryId"></param>
+        /// <returns>bool</returns
         public async Task<bool> DeliveryExists(int deliveryId)
         {
             return await _dbContext.Delivaries
                 .Where(d => d.Id == deliveryId && d.IsDeleted == false)
                 .AnyAsync();
         }
+
+        /// <summary>
+        /// Returns if suplier exists.
+        /// </summary>
+        /// <param name="suplierId"></param>
+        /// <returns>bool</returns
         public async Task<bool> SuplierExists(int suplierId)
         {
             return await _dbContext.Supliers
                 .Where(s => s.Id == suplierId && s.IsDeleted == false)
                 .AnyAsync();
         }
+
+        /// <summary>
+        /// Returns if partOrder exists.
+        /// </summary>
+        /// <param name="partOrderId"></param>
+        /// <returns>bool</returns
+        public async Task<bool> PartOrderExists(int partOrderId)
+        {
+            return await _dbContext.PartOrders
+                .Where(po => po.Id == partOrderId && po.IsDeleted == false)
+                .AnyAsync();
+        }
+
+
+        //public Task UpdateSuplierPartsInStock(int suplierId, int[] suppliedPartsOemNums)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

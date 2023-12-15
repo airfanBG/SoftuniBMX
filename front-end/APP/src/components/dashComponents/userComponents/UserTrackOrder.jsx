@@ -4,7 +4,7 @@ import LoaderWheel from "../../LoaderWheel.jsx";
 import BoardHeader from "../BoardHeader.jsx";
 import { useContext, useEffect, useState } from "react";
 import { get } from "../../../util/api.js";
-import { environment } from "../../../environments/environment_dev.js";
+import { environment } from "../../../environments/environment.js";
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 import UserOrderItem from "./UserOrderItem.jsx";
 

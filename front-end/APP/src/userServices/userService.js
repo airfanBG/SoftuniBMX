@@ -1,4 +1,4 @@
-import { environment } from "../environments/environment_dev.js";
+import { environment } from "../environments/environment.js";
 import { get, put } from "../util/api.js";
 
 function userInfo(id) {
