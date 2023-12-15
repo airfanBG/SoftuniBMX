@@ -32,10 +32,20 @@ namespace BicicleApp.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            var bmxCors = "_bmxCors";
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(bmxCors,
+                                  policy =>
+                                  {
+                                      policy.WithOrigins("http://localhost:5173")
+                                            .AllowAnyHeader()
+                                            .AllowAnyMethod();
+                                  });
+            });
+
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -63,6 +73,7 @@ namespace BicicleApp.Api
             builder.Services.AddIdentityCore<Employee>()
                 .AddEntityFrameworkStores<BicycleAppDbContext>();
 
+            builder.Services.AddAuthorization();
             var jwtSecret = builder.Configuration["JwtSecret"];
             var key = Encoding.ASCII.GetBytes(jwtSecret);
             builder.Services.AddAuthentication(options =>
@@ -123,6 +134,10 @@ namespace BicicleApp.Api
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseCors(bmxCors);
 
             app.UseAuthentication();
             app.UseAuthorization();

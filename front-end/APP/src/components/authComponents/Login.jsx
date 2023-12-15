@@ -91,6 +91,7 @@ function Login() {
       setIsLoading(true);
       // login in app
       const result = await login(user);
+      console.log(result);
       if (result.code) {
         setIsLoading(false);
         setResError({ status: true, message: result.message });

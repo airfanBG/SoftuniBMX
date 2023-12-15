@@ -14,7 +14,7 @@
         {
             return new List<IdentityRole>
             {
-                new IdentityRole(){ Id = "6ac1cb3c-2457-4aff-8fa2-c7052ebcea9e", Name = "client", NormalizedName = "client".ToUpper()},
+                new IdentityRole(){ Id = "6ac1cb3c-2457-4aff-8fa2-c7052ebcea9e", Name = "user", NormalizedName = "user".ToUpper()},
                 new IdentityRole(){ Id = "f0d2cbfa-cdca-4936-9d85-f9a697d39f2b", Name = "manager", NormalizedName = "manager".ToUpper()},
                 new IdentityRole(){ Id = "fa8f997a-4e15-475f-a028-87a9b6e6be56", Name = "frameworker", NormalizedName = "frameworker".ToUpper()},
                 new IdentityRole(){ Id = "a9618213-7ba0-48cf-81d4-00cd16910ec7", Name = "wheelworker", NormalizedName = "wheelworker".ToUpper()},
@@ -1904,6 +1904,87 @@
             };
 
             return new List<PartOrder> { partOrder1, partOrder2, partOrder3 };
+        }
+        public ICollection<BikeStandartModel> SeedBikeStandartModels()
+        {
+            return new List<BikeStandartModel>
+            {
+                new BikeStandartModel()
+                {
+                    Id = 1,
+                    ModelName = "Bike 1",
+                    ImageUrl = "https://yuchormanski.free.bg/bikes/bike-1.webp",
+                    Price = 575M,
+                    Description = "Slow Initial Rendering: Since the data is fetched from the server before rendering, initial load times can be slow, resulting in a less-than-ideal user experience."
+                },
+                 new BikeStandartModel()
+                {
+                    Id = 2,
+                    ModelName = "Bike 2",
+                    ImageUrl = "https://yuchormanski.free.bg/bikes/bike-2.webp",
+                    Price = 365M,
+                    Description = "Loading States: Users may experience an in-between or loading state, as they wait for the data to be rendered on the page."
+                },
+                 new BikeStandartModel()
+                {
+                    Id = 3,
+                    ModelName = "Bike 3",
+                    ImageUrl = "https://yuchormanski.free.bg/bikes/bike-3.webp",
+                    Price = 455M,
+                    Description = "Lack of Interactivity: There isn’t much opportunity for interactivity with the user until the data has been fully loaded and rendered on the page."
+                },
+            };
+        }
+        public ICollection<BikeModelPart> SeedBikeModelPartls()
+        {
+            return new List<BikeModelPart>
+            {
+                new BikeModelPart()
+                {
+                    BikeModelId = 1,
+                    PartId = 1
+                },
+                new BikeModelPart()
+                {
+                    BikeModelId = 1,
+                    PartId = 4
+                },
+                new BikeModelPart()
+                {
+                    BikeModelId = 1,
+                    PartId = 9
+                },
+                new BikeModelPart()
+                {
+                    BikeModelId = 2,
+                    PartId = 3
+                },
+                new BikeModelPart()
+                {
+                    BikeModelId = 2,
+                    PartId = 14
+                },
+                 new BikeModelPart()
+                {
+                    BikeModelId = 2,
+                    PartId = 12
+                },
+                 new BikeModelPart()
+                {
+                    BikeModelId = 3,
+                    PartId = 2
+                },
+                  new BikeModelPart()
+                {
+                    BikeModelId = 3,
+                    PartId = 5
+                },
+                  new BikeModelPart()
+                {
+                    BikeModelId = 3,
+                    PartId = 13
+                }
+            };
         }
     }
 }

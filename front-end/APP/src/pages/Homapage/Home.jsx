@@ -7,8 +7,7 @@ import Footer from "../../components/Footer.jsx";
 import UserContent from "./UserContent.jsx";
 import { createContext, useEffect, useState } from "react";
 import { get } from "../../util/api.js";
-import { environment } from "../../environments/environment_dev.js";
-// import { dataPath } from "../../environments/path.js";
+import { environment } from "../../environments/environment.js";
 
 export const HomeContext = createContext();
 

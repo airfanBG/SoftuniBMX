@@ -21,10 +21,7 @@
 
         }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer("Server=DESKTOP-TP2JLNJ\\SQLEXPRESS;Database=BicycleNewDB;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False");
-        //}
+
 
         //Identity Tables
         public DbSet<BaseUser> BaseUsers { get; set; } = null!;
@@ -340,6 +337,8 @@
             builder.Entity<PartOrder>(entity => entity.HasData(seeder.SeedPartOrders()));
             builder.Entity<IdentityRole>(entity => entity.HasData(seeder.SeedRoles()));
             builder.Entity<IdentityUserRole<string>>(entity => entity.HasData(seeder.SeedRolesUsers()));
+            builder.Entity<BikeStandartModel>(entity => entity.HasData(seeder.SeedBikeStandartModels()));
+            builder.Entity<BikeModelPart>(entity => entity.HasData(seeder.SeedBikeModelPartls()));
 
             base.OnModelCreating(builder);
         }

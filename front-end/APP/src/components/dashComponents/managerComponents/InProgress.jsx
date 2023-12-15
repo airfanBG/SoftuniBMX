@@ -3,7 +3,7 @@ import styles from "./InProgress.module.css";
 import { useEffect, useState } from "react";
 
 import { get } from "../../../util/api.js";
-import { environment } from "../../../environments/environment_dev.js";
+import { environment } from "../../../environments/environment.js";
 
 import BoardHeader from "../BoardHeader.jsx";
 import OrderInProgress from "./OrderInProgress.jsx";
@@ -24,7 +24,7 @@ function InProgress() {
     const abortController = new AbortController();
 
     async function getInProgressOrders() {
-      const result = await get(environment.get_all_in_progress);
+      const result = await get(environment.in_progress_orders);
       if (!result) {
         setLoading(false);
         return setError({
