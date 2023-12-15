@@ -21,7 +21,7 @@ function ElementInfo({ data }) {
         <div className={`${styles.info} `}>
           {/* <div className={`${styles.info} ${styles.price}`}> */}
           <span className={styles.label}>Price</span>
-          {data.salesPrice}
+          {data.salePrice}
         </div>
         <StarsRating
           size={20}

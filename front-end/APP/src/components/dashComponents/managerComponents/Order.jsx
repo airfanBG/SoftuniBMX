@@ -18,8 +18,8 @@ function Order({ order, onStatusChange }) {
   async function onBtnClickHandler(type, orderId) {
     let result = {};
     if (type === "approve") {
-      result = await approveHandlerAction(orderId);
-      console.log(result);
+      await approveHandlerAction(orderId);
+      console.log("should rerender");
       onStatusChange();
     } else if (type === "reject") {
       result = await onRejectHandler(orderId);

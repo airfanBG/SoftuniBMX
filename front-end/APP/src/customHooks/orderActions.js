@@ -4,8 +4,10 @@ import { post } from "../util/api.js";
 async function approveHandlerAction(id) {
   // const approved = {};
   // console.log("approved");
-  const approved = await post(`${environment.approve_order}${id}`);
-  return approved;
+  // const approved = await post(`${environment.approve_order}${id}`);
+  // return approved;
+  await post(`${environment.approve_order}${id}`);
+  return;
 }
 
 async function onRejectHandler(id) {

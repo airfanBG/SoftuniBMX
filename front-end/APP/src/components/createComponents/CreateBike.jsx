@@ -3,6 +3,7 @@ import styles from "./CreateBike.module.css";
 import { useContext, useEffect, useReducer } from "react";
 
 import {
+  getCompatible,
   getFrames,
   getOneFrame,
   getOnePart,
@@ -39,6 +40,7 @@ const initialState = {
   canBuy: false,
   total: 0,
   order: {},
+  selection: [],
 };
 
 function reducer(state, action) {
@@ -101,6 +103,7 @@ function CreateBike() {
       canBuy,
       total,
       order,
+      selection,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
@@ -117,13 +120,11 @@ function CreateBike() {
         const frames = await getFrames();
 
         dispatch({ type: "frameList", payload: frames });
-        dispatch({ type: "dataReceived", payload: false });
       } catch (err) {
         dispatch({ type: "dataFailed" });
+      } finally {
+        dispatch({ type: "dataReceived", payload: false });
       }
-      // finally {
-      //   dispatch({ type: "dataReceived", payload: true });
-      // }
     }
     frames();
   }, []);
@@ -138,21 +139,24 @@ function CreateBike() {
 
           // get selected frame
           const data = await getOneFrame(selectedFrame);
-          console.log(data);
-          // get wheels depending on selected frame type
-          const wheelsData = await getWheels(data.type);
-
+          // console.log(data);
           const frameImage = data.imageUrls[0];
+          //get all other
+          const allOther = await getCompatible(data.id);
+          const wheels = allOther.filter((x) => x.category === "Wheel");
+          const accessories = allOther.filter(
+            (x) => x.category === "Acsessories"
+          );
 
           dispatch({
             type: "isFrameSelected",
             payload: { ...data, headImg: frameImage },
           });
-          dispatch({ type: "framePrice", payload: data.salesPrice });
+          dispatch({ type: "framePrice", payload: data.salePrice });
           dispatch({ type: "isWheelSelected", payload: {} });
           dispatch({ type: "isPartSelected", payload: {} });
-          dispatch({ type: "wheelsList", payload: wheelsData });
-          dispatch({ type: "partsList", payload: [] });
+          dispatch({ type: "wheelsList", payload: wheels });
+          dispatch({ type: "partsList", payload: accessories });
           dispatch({ type: "selectedWheel", payload: "" });
           dispatch({ type: "selectedPart", payload: "" });
           dispatch({ type: "wheelPrice", payload: 0 });
@@ -175,24 +179,16 @@ function CreateBike() {
       async function getSelected() {
         try {
           dispatch({ type: "dataReceived", payload: true });
-
           // get selected wheel
-          const data = await getOneWheel(selectedWheel);
-          // console.log(data);
-
-          // get parts depending on selected wheel type
-          const partsData = await getParts(data.type);
-          // console.log(partsData);
-
+          const data = wheels.filter((x) => x.id == selectedWheel)[0];
           const wheelImage = data.imageUrls[0];
 
           dispatch({
             type: "isWheelSelected",
             payload: { ...data, headImg: wheelImage },
           });
-          dispatch({ type: "wheelPrice", payload: data.salesPrice });
+          dispatch({ type: "wheelPrice", payload: data.salePrice });
           dispatch({ type: "isPartSelected", payload: {} });
-          dispatch({ type: "partsList", payload: partsData });
           dispatch({ type: "selectedPart", payload: "" });
           dispatch({ type: "partsPrice", payload: 0 });
           dispatch({ type: "buy", payload: false });
@@ -203,7 +199,7 @@ function CreateBike() {
       }
       getSelected();
     },
-    [selectedWheel]
+    [selectedWheel, wheels]
   );
 
   // PART REQUEST
@@ -215,16 +211,15 @@ function CreateBike() {
           dispatch({ type: "dataReceived", payload: true });
 
           // get selected part
-          const data = await getOnePart(selectedPart);
-          // console.log(data);
-
+          const data = parts.filter((x) => x.id == selectedPart)[0];
           const partsImage = data.imageUrls[0];
+          // console.log(data);
 
           dispatch({
             type: "isPartSelected",
             payload: { ...data, headImg: partsImage },
           });
-          dispatch({ type: "partsPrice", payload: data.salesPrice });
+          dispatch({ type: "partsPrice", payload: data.salePrice });
           dispatch({ type: "buy", payload: true });
           dispatch({ type: "dataReceived", payload: false });
         } catch (err) {
@@ -233,7 +228,7 @@ function CreateBike() {
       }
       getSelected();
     },
-    [selectedPart]
+    [selectedPart, parts]
   );
 
   useEffect(

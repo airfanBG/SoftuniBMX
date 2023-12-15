@@ -15,6 +15,7 @@ export const environment = {
   // CLIENT
   // update_client: "/users/", // + id
   info_client: "/api/client/info?id=", // + id
+  create_order: "/api/client_order/create",
 
   // EMPLOYEE
   // update_employee: "/users/", // + id
@@ -23,7 +24,7 @@ export const environment = {
   worker_order_queue: "/api/employee_order/myOrders?id=",
 
   // QUALITY_CONTROL
-  quality_assurance: "/api/employee_оrder/quality_assurance",
+  quality_assurance: "/api/employee_order/quality_assurance",
   pass_qControl: "/api/employee_order/quality_assurance?orderId=",
   return_qControl: "/api/employee_order/quality_assurance_return",
 
@@ -36,14 +37,10 @@ export const environment = {
 
   // BIKE_SERVICES
   frames: "/api/accountpage/frames",
-  compatible_parts: "/api/accountpage/compatible_parts",
+  compatible_parts: "/api/accountpage/compatible_parts?id=",
   selected_part: "/api/accountpage/selected_part?id=",
-  // wheels: "/wheels/",
-  // accessories: "/accessories/",
 };
 
-// indexPage: "/indexPage",
-// // TODO: change to project path
 // // get_all_in_progress: "/inProgress/",
 // get_all_in_progress: "/production/",
 // in_progress: "/production/",
