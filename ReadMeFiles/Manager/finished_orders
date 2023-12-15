@@ -1,3 +1,5 @@
+[Обратно към ReadMe](/README.md)
+
 ### Отговор
 
 ### `GET /api/manager/rejected_orders?StartDate=12%2F02%2F2023%2010%3A00&EndDate=12%2F03%2F2023%2020%3A00` Връща колекция от JSON обекти със следните пропъртита:
@@ -27,3 +29,5 @@ GET /api/manager/rejected_orders?StartDate=12%2F02%2F2023%2010%3A00&EndDate=12%2
 ]
 
 ```
+
+[Обратно към ReadMe](/README.md)

@@ -1,3 +1,5 @@
+[Обратно към ReadMe](/README.md)
+
 ### Отговор
 
 ### `GET /api/manager/rejected_orders` Връща колекция от JSON обекти със следните пропъртита:
@@ -55,3 +57,4 @@ GET /api/manager/rejected_orders
 ]
 
 ```
+[Обратно към ReadMe](/README.md)

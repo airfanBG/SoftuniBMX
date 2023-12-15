@@ -1,3 +1,5 @@
+[Обратно към ReadMe](/README.md)
+
 ### Отговор
 
 ### `POST /api/manager/delete_order?orderId=1`
@@ -15,3 +17,4 @@ POST /api/manager/delete_order?orderId=1
 StatusCode(200)
 ```
 
+[Обратно към ReadMe](/README.md)
