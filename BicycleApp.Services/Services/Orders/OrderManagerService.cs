@@ -31,7 +31,7 @@
         /// </summary>
         /// <param name="orderId"></param>
         /// <returns>Task<bool></returns>
-        public async Task<bool> AcceptAndAssignOrderByManagerAsync(int orderId)
+        public async Task<int> AcceptAndAssignOrderByManagerAsync(int orderId)
         {
             try
             {
@@ -44,7 +44,7 @@
                     //Checks for available quantity
                     if (orderPartEmployee.PartQuantity > аvailableParts.Quantity)
                     {
-                        return false;
+                        return 0;
                     }
                     orderPartEmployee.DatetimeAsigned = _dateTimeProvider.Now;
                     аvailableParts.Quantity -= orderPartEmployee.PartQuantity;
@@ -57,12 +57,12 @@
 
                 await _db.SaveChangesAsync();
 
-                return true;
+                return orderId;
             }
             catch (Exception)
             {
             }
-            return false;
+            return 0;
         }
 
         /// <summary>

@@ -326,6 +326,7 @@
             builder.Entity<ImageEmployee>(entity => entity.HasData(seeder.SeedImagesEmployees()));
             builder.Entity<Order>(entity => entity.HasData(seeder.SeedOrders()));
             builder.Entity<OrderPartEmployee>(entity => entity.HasData(seeder.SeedOrdersPartsEmployees()));
+            builder.Entity<OrderPartEmployeeInfo>(entity => entity.HasData(seeder.SeedOrderOrderParsEmployeeInfos()));
             builder.Entity<Part>(entity => entity.HasData(seeder.SeedParts()));
             builder.Entity<PartCategory>(entity => entity.HasData(seeder.SeedPartCategories()));
             builder.Entity<Rate>(entity => entity.HasData(seeder.SeedRates()));

@@ -1,6 +1,6 @@
 ### Отговор
 
-### `POST /api/manager/approve_order?orderId=1`
+### `POST /api/manager/approve_order`
 
 ### Examples:
 
@@ -11,5 +11,7 @@ POST /api/manager/approve_order?orderId=1
 ```
 
 ## Response:
+Връща Id на потвърдената поръчка - тип integer
 ```
-StatusCode(200)
+1
+```

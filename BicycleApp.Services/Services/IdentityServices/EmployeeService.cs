@@ -24,7 +24,7 @@
     using Microsoft.AspNetCore.WebUtilities;
     using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Services.HelperClasses.Contracts;
-    using static BicycleApp.Common.EntityValidationConstants;
+    using BicycleApp.Services.Models.Order;
 
     public class EmployeeService : IEmployeeService
     {
@@ -307,6 +307,30 @@
                 throw new Exception(e.Message);
             }
 
+        }
+
+        public async Task<AllEmployeesDto?> GetAllEmployees()
+        {
+            try
+            {
+                return await dbContext.Roles
+                                  .Where(r => r.Name != "user")
+                                  .Select(s => new AllEmployeesDto()
+                                  {
+                                      Roles = new List<EmployeeRoleDto>()
+                                      {
+                                          new EmployeeRoleDto()
+                                          {
+
+                                          }
+                                      }
+                                  })
+                                  .FirstAsync();
+            }
+            catch (Exception)
+            {
+            }
+            return null;
         }
 
         /// <summary>
