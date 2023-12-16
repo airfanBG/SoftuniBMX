@@ -1,3 +1,5 @@
+[Обратно към ReadMe](/README.md)
+
 ### Отговор
 
 ### `GET /api/accountpage/compatible_parts` Връща колекция от JSON обекти със следните пропъртита:
@@ -76,3 +78,5 @@ GET /api/accountpage/compatible_parts?id=1
 ]
 
 ```
+
+[Обратно към ReadMe](/README.md)

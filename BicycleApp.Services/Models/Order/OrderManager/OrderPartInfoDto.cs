@@ -7,5 +7,8 @@
         public string PartName { get; set; } = null!;
         public int PartQuantity { get; set; }
         public double PartQunatityInStock { get; set; }
+        public string StartDate { get; set; } = null!;
+        public string EndDate { get; set; } = null!;
+        public bool IsComplete { get; set; }
     }
 }

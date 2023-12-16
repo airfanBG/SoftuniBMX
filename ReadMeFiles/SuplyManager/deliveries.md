@@ -1,3 +1,5 @@
+[Обратно към ReadMe](/README.md)
+
 ### Отговор
 
 ### `GET /api/supplys_manager/deliveries?page=1` Връща колекция от JSON обекти със следните пропъртита:
@@ -93,3 +95,4 @@ GET /api/supplys_manager/deliveries?page=1
 }
 
 ```
+[Обратно към ReadMe](/README.md)

@@ -131,7 +131,10 @@
                                                     Description = _stringManipulator.GetTextFromProperty(orderPart.Description),
                                                     PartName = orderPart.PartName,
                                                     PartQuantity = orderPart.PartQuantity,
-                                                    PartQunatityInStock = orderPart.Part.Quantity
+                                                    PartQunatityInStock = orderPart.Part.Quantity,
+                                                    StartDate = orderPart.StartDatetime.ToString(),
+                                                    EndDate = orderPart.EndDatetime.ToString(),
+                                                    IsComplete = orderPart.IsCompleted
                                                 })
                                                 .ToList()
                                 })

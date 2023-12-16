@@ -4,6 +4,7 @@ using BicycleApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BicycleApp.Data.Migrations
 {
     [DbContext(typeof(BicycleAppDbContext))]
-    partial class BicycleAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231215083422_DataSeeded")]
+    partial class DataSeeded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -818,21 +821,6 @@ namespace BicycleApp.Data.Migrations
                             StatusId = 1,
                             UnpaidAmount = 650.00m,
                             VAT = 125.00m
-                        },
-                        new
-                        {
-                            Id = 10,
-                            ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                            DateCreated = new DateTime(2023, 12, 16, 13, 36, 13, 288, DateTimeKind.Local).AddTicks(5331),
-                            Description = "Passed quality control",
-                            Discount = 0m,
-                            FinalAmount = 425.00m,
-                            IsDeleted = false,
-                            PaidAmount = 0m,
-                            SaleAmount = 354.17m,
-                            StatusId = 1,
-                            UnpaidAmount = 0m,
-                            VAT = 70.83m
                         });
                 });
 
@@ -1312,60 +1300,6 @@ namespace BicycleApp.Data.Migrations
                             PartPrice = 290.00m,
                             PartQuantity = 4.0,
                             SerialNumber = "BID12345680"
-                        },
-                        new
-                        {
-                            OrderId = 10,
-                            PartId = 1,
-                            UniqueKeyForSerialNumber = "231b3632-b31c-4711-8f67-fe42b36642b5",
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DatetimeAsigned = new DateTime(2023, 12, 16, 15, 48, 13, 0, DateTimeKind.Unspecified),
-                            Description = "test",
-                            EmployeeId = "21003785-a275-4139-ae20-af6a6cf8fea8",
-                            EndDatetime = new DateTime(2023, 12, 16, 16, 53, 13, 0, DateTimeKind.Unspecified),
-                            IsCompleted = true,
-                            IsDeleted = false,
-                            PartName = "Frame OG",
-                            PartPrice = 100.00m,
-                            PartQuantity = 1.0,
-                            SerialNumber = "BIDPASQC123",
-                            StartDatetime = new DateTime(2023, 12, 16, 16, 48, 13, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            OrderId = 10,
-                            PartId = 2,
-                            UniqueKeyForSerialNumber = "231b3632-b31c-4711-8f67-fe42b36642b5",
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DatetimeAsigned = new DateTime(2023, 12, 16, 15, 48, 13, 0, DateTimeKind.Unspecified),
-                            Description = "test",
-                            EmployeeId = "17063948-8fdc-417e-8fb7-2ae6bf572f94",
-                            EndDatetime = new DateTime(2023, 12, 17, 9, 15, 13, 0, DateTimeKind.Unspecified),
-                            IsCompleted = true,
-                            IsDeleted = false,
-                            PartName = "Wheel of the YearG",
-                            PartPrice = 75.00m,
-                            PartQuantity = 1.0,
-                            SerialNumber = "BIDPASQC123",
-                            StartDatetime = new DateTime(2023, 12, 17, 9, 10, 13, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            OrderId = 10,
-                            PartId = 3,
-                            UniqueKeyForSerialNumber = "231b3632-b31c-4711-8f67-fe42b36642b5",
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DatetimeAsigned = new DateTime(2023, 12, 16, 15, 48, 13, 0, DateTimeKind.Unspecified),
-                            Description = "test",
-                            EmployeeId = "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91",
-                            EndDatetime = new DateTime(2023, 12, 17, 10, 30, 13, 0, DateTimeKind.Unspecified),
-                            IsCompleted = true,
-                            IsDeleted = false,
-                            PartName = "Shift",
-                            PartPrice = 250.00m,
-                            PartQuantity = 1.0,
-                            SerialNumber = "BIDPASQC123",
-                            StartDatetime = new DateTime(2023, 12, 17, 10, 15, 13, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -1404,32 +1338,6 @@ namespace BicycleApp.Data.Migrations
                     b.HasIndex("OrderId", "PartId", "UniqueKeyForSerialNumber");
 
                     b.ToTable("OrdersPartsEmployeesInfos");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            OrderId = 10,
-                            PartId = 1,
-                            ProductionТime = new TimeSpan(0, 0, 5, 0, 0),
-                            UniqueKeyForSerialNumber = "231b3632-b31c-4711-8f67-fe42b36642b5"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            OrderId = 10,
-                            PartId = 2,
-                            ProductionТime = new TimeSpan(0, 0, 5, 0, 0),
-                            UniqueKeyForSerialNumber = "231b3632-b31c-4711-8f67-fe42b36642b5"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            OrderId = 10,
-                            PartId = 3,
-                            ProductionТime = new TimeSpan(0, 0, 15, 0, 0),
-                            UniqueKeyForSerialNumber = "231b3632-b31c-4711-8f67-fe42b36642b5"
-                        });
                 });
 
             modelBuilder.Entity("BicycleApp.Data.Models.EntityModels.Part", b =>
