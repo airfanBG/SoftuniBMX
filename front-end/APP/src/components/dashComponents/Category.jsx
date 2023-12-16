@@ -11,7 +11,7 @@ function Category() {
         <span
           className={styles.element}
           style={
-            user.department === "Frames" ? { color: "var(--color-line)" } : null
+            user.role === "frameworker" ? { color: "var(--color-line)" } : null
           }
         >
           Frames
@@ -20,7 +20,7 @@ function Category() {
         <span
           className={styles.element}
           style={
-            user.department === "Wheels" ? { color: "var(--color-line)" } : null
+            user.role === "wheelworker" ? { color: "var(--color-line)" } : null
           }
         >
           Wheels
@@ -29,7 +29,7 @@ function Category() {
         <span
           className={styles.element}
           style={
-            user.department === "Accessory"
+            user.role === "accessoriesworker"
               ? { color: "var(--color-line)" }
               : null
           }

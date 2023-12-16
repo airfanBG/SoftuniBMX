@@ -18,10 +18,11 @@ export const environment = {
   create_order: "/api/client_order/create",
 
   // EMPLOYEE
-  // update_employee: "/users/", // + id
   info_employee: "/api/employee/info?id=", // + id
-  // get_all_employers: "/users?role=worker&role=manager&role=qControl",
   worker_order_queue: "/api/employee_order/myOrders?id=",
+  worker_order_start: "/api/employee_order/start",
+  worker_order_end: "/api/employee_order/end",
+  worker_order: "/api/employee_order/",
 
   // QUALITY_CONTROL
   quality_assurance: "/api/employee_order/quality_assurance",

@@ -1,4 +1,3 @@
-import { useContext, useEffect, useState } from "react";
 import styles from "./Order.module.css";
 
 import Button from "../../Button.jsx";
@@ -6,10 +5,9 @@ import {
   onDeleteHandler,
   onRejectHandler,
   approveHandlerAction,
-} from "../../../customHooks/orderActions.js";
+} from "./managerActions/orderActions.js";
 
 function Order({ order, onStatusChange }) {
-  // const { orderId, serialNumber, orderParts } = order;
   const { orderId, dateCreated, serialNumber, orderParts } = order;
   const frame = orderParts[0];
   const wheel = orderParts[1];
@@ -18,8 +16,8 @@ function Order({ order, onStatusChange }) {
   async function onBtnClickHandler(type, orderId) {
     let result = {};
     if (type === "approve") {
-      await approveHandlerAction(orderId);
-      console.log("should rerender");
+      result = await approveHandlerAction(orderId);
+      console.log(result);
       onStatusChange();
     } else if (type === "reject") {
       result = await onRejectHandler(orderId);

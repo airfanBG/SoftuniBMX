@@ -4,77 +4,37 @@ import { useContext, useEffect, useState } from "react";
 import { secondsToTime } from "../../util/util.js";
 import { UserContext } from "../../context/GlobalUserProvider.jsx";
 import { useNavigate } from "react-router-dom";
-import { put } from "../../util/api.js";
+import { post } from "../../util/api.js";
 import { environment } from "../../environments/environment.js";
 import LoaderWheel from "../LoaderWheel.jsx";
 
-function OrderItem({ product, onBtnHandler, orderId, orderIndex }) {
+function OrderItem({ product, onBtnHandler, orderIndex }) {
   const { user } = useContext(UserContext);
-  const [index, setIndex] = useState(null);
-  const [item, setItem] = useState("");
-  const [firstCall, setFirstCall] = useState(false);
-  const [isDone, setIsDone] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [meta, setMeta] = useState({});
 
-  let newProduct = {};
-
-  // useEffect(function () {
-  //   const abortController = new AbortController();
-  //   // setId(product.id);
-  //   console.log(product);
-
-  //   setMeta({
-  //     id: product.partId,
-  //     dateCreated: product.datetimeAsigned,
-  //     serialNumber: product.orderSerialNumber,
-  //   });
-
-  //   setItem(product);
-  //   setIndex(0);
-
-  //   return () => abortController.abort();
-  // }, []);
-
-  //   {
-  //     "orderSerialNumber": "BID12345679",
-  //     "partId": 1,
-  //     "partName": "Frame Road",
-  //     "partOEMNumber": "oemtest1",
-  //     "quantity": 1,
-  //     "datetimeAsigned": "13/12/2023 20:40",
-  //     "datetimeFinished": null,
-  //     "description": null
-  // }
-
-  useEffect(
-    function () {
-      if (item.isProduced || firstCall) {
-        // make copy on original object
-        newProduct = { ...product };
-
-        // replace array data with modified in state
-        newProduct.orderStates[index] = item;
-        // console.log(newProduct);
-
-        // write data to database
-        finishedJob(meta.id);
-        // rerender parent component
-        onBtnHandler();
-      }
-    },
-    [isDone, firstCall]
-  );
-
-  function onButtonClick() {
-    let currentDate = new Date().toISOString();
-
+  console.log(new Date().toISOString());
+  console.log(Date.now());
+  async function onButtonClick() {
+    const currentDate = new Date().toISOString();
     const model = {
       partId: product.partId,
       employeeId: user.id,
       dateTime: currentDate,
     };
-    console.log(model);
+    let path = "";
+
+    // console.log(product);
+    // console.log(model);
+
+    if (product.datetimeAsigned === null) {
+      path = "start";
+    } else if (product.datetimeFinished === null) {
+      path = "end";
+    }
+
+    const result = await post(environment.worker_order + path, model);
+    console.log(result);
+    onBtnHandler();
 
     // if (item.startedTime === "" && item.finishedTime === "") {
     //   setItem({
@@ -89,19 +49,6 @@ function OrderItem({ product, onBtnHandler, orderId, orderIndex }) {
     // }
   }
 
-  async function finishedJob(id) {
-    setLoading(true);
-    // console.log("request");
-
-    try {
-      const result = await put(environment.in_progress + id, newProduct);
-      // console.log(result);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  }
   return (
     <>
       {loading && <LoaderWheel />}
@@ -111,10 +58,10 @@ function OrderItem({ product, onBtnHandler, orderId, orderIndex }) {
             <span>SN: </span>
             {product.orderSerialNumber}
           </p>
-          {/* <p className={styles.model}>
+          <p className={styles.model}>
             <span>Date created: </span>
-            {product.dateCreated}
-          </p> */}
+            {product.datetimeAsigned.split(" ").at(0).replaceAll("/", ".")}
+          </p>
         </header>
 
         {/* <div className={styles.info}> */}
@@ -143,7 +90,9 @@ function OrderItem({ product, onBtnHandler, orderId, orderIndex }) {
             product.datetimeFinished.replaceAll("/", ".")}
         </p>
         {/* <p className={styles.partId}>ID# {item.partId}</p> */}
-        <p className={styles.partId}>ID# {orderId + "-" + item.partId}</p>
+        <p className={styles.partId}>
+          ID# {product.partId + "-" + product.partId}
+        </p>
         {/* </div> */}
 
         <div className={styles.timer}>
