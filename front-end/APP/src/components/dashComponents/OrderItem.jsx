@@ -21,10 +21,7 @@ function OrderItem({ product, onBtnHandler, orderIndex }) {
     };
     let path = "";
 
-    // console.log(product);
-    // console.log(model);
-
-    if (product.datetimeAsigned === null) {
+    if (product.datetimeStarted === null) {
       path = "start";
     } else if (product.datetimeFinished === null) {
       path = "end";
@@ -67,10 +64,16 @@ function OrderItem({ product, onBtnHandler, orderIndex }) {
           <span>Brand: </span>
           {product.partName}
         </h3>
-        <p className={styles.model}>
-          <span>OEM Number: </span>
-          {product.partOEMNumber}
-        </p>
+        <div className={styles.twoColumns}>
+          <p className={styles.model}>
+            <span>OEM Number: </span>
+            {product.partOEMNumber}
+          </p>
+          <p className={styles.model}>
+            <span>Quantity: </span>
+            {product.quantity}
+          </p>
+        </div>
         <div className={styles.model}>
           <span>Description:</span>
           {product.description}
@@ -79,15 +82,14 @@ function OrderItem({ product, onBtnHandler, orderIndex }) {
         {/* <div className={styles.info}> */}
         <p className={styles.model}>
           <span>Started on: </span>
-          {product.datetimeAsigned &&
-            product.datetimeAsigned.replaceAll("/", ".")}
+          {product.datetimeStarted &&
+            product.datetimeStarted.replaceAll("/", ".")}
         </p>
         <p className={`${styles.model} ${styles.shortLine}`}>
           <span>Finished on: </span>
           {product.datetimeFinished &&
             product.datetimeFinished.replaceAll("/", ".")}
         </p>
-        {/* <p className={styles.partId}>ID# {item.partId}</p> */}
         <p className={styles.partId}>
           ID# {product.partId + "-" + product.partId}
         </p>
@@ -103,22 +105,8 @@ function OrderItem({ product, onBtnHandler, orderIndex }) {
             onClick={onButtonClick}
             disabled={orderIndex !== 0}
           >
-            {/* {product.datetimeAsigned === "" &&
-              product.datetimeFinished === "" &&
-              orderIndex !== 0 &&
-              "to Queue"}
-            {product.datetimeAsigned === "" &&
-              product.datetimeFinished === "" &&
-              orderIndex === 0 &&
-              "Start"}
-            {product.datetimeAsigned !== "" &&
-              product.datetimeFinished === "" &&
-              "In Progress"}
-            {product.datetimeAsigned !== "" &&
-              product.datetimeFinished !== "" &&
-              "Finished"} */}
-            {orderIndex === 0 && !product.datetimeAsigned && "Start"}
-            {orderIndex === 0 && product.datetimeAsigned && "In Progress"}
+            {orderIndex === 0 && !product.datetimeStarted && "Start"}
+            {orderIndex === 0 && product.datetimeStarted && "In Progress"}
             {orderIndex !== 0 && "to Queue"}
           </button>
         </div>
@@ -130,3 +118,15 @@ function OrderItem({ product, onBtnHandler, orderIndex }) {
 }
 
 export default OrderItem;
+
+// {
+//   "orderSerialNumber": "BID12345678",
+//   "partId": 1,
+//   "partName": "Frame Road",
+//   "partOEMNumber": "oemtest1",
+//   "quantity": 1,
+//   "datetimeAsigned": "16/12/2023 14:14",
+//   "datetimeStarted": null,
+//   "datetimeFinished": null,
+//   "description": null
+// }
