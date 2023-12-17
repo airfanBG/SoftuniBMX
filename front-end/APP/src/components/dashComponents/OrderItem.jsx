@@ -12,8 +12,6 @@ function OrderItem({ product, onBtnHandler, orderIndex }) {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
 
-  console.log(new Date().toISOString());
-  console.log(Date.now());
   async function onButtonClick() {
     const currentDate = new Date().toISOString();
     const model = {

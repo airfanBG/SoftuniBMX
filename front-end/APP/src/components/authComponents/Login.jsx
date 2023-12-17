@@ -93,7 +93,7 @@ function Login() {
       // console.log(result);
 
       const currentUser = {
-        balance: 1000,
+        // balance: 1000,
         accessToken: result.token,
         firstName: result.employeeFullName
           ? result.employeeFullName.split(" ").at(0)
