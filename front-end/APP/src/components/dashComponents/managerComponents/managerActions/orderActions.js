@@ -1,31 +1,18 @@
-import { getElement, getOrder } from "../../../../bikeServices/service.js";
+import { environment } from "../../../../environments/environment.js";
+import { post } from "../../../../util/api.js";
 
-function onApproveHandler(order) {
-  const { frame, wheel, accessory, createdAt, count, ownerId, id } = order;
-  const approvedOrder = {
-    frame,
-    wheel,
-    accessory,
-    frameStartedTime: "",
-    frameFinishedTime: "",
-    wheelStartedTime: "",
-    wheelFinishedTime: "",
-    accessoryStartedTime: "",
-    accessoryFinishedTime: "",
-    count,
-    createdAt,
-    id: id,
-    customerId: ownerId,
-  };
-
-  console.log(approvedOrder);
+async function approveHandlerAction(id) {
+  const approved = await post(`${environment.approve_order}${id}`);
+  return approved;
 }
 
-function onRejectHandler(id) {
-  console.log("In process" + id);
+async function onRejectHandler(id) {
+  const rejected = await post(`${environment.reject_order}${id}`);
+  return rejected;
 }
-function onDeleteHandler(id) {
-  console.log("In process" + id);
+async function onDeleteHandler(id) {
+  const deleted = await post(`${environment.del_order}${id}`);
+  return deleted;
 }
 
-export { onApproveHandler, onRejectHandler, onDeleteHandler };
+export { approveHandlerAction, onRejectHandler, onDeleteHandler };

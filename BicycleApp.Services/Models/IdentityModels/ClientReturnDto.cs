@@ -10,6 +10,8 @@
 
         public string? Token { get; set; }
 
+        public decimal? Balance { get; set; }
+
         public bool Result { get; set; }
     }
 }

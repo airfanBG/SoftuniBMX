@@ -1,3 +1,5 @@
+[Обратно към ReadMe](/README.md)
+
 ### Отговор
 
 ### `PUT /api/supplys_manager/edit_suplier`
@@ -13,3 +15,5 @@ PUT /api/supplys_manager/edit_suplier
 ## Response:
 ```
 StatusCode(200)
+
+[Обратно към ReadMe](/README.md)

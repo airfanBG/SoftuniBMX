@@ -1,3 +1,5 @@
+[Обратно към ReadMe](/README.md)
+
 ### Отговор
 
 ### `GET /api/suppllys_manager/get_part_order?partOrderId=1` Връща колекция от JSON обекти със следните пропъртита:
@@ -33,3 +35,4 @@ GET /api/suppllys_manager/get_part_order?partOrderId=1
 }
 
 ```
+[Обратно към ReadMe](/README.md)

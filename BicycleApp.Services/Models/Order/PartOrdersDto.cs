@@ -9,6 +9,8 @@
 
         [JsonProperty("partId")]
         public int PartId { get; set; }
+        [JsonProperty("orderId")]
+        public int OrderId { get; set; }
 
         [JsonProperty("partName")]
         public string PartName { get; set; } = null!;
@@ -21,6 +23,8 @@
 
         [JsonProperty("start")]
         public string DatetimeAsigned { get; set; } = null!;
+
+        public string? DatetimeStarted { get; set; }
 
         [JsonProperty("finish")]
         public string? DatetimeFinished { get; set; }

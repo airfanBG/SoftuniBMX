@@ -89,28 +89,27 @@ function Login() {
 
     try {
       setIsLoading(true);
-      // login in app
       const result = await login(user);
       console.log(result);
-      if (result.code) {
-        setIsLoading(false);
-        setResError({ status: true, message: result.message });
-        errorHandler(result.message);
-        throw new Error(result);
-      }
+
       const currentUser = {
-        accessToken: result.accessToken,
-        firstName: result.user.firstName,
-        lastName: result.user.lastName,
-        role: result.user.role,
-        id: result.user.id,
+        balance: result.balance,
+        accessToken: result.token,
+        firstName: result.employeeFullName
+          ? result.employeeFullName.split(" ").at(0)
+          : result.clientFullName.split(" ").at(0),
+        lastName: result.employeeFullName
+          ? result.employeeFullName.split(" ").at(1)
+          : result.clientFullName.split(" ").at(1),
+        role: result.role,
+        id: result.employeeId ? result.employeeId : result.clientId,
       };
-      if (result.user.balance) {
-        currentUser.balance = Number(result.user.balance.toFixed(2));
-      }
-      if (result.user.department) {
-        currentUser.department = result.user.department;
-      }
+      // if (result.balance) {
+      //   currentUser.balance = Number(result.balance.toFixed(2));
+      // }
+      // if (result.department) {
+      //   currentUser.department = result.department;
+      // }
 
       if (currentUser.role !== "user") {
         setHasOrder(false);
@@ -262,3 +261,11 @@ function Login() {
 }
 
 export default Login;
+
+// {
+//   "employeeId": "406e8cf1-acaa-44a8-afec-585ff64bed34",
+//   "employeeFullName": "Kalin Kalinov",
+//   "role": "manager",
+//   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjQwNmU4Y2YxLWFjYWEtNDRhOC1hZmVjLTU4NWZmNjRiZWQzNCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Im1hbmFnZXJAYi1mcmVlLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6Im1hbmFnZXIiLCJleHAiOjE3MDMxMDAxMDUsImlzcyI6IkJpY3ljbGVfYXBwIiwiYXVkIjoiYmljeWNsZSJ9.vJjHV1SzilWpPYYtRpBLsKNugxyajlyB6LBtVotP2CQ",
+//   "result": true
+// }

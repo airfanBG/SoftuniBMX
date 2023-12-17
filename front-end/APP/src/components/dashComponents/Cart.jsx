@@ -5,11 +5,11 @@ import styles from "./Cart.module.css";
 import BoardHeader from "./BoardHeader.jsx";
 // import { UserContext } from "../UserProfile.jsx";
 import { clearOrderData, getOrderData, getStockData } from "../../util/util.js";
-import {
-  getOneFrame,
-  getOnePart,
-  getOneWheel,
-} from "../../bikeServices/service.js";
+// import {
+//   getOneFrame,
+//   getOnePart,
+//   getOneWheel,
+// } from "../../bikeServices/service.js";
 import LoaderWheel from "../LoaderWheel.jsx";
 import { get, post, put } from "../../util/api.js";
 import { useNavigate } from "react-router-dom";
@@ -41,6 +41,7 @@ function Cart() {
     if (!order) {
       return setLoading(false);
     }
+    // console.log(order);
     const { frame, wheel, parts } = order;
 
     setHeadImg({
@@ -73,17 +74,26 @@ function Cart() {
     //user balance after order
     const userReducedBalance =
       user.balance -
-      (frame.salesPrice + wheel.salesPrice + parts.salesPrice) * 0.2 * select;
+      (frame.salePrice + wheel.salePrice + parts.salePrice) * 0.2 * select;
 
     const currentOrder = {
-      frame,
-      wheel,
-      accessory: parts,
-      userText,
-      count: select,
-      createdAt: Date.now(),
-      ...additionalFields,
+      id: user.id,
+      description: userText,
+      quantity: select,
+      vatId: 1,
+      parts: [
+        {
+          partId: frame.id,
+        },
+        {
+          partId: wheel.id,
+        },
+        {
+          partId: parts.id,
+        },
+      ],
     };
+    // console.log(currentOrder);
 
     if (
       user.balance <
@@ -92,26 +102,17 @@ function Cart() {
       return setError({ message: "Not enough money!" });
     }
     if (!select) return setError({ message: "Select quantity" });
-    // TODO:
-    // ONLY FOR DEV SERVER
-    //DATA FOR UPDATE USER AFTER ORDER
-    const currentUser = await get(environment.info_client + user.id);
-    console.log(currentUser);
-    const userPayment = {
-      ...currentUser,
-      balance: userReducedBalance,
-      password: currentUser.repass,
-    };
-
-    console.log(userPayment);
 
     // IN PROD
-    // const userPayment = { ...user, balance: userReducedBalance };
+    const userPayment = { ...user, balance: userReducedBalance };
     setLoading(true);
     try {
-      const orderResponse = await post("/orders/", currentOrder);
-      const userAfterOrder = await put(`/users/${user.id}`, userPayment); //TAKE MONEY FROM USER ACCOUNT
-      console.log(userAfterOrder);
+      const orderResponse = await post(environment.create_order, currentOrder);
+      console.log(orderResponse);
+
+      //TAKE MONEY FROM USER ACCOUNT
+      // const userAfterOrder = await put(`/users/${user.id}`, userPayment);
+      // console.log(userAfterOrder);
     } catch (err) {
       console.error(err);
     } finally {
@@ -201,14 +202,14 @@ function Cart() {
                   <p className={styles.totalPrice}>
                     <span>Total:</span>
                     {!isNaN(
-                      frame.salesPrice + wheel.salesPrice + parts.salesPrice
+                      frame.salePrice + wheel.salePrice + parts.salePrice
                     ) &&
                       (
                         (frame.salesPrice +
                           wheel.salesPrice +
                           parts.salesPrice) *
                           select ||
-                        frame.salesPrice + wheel.salesPrice + parts.salesPrice
+                        frame.salePrice + wheel.salePrice + parts.salePrice
                       ).toFixed(2)}
                   </p>
                   <button

@@ -20,5 +20,7 @@
         Task<bool> ChangePassword(ClientLoginDto clientLoginDto);
 
         Task<bool> ResetPasswordToDefault(string email);
+
+        Task<bool> EditClientInfoAsync(ClientEditDto clientEditDto);
     }
 }

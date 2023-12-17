@@ -12,11 +12,10 @@ export async function login(user) {
       : environment.login_client;
 
   const result = await post(path, user);
-  console.log(result);
   if (!result.token) return;
-  if (result.user.role === "worker" || result.user.role === "manager")
+  if (result.role === "worker" || result.role === "manager") {
     clearOrderData();
-  // setUserData(result);
+  }
   return result;
 }
 

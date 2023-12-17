@@ -1,3 +1,5 @@
+[Обратно към ReadMe](/README.md)
+
 ### Отговор
 
 ### `GET /api/supplys_manager/get_suplier` - Връща JSON обект на доставчик на база подаден Id номер:
@@ -37,3 +39,5 @@ GET /api/supplys_manager/get_suplier
 }
 
 ```
+
+[Обратно към ReadMe](/README.md)

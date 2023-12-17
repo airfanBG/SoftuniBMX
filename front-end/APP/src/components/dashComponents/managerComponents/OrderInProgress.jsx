@@ -1,6 +1,7 @@
 import styles from "./OrderInProgress.module.css";
 
 function OrderInProgress({ order, i, onOrderButtonClick }) {
+  console.log(order);
   return (
     <>
       <div className={styles.orderLine}>
@@ -12,9 +13,9 @@ function OrderInProgress({ order, i, onOrderButtonClick }) {
 
         <div className={styles.figureLine}>
           <div className={styles.circle}>
-            {order.orderStates[0].isProduced ? (
+            {order.orderParts[0].isProduced ? (
               <span className={styles.icon}>&#10004;</span>
-            ) : order.orderStates[0].startedTime ? (
+            ) : order.orderParts[0].startedTime ? (
               <span className={styles.ionIcon}>
                 <ion-icon name="hourglass-outline"></ion-icon>
               </span>
@@ -26,9 +27,9 @@ function OrderInProgress({ order, i, onOrderButtonClick }) {
           </div>
           <div className={styles.line}></div>
           <div className={styles.circle}>
-            {order.orderStates[1].isProduced ? (
+            {order.orderParts[1].isProduced ? (
               <span className={styles.icon}>&#10004;</span>
-            ) : order.orderStates[1].startedTime ? (
+            ) : order.orderParts[1].startedTime ? (
               <span className={styles.ionIcon}>
                 <ion-icon name="hourglass-outline"></ion-icon>
               </span>
@@ -40,9 +41,9 @@ function OrderInProgress({ order, i, onOrderButtonClick }) {
           </div>
           <div className={styles.line}></div>
           <div className={styles.circle}>
-            {order.orderStates[2].isProduced ? (
+            {order.orderParts[2].isProduced ? (
               <span className={styles.icon}>&#10004;</span>
-            ) : order.orderStates[2].startedTime ? (
+            ) : order.orderParts[2].startedTime ? (
               <span className={styles.ionIcon}>
                 <ion-icon name="hourglass-outline"></ion-icon>
               </span>

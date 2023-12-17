@@ -91,6 +91,7 @@ function QControlOrders() {
       const abortController = new AbortController();
       async function getOrders() {
         const result = await get(environment.quality_assurance);
+
         if (!result) {
           dispatch({ type: "isLoading", payload: false });
           return dispatch({
@@ -118,7 +119,7 @@ function QControlOrders() {
 
       return () => abortController.abort();
     },
-    [status, dataArray]
+    [status, dataArray, itemPerPage]
   );
 
   useEffect(
@@ -147,10 +148,11 @@ function QControlOrders() {
         {loading && <LoaderWheel />}
         <div className={styles.orders}>
           {orderList &&
-            orderList.map((order) => (
+            orderList.map((order, i) => (
               <QControlOrderItem
                 product={order}
-                key={order.orderId}
+                key={i}
+                // key={order.orderId}
                 // onBtnHandler={onBtnHandler}
                 orderId={order.id}
                 onReBuild={reBuild}

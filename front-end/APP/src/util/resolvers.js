@@ -14,4 +14,11 @@ function timeResolver(t1, t2) {
   return roundedHours + " hours and " + roundedMinutes + " minutes.";
 }
 
-export { imageResolver, timeResolver };
+function formatCurrency(value) {
+  return new Intl.NumberFormat("bg", {
+    style: "currency",
+    currency: "BGN",
+  }).format(value);
+}
+
+export { imageResolver, timeResolver, formatCurrency };
