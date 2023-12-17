@@ -46,13 +46,13 @@ function OrderElement({ order }) {
                 <p
                   className={styles.field}
                   style={
-                    s.isProduced
+                    s.isComplete
                       ? { color: "var(--button-agree)" }
                       : { color: "var(--color-main-dark)" }
                   }
                 >
                   <span className={styles.fieldLabel}>Status:</span>
-                  {s.isProduced ? "Finished" : "In Process"}
+                  {s.isComplete ? "Finished" : "In Process"}
                 </p>
               </div>
             </div>

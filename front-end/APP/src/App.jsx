@@ -88,8 +88,14 @@ function App() {
                     path={"manager-in-progress"}
                     element={<InProgress />}
                   />
-                  <Route path={"manager-ready"} />
-                  <Route path={"manager-finished"} />
+                  <Route
+                    path={"manager-ready"}
+                    element={<ComponentScaffold />}
+                  />
+                  <Route
+                    path={"manager-finished"}
+                    element={<ComponentScaffold />}
+                  />
                   <Route path={"employers"} element={<EmployersList />} />
                   <Route path={"statistic"} />
                   <Route path={"add-member"} element={<AddMember />} />
