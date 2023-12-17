@@ -23,7 +23,7 @@ import UserTrackOrder from "./components/dashComponents/userComponents/UserTrack
 import UserHomeScreenSelection from "./components/dashComponents/userComponents/UserHomeScreenSelection.jsx";
 import LoaderWheel from "./components/LoaderWheel.jsx";
 import { ErrorProvider } from "./context/ErrorContext.jsx";
-import ComponentScaffold from "./components/dashComponents/ComponentScaffold.jsx";
+import ComponentScaffold from "./components/dashComponents/userComponents/ComponentScaffold.jsx";
 
 // import Home from "./pages/Homapage/Home.jsx";
 // import CreateBike from "./components/createComponents/CreateBike.jsx";

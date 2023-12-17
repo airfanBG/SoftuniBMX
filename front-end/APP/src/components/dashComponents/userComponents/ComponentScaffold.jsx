@@ -2,10 +2,10 @@ import styles from "./ComponentScaffold.module.css";
 
 import { useContext, useState } from "react";
 
-import { UserContext } from "../../context/GlobalUserProvider.jsx";
+import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 
-import BoardHeader from "./BoardHeader.jsx";
-import LoaderWheel from "../LoaderWheel.jsx";
+import BoardHeader from "../BoardHeader.jsx";
+import LoaderWheel from "../../LoaderWheel.jsx";
 
 function ComponentScaffold() {
   const { user } = useContext(UserContext);
