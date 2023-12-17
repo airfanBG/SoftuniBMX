@@ -14,11 +14,15 @@ function OrderItem({ product, onBtnHandler, orderIndex }) {
 
   async function onButtonClick() {
     const currentDate = new Date().toISOString();
+    // const currentDate = new Date()
+    //   .toLocaleString(undefined, { hour12: false })
+    //   .replace(", ", " ");
     const model = {
       partId: product.partId,
       employeeId: user.id,
       dateTime: currentDate,
     };
+
     let path = "";
 
     if (product.datetimeStarted === null) {
@@ -26,22 +30,11 @@ function OrderItem({ product, onBtnHandler, orderIndex }) {
     } else if (product.datetimeFinished === null) {
       path = "end";
     }
-
+    console.log(environment.worker_order + path);
+    console.log(model);
     const result = await post(environment.worker_order + path, model);
     console.log(result);
     onBtnHandler();
-
-    // if (item.startedTime === "" && item.finishedTime === "") {
-    //   setItem({
-    //     ...item,
-    //     startedTime: currentDate,
-    //     nameOfEmplоyeeProducedThePart: `${user.firstName} ${user.lastName}`,
-    //   });
-    //   setFirstCall(!firstCall);
-    // } else if (item.startedTime !== "" && item.finishedTime === "") {
-    //   setItem({ ...item, finishedTime: currentDate, isProduced: true });
-    //   setIsDone(!isDone);
-    // }
   }
 
   return (
@@ -55,7 +48,8 @@ function OrderItem({ product, onBtnHandler, orderIndex }) {
           </p>
           <p className={styles.model}>
             <span>Date created: </span>
-            {product.datetimeAsigned.split(" ").at(0).replaceAll("/", ".")}
+            {/* {product.datetimeAsigned.split(" ").at(0).replaceAll("/", ".")} */}
+            {product.datetimeAsigned}
           </p>
         </header>
 
@@ -103,7 +97,7 @@ function OrderItem({ product, onBtnHandler, orderIndex }) {
           <button
             className={styles.startBtn}
             onClick={onButtonClick}
-            disabled={orderIndex !== 0}
+            // disabled={orderIndex !== 0}
           >
             {orderIndex === 0 && !product.datetimeStarted && "Start"}
             {orderIndex === 0 && product.datetimeStarted && "In Progress"}

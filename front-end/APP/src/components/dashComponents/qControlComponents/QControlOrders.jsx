@@ -148,10 +148,11 @@ function QControlOrders() {
         {loading && <LoaderWheel />}
         <div className={styles.orders}>
           {orderList &&
-            orderList.map((order) => (
+            orderList.map((order, i) => (
               <QControlOrderItem
                 product={order}
-                key={order.orderId}
+                key={i}
+                // key={order.orderId}
                 // onBtnHandler={onBtnHandler}
                 orderId={order.id}
                 onReBuild={reBuild}
