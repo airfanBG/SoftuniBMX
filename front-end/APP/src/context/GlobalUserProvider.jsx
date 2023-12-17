@@ -12,7 +12,7 @@ function GlobalUser({ children }) {
   useEffect(function () {
     const data = getUserData();
     if (data) {
-      setUser(data);
+      const result = setUser(data);
     }
 
     const order = getOrderData();

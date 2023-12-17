@@ -27,7 +27,6 @@ async function request(method, url, data) {
     if (response.status != 204) {
       result = await response.json();
     }
-
     if (response.ok == false) {
       if (response.status == 403) {
         clearUserData();

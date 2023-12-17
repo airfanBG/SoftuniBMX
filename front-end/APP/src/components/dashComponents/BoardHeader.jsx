@@ -25,7 +25,9 @@ function BoardHeader() {
     <header className={styles.boardHeader}>
       {user === "free" && <Guest />}
       {user.role === "user" && <Balance user={user} />}
-      {user.role === "worker" && <Category />}
+      {(user.role === "accessoriesworker" ||
+        user.role === "frameworker" ||
+        user.role === "wheelworker") && <Category />}
       <button className={styles.logout} onClick={onLogout}>
         Logout
       </button>

@@ -31,7 +31,7 @@
                 if (clientRegisterDto == null)
                 {
                     // The clientRegisterDto object is null, so return a 400 Bad Request response
-                    return StatusCode(400);       
+                    return StatusCode(400);
                 }
 
                 if (!ModelState.IsValid)
@@ -198,7 +198,7 @@
                 return Ok();
             }
 
-            return BadRequest();           
+            return BadRequest();
         }
 
         [HttpGet]
@@ -314,6 +314,42 @@
                 }
 
                 return BadRequest();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpPut]
+        [Route("edit")]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<ClientEditDto>> EditInfo([FromBody] ClientEditDto clientEditDto)
+        {
+            if (clientEditDto == null)
+            {
+                return BadRequest(clientEditDto);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(clientEditDto);
+            }
+
+            try
+            {
+                bool result = await clientService.EditClientInfoAsync(clientEditDto);
+
+                if (result)
+                {
+                    return StatusCode(StatusCodes.Status202Accepted);
+                }
+
+                return StatusCode(StatusCodes.Status409Conflict);
+
             }
             catch (Exception)
             {

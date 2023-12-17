@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import styles from "./Navigation.module.css";
 import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "../../context/GlobalUserProvider.jsx";
@@ -17,28 +17,36 @@ function Navigation() {
       <nav className={styles.nav}>
         <ul className={styles.navList} role="list">
           <li className={styles.navListItem}>
-            {window.location.pathname === "/" &&
-            user.role !== "worker" &&
-            user.role !== "manager" &&
-            user.role !== "qControl" ? (
+            {window.location.pathname === "/" && user.role === "user" ? (
               <NavLink to={"/app"} className={styles.navLink}>
                 Create
               </NavLink>
             ) : (
+              // {window.location.pathname === "/" &&
+              // user.role !== "accessoriesworker" &&
+              // user.role !== "wheelworker" &&
+              // user.role !== "frameworker" &&
+              // user.role !== "manager" &&
+              // user.role !== "qualitycontrol" ? (
+              //   <NavLink to={"/app"} className={styles.navLink}>
+              //     Create
+              //   </NavLink>
               <NavLink to={"/"} className={styles.navLink}>
                 Home
               </NavLink>
             )}
           </li>
-          {window.location.pathname !== "/" &&
-            user &&
-            user.role !== "worker" &&
-            user.role !== "manager" &&
-            user.role !== "qControl" && (
-              <NavLink to={"/app"} className={styles.navLink}>
-                Create
-              </NavLink>
-            )}
+          {window.location.pathname !== "/" && user && user.role === "user" && (
+            <NavLink to={"/app"} className={styles.navLink}>
+              Create
+            </NavLink>
+            // user.role !== "worker" &&
+            // user.role !== "manager" &&
+            // user.role !== "qControl" && (
+            //   <NavLink to={"/app"} className={styles.navLink}>
+            //     Create
+            //   </NavLink>
+          )}
           <li className={styles.navListItem}>
             <NavLink to={"/about"} className={styles.navLink}>
               About
@@ -73,4 +81,4 @@ function Navigation() {
   );
 }
 
-export default Navigation;
+export default memo(Navigation);

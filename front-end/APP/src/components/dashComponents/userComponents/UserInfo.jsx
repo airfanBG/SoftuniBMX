@@ -25,7 +25,7 @@ function UserInfo() {
   useEffect(
     function () {
       async function getClientInfo() {
-        const data = await userInfo(user.id);
+        const data = await userInfo(user.id, user.role);
         setInfo({ ...data });
         if (data.role === "user") {
           setInfo({ ...data, balance: Number(data.balance.toFixed(2)) });

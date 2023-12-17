@@ -2,27 +2,13 @@ import styles from "./UserContactInfo.module.css";
 
 import { useContext } from "react";
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
-// import { userInfo } from "../../../userServices/userService.js";
 import ContactInfoElement from "../ContactInfoElement.jsx";
+import { userInfo } from "../../../userServices/userService.js";
+import { formatCurrency } from "../../../util/resolvers.js";
 
 function UserContactInfo({ info }) {
   const { user } = useContext(UserContext);
-  // const [info, setInfo] = useState("");
 
-  // useEffect(
-  //   function () {
-  //     async function getClientInfo() {
-  //       const data = await userInfo(user.id);
-  //       console.log(data);
-  //       setInfo({ ...data });
-  //       if (data.role === "user") {
-  //         setInfo({ ...data, balance: Number(data.balance.toFixed(2)) });
-  //       }
-  //     }
-  //     getClientInfo();
-  //   },
-  //   [user]
-  // );
   return (
     <>
       {info && (
@@ -134,7 +120,8 @@ function UserContactInfo({ info }) {
             <div className={styles.fullData}>
               <div className={styles.row}>
                 <ContactInfoElement
-                  content={user.balance.toFixed(2)}
+                  // content={user.balance.toFixed(2)}
+                  content={formatCurrency(user.balance)}
                   label={"Account balance"}
                   width={"40%"}
                 />

@@ -233,6 +233,7 @@ function QControlOrderItem({ product, onReBuild }) {
             />
           </div>
         </section>
+
         <div className={styles.infoBlock}>
           <p className={styles.qControlInfo}></p>
           <button
