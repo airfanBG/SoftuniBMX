@@ -3,6 +3,7 @@
     using System.Threading.Tasks;
 
     using BicycleApp.Services.Models.IdentityModels;
+    using BicycleApp.Services.Models.Order;
 
     public interface IEmployeeService
     {
@@ -17,5 +18,6 @@
         Task<bool> ResetPasswordToDefault(string email);
 
         Task ConfirmEmailAsync(string emmployeeId, string code);
+        Task<AllEmployeesDto?> GetAllEmployees();
     }
 }

@@ -22,6 +22,8 @@
         [JsonProperty("start")]
         public string DatetimeAsigned { get; set; } = null!;
 
+        public string? DatetimeStarted { get; set; }
+
         [JsonProperty("finish")]
         public string? DatetimeFinished { get; set; }
 
