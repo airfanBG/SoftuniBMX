@@ -8,7 +8,7 @@ import { post } from "../../util/api.js";
 import { environment } from "../../environments/environment.js";
 import LoaderWheel from "../LoaderWheel.jsx";
 
-function OrderItem({ product, onBtnHandler, orderIndex }) {
+function OrderItem({ product, onBtnHandler, orderIndex, orderId }) {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
 
@@ -21,6 +21,7 @@ function OrderItem({ product, onBtnHandler, orderIndex }) {
       partId: product.partId,
       employeeId: user.id,
       dateTime: currentDate,
+      orderId: orderId,
     };
 
     let path = "";
@@ -97,7 +98,7 @@ function OrderItem({ product, onBtnHandler, orderIndex }) {
           <button
             className={styles.startBtn}
             onClick={onButtonClick}
-            // disabled={orderIndex !== 0}
+            disabled={orderIndex !== 0}
           >
             {orderIndex === 0 && !product.datetimeStarted && "Start"}
             {orderIndex === 0 && product.datetimeStarted && "In Progress"}
