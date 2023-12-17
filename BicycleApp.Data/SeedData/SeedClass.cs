@@ -671,7 +671,7 @@
                 PartName = "Frame OG",
                 PartPrice = 100.00M,
                 PartQuantity = 1,
-                DatetimeAsigned = DateTime.Now,
+                DatetimeAsigned = null,
                 StartDatetime = null,
                 EndDatetime = null,
                 Description = "test",

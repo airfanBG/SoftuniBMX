@@ -39,7 +39,8 @@
         {
             var order = await dbContext.OrdersPartsEmployees
                 .FirstOrDefaultAsync(ope => ope.PartId == partOrdersStartEndDto.PartId
-                && ope.EmployeeId == partOrdersStartEndDto.EmployeeId);
+                && ope.EmployeeId == partOrdersStartEndDto.EmployeeId
+                && ope.OrderId == partOrdersStartEndDto.OrderId);
 
             if (order == null)
             {
@@ -62,7 +63,8 @@
         {
             var order = await dbContext.OrdersPartsEmployees
                 .FirstOrDefaultAsync(ope => ope.PartId == partOrdersStartEndDto.PartId
-                && ope.EmployeeId == partOrdersStartEndDto.EmployeeId);
+                && ope.EmployeeId == partOrdersStartEndDto.EmployeeId
+                && ope.OrderId == partOrdersStartEndDto.OrderId);
 
             if (order == null)
             {
@@ -117,11 +119,12 @@
             .Include(ep => ep.Part)
             .Include(ep => ep.Order)
             .Include(opei => opei.OrdersPartsEmployeesInfos)
-            .Where(ep => ep.EmployeeId == employeeId && ep.EndDatetime == null && ep.IsCompleted == false)
+            .Where(ep => ep.EmployeeId == employeeId && ep.StartDatetime == null && ep.EndDatetime == null && ep.IsCompleted == false)
             .OrderBy(o => o.OrderId)
             .Select(p => new PartOrdersDto()
             {
                 PartId = p.PartId,
+                OrderId = p.OrderId,
                 PartName = p.Part.Name,
                 PartOEMNumber = p.Part.OEMNumber,
                 DatetimeAsigned = p.DatetimeAsigned.Value.ToString(DefaultDateWithTimeFormat),
