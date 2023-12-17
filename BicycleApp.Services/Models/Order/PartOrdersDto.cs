@@ -9,6 +9,8 @@
 
         [JsonProperty("partId")]
         public int PartId { get; set; }
+        [JsonProperty("orderId")]
+        public int OrderId { get; set; }
 
         [JsonProperty("partName")]
         public string PartName { get; set; } = null!;
