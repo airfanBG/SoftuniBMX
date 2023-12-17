@@ -39,7 +39,8 @@
         {
             var order = await dbContext.OrdersPartsEmployees
                 .FirstOrDefaultAsync(ope => ope.PartId == partOrdersStartEndDto.PartId
-                && ope.EmployeeId == partOrdersStartEndDto.EmployeeId);
+                && ope.EmployeeId == partOrdersStartEndDto.EmployeeId
+                && ope.OrderId == partOrdersStartEndDto.OrderId);
 
             if (order == null)
             {
@@ -62,7 +63,8 @@
         {
             var order = await dbContext.OrdersPartsEmployees
                 .FirstOrDefaultAsync(ope => ope.PartId == partOrdersStartEndDto.PartId
-                && ope.EmployeeId == partOrdersStartEndDto.EmployeeId);
+                && ope.EmployeeId == partOrdersStartEndDto.EmployeeId
+                && ope.OrderId == partOrdersStartEndDto.OrderId);
 
             if (order == null)
             {
@@ -122,6 +124,7 @@
             .Select(p => new PartOrdersDto()
             {
                 PartId = p.PartId,
+                OrderId = p.OrderId,
                 PartName = p.Part.Name,
                 PartOEMNumber = p.Part.OEMNumber,
                 DatetimeAsigned = p.DatetimeAsigned.Value.ToString(DefaultDateWithTimeFormat),
