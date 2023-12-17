@@ -1,7 +1,7 @@
 import { UserContext } from "../../context/GlobalUserProvider.jsx";
 import styles from "./NavigationSecondary.module.css";
 import NavSecListItem from "./NavSecListItem.jsx";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 // import { UserContext } from "../UserProfile.jsx";
 
 function NavigationSecondary() {
@@ -9,38 +9,49 @@ function NavigationSecondary() {
 
   const [currentMenu, setCurrentMenu] = useState([]);
 
-  const userMenu = {
-    user: [
-      { link: "info", textContent: "Profile" },
-      { link: "cart", textContent: "Cart" },
-      // { link: "user-ready", textContent: "Ready" },
-      { link: "user-in-progress", textContent: "In production" },
-      // { link: "user-archive", textContent: "Archive" },
-    ],
-    worker: [
-      { link: "info", textContent: "Profile" },
-      { link: "worker-orders", textContent: "Orders" },
-    ],
-    qControl: [
-      { link: "info", textContent: "Profile" },
-      { link: "q-control-orders", textContent: "Quality Control" },
-    ],
-    manager: [
-      { link: "info", textContent: "Profile" },
-      { link: "managerOrders", textContent: "Orders" },
-      { link: "manager-in-progress", textContent: "In production" },
-      // { link: "manager-finished", textContent: "Finished" },
-      // { link: "manager-dispatched", textContent: "Dispatched" },
-      { link: "employers", textContent: "Employers" },
-      // { link: "manager-storage", textContent: "Storage" },
-      // { link: "statistic", textContent: "Statistic" },
-    ],
-  };
+  const userMenu = useMemo(
+    () => ({
+      user: [
+        { link: "info", textContent: "Profile" },
+        { link: "cart", textContent: "Cart" },
+        { link: "user-ready", textContent: "Ready" },
+        { link: "user-in-progress", textContent: "In production" },
+        // { link: "user-archive", textContent: "Archive" },
+      ],
+      accessoriesworker: [
+        { link: "info", textContent: "Profile" },
+        { link: "worker-orders", textContent: "Orders" },
+      ],
+      frameworker: [
+        { link: "info", textContent: "Profile" },
+        { link: "worker-orders", textContent: "Orders" },
+      ],
+      wheelworker: [
+        { link: "info", textContent: "Profile" },
+        { link: "worker-orders", textContent: "Orders" },
+      ],
+      qualitycontrol: [
+        { link: "info", textContent: "Profile" },
+        { link: "q-control-orders", textContent: "Quality Control" },
+      ],
+      manager: [
+        { link: "info", textContent: "Profile" },
+        { link: "managerOrders", textContent: "Orders" },
+        { link: "manager-in-progress", textContent: "In production" },
+        { link: "manager-finished", textContent: "Finished" },
+        // { link: "manager-dispatched", textContent: "Dispatched" },
+        { link: "employers", textContent: "Employers" },
+        // { link: "manager-storage", textContent: "Storage" },
+        // { link: "statistic", textContent: "Statistic" },
+      ],
+    }),
+    []
+  );
 
   useEffect(() => {
     if (!user) return;
     setCurrentMenu(userMenu[user.role]);
-  }, [user]);
+  }, [user, userMenu]);
 
   return (
     <nav className={styles.nav}>

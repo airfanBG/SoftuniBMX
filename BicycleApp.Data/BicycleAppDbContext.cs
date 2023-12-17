@@ -15,16 +15,16 @@
 
         }
 
-        //public BicycleAppDbContext(DbContextOptions<BicycleAppDbContext> options)
-        //    : base(options)
-        //{
-
-        //}
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public BicycleAppDbContext(DbContextOptions<BicycleAppDbContext> options)
+            : base(options)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-TP2JLNJ\\SQLEXPRESS;Database=BicycleNewDB;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False");
+
         }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("Server=DESKTOP-O0P5VDC\\SQLEXPRESS;Database=BicycleNewDB;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False");
+        //}
 
         //Identity Tables
         public DbSet<BaseUser> BaseUsers { get; set; } = null!;
@@ -329,6 +329,7 @@
             builder.Entity<ImageEmployee>(entity => entity.HasData(seeder.SeedImagesEmployees()));
             builder.Entity<Order>(entity => entity.HasData(seeder.SeedOrders()));
             builder.Entity<OrderPartEmployee>(entity => entity.HasData(seeder.SeedOrdersPartsEmployees()));
+            builder.Entity<OrderPartEmployeeInfo>(entity => entity.HasData(seeder.SeedOrderOrderParsEmployeeInfos()));
             builder.Entity<Part>(entity => entity.HasData(seeder.SeedParts()));
             builder.Entity<PartCategory>(entity => entity.HasData(seeder.SeedPartCategories()));
             builder.Entity<Rate>(entity => entity.HasData(seeder.SeedRates()));

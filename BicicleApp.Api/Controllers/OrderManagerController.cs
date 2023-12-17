@@ -137,7 +137,7 @@ namespace BicicleApp.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> ApproveOrder([FromQuery] int orderId)
+        public async Task<ActionResult<int>> ApproveOrder([FromQuery] int orderId)
         {
             if (orderId <= 0)
             {
@@ -148,12 +148,12 @@ namespace BicicleApp.Api.Controllers
             {
                 var result = await _orderManagerService.AcceptAndAssignOrderByManagerAsync(orderId);
 
-                if (result == false)
+                if (result == 0)
                 {
                     return StatusCode(400);
                 }
 
-                return StatusCode(200);
+                return Ok(result);
 
             }
             catch (Exception)

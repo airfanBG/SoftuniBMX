@@ -1,3 +1,5 @@
+[Обратно към ReadMe](/README.md)
+
 ### Отговор
 
 ### `GET /api/accountpage/selected_part` Връща JSON обект със следните пропъртита:
@@ -40,3 +42,4 @@ GET /api/accountpage/selected_part?id=1
 }
 
 ```
+[Обратно към ReadMe](/README.md)

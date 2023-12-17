@@ -58,9 +58,9 @@ function App() {
                 <Route
                   path="profile"
                   element={
-                    // <ProtectedRoute>
-                    <UserProfile />
-                    // </ProtectedRoute>
+                    <ProtectedRoute>
+                      <UserProfile />
+                    </ProtectedRoute>
                   }
                 >
                   <Route index element={<Navigate replace to="info" />} />

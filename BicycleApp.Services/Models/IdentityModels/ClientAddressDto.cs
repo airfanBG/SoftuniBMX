@@ -1,31 +1,31 @@
 ﻿namespace BicycleApp.Services.Models.IdentityModels
 {
-    using Newtonsoft.Json;
-        
+    using System.Text.Json.Serialization;
+
     public class ClientAddressDto
     {
-        [JsonProperty("country")]
+        [JsonPropertyName("country")]
         public string? Country { get; set; }
 
-        [JsonProperty("postCode")]
+        [JsonPropertyName("postCode")]
         public string? PostCode { get; set; }
 
-        [JsonProperty("district")]
+        [JsonPropertyName("district")]
         public string? District { get; set; }
 
-        [JsonProperty("block")]
+        [JsonPropertyName("block")]
         public string? Block { get; set; }
 
-        [JsonProperty("floor")]
+        [JsonPropertyName("floor")]
         public int? Floor { get; set; }
 
-        [JsonProperty("apartment")]
+        [JsonPropertyName("apartment")]
         public string? Apartment { get; set; }
 
-        [JsonProperty("street")]
+        [JsonPropertyName("street")]
         public string? Street { get; set; }
 
-        [JsonProperty("strNumber")]
+        [JsonPropertyName("strNumber")]
         public string? StrNumber { get; set; }
     }
 }

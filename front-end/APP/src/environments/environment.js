@@ -14,13 +14,15 @@ export const environment = {
 
   // CLIENT
   // update_client: "/users/", // + id
-  // info_client: "/users/", // + id
+  info_client: "/api/client/info?id=", // + id
+  create_order: "/api/client_order/create",
 
   // EMPLOYEE
-  // update_employee: "/users/", // + id
-  // info_employee: "/users/", // + id
-  // get_all_employers: "/users?role=worker&role=manager&role=qControl",
-  worker_order_queue: "/api/employee_order/myOrders",
+  info_employee: "/api/employee/info?id=", // + id
+  worker_order_queue: "/api/employee_order/myOrders?id=",
+  worker_order_start: "/api/employee_order/start",
+  worker_order_end: "/api/employee_order/end",
+  worker_order: "/api/employee_order/",
 
   // QUALITY_CONTROL
   quality_assurance: "/api/employee_order/quality_assurance",
@@ -28,6 +30,7 @@ export const environment = {
   return_qControl: "/api/employee_order/quality_assurance_return",
 
   // MANAGER
+  pending_orders: "/api/manager/pending_orders?page=",
   approve_order: "/api/manager/approve_order?orderId=", // + id
   reject_order: "/api/manager/reject_order?orderId=", // + id
   del_order: "/api/manager/delete_order?orderId=", // +id
@@ -35,14 +38,10 @@ export const environment = {
 
   // BIKE_SERVICES
   frames: "/api/accountpage/frames",
-  compatible_parts: "/api/accountpage/compatible_parts",
-  selected_part: "/api/accountpage/selected_part",
-  // wheels: "/wheels/",
-  // accessories: "/accessories/",
+  compatible_parts: "/api/accountpage/compatible_parts?id=",
+  selected_part: "/api/accountpage/selected_part?id=",
 };
 
-// indexPage: "/indexPage",
-// // TODO: change to project path
 // // get_all_in_progress: "/inProgress/",
 // get_all_in_progress: "/production/",
 // in_progress: "/production/",

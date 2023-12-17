@@ -1,6 +1,7 @@
 ﻿namespace BicycleApp.Services.Services.Order
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -8,6 +9,7 @@
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.Contracts.Factory;
+    using BicycleApp.Services.Models.IdentityModels;
     using BicycleApp.Services.Models.Order;
 
     using Microsoft.AspNetCore.Identity;
@@ -37,7 +39,8 @@
         {
             var order = await dbContext.OrdersPartsEmployees
                 .FirstOrDefaultAsync(ope => ope.PartId == partOrdersStartEndDto.PartId
-                && ope.EmployeeId == partOrdersStartEndDto.EmployeeId);
+                && ope.EmployeeId == partOrdersStartEndDto.EmployeeId
+                && ope.OrderId == partOrdersStartEndDto.OrderId);
 
             if (order == null)
             {
@@ -60,7 +63,8 @@
         {
             var order = await dbContext.OrdersPartsEmployees
                 .FirstOrDefaultAsync(ope => ope.PartId == partOrdersStartEndDto.PartId
-                && ope.EmployeeId == partOrdersStartEndDto.EmployeeId);
+                && ope.EmployeeId == partOrdersStartEndDto.EmployeeId
+                && ope.OrderId == partOrdersStartEndDto.OrderId);
 
             if (order == null)
             {
@@ -115,13 +119,16 @@
             .Include(ep => ep.Part)
             .Include(ep => ep.Order)
             .Include(opei => opei.OrdersPartsEmployeesInfos)
-            .Where(ep => ep.EmployeeId == employeeId && ep.EndDatetime == null && ep.IsCompleted == false)
+            .Where(ep => ep.EmployeeId == employeeId && ep.StartDatetime == null && ep.EndDatetime == null && ep.IsCompleted == false)
+            .OrderBy(o => o.OrderId)
             .Select(p => new PartOrdersDto()
             {
                 PartId = p.PartId,
+                OrderId = p.OrderId,
                 PartName = p.Part.Name,
                 PartOEMNumber = p.Part.OEMNumber,
                 DatetimeAsigned = p.DatetimeAsigned.Value.ToString(DefaultDateWithTimeFormat),
+                DatetimeStarted = p.StartDatetime.Value.ToString(DefaultDateWithTimeFormat),
                 DatetimeFinished = null,
                 Description = p.OrdersPartsEmployeesInfos.Where(o => p.OrderId == o.OrderId && p.PartId == o.PartId && p.UniqueKeyForSerialNumber == o.UniqueKeyForSerialNumber).OrderBy(id => id.Id).LastOrDefault().DescriptionForWorker,
                 OrderSerialNumber = p.SerialNumber,
@@ -137,5 +144,6 @@
 
             return ordersDto;
         }
+       
     }
 }

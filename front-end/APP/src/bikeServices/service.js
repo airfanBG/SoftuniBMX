@@ -18,7 +18,7 @@ async function getParts(criteria) {
 }
 
 async function getOneFrame(id) {
-  const data = await get(environment.frames + id);
+  const data = await get(environment.selected_part + id);
   return data;
 }
 async function getOneWheel(id) {
@@ -50,6 +50,11 @@ async function getElement(elName, id) {
   return data;
 }
 
+async function getCompatible(id) {
+  const data = await get(environment.compatible_parts + id);
+  return data;
+}
+
 export {
   getOneFrame,
   getFrames,
@@ -61,4 +66,5 @@ export {
   getElement,
   getOrder,
   getOrdersList,
+  getCompatible,
 };

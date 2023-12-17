@@ -3,17 +3,20 @@
     using System.IdentityModel.Tokens.Jwt;
     using System.Security.Claims;
     using System.Text;
+
     using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.HelperClasses.Contracts;
     using BicycleApp.Services.Models.IdentityModels;
+
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.WebUtilities;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.IdentityModel.Tokens;
+
     using static BicycleApp.Common.UserConstants;
 
     public class ClientService : IClientService
@@ -28,14 +31,14 @@
         private readonly IStringManipulator stringManipulator;
         private readonly IOptionProvider optionProvider;
 
-        public ClientService(UserManager<BaseUser> userManager, 
-                             SignInManager<BaseUser> signInManager, 
+        public ClientService(UserManager<BaseUser> userManager,
+                             SignInManager<BaseUser> signInManager,
                              RoleManager<IdentityRole> roleManager,
                              BicycleAppDbContext dbContext,
-                             IConfiguration configuration, 
+                             IConfiguration configuration,
                              IModelsFactory modelFactory,
                              IEmailSender emailSender,
-                             IStringManipulator stringManipulator, 
+                             IStringManipulator stringManipulator,
                              IOptionProvider optionProvider)
         {
             this.userManager = userManager;
@@ -142,6 +145,11 @@
 
             if (result.Succeeded)
             {
+                decimal? balance = await dbContext.Clients
+                    .Where(b => b.Id == client.Id)
+                    .Select(b => b.Balance)
+                    .FirstOrDefaultAsync();
+
                 var roles = await userManager.GetRolesAsync(client);
                 return new ClientReturnDto()
                 {
@@ -149,6 +157,7 @@
                     ClientFullName = $"{client.FirstName} {client.LastName}",
                     Role = roles[0],
                     Token = await this.GenerateJwtTokenAsync(client),
+                    Balance = balance,
                     Result = true
                 };
             }
@@ -446,6 +455,69 @@
             {
             }
             return false;
+        }
+
+        public async Task<bool> EditClientInfoAsync(ClientEditDto clientEditDto)
+        {
+            Client? client = await dbContext.Clients.
+                 FirstOrDefaultAsync(c => c.Email == clientEditDto.Email);
+            if (client == null)
+            {
+                return false;
+            }
+
+            client.FirstName = clientEditDto.FirstName != null ? clientEditDto.FirstName : client.FirstName;
+
+            client.LastName = clientEditDto.LastName != null ? clientEditDto.LastName : client.LastName;
+
+            client.PhoneNumber = clientEditDto.PhoneNumber != null ? clientEditDto.PhoneNumber : client.PhoneNumber;
+
+            if (clientEditDto.Town != null)
+            {
+                client.TownId = await this.GetTownIdAsync(clientEditDto.Town);
+            }
+
+            var sb = new StringBuilder();
+            ClientAddressDto innerDto = clientEditDto.DelivaryAddress;
+
+            if (!string.IsNullOrWhiteSpace(innerDto.Country))
+            {
+                sb.Append($"{innerDto.Country} ");
+            }
+            if (!string.IsNullOrWhiteSpace(innerDto.PostCode))
+            {
+                sb.Append($"{innerDto.PostCode} ");
+            }
+            if (!string.IsNullOrWhiteSpace(innerDto.District))
+            {
+                sb.Append($"{innerDto.District} ");
+            }
+            if (!string.IsNullOrWhiteSpace(innerDto.Block))
+            {
+                sb.Append($"{innerDto.Block} ");
+            }
+            if (innerDto.Floor.HasValue)
+            {
+                sb.Append($"{innerDto.Floor} ");
+            }
+            if (!string.IsNullOrWhiteSpace(innerDto.Apartment))
+            {
+                sb.Append($"{innerDto.Apartment} ");
+            }
+            if (!string.IsNullOrWhiteSpace(innerDto.Street))
+            {
+                sb.Append($"{innerDto.Street} ");
+            }
+            if (!string.IsNullOrWhiteSpace(innerDto.StrNumber))
+            {
+                sb.Append($"{innerDto.StrNumber}");
+            }
+
+            client.DelivaryAddress = sb.ToString();
+
+            await dbContext.SaveChangesAsync();
+
+            return true;
         }
     }
 }
