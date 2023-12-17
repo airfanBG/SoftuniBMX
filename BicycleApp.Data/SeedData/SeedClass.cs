@@ -590,8 +590,25 @@
                 DateFinish = null,
                 StatusId = 1
             };
+            Order order10 = new Order()
+            {
+                Id = 10,
+                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                Description = "Passed quality control",
+                SaleAmount = 354.17M,
+                Discount = 0,
+                VAT = 70.83M,
+                FinalAmount = 425.00M,
+                PaidAmount = 0,
+                DateCreated = DateTime.Now,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false,
+                DateFinish = null,
+                StatusId = 1
+            };
 
-            return new List<Order> { order, order2, order3, order4, order5, order6, order7, order8, order9 };
+            return new List<Order> { order, order2, order3, order4, order5, order6, order7, order8, order9, order10 };
         }
 
         public List<OrderPartEmployee> SeedOrdersPartsEmployees()
@@ -1028,10 +1045,88 @@
                 Description = "test",
                 IsCompleted = false
             };
+            OrderPartEmployee qualityControlOpeFrame = new OrderPartEmployee()
+            {
+                OrderId = 10,
+                SerialNumber = "BIDPASQC123",
+                UniqueKeyForSerialNumber = "231b3632-b31c-4711-8f67-fe42b36642b5",
+                PartId = 1,
+                EmployeeId = "21003785-a275-4139-ae20-af6a6cf8fea8",
+                PartName = "Frame OG",
+                PartPrice = 100.00M,
+                PartQuantity = 1,
+                DatetimeAsigned = new DateTime(2023,12,16,15,48,13),
+                StartDatetime = new DateTime(2023, 12, 16, 16, 48, 13),
+                EndDatetime = new DateTime(2023, 12, 16, 16, 53, 13),
+                Description = "test",
+                IsCompleted = true
+            };
+            OrderPartEmployee qualityControlOpeWheel = new OrderPartEmployee()
+            {
+                OrderId = 10,
+                SerialNumber = "BIDPASQC123",
+                UniqueKeyForSerialNumber = "231b3632-b31c-4711-8f67-fe42b36642b5",
+                PartId = 2,
+                EmployeeId = "17063948-8fdc-417e-8fb7-2ae6bf572f94",
+                PartName = "Wheel of the YearG",
+                PartPrice = 75.00M,
+                PartQuantity = 1,
+                DatetimeAsigned = new DateTime(2023, 12, 16, 15, 48, 13),
+                StartDatetime = new DateTime(2023, 12, 17, 9, 10, 13),
+                EndDatetime = new DateTime(2023, 12, 17, 9, 15, 13),
+                Description = "test",
+                IsCompleted = true
+            };
+            OrderPartEmployee qualityControlOpeAccessories = new OrderPartEmployee()
+            {
+                OrderId = 10,
+                SerialNumber = "BIDPASQC123",
+                UniqueKeyForSerialNumber = "231b3632-b31c-4711-8f67-fe42b36642b5",
+                PartId = 3,
+                EmployeeId = "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91",
+                PartName = "Shift",
+                PartPrice = 250.00M,
+                PartQuantity = 1,
+                DatetimeAsigned = new DateTime(2023, 12, 16, 15, 48, 13),
+                StartDatetime = new DateTime(2023, 12, 17, 10, 15, 13),
+                EndDatetime = new DateTime(2023, 12, 17, 10, 30, 13),
+                Description = "test",
+                IsCompleted = true
+            };
             return new List<OrderPartEmployee> {
                 opeFrame, opeWheel, opeAccessories, opeFrame2, opeWheel2, opeAccessories2, opeFrame3, opeWheel3, opeAccessories3,
                 opeFrame4, opeWheel4, opeAccessories4, opeFrame5, opeWheel5, opeAccessories5, opeFrame6, opeWheel6, opeAccessories6,
-                opeFrame7, opeWheel7, opeAccessories7, opeFrame8, opeWheel8, opeAccessories8, opeFrame9, opeWheel9, opeAccessories9
+                opeFrame7, opeWheel7, opeAccessories7, opeFrame8, opeWheel8, opeAccessories8, opeFrame9, opeWheel9, opeAccessories9,qualityControlOpeFrame,qualityControlOpeWheel,qualityControlOpeAccessories
+            };
+        }
+        public ICollection<OrderPartEmployeeInfo> SeedOrderOrderParsEmployeeInfos()
+        {
+            return new List<OrderPartEmployeeInfo>() 
+            { 
+                new OrderPartEmployeeInfo()
+                {
+                    Id = 1,
+                    OrderId = 10,
+                    PartId = 1,
+                    UniqueKeyForSerialNumber = "231b3632-b31c-4711-8f67-fe42b36642b5",
+                    ProductionТime = new TimeSpan(0,5,0)
+                },
+                new OrderPartEmployeeInfo()
+                {
+                    Id = 2,
+                    OrderId = 10,
+                    PartId = 2,
+                    UniqueKeyForSerialNumber = "231b3632-b31c-4711-8f67-fe42b36642b5",
+                    ProductionТime = new TimeSpan(0,5,0)
+                },
+                new OrderPartEmployeeInfo()
+                {
+                    Id = 3,
+                    OrderId = 10,
+                    PartId = 3,
+                    UniqueKeyForSerialNumber = "231b3632-b31c-4711-8f67-fe42b36642b5",
+                    ProductionТime = new TimeSpan(0,15,0)
+                },
             };
         }
 
