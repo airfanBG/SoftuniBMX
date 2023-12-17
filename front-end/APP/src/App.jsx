@@ -23,6 +23,7 @@ import UserTrackOrder from "./components/dashComponents/userComponents/UserTrack
 import UserHomeScreenSelection from "./components/dashComponents/userComponents/UserHomeScreenSelection.jsx";
 import LoaderWheel from "./components/LoaderWheel.jsx";
 import { ErrorProvider } from "./context/ErrorContext.jsx";
+import ComponentScaffold from "./components/dashComponents/ComponentScaffold.jsx";
 
 // import Home from "./pages/Homapage/Home.jsx";
 // import CreateBike from "./components/createComponents/CreateBike.jsx";
@@ -66,12 +67,16 @@ function App() {
                   <Route index element={<Navigate replace to="info" />} />
                   <Route path="info" element={<UserInfo />} />
                   <Route path={"cart"} element={<Cart />} />
-                  <Route path={"user-ready"} element={<Cart />} />
+                  {/* <Route path={"user-ready"} element={<Cart />} /> */}
+                  <Route path={"user-ready"} element={<ComponentScaffold />} />
                   <Route
                     path={"user-in-progress"}
                     element={<UserTrackOrder />}
                   />
-                  <Route path={"user-archive"} element={<Cart />} />
+                  <Route
+                    path={"user-archive"}
+                    element={<ComponentScaffold />}
+                  />
                   <Route
                     path={"get-stock"}
                     element={<UserHomeScreenSelection />}

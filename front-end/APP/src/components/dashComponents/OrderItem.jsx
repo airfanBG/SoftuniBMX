@@ -113,15 +113,3 @@ function OrderItem({ product, onBtnHandler, orderIndex, orderId }) {
 }
 
 export default OrderItem;
-
-// {
-//   "orderSerialNumber": "BID12345678",
-//   "partId": 1,
-//   "partName": "Frame Road",
-//   "partOEMNumber": "oemtest1",
-//   "quantity": 1,
-//   "datetimeAsigned": "16/12/2023 14:14",
-//   "datetimeStarted": null,
-//   "datetimeFinished": null,
-//   "description": null
-// }
