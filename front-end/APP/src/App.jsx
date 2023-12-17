@@ -25,14 +25,6 @@ import LoaderWheel from "./components/LoaderWheel.jsx";
 import { ErrorProvider } from "./context/ErrorContext.jsx";
 import ComponentScaffold from "./components/dashComponents/userComponents/ComponentScaffold.jsx";
 
-// import Home from "./pages/Homapage/Home.jsx";
-// import CreateBike from "./components/createComponents/CreateBike.jsx";
-// import About from "./pages/About/About.jsx";
-// import UserProfile from "./components/UserProfile.jsx";
-// import Login from "./components/authComponents/Login.jsx";
-// import AppLayout from "./pages/AppLayout.jsx";
-// import PageNotFound from "./components/PageNotFound.jsx";
-
 // LAZY LOADING
 const CreateBike = lazy(() =>
   import("./components/createComponents/CreateBike.jsx")
@@ -48,14 +40,12 @@ function App() {
   return (
     <AuthProvider>
       <GlobalUser>
-        {/* <OrdersManager> */}
         <ErrorProvider>
           <BrowserRouter>
             <Suspense fallback={<LoaderWheel />}>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="about" element={<About />} />
-
                 <Route
                   path="profile"
                   element={
@@ -67,7 +57,6 @@ function App() {
                   <Route index element={<Navigate replace to="info" />} />
                   <Route path="info" element={<UserInfo />} />
                   <Route path={"cart"} element={<Cart />} />
-                  {/* <Route path={"user-ready"} element={<Cart />} /> */}
                   <Route path={"user-ready"} element={<ComponentScaffold />} />
                   <Route
                     path={"user-in-progress"}
@@ -104,7 +93,6 @@ function App() {
                     element={<QControlOrders />}
                   />
                 </Route>
-
                 <Route
                   path="app"
                   element={
@@ -116,7 +104,6 @@ function App() {
                   <Route index element={<Navigate replace to="create" />} />
                   <Route path={"create"} element={<CreateBike />} />
                 </Route>
-
                 <Route path="auth" element={<Auth />}>
                   <Route index element={<Navigate replace to="login" />} />
                   <Route path="login" element={<Login />} />
@@ -126,13 +113,11 @@ function App() {
                     element={<ForgottenPassword />}
                   />
                 </Route>
-
                 <Route path="*" element={<PageNotFound />} />
               </Routes>
             </Suspense>
           </BrowserRouter>
         </ErrorProvider>
-        {/* </OrdersManager> */}
       </GlobalUser>
     </AuthProvider>
   );
