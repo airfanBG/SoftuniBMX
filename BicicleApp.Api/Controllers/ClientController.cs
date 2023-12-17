@@ -50,7 +50,7 @@
 
                 if (isRegistered)
                 {
-                    return Ok();
+                    return Ok(true);
                 }
 
                 //Return bad request if registration has failed

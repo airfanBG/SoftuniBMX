@@ -21,9 +21,12 @@ export async function login(user) {
 
 export async function register(user) {
   let result;
+  console.log(user);
   if (user.email.includes("@b-free.com")) {
+    console.log(environment.register_employee);
     result = await post(environment.register_employee, user);
   } else {
+    console.log(environment.register_client);
     result = await post(environment.register_client, user);
   }
   return result;
