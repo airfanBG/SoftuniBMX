@@ -16,7 +16,7 @@ function NavigationSecondary() {
         { link: "cart", textContent: "Cart" },
         { link: "user-ready", textContent: "Ready" },
         { link: "user-in-progress", textContent: "In production" },
-        // { link: "user-archive", textContent: "Archive" },
+        { link: "user-archive", textContent: "Archive" },
       ],
       accessoriesworker: [
         { link: "info", textContent: "Profile" },

@@ -41,25 +41,3 @@ export const environment = {
   compatible_parts: "/api/accountpage/compatible_parts?id=",
   selected_part: "/api/accountpage/selected_part?id=",
 };
-
-// // get_all_in_progress: "/inProgress/",
-// get_all_in_progress: "/production/",
-// in_progress: "/production/",
-// user_in_progress: "/production?ownerId=",
-// GET_ALL_INTENDED: "/",
-// // orders: "/orders/",
-// orders: "/order_to_be_approved/",
-
-// del_order: "/order_to_be_approved/",
-// // del_order: `/api/manager/delete_order?orderId=`, // +id
-// // TODO: Uncomment when delete in orderActions
-
-// approve_order: `/approved/`, // + id
-// // TODO: Uncomment approved in orderActions
-// //approve_order: `/api/manager/approve_order?orderId=`, // + id
-
-// reject_order: `/rejected_orders/`, // + id
-// // TODO: Uncomment approved in orderActions
-// //reject_order: `/api/manager/reject_order?orderId=`, // + id
-
-// post_qControl: `/api/employee_оrder/quality_assurance?orderId=`,
