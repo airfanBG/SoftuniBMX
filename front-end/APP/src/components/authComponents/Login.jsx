@@ -90,10 +90,10 @@ function Login() {
     try {
       setIsLoading(true);
       const result = await login(user);
-      // console.log(result);
+      console.log(result);
 
       const currentUser = {
-        balance: 1000,
+        balance: result.balance,
         accessToken: result.token,
         firstName: result.employeeFullName
           ? result.employeeFullName.split(" ").at(0)

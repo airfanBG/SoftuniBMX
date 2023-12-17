@@ -12,41 +12,29 @@ function OrderItem({ product, onBtnHandler, orderIndex }) {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
 
-  console.log(new Date().toISOString());
-  console.log(Date.now());
   async function onButtonClick() {
     const currentDate = new Date().toISOString();
+    // const currentDate = new Date()
+    //   .toLocaleString(undefined, { hour12: false })
+    //   .replace(", ", " ");
     const model = {
       partId: product.partId,
       employeeId: user.id,
       dateTime: currentDate,
     };
+
     let path = "";
 
-    // console.log(product);
-    // console.log(model);
-
-    if (product.datetimeAsigned === null) {
+    if (product.datetimeStarted === null) {
       path = "start";
     } else if (product.datetimeFinished === null) {
       path = "end";
     }
-
+    console.log(environment.worker_order + path);
+    console.log(model);
     const result = await post(environment.worker_order + path, model);
     console.log(result);
     onBtnHandler();
-
-    // if (item.startedTime === "" && item.finishedTime === "") {
-    //   setItem({
-    //     ...item,
-    //     startedTime: currentDate,
-    //     nameOfEmplоyeeProducedThePart: `${user.firstName} ${user.lastName}`,
-    //   });
-    //   setFirstCall(!firstCall);
-    // } else if (item.startedTime !== "" && item.finishedTime === "") {
-    //   setItem({ ...item, finishedTime: currentDate, isProduced: true });
-    //   setIsDone(!isDone);
-    // }
   }
 
   return (
@@ -60,7 +48,8 @@ function OrderItem({ product, onBtnHandler, orderIndex }) {
           </p>
           <p className={styles.model}>
             <span>Date created: </span>
-            {product.datetimeAsigned.split(" ").at(0).replaceAll("/", ".")}
+            {/* {product.datetimeAsigned.split(" ").at(0).replaceAll("/", ".")} */}
+            {product.datetimeAsigned}
           </p>
         </header>
 
@@ -69,10 +58,16 @@ function OrderItem({ product, onBtnHandler, orderIndex }) {
           <span>Brand: </span>
           {product.partName}
         </h3>
-        <p className={styles.model}>
-          <span>OEM Number: </span>
-          {product.partOEMNumber}
-        </p>
+        <div className={styles.twoColumns}>
+          <p className={styles.model}>
+            <span>OEM Number: </span>
+            {product.partOEMNumber}
+          </p>
+          <p className={styles.model}>
+            <span>Quantity: </span>
+            {product.quantity}
+          </p>
+        </div>
         <div className={styles.model}>
           <span>Description:</span>
           {product.description}
@@ -81,15 +76,14 @@ function OrderItem({ product, onBtnHandler, orderIndex }) {
         {/* <div className={styles.info}> */}
         <p className={styles.model}>
           <span>Started on: </span>
-          {product.datetimeAsigned &&
-            product.datetimeAsigned.replaceAll("/", ".")}
+          {product.datetimeStarted &&
+            product.datetimeStarted.replaceAll("/", ".")}
         </p>
         <p className={`${styles.model} ${styles.shortLine}`}>
           <span>Finished on: </span>
           {product.datetimeFinished &&
             product.datetimeFinished.replaceAll("/", ".")}
         </p>
-        {/* <p className={styles.partId}>ID# {item.partId}</p> */}
         <p className={styles.partId}>
           ID# {product.partId + "-" + product.partId}
         </p>
@@ -103,24 +97,10 @@ function OrderItem({ product, onBtnHandler, orderIndex }) {
           <button
             className={styles.startBtn}
             onClick={onButtonClick}
-            disabled={orderIndex !== 0}
+            // disabled={orderIndex !== 0}
           >
-            {/* {product.datetimeAsigned === "" &&
-              product.datetimeFinished === "" &&
-              orderIndex !== 0 &&
-              "to Queue"}
-            {product.datetimeAsigned === "" &&
-              product.datetimeFinished === "" &&
-              orderIndex === 0 &&
-              "Start"}
-            {product.datetimeAsigned !== "" &&
-              product.datetimeFinished === "" &&
-              "In Progress"}
-            {product.datetimeAsigned !== "" &&
-              product.datetimeFinished !== "" &&
-              "Finished"} */}
-            {orderIndex === 0 && !product.datetimeAsigned && "Start"}
-            {orderIndex === 0 && product.datetimeAsigned && "In Progress"}
+            {orderIndex === 0 && !product.datetimeStarted && "Start"}
+            {orderIndex === 0 && product.datetimeStarted && "In Progress"}
             {orderIndex !== 0 && "to Queue"}
           </button>
         </div>
@@ -132,3 +112,15 @@ function OrderItem({ product, onBtnHandler, orderIndex }) {
 }
 
 export default OrderItem;
+
+// {
+//   "orderSerialNumber": "BID12345678",
+//   "partId": 1,
+//   "partName": "Frame Road",
+//   "partOEMNumber": "oemtest1",
+//   "quantity": 1,
+//   "datetimeAsigned": "16/12/2023 14:14",
+//   "datetimeStarted": null,
+//   "datetimeFinished": null,
+//   "description": null
+// }
