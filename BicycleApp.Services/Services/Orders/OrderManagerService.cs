@@ -124,12 +124,16 @@
                                     OrderId = ope.Id,
                                     SerialNumber = ope.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
                                     DateCreated = ope.DateCreated.ToString(),
+                                    Department = ope.OrdersPartsEmployees.Select(ed=>ed.Employee.Department.Name).First(),
+                                    EmployeeName = ope.OrdersPartsEmployees.Select(en => en.Employee.LastName).First(),
                                     OrderParts = ope.OrdersPartsEmployees
                                                 .Select(orderPart => new OrderPartInfoDto
                                                 {
                                                     PartId = orderPart.PartId,
                                                     Description = _stringManipulator.GetTextFromProperty(orderPart.Description),
                                                     PartName = orderPart.PartName,
+                                                    CategoryName = orderPart.Part.Category.Name,
+                                                    OemNumber = orderPart.Part.OEMNumber,
                                                     PartQuantity = orderPart.PartQuantity,
                                                     PartQunatityInStock = orderPart.Part.Quantity,
                                                     StartDate = orderPart.StartDatetime.ToString(),
