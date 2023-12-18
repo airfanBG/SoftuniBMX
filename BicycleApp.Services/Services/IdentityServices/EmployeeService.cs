@@ -309,30 +309,6 @@
 
         }
 
-        public async Task<AllEmployeesDto?> GetAllEmployees()
-        {
-            try
-            {
-                return await dbContext.Roles
-                                  .Where(r => r.Name != "user")
-                                  .Select(s => new AllEmployeesDto()
-                                  {
-                                      Roles = new List<EmployeeRoleDto>()
-                                      {
-                                          new EmployeeRoleDto()
-                                          {
-
-                                          }
-                                      }
-                                  })
-                                  .FirstAsync();
-            }
-            catch (Exception)
-            {
-            }
-            return null;
-        }
-
         /// <summary>
         /// This method creates a Jwt token
         /// </summary>

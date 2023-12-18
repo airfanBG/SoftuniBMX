@@ -387,5 +387,10 @@
             }
             return false;
         }
+
+        public async Task<AllEmployeesDto?> GetAllEmployees()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

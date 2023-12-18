@@ -76,13 +76,14 @@
                 newOrder.Description = _stringManipulator.GetTextFromProperty(order.Description);
                 newOrder.SaleAmount = totalAmount - totalDiscount - totalVAT;
 
-                var newOrderId = await _orderFactory.CreateUserOrderAsync(newOrder);
-                newOrder.OrderId = newOrderId;
+                var newOrderObject =  _orderFactory.CreateUserOrderAsync(newOrder, _dateTimeProvider.Now);
 
-                if (newOrderId != 0)
-                {
-                    return newOrder;
-                }
+                await _db.Orders.AddAsync(newOrderObject);
+                await _db.SaveChangesAsync();
+
+                newOrder.OrderId = newOrderObject.Id;
+
+                return newOrder;
             }
             catch (Exception)
             {

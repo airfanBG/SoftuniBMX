@@ -5,6 +5,6 @@
 
     public class DateTimeProvider : IDateTimeProvider
     {
-        public DateTime Now => DateTime.UtcNow;
+        public virtual DateTime Now => DateTime.UtcNow;
     }
 }

@@ -8,19 +8,17 @@
     using BicycleApp.Services.Models.Order.OrderUser.Contracts;
 
     public class OrderFactory : IOrderFactory
-    {       
-        private readonly BicycleAppDbContext _db;
+    {   
+        //TODO Remove _db, move it to servce.
         private readonly IDateTimeProvider _dateTimeProvider;
         public OrderFactory(BicycleAppDbContext db, IDateTimeProvider dateTimeProvider)
         {
-            _db = db;
+            
             _dateTimeProvider = dateTimeProvider;
         }
-        public async Task<int> CreateUserOrderAsync(IOrder order)
+        public Order CreateUserOrderAsync(IOrder order, DateTime currentTime)
         {
-            try
-            {
-                var orderToSave = new Order()
+              return new Order()
                 {
                     FinalAmount = order.FinalAmount,
                     PaidAmount = order.PaidAmount,
@@ -34,16 +32,6 @@
                     IsDeleted = order.IsDeleted,
                     StatusId = order.StatusId
                 };
-
-                await _db.Orders.AddAsync(orderToSave);
-                await _db.SaveChangesAsync();
-
-                return orderToSave.Id;
-            }
-            catch (Exception)
-            {
-            }
-            return 0;
         }
         public IOrderPartDto CreateOrderPartFromUserOrder(string partName, int partQuantity, int partId, decimal productPrice)
         {
