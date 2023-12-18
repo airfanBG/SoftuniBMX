@@ -10,7 +10,6 @@ import UserOrderItem from "./UserOrderItem.jsx";
 function UserTrackOrder() {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
-  const [orders, setOrders] = useState(null);
 
   return (
     <>
@@ -19,8 +18,9 @@ function UserTrackOrder() {
       <section className={styles.board}>
         <BoardHeader />
         {loading && <LoaderWheel />}
+        {/* PUT YOUR CODE AFTER THIS LINE */}
 
-        {!orders && <h2>Your orders will appear here</h2>}
+        {/* END OF YOUR CODE */}
       </section>
     </>
   );

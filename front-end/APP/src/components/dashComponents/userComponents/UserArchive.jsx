@@ -1,13 +1,12 @@
-import styles from "./ComponentScaffold.module.css";
-
+import styles from "./UserArchive.module.css";
 import { useContext, useState } from "react";
-
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 
-import BoardHeader from "../BoardHeader.jsx";
 import LoaderWheel from "../../LoaderWheel.jsx";
+import BoardHeader from "../BoardHeader.jsx";
+import UserOrderItem from "./UserOrderItem.jsx";
 
-function ComponentScaffold() {
+function UserArchive() {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
 
@@ -18,10 +17,12 @@ function ComponentScaffold() {
       <section className={styles.board}>
         <BoardHeader />
         {loading && <LoaderWheel />}
-        <h2>Put content here </h2>
+        {/* PUT YOUR CODE AFTER THIS LINE */}
+
+        {/* END OF YOUR CODE */}
       </section>
     </>
   );
 }
 
-export default ComponentScaffold;
+export default UserArchive;
