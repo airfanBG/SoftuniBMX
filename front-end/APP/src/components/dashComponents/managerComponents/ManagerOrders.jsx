@@ -52,7 +52,7 @@ function ManagerOrders() {
       const abortController = new AbortController();
       async function getOrdersPagination() {
         const data = await get(environment.pending_orders + page);
-        console.log(data);
+        // console.log(data);
 
         dispatch({ type: "length/isSet", payload: data.totalOrdersCount });
         dispatch({ type: "orders/received", payload: data.orders });

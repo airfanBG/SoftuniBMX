@@ -119,7 +119,7 @@
             .Include(ep => ep.Part)
             .Include(ep => ep.Order)
             .Include(opei => opei.OrdersPartsEmployeesInfos)
-            .Where(ep => ep.EmployeeId == employeeId && ep.StartDatetime == null && ep.EndDatetime == null && ep.IsCompleted == false)
+            .Where(ep => ep.EmployeeId == employeeId && ep.EndDatetime == null && ep.IsCompleted == false)
             .OrderBy(o => o.OrderId)
             .Select(p => new PartOrdersDto()
             {

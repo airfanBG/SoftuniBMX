@@ -86,6 +86,7 @@ function QControlOrderItem({ product, onReBuild }) {
       result = await post(environment.pass_qControl + product.orderId);
     } else if (Object.value(valuesCheck).every((x) => x === false)) {
       // TODO: отива за брак - ендпоинт
+      console.log(finalResult);
     } else {
       result = await post(environment.return_qControl, finalResult);
     }

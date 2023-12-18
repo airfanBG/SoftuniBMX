@@ -1,16 +1,15 @@
-import styles from "./UserTrackOrder.module.css";
+import styles from "./ComponentScaffold.module.css";
 
 import { useContext, useState } from "react";
+
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 
-import LoaderWheel from "../../LoaderWheel.jsx";
 import BoardHeader from "../BoardHeader.jsx";
-import UserOrderItem from "./UserOrderItem.jsx";
+import LoaderWheel from "../../LoaderWheel.jsx";
 
-function UserTrackOrder() {
+function ComponentScaffold() {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
-  const [orders, setOrders] = useState(null);
 
   return (
     <>
@@ -19,11 +18,10 @@ function UserTrackOrder() {
       <section className={styles.board}>
         <BoardHeader />
         {loading && <LoaderWheel />}
-
-        {!orders && <h2>Your orders will appear here</h2>}
+        <h2>Put content here just here</h2>
       </section>
     </>
   );
 }
 
-export default UserTrackOrder;
+export default ComponentScaffold;
