@@ -25,6 +25,8 @@ import ComponentScaffold from "./components/dashComponents/userComponents/Compon
 import UserArchive from "./components/dashComponents/userComponents/UserArchive.jsx";
 import LoaderWheel from "./components/LoaderWheel.jsx";
 import { ErrorProvider } from "./context/ErrorContext.jsx";
+import ManagerRejected from "./components/dashComponents/managerComponents/ManagerRejected.jsx";
+import ManagerFinished from "./components/dashComponents/managerComponents/ManagerFinished.jsx";
 
 // LAZY LOADING
 const CreateBike = lazy(() =>
@@ -81,8 +83,12 @@ function App() {
                     element={<ComponentScaffold />}
                   />
                   <Route
+                    path={"manager-rejected"}
+                    element={<ManagerRejected />}
+                  />
+                  <Route
                     path={"manager-finished"}
-                    element={<ComponentScaffold />}
+                    element={<ManagerFinished />}
                   />
                   <Route path={"employers"} element={<EmployersList />} />
                   <Route path={"statistic"} />
