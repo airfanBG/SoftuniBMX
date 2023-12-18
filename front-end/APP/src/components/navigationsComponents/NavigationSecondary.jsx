@@ -16,7 +16,7 @@ function NavigationSecondary() {
         { link: "cart", textContent: "Cart" },
         { link: "user-ready", textContent: "Ready" },
         { link: "user-in-progress", textContent: "In production" },
-        // { link: "user-archive", textContent: "Archive" },
+        { link: "user-archive", textContent: "Archive" },
       ],
       accessoriesworker: [
         { link: "info", textContent: "Profile" },
@@ -38,6 +38,7 @@ function NavigationSecondary() {
         { link: "info", textContent: "Profile" },
         { link: "managerOrders", textContent: "Orders" },
         { link: "manager-in-progress", textContent: "In production" },
+        { link: "manager-rejected", textContent: "Rejected" },
         { link: "manager-finished", textContent: "Finished" },
         // { link: "manager-dispatched", textContent: "Dispatched" },
         { link: "employers", textContent: "Employers" },

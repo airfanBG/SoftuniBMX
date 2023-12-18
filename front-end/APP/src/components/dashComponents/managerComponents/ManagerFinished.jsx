@@ -1,13 +1,13 @@
-import styles from "./UserTrackOrder.module.css";
+import styles from "./ManagerFinished.module.css";
 
 import { useContext, useState } from "react";
+
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 
-import LoaderWheel from "../../LoaderWheel.jsx";
 import BoardHeader from "../BoardHeader.jsx";
-import UserOrderItem from "./UserOrderItem.jsx";
+import LoaderWheel from "../../LoaderWheel.jsx";
 
-function UserTrackOrder() {
+function ManagerFinished() {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
 
@@ -18,12 +18,10 @@ function UserTrackOrder() {
       <section className={styles.board}>
         <BoardHeader />
         {loading && <LoaderWheel />}
-        {/* PUT YOUR CODE AFTER THIS LINE */}
-        rdyrdjytrckyuty
-        {/* END OF YOUR CODE */}
+        <h2>Manager finished</h2>
       </section>
     </>
   );
 }
 
-export default UserTrackOrder;
+export default ManagerFinished;

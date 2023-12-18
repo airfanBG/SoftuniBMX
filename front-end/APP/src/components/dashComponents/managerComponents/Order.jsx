@@ -24,9 +24,11 @@ function Order({ order, onStatusChange }) {
       console.log(result);
       onStatusChange();
     } else if (type === "delete") {
-      result = await onDeleteHandler(orderId);
-      console.log(result);
-      onStatusChange();
+      if (window.confirm("Delete this order?")) {
+        result = await onDeleteHandler(orderId);
+        console.log(result);
+        onStatusChange();
+      }
     }
   }
 

@@ -1,5 +1,4 @@
-import styles from "./UserTrackOrder.module.css";
-
+import styles from "./UserArchive.module.css";
 import { useContext, useState } from "react";
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 
@@ -7,7 +6,7 @@ import LoaderWheel from "../../LoaderWheel.jsx";
 import BoardHeader from "../BoardHeader.jsx";
 import UserOrderItem from "./UserOrderItem.jsx";
 
-function UserTrackOrder() {
+function UserArchive() {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
 
@@ -19,11 +18,11 @@ function UserTrackOrder() {
         <BoardHeader />
         {loading && <LoaderWheel />}
         {/* PUT YOUR CODE AFTER THIS LINE */}
-        rdyrdjytrckyuty
+
         {/* END OF YOUR CODE */}
       </section>
     </>
   );
 }
 
-export default UserTrackOrder;
+export default UserArchive;
