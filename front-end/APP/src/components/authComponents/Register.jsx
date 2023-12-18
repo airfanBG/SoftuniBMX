@@ -72,7 +72,7 @@ function Register() {
     // FIRST NAME VALIDATION
     if (
       inputName === "firstName" &&
-      (inputValue.length < 2 || inputValue.length > 20)
+      (inputValue.length < 3 || inputValue.length > 30)
     ) {
       return setInputError((err) => ({
         ...err,
@@ -84,7 +84,7 @@ function Register() {
     // LAST NAME VALIDATION
     if (
       inputName === "lastName" &&
-      (inputValue.length < 3 || inputValue.length > 20)
+      (inputValue.length < 3 || inputValue.length > 30)
     ) {
       return setInputError((err) => ({
         ...err,
@@ -120,6 +120,7 @@ function Register() {
     }
 
     //PHONE VALIDATION
+    // TODO: length
     if (inputName === "phone" && inputValue) {
       return setInputError((err) => ({
         ...err,
@@ -184,8 +185,8 @@ function Register() {
       repass: values.repass,
       iban: values.iban,
       balance: Number(values.balance),
-      phoneNumber: values.phone,
-      town: values.city,
+      phone: values.phone,
+      city: values.city,
       role: "user",
       address: {
         country: values.country,
@@ -199,9 +200,9 @@ function Register() {
       },
     };
 
-    const regResponse = await register(user);
-    console.log(user);
-    console.log(regResponse);
+    // const regResponse = await register(user);
+    // console.log(user);
+    // console.log(regResponse);
     try {
       setIsLoading(true);
       const regResponse = await register(user);
@@ -217,10 +218,10 @@ function Register() {
         setValues(initialState);
       }, 2000);
     } catch (err) {
-      setTimeout(() => {
-        navigate("/");
-        setResError({ status: false, message: "" });
-      }, 3000);
+      // setTimeout(() => {
+      // navigate("/");
+      //   setResError({ status: false, message: "" });
+      // }, 3000);
       throw new Error(err.message);
     }
   }

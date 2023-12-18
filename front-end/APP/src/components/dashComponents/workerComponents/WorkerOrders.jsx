@@ -46,9 +46,9 @@ function WorkerOrders() {
             workerList.map((order, i) => (
               <OrderItem
                 product={order}
-                key={i}
+                key={order.orderId}
                 onBtnHandler={onBtnHandler}
-                orderId={order.partId}
+                orderId={order.orderId}
                 orderIndex={i}
               />
             ))}

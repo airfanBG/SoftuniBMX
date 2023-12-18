@@ -24,7 +24,6 @@ function AddMember() {
       position,
       isManager,
       dateOfHire,
-      imageUrl,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
@@ -48,7 +47,6 @@ function AddMember() {
       phoneNumber,
       isManager: role === "manager" ? true : false,
       dateOfHire: new Date().toLocaleDateString(),
-      imageUrl,
     };
 
     if (role === "worker") {
