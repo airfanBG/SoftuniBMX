@@ -95,11 +95,11 @@ function AddMember() {
       finalState.position = position;
     }
 
-    console.log(finalState);
-    // const result = await post(environment.register_employee, finalState);
+    // console.log(finalState);
+    const result = await post(environment.register_employee, finalState);
     // console.log(result);
 
-    // navigate("/profile/employers");
+    navigate("/profile/employers");
   }
   return (
     <>
