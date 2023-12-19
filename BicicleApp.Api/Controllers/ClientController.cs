@@ -125,7 +125,7 @@
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<ClientInfoDto>> GetClientInfo([FromQuery] string id)
+        public async Task<ActionResult<ClientEditDto>> GetClientInfo([FromQuery] string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {

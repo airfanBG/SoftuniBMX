@@ -53,7 +53,7 @@
                 FirstName = "Ivan",
                 LastName = "Ivanov",
                 PhoneNumber = "1234567890",
-                DelivaryAddress = "Mladost 1, bl 20",
+                DelivaryAddressId = 1,
                 TownId = 1,
                 IBAN = "BG0012345678910111212",
                 Balance = 1000.00M,
@@ -76,7 +76,7 @@
                 FirstName = "Georgi",
                 LastName = "Georgiev",
                 PhoneNumber = "1234567890",
-                DelivaryAddress = "Mladost 1, bl 20",
+                DelivaryAddressId = 2,
                 TownId = 2,
                 IBAN = "BG0012345678910111212",
                 Balance = 50.00M,
@@ -99,7 +99,7 @@
                 FirstName = "Dimityr",
                 LastName = "Dimitrov",
                 PhoneNumber = "1234567890",
-                DelivaryAddress = "Mladost 1, bl 20",
+                DelivaryAddressId = 3,
                 TownId = 3,
                 IBAN = "BG0012345678910111212",
                 Balance = 1246.00M,
@@ -119,6 +119,46 @@
                 client3
             };
             return list;
+        }
+
+        public ICollection<DelivaryAddress> SeedDelivaryAddresses()
+        {
+            return new List<DelivaryAddress>()
+            {
+                new DelivaryAddress()
+                {
+                    Id = 1,
+                    Country = "Bulgaria",
+                    TownId = 1,
+                    Street = "Mladost",
+                    StrNumber = "1",
+                    Block = "20",
+                    PostCode = "1000"
+                },
+                 new DelivaryAddress()
+                {
+                    Id = 2,
+                    Country = "Bulgaria",
+                    TownId = 2,
+                    Street = "Gadost",
+                    StrNumber = "13",
+                    Block = "20",
+                    District = "Somewhere over the rainbow",
+                    Floor = 3,
+                    PostCode = "4000"
+                },
+                 new DelivaryAddress()
+                {
+                    Id = 3,
+                    Country = "Bulgaria",
+                    TownId = 3,
+                    Street = "Ovcha mogila",
+                    StrNumber = "123",
+                    District = "Near to earth core",
+                    Floor = 3,
+                    PostCode = "1236"
+                },
+            };
         }
 
         public List<Employee> SeedEmployees()

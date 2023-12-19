@@ -1,7 +1,7 @@
 ﻿namespace BicycleApp.Data.Models.IdentityModels
 {
     using System.ComponentModel.DataAnnotations;
-
+    using System.ComponentModel.DataAnnotations.Schema;
     using BicycleApp.Data.Models.EntityModels;
 
     using Microsoft.EntityFrameworkCore;
@@ -18,10 +18,10 @@
             this.Images = new HashSet<ImageClient>();
         }
 
-
-        [MaxLength(DelivaryAddressMaxLength)]
         [Comment("The default address of the client for deliveries")]
-        public string DelivaryAddress { get; set; } = null!;
+        [ForeignKey(nameof(DelivaryAddress))]
+        public int DelivaryAddressId { get; set; }
+        public DelivaryAddress DelivaryAddress { get; set; } = null!;
 
         [Comment("The Id of the default town for this client")]
         public int TownId { get; set; }
