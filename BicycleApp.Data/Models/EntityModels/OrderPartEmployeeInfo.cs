@@ -10,7 +10,7 @@
         [Comment("Id of information for manufacturing part.")]
         public int Id { get; set; }
         
-        [Comment("Id of the order from the client")]
+        [Comment("Id of the order from the quality control")]
         public string? DescriptionForWorker { get; set; }
 
         [Required]
