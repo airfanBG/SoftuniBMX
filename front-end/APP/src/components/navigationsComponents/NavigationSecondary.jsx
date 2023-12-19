@@ -42,8 +42,8 @@ function NavigationSecondary() {
         { link: "manager-finished", textContent: "Finished" },
         // { link: "manager-dispatched", textContent: "Dispatched" },
         { link: "employers", textContent: "Employers" },
-        // { link: "manager-storage", textContent: "Storage" },
-        // { link: "statistic", textContent: "Statistic" },
+        { link: "manager-storage", textContent: "Storage" },
+        { link: "statistic", textContent: "Statistic" },
       ],
     }),
     []
