@@ -7,7 +7,7 @@ import {
   approveHandlerAction,
 } from "./managerActions/orderActions.js";
 
-function Order({ order, onStatusChange }) {
+function Order({ order, onStatusChange, isRejected = true }) {
   const { orderId, dateCreated, serialNumber, orderParts } = order;
   const frame = orderParts[0];
   const wheel = orderParts[1];
@@ -172,10 +172,14 @@ function Order({ order, onStatusChange }) {
             >
               Approve
             </Button>
-            <Button type={"reject"} onClick={onBtnClickHandler} id={orderId}>
-              {/* <Button type={"reject"} onClick={() => rejectHandler(id)} id={id}> */}
-              Reject
-            </Button>
+
+            {isRejected && (
+              <Button type={"reject"} onClick={onBtnClickHandler} id={orderId}>
+                {/* <Button type={"reject"} onClick={() => rejectHandler(id)} id={id}> */}
+                Reject
+              </Button>
+            )}
+
             <Button type={"delete"} onClick={onBtnClickHandler} id={orderId}>
               {/* <Button type={"delete"} onClick={() => deleteHandler(id)} id={id}> */}
               Delete

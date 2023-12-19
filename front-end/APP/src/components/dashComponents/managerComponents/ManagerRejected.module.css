@@ -16,3 +16,10 @@
   gap: 2rem;
   background-color: #fff;
 }
+
+.orders {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding: 1rem 0;
+}
