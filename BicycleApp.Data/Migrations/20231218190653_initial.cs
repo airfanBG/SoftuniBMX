@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BicycleApp.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class NewInitial : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -723,7 +723,7 @@ namespace BicycleApp.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false, comment: "Id of information for manufacturing part.")
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DescriptionForWorker = table.Column<string>(type: "nvarchar(max)", nullable: true, comment: "Id of the order from the client"),
+                    DescriptionForWorker = table.Column<string>(type: "nvarchar(max)", nullable: true, comment: "Id of the order from the quality control"),
                     ProductionТime = table.Column<TimeSpan>(type: "time", nullable: false, comment: "Timespan for production on part."),
                     OrderId = table.Column<int>(type: "int", nullable: false, comment: "Id of the order from the client"),
                     UniqueKeyForSerialNumber = table.Column<string>(type: "nvarchar(450)", nullable: false, comment: "Separate unique products by serial number in one order"),
@@ -768,8 +768,8 @@ namespace BicycleApp.Data.Migrations
                 columns: new[] { "Id", "DateCreated", "DateDeleted", "DateUpdated", "IsDeleted", "Name" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1641), null, null, false, "Administration" },
-                    { 2, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1650), null, null, false, "Workshop" }
+                    { 1, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(6852), null, null, false, "Administration" },
+                    { 2, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(6861), null, null, false, "Workshop" }
                 });
 
             migrationBuilder.InsertData(
@@ -777,9 +777,9 @@ namespace BicycleApp.Data.Migrations
                 columns: new[] { "Id", "DateCreated", "DateDeleted", "DateUpdated", "ImageUrl", "IsDeleted", "Name" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2372), null, null, "test", false, "Frame" },
-                    { 2, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2381), null, null, "test", false, "Wheel" },
-                    { 3, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2383), null, null, "test", false, "Acsessories" }
+                    { 1, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7549), null, null, "test", false, "Frame" },
+                    { 2, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7556), null, null, "test", false, "Wheel" },
+                    { 3, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7558), null, null, "test", false, "Acsessories" }
                 });
 
             migrationBuilder.InsertData(
@@ -787,19 +787,19 @@ namespace BicycleApp.Data.Migrations
                 columns: new[] { "Id", "DateCreated", "DateDeleted", "DateUpdated", "IsDeleted", "OemPartNumber", "SuplierId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2694), null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2697), false, "oemtest1", null },
-                    { 2, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2699), null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2700), false, "oemtest2", null },
-                    { 3, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2702), null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2703), false, "oemtest3", null },
-                    { 4, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2709), null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2710), false, "oemtest4", null },
-                    { 5, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2712), null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2713), false, "oemtest5", null },
-                    { 6, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2714), null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2715), false, "oemtest6", null },
-                    { 7, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2717), null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2718), false, "oemtest7", null },
-                    { 8, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2719), null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2720), false, "oemtest8", null },
-                    { 9, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2722), null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2723), false, "oemtest9", null },
-                    { 10, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2724), null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2725), false, "oemtest10", null },
-                    { 11, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2727), null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2728), false, "oemtest11", null },
-                    { 12, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2729), null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2730), false, "oemtest12", null },
-                    { 13, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2732), null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2733), false, "oemtest13", null }
+                    { 1, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7842), null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7843), false, "oemtest1", null },
+                    { 2, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7846), null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7847), false, "oemtest2", null },
+                    { 3, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7849), null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7850), false, "oemtest3", null },
+                    { 4, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7856), null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7857), false, "oemtest4", null },
+                    { 5, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7859), null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7860), false, "oemtest5", null },
+                    { 6, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7861), null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7862), false, "oemtest6", null },
+                    { 7, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7864), null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7865), false, "oemtest7", null },
+                    { 8, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7867), null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7868), false, "oemtest8", null },
+                    { 9, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7869), null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7871), false, "oemtest9", null },
+                    { 10, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7872), null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7873), false, "oemtest10", null },
+                    { 11, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7875), null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7876), false, "oemtest11", null },
+                    { 12, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7878), null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7879), false, "oemtest12", null },
+                    { 13, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7881), null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7882), false, "oemtest13", null }
                 });
 
             migrationBuilder.InsertData(
@@ -807,13 +807,13 @@ namespace BicycleApp.Data.Migrations
                 columns: new[] { "Id", "DateCreated", "DateDeleted", "DateUpdated", "IsDeleted", "Name" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2524), null, null, false, "Pending approval" },
-                    { 2, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2531), null, null, false, "Approved order" },
-                    { 3, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2533), null, null, false, "Frame management" },
-                    { 4, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2535), null, null, false, "Wheel management" },
-                    { 5, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2537), null, null, false, "Shift management" },
-                    { 6, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2539), null, null, false, "Quality control" },
-                    { 7, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2541), null, null, false, "Send order" }
+                    { 1, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7668), null, null, false, "Pending approval" },
+                    { 2, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7674), null, null, false, "Approved order" },
+                    { 3, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7676), null, null, false, "Frame management" },
+                    { 4, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7678), null, null, false, "Wheel management" },
+                    { 5, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7680), null, null, false, "Shift management" },
+                    { 6, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7682), null, null, false, "Quality control" },
+                    { 7, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7684), null, null, false, "Send order" }
                 });
 
             migrationBuilder.InsertData(
@@ -821,9 +821,9 @@ namespace BicycleApp.Data.Migrations
                 columns: new[] { "Id", "Address", "CategoryName", "ContactName", "DateCreated", "DateDeleted", "DateUpdated", "Email", "IsDeleted", "Name", "PhoneNumeber", "VATNumber" },
                 values: new object[,]
                 {
-                    { 1, "Sofia, center", "Frame", "Pesh Peshev", new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2571), null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2572), "text@test.bg", false, "X Ltd", "1234567890", "123456789" },
-                    { 2, "Sofia, east", "Wheel", "Pesho Peshev", new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2576), null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2577), "text2@test.bg", false, "XX Ltd", "1234567899", "123456788" },
-                    { 3, "Sofia, west", "Acsessories", "Ivan Peshev", new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2579), null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2580), "text3@test.bg", false, "XXX Ltd", "1234567897", "123456787" }
+                    { 1, "Sofia, center", "Frame", "Pesh Peshev", new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7719), null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7720), "text@test.bg", false, "X Ltd", "1234567890", "123456789" },
+                    { 2, "Sofia, east", "Wheel", "Pesho Peshev", new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7724), null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7725), "text2@test.bg", false, "XX Ltd", "1234567899", "123456788" },
+                    { 3, "Sofia, west", "Acsessories", "Ivan Peshev", new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7727), null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7728), "text3@test.bg", false, "XXX Ltd", "1234567897", "123456787" }
                 });
 
             migrationBuilder.InsertData(
@@ -831,35 +831,35 @@ namespace BicycleApp.Data.Migrations
                 columns: new[] { "Id", "DateCreated", "DateDeleted", "DateUpdated", "IsDeleted", "Name" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2622), null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2623), false, "Sofia" },
-                    { 2, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2628), null, null, false, "Varna" },
-                    { 3, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2630), null, null, false, "Burgas" }
+                    { 1, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7766), null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7767), false, "Sofia" },
+                    { 2, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7775), null, null, false, "Varna" },
+                    { 3, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7776), null, null, false, "Burgas" }
                 });
 
             migrationBuilder.InsertData(
                 table: "VATCategories",
                 columns: new[] { "Id", "DateCreated", "DateDeleted", "DateUpdated", "IsDeleted", "VATPercent" },
-                values: new object[] { 1, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2657), null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2658), false, 20.00m });
+                values: new object[] { 1, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7807), null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7808), false, 20.00m });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DateCreated", "DateDeleted", "DateOfHire", "DateOfLeave", "DateUpdated", "DepartmentId", "Discriminator", "Email", "EmailConfirmed", "FirstName", "IsDeleted", "IsManeger", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Position", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "17063948-8fdc-417e-8fb7-2ae6bf572f94", 0, "c37d0e01-96cb-4ea7-a4e2-eeccf31b0b82", new DateTime(2023, 12, 17, 13, 28, 57, 637, DateTimeKind.Local).AddTicks(3491), null, new DateTime(2023, 12, 17, 13, 28, 57, 637, DateTimeKind.Local).AddTicks(3466), null, null, 2, "Employee", "todorov@b-free.com", true, "Todor", false, false, "Todorov", false, null, "TODOROV@B-FREE.COM", null, "AQAAAAIAAYagAAAAEItOnw3+G74FiyMcmz2w8prrtbjLtOt2UZg/5dTjY0icOUsRAhsxXX80abuYl9/Ufw==", "1234567890", false, "Wheelworker", "TODOROV@B-FREE.COM", false, "todorov@b-free.com" });
+                values: new object[] { "17063948-8fdc-417e-8fb7-2ae6bf572f94", 0, "0d198975-cb5d-47b3-b91a-b8bc6a58ff82", new DateTime(2023, 12, 18, 21, 6, 53, 306, DateTimeKind.Local).AddTicks(1935), null, new DateTime(2023, 12, 18, 21, 6, 53, 306, DateTimeKind.Local).AddTicks(1916), null, null, 2, "Employee", "todorov@b-free.com", true, "Todor", false, false, "Todorov", false, null, "TODOROV@B-FREE.COM", null, "AQAAAAIAAYagAAAAEKFOPm5QJeIx0cOPcbLD4vjUj4LOErOQ3mvvK4fnJsWgsAZqbnC2mGhotqlYKGyUVQ==", "1234567890", false, "Wheelworker", "TODOROV@B-FREE.COM", false, "todorov@b-free.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Balance", "ConcurrencyStamp", "DateCreated", "DateDeleted", "DateUpdated", "DelivaryAddress", "Discriminator", "Email", "EmailConfirmed", "FirstName", "IBAN", "IsDeleted", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TownId", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "17ce735d-6713-4d0a-8fcb-e4a71ee86f6f", 0, 50.00m, "30bc5b54-d0fe-4d51-9aac-4b8d56e1e427", new DateTime(2023, 12, 17, 13, 28, 57, 369, DateTimeKind.Local).AddTicks(4825), null, null, "Mladost 1, bl 20", "Client", "joro@test.bg", true, "Georgi", "BG0012345678910111212", false, "Georgiev", false, null, "JORO@TEST.BG", null, "AQAAAAIAAYagAAAAEEey4HAOsvUiC9KjzP7PEaVA9mgKIHCBq9zbbADREa9tMuSeZWoBCQHUI//ULOcnpw==", "1234567890", false, "JORO@TEST.BG", 2, false, "joro@test.bg" });
+                values: new object[] { "17ce735d-6713-4d0a-8fcb-e4a71ee86f6f", 0, 50.00m, "970d9e53-1a9c-4058-ae0e-88c61b8e5465", new DateTime(2023, 12, 18, 21, 6, 53, 40, DateTimeKind.Local).AddTicks(4306), null, null, "Mladost 1, bl 20", "Client", "joro@test.bg", true, "Georgi", "BG0012345678910111212", false, "Georgiev", false, null, "JORO@TEST.BG", null, "AQAAAAIAAYagAAAAEOmr4Vy35MHKyiFOiVWKp6KaykAI42BVdMcZf4ESJvJC2QAzpvuUhzh614pQnvONfg==", "1234567890", false, "JORO@TEST.BG", 2, false, "joro@test.bg" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DateCreated", "DateDeleted", "DateOfHire", "DateOfLeave", "DateUpdated", "DepartmentId", "Discriminator", "Email", "EmailConfirmed", "FirstName", "IsDeleted", "IsManeger", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Position", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "21003785-a275-4139-ae20-af6a6cf8fea8", 0, "6c9bdd98-f2a2-49eb-a877-33c017fd0e1a", new DateTime(2023, 12, 17, 13, 28, 57, 570, DateTimeKind.Local).AddTicks(9364), null, new DateTime(2023, 12, 17, 13, 28, 57, 570, DateTimeKind.Local).AddTicks(9340), null, null, 2, "Employee", "marinov@b-free.com", true, "Marin", false, false, "Marinov", false, null, "MARINOV@B-FREE.COM", null, "AQAAAAIAAYagAAAAEEuxY0Flb2Cb3QRTBVd2rcKPZKimQDrTDWNXEuq//SbXGyXP9zhoEJ701NRIHnZDIA==", "1234567890", false, "FrameWorker", "MARINOV@B-FREE.COM", false, "marinov@b-free.com" },
-                    { "29f06920-d2ad-43d8-b362-e2b94d7a7502", 0, "51ca2e19-db38-4c43-a75d-0ce68d5183bc", new DateTime(2023, 12, 17, 13, 28, 57, 771, DateTimeKind.Local).AddTicks(3574), null, new DateTime(2023, 12, 17, 13, 28, 57, 771, DateTimeKind.Local).AddTicks(3549), null, null, 2, "Employee", "atanasov@b-free.com", true, "Atanas", false, false, "Atanasov", false, null, "ATANASOV@B-FREE.COM", null, "AQAAAAIAAYagAAAAEAdaU2EMiwYF9Wvp/UWj8lkY/m9qLCxiO8ia3UFPER2fpLpZLgl6U0oRBoW7fo+Iog==", "1234567890", false, "Qualitycontrol", "ATANASOV@B-FREE.COM", false, "atanasov@b-free.com" },
-                    { "406e8cf1-acaa-44a8-afec-585ff64bed34", 0, "06f4e820-48b5-4c3d-a3a7-6c507d2d0236", new DateTime(2023, 12, 17, 13, 28, 57, 504, DateTimeKind.Local).AddTicks(8183), null, new DateTime(2023, 12, 17, 13, 28, 57, 504, DateTimeKind.Local).AddTicks(8123), null, null, 1, "Employee", "manager@b-free.com", true, "Kalin", false, true, "Kalinov", false, null, "MANAGER@B-FREE.COM", null, "AQAAAAIAAYagAAAAEGU8z7NEYJYxn5IVJOW6OZ1n4X6o9QAZfbwkNvzRmDB4NjD04dsKkS8P7KMFr+PhZg==", "1234567890", false, "manager", "MANAGER@B-FREE.COM", false, "manager@b-free.com" },
-                    { "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91", 0, "4a88e7aa-20c9-443b-abe6-add81c111b38", new DateTime(2023, 12, 17, 13, 28, 57, 704, DateTimeKind.Local).AddTicks(214), null, new DateTime(2023, 12, 17, 13, 28, 57, 704, DateTimeKind.Local).AddTicks(192), null, null, 2, "Employee", "ivanov@b-free.com", true, "Ivan", false, false, "Ivanov", false, null, "IVANOV@B-FREE.COM", null, "AQAAAAIAAYagAAAAEA11hSQ5pbpJ/qmXzfKwnXWnUGz5UIJhgUBH3k4FAmDToYYLPNvG7FWH/MA/EGzuUQ==", "1234567890", false, "Accessoriesworker", "IVANOV@B-FREE.COM", false, "ivanov@b-free.com" }
+                    { "21003785-a275-4139-ae20-af6a6cf8fea8", 0, "2aa38f76-9c6d-48d2-9076-6dfa3afe272d", new DateTime(2023, 12, 18, 21, 6, 53, 240, DateTimeKind.Local).AddTicks(2116), null, new DateTime(2023, 12, 18, 21, 6, 53, 240, DateTimeKind.Local).AddTicks(2092), null, null, 2, "Employee", "marinov@b-free.com", true, "Marin", false, false, "Marinov", false, null, "MARINOV@B-FREE.COM", null, "AQAAAAIAAYagAAAAEMYPh+IDLErFhKUOamklQS6lEseLRXdixgsp9HEFQbro46L4hGLv6HopBk5VzDYbUQ==", "1234567890", false, "FrameWorker", "MARINOV@B-FREE.COM", false, "marinov@b-free.com" },
+                    { "29f06920-d2ad-43d8-b362-e2b94d7a7502", 0, "c8f68af0-091f-4efc-b80b-b9b4b3cd6821", new DateTime(2023, 12, 18, 21, 6, 53, 438, DateTimeKind.Local).AddTicks(4180), null, new DateTime(2023, 12, 18, 21, 6, 53, 438, DateTimeKind.Local).AddTicks(4156), null, null, 2, "Employee", "atanasov@b-free.com", true, "Atanas", false, false, "Atanasov", false, null, "ATANASOV@B-FREE.COM", null, "AQAAAAIAAYagAAAAEPCl4SLbUb/fzNMYvj77y9AiYlayDsXnceMjgf0fzJbJtPs3ZbVtIKtcZ+RcShjOzw==", "1234567890", false, "Qualitycontrol", "ATANASOV@B-FREE.COM", false, "atanasov@b-free.com" },
+                    { "406e8cf1-acaa-44a8-afec-585ff64bed34", 0, "08250c1c-1de0-471b-b870-575e591b48bb", new DateTime(2023, 12, 18, 21, 6, 53, 174, DateTimeKind.Local).AddTicks(8279), null, new DateTime(2023, 12, 18, 21, 6, 53, 174, DateTimeKind.Local).AddTicks(8208), null, null, 1, "Employee", "manager@b-free.com", true, "Kalin", false, true, "Kalinov", false, null, "MANAGER@B-FREE.COM", null, "AQAAAAIAAYagAAAAEH1z0m7NAZHQu9Y/dU1G1wgi4e1/1P1SZZxf6+Wg4Rl0shO1iQf7W1JSP3IFOYhbqw==", "1234567890", false, "manager", "MANAGER@B-FREE.COM", false, "manager@b-free.com" },
+                    { "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91", 0, "d2df9262-98cd-440a-8f34-890a1db881c6", new DateTime(2023, 12, 18, 21, 6, 53, 372, DateTimeKind.Local).AddTicks(6264), null, new DateTime(2023, 12, 18, 21, 6, 53, 372, DateTimeKind.Local).AddTicks(6241), null, null, 2, "Employee", "ivanov@b-free.com", true, "Ivan", false, false, "Ivanov", false, null, "IVANOV@B-FREE.COM", null, "AQAAAAIAAYagAAAAEM5H293Z97MkszJq0aFMcRfYJXiHR40mjoGf7XEW6hZ+arjXjZc+lZV2pn03xqLqLA==", "1234567890", false, "Accessoriesworker", "IVANOV@B-FREE.COM", false, "ivanov@b-free.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -867,8 +867,8 @@ namespace BicycleApp.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Balance", "ConcurrencyStamp", "DateCreated", "DateDeleted", "DateUpdated", "DelivaryAddress", "Discriminator", "Email", "EmailConfirmed", "FirstName", "IBAN", "IsDeleted", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TownId", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "99d3ca6f-2067-4316-a5d7-934c93789521", 0, 1246.00m, "4c32dd29-ddd7-48a2-b42e-1bc827fc5d1f", new DateTime(2023, 12, 17, 13, 28, 57, 436, DateTimeKind.Local).AddTicks(9329), null, null, "Mladost 1, bl 20", "Client", "powerranger@test.bg", true, "Dimityr", "BG0012345678910111212", false, "Dimitrov", false, null, "POWERRANGER@TEST.BG", null, "AQAAAAIAAYagAAAAELJ5hNMQrS84Wxq0Ytig9LZPc5dq3oICDU3LEmKJmBXV81rudzOz6xBvEC+QGvZNbQ==", "1234567890", false, "POWERRANGER@TEST.BG", 3, false, "powerranger@test.bg" },
-                    { "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", 0, 1000.00m, "957e0df6-e332-4c90-bd17-e01e98acca7c", new DateTime(2023, 12, 17, 13, 28, 57, 302, DateTimeKind.Local).AddTicks(9307), null, null, "Mladost 1, bl 20", "Client", "client@test.bg", true, "Ivan", "BG0012345678910111212", false, "Ivanov", false, null, "CLIENT@TEST.BG", null, "AQAAAAIAAYagAAAAEHS+rQ3FbnVKpJIwdZPFkpwxvMDpcZawzmhunj5PalMdjxOcY9sznJZfw9j3NawKVw==", "1234567890", false, "CLIENT@TEST.BG", 1, false, "client@test.bg" }
+                    { "99d3ca6f-2067-4316-a5d7-934c93789521", 0, 1246.00m, "269c2d6f-d14e-49a1-af44-6e8e49ad6490", new DateTime(2023, 12, 18, 21, 6, 53, 109, DateTimeKind.Local).AddTicks(5182), null, null, "Mladost 1, bl 20", "Client", "powerranger@test.bg", true, "Dimityr", "BG0012345678910111212", false, "Dimitrov", false, null, "POWERRANGER@TEST.BG", null, "AQAAAAIAAYagAAAAEFUk5nFWclIIrHgMZiotsD2MEdgMzT1yCkb9YdU7M/+YY0sopmOdUrrG0Ne4wivneg==", "1234567890", false, "POWERRANGER@TEST.BG", 3, false, "powerranger@test.bg" },
+                    { "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", 0, 1000.00m, "9ef51668-23e0-41d2-a101-a677cdbe9417", new DateTime(2023, 12, 18, 21, 6, 52, 969, DateTimeKind.Local).AddTicks(1840), null, null, "Mladost 1, bl 20", "Client", "client@test.bg", true, "Ivan", "BG0012345678910111212", false, "Ivanov", false, null, "CLIENT@TEST.BG", null, "AQAAAAIAAYagAAAAEO5wc88tVzIdrTSKOjkqY/eHCqQ8hEFKGerr+kPwmZq1K4pAFaKPRaAbIDCgXWLWpg==", "1234567890", false, "CLIENT@TEST.BG", 1, false, "client@test.bg" }
                 });
 
             migrationBuilder.InsertData(
@@ -876,23 +876,23 @@ namespace BicycleApp.Data.Migrations
                 columns: new[] { "Id", "CategoryId", "DateCreated", "DateDeleted", "DateUpdated", "Description", "Discount", "Intend", "IsDeleted", "Name", "OEMNumber", "Quantity", "SalePrice", "Type", "VATCategoryId" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2202), null, null, "Best frame in the road!", 0.00m, "For road usage", false, "Frame Road", "oemtest1", 32.0, 100.00m, 1, 1 },
-                    { 2, 1, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2211), null, null, "Best frame in the montain", 0.00m, "For montain usage", false, "Frame Montain", "oemtest2", 43.0, 90.00m, 2, 1 },
-                    { 3, 1, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2214), null, null, "Best frame in the road for womens", 0.00m, "For road usage in women bikes", false, "Frame Road woman", "oemtest3", 32.0, 80.00m, 3, 1 },
-                    { 4, 2, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2218), null, null, "Best wheels ever!", 0.00m, "Best wheels for a road usage", false, "Wheel of the Year for road", "oemtest4", 50.0, 75.00m, 1, 1 },
-                    { 5, 2, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2252), null, null, "Best wheels for a montain!", 0.00m, "Best wheels for a montain usage", false, "Wheel of the Year for montain", "oemtest5", 40.0, 85.00m, 2, 1 },
-                    { 6, 2, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2257), null, null, "Best wheels for a road!", 0.00m, "Best seler for a road usage", false, "Road wheel best seler", "oemtest6", 50.0, 65.00m, 3, 1 },
-                    { 7, 3, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2261), null, null, "Worst shift - have only one!", 0.00m, "Base shift - have only one", false, "Shift", "oemtest7", 29.0, 250.00m, 1, 1 },
-                    { 8, 3, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2264), null, null, "Best shifts for a montain!", 0.00m, "Best shift for a montain usage", false, "Montain Shifts", "oemtest8", 19.0, 350.00m, 2, 1 },
-                    { 9, 3, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2267), null, null, "Best shifts for a road!", 0.00m, "Best shift for a road usage", false, "Road Shifts", "oemtest9", 29.0, 400.00m, 3, 1 },
-                    { 10, 3, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2271), null, null, "Better shifts for a road!", 0.00m, "Better shift for a road usage", false, "Road better Shifts", "oemtest10", 21.0, 410.00m, 3, 1 },
-                    { 11, 3, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2275), null, null, "Budget shifts for a road!", 0.00m, "Budget shift for a road usage", false, "Road budget Shifts", "oemtest11", 21.0, 290.00m, 3, 1 },
-                    { 12, 3, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2279), null, null, "Cheap standard shift!", 0.00m, "Cheap standard shift for a road usage", false, "Shift", "oemtest12", 29.0, 220.00m, 1, 1 },
-                    { 13, 3, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2284), null, null, "Budget shifts for a montain!", 0.00m, "Budget shift for a montain usage", false, "Montain Shifts", "oemtest13", 19.0, 280.00m, 2, 1 },
-                    { 14, 2, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2288), null, null, "Budget wheel ever!", 0.00m, "Budget wheel for a road usage", false, "Budget wheel for road", "oemtest14", 50.0, 65.00m, 1, 1 },
-                    { 15, 2, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2292), null, null, "Budget wheel for a montain!", 0.00m, "Budget wheel for a montain usage", false, "Budget wheel for a montain", "oemtest15", 40.0, 75.00m, 2, 1 },
-                    { 16, 2, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2295), null, null, "The cheapest wheel for a road!", 0.00m, "The cheapest wheel for a road usage", false, "The cheapest road wheel", "oemtest16", 50.0, 55.00m, 3, 1 },
-                    { 17, 2, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2328), null, null, "The best titanium wheel for a road!", 0.00m, "The best titanium wheel for a road usage", false, "Road titanium wheel", "oemtest17", 50.0, 95.00m, 3, 1 }
+                    { 1, 1, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7435), null, null, "Best frame in the road!", 0.00m, "For road usage", false, "Frame Road", "oemtest1", 32.0, 100.00m, 1, 1 },
+                    { 2, 1, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7447), null, null, "Best frame in the montain", 0.00m, "For montain usage", false, "Frame Montain", "oemtest2", 43.0, 90.00m, 2, 1 },
+                    { 3, 1, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7450), null, null, "Best frame in the road for womens", 0.00m, "For road usage in women bikes", false, "Frame Road woman", "oemtest3", 32.0, 80.00m, 3, 1 },
+                    { 4, 2, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7460), null, null, "Best wheels ever!", 0.00m, "Best wheels for a road usage", false, "Wheel of the Year for road", "oemtest4", 50.0, 75.00m, 1, 1 },
+                    { 5, 2, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7464), null, null, "Best wheels for a montain!", 0.00m, "Best wheels for a montain usage", false, "Wheel of the Year for montain", "oemtest5", 40.0, 85.00m, 2, 1 },
+                    { 6, 2, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7468), null, null, "Best wheels for a road!", 0.00m, "Best seler for a road usage", false, "Road wheel best seler", "oemtest6", 50.0, 65.00m, 3, 1 },
+                    { 7, 3, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7472), null, null, "Worst shift - have only one!", 0.00m, "Base shift - have only one", false, "Shift", "oemtest7", 29.0, 250.00m, 1, 1 },
+                    { 8, 3, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7475), null, null, "Best shifts for a montain!", 0.00m, "Best shift for a montain usage", false, "Montain Shifts", "oemtest8", 19.0, 350.00m, 2, 1 },
+                    { 9, 3, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7479), null, null, "Best shifts for a road!", 0.00m, "Best shift for a road usage", false, "Road Shifts", "oemtest9", 29.0, 400.00m, 3, 1 },
+                    { 10, 3, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7483), null, null, "Better shifts for a road!", 0.00m, "Better shift for a road usage", false, "Road better Shifts", "oemtest10", 21.0, 410.00m, 3, 1 },
+                    { 11, 3, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7486), null, null, "Budget shifts for a road!", 0.00m, "Budget shift for a road usage", false, "Road budget Shifts", "oemtest11", 21.0, 290.00m, 3, 1 },
+                    { 12, 3, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7489), null, null, "Cheap standard shift!", 0.00m, "Cheap standard shift for a road usage", false, "Shift", "oemtest12", 29.0, 220.00m, 1, 1 },
+                    { 13, 3, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7493), null, null, "Budget shifts for a montain!", 0.00m, "Budget shift for a montain usage", false, "Montain Shifts", "oemtest13", 19.0, 280.00m, 2, 1 },
+                    { 14, 2, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7496), null, null, "Budget wheel ever!", 0.00m, "Budget wheel for a road usage", false, "Budget wheel for road", "oemtest14", 50.0, 65.00m, 1, 1 },
+                    { 15, 2, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7500), null, null, "Budget wheel for a montain!", 0.00m, "Budget wheel for a montain usage", false, "Budget wheel for a montain", "oemtest15", 40.0, 75.00m, 2, 1 },
+                    { 16, 2, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7508), null, null, "The cheapest wheel for a road!", 0.00m, "The cheapest wheel for a road usage", false, "The cheapest road wheel", "oemtest16", 50.0, 55.00m, 3, 1 },
+                    { 17, 2, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7511), null, null, "The best titanium wheel for a road!", 0.00m, "The best titanium wheel for a road usage", false, "Road titanium wheel", "oemtest17", 50.0, 95.00m, 3, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -929,22 +929,22 @@ namespace BicycleApp.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Comments",
                 columns: new[] { "Id", "ClientId", "DateCreated", "DateDeleted", "DateUpdated", "Description", "IsDeleted", "PartId", "Title" },
-                values: new object[] { 1, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1471), null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1492), "Test Description", false, 1, "Test Title" });
+                values: new object[] { 1, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(6647), null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(6668), "Test Description", false, 1, "Test Title" });
 
             migrationBuilder.InsertData(
                 table: "Delivaries",
                 columns: new[] { "Id", "DateDeleted", "DateDelivered", "DateUpdated", "IsDeleted", "Note", "PartId", "QuantityDelivered", "SuplierId" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1542), new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1543), false, "text", 1, 2.0, 1 },
-                    { 2, null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1545), new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1546), false, "text2", 4, 2.0, 2 },
-                    { 3, null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1548), new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1549), false, "text2", 7, 1.0, 3 },
-                    { 4, null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1550), new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1551), false, "text4", 1, 4.0, 1 },
-                    { 5, null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1553), new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1554), false, "text5", 4, 4.0, 2 },
-                    { 6, null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1556), new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1557), false, "text6", 7, 2.0, 3 },
-                    { 7, null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1559), new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1560), false, "text7", 1, 3.0, 1 },
-                    { 8, null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1561), new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1562), false, "text8", 4, 5.0, 2 },
-                    { 9, null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1564), new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1565), false, "text9", 7, 4.0, 3 }
+                    { 1, null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(6723), new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(6724), false, "text", 1, 2.0, 1 },
+                    { 2, null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(6736), new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(6737), false, "text2", 4, 2.0, 2 },
+                    { 3, null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(6739), new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(6740), false, "text2", 7, 1.0, 3 },
+                    { 4, null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(6741), new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(6742), false, "text4", 1, 4.0, 1 },
+                    { 5, null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(6744), new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(6745), false, "text5", 4, 4.0, 2 },
+                    { 6, null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(6747), new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(6748), false, "text6", 7, 2.0, 3 },
+                    { 7, null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(6750), new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(6751), false, "text7", 1, 3.0, 1 },
+                    { 8, null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(6753), new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(6754), false, "text8", 4, 5.0, 2 },
+                    { 9, null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(6756), new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(6757), false, "text9", 7, 4.0, 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -967,16 +967,16 @@ namespace BicycleApp.Data.Migrations
                 columns: new[] { "Id", "ClientId", "DateCreated", "DateDeleted", "DateFinish", "DateUpdated", "Description", "Discount", "FinalAmount", "IsDeleted", "PaidAmount", "SaleAmount", "StatusId", "UnpaidAmount", "VAT" },
                 values: new object[,]
                 {
-                    { 1, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1822), null, null, null, "", 0m, 750.00m, false, 0m, 625.00m, 1, 750.00m, 125.00m },
-                    { 2, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1827), null, null, null, "test2", 0m, 850.00m, false, 0m, 725.00m, 1, 850.00m, 125.00m },
-                    { 3, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1830), null, null, null, "test3", 0m, 950.00m, false, 0m, 825.00m, 1, 750.00m, 125.00m },
-                    { 4, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1834), null, null, null, "test4", 0m, 650.00m, false, 0m, 525.00m, 1, 750.00m, 125.00m },
-                    { 5, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1837), null, null, null, "test5", 0m, 850.00m, false, 0m, 725.00m, 1, 850.00m, 125.00m },
-                    { 6, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1929), null, null, null, "test6", 0m, 850.00m, false, 0m, 525.00m, 1, 650.00m, 125.00m },
-                    { 7, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1933), null, null, null, "test7", 0m, 650.00m, false, 0m, 525.00m, 1, 750.00m, 125.00m },
-                    { 8, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1936), null, null, null, "test8", 0m, 850.00m, false, 0m, 725.00m, 1, 850.00m, 125.00m },
-                    { 9, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1939), null, null, null, "test9", 0m, 850.00m, false, 0m, 525.00m, 1, 650.00m, 125.00m },
-                    { 10, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1942), null, null, null, "Passed quality control", 0m, 425.00m, false, 0m, 354.17m, 1, 0m, 70.83m }
+                    { 1, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7020), null, null, null, "", 0m, 750.00m, false, 0m, 625.00m, 1, 750.00m, 125.00m },
+                    { 2, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7025), null, null, null, "test2", 0m, 850.00m, false, 0m, 725.00m, 1, 850.00m, 125.00m },
+                    { 3, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7079), null, null, null, "test3", 0m, 950.00m, false, 0m, 825.00m, 1, 750.00m, 125.00m },
+                    { 4, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7084), null, null, null, "test4", 0m, 650.00m, false, 0m, 525.00m, 1, 750.00m, 125.00m },
+                    { 5, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7087), null, null, null, "test5", 0m, 850.00m, false, 0m, 725.00m, 1, 850.00m, 125.00m },
+                    { 6, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7090), null, null, null, "test6", 0m, 850.00m, false, 0m, 525.00m, 1, 650.00m, 125.00m },
+                    { 7, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7093), null, null, null, "test7", 0m, 650.00m, false, 0m, 525.00m, 1, 750.00m, 125.00m },
+                    { 8, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7096), null, null, null, "test8", 0m, 850.00m, false, 0m, 725.00m, 1, 850.00m, 125.00m },
+                    { 9, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7099), null, null, null, "test9", 0m, 850.00m, false, 0m, 525.00m, 1, 650.00m, 125.00m },
+                    { 10, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7101), null, null, null, "Passed quality control", 0m, 425.00m, false, 0m, 354.17m, 1, 0m, 70.83m }
                 });
 
             migrationBuilder.InsertData(
@@ -984,9 +984,9 @@ namespace BicycleApp.Data.Migrations
                 columns: new[] { "Id", "DateCreated", "DateDeleted", "DateUpdated", "IsDeleted", "Note", "PartId", "PartId1", "Quantity", "SuplierId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2770), null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2772), false, "text", 1, null, 2, 1 },
-                    { 2, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2775), null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2776), false, "text2", 4, null, 2, 2 },
-                    { 3, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2778), null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2779), false, "text2", 7, null, 1, 3 }
+                    { 1, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7917), null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7918), false, "text", 1, null, 2, 1 },
+                    { 2, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7926), null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7927), false, "text2", 4, null, 2, 2 },
+                    { 3, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7929), null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7930), false, "text2", 7, null, 1, 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -1035,9 +1035,9 @@ namespace BicycleApp.Data.Migrations
                 columns: new[] { "OrderId", "PartId", "UniqueKeyForSerialNumber", "DateCreated", "DateDeleted", "DateFinish", "DateUpdated", "DatetimeAsigned", "Description", "EmployeeId", "EndDatetime", "IsCompleted", "IsDeleted", "PartName", "PartPrice", "PartQuantity", "SerialNumber", "StartDatetime" },
                 values: new object[,]
                 {
-                    { 1, 1, "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1994), "test", "21003785-a275-4139-ae20-af6a6cf8fea8", null, false, false, "Frame OG", 100.00m, 1.0, "BID12345678", null },
-                    { 1, 2, "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(1999), "test", "17063948-8fdc-417e-8fb7-2ae6bf572f94", null, false, false, "Wheel of the YearG", 75.00m, 2.0, "BID12345678", null },
-                    { 1, 3, "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, new DateTime(2023, 12, 17, 13, 28, 57, 838, DateTimeKind.Local).AddTicks(2003), "test", "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91", null, false, false, "Shift", 250.00m, 2.0, "BID12345678", null },
+                    { 1, 1, "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7163), "test", "21003785-a275-4139-ae20-af6a6cf8fea8", null, false, false, "Frame OG", 100.00m, 1.0, "BID12345678", null },
+                    { 1, 2, "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7167), "test", "17063948-8fdc-417e-8fb7-2ae6bf572f94", null, false, false, "Wheel of the YearG", 75.00m, 2.0, "BID12345678", null },
+                    { 1, 3, "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, new DateTime(2023, 12, 18, 21, 6, 53, 503, DateTimeKind.Local).AddTicks(7170), "test", "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91", null, false, false, "Shift", 250.00m, 1.0, "BID12345678", null },
                     { 2, 1, "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, null, "test", null, null, false, false, "Frame OG", 100.00m, 1.0, "BID12345679", null },
                     { 2, 4, "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, null, "test", null, null, false, false, "Wheel of the Year for road", 75.00m, 1.0, "BID12345679", null },
                     { 2, 12, "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, null, "test", null, null, false, false, "Shift", 220.00m, 1.0, "BID12345679", null },

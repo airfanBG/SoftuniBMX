@@ -66,7 +66,7 @@
         /// <returns>True or False</returns>
         /// <exception cref="ArgumentNullException">If input data is null</exception>
         /// <exception cref="ArgumentException">If employee already exists</exception>
-        public async Task<bool> RegisterEmployeeAsync(EmployeeRegisterDto employeeRegisterDto, string httpScheme, string httpHost)
+        public async Task<string> RegisterEmployeeAsync(EmployeeRegisterDto employeeRegisterDto, string httpScheme, string httpHost)
         {
             if (employeeRegisterDto == null)
             {
@@ -95,7 +95,7 @@
 
             if (result == null)
             {
-                return false;
+                return string.Empty;
             }
 
             if (result.Succeeded)
@@ -108,10 +108,10 @@
                 var emailSenderResult = emailSender.IsSendedEmailForVerification(employee.Email, $"{employee.FirstName} {employee.LastName}", callback);
                 if (emailSenderResult)
                 {
-                    return true;
+                    return stringManipulator.ReturnFullName(employee.FirstName, employee.LastName);
                 }
             }
-            return false;
+            return string.Empty;
         }
 
         /// <summary>

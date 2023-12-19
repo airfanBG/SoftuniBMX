@@ -214,7 +214,7 @@
         /// </summary>
         /// <param name="orderId"></param>
         /// <returns>Task</returns>
-        public async Task ManagerDeleteOrder(int orderId)
+        public async Task<int> ManagerDeleteOrder(int orderId)
         {
             if (orderId <= 0)
             {
@@ -229,6 +229,8 @@
 
                 _db.Orders.Update(orderToReject);
                 await _db.SaveChangesAsync();
+
+                return orderId;
             }
             catch (Exception ex)
             {

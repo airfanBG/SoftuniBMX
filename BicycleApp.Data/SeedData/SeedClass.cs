@@ -654,7 +654,7 @@
                 EmployeeId = "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91",
                 PartName = "Shift",
                 PartPrice = 250.00M,
-                PartQuantity = 2,
+                PartQuantity = 1,
                 DatetimeAsigned = DateTime.Now,
                 StartDatetime = null,
                 EndDatetime = null,

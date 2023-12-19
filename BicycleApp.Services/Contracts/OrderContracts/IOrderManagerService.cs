@@ -10,7 +10,7 @@
         Task<OrderQueryDto> AllPendingOrdersAsync(int currentPage);
         Task<ICollection<OrderInfoDto>> GetAllFinishedOrdersForPeriod(FinishedOrdersDto datesPeriod);
         Task<int> ArePartsNeeded(int partsInOrder, int partInStockId);
-        Task ManagerDeleteOrder(int orderId);
+        Task<int> ManagerDeleteOrder(int orderId);
         Task<string> SetEmployeeToPart(int partId);
         Task <ICollection<OrderPartDeliveryDto>> RejectOrderAsync(int orderId);
         Task<ICollection<OrderInfoDto>> AllRejectedOrdersAsync();

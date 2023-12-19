@@ -1,22 +1,13 @@
 ﻿namespace BicycleApp.Services.Services.Factory
 {
-    using BicicleApp.Common.Providers.Contracts;
-    using BicycleApp.Data;
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Models.Order.OrderUser;
     using BicycleApp.Services.Models.Order.OrderUser.Contracts;
 
     public class OrderFactory : IOrderFactory
-    {   
-        //TODO Remove _db, move it to servce.
-        private readonly IDateTimeProvider _dateTimeProvider;
-        public OrderFactory(BicycleAppDbContext db, IDateTimeProvider dateTimeProvider)
-        {
-            
-            _dateTimeProvider = dateTimeProvider;
-        }
-        public Order CreateUserOrderAsync(IOrder order, DateTime currentTime)
+    {  
+        public Order CreateUserOrder(IOrder order, DateTime currentTime)
         {
               return new Order()
                 {
@@ -26,7 +17,7 @@
                     UnpaidAmount = order.UnpaidAmount,
                     VAT = order.VAT,
                     ClientId = order.ClientId,
-                    DateCreated = _dateTimeProvider.Now,
+                    DateCreated = currentTime,
                     Description = order.Description,
                     Discount = order.Discount,
                     IsDeleted = order.IsDeleted,
@@ -44,7 +35,7 @@
             };
         }
 
-        public async Task<OrderPartEmployee> CreateOrderPartEmployeeProduct(int orderId, string uniqueKeyForSerialNumber, string serialNumber, int partId, string partName, int partQuantity, decimal partPrice)
+        public async Task<OrderPartEmployee> CreateOrderPartEmployeeProduct(int orderId, string uniqueKeyForSerialNumber, string serialNumber, int partId, string partName, int partQuantity, decimal partPrice, DateTime currentDate)
         {
             var ope = new OrderPartEmployee()
             {
@@ -54,7 +45,8 @@
                 PartName = partName,
                 PartPrice = partPrice,
                 SerialNumber = serialNumber,
-                UniqueKeyForSerialNumber = uniqueKeyForSerialNumber
+                UniqueKeyForSerialNumber = uniqueKeyForSerialNumber,
+                DateCreated = currentDate
             };
 
             return  ope;

@@ -46,10 +46,10 @@
                 //Register
                 var httpScheme = Request.Scheme;
                 var httpHost = Request.Host.Value;
-                bool isRegistered = await employeeService.RegisterEmployeeAsync(employeeRegisterDto, httpScheme, httpHost);
-                if (isRegistered)
+                var registeredEmployeeName = await employeeService.RegisterEmployeeAsync(employeeRegisterDto, httpScheme, httpHost);
+                if (!string.IsNullOrEmpty(registeredEmployeeName))
                 {
-                    return Ok();
+                    return Ok(registeredEmployeeName);
                 }
 
                 //Return bad request if registration has failed

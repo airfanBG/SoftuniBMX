@@ -3,11 +3,10 @@
     using System.Threading.Tasks;
 
     using BicycleApp.Services.Models.IdentityModels;
-    using BicycleApp.Services.Models.Order;
 
     public interface IEmployeeService
     {
-        Task<bool> RegisterEmployeeAsync(EmployeeRegisterDto employeeRegisterDto, string httpScheme, string httpHost);
+        Task<string> RegisterEmployeeAsync(EmployeeRegisterDto employeeRegisterDto, string httpScheme, string httpHost);
 
         Task<EmployeeReturnDto> LoginEmployeeAsync(EmployeeLoginDto employeeDto);
 
