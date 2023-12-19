@@ -7,6 +7,7 @@ import { initialState, reducer } from "./managerUtil/addMemberReducer.js";
 import { post } from "../../../util/api.js";
 import { environment } from "../../../environments/environment.js";
 import { useNavigate } from "react-router-dom";
+import { PASS_REGEX } from "../../../util/util.js";
 
 function AddMember() {
   const [phone, setPhone] = useState("");
@@ -18,15 +19,17 @@ function AddMember() {
       firstName,
       lastName,
       repass,
-      role,
+      userRole,
       department,
       phoneNumber,
       position,
       isManager,
       dateOfHire,
+      error,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
+  let role = "";
 
   function onSetInputData(e) {
     const actionType = e.target.id;
@@ -34,8 +37,45 @@ function AddMember() {
     dispatch({ type: actionType, payload: payloadData });
   }
 
+  function onBlurInput(e) {
+    const actionType = e.target.id;
+    const fieldValue = e.target.value;
+
+    if (!fieldValue) return;
+
+    if (actionType === "firstName/input" && fieldValue.length < 3) {
+      dispatch({ type: "error/set", payload: actionType });
+    } else if (actionType === "lastName/input" && fieldValue.length < 3) {
+      dispatch({ type: "error/set", payload: actionType });
+    } else if (actionType === "email/input" && fieldValue.length < 3) {
+      dispatch({ type: "error/set", payload: actionType });
+    } else if (
+      actionType === "password/input" &&
+      !PASS_REGEX.test(fieldValue)
+    ) {
+      dispatch({ type: "error/set", payload: actionType });
+    } else if (actionType === "repass/input" && fieldValue !== password) {
+      dispatch({ type: "error/set", payload: actionType });
+    }
+  }
+
+  function clearInput(e) {
+    const actionType = e.target.id;
+
+    if (error[actionType])
+      dispatch({ type: "error/clear", payload: actionType });
+  }
+
   async function handleFormSubmit(e) {
     e.preventDefault();
+
+    if (department === "Frames") {
+      role = "frameworker";
+    } else if (department === "Wheels") {
+      role = "wheelworker";
+    } else if (department === "Accessory") {
+      role = "accessoriesworker";
+    }
 
     const finalState = {
       email: email + "@b-free.com",
@@ -45,19 +85,21 @@ function AddMember() {
       repass,
       role,
       phoneNumber,
-      isManager: role === "manager" ? true : false,
-      dateOfHire: new Date().toLocaleDateString(),
+      isManager: userRole === "manager" ? true : false,
+      // dateOfHire: new Date().toLocaleDateString(),
+      dateOfHire: new Date().toISOString(),
     };
 
-    if (role === "worker") {
+    if (userRole === "worker") {
       finalState.department = department;
       finalState.position = position;
     }
 
-    const result = await post(environment.register_employee, finalState);
-    console.log(result);
+    console.log(finalState);
+    // const result = await post(environment.register_employee, finalState);
+    // console.log(result);
 
-    navigate("/profile/employers");
+    // navigate("/profile/employers");
   }
   return (
     <>
@@ -75,8 +117,15 @@ function AddMember() {
                   id="firstName/input"
                   value={firstName}
                   onChange={onSetInputData}
+                  onBlur={onBlurInput}
+                  onFocus={clearInput}
                   required
                 />
+                {error["firstName/input"] && (
+                  <p className={styles.error}>
+                    First name should be between 3 and 20 characters
+                  </p>
+                )}
               </div>
 
               <div className={styles.inputField}>
@@ -86,8 +135,16 @@ function AddMember() {
                   id="lastName/input"
                   value={lastName}
                   onChange={onSetInputData}
+                  onBlur={onBlurInput}
+                  onFocus={clearInput}
                   required
+                  // disabled={true}
                 />
+                {error["lastName/input"] && (
+                  <p className={styles.error}>
+                    Last name should be between 3 and 20 characters
+                  </p>
+                )}
               </div>
 
               <div className={styles.inputField}>
@@ -98,9 +155,16 @@ function AddMember() {
                     id="email/input"
                     value={email}
                     onChange={onSetInputData}
+                    onBlur={onBlurInput}
+                    onFocus={clearInput}
                     required
                   />
                   <span>@b-free.com</span>
+                  {error["email/input"] && (
+                    <p className={styles.error}>
+                      Email should be at least 3 characters
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -110,9 +174,15 @@ function AddMember() {
                   type="password"
                   id="password/input"
                   value={password}
+                  name={password}
                   onChange={onSetInputData}
+                  onBlur={onBlurInput}
+                  onFocus={clearInput}
                   required
                 />
+                {error["password/input"] && (
+                  <p className={styles.error}>Invalid password</p>
+                )}
               </div>
 
               <div className={styles.inputField}>
@@ -122,15 +192,20 @@ function AddMember() {
                   id="repass/input"
                   value={repass}
                   onChange={onSetInputData}
+                  onBlur={onBlurInput}
+                  onFocus={clearInput}
                   required
                 />
+                {error["repass/input"] && (
+                  <p className={styles.error}>Password do not match</p>
+                )}
               </div>
 
               <div className={styles.inputField}>
                 <label htmlFor="role/select">Role</label>
                 <select
                   id="role/select"
-                  value={role}
+                  value={userRole}
                   onChange={onSetInputData}
                   required
                 >
@@ -141,7 +216,7 @@ function AddMember() {
                 </select>
               </div>
 
-              {role === "worker" && (
+              {userRole === "worker" && (
                 <div className={styles.inputField}>
                   <label htmlFor="department/select">Department</label>
                   <select
@@ -157,7 +232,7 @@ function AddMember() {
                 </div>
               )}
 
-              {role === "worker" && (
+              {userRole === "worker" && (
                 <div className={styles.inputField}>
                   <label htmlFor="position/select">Position</label>
                   <select
@@ -192,7 +267,12 @@ function AddMember() {
                 />
               </div>
 
-              <button className={styles.addMemberBtn}>Add member</button>
+              <button
+                className={styles.addMemberBtn}
+                disabled={Object.values(error).some((x) => x)}
+              >
+                Add member
+              </button>
             </form>
           </div>
         </section>

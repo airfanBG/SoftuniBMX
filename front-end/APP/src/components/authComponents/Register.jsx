@@ -228,10 +228,10 @@ function Register() {
         setValues(initialState);
       }, 2000);
     } catch (err) {
-      // setTimeout(() => {
-      // navigate("/");
-      //   setResError({ status: false, message: "" });
-      // }, 3000);
+      setTimeout(() => {
+        navigate("/");
+        setResError({ status: false, message: "" });
+      }, 3000);
       throw new Error(err.message);
     }
   }
