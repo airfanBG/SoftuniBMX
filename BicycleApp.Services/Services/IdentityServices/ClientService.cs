@@ -3,7 +3,7 @@
     using System.IdentityModel.Tokens.Jwt;
     using System.Security.Claims;
     using System.Text;
-
+    using BicicleApp.Common.Providers.Contracts;
     using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
     using BicycleApp.Data.Models.IdentityModels;
@@ -30,6 +30,7 @@
         private readonly IEmailSender emailSender;
         private readonly IStringManipulator stringManipulator;
         private readonly IOptionProvider optionProvider;
+        private readonly IDateTimeProvider dateTimeProvider;
 
         public ClientService(UserManager<BaseUser> userManager,
                              SignInManager<BaseUser> signInManager,
@@ -39,7 +40,8 @@
                              IModelsFactory modelFactory,
                              IEmailSender emailSender,
                              IStringManipulator stringManipulator,
-                             IOptionProvider optionProvider)
+                             IOptionProvider optionProvider,
+                             IDateTimeProvider dateTimeProvider)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -50,6 +52,7 @@
             this.emailSender = emailSender;
             this.stringManipulator = stringManipulator;
             this.optionProvider = optionProvider;
+            this.dateTimeProvider = dateTimeProvider;
         }
 
         /// <summary>
@@ -481,6 +484,7 @@
                 client.LastName = clientEditDto.LastName;
                 client.PhoneNumber = clientEditDto.PhoneNumber;
                 client.TownId = updatedTownId;
+                client.DateUpdated = dateTimeProvider.Now;
 
                 var address = await dbContext.DelivaryAddresses.FirstAsync(da => da.Id == client.DelivaryAddressId);
                 address.Floor = clientEditDto.DelivaryAddress.Floor;
