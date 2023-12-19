@@ -19,7 +19,7 @@ function UserTrackOrder() {
         <BoardHeader />
         {loading && <LoaderWheel />}
         {/* PUT YOUR CODE AFTER THIS LINE */}
-        rdyrdjytrckyuty
+
         {/* END OF YOUR CODE */}
       </section>
     </>
