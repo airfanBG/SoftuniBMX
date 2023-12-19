@@ -119,5 +119,16 @@
             public const int RateMinValue = 1;
             public const int RateMaxValue = 5;
         }
+
+        public static class DelivaryAddressConstants
+        {
+            public const int CountryMaxValue = 50;
+            public const int PostCodeMaxValue = 10;
+            public const int DistrictMaxValue = 100;
+            public const int BlockMaxValue = 20;
+            public const int ApartamentMaxValue = 20;
+            public const int StreetMaxValue = 100;
+            public const int StreetNumberMaxValue = 20;
+        }
     }
 }

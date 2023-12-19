@@ -24,7 +24,6 @@
     using Microsoft.AspNetCore.WebUtilities;
     using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Services.HelperClasses.Contracts;
-    using BicycleApp.Services.Models.Order;
 
     public class EmployeeService : IEmployeeService
     {
@@ -66,7 +65,7 @@
         /// <returns>True or False</returns>
         /// <exception cref="ArgumentNullException">If input data is null</exception>
         /// <exception cref="ArgumentException">If employee already exists</exception>
-        public async Task<bool> RegisterEmployeeAsync(EmployeeRegisterDto employeeRegisterDto, string httpScheme, string httpHost)
+        public async Task<string> RegisterEmployeeAsync(EmployeeRegisterDto employeeRegisterDto, string httpScheme, string httpHost)
         {
             if (employeeRegisterDto == null)
             {
@@ -95,7 +94,7 @@
 
             if (result == null)
             {
-                return false;
+                return string.Empty;
             }
 
             if (result.Succeeded)
@@ -108,10 +107,10 @@
                 var emailSenderResult = emailSender.IsSendedEmailForVerification(employee.Email, $"{employee.FirstName} {employee.LastName}", callback);
                 if (emailSenderResult)
                 {
-                    return true;
+                    return stringManipulator.ReturnFullName(employee.FirstName, employee.LastName);
                 }
             }
-            return false;
+            return string.Empty;
         }
 
         /// <summary>
@@ -179,11 +178,15 @@
                 .Select(d => d.Name)
                 .FirstOrDefaultAsync();
 
+            var roles = await userManager.GetRolesAsync(employee);
+
             return new EmployeeInfoDto()
             {
                 Id = employee.Id,
+                ImageUrl = employee.ImagesEmployees.FirstOrDefault().ImageUrl,
                 FirstName = employee.FirstName,
                 LastName = employee.LastName,
+                Role = roles.Count > 1 ? string.Join(", ", roles) : roles[0],
                 Email = employee.Email,
                 Position = employee.Position,
                 Department = department,
@@ -307,30 +310,6 @@
                 throw new Exception(e.Message);
             }
 
-        }
-
-        public async Task<AllEmployeesDto?> GetAllEmployees()
-        {
-            try
-            {
-                return await dbContext.Roles
-                                  .Where(r => r.Name != "user")
-                                  .Select(s => new AllEmployeesDto()
-                                  {
-                                      Roles = new List<EmployeeRoleDto>()
-                                      {
-                                          new EmployeeRoleDto()
-                                          {
-
-                                          }
-                                      }
-                                  })
-                                  .FirstAsync();
-            }
-            catch (Exception)
-            {
-            }
-            return null;
         }
 
         /// <summary>

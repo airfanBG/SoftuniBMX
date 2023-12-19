@@ -1,26 +1,15 @@
 ﻿namespace BicycleApp.Services.Services.Factory
 {
-    using BicicleApp.Common.Providers.Contracts;
-    using BicycleApp.Data;
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Models.Order.OrderUser;
     using BicycleApp.Services.Models.Order.OrderUser.Contracts;
 
     public class OrderFactory : IOrderFactory
-    {       
-        private readonly BicycleAppDbContext _db;
-        private readonly IDateTimeProvider _dateTimeProvider;
-        public OrderFactory(BicycleAppDbContext db, IDateTimeProvider dateTimeProvider)
+    {  
+        public Order CreateUserOrder(IOrder order, DateTime currentTime)
         {
-            _db = db;
-            _dateTimeProvider = dateTimeProvider;
-        }
-        public async Task<int> CreateUserOrderAsync(IOrder order)
-        {
-            try
-            {
-                var orderToSave = new Order()
+              return new Order()
                 {
                     FinalAmount = order.FinalAmount,
                     PaidAmount = order.PaidAmount,
@@ -28,22 +17,12 @@
                     UnpaidAmount = order.UnpaidAmount,
                     VAT = order.VAT,
                     ClientId = order.ClientId,
-                    DateCreated = _dateTimeProvider.Now,
+                    DateCreated = currentTime,
                     Description = order.Description,
                     Discount = order.Discount,
                     IsDeleted = order.IsDeleted,
                     StatusId = order.StatusId
                 };
-
-                await _db.Orders.AddAsync(orderToSave);
-                await _db.SaveChangesAsync();
-
-                return orderToSave.Id;
-            }
-            catch (Exception)
-            {
-            }
-            return 0;
         }
         public IOrderPartDto CreateOrderPartFromUserOrder(string partName, int partQuantity, int partId, decimal productPrice)
         {
@@ -56,7 +35,7 @@
             };
         }
 
-        public async Task<OrderPartEmployee> CreateOrderPartEmployeeProduct(int orderId, string uniqueKeyForSerialNumber, string serialNumber, int partId, string partName, int partQuantity, decimal partPrice)
+        public async Task<OrderPartEmployee> CreateOrderPartEmployeeProduct(int orderId, string uniqueKeyForSerialNumber, string serialNumber, int partId, string partName, int partQuantity, decimal partPrice, DateTime currentDate)
         {
             var ope = new OrderPartEmployee()
             {
@@ -66,7 +45,8 @@
                 PartName = partName,
                 PartPrice = partPrice,
                 SerialNumber = serialNumber,
-                UniqueKeyForSerialNumber = uniqueKeyForSerialNumber
+                UniqueKeyForSerialNumber = uniqueKeyForSerialNumber,
+                DateCreated = currentDate
             };
 
             return  ope;
