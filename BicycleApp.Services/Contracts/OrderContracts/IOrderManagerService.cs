@@ -16,6 +16,6 @@
         Task<ICollection<OrderInfoDto>> AllRejectedOrdersAsync();
         Task<bool> AcceptAndAssignRejectedOrderByManagerAsync(int orderId);
         Task<ICollection<OrderInfoDto>> AllOrdersInProgressAsync();
-        Task<AllEmployeesDto?> GetAllEmployees();
+        Task<ICollection<EmployeesOverviewForMonthDto>> GetAllEmployees();
     }
 }

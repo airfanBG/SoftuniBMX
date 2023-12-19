@@ -24,7 +24,6 @@
     using Microsoft.AspNetCore.WebUtilities;
     using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Services.HelperClasses.Contracts;
-    using BicycleApp.Services.Models.Order;
 
     public class EmployeeService : IEmployeeService
     {

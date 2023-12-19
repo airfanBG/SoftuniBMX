@@ -16,6 +16,7 @@
             this.Comments = new HashSet<Comment>();
             this.Orders = new HashSet<Order>();
             this.Images = new HashSet<ImageClient>();
+
         }
 
         [Comment("The default address of the client for deliveries")]

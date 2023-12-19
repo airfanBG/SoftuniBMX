@@ -6,10 +6,13 @@
     using BicycleApp.Services.HelperClasses.Contracts;
     using BicycleApp.Services.Models.Order;
     using BicycleApp.Services.Models.Order.OrderManager;
+    using static BicycleApp.Common.ApplicationGlobalConstants;
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using BicycleApp.Data.Models.IdentityModels;
+    using BicycleApp.Services.Models.IdentityModels;
 
     public class OrderManagerService : IOrderManagerService
     {
@@ -394,9 +397,29 @@
             return false;
         }
 
-        public async Task<AllEmployeesDto?> GetAllEmployees()
-        {
-            throw new NotImplementedException();
+        public async Task<ICollection<EmployeesOverviewForMonthDto>> GetAllEmployees()
+        {            
+            var previusMonth = _dateTimeProvider.PreviousMonthObject;
+
+            var allMonthEmployeeInfo = await _db.Employees.Where(e => e.OrdersPartsEmployees.Any(ope => ope.StartDatetime.Value.Month == previusMonth.PreviousMonth+1
+                                                                                                        && ope.StartDatetime.Value.Year == previusMonth.PreviousYear))                                 
+                                                          .ToListAsync();
+
+            var sortedList = allMonthEmployeeInfo.Select(x => new EmployeesOverviewForMonthDto()
+            {
+                RoleName = "",
+                EmployeeInfos = new List<EmployeeInfoDto>()
+                {
+                    new EmployeeInfoDto()
+                    {
+                        Id = x.Id,
+                        FirstName = x.FirstName,
+                        LastName = x.LastName
+                    }
+                }
+            }).ToList();
+
+            return sortedList;
         }
     }
 }

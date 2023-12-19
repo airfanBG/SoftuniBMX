@@ -1,4 +1,6 @@
-﻿using BicycleApp.Services.Contracts;
+﻿using BicycleApp.Data.Models.IdentityModels;
+using BicycleApp.Services.Contracts;
+using BicycleApp.Services.Models.Order;
 using BicycleApp.Services.Models.Order.OrderManager;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -267,6 +269,14 @@ namespace BicicleApp.Api.Controllers
             {
                 return StatusCode(500);
             }
+        }
+
+        [HttpGet("all_employees")]
+        public async Task<ActionResult<ICollection<EmployeesOverviewForMonthDto>>> GetAllEmployees()
+        {
+            var allEmployeeCollection = await _orderManagerService.GetAllEmployees();
+
+            return Ok(allEmployeeCollection);
         }
     }  
 }

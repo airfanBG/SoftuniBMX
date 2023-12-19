@@ -4,7 +4,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using BicycleApp.Data.Models.EntityModels;
-
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
     using static BicycleApp.Common.EntityValidationConstants.User;
@@ -41,6 +41,6 @@
         [Required]
         public bool IsManeger { get; set; } = false;
 
-        public virtual ICollection<ImageEmployee> ImagesEmployees { get; set; }
+        public virtual ICollection<ImageEmployee> ImagesEmployees { get; set; }       
     }
 }
