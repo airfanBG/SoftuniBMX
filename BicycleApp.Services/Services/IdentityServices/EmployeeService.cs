@@ -185,7 +185,7 @@
                 Id = employee.Id,
                 FirstName = employee.FirstName,
                 LastName = employee.LastName,
-                Role = roles.Count > 1 ? string.Join(", ", roles) : roles[0],
+                //Role = roles.Count > 1 ? string.Join(", ", roles) : roles[0],
                 Email = employee.Email,
                 Position = employee.Position,
                 Department = department,

@@ -18,7 +18,6 @@ function EditContactInfo({ info, setInfo, base64 }) {
     lastName: info.lastName,
     iban: info?.iban,
     balance: info?.balance,
-    phone: info.phoneNumber,
     city: info.town,
     role: user.role,
     country: info.address?.country,
@@ -45,20 +44,23 @@ function EditContactInfo({ info, setInfo, base64 }) {
       lastName,
       iban,
       balance,
-      phone,
       city,
+      role,
       country,
       district,
       postCode,
       block,
-      street,
-      strNumber,
       apartment,
+      street,
       floor,
+      strNumber,
+      id,
       imageUrl,
-      password,
-      repass,
-      role,
+      department,
+      phoneNumber,
+      position,
+      dateOfHire,
+      isManager,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
@@ -81,33 +83,25 @@ function EditContactInfo({ info, setInfo, base64 }) {
       postCode,
       block,
       apartment,
-      street: street,
+      street,
       strNumber,
       floor,
     };
     let data;
     if (role === "user") {
       data = {
-        // password: info.repass,
-        // repass: info.repass,
-        // role: info.role,
-        // email,
+        id,
         firstName,
         lastName,
-        // iban,
-        // balance,
-        phone,
+        email,
+        phoneNumber,
         city,
-        // imageUrl: updatedImg,
+        iban,
+        balance,
         address: newAddress,
       };
     } else {
       data = {
-        // imageUrl: updatedImg,
-        // password: info.repass,
-        // repass: info.repass,
-        // role: info.role,
-        // email,
         firstName,
         lastName,
         department: info?.department,
@@ -125,7 +119,7 @@ function EditContactInfo({ info, setInfo, base64 }) {
       lastName: lastName,
       iban: iban,
       balance: balance,
-      phone: phone,
+      phone: phoneNumber,
       city: city,
       address: newAddress,
       imageUrl: updatedImg,
@@ -139,8 +133,8 @@ function EditContactInfo({ info, setInfo, base64 }) {
       balance: balance,
     });
 
-    const result = await updateUserData(info.id, data);
-    console.log(result);
+    const result = await updateUserData(id, data, role);
+    // console.log(result);
     navigate("/profile");
   }
 
@@ -154,6 +148,7 @@ function EditContactInfo({ info, setInfo, base64 }) {
           action="setFirstName"
           type="text"
           content={"First Name"}
+          required={true}
         />
         {/* LAST NAME */}
         <EditTextInput
@@ -162,6 +157,7 @@ function EditContactInfo({ info, setInfo, base64 }) {
           action="setLastName"
           type="text"
           content={"Last Name"}
+          required={true}
         />
         {/* EMAIL */}
         {/* <EditTextInput
@@ -183,11 +179,12 @@ function EditContactInfo({ info, setInfo, base64 }) {
         )} */}
         {/* PHONE */}
         <EditTextInput
-          inputValue={phone}
+          inputValue={phoneNumber}
           dispatch={dispatch}
           action="setPhone"
           type="text"
           content={"Phone"}
+          required={true}
         />
         {/* CITY */}
         {role === "user" && (
@@ -197,6 +194,7 @@ function EditContactInfo({ info, setInfo, base64 }) {
             action="setCity"
             type="text"
             content={"City"}
+            required={true}
           />
         )}
         {/* COUNTRY */}
@@ -207,6 +205,7 @@ function EditContactInfo({ info, setInfo, base64 }) {
             action="setCountry"
             type="text"
             content={"Country"}
+            required={true}
           />
         )}
         {/* POSTCODE */}
@@ -267,6 +266,7 @@ function EditContactInfo({ info, setInfo, base64 }) {
             action="setStreet"
             type="text"
             content={"Street"}
+            required={true}
           />
         )}
         {/* STREET NUmber*/}
@@ -277,6 +277,7 @@ function EditContactInfo({ info, setInfo, base64 }) {
             action="setStrNumber"
             type="text"
             content={"Street"}
+            required={true}
           />
         )}
         {/* BALANCE */}

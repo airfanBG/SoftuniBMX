@@ -13,7 +13,7 @@ export const environment = {
   indexPage: "/api/home/index",
 
   // CLIENT
-  // update_client: "/users/", // + id
+  update_client: "/api/client/edit/", // + id
   info_client: "/api/client/info?id=", // + id
   create_order: "/api/client_order/create",
 
