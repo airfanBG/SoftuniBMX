@@ -3,23 +3,15 @@
 ### Отговор
 
 ### `GET /api/manager/orders_in_progress` Връща колекция от JSON обекти със следните пропъртита:
-- `orderId"`: Уникален идентификатор на поръчката.
-- `serialNumber"`: Уникален идентификатор на велосипеда.
-- `department`: Името на департамента в който се намира поръчката.
-- `employeeName`: Името на работника при който се намира поръчката.
-- `dateCreated`: Дата и час на създаване на поръчката.
-- `dateFinished`: Показва че поръчката не е завършена.
-- `orderParts`: Колекция от поръчаните части.
-- `partId`: Уникален идентификатор на частта.
-- `description`: Описание на причината за връщане на частта за доработване от качествения контрол.
-- `partName`: Наименованието на частта.
-- `categoryName`: Категория на частта.
-- `oemNumber`: Уникален номер на частта.
-- `partQuantity`: Количество на поръчаната част.
-- `partQuantityInStock`: Количество на склад от поръчаната част.
-- `startDate`: Дата и час на започване на работа по частта.
-- `endDate`: Дата и час на завършване на работата по частта.
-- `isComplete`: Дали е завършена работата по частта.
+- `id`: Уникален идентификатор на направената поръчка.
+- `serialNumber`: Уникален сериен номер на конкретна част.
+- `dateCreated`: Дата на създаване на поръчката.
+- `orderStates`: Колекция от информация за дадена част, от направената поръчка.
+- `partId`: Идентификатор на поръчната част.
+- `partType`: Тип на часта.
+- `partModel`: Модел на часта.
+- `nameOfEmplоyeeProducedThePart`: Име на служите, отговорен за направата й.
+- `isProduced`: Проверка, дали часта е изготвена или не.
 
 ### Examples:
 
@@ -38,76 +30,80 @@ GET /api/manager/оrders_in_progress
   {
     "orderId": 1,
     "serialNumber": "BID12345678",
-    "dateCreated": "2023-12-15 10:34:22.3280663",
-    "dateFinished": null,
-    "orderParts": [
+    "dateCreated": "15-12-2023",
+    "orderStates": [
       {
         "partId": 1,
-        "description": "test",
-        "partName": "Frame OG",
-        "partQuantity": 1,
-        "partQunatityInStock": 32,
-        "startDate": null,
-        "endDate": null,
-        "isComplete": false
+        "partType": "Frame",
+        "partModel": "Frame Road",
+        "nameOfEmplоyeeProducedThePart": "Marin Marinov",
+        "isProduced": true,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null
       },
       {
         "partId": 2,
-        "description": "test",
-        "partName": "Wheel of the YearG",
-        "partQuantity": 2,
-        "partQunatityInStock": 43,
-        "startDate": null,
-        "endDate": null,
-        "isComplete": false
+        "partType": "Frame",
+        "partModel": "Frame Montain",
+        "nameOfEmplоyeeProducedThePart": "Todor Todorov",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null
       },
       {
         "partId": 3,
-        "description": "test",
-        "partName": "Shift",
-        "partQuantity": 2,
-        "partQunatityInStock": 32,
-        "startDate": null,
-        "endDate": null,
-        "isComplete": false
+        "partType": "Frame",
+        "partModel": "Frame Road woman",
+        "nameOfEmplоyeeProducedThePart": "Ivan Ivanov",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null
       }
     ]
   },
   {
     "orderId": 2,
     "serialNumber": "BID12345679",
-    "dateCreated": "2023-12-15 10:34:22.3280672",
-    "dateFinished": null,
-    "orderParts": [
+    "dateCreated": "15-12-2023",
+    "orderStates": [
       {
         "partId": 1,
-        "description": "test",
-        "partName": "Frame OG",
-        "partQuantity": 1,
-        "partQunatityInStock": 32,
-        "startDate": null,
-        "endDate": null,
-        "isComplete": false
+        "partType": "Frame",
+        "partModel": "Frame Road",
+        "nameOfEmplоyeeProducedThePart": "Marin Marinov",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null
       },
       {
         "partId": 4,
-        "description": "test",
-        "partName": "Wheel of the Year for road",
-        "partQuantity": 2,
-        "partQunatityInStock": 50,
-        "startDate": null,
-        "endDate": null,
-        "isComplete": false
+        "partType": "Wheel",
+        "partModel": "Wheel of the Year for road",
+        "nameOfEmplоyeeProducedThePart": "Todor Todorov",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null
       },
       {
         "partId": 12,
-        "description": "test",
-        "partName": "Shift",
-        "partQuantity": 2,
-        "partQunatityInStock": 29,
-        "startDate": null,
-        "endDate": null,
-        "isComplete": false
+        "partType": "Acsessories",
+        "partModel": "Shift",
+        "nameOfEmplоyeeProducedThePart": "Ivan Ivanov",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null
       }
     ]
   }
