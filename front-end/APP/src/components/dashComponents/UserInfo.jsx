@@ -16,7 +16,7 @@ import ManagerContactInfo from "./managerComponents/ManagerContactInfo.jsx";
 function UserInfo() {
   const { user, updateUser } = useContext(UserContext);
   const [add, setAdd] = useState("");
-
+  console.log(user);
   async function addMoneyBtnHandler() {
     // TODO: make request to update user balance
     //next is only for testing

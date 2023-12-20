@@ -52,6 +52,7 @@
         public DbSet<Rate> Rates { get; set; } = null!;
 
         public DbSet<Delivary> Delivaries { get; set; } = null!;
+        public DbSet<DelivaryAddress> DelivaryAddresses { get; set; } = null!;
 
         public DbSet<Suplier> Supliers { get; set; } = null!;
 
@@ -336,6 +337,7 @@
             builder.Entity<Status>(entity => entity.HasData(seeder.SeedStatuses()));
             builder.Entity<Suplier>(entity => entity.HasData(seeder.SeedSuplieres()));
             builder.Entity<Town>(entity => entity.HasData(seeder.SeedTowns()));
+            builder.Entity<DelivaryAddress>(entity => entity.HasData(seeder.SeedDelivaryAddresses()));
             builder.Entity<VATCategory>(entity => entity.HasData(seeder.SeedVATCategories()));
             builder.Entity<PartInStock>(entity => entity.HasData(seeder.SeedPartsInStock()));
             builder.Entity<PartOrder>(entity => entity.HasData(seeder.SeedPartOrders()));

@@ -6,11 +6,14 @@
     using BicycleApp.Services.HelperClasses.Contracts;
     using BicycleApp.Services.Models.Order;
     using BicycleApp.Services.Models.Order.OrderManager;
+    using static BicycleApp.Common.ApplicationGlobalConstants;
     using BicycleApp.Services.Models.Order.OrderUser;
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using BicycleApp.Data.Models.IdentityModels;
+    using BicycleApp.Services.Models.IdentityModels;
 
     using static BicycleApp.Common.ApplicationGlobalConstants;
 
@@ -216,7 +219,7 @@
         /// </summary>
         /// <param name="orderId"></param>
         /// <returns>Task</returns>
-        public async Task ManagerDeleteOrder(int orderId)
+        public async Task<int> ManagerDeleteOrder(int orderId)
         {
             if (orderId <= 0)
             {
@@ -231,6 +234,8 @@
 
                 _db.Orders.Update(orderToReject);
                 await _db.SaveChangesAsync();
+
+                return orderId;
             }
             catch (Exception ex)
             {
@@ -392,6 +397,31 @@
             {
             }
             return false;
+        }
+
+        public async Task<ICollection<EmployeesOverviewForMonthDto>> GetAllEmployees()
+        {            
+            var previusMonth = _dateTimeProvider.PreviousMonthObject;
+
+            var allMonthEmployeeInfo = await _db.Employees.Where(e => e.OrdersPartsEmployees.Any(ope => ope.StartDatetime.Value.Month == previusMonth.PreviousMonth+1
+                                                                                                        && ope.StartDatetime.Value.Year == previusMonth.PreviousYear))                                 
+                                                          .ToListAsync();
+
+            var sortedList = allMonthEmployeeInfo.Select(x => new EmployeesOverviewForMonthDto()
+            {
+                RoleName = "",
+                EmployeeInfos = new List<EmployeeInfoDto>()
+                {
+                    new EmployeeInfoDto()
+                    {
+                        Id = x.Id,
+                        FirstName = x.FirstName,
+                        LastName = x.LastName
+                    }
+                }
+            }).ToList();
+
+            return sortedList;
         }
     }
 }

@@ -4,11 +4,12 @@
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Models;
     using BicycleApp.Services.Models.IdentityModels;
+    using BicycleApp.Services.Models.IdentityModels.Contracts;
     using BicycleApp.Services.Models.Supply;
 
     public interface IModelsFactory
     {
-        Client CreateNewClientModel(ClientRegisterDto clientRegisterDto);
+        Client CreateNewClientModel(IBaseClientDto clientRegisterDto);
 
         Employee CreateNewEmployee(EmployeeRegisterDto employeeRegisterDto);
 
@@ -27,5 +28,7 @@
         Suplier CreateNewSuplier(CreateSuplierDto createSuplierDto);
 
         PartOrder CreateNewPartOrder(CreatePartOrderDto createPartOrderDto);
+
+        DelivaryAddress CreateNewDelivaryAddress(IDelivaryAddressDto clientDelivaryAddressDto);
     }
 }

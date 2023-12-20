@@ -1,9 +1,13 @@
-﻿using System.Text.Json.Serialization;
+﻿using BicycleApp.Services.Models.IdentityModels.Contracts;
+using System.Text.Json.Serialization;
 
 namespace BicycleApp.Services.Models.IdentityModels
 {
-    public class ClientEditDto
+    public class ClientEditDto : IBaseClientDto
     {
+        [JsonPropertyName("id")]
+        public string ClientId { get; set; } = null!;
+
         [JsonPropertyName("firstName")]
         public string? FirstName { get; set; }
 
@@ -13,11 +17,17 @@ namespace BicycleApp.Services.Models.IdentityModels
         [JsonPropertyName("email")]
         public string? Email { get; set; }
 
-        [JsonPropertyName("phone")]
+        [JsonPropertyName("phoneNumber")]
         public string? PhoneNumber { get; set; }
 
         [JsonPropertyName("city")]
         public string? Town { get; set; }
+
+        [JsonPropertyName("iban")]
+        public string? IBAN { get; set; }
+
+        [JsonPropertyName("balance")]
+        public decimal Balance { get; set; }
 
         [JsonPropertyName("address")]
         public ClientAddressDto DelivaryAddress { get; set; } = null!;

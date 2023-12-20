@@ -13,7 +13,7 @@ export const environment = {
   indexPage: "/api/home/index",
 
   // CLIENT
-  // update_client: "/users/", // + id
+  update_client: "/api/client/edit/", // + id
   info_client: "/api/client/info?id=", // + id
 
   // CLIENT_ORDER
@@ -39,6 +39,7 @@ export const environment = {
   reject_order: "/api/manager/reject_order?orderId=", // + id
   del_order: "/api/manager/delete_order?orderId=", // +id
   in_progress_orders: "/api/manager/orders_in_progress",
+  rejected_orders_list: "/api/manager/rejected_orders/",
 
   // BIKE_SERVICES
   frames: "/api/accountpage/frames",

@@ -77,13 +77,23 @@
                 newOrder.Description = _stringManipulator.GetTextFromProperty(order.Description);
                 newOrder.SaleAmount = totalAmount - totalDiscount - totalVAT;
 
-                var newOrderId = await _orderFactory.CreateUserOrderAsync(newOrder);
-                newOrder.OrderId = newOrderId;
+                var client = await _db.Clients.FirstAsync(c => c.Id == order.ClientId);
 
-                if (newOrderId != 0)
+                var isThereEnoughMoney = CheckBalance(client.Balance, newOrder.FinalAmount);
+
+                if (!isThereEnoughMoney)
                 {
-                    return newOrder;
+                    return null;
                 }
+
+                var newOrderObject = _orderFactory.CreateUserOrder(newOrder, _dateTimeProvider.Now);
+
+                await _db.Orders.AddAsync(newOrderObject);
+                await _db.SaveChangesAsync();
+
+                newOrder.OrderId = newOrderObject.Id;
+
+                return newOrder;
             }
             catch (Exception)
             {
@@ -145,7 +155,7 @@
 
                     foreach (var orderPart in newOrder.OrderParts)
                     {
-                        var ope = await _orderFactory.CreateOrderPartEmployeeProduct(newOrder.OrderId, guidKey, serialNumber, orderPart.PartId, orderPart.PartName, orderPart.PartQuantity, orderPart.PartPrice);
+                        var ope = await _orderFactory.CreateOrderPartEmployeeProduct(newOrder.OrderId, guidKey, serialNumber, orderPart.PartId, orderPart.PartName, orderPart.PartQuantity, orderPart.PartPrice, _dateTimeProvider.Now);
 
                         orderPartEmployeeCollection.Add(ope);
                     }
@@ -210,5 +220,45 @@
             }
         }
 
+        /// <summary>
+        /// Check and reduce client`s balance by needed amount for order. If it`s successful return <see langword="true"/>, otherwise <see langword="false"/>.    
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <param name="percentageOfDeduction"></param>
+        /// <param name="newOrder"></param>
+        /// <returns>Task<bool></returns>
+        public async Task<bool> DeductionByAmount(string clientId, decimal percentageOfDeduction, IOrder newOrder)
+        {
+            try
+            {
+                var client = await _db.Clients.FirstAsync(c => c.Id == clientId);
+
+                decimal neededMoneyForOrder = Math.Round(newOrder.FinalAmount * (percentageOfDeduction / 100));
+
+                client.Balance -= neededMoneyForOrder;
+
+                var order = await _db.Orders.FirstAsync(o => o.Id == newOrder.OrderId);
+                order.PaidAmount = neededMoneyForOrder;
+                order.UnpaidAmount = newOrder.FinalAmount - neededMoneyForOrder;
+
+                await _db.SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception)
+            {
+            }
+
+            return false;
+        }
+
+        private bool CheckBalance(decimal clientBalanceAmount, decimal orderAmount)
+        {
+            if (clientBalanceAmount >= orderAmount)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

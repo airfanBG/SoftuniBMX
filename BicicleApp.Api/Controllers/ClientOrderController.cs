@@ -3,15 +3,18 @@
     using BicycleApp.Services.Contracts.OrderContracts;
     using BicycleApp.Services.Models.Order.OrderUser;
     using Microsoft.AspNetCore.Mvc;
+    using static Org.BouncyCastle.Math.EC.ECCurve;
 
     [Route("api/client_order")]
     [ApiController]
     public class ClientOrderController : ControllerBase
     {
         private readonly IOrderUserService _userService;
-        public ClientOrderController(IOrderUserService userService)
+        private readonly IConfiguration _config;
+        public ClientOrderController(IOrderUserService userService, IConfiguration config)
         {
             _userService = userService;
+            _config = config;
         }
 
 
@@ -30,9 +33,16 @@
 
                 if (result)
                 {
-                    var successOrder = (SuccessOrderInfo)_userService.SuccessCreatedOrder(createdOrder);
+                    var advancePaymentPercentage = decimal.Parse(_config.GetSection("AdvancePaymentPercentage").Value);
 
-                    return Ok(successOrder);
+                    var isReducedAmoutForOrder = await _userService.DeductionByAmount(userOrder.ClientId, advancePaymentPercentage, createdOrder);
+
+                    if (isReducedAmoutForOrder)
+                    {
+                        var successOrder = (SuccessOrderInfo)_userService.SuccessCreatedOrder(createdOrder);
+
+                        return Ok(successOrder);
+                    }
                 }
             }
             return BadRequest();

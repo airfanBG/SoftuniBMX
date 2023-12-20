@@ -9,12 +9,12 @@ async function userInfo(id, role) {
   return result;
 }
 
-function updateUserData(id, data) {
+function updateUserData(id, data, role) {
   let result;
-  if (data.role === "user") {
-    result = put(environment.update_client + id, data);
+  if (role === "user") {
+    result = put(environment.update_client, data);
   } else {
-    result = put(environment.update_employee + id, data);
+    // result = put(environment.update_employee + id, data);
   }
   return result;
 }

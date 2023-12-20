@@ -1,12 +1,14 @@
 ﻿namespace BicycleApp.Services.Models.IdentityModels
 {
+    using BicycleApp.Services.Models.IdentityModels.Contracts;
     using System.ComponentModel.DataAnnotations;
     using System.Text.Json.Serialization;
 
     using static BicycleApp.Common.EntityValidationConstants.User;
 
-    public class ClientRegisterDto
+    public class ClientRegisterDto : IBaseClientDto
     {
+        public string? ClientId { get; set; } 
         [Required]
         [StringLength(FirstNameMaxLength, MinimumLength = FirstNameMinLength)]
         [JsonPropertyName("firstName")]
