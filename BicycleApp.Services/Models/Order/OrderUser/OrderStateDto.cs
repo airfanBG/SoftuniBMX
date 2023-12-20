@@ -13,5 +13,6 @@
         public string? EmployeeId { get; set; }
         public int? ElementProduceTimeInMinutes { get; set; }
         public  string? Description { get; set; }
+        public int PartQuantity { get; set; }
     }
 }

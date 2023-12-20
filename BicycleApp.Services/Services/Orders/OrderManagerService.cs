@@ -142,7 +142,9 @@
                                                    NameOfEmplоyeeProducedThePart = _stringManipulator.ReturnFullName(ope.Employee.FirstName, ope.Employee.LastName),
                                                    PartModel = ope.Part.Name,
                                                    PartType = ope.Part.Category.Name,
-                                                   PartId = ope.PartId
+                                                   SerialNumber = ope.Part.OEMNumber,
+                                                   PartId = ope.PartId,
+                                                   PartQuantity = ope.PartQuantity,
 
                                                }).ToList()
                             })

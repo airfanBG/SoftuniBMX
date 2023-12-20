@@ -24,8 +24,8 @@ function OrderElement({ order }) {
           {id}
         </p>
         <p className={styles.date}>
-          <span className={styles.label}>Date:</span>
-          {currentDate}
+          <span className={styles.label}>Date created:</span>
+          {dateCreated}
         </p>
       </header>
 
@@ -33,12 +33,12 @@ function OrderElement({ order }) {
         {orderParts.map((s, i) => (
           <div key={i} className={styles.sector}>
             <div className={styles.block}>
-              <h3 className={styles.line}>{s.partName}</h3>
+              <h3 className={styles.line}>{s.partType}</h3>
 
               <div className={styles.metaData}>
                 <p className={styles.field}>
                   <span className={styles.fieldLabel}>OEM Number:</span>
-                  {s.oemNumber}
+                  {s.serialNumber}
                 </p>
                 <p className={styles.field}>
                   <span className={styles.fieldLabel}>Quantity:</span>
@@ -54,13 +54,13 @@ function OrderElement({ order }) {
                 <p
                   className={styles.field}
                   style={
-                    s.isComplete
+                    s.IsProduced
                       ? { color: "var(--button-agree)" }
                       : { color: "var(--color-main-dark)" }
                   }
                 >
                   <span className={styles.fieldLabel}>Status:</span>
-                  {s.isComplete ? "Finished" : "In Process"}
+                  {s.IsProduced ? "Finished" : "In Process"}
                 </p>
               </div>
             </div>
