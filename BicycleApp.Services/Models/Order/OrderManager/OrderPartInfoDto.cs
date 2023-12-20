@@ -11,6 +11,7 @@
         public double PartQunatityInStock { get; set; }
         public string StartDate { get; set; } = null!;
         public string EndDate { get; set; } = null!;
+        public string? EmployeeName { get; set; } = null!;
         public bool IsComplete { get; set; }
     }
 }

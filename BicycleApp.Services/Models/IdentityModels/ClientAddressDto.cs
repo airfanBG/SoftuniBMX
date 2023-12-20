@@ -1,8 +1,9 @@
 ﻿namespace BicycleApp.Services.Models.IdentityModels
 {
+    using BicycleApp.Services.Models.IdentityModels.Contracts;
     using System.Text.Json.Serialization;
 
-    public class ClientAddressDto
+    public class ClientAddressDto : IDelivaryAddressDto
     {
         [JsonPropertyName("country")]
         public string? Country { get; set; }

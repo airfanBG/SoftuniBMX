@@ -1,4 +1,6 @@
-﻿using BicycleApp.Services.Contracts;
+﻿using BicycleApp.Data.Models.IdentityModels;
+using BicycleApp.Services.Contracts;
+using BicycleApp.Services.Models.Order;
 using BicycleApp.Services.Models.Order.OrderManager;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -111,7 +113,7 @@ namespace BicicleApp.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> DeleteOrder([FromQuery] int orderId)
+        public async Task<ActionResult<int>> DeleteOrder([FromQuery] int orderId)
         {
             if (orderId <= 0)
             {
@@ -120,15 +122,19 @@ namespace BicicleApp.Api.Controllers
 
             try
             {
-                await _orderManagerService.ManagerDeleteOrder(orderId);
+                var deletedOrderId = await _orderManagerService.ManagerDeleteOrder(orderId);
 
-                return StatusCode(200);
+                if (deletedOrderId > 0)
+                {
+                    return Ok(deletedOrderId);
+                }               
             }
             catch (Exception)
             {
-
-                return StatusCode(500);
             }
+
+            int invalidOrderId = 0;
+            return StatusCode(500, invalidOrderId);
         }
 
         [HttpPost]
@@ -263,6 +269,14 @@ namespace BicicleApp.Api.Controllers
             {
                 return StatusCode(500);
             }
+        }
+
+        [HttpGet("all_employees")]
+        public async Task<ActionResult<ICollection<EmployeesOverviewForMonthDto>>> GetAllEmployees()
+        {
+            var allEmployeeCollection = await _orderManagerService.GetAllEmployees();
+
+            return Ok(allEmployeeCollection);
         }
     }  
 }

@@ -3,7 +3,17 @@ import styles from "./PhoneComponent.module.css";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 
-function PhoneComponent({ label, values, setValues, phone, setPhone }) {
+function PhoneComponent({
+  label,
+  mainValue,
+  values,
+  setValues,
+  phone,
+  setPhone,
+  phoneValidate,
+  clearErrorState,
+  errorMode,
+}) {
   return (
     <div className={styles.wrapper}>
       <div className={styles["flex-column"]}>
@@ -11,10 +21,13 @@ function PhoneComponent({ label, values, setValues, phone, setPhone }) {
       </div>
       <div className={styles["inputForm"]}>
         <PhoneInput
+          name={"phone"}
           defaultCountry="bg"
           value={phone}
           onChange={(phone) => setPhone(phone)}
-          onBlur={() => setValues({ ...values, phone: phone })}
+          // onBlur={() => setValues({ ...values, phone: phone })}
+          onBlur={phoneValidate}
+          onFocus={clearErrorState}
           inputStyle={{
             border: "none",
             borderRadius: "10px",
@@ -23,6 +36,9 @@ function PhoneComponent({ label, values, setValues, phone, setPhone }) {
           buttonStyle={false}
         />
       </div>
+      {errorMode(mainValue) && (
+        <p className={styles.warning}>{errorMode(mainValue)}</p>
+      )}
     </div>
   );
 }

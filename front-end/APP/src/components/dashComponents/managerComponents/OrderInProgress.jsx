@@ -18,18 +18,16 @@ function OrderInProgress({ order, i, onOrderButtonClick }) {
     }
   }
 
-  return (
-    <>
-      <div className={styles.orderLine}>
-        <p>#{i}.</p>
-        <p className={styles.serial}>
-          <span>SN:</span>
+  return <>
+       <div className={styles.orderLine}>
+         <p>#{i}.</p>
+         <p className={styles.serial}>
+           <span>SN:</span>
           {order.serialNumber}
-        </p>
-
-        <div className={styles.figureLine}>
-          <div className={styles.circle}>
-            {order.orderParts[0].isComplete ? (
+         </p>
+         <div className={styles.figureLine}>
+           <div className={styles.circle}>
+             {order.orderParts[0].isComplete ? (
               <span className={styles.icon}>&#10004;</span>
             ) : order.orderParts[0].startDate === null &&
               order.orderParts[0].endDate === null ? (
@@ -84,15 +82,15 @@ function OrderInProgress({ order, i, onOrderButtonClick }) {
           <span>Date Created:</span>
           {order.dateCreated.split(" ").at(0).replaceAll("-", ".")}
         </p>
-        <button
+        { user.role!=="user" && <button
           className={styles.btn}
           onClick={() => onOrderButtonClick(order)}
         >
           More Info
-        </button>
+        </button>}
       </div>
-    </>
-  );
+       </>
 }
 
 export default OrderInProgress;
+

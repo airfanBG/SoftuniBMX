@@ -67,7 +67,7 @@ function InProgress() {
           {loading && <LoaderWheel />}
           {orderList.map((order, i) => (
             <OrderInProgress
-              key={order.id}
+              key={order.orderId}
               order={order}
               i={i + 1}
               onOrderButtonClick={onOrderButtonClick}

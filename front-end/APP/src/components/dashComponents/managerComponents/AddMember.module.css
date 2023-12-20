@@ -36,6 +36,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
+  position: relative;
 }
 
 .form .inputField input,
@@ -64,4 +65,19 @@
   margin-top: 2rem;
   border: 1px solid var(--color-border);
   border-radius: 0.5rem;
+}
+
+.addMemberBtn:disabled {
+  background-color: var(--color-hd);
+}
+
+.error {
+  background-color: #fff;
+  position: absolute;
+  right: -3rem;
+  color: var(--color-warning);
+  font-size: 1.4rem;
+  padding: 0.2rem 1rem;
+  border: 1px solid var(--color-warning);
+  border-radius: 0.3rem;
 }

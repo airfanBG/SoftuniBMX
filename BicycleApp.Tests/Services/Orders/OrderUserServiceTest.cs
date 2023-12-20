@@ -14,34 +14,40 @@
     using BicycleApp.Services.Models.Order.OrderUser.Contracts;
     using BicycleApp.Services.Services.Factory;
     using BicycleApp.Services.Services.Orders;
-    using FakeItEasy;
+    using Microsoft.EntityFrameworkCore;
+    using Moq.EntityFrameworkCore;
+    using Moq;
 
     [TestFixture]
     internal class OrderUserServiceTest
     {
-        private static BicycleAppDbContext db = new BicycleAppDbContext();
-        private static IStringManipulator stringManipulator = new StringManipulator();
-        private static IDateTimeProvider dateTimeProvider = new DateTimeProvider();
-        private static IOrderFactory orderFactory = new OrderFactory(db, dateTimeProvider);
-        private static IGuidProvider guidProvider = new GuidProvider();
+        //To 
+        private static BicycleAppDbContext fakeContext;
+        private static IStringManipulator fakeStringManipulator;
+        private static IDateTimeProvider fakeDateTimeProvider;
+        private static IOrderFactory fakeOrderFactory;
+        private static IGuidProvider fakeGuidProvider;
 
-        private static Part part1 = new Part()
-        {
-            CategoryId = 1,
-            SalePrice = 100,
-            VATCategoryId = 1,
-        };        
-
-        private readonly IOrderUserService orderUserService = new OrderUserService(db, stringManipulator, orderFactory, guidProvider, dateTimeProvider);
+        private readonly IOrderUserService orderUserService = new OrderUserService(fakeContext, fakeStringManipulator, fakeOrderFactory, fakeGuidProvider, fakeDateTimeProvider);
 
         [Test]
         public async Task CreateOrderByUserAsync_Should_ReturnNull_WhenDiscountIsGreaterThanSalePrice()
         {
             // Arrange
+            var employeeContextMock = new Mock<BicycleAppDbContext>();
+            employeeContextMock.Setup(x => x.VATCategories)
+                .ReturnsDbSet(new List<VATCategory>(){ new VATCategory()
+            {
+               Id=  1,
+               VATPercent = 20M,
+            }});
+
+            //A.CallTo(() => fakeContext.Parts.ToList()).Returns(parts);
+
             IUserOrderDto invalidOrder = new UserOrderDto()
             {
                 VATId = 1,
-                ClientId = "",
+                ClientId = "fakeClient",
                 OrderQuantity = 1,
                 OrderParts = new List<OrderPartIdDto>()
                 {

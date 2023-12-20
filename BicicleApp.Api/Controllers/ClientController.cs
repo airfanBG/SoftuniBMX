@@ -125,7 +125,7 @@
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<ClientInfoDto>> GetClientInfo([FromQuery] string id)
+        public async Task<ActionResult<ClientEditDto>> GetClientInfo([FromQuery] string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -341,14 +341,14 @@
 
             try
             {
-                bool result = await clientService.EditClientInfoAsync(clientEditDto);
+                var result = await clientService.EditClientInfoAsync(clientEditDto);
 
-                if (result)
+                if (!string.IsNullOrEmpty(result))
                 {
-                    return StatusCode(StatusCodes.Status202Accepted);
+                    return Ok(result);
                 }
 
-                return StatusCode(StatusCodes.Status409Conflict);
+                return StatusCode(StatusCodes.Status409Conflict, result);
 
             }
             catch (Exception)
