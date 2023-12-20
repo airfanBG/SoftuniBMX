@@ -472,7 +472,7 @@
             return false;
         }
 
-        public async Task<bool> EditClientInfoAsync(ClientEditDto clientEditDto)
+        public async Task<string> EditClientInfoAsync(ClientEditDto clientEditDto)
         {
             try
             {
@@ -499,13 +499,13 @@
 
                 await dbContext.SaveChangesAsync();
 
-                return true;
+                return client.Id;
             }
             catch (Exception)
             {
             }
 
-            return false;
+            return string.Empty;
         }
     }
 }

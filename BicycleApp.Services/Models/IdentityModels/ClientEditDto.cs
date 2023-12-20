@@ -17,7 +17,7 @@ namespace BicycleApp.Services.Models.IdentityModels
         [JsonPropertyName("email")]
         public string? Email { get; set; }
 
-        [JsonPropertyName("phone")]
+        [JsonPropertyName("phoneNumber")]
         public string? PhoneNumber { get; set; }
 
         [JsonPropertyName("city")]

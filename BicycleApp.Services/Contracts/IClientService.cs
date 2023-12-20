@@ -21,6 +21,6 @@
 
         Task<bool> ResetPasswordToDefault(string email);
 
-        Task<bool> EditClientInfoAsync(ClientEditDto clientEditDto);
+        Task<string> EditClientInfoAsync(ClientEditDto clientEditDto);
     }
 }

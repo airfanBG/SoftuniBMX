@@ -183,7 +183,6 @@
             return new EmployeeInfoDto()
             {
                 Id = employee.Id,
-                ImageUrl = employee.ImagesEmployees.FirstOrDefault().ImageUrl,
                 FirstName = employee.FirstName,
                 LastName = employee.LastName,
                 Role = roles.Count > 1 ? string.Join(", ", roles) : roles[0],
