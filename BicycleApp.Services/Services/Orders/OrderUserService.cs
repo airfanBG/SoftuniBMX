@@ -7,6 +7,7 @@
     using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Contracts.OrderContracts;
     using BicycleApp.Services.HelperClasses.Contracts;
+    using BicycleApp.Services.Models.Order.OrderManager;
     using BicycleApp.Services.Models.Order.OrderUser;
     using BicycleApp.Services.Models.Order.OrderUser.Contracts;
     using Microsoft.EntityFrameworkCore;
@@ -121,6 +122,7 @@
                                                }).ToList()
                             })
                             .ToListAsync();
+
         }
 
         /// <summary>

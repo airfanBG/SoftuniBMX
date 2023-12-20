@@ -15,7 +15,11 @@ export const environment = {
   // CLIENT
   // update_client: "/users/", // + id
   info_client: "/api/client/info?id=", // + id
+
+  // CLIENT_ORDER
   create_order: "/api/client_order/create",
+  orders_in_progress: "/api/client_order/progress?id=", // + id,
+  delete_order: "/api/client_order/delete",
 
   // EMPLOYEE
   info_employee: "/api/employee/info?id=", // + id

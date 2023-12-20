@@ -6,10 +6,13 @@
     using BicycleApp.Services.HelperClasses.Contracts;
     using BicycleApp.Services.Models.Order;
     using BicycleApp.Services.Models.Order.OrderManager;
+    using BicycleApp.Services.Models.Order.OrderUser;
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+
+    using static BicycleApp.Common.ApplicationGlobalConstants;
 
     public class OrderManagerService : IOrderManagerService
     {
@@ -112,40 +115,39 @@
         /// Return orders, where all parts are assign to employee.
         /// </summary>
         /// <returns>Task<ICollection<OrderInfoDto>></returns>
-        public async Task<ICollection<OrderInfoDto>> AllOrdersInProgressAsync()
+
+        public async Task<ICollection<OrderProgretionDto>> AllOrdersInProgressAsync()
         {
-            var listOfPendingOrders = await _db.Orders
-                                .AsNoTracking()
-                                .Where(o => o.OrdersPartsEmployees.Any(ope => ope.EmployeeId != null
+            return await _db.Orders
+                            .Include(o => o.OrdersPartsEmployees)
+                                .ThenInclude(ope => ope.Employee)
+                            .Include(o => o.OrdersPartsEmployees)
+                                .ThenInclude(ope => ope.Part)
+                            .ThenInclude(part => part.Category)
+                            .Where(o => o.OrdersPartsEmployees.Any(ope => ope.EmployeeId != null
                                                                               && ope.DatetimeAsigned != null)
                                                                               && (o.IsDeleted == false && o.DateDeleted.Equals(null)))
-                                .Select(ope => new OrderInfoDto
-                                {
-                                    OrderId = ope.Id,
-                                    SerialNumber = ope.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
-                                    DateCreated = ope.DateCreated.ToString(),
-                                    Department = ope.OrdersPartsEmployees.Select(ed=>ed.Employee.Department.Name).First(),
-                                    EmployeeName = ope.OrdersPartsEmployees.Select(en => en.Employee.LastName).First(),
-                                    OrderParts = ope.OrdersPartsEmployees
-                                                .Select(orderPart => new OrderPartInfoDto
-                                                {
-                                                    PartId = orderPart.PartId,
-                                                    Description = _stringManipulator.GetTextFromProperty(orderPart.Description),
-                                                    PartName = orderPart.PartName,
-                                                    CategoryName = orderPart.Part.Category.Name,
-                                                    OemNumber = orderPart.Part.OEMNumber,
-                                                    PartQuantity = orderPart.PartQuantity,
-                                                    PartQunatityInStock = orderPart.Part.Quantity,
-                                                    StartDate = orderPart.StartDatetime.ToString(),
-                                                    EndDate = orderPart.EndDatetime.ToString(),
-                                                    IsComplete = orderPart.IsCompleted
-                                                })
-                                                .ToList()
-                                })
-                                .ToListAsync();
+                            .Select(o => new OrderProgretionDto()
+                            {
+                                OrderId = o.Id,
+                                SerialNumber = o.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
+                                DateCreated = o.DateCreated.ToString(DefaultDateFormat),
+                                OrderStates = o.OrdersPartsEmployees
+                                               .Select(ope => new OrderStateDto()
+                                               {
+                                                   IsProduced = ope.IsCompleted,
+                                                   NameOfEmplоyeeProducedThePart = _stringManipulator.ReturnFullName(ope.Employee.FirstName, ope.Employee.LastName),
+                                                   PartModel = ope.Part.Name,
+                                                   PartType = ope.Part.Category.Name,
+                                                   PartId = ope.PartId
 
-            return listOfPendingOrders;
+                                               }).ToList()
+                            })
+                            .ToListAsync();
+
         }
+
+
         /// <summary>
         /// Check for available parts in store for current order.
         /// </summary>
