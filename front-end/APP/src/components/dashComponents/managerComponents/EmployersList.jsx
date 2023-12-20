@@ -107,16 +107,18 @@ function Employers() {
   const [person, setPerson] = useState({});
   const [background, setBackground] = useState(false);
 
-  const employersList = useMemo(() => {
-    return getEmployers();
-  }, []);
+  // TODO: change this when fixed in backend
+  // const employersList = useMemo(() => {
+  //   return getEmployers();
+  // }, []);
 
   useEffect(
     function () {
       const abortController = new AbortController();
       async function getEmps() {
-        const data = await employersList;
-        // const data = list;
+        // TODO: change this when fixed in backend
+        // const data = await employersList;
+        const data = list;
         let empArr = [];
         let conArr = [];
         let manArr = [];
@@ -138,7 +140,9 @@ function Employers() {
       return () => abortController.abort();
     },
 
-    [employersList]
+    // TODO: change this when fixed in backend
+    // [employersList]
+    []
   );
 
   function handleClick(p) {
