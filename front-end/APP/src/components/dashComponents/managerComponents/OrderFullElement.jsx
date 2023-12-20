@@ -1,7 +1,9 @@
 import styles from "./OrderFullElement.module.css";
 
 function OrderElement({ order }) {
-  const { serialNumber, id, dateCreated, orderParts } = order;
+  const { serialNumber, orderId: id, dateCreated, orderParts } = order;
+
+  const currentDate = dateCreated.split(" ").at(0).replaceAll("-", ".");
 
   return (
     <div className={styles.container}>
@@ -23,7 +25,7 @@ function OrderElement({ order }) {
         </p>
         <p className={styles.date}>
           <span className={styles.label}>Date:</span>
-          {dateCreated.replaceAll("/", ".")}
+          {currentDate}
         </p>
       </header>
 
@@ -33,15 +35,21 @@ function OrderElement({ order }) {
             <div className={styles.block}>
               <h3 className={styles.line}>{s.partName}</h3>
 
-              <p className={styles.field}>
-                <span className={styles.fieldLabel}>Model:</span>
-                {s.partModel}
-              </p>
+              <div className={styles.metaData}>
+                <p className={styles.field}>
+                  <span className={styles.fieldLabel}>OEM Number:</span>
+                  {s.oemNumber}
+                </p>
+                <p className={styles.field}>
+                  <span className={styles.fieldLabel}>Quantity:</span>
+                  {s.partQuantity}
+                </p>
+              </div>
 
               <div className={styles.metaData}>
                 <p className={styles.field}>
                   <span className={styles.fieldLabel}>Employee Name:</span>
-                  {s.nameOfEmplоyeeProducedThePart}
+                  {s.employeeName ?? "Employee name"}
                 </p>
                 <p
                   className={styles.field}
@@ -64,42 +72,3 @@ function OrderElement({ order }) {
 }
 
 export default OrderElement;
-
-// {
-//   "orderId": 1,
-//   "serialNumber": "BID12345678",
-//   "dateCreated": "2023-12-17 13:09:57.5250286",
-//   "dateFinished": null,
-//   "orderParts": [
-//       {
-//           "partId": 1,
-//           "description": "test",
-//           "partName": "Frame OG",
-//           "partQuantity": 1,
-//           "partQunatityInStock": 28,
-//           "startDate": "2023-12-17 13:29:56.3270000",
-//           "endDate": "2023-12-17 13:35:34.6850000",
-//           "isComplete": true
-//       },
-//       {
-//           "partId": 2,
-//           "description": "test",
-//           "partName": "Wheel of the YearG",
-//           "partQuantity": 1,
-//           "partQunatityInStock": 42,
-//           "startDate": "2023-12-17 13:37:52.4510000",
-//           "endDate": "2023-12-17 13:37:53.6690000",
-//           "isComplete": true
-//       },
-//       {
-//           "partId": 3,
-//           "description": "test",
-//           "partName": "Shift",
-//           "partQuantity": 1,
-//           "partQunatityInStock": 32,
-//           "startDate": "2023-12-17 13:38:19.7070000",
-//           "endDate": "2023-12-17 13:38:20.7370000",
-//           "isComplete": true
-//       }
-//   ]
-// }
