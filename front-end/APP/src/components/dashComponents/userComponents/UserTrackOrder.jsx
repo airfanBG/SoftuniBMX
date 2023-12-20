@@ -67,7 +67,7 @@ function UserTrackOrder() {
         <BoardHeader />
         <div className={styles.orders}>
           {loading && <LoaderWheel />}
-          {orderList.map((order, i) => (
+          {orderList.map((order, orderId) => (
             <OrderInProgress
               key={order.orderId}
               order={order}
