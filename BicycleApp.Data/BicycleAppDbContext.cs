@@ -148,7 +148,7 @@
                 entity
                     .HasOne(ic => ic.Client)
                     .WithMany(c => c.Images)
-                    .HasForeignKey(ic => ic.ClientId)
+                    .HasForeignKey(ic => ic.UserId)
                     .OnDelete(DeleteBehavior.NoAction);
             });
 
@@ -158,7 +158,7 @@
                 entity
                     .HasOne(ie => ie.Employee)
                     .WithMany(e => e.ImagesEmployees)
-                    .HasForeignKey(ie => ie.EmployeeId)
+                    .HasForeignKey(ie => ie.UserId)
                     .OnDelete(DeleteBehavior.NoAction);
             });
 

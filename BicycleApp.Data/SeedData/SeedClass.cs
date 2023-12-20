@@ -447,7 +447,7 @@
                 Id = 1,
                 ImageName = "image",
                 ImageUrl = "test",
-                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd"
+                UserId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd"
             };
 
             return new List<ImageClient> { imageClient };
@@ -460,7 +460,7 @@
                 Id = 1,
                 ImageName = "image",
                 ImageUrl = "test",
-                EmployeeId = "21003785-a275-4139-ae20-af6a6cf8fea8"
+                UserId = "21003785-a275-4139-ae20-af6a6cf8fea8"
             };
 
             return new List<ImageEmployee> { imageEmployee };

@@ -17,19 +17,16 @@
         private readonly BicycleAppDbContext _db;
         private readonly IStringManipulator _stringManipulator;
         private readonly IOrderFactory _orderFactory;
-        private readonly IGuidProvider _guidProvider;
         private readonly IDateTimeProvider _dateTimeProvider;
 
         public OrderUserService(BicycleAppDbContext db,
                                 IStringManipulator stringManipulator,
                                 IOrderFactory orderFactory,
-                                IGuidProvider guidProvider,
                                 IDateTimeProvider dateTimeProvider)
         {
             _db = db;
             _stringManipulator = stringManipulator;
             _orderFactory = orderFactory;
-            _guidProvider = guidProvider;
             _dateTimeProvider = dateTimeProvider;
         }
 
@@ -149,7 +146,7 @@
                 for (int i = 0; i < quntityOfPart; i++)
                 {
                     string serialNumber = _stringManipulator.SerialNumberGenerator();
-                    string guidKey = _guidProvider.CreateGuid();
+                    string guidKey = _stringManipulator.CreateGuid();
 
                     foreach (var orderPart in newOrder.OrderParts)
                     {

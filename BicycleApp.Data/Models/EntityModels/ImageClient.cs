@@ -1,18 +1,12 @@
 ﻿namespace BicycleApp.Data.Models.EntityModels
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
+    using BicycleApp.Data.Interfaces;
     using BicycleApp.Data.Models.IdentityModels;
-
     using Microsoft.EntityFrameworkCore;
+    using System.ComponentModel.DataAnnotations;
 
     [Comment("Table with the location of all images of all clients in tha database")]
-    public class ImageClient
+    public class ImageClient : IUserImage
     {
         [Key]
         public int Id { get; set; }
@@ -27,7 +21,7 @@
 
         [Required]
         [Comment("Id of the client")]
-        public string ClientId { get; set; } = null!;
+        public string UserId { get; set; } = null!;
 
         public virtual Client Client { get; set; } = null!;
     }
