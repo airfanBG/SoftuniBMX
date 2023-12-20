@@ -11,14 +11,13 @@ import { environment } from "../../../environments/environment.js";
 function EditContactInfo({ info, setInfo, base64 }) {
   const { user, updateUser } = useContext(UserContext);
   const navigate = useNavigate();
-
   const initialState = {
     email: info.email,
     firstName: info.firstName,
     lastName: info.lastName,
     iban: info?.iban,
     balance: info?.balance ?? "",
-    city: info.town,
+    city: info.city,
     role: user.role,
     country: info.address?.country,
     district: info.address?.district ?? "",
@@ -112,6 +111,10 @@ function EditContactInfo({ info, setInfo, base64 }) {
       };
     }
 
+    const result = await updateUserData(id, data, role);
+    console.log(result);
+
+    // IF RESULT IS OK UPDATE CONTEXT
     setInfo({
       ...info,
       email: email,
@@ -133,8 +136,7 @@ function EditContactInfo({ info, setInfo, base64 }) {
       balance: balance,
     });
 
-    const result = await updateUserData(id, data, role);
-    // console.log(result);
+    // NAVIGATE TO USER PROFILE PAGE
     navigate("/profile");
   }
 
