@@ -3,7 +3,7 @@
 ### Отговор
 
 ### `GET /api/manager/orders_in_progress` Връща колекция от JSON обекти със следните пропъртита:
-- `id`: Уникален идентификатор на направената поръчка.
+- `orderId`: Уникален идентификатор на направената поръчка.
 - `serialNumber`: Уникален сериен номер на конкретна част.
 - `dateCreated`: Дата на създаване на поръчката.
 - `orderStates`: Колекция от информация за дадена част, от направената поръчка.
@@ -12,6 +12,12 @@
 - `partModel`: Модел на часта.
 - `nameOfEmplоyeeProducedThePart`: Име на служите, отговорен за направата й.
 - `isProduced`: Проверка, дали часта е изготвена или не.
+отговорен за направата й.
+- `isProduced`: Проверка, дали часта е изготвена или не.
+отговорен за направата й.
+- `serialNumber`: Уникален номер на часта.
+отговорен за направата й.
+- `partQuantity`: Количество на часта.
 
 ### Examples:
 
@@ -28,46 +34,6 @@ GET /api/manager/оrders_in_progress
 	
 [
   {
-    "orderId": 1,
-    "serialNumber": "BID12345678",
-    "dateCreated": "15-12-2023",
-    "orderStates": [
-      {
-        "partId": 1,
-        "partType": "Frame",
-        "partModel": "Frame Road",
-        "nameOfEmplоyeeProducedThePart": "Marin Marinov",
-        "isProduced": true,
-        "serialNumber": null,
-        "employeeId": null,
-        "elementProduceTimeInMinutes": null,
-        "description": null
-      },
-      {
-        "partId": 2,
-        "partType": "Frame",
-        "partModel": "Frame Montain",
-        "nameOfEmplоyeeProducedThePart": "Todor Todorov",
-        "isProduced": false,
-        "serialNumber": null,
-        "employeeId": null,
-        "elementProduceTimeInMinutes": null,
-        "description": null
-      },
-      {
-        "partId": 3,
-        "partType": "Frame",
-        "partModel": "Frame Road woman",
-        "nameOfEmplоyeeProducedThePart": "Ivan Ivanov",
-        "isProduced": false,
-        "serialNumber": null,
-        "employeeId": null,
-        "elementProduceTimeInMinutes": null,
-        "description": null
-      }
-    ]
-  },
-  {
     "orderId": 2,
     "serialNumber": "BID12345679",
     "dateCreated": "15-12-2023",
@@ -78,10 +44,11 @@ GET /api/manager/оrders_in_progress
         "partModel": "Frame Road",
         "nameOfEmplоyeeProducedThePart": "Marin Marinov",
         "isProduced": false,
-        "serialNumber": null,
+        "serialNumber": "oemtest1",
         "employeeId": null,
         "elementProduceTimeInMinutes": null,
-        "description": null
+        "description": null,
+        "partQuantity": 1
       },
       {
         "partId": 4,
@@ -89,10 +56,11 @@ GET /api/manager/оrders_in_progress
         "partModel": "Wheel of the Year for road",
         "nameOfEmplоyeeProducedThePart": "Todor Todorov",
         "isProduced": false,
-        "serialNumber": null,
+        "serialNumber": "oemtest4",
         "employeeId": null,
         "elementProduceTimeInMinutes": null,
-        "description": null
+        "description": null,
+        "partQuantity": 2
       },
       {
         "partId": 12,
@@ -100,10 +68,11 @@ GET /api/manager/оrders_in_progress
         "partModel": "Shift",
         "nameOfEmplоyeeProducedThePart": "Ivan Ivanov",
         "isProduced": false,
-        "serialNumber": null,
+        "serialNumber": "oemtest12",
         "employeeId": null,
         "elementProduceTimeInMinutes": null,
-        "description": null
+        "description": null,
+        "partQuantity": 2
       }
     ]
   }
