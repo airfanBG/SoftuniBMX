@@ -29,7 +29,7 @@
         {
             if (string.IsNullOrWhiteSpace(id))
             {
-                return StatusCode(400);
+                return StatusCode(400, id);
             }
 
             try

@@ -1,13 +1,14 @@
-﻿namespace BicycleApp.Services.Models
+﻿using System.Text.Json.Serialization;
+
+namespace BicycleApp.Services.Models
 {
-    using Newtonsoft.Json;
 
     public class PartShortInfoDto
     {
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; } = null!;
     }
 }
