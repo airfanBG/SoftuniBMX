@@ -12,12 +12,10 @@
 - `partModel`: Модел на часта.
 - `nameOfEmplоyeeProducedThePart`: Име на служите, отговорен за направата й.
 - `isProduced`: Проверка, дали часта е изготвена или не.
-отговорен за направата й.
-- `isProduced`: Проверка, дали часта е изготвена или не.
-отговорен за направата й.
 - `serialNumber`: Уникален номер на часта.
-отговорен за направата й.
 - `partQuantity`: Количество на часта.
+- `startDate`: Дата и час на започване на работа по частта.
+- `endDate`: Дата и час на завършване на работа по частта.
 
 ### Examples:
 
@@ -48,7 +46,9 @@ GET /api/manager/оrders_in_progress
         "employeeId": null,
         "elementProduceTimeInMinutes": null,
         "description": null,
-        "partQuantity": 1
+        "partQuantity": 1,
+        "startDate": null,
+        "endDate": null
       },
       {
         "partId": 4,
@@ -60,7 +60,9 @@ GET /api/manager/оrders_in_progress
         "employeeId": null,
         "elementProduceTimeInMinutes": null,
         "description": null,
-        "partQuantity": 2
+        "partQuantity": 2,
+        "startDate": null,
+        "endDate": null
       },
       {
         "partId": 12,
@@ -72,7 +74,58 @@ GET /api/manager/оrders_in_progress
         "employeeId": null,
         "elementProduceTimeInMinutes": null,
         "description": null,
-        "partQuantity": 2
+        "partQuantity": 2,
+        "startDate": null,
+        "endDate": null
+      }
+    ]
+  },
+  {
+    "orderId": 3,
+    "serialNumber": "BID12345680",
+    "dateCreated": "15-12-2023",
+    "orderStates": [
+      {
+        "partId": 1,
+        "partType": "Frame",
+        "partModel": "Frame Road",
+        "nameOfEmplоyeeProducedThePart": "Marin Marinov",
+        "isProduced": false,
+        "serialNumber": "oemtest1",
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 1,
+        "startDate": null,
+        "endDate": null
+      },
+      {
+        "partId": 5,
+        "partType": "Wheel",
+        "partModel": "Wheel of the Year for montain",
+        "nameOfEmplоyeeProducedThePart": "Todor Todorov",
+        "isProduced": false,
+        "serialNumber": "oemtest5",
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 6,
+        "startDate": null,
+        "endDate": null
+      },
+      {
+        "partId": 11,
+        "partType": "Acsessories",
+        "partModel": "Road budget Shifts",
+        "nameOfEmplоyeeProducedThePart": "Ivan Ivanov",
+        "isProduced": false,
+        "serialNumber": "oemtest11",
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 4,
+        "startDate": null,
+        "endDate": null
       }
     ]
   }
