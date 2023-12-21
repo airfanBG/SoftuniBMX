@@ -14,5 +14,7 @@
         public int? ElementProduceTimeInMinutes { get; set; }
         public  string? Description { get; set; }
         public int PartQuantity { get; set; }
+        public string StartDate { get; set; } = null!;
+        public string EndDate { get; set; } = null!;
     }
 }
