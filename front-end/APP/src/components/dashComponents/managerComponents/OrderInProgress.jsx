@@ -61,7 +61,7 @@ function OrderInProgress({ order, i, onOrderButtonClick }) {
 
           <div className={styles.line}></div>
           <div className={styles.circle}>
-            {order.orderStates[1].isProduced ? (
+            {/* {order.orderStates[1].isProduced ? (
               <span className={styles.icon}>&#10004;</span>
             ) : order.orderStates[1].startDate === null &&
               order.orderStates[1].endDate === null ? (
@@ -72,13 +72,14 @@ function OrderInProgress({ order, i, onOrderButtonClick }) {
               <span className={`${styles.ionIcon} ${styles.started}`}>
                 <ion-icon name="hammer-outline"></ion-icon>
               </span>
-            )}
+            )} */}
+            {statusCheck(1)}
             {/* <span>{order.orderStates[1].partType}</span> */}
             <span>Wheels</span>
           </div>
           <div className={styles.line}></div>
           <div className={styles.circle}>
-            {order.orderStates[2].isProduced ? (
+            {/* {order.orderStates[2].isProduced ? (
               <span className={styles.icon}>&#10004;</span>
             ) : order.orderStates[2].startDate === null &&
               order.orderStates[2].endDate === null ? (
@@ -89,7 +90,8 @@ function OrderInProgress({ order, i, onOrderButtonClick }) {
               <span className={`${styles.ionIcon} ${styles.started}`}>
                 <ion-icon name="hammer-outline"></ion-icon>
               </span>
-            )}
+            )} */}
+            {statusCheck(2)}
             {/* <span>{order.orderStates[2].partType}</span> */}
             <span>Accessory</span>
           </div>
