@@ -111,8 +111,10 @@ function EditContactInfo({ info, setInfo, base64 }) {
       };
     }
 
-    const result = await updateUserData(id, data, role);
-    console.log(result);
+    updateUserData(id, data, role);
+
+    // const result = await updateUserData(id, data, role);
+    // console.log(result);
 
     // IF RESULT IS OK UPDATE CONTEXT
     setInfo({
