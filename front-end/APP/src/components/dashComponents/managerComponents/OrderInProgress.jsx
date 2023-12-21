@@ -14,24 +14,35 @@ function OrderInProgress({ order, i, onOrderButtonClick }) {
 
     let result = null;
     if (base[index].isProduced) {
-      return (result = "&#10004;");
+      return (result = <span className={styles.icon}>&#10004;</span>);
     } else if (base[index].startDate === null && base[index].endDate === null) {
-      return (result = <ion-icon name="hourglass-outline"></ion-icon>);
+      return (result = (
+        <span className={`${styles.ionIcon} ${styles.preview}`}>
+          <ion-icon name="hourglass-outline"></ion-icon>
+        </span>
+      ));
     } else if (base[index].startDate !== null && base[index].endDate === null) {
-      return (result = <ion-icon name="hammer-outline"></ion-icon>);
+      return (result = (
+        <span className={`${styles.ionIcon} ${styles.started}`}>
+          <ion-icon name="hammer-outline"></ion-icon>
+        </span>
+      ));
     }
   }
 
-  return <>
-       <div className={styles.orderLine}>
-         <p>#{order.orderId}.</p>
-         <p className={styles.serial}>
-           <span>SN:</span>
+  console.log(order);
+
+  return (
+    <>
+      <div className={styles.orderLine}>
+        <p>#{order.orderId}.</p>
+        <p className={styles.serial}>
+          <span>SN:</span>
           {order.serialNumber}
-         </p>
-         <div className={styles.figureLine}>
-           <div className={styles.circle}>
-             {order.orderStates[0].isProduced ? (
+        </p>
+        <div className={styles.figureLine}>
+          <div className={styles.circle}>
+            {/* {order.orderStates[0].isProduced ? (
               <span className={styles.icon}>&#10004;</span>
             ) : order.orderStates[0].startDate === null &&
               order.orderStates[0].endDate === null ? (
@@ -42,10 +53,12 @@ function OrderInProgress({ order, i, onOrderButtonClick }) {
               <span className={`${styles.ionIcon} ${styles.started}`}>
                 <ion-icon name="hammer-outline"></ion-icon>
               </span>
-            )}
+            )} */}
+            {statusCheck(0)}
             {/* <span>{order.orderStates[0].partType}</span> */}
             <span>Frame</span>
           </div>
+
           <div className={styles.line}></div>
           <div className={styles.circle}>
             {order.orderStates[1].isProduced ? (
@@ -86,15 +99,17 @@ function OrderInProgress({ order, i, onOrderButtonClick }) {
           <span>Date Created:</span>
           {order.dateCreated.split(" ").at(0).replaceAll("-", ".")}
         </p>
-        { user.role!=="user" && <button
-          className={styles.btn}
-          onClick={() => onOrderButtonClick(order)}
-        >
-          More Info
-        </button>}
+        {user.role !== "user" && (
+          <button
+            className={styles.btn}
+            onClick={() => onOrderButtonClick(order)}
+          >
+            More Info
+          </button>
+        )}
       </div>
-       </>
+    </>
+  );
 }
 
 export default OrderInProgress;
-

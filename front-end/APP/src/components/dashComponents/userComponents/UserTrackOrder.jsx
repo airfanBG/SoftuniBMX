@@ -21,30 +21,33 @@ function UserTrackOrder() {
   const [background, setBackground] = useState(false);
   const [currentOrder, setCurrentOrder] = useState({});
 
-  useEffect(function () {
-    setLoading(true);
-    const abortController = new AbortController();
-    
-    async function getInProgressOrders() {
-      const result = await post(environment.orders_in_progress + user.id);
-      if (!result) {
+  useEffect(
+    function () {
+      setLoading(true);
+      const abortController = new AbortController();
+
+      async function getInProgressOrders() {
+        const result = await post(environment.orders_in_progress + user.id);
+        if (!result) {
+          setLoading(false);
+          return setError({
+            message: "Something went wrong. Service can not get data!",
+          });
+        }
+        setOrderList(result);
         setLoading(false);
-        return setError({
-          message: "Something went wrong. Service can not get data!",
-        });
       }
-      setOrderList(result);
-      setLoading(false);
-    }
-    getInProgressOrders();
+      getInProgressOrders();
 
-    return () => abortController.abort();
-  }, []);
+      return () => abortController.abort();
+    },
+    [user.id]
+  );
 
-  function onOrderButtonClick(o) {
-    setCurrentOrder(o);
-    setBackground(true);
-  }
+  // function onOrderButtonClick(o) {
+  //   setCurrentOrder(o);
+  //   setBackground(true);
+  // }
 
   function close(e) {
     setCurrentOrder({});
@@ -67,11 +70,8 @@ function UserTrackOrder() {
         <BoardHeader />
         <div className={styles.orders}>
           {loading && <LoaderWheel />}
-          {orderList.map((order, orderId) => (
-            <OrderInProgress
-              key={order.orderId}
-              order={order}
-            />
+          {orderList.map((order, i) => (
+            <OrderInProgress key={order.orderId} order={order} i={i} />
           ))}
         </div>
       </section>
