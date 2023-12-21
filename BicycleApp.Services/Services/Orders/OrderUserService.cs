@@ -6,6 +6,7 @@
     using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Contracts.OrderContracts;
     using BicycleApp.Services.HelperClasses.Contracts;
+    using BicycleApp.Services.Models.Order.OrderManager;
     using BicycleApp.Services.Models.Order.OrderUser;
     using BicycleApp.Services.Models.Order.OrderUser.Contracts;
     using Microsoft.EntityFrameworkCore;
@@ -122,11 +123,13 @@
                                                    NameOfEmplоyeeProducedThePart = _stringManipulator.ReturnFullName(ope.Employee.FirstName, ope.Employee.LastName),
                                                    PartModel = ope.Part.Name,
                                                    PartType = ope.Part.Category.Name,
-                                                   PartId = ope.PartId
-
+                                                   PartId = ope.PartId,
+                                                   StartDate = ope.StartDatetime.ToString(),
+                                                   EndDate = ope.EndDatetime.ToString(),
                                                }).ToList()
                             })
                             .ToListAsync();
+
         }
 
         /// <summary>

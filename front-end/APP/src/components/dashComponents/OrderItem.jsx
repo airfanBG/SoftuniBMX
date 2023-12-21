@@ -31,10 +31,7 @@ function OrderItem({ product, onBtnHandler, orderIndex, orderId }) {
     } else if (product.datetimeFinished === null) {
       path = "end";
     }
-    console.log(environment.worker_order + path);
-    console.log(model);
     const result = await post(environment.worker_order + path, model);
-    console.log(result);
     onBtnHandler();
   }
 

@@ -7,18 +7,23 @@ import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 import BoardHeader from "../BoardHeader.jsx";
 import LoaderWheel from "../../LoaderWheel.jsx";
 import { get } from "../../../util/api.js";
+import { environment } from "../../../environments/environment.js";
+import Order from "./Order.jsx";
 
 const initialState = {
   loading: false,
   status: false,
+  orders: [],
 };
 
 function reducer(state, action) {
   switch (action.type) {
-    case "loading/action":
+    case "loading":
       return { ...state, loading: true };
     case "component/rerender":
-      return { ...state, status: !state.status };
+      return { ...state, status: !state.status, loading: false };
+    case "orders/received":
+      return { ...state, orders: action.payload, loading: false };
 
     default:
       throw new Error("Unknown action type");
@@ -27,16 +32,25 @@ function reducer(state, action) {
 
 function ManagerRejected() {
   const { user } = useContext(UserContext);
-  const [{ loading, status }, dispatch] = useReducer(reducer, initialState);
+  const [{ loading, status, orders }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
 
-  useEffect(function () {
-    async function getOrders() {
-      const result = await get();
-    }
-    getOrders();
-  }, []);
+  useEffect(
+    function () {
+      async function getOrders() {
+        const result = await get(environment.rejected_orders_list);
+        dispatch({ type: "loading" });
+        dispatch({ type: "orders/received", payload: result });
+      }
+      getOrders();
+    },
+    [status]
+  );
 
   function rerender() {
+    dispatch({ type: "loading" });
     dispatch({ type: "component/rerender" });
   }
 
@@ -47,6 +61,18 @@ function ManagerRejected() {
       <section className={styles.board}>
         <BoardHeader />
         {loading && <LoaderWheel />}
+        <div className={styles.orders}>
+          {orders.length === 0 && <h2>There is no rejected orders</h2>}
+          {orders &&
+            orders.map((order) => (
+              <Order
+                key={order.orderId}
+                order={order}
+                onStatusChange={rerender}
+                isRejected={false}
+              />
+            ))}
+        </div>
       </section>
     </>
   );

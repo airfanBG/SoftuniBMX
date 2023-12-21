@@ -11,30 +11,29 @@ import { environment } from "../../../environments/environment.js";
 function EditContactInfo({ info, setInfo, base64 }) {
   const { user, updateUser } = useContext(UserContext);
   const navigate = useNavigate();
-
   const initialState = {
     email: info.email,
     firstName: info.firstName,
     lastName: info.lastName,
     iban: info?.iban,
-    balance: info?.balance,
-    city: info.town,
+    balance: info?.balance ?? "",
+    city: info.city,
     role: user.role,
     country: info.address?.country,
-    district: info.address?.district,
-    postCode: info.address?.postCode,
-    block: info.address?.block,
-    apartment: info.address?.apartment,
+    district: info.address?.district ?? "",
+    postCode: info.address?.postCode ?? "",
+    block: info.address?.block ?? "",
+    apartment: info.address?.apartment ?? "",
     street: info.address?.street,
-    floor: info.address?.floor,
+    floor: info.address?.floor ?? "",
     strNumber: info.address?.strNumber,
     id: info.id,
-    imageUrl: base64,
-    department: info?.department,
-    phoneNumber: info?.phoneNumber,
-    position: info?.position,
-    dateOfHire: info?.dateOfHire,
-    isManager: info?.isManager,
+    imageUrl: base64 ?? "",
+    department: info?.department ?? "",
+    phoneNumber: info?.phoneNumber ?? "",
+    position: info?.position ?? "",
+    dateOfHire: info?.dateOfHire ?? "",
+    isManager: info?.isManager ?? "",
   };
 
   const [
@@ -112,6 +111,12 @@ function EditContactInfo({ info, setInfo, base64 }) {
       };
     }
 
+    updateUserData(id, data, role);
+
+    // const result = await updateUserData(id, data, role);
+    // console.log(result);
+
+    // IF RESULT IS OK UPDATE CONTEXT
     setInfo({
       ...info,
       email: email,
@@ -133,8 +138,7 @@ function EditContactInfo({ info, setInfo, base64 }) {
       balance: balance,
     });
 
-    const result = await updateUserData(id, data, role);
-    // console.log(result);
+    // NAVIGATE TO USER PROFILE PAGE
     navigate("/profile");
   }
 

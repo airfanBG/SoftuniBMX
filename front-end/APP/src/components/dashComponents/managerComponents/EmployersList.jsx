@@ -107,6 +107,7 @@ function Employers() {
   const [person, setPerson] = useState({});
   const [background, setBackground] = useState(false);
 
+  // TODO: change this when fixed in backend
   const employersList = useMemo(() => {
     return getEmployers();
   }, []);
@@ -115,6 +116,7 @@ function Employers() {
     function () {
       const abortController = new AbortController();
       async function getEmps() {
+        // TODO: change this when fixed in backend
         const data = await employersList;
         // const data = list;
         let empArr = [];
@@ -138,7 +140,9 @@ function Employers() {
       return () => abortController.abort();
     },
 
+    // TODO: change this when fixed in backend
     [employersList]
+    // []
   );
 
   function handleClick(p) {

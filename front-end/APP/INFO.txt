@@ -3,6 +3,6 @@
 2. Приложението се стартира с 
     npm run dev
 
-
+joro7@test.bg
 pass- User123!
 pass-client - 123456
