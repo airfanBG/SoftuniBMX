@@ -145,7 +145,8 @@
                                                    SerialNumber = ope.Part.OEMNumber,
                                                    PartId = ope.PartId,
                                                    PartQuantity = ope.PartQuantity,
-
+                                                   StartDate = ope.StartDatetime.ToString(),
+                                                   EndDate = ope.EndDatetime.ToString(),
                                                }).ToList()
                             })
                             .ToListAsync();

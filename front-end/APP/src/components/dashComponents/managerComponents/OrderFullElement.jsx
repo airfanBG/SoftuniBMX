@@ -1,7 +1,7 @@
 import styles from "./OrderFullElement.module.css";
 
 function OrderElement({ order }) {
-  const { serialNumber, orderId: id, dateCreated, orderParts } = order;
+  const { serialNumber, orderId: id, dateCreated, orderStates } = order;
 
   const currentDate = dateCreated.split(" ").at(0).replaceAll("-", ".");
 
@@ -30,7 +30,7 @@ function OrderElement({ order }) {
       </header>
 
       <div className={styles.orderStatesList}>
-        {orderParts.map((s, i) => (
+        {orderStates.map((s, i) => (
           <div key={i} className={styles.sector}>
             <div className={styles.block}>
               <h3 className={styles.line}>{s.partType}</h3>
@@ -49,7 +49,7 @@ function OrderElement({ order }) {
               <div className={styles.metaData}>
                 <p className={styles.field}>
                   <span className={styles.fieldLabel}>Employee Name:</span>
-                  {s.employeeName ?? "Employee name"}
+                  {s.nameOfEmplоyeeProducedThePart}
                 </p>
                 <p
                   className={styles.field}
