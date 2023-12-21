@@ -11,7 +11,6 @@
         public BaseUser()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.Roles = new HashSet<IdentityRole>();
         }
 
         [MaxLength(FirstNameMaxLength)]
@@ -36,6 +35,5 @@
         [Comment("Date of the deletion of the account")]
         public DateTime? DateDeleted { get; set; }
 
-        public virtual ICollection<IdentityRole> Roles { get; set; }
     }
 }

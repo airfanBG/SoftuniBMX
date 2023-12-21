@@ -1,7 +1,6 @@
 ﻿namespace BicycleApp.Services.Services.Orders
 {
     using BicicleApp.Common.Providers.Contracts;
-    using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.Contracts.Factory;
@@ -81,7 +80,7 @@
                 {
                     return null;
                 }
-
+              
                 var newOrderObject = _orderFactory.CreateUserOrder(newOrder, _dateTimeProvider.Now);
 
                 await _db.Orders.AddAsync(newOrderObject);
