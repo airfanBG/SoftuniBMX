@@ -28,6 +28,7 @@
 
         //Identity Tables
         public virtual DbSet<BaseUser> BaseUsers { get; set; } = null!;
+        public virtual DbSet<BaseUserRole> BaseUserRoles { get; set; } = null!;
         public virtual DbSet<Client> Clients { get; set; } = null!;
 
         public virtual DbSet<Employee> Employees { get; set; } = null!;

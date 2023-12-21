@@ -63,7 +63,7 @@ namespace BicicleApp.Api
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 5;
             })
-                .AddRoles<IdentityRole>()
+                .AddRoles<BaseUserRole>()
                 .AddEntityFrameworkStores<BicycleAppDbContext>()
                 .AddDefaultTokenProviders();
 
