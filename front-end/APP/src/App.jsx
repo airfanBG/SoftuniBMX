@@ -27,6 +27,7 @@ import LoaderWheel from "./components/LoaderWheel.jsx";
 import { ErrorProvider } from "./context/ErrorContext.jsx";
 import ManagerRejected from "./components/dashComponents/managerComponents/ManagerRejected.jsx";
 import ManagerFinished from "./components/dashComponents/managerComponents/ManagerFinished.jsx";
+import ManagerStatistic from "./components/dashComponents/managerComponents/ManagerStatistic.jsx";
 
 // LAZY LOADING
 const CreateBike = lazy(() =>
@@ -91,7 +92,7 @@ function App() {
                     element={<ManagerFinished />}
                   />
                   <Route path={"employers"} element={<EmployersList />} />
-                  <Route path={"statistic"} />
+                  <Route path={"statistic"} element={<ManagerStatistic />} />
                   <Route path={"add-member"} element={<AddMember />} />
                   <Route
                     path={"q-control-orders"}
