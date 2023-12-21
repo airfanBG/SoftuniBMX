@@ -43,57 +43,18 @@ function OrderInProgress({ order, i, onOrderButtonClick }) {
         </p>
         <div className={styles.figureLine}>
           <div className={styles.circle}>
-            {/* {order.orderStates[0].isProduced ? (
-              <span className={styles.icon}>&#10004;</span>
-            ) : order.orderStates[0].startDate === null &&
-              order.orderStates[0].endDate === null ? (
-              <span className={`${styles.ionIcon} ${styles.preview}`}>
-                <ion-icon name="hourglass-outline"></ion-icon>
-              </span>
-            ) : (
-              <span className={`${styles.ionIcon} ${styles.started}`}>
-                <ion-icon name="hammer-outline"></ion-icon>
-              </span>
-            )} */}
             {statusCheck(0)}
-            {/* <span>{order.orderStates[0].partType}</span> */}
             <span>Frame</span>
           </div>
 
           <div className={styles.line}></div>
           <div className={styles.circle}>
-            {/* {order.orderStates[1].isProduced ? (
-              <span className={styles.icon}>&#10004;</span>
-            ) : order.orderStates[1].startDate === null &&
-              order.orderStates[1].endDate === null ? (
-              <span className={`${styles.ionIcon} ${styles.preview}`}>
-                <ion-icon name="hourglass-outline"></ion-icon>
-              </span>
-            ) : (
-              <span className={`${styles.ionIcon} ${styles.started}`}>
-                <ion-icon name="hammer-outline"></ion-icon>
-              </span>
-            )} */}
             {statusCheck(1)}
-            {/* <span>{order.orderStates[1].partType}</span> */}
             <span>Wheels</span>
           </div>
           <div className={styles.line}></div>
           <div className={styles.circle}>
-            {/* {order.orderStates[2].isProduced ? (
-              <span className={styles.icon}>&#10004;</span>
-            ) : order.orderStates[2].startDate === null &&
-              order.orderStates[2].endDate === null ? (
-              <span className={`${styles.ionIcon} ${styles.preview}`}>
-                <ion-icon name="hourglass-outline"></ion-icon>
-              </span>
-            ) : (
-              <span className={`${styles.ionIcon} ${styles.started}`}>
-                <ion-icon name="hammer-outline"></ion-icon>
-              </span>
-            )} */}
             {statusCheck(2)}
-            {/* <span>{order.orderStates[2].partType}</span> */}
             <span>Accessory</span>
           </div>
         </div>
