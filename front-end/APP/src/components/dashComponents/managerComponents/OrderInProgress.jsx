@@ -4,9 +4,9 @@ import styles from "./OrderInProgress.module.css";
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 
 function OrderInProgress({ order, i, onOrderButtonClick }) {
-  const [frame, setFrame] = useState(false);
-  const [wheel, setWheel] = useState(false);
-  const [parts, setParts] = useState(false);
+  // const [frame, setFrame] = useState(false);
+  // const [wheel, setWheel] = useState(false);
+  // const [parts, setParts] = useState(false);
   const { user } = useContext(UserContext);
 
   function statusCheck(index) {
@@ -15,23 +15,26 @@ function OrderInProgress({ order, i, onOrderButtonClick }) {
     let result = null;
 
     if (base[index].isProduced) {
-      return (result = <span className={styles.icon}>&#10004;</span>);
+      result = <span className={styles.icon}>&#10004;</span>;
     } else if (base[index].startDate === null && base[index].endDate === null) {
-      return (result = (
-        <span className={`${styles.ionIcon} ${styles.preview}`}>
+      result = (
+        <span
+          className={`${styles.ionIcon} ${styles.preview} ${
+            base[index].description ? styles.returned : null
+          }`}
+        >
           <ion-icon name="hourglass-outline"></ion-icon>
         </span>
-      ));
+      );
     } else if (base[index].startDate !== null && base[index].endDate === null) {
-      return (result = (
+      result = (
         <span className={`${styles.ionIcon} ${styles.started}`}>
           <ion-icon name="hammer-outline"></ion-icon>
         </span>
-      ));
+      );
     }
+    return result;
   }
-
-  console.log(order);
 
   return (
     <>

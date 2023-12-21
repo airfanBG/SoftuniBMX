@@ -1,4 +1,4 @@
-import styles from "./ManagerScrap.module.css";
+import styles from "./ManagerSalaries.module.css";
 
 import { useContext, useState } from "react";
 
@@ -7,7 +7,7 @@ import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 import BoardHeader from "../BoardHeader.jsx";
 import LoaderWheel from "../../LoaderWheel.jsx";
 
-function ManagerScrap() {
+function ManagerSalaries() {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
 
@@ -18,10 +18,10 @@ function ManagerScrap() {
       <section className={styles.board}>
         <BoardHeader />
         {loading && <LoaderWheel />}
-        <h2>Manager scrap</h2>
+        <h2>Manager salaries</h2>
       </section>
     </>
   );
 }
 
-export default ManagerScrap;
+export default ManagerSalaries;

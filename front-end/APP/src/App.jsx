@@ -28,6 +28,8 @@ import { ErrorProvider } from "./context/ErrorContext.jsx";
 import ManagerRejected from "./components/dashComponents/managerComponents/ManagerRejected.jsx";
 import ManagerFinished from "./components/dashComponents/managerComponents/ManagerFinished.jsx";
 import ManagerStatistic from "./components/dashComponents/managerComponents/ManagerStatistic.jsx";
+import ManagerSalaries from "./components/dashComponents/managerComponents/ManagerSalaries.jsx";
+import StorageMain from "./components/storage/StorageMain.jsx";
 
 // LAZY LOADING
 const CreateBike = lazy(() =>
@@ -72,8 +74,11 @@ function App() {
                     path={"get-stock"}
                     element={<UserHomeScreenSelection />}
                   />
+                  {/* WORKER */}
                   <Route path="worker-orders" element={<WorkerOrders />} />
                   <Route path={"finished"} element={<WorkerFinished />} />
+
+                  {/* MANAGER */}
                   <Route path={"managerOrders"} element={<ManagerOrders />} />
                   <Route
                     path={"manager-in-progress"}
@@ -93,7 +98,11 @@ function App() {
                   />
                   <Route path={"employers"} element={<EmployersList />} />
                   <Route path={"statistic"} element={<ManagerStatistic />} />
+                  <Route path={"salaries"} element={<ManagerSalaries />} />
                   <Route path={"add-member"} element={<AddMember />} />
+                  <Route path={"storage"} element={<StorageMain />} />
+
+                  {/* QCONTROL */}
                   <Route
                     path={"q-control-orders"}
                     element={<QControlOrders />}
