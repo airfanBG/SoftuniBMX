@@ -10,5 +10,7 @@
         public bool IsProduced { get; set; }
         public string? SerialNumber { get; set; }
         public string? EmployeeId { get; set; }
+        public string? StartDate { get; set; } 
+        public string? EndDate { get; set; } 
     }
 }

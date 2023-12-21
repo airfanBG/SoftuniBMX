@@ -127,8 +127,9 @@
                                                    NameOfEmplоyeeProducedThePart = _stringManipulator.ReturnFullName(ope.Employee.FirstName, ope.Employee.LastName),
                                                    PartModel = ope.Part.Name,
                                                    PartType = ope.Part.Category.Name,
-                                                   PartId = ope.PartId
-
+                                                   PartId = ope.PartId,
+                                                   StartDate = ope.StartDatetime.ToString(),
+                                                   EndDate = ope.EndDatetime.ToString(),
                                                }).ToList()
                             })
                             .ToListAsync();
