@@ -21,9 +21,12 @@ import InProgress from "./components/dashComponents/managerComponents/InProgress
 import QControlOrders from "./components/dashComponents/qControlComponents/QControlOrders.jsx";
 import UserTrackOrder from "./components/dashComponents/userComponents/UserTrackOrder.jsx";
 import UserHomeScreenSelection from "./components/dashComponents/userComponents/UserHomeScreenSelection.jsx";
+import ComponentScaffold from "./components/dashComponents/userComponents/ComponentScaffold.jsx";
+import UserArchive from "./components/dashComponents/userComponents/UserArchive.jsx";
 import LoaderWheel from "./components/LoaderWheel.jsx";
 import { ErrorProvider } from "./context/ErrorContext.jsx";
-import ComponentScaffold from "./components/dashComponents/userComponents/ComponentScaffold.jsx";
+import ManagerRejected from "./components/dashComponents/managerComponents/ManagerRejected.jsx";
+import ManagerFinished from "./components/dashComponents/managerComponents/ManagerFinished.jsx";
 
 // LAZY LOADING
 const CreateBike = lazy(() =>
@@ -62,10 +65,8 @@ function App() {
                     path={"user-in-progress"}
                     element={<UserTrackOrder />}
                   />
-                  <Route
-                    path={"user-archive"}
-                    element={<ComponentScaffold />}
-                  />
+                  <Route path={"user-archive"} element={<UserArchive />} />
+
                   <Route
                     path={"get-stock"}
                     element={<UserHomeScreenSelection />}
@@ -82,8 +83,12 @@ function App() {
                     element={<ComponentScaffold />}
                   />
                   <Route
+                    path={"manager-rejected"}
+                    element={<ManagerRejected />}
+                  />
+                  <Route
                     path={"manager-finished"}
-                    element={<ComponentScaffold />}
+                    element={<ManagerFinished />}
                   />
                   <Route path={"employers"} element={<EmployersList />} />
                   <Route path={"statistic"} />

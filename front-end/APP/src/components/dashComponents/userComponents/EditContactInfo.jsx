@@ -5,35 +5,35 @@ import { reducer } from "./editComponents/reducer.js";
 import { updateUserData } from "../../../userServices/userService.js";
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 import { useNavigate } from "react-router-dom";
+import { get } from "../../../util/api.js";
+import { environment } from "../../../environments/environment.js";
 
 function EditContactInfo({ info, setInfo, base64 }) {
   const { user, updateUser } = useContext(UserContext);
   const navigate = useNavigate();
-
   const initialState = {
     email: info.email,
     firstName: info.firstName,
     lastName: info.lastName,
     iban: info?.iban,
-    balance: info?.balance,
-    phone: info.phoneNumber,
-    city: info?.city,
-    role: info.role,
+    balance: info?.balance ?? "",
+    city: info.city,
+    role: user.role,
     country: info.address?.country,
-    district: info.address?.district,
-    postCode: info.address?.postCode,
-    block: info.address?.block,
-    apartment: info.address?.apartment,
+    district: info.address?.district ?? "",
+    postCode: info.address?.postCode ?? "",
+    block: info.address?.block ?? "",
+    apartment: info.address?.apartment ?? "",
     street: info.address?.street,
-    floor: info.address?.floor,
+    floor: info.address?.floor ?? "",
     strNumber: info.address?.strNumber,
     id: info.id,
-    imageUrl: base64,
-    department: info?.department,
-    phoneNumber: info?.phoneNumber,
-    position: info?.position,
-    dateOfHire: info?.dateOfHire,
-    isManager: info?.isManager,
+    imageUrl: base64 ?? "",
+    department: info?.department ?? "",
+    phoneNumber: info?.phoneNumber ?? "",
+    position: info?.position ?? "",
+    dateOfHire: info?.dateOfHire ?? "",
+    isManager: info?.isManager ?? "",
   };
 
   const [
@@ -43,20 +43,23 @@ function EditContactInfo({ info, setInfo, base64 }) {
       lastName,
       iban,
       balance,
-      phone,
       city,
+      role,
       country,
       district,
       postCode,
       block,
-      street,
-      strNumber,
       apartment,
+      street,
       floor,
+      strNumber,
+      id,
       imageUrl,
-      password,
-      repass,
-      role,
+      department,
+      phoneNumber,
+      position,
+      dateOfHire,
+      isManager,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
@@ -67,7 +70,6 @@ function EditContactInfo({ info, setInfo, base64 }) {
     },
     [base64]
   );
-  console.log(role);
 
   async function formSubmitHandler(e) {
     e.preventDefault();
@@ -80,33 +82,25 @@ function EditContactInfo({ info, setInfo, base64 }) {
       postCode,
       block,
       apartment,
-      street: street,
+      street,
       strNumber,
       floor,
     };
     let data;
     if (role === "user") {
       data = {
-        password: info.repass,
-        repass: info.repass,
-        role: info.role,
-        email,
+        id,
         firstName,
         lastName,
+        email,
+        phoneNumber,
+        city,
         iban,
         balance,
-        phone,
-        city,
-        imageUrl: updatedImg,
         address: newAddress,
       };
     } else {
       data = {
-        imageUrl: updatedImg,
-        password: info.repass,
-        repass: info.repass,
-        role: info.role,
-        email,
         firstName,
         lastName,
         department: info?.department,
@@ -117,6 +111,12 @@ function EditContactInfo({ info, setInfo, base64 }) {
       };
     }
 
+    updateUserData(id, data, role);
+
+    // const result = await updateUserData(id, data, role);
+    // console.log(result);
+
+    // IF RESULT IS OK UPDATE CONTEXT
     setInfo({
       ...info,
       email: email,
@@ -124,7 +124,7 @@ function EditContactInfo({ info, setInfo, base64 }) {
       lastName: lastName,
       iban: iban,
       balance: balance,
-      phone: phone,
+      phone: phoneNumber,
       city: city,
       address: newAddress,
       imageUrl: updatedImg,
@@ -138,8 +138,7 @@ function EditContactInfo({ info, setInfo, base64 }) {
       balance: balance,
     });
 
-    const result = await updateUserData(info.id, data);
-    console.log(result);
+    // NAVIGATE TO USER PROFILE PAGE
     navigate("/profile");
   }
 
@@ -153,6 +152,7 @@ function EditContactInfo({ info, setInfo, base64 }) {
           action="setFirstName"
           type="text"
           content={"First Name"}
+          required={true}
         />
         {/* LAST NAME */}
         <EditTextInput
@@ -161,17 +161,18 @@ function EditContactInfo({ info, setInfo, base64 }) {
           action="setLastName"
           type="text"
           content={"Last Name"}
+          required={true}
         />
         {/* EMAIL */}
-        <EditTextInput
+        {/* <EditTextInput
           inputValue={email}
           dispatch={dispatch}
           action="setEmail"
           type="email"
           content={"Email"}
-        />
+        /> */}
         {/* IBAN */}
-        {role === "user" && (
+        {/* {role === "user" && (
           <EditTextInput
             inputValue={iban}
             dispatch={dispatch}
@@ -179,14 +180,15 @@ function EditContactInfo({ info, setInfo, base64 }) {
             type="text"
             content={"IBAN"}
           />
-        )}
+        )} */}
         {/* PHONE */}
         <EditTextInput
-          inputValue={phone}
+          inputValue={phoneNumber}
           dispatch={dispatch}
           action="setPhone"
           type="text"
           content={"Phone"}
+          required={true}
         />
         {/* CITY */}
         {role === "user" && (
@@ -196,6 +198,7 @@ function EditContactInfo({ info, setInfo, base64 }) {
             action="setCity"
             type="text"
             content={"City"}
+            required={true}
           />
         )}
         {/* COUNTRY */}
@@ -206,6 +209,7 @@ function EditContactInfo({ info, setInfo, base64 }) {
             action="setCountry"
             type="text"
             content={"Country"}
+            required={true}
           />
         )}
         {/* POSTCODE */}
@@ -266,9 +270,10 @@ function EditContactInfo({ info, setInfo, base64 }) {
             action="setStreet"
             type="text"
             content={"Street"}
+            required={true}
           />
         )}
-        {/* STREET*/}
+        {/* STREET NUmber*/}
         {role === "user" && (
           <EditTextInput
             inputValue={strNumber}
@@ -276,10 +281,11 @@ function EditContactInfo({ info, setInfo, base64 }) {
             action="setStrNumber"
             type="text"
             content={"Street"}
+            required={true}
           />
         )}
         {/* BALANCE */}
-        {role === "user" && (
+        {/* {role === "user" && (
           <EditTextInput
             inputValue={balance}
             dispatch={dispatch}
@@ -287,7 +293,7 @@ function EditContactInfo({ info, setInfo, base64 }) {
             type="tel"
             content={"Account"}
           />
-        )}
+        )} */}
 
         <button className={styles.saveBtn}>Save profile</button>
       </form>

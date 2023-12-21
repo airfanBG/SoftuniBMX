@@ -25,37 +25,403 @@ https://localhost:7047/api/ClientOrder/progress?id=17ce735d-6713-4d0a-8fcb-e4a71
 - `partModel`: Модел на часта.
 - `nameOfEmplоyeeProducedThePart`: Име на служите, отговорен за направата й.
 - `isProduced`: Проверка, дали часта е изготвена или не.
+- `startDate`: Дата и час на започване на работа по частта.
+- `endDate`: Дата и час на завършване на работа по частта.
 ### Example:
 ```json
 [
-    {
-        "id": 2,
-        "serialNumber": "BIDTLR6WLB1",
-        "dateCreated": "01/12/2023",
-        "orderStates": [
-            {
-                "partId": 1,
-                "partType": "Frame",
-                "partModel": "Frame Road",
-                "nameOfEmplоyeeProducedThePart": " ",
-                "isProduced": false
-            },
-            {
-                "partId": 3,
-                "partType": "Frame",
-                "partModel": "Frame Road woman",
-                "nameOfEmplоyeeProducedThePart": " ",
-                "isProduced": false
-            },
-            {
-                "partId": 4,
-                "partType": "Wheel",
-                "partModel": "Wheel of the Year for road",
-                "nameOfEmplоyeeProducedThePart": " ",
-                "isProduced": false
-            }
-        ]
-    }
+  {
+    "orderId": 2,
+    "serialNumber": "BID12345679",
+    "dateCreated": "15-12-2023",
+    "orderStates": [
+      {
+        "partId": 1,
+        "partType": "Frame",
+        "partModel": "Frame Road",
+        "nameOfEmplоyeeProducedThePart": "Marin Marinov",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 0,
+        "startDate": null,
+        "endDate": null
+      },
+      {
+        "partId": 4,
+        "partType": "Wheel",
+        "partModel": "Wheel of the Year for road",
+        "nameOfEmplоyeeProducedThePart": "Todor Todorov",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 0,
+        "startDate": null,
+        "endDate": null
+      },
+      {
+        "partId": 12,
+        "partType": "Acsessories",
+        "partModel": "Shift",
+        "nameOfEmplоyeeProducedThePart": "Ivan Ivanov",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 0,
+        "startDate": null,
+        "endDate": null
+      }
+    ]
+  },
+  {
+    "orderId": 3,
+    "serialNumber": "BID12345680",
+    "dateCreated": "15-12-2023",
+    "orderStates": [
+      {
+        "partId": 1,
+        "partType": "Frame",
+        "partModel": "Frame Road",
+        "nameOfEmplоyeeProducedThePart": "Marin Marinov",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 0,
+        "startDate": null,
+        "endDate": null
+      },
+      {
+        "partId": 5,
+        "partType": "Wheel",
+        "partModel": "Wheel of the Year for montain",
+        "nameOfEmplоyeeProducedThePart": "Todor Todorov",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 0,
+        "startDate": null,
+        "endDate": null
+      },
+      {
+        "partId": 11,
+        "partType": "Acsessories",
+        "partModel": "Road budget Shifts",
+        "nameOfEmplоyeeProducedThePart": "Ivan Ivanov",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 0,
+        "startDate": null,
+        "endDate": null
+      }
+    ]
+  },
+  {
+    "orderId": 4,
+    "serialNumber": "BID12345680",
+    "dateCreated": "15-12-2023",
+    "orderStates": [
+      {
+        "partId": 1,
+        "partType": "Frame",
+        "partModel": "Frame Road",
+        "nameOfEmplоyeeProducedThePart": " ",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 0,
+        "startDate": null,
+        "endDate": null
+      },
+      {
+        "partId": 5,
+        "partType": "Wheel",
+        "partModel": "Wheel of the Year for montain",
+        "nameOfEmplоyeeProducedThePart": " ",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 0,
+        "startDate": null,
+        "endDate": null
+      },
+      {
+        "partId": 11,
+        "partType": "Acsessories",
+        "partModel": "Road budget Shifts",
+        "nameOfEmplоyeeProducedThePart": " ",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 0,
+        "startDate": null,
+        "endDate": null
+      }
+    ]
+  },
+  {
+    "orderId": 5,
+    "serialNumber": "BID12345680",
+    "dateCreated": "15-12-2023",
+    "orderStates": [
+      {
+        "partId": 1,
+        "partType": "Frame",
+        "partModel": "Frame Road",
+        "nameOfEmplоyeeProducedThePart": " ",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 0,
+        "startDate": null,
+        "endDate": null
+      },
+      {
+        "partId": 5,
+        "partType": "Wheel",
+        "partModel": "Wheel of the Year for montain",
+        "nameOfEmplоyeeProducedThePart": " ",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 0,
+        "startDate": null,
+        "endDate": null
+      },
+      {
+        "partId": 11,
+        "partType": "Acsessories",
+        "partModel": "Road budget Shifts",
+        "nameOfEmplоyeeProducedThePart": " ",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 0,
+        "startDate": null,
+        "endDate": null
+      }
+    ]
+  },
+  {
+    "orderId": 6,
+    "serialNumber": "BID12345680",
+    "dateCreated": "15-12-2023",
+    "orderStates": [
+      {
+        "partId": 1,
+        "partType": "Frame",
+        "partModel": "Frame Road",
+        "nameOfEmplоyeeProducedThePart": " ",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 0,
+        "startDate": null,
+        "endDate": null
+      },
+      {
+        "partId": 5,
+        "partType": "Wheel",
+        "partModel": "Wheel of the Year for montain",
+        "nameOfEmplоyeeProducedThePart": " ",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 0,
+        "startDate": null,
+        "endDate": null
+      },
+      {
+        "partId": 11,
+        "partType": "Acsessories",
+        "partModel": "Road budget Shifts",
+        "nameOfEmplоyeeProducedThePart": " ",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 0,
+        "startDate": null,
+        "endDate": null
+      }
+    ]
+  },
+  {
+    "orderId": 7,
+    "serialNumber": "BID12345680",
+    "dateCreated": "15-12-2023",
+    "orderStates": [
+      {
+        "partId": 1,
+        "partType": "Frame",
+        "partModel": "Frame Road",
+        "nameOfEmplоyeeProducedThePart": " ",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 0,
+        "startDate": null,
+        "endDate": null
+      },
+      {
+        "partId": 5,
+        "partType": "Wheel",
+        "partModel": "Wheel of the Year for montain",
+        "nameOfEmplоyeeProducedThePart": " ",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 0,
+        "startDate": null,
+        "endDate": null
+      },
+      {
+        "partId": 11,
+        "partType": "Acsessories",
+        "partModel": "Road budget Shifts",
+        "nameOfEmplоyeeProducedThePart": " ",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 0,
+        "startDate": null,
+        "endDate": null
+      }
+    ]
+  },
+  {
+    "orderId": 8,
+    "serialNumber": "BID12345680",
+    "dateCreated": "15-12-2023",
+    "orderStates": [
+      {
+        "partId": 1,
+        "partType": "Frame",
+        "partModel": "Frame Road",
+        "nameOfEmplоyeeProducedThePart": " ",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 0,
+        "startDate": null,
+        "endDate": null
+      },
+      {
+        "partId": 5,
+        "partType": "Wheel",
+        "partModel": "Wheel of the Year for montain",
+        "nameOfEmplоyeeProducedThePart": " ",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 0,
+        "startDate": null,
+        "endDate": null
+      },
+      {
+        "partId": 11,
+        "partType": "Acsessories",
+        "partModel": "Road budget Shifts",
+        "nameOfEmplоyeeProducedThePart": " ",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 0,
+        "startDate": null,
+        "endDate": null
+      }
+    ]
+  },
+  {
+    "orderId": 9,
+    "serialNumber": "BID12345680",
+    "dateCreated": "15-12-2023",
+    "orderStates": [
+      {
+        "partId": 1,
+        "partType": "Frame",
+        "partModel": "Frame Road",
+        "nameOfEmplоyeeProducedThePart": " ",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 0,
+        "startDate": null,
+        "endDate": null
+      },
+      {
+        "partId": 5,
+        "partType": "Wheel",
+        "partModel": "Wheel of the Year for montain",
+        "nameOfEmplоyeeProducedThePart": " ",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 0,
+        "startDate": null,
+        "endDate": null
+      },
+      {
+        "partId": 11,
+        "partType": "Acsessories",
+        "partModel": "Road budget Shifts",
+        "nameOfEmplоyeeProducedThePart": " ",
+        "isProduced": false,
+        "serialNumber": null,
+        "employeeId": null,
+        "elementProduceTimeInMinutes": null,
+        "description": null,
+        "partQuantity": 0,
+        "startDate": null,
+        "endDate": null
+      }
+    ]
+  }
 ]
 ```
 [Обратно към ReadMe](/README.md)

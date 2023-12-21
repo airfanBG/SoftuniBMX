@@ -4,13 +4,20 @@ const initialState = {
   firstName: "",
   lastName: "",
   repass: "",
-  role: "",
+  userRole: "",
   department: "",
   phoneNumber: "",
   position: "",
   dateOfHire: "",
   isManager: false,
   imageUrl: "",
+  error: {
+    "firstName/input": "",
+    "lastName/input": "",
+    "email/input": "",
+    "password/input": "",
+    "repass/input": "",
+  },
 };
 
 function reducer(state, action) {
@@ -26,7 +33,7 @@ function reducer(state, action) {
     case "repass/input":
       return { ...state, repass: action.payload };
     case "role/select":
-      return { ...state, role: action.payload };
+      return { ...state, userRole: action.payload };
     case "department/select":
       return { ...state, department: action.payload };
     case "position/select":
@@ -37,6 +44,10 @@ function reducer(state, action) {
       return { ...state, isManager: action.payload };
     case "phone/input":
       return { ...state, phoneNumber: action.payload };
+    case "error/set":
+      return { ...state, error: { ...state.error, [action.payload]: true } };
+    case "error/clear":
+      return { ...state, error: { ...state.error, [action.payload]: false } };
 
     default:
       throw new Error("Unknown action type");

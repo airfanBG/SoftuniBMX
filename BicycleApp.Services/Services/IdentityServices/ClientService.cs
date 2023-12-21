@@ -3,7 +3,7 @@
     using System.IdentityModel.Tokens.Jwt;
     using System.Security.Claims;
     using System.Text;
-
+    using BicicleApp.Common.Providers.Contracts;
     using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
     using BicycleApp.Data.Models.IdentityModels;
@@ -30,6 +30,7 @@
         private readonly IEmailSender emailSender;
         private readonly IStringManipulator stringManipulator;
         private readonly IOptionProvider optionProvider;
+        private readonly IDateTimeProvider dateTimeProvider;
 
         public ClientService(UserManager<BaseUser> userManager,
                              SignInManager<BaseUser> signInManager,
@@ -39,7 +40,8 @@
                              IModelsFactory modelFactory,
                              IEmailSender emailSender,
                              IStringManipulator stringManipulator,
-                             IOptionProvider optionProvider)
+                             IOptionProvider optionProvider,
+                             IDateTimeProvider dateTimeProvider)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -50,6 +52,7 @@
             this.emailSender = emailSender;
             this.stringManipulator = stringManipulator;
             this.optionProvider = optionProvider;
+            this.dateTimeProvider = dateTimeProvider;
         }
 
         /// <summary>
@@ -73,7 +76,9 @@
             }
 
             Client client = this.modelFactory.CreateNewClientModel(clientDto);
-            client.TownId = await this.GetTownIdAsync(clientDto.Town);
+            var townId = await this.GetTownIdAsync(clientDto.Town);
+            client.TownId = townId;
+            client.DelivaryAddress.TownId = townId;
             var result = await this.userManager.CreateAsync(client, clientDto.Password);
 
             //TODO: Remove client role management. DB don`t need so much records.
@@ -172,9 +177,9 @@
         /// </summary>
         /// <param name="Id">The id of the client</param>
         /// <returns>Dto with information for the client</returns>
-        public async Task<ClientInfoDto?> GetClientInfoAsync(string Id)
+        public async Task<ClientEditDto?> GetClientInfoAsync(string Id)
         {
-            var client = await dbContext.Clients.FirstOrDefaultAsync(c => c.Id == Id);
+            var client = await dbContext.Clients.Include(da => da.DelivaryAddress).FirstOrDefaultAsync(c => c.Id == Id);
 
             if (client == null)
             {
@@ -186,17 +191,27 @@
                 .Select(t => t.Name)
                 .FirstOrDefaultAsync();
 
-            return new ClientInfoDto()
+            return new ClientEditDto()
             {
-                Id = client.Id,
+                ClientId = client.Id,
                 FirstName = client.FirstName,
                 LastName = client.LastName,
-                Email = client.Email,
-                DelivaryAddress = client.DelivaryAddress,
-                Balance = client.Balance,
+                Email = client.Email,                
+                Balance= client.Balance,
                 IBAN = client.IBAN,
                 PhoneNumber = client.PhoneNumber,
-                Town = town
+                Town = town,
+                DelivaryAddress = new ClientAddressDto()
+                {
+                    Street = client.DelivaryAddress.Street,
+                    StrNumber = client.DelivaryAddress.StrNumber,
+                    Apartment = client.DelivaryAddress.Apartment,
+                    Block = client.DelivaryAddress.Block,
+                    Country = client.DelivaryAddress.Country,
+                    District = client.DelivaryAddress.District,
+                    Floor = client.DelivaryAddress.Floor,
+                    PostCode = client.DelivaryAddress.PostCode
+                },
             };
         }
 
@@ -457,67 +472,40 @@
             return false;
         }
 
-        public async Task<bool> EditClientInfoAsync(ClientEditDto clientEditDto)
+        public async Task<string> EditClientInfoAsync(ClientEditDto clientEditDto)
         {
-            Client? client = await dbContext.Clients.
-                 FirstOrDefaultAsync(c => c.Email == clientEditDto.Email);
-            if (client == null)
+            try
             {
-                return false;
+                var client = await dbContext.Clients.Include(da => da.DelivaryAddress).FirstAsync(c => c.Id == clientEditDto.ClientId);
+
+                var updatedTownId = await GetTownIdAsync(clientEditDto.Town);
+
+                client.FirstName = clientEditDto.FirstName;
+                client.LastName = clientEditDto.LastName;
+                client.PhoneNumber = clientEditDto.PhoneNumber;
+                client.TownId = updatedTownId;
+                client.DateUpdated = dateTimeProvider.Now;
+
+                var address = await dbContext.DelivaryAddresses.FirstAsync(da => da.Id == client.DelivaryAddressId);
+                address.Floor = clientEditDto.DelivaryAddress.Floor;
+                address.Street = clientEditDto.DelivaryAddress.Street;
+                address.StrNumber = clientEditDto.DelivaryAddress.StrNumber;
+                address.Apartment = clientEditDto.DelivaryAddress.Apartment;
+                address.Block = clientEditDto.DelivaryAddress.Block;
+                address.Country = clientEditDto.DelivaryAddress.Country;
+                address.District = clientEditDto.DelivaryAddress.District;
+                address.PostCode = clientEditDto.DelivaryAddress.PostCode;
+                address.TownId = updatedTownId;
+
+                await dbContext.SaveChangesAsync();
+
+                return client.Id;
+            }
+            catch (Exception)
+            {
             }
 
-            client.FirstName = clientEditDto.FirstName != null ? clientEditDto.FirstName : client.FirstName;
-
-            client.LastName = clientEditDto.LastName != null ? clientEditDto.LastName : client.LastName;
-
-            client.PhoneNumber = clientEditDto.PhoneNumber != null ? clientEditDto.PhoneNumber : client.PhoneNumber;
-
-            if (clientEditDto.Town != null)
-            {
-                client.TownId = await this.GetTownIdAsync(clientEditDto.Town);
-            }
-
-            var sb = new StringBuilder();
-            ClientAddressDto innerDto = clientEditDto.DelivaryAddress;
-
-            if (!string.IsNullOrWhiteSpace(innerDto.Country))
-            {
-                sb.Append($"{innerDto.Country} ");
-            }
-            if (!string.IsNullOrWhiteSpace(innerDto.PostCode))
-            {
-                sb.Append($"{innerDto.PostCode} ");
-            }
-            if (!string.IsNullOrWhiteSpace(innerDto.District))
-            {
-                sb.Append($"{innerDto.District} ");
-            }
-            if (!string.IsNullOrWhiteSpace(innerDto.Block))
-            {
-                sb.Append($"{innerDto.Block} ");
-            }
-            if (innerDto.Floor.HasValue)
-            {
-                sb.Append($"{innerDto.Floor} ");
-            }
-            if (!string.IsNullOrWhiteSpace(innerDto.Apartment))
-            {
-                sb.Append($"{innerDto.Apartment} ");
-            }
-            if (!string.IsNullOrWhiteSpace(innerDto.Street))
-            {
-                sb.Append($"{innerDto.Street} ");
-            }
-            if (!string.IsNullOrWhiteSpace(innerDto.StrNumber))
-            {
-                sb.Append($"{innerDto.StrNumber}");
-            }
-
-            client.DelivaryAddress = sb.ToString();
-
-            await dbContext.SaveChangesAsync();
-
-            return true;
+            return string.Empty;
         }
     }
 }
