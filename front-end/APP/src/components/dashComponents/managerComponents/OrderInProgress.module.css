@@ -70,7 +70,8 @@
   transform: translate(-52%, -46%);
 }
 .circle span.preview {
-  color: rgb(0, 139, 246);
+  /* color: rgb(0, 139, 246); */
+  color: rgb(73, 86, 97);
 }
 .circle span.started {
   color: rgb(246, 152, 0);

@@ -13,6 +13,7 @@ function OrderInProgress({ order, i, onOrderButtonClick }) {
     const base = order.orderStates;
 
     let result = null;
+
     if (base[index].isProduced) {
       return (result = <span className={styles.icon}>&#10004;</span>);
     } else if (base[index].startDate === null && base[index].endDate === null) {
