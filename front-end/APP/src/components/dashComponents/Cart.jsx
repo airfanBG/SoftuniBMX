@@ -127,6 +127,7 @@ function Cart() {
   function onCancelClick() {
     clearOrderData();
     navigate("/profile");
+    setHasOrder(false);
   }
 
   return (
