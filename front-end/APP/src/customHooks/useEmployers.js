@@ -7,8 +7,7 @@ async function useEmployers() {
   return emp;
 }
 async function getEmployers() {
-  // const emp = await get(environment.info_emplloyee);
-  const emp = await get(environment.get_all_employers);
+  const emp = await get(environment.all_employees);
   return emp;
 }
 

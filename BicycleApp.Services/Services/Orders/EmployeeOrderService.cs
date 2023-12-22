@@ -1,20 +1,15 @@
 ﻿namespace BicycleApp.Services.Services.Order
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-
     using BicycleApp.Data;
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.Contracts.Factory;
-    using BicycleApp.Services.Models.IdentityModels;
     using BicycleApp.Services.Models.Order;
-
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
-
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
     using static BicycleApp.Common.ApplicationGlobalConstants;
 
     public class EmployeeOrderService : IEmployeeOrderService

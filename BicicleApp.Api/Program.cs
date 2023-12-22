@@ -63,7 +63,7 @@ namespace BicicleApp.Api
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 5;
             })
-                .AddRoles<IdentityRole>()
+                .AddRoles<BaseUserRole>()
                 .AddEntityFrameworkStores<BicycleAppDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -111,7 +111,6 @@ namespace BicicleApp.Api
             builder.Services.AddScoped<IStringManipulator, StringManipulator>();
             builder.Services.AddScoped<IDateTimeProvider, DateTimeProvider>();
             builder.Services.AddScoped<IDateTimeProvider, DateTimeProvider>();
-            builder.Services.AddScoped<IGuidProvider, GuidProvider>();
             builder.Services.AddScoped<IQualityAssuranceService, QualityAssuranceService>();
             builder.Services.AddScoped<IEmployeeOrderService, EmployeeOrderService>();
             builder.Services.AddScoped<IDateTimeProvider, DateTimeProvider>();

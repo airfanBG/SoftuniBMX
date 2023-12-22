@@ -80,15 +80,15 @@ function QControlOrderItem({ product, onReBuild }) {
     finalResult.orderStates[2].isProduced = accessoryCheck;
     finalResult.orderStates[2].description = textAccessory;
 
-    console.log(finalResult);
-
     if (Object.values(valuesCheck).every((x) => x === true)) {
       result = await post(environment.pass_qControl + product.orderId);
-    } else if (Object.value(valuesCheck).every((x) => x === false)) {
+      console.log("pass");
+    } else if (Object.values(valuesCheck).every((x) => x === false)) {
       // TODO: отива за брак - ендпоинт
-      console.log(finalResult);
+      console.log("scrap");
     } else {
       result = await post(environment.return_qControl, finalResult);
+      console.log("some pass");
     }
     console.log(result);
   }
