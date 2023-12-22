@@ -4,9 +4,6 @@ import styles from "./OrderInProgress.module.css";
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 
 function OrderInProgress({ order, i, onOrderButtonClick }) {
-  // const [frame, setFrame] = useState(false);
-  // const [wheel, setWheel] = useState(false);
-  // const [parts, setParts] = useState(false);
   const { user } = useContext(UserContext);
 
   function statusCheck(index) {
@@ -28,7 +25,11 @@ function OrderInProgress({ order, i, onOrderButtonClick }) {
       );
     } else if (base[index].startDate !== null && base[index].endDate === null) {
       result = (
-        <span className={`${styles.ionIcon} ${styles.started}`}>
+        <span
+          className={`${styles.ionIcon} ${styles.started} ${
+            base[index].description ? styles.returned : null
+          }`}
+        >
           <ion-icon name="hammer-outline"></ion-icon>
         </span>
       );
