@@ -4,5 +4,6 @@
     {
         public const string CLIENT = "client";
         public const string EMPLOYEE = "employee";
+        public const string FRAMEWORKER = "frameworker";
     }
 }
