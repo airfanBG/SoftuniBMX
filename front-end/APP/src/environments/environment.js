@@ -46,4 +46,7 @@ export const environment = {
   frames: "/api/accountpage/frames",
   compatible_parts: "/api/accountpage/compatible_parts?id=",
   selected_part: "/api/accountpage/selected_part?id=",
+
+  //STORAGE
+  add_supplier: "/api/supplys_manager/create_suplier",
 };
