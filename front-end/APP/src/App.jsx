@@ -24,6 +24,7 @@ import UserHomeScreenSelection from "./components/dashComponents/userComponents/
 import LoaderWheel from "./components/LoaderWheel.jsx";
 import { ErrorProvider } from "./context/ErrorContext.jsx";
 import ComponentScaffold from "./components/dashComponents/userComponents/ComponentScaffold.jsx";
+import Contacts from "./pages/Contacts/Contacts.jsx";
 
 // LAZY LOADING
 const CreateBike = lazy(() =>
@@ -46,6 +47,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="about" element={<About />} />
+                <Route path="contacts" element={<Contacts />} />
                 <Route
                   path="profile"
                   element={

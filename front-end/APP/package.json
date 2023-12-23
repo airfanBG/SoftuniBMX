@@ -11,14 +11,15 @@
     "server": "json-server --watch data/api.json -m ./node_modules/json-server-auth --port 9000 --delay 500"
   },
   "dependencies": {
+    "@phosphor-icons/react": "^2.0.15",
+    "emailjs-com": "^3.2.0",
     "json-server-auth": "^2.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.48.2",
     "react-international-phone": "^4.0.3",
     "react-router-dom": "^6.18.0",
-    "uuid": "^9.0.1",
-    "@phosphor-icons/react": "^2.0.15"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
