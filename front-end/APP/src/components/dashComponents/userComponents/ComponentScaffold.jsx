@@ -18,7 +18,7 @@ function ComponentScaffold() {
       <section className={styles.board}>
         <BoardHeader />
         {loading && <LoaderWheel />}
-        <h2>Put content here </h2>
+        <h2>Put content here just here</h2>
       </section>
     </>
   );

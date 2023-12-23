@@ -5,8 +5,6 @@ import { reducer } from "./editComponents/reducer.js";
 import { updateUserData } from "../../../userServices/userService.js";
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 import { useNavigate } from "react-router-dom";
-import { get } from "../../../util/api.js";
-import { environment } from "../../../environments/environment.js";
 
 function EditContactInfo({ info, setInfo, base64 }) {
   const { user, updateUser } = useContext(UserContext);
@@ -19,8 +17,8 @@ function EditContactInfo({ info, setInfo, base64 }) {
     iban: info?.iban,
     balance: info?.balance,
     phone: info.phoneNumber,
-    city: info.town,
-    role: user.role,
+    city: info?.city,
+    role: info.role,
     country: info.address?.country,
     district: info.address?.district,
     postCode: info.address?.postCode,
@@ -69,6 +67,7 @@ function EditContactInfo({ info, setInfo, base64 }) {
     },
     [base64]
   );
+  console.log(role);
 
   async function formSubmitHandler(e) {
     e.preventDefault();
@@ -88,26 +87,26 @@ function EditContactInfo({ info, setInfo, base64 }) {
     let data;
     if (role === "user") {
       data = {
-        // password: info.repass,
-        // repass: info.repass,
-        // role: info.role,
-        // email,
+        password: info.repass,
+        repass: info.repass,
+        role: info.role,
+        email,
         firstName,
         lastName,
-        // iban,
-        // balance,
+        iban,
+        balance,
         phone,
         city,
-        // imageUrl: updatedImg,
+        imageUrl: updatedImg,
         address: newAddress,
       };
     } else {
       data = {
-        // imageUrl: updatedImg,
-        // password: info.repass,
-        // repass: info.repass,
-        // role: info.role,
-        // email,
+        imageUrl: updatedImg,
+        password: info.repass,
+        repass: info.repass,
+        role: info.role,
+        email,
         firstName,
         lastName,
         department: info?.department,
@@ -164,15 +163,15 @@ function EditContactInfo({ info, setInfo, base64 }) {
           content={"Last Name"}
         />
         {/* EMAIL */}
-        {/* <EditTextInput
+        <EditTextInput
           inputValue={email}
           dispatch={dispatch}
           action="setEmail"
           type="email"
           content={"Email"}
-        /> */}
+        />
         {/* IBAN */}
-        {/* {role === "user" && (
+        {role === "user" && (
           <EditTextInput
             inputValue={iban}
             dispatch={dispatch}
@@ -180,7 +179,7 @@ function EditContactInfo({ info, setInfo, base64 }) {
             type="text"
             content={"IBAN"}
           />
-        )} */}
+        )}
         {/* PHONE */}
         <EditTextInput
           inputValue={phone}
@@ -269,7 +268,7 @@ function EditContactInfo({ info, setInfo, base64 }) {
             content={"Street"}
           />
         )}
-        {/* STREET NUmber*/}
+        {/* STREET*/}
         {role === "user" && (
           <EditTextInput
             inputValue={strNumber}
@@ -280,7 +279,7 @@ function EditContactInfo({ info, setInfo, base64 }) {
           />
         )}
         {/* BALANCE */}
-        {/* {role === "user" && (
+        {role === "user" && (
           <EditTextInput
             inputValue={balance}
             dispatch={dispatch}
@@ -288,7 +287,7 @@ function EditContactInfo({ info, setInfo, base64 }) {
             type="tel"
             content={"Account"}
           />
-        )} */}
+        )}
 
         <button className={styles.saveBtn}>Save profile</button>
       </form>
