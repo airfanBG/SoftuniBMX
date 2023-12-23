@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import emailjs from "emailjs-com";
 import styles from "./ContactForm.module.css";
+import { useNavigate } from "react-router-dom";
 
 function ContactForm() {
   const [email, setEmail] = useState("");
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
+  const navigate = useNavigate("/");
 
   function send(e) {
     e.preventDefault();
@@ -34,6 +36,7 @@ function ContactForm() {
               setEmail("");
               setTitle("");
               setText("");
+              navigate("/");
             },
             (error) => {
               console.error("Error sending email:", error);

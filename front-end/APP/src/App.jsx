@@ -25,6 +25,7 @@ import LoaderWheel from "./components/LoaderWheel.jsx";
 import { ErrorProvider } from "./context/ErrorContext.jsx";
 import ComponentScaffold from "./components/dashComponents/userComponents/ComponentScaffold.jsx";
 import Contacts from "./pages/Contacts/Contacts.jsx";
+import ComponentUserOrdersReady from "./components/dashComponents/userComponents/ComponentUserOrdersReady.jsx";
 
 // LAZY LOADING
 const CreateBike = lazy(() =>
@@ -59,7 +60,7 @@ function App() {
                   <Route index element={<Navigate replace to="info" />} />
                   <Route path="info" element={<UserInfo />} />
                   <Route path={"cart"} element={<Cart />} />
-                  <Route path={"user-ready"} element={<ComponentScaffold />} />
+                  <Route path={"user-ready"} element={<ComponentUserOrdersReady />} />
                   <Route
                     path={"user-in-progress"}
                     element={<UserTrackOrder />}
