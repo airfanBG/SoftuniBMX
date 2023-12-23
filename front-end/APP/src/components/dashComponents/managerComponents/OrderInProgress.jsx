@@ -65,7 +65,7 @@ function OrderInProgress({ order, i, onOrderButtonClick }) {
 
         <p className={styles.dateCreated}>
           <span>Date Created:</span>
-          {order.dateCreated.split(" ").at(0).replaceAll("-", ".")}
+          {order.dateCreated.split(" ").at(0).replaceAll("/", ".")}
         </p>
         {user.role !== "user" && (
           <button

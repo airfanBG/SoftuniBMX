@@ -2,6 +2,7 @@ import styles from "./OrderFullElement.module.css";
 
 function OrderElement({ order }) {
   const { serialNumber, orderId: id, dateCreated, orderStates } = order;
+  console.log(order);
 
   return (
     <div className={styles.container}>
@@ -52,14 +53,26 @@ function OrderElement({ order }) {
                 <p
                   className={styles.field}
                   style={
-                    s.IsProduced
+                    s.isProduced
                       ? { color: "var(--button-agree)" }
                       : { color: "var(--color-main-dark)" }
                   }
                 >
                   <span className={styles.fieldLabel}>Status:</span>
-                  {s.IsProduced ? "Finished" : "In Process"}
+                  {s.isProduced ? "Finished" : "In Process"}
                 </p>
+                <div className={styles.metaData}>
+                  {
+                    <p className={styles.field}>
+                      <span className={styles.fieldLabel}>Description:</span>
+                      {s.description}
+                    </p>
+                  }
+                  <p className={styles.field}>
+                    <span className={styles.fieldLabel}>Prodiced time:</span>
+                    {s.elementProduceTimeInMinutes}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
