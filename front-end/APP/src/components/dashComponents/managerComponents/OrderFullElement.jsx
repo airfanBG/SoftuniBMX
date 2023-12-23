@@ -53,7 +53,7 @@ function OrderElement({ order }) {
                 </p>
                 <p
                   className={styles.field}
-                  style={
+                  style={//Не разбирам защо(и труе и фолс са "In Process")
                     s.IsProduced
                       ? { color: "var(--button-agree)" }
                       : { color: "var(--color-main-dark)" }

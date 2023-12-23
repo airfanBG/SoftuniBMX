@@ -129,7 +129,9 @@
                             .ThenInclude(part => part.Category)
                             .Where(o => o.OrdersPartsEmployees.Any(ope => ope.EmployeeId != null
                                                                               && ope.DatetimeAsigned != null)
-                                                                              && (o.IsDeleted == false && o.DateDeleted.Equals(null)))
+                                                                              && (o.IsDeleted == false 
+                                                                              && o.DateDeleted.Equals(null))
+                                                                              && o.DateFinish.Equals(null))
                             .Select(o => new OrderProgretionDto()
                             {
                                 OrderId = o.Id,
@@ -140,9 +142,9 @@
                                                {
                                                    IsProduced = ope.IsCompleted,
                                                    NameOfEmplоyeeProducedThePart = _stringManipulator.ReturnFullName(ope.Employee.FirstName, ope.Employee.LastName),
-                                                   PartModel = ope.Part.Name,
+                                                   PartModel = ope.PartName,
                                                    PartType = ope.Part.Category.Name,
-                                                   SerialNumber = ope.Part.OEMNumber,
+                                                   SerialNumber = ope.SerialNumber,
                                                    PartId = ope.PartId,
                                                    PartQuantity = ope.PartQuantity,
                                                    StartDate = ope.StartDatetime.ToString(),
@@ -190,9 +192,12 @@
         public async Task<ICollection<OrderInfoDto>> GetAllFinishedOrdersForPeriod(FinishedOrdersDto datesPeriod)
         {
             var result =  await _db.Orders
+                            .Include(o => o.OrdersPartsEmployees)
+                            .ThenInclude(ope => ope.OrdersPartsEmployeesInfos)//До тук - да вкарам ProductionTime!!!
                             .AsNoTracking()
                             .Where(o => o.DateCreated >= datesPeriod.StartDate
-                                     && o.DateFinish <= datesPeriod.EndDate)
+                                     && o.DateFinish <= datesPeriod.EndDate
+                                     && o.DateFinish != null)
                             .Select(o => new OrderInfoDto()
                             {
                                 OrderId = o.Id,
