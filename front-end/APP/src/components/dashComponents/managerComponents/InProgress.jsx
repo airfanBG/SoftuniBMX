@@ -31,7 +31,8 @@ function InProgress() {
           message: "Something went wrong. Service can not get data!",
         });
       }
-      setOrderList(result);
+      const sortedResult = result.sort((a, b) => a.dateCreated - b.dateCreated);
+      setOrderList(sortedResult);
       setLoading(false);
     }
     getInProgressOrders();

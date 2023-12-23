@@ -4,6 +4,7 @@
     using BicycleApp.Data;
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.HelperClasses.Contracts;
+    using BicycleApp.Services.Models.IdentityModels;
     using BicycleApp.Services.Models.Order;
     using BicycleApp.Services.Models.Order.OrderManager;
     using static BicycleApp.Common.ApplicationGlobalConstants;
@@ -12,8 +13,6 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using BicycleApp.Data.Models.IdentityModels;
-    using BicycleApp.Services.Models.IdentityModels;
 
     using static BicycleApp.Common.ApplicationGlobalConstants;
 

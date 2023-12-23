@@ -84,7 +84,7 @@ function AddMember() {
       lastName,
       repass,
       role,
-      phoneNumber,
+      phone: phoneNumber,
       isManager: userRole === "manager" ? true : false,
       // dateOfHire: new Date().toLocaleDateString(),
       dateOfHire: new Date().toISOString(),

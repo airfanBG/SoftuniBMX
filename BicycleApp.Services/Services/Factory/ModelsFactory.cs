@@ -101,7 +101,8 @@
                 NormalizedUserName = employeeRegisterDto.Email.ToUpper(),
                 PhoneNumber = employeeRegisterDto.PhoneNumber,
                 UserName = employeeRegisterDto.Email,
-                Position = employeeRegisterDto.Position
+                Position = employeeRegisterDto.Position,
+                EmailConfirmed = true
             };
         }
 

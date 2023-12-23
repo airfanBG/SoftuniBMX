@@ -1,14 +1,11 @@
 ﻿namespace BicycleApp.Services.Services
 {
-    using System.Text;
-    using System.Threading.Tasks;
-
     using BicycleApp.Data;
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.Models;
-
     using Microsoft.EntityFrameworkCore;
+    using System.Threading.Tasks;
 
     public class PartService : IPartService
     {

@@ -3,8 +3,6 @@ import styles from "./OrderFullElement.module.css";
 function OrderElement({ order }) {
   const { serialNumber, orderId: id, dateCreated, orderStates } = order;
 
-  const currentDate = dateCreated.split(" ").at(0).replaceAll("-", ".");
-
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
@@ -25,7 +23,7 @@ function OrderElement({ order }) {
         </p>
         <p className={styles.date}>
           <span className={styles.label}>Date created:</span>
-          {dateCreated}
+          {dateCreated.replaceAll("/", ".")}
         </p>
       </header>
 
@@ -72,3 +70,18 @@ function OrderElement({ order }) {
 }
 
 export default OrderElement;
+
+// {
+//   "partId": 1,
+//   "partType": "Frame",
+//   "partModel": "Frame Road",
+//   "nameOfEmplоyeeProducedThePart": "Marin Marinov",
+//   "isProduced": true,
+//   "serialNumber": "oemtest1",
+//   "employeeId": null,
+//   "elementProduceTimeInMinutes": null,
+//   "description": null,
+//   "partQuantity": 1,
+//   "startDate": "2023-12-21 22:59:26.6380000",
+//   "endDate": "2023-12-21 22:59:35.8470000"
+// }

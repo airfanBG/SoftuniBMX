@@ -23,7 +23,7 @@
     {
         private readonly UserManager<BaseUser> userManager;
         private readonly SignInManager<BaseUser> signInManager;
-        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly RoleManager<BaseUserRole> roleManager;
         private readonly BicycleAppDbContext dbContext;
         private readonly IConfiguration configuration;
         private readonly IModelsFactory modelFactory;
@@ -34,7 +34,7 @@
 
         public ClientService(UserManager<BaseUser> userManager,
                              SignInManager<BaseUser> signInManager,
-                             RoleManager<IdentityRole> roleManager,
+                             RoleManager<BaseUserRole> roleManager,
                              BicycleAppDbContext dbContext,
                              IConfiguration configuration,
                              IModelsFactory modelFactory,
@@ -83,7 +83,8 @@
 
             //TODO: Remove client role management. DB don`t need so much records.
             var isRoleExists = await roleManager.RoleExistsAsync(clientDto.Role.ToLower());
-            var identityRole = new IdentityRole(clientDto.Role.ToLower());
+            var identityRole = new BaseUserRole();
+            identityRole.Name = clientDto.Role;
             if (!isRoleExists)
             {
                 await roleManager.CreateAsync(identityRole);

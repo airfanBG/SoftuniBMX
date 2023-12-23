@@ -1,6 +1,7 @@
 ﻿namespace BicycleApp.Services.Services.Factory
 {
     using BicycleApp.Data;
+    using BicycleApp.Data.Interfaces;
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.Contracts.Factory;
     using Microsoft.EntityFrameworkCore;
@@ -18,14 +19,14 @@
         {
             if (userRole.ToLower() != CLIENT)
             {
-                return await _db.ImagesEmployees.AnyAsync(ie => ie.EmployeeId == userId);
+                return await _db.ImagesEmployees.AnyAsync(ie => ie.UserId == userId);
             }
             else
             {
-                return await _db.ImagesClients.AnyAsync(ie => ie.ClientId == userId);
+                return await _db.ImagesClients.AnyAsync(ie => ie.UserId == userId);
             }
         }
-        public async Task<bool> CreateUserImage(string userId, string userRole, string filePath, string imageName)
+        public async Task<IUserImage?> CreateUserImage(string userId, string userRole, string filePath, string imageName)
         {
             if (!string.IsNullOrEmpty(userId)
                 && !string.IsNullOrEmpty(userRole)
@@ -34,93 +35,87 @@
             {
                 try
                 {
+                    IUserImage userImage;
+
                     if (userRole.ToLower() != CLIENT)
                     {
-                        ImageEmployee ie = new ImageEmployee()
+                        userImage = new ImageEmployee()
                         {
-                            EmployeeId = userId,
+                            UserId = userId,
                             ImageName = imageName,
                             ImageUrl = filePath
                         };
-
-                        await _db.ImagesEmployees.AddAsync(ie);
                     }
                     else
                     {
-                        ImageClient ic = new ImageClient()
+                        userImage = new ImageClient()
                         {
-                            ClientId = userId,
+                            UserId = userId,
                             ImageName = imageName,
                             ImageUrl = filePath
                         };
-
-                        await _db.ImagesClients.AddAsync(ic);
                     }
-
-                    await _db.SaveChangesAsync();
-
-                    return true;
+                    return userImage;
                 }
                 catch (Exception)
                 {
                 }
             }
-            return false;
+            return null;
         }
-
         public async Task<string?> GetUserImagePathAsync(string userId, string userRole)
         {
             string filePath = string.Empty;
 
             if (userRole.ToLower() != CLIENT)
             {
-                var imageEmployee = await _db.ImagesEmployees.FirstOrDefaultAsync(ie => ie.EmployeeId == userId);
+                var imageEmployee = await _db.ImagesEmployees.FirstOrDefaultAsync(ie => ie.UserId == userId);
                 filePath = imageEmployee.ImageUrl;
             }
             else
             {
-                var imageClient = await _db.ImagesClients.FirstOrDefaultAsync(ie => ie.ClientId == userId);
+                var imageClient = await _db.ImagesClients.FirstOrDefaultAsync(ie => ie.UserId == userId);
                 filePath = imageClient.ImageUrl;
             }
 
             return filePath;
         }
-
-        public async Task<bool> UpdateUserImage(string userId, string userRole, string filePath)
+        public async Task<IUserImage?> UpdateUserImage(string userId, string userRole, string filePath)
         {
-            try
+            if (!string.IsNullOrEmpty(userId)
+                && !string.IsNullOrEmpty(userRole)
+                && !string.IsNullOrEmpty(filePath))
             {
-                if (userRole.ToLower() != CLIENT)
+                try
                 {
-                    var imageEmployee = await _db.ImagesEmployees.FirstOrDefaultAsync(ie => ie.EmployeeId == userId);
+                    IUserImage userUpdatedImage;
 
-                    if (imageEmployee != null)
+                    if (userRole.ToLower() != CLIENT)
                     {
-                        imageEmployee.ImageUrl = filePath;
+                         userUpdatedImage = await _db.ImagesEmployees.FirstOrDefaultAsync(ie => ie.UserId == userId);
 
-                        _db.ImagesEmployees.Update(imageEmployee);
+                        if (userUpdatedImage != null)
+                        {
+                            userUpdatedImage.ImageUrl = filePath;
+                        }
                     }
+                    else
+                    {
+                         userUpdatedImage = await _db.ImagesClients.FirstOrDefaultAsync(ie => ie.UserId == userId);
+
+                        if (userUpdatedImage != null)
+                        {
+                            userUpdatedImage.ImageUrl = filePath;
+                        }
+                    }
+
+                    return userUpdatedImage;
                 }
-                else
+                catch (Exception)
                 {
-                    var imageClient = await _db.ImagesClients.FirstOrDefaultAsync(ie => ie.ClientId == userId);
-
-                    if (imageClient != null)
-                    {
-                        imageClient.ImageUrl = filePath;
-
-                        _db.ImagesClients.Update(imageClient);
-                    }
                 }
-
-                await _db.SaveChangesAsync();
-
-                return true;
             }
-            catch (Exception)
-            {
-            }
-            return false;
+            return null;
         }
     }
 }
