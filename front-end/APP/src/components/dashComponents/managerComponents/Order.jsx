@@ -7,7 +7,7 @@ import {
   approveHandlerAction,
 } from "./managerActions/orderActions.js";
 
-function Order({ order, onStatusChange, isRejected = true }) {
+function Order({ order, onStatusChange, isRejected = true, isDeleted = true }) {
   const { orderId, dateCreated, serialNumber, orderParts } = order;
   const frame = orderParts[0];
   const wheel = orderParts[1];
@@ -159,19 +159,21 @@ function Order({ order, onStatusChange, isRejected = true }) {
           </div>
 
           <div className={styles.actions}>
-            <Button
-              type={"approve"}
-              onClick={onBtnClickHandler}
-              // onClick={() => approveHandler(id)}
-              id={orderId}
-              disabled={
-                frame.partQuantity > frame.partQunatityInStock ||
-                wheel.partQuantity > wheel.partQunatityInStock ||
-                accessory.partQuantity > accessory.partQunatityInStock
-              }
-            >
-              Approve
-            </Button>
+            {isDeleted && (
+              <Button
+                type={"approve"}
+                onClick={onBtnClickHandler}
+                // onClick={() => approveHandler(id)}
+                id={orderId}
+                disabled={
+                  frame.partQuantity > frame.partQunatityInStock ||
+                  wheel.partQuantity > wheel.partQunatityInStock ||
+                  accessory.partQuantity > accessory.partQunatityInStock
+                }
+              >
+                Approve
+              </Button>
+            )}
 
             {isRejected && (
               <Button type={"reject"} onClick={onBtnClickHandler} id={orderId}>
@@ -180,10 +182,12 @@ function Order({ order, onStatusChange, isRejected = true }) {
               </Button>
             )}
 
-            <Button type={"delete"} onClick={onBtnClickHandler} id={orderId}>
-              {/* <Button type={"delete"} onClick={() => deleteHandler(id)} id={id}> */}
-              Delete
-            </Button>
+            {isDeleted && (
+              <Button type={"delete"} onClick={onBtnClickHandler} id={orderId}>
+                {/* <Button type={"delete"} onClick={() => deleteHandler(id)} id={id}> */}
+                Delete
+              </Button>
+            )}
           </div>
         </section>
       </div>
@@ -192,33 +196,3 @@ function Order({ order, onStatusChange, isRejected = true }) {
 }
 
 export default Order;
-
-// [
-//   {
-//       "orderId": 3,
-//       "serialNumber": "BID12345680",
-//       "orderParts": [
-//           {
-//               "partId": 1,
-//               "descrioption": "test",
-//               "partName": "Frame OG",
-//               "partQuantity": 1,
-//               "partQunatityInStock": 2
-//           },
-//           {
-//               "partId": 5,
-//               "descrioption": "test",
-//               "partName": "Wheel of the Year for montain",
-//               "partQuantity": 6,
-//               "partQunatityInStock": 40
-//           },
-//           {
-//               "partId": 11,
-//               "descrioption": "test",
-//               "partName": "Road budget Shifts",
-//               "partQuantity": 4,
-//               "partQunatityInStock": 21
-//           }
-//       ]
-//   }
-// ]
