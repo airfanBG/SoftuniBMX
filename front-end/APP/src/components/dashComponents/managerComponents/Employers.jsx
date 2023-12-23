@@ -12,6 +12,11 @@ function Employers() {
   const [background, setBackground] = useState(false);
   const [person, setPerson] = useState({});
 
+  function close(e) {
+    // setCurrentOrder({});
+    // setBackground(false);
+  }
+
   function onSelectActive(selected) {
     if (active === selected) return;
     setActive(selected);
