@@ -108,17 +108,17 @@ function Employers() {
   const [background, setBackground] = useState(false);
 
   // TODO: change this when fixed in backend
-  // const employersList = useMemo(() => {
-  //   return getEmployers();
-  // }, []);
+  const employersList = useMemo(() => {
+    return getEmployers();
+  }, []);
 
   useEffect(
     function () {
       const abortController = new AbortController();
       async function getEmps() {
         // TODO: change this when fixed in backend
-        // const data = await employersList;
-        const data = list;
+        const data = await employersList;
+        // const data = list;
         let empArr = [];
         let conArr = [];
         let manArr = [];
@@ -141,8 +141,8 @@ function Employers() {
     },
 
     // TODO: change this when fixed in backend
-    // [employersList]
-    []
+    [employersList]
+    // []
   );
 
   function handleClick(p) {
@@ -166,6 +166,9 @@ function Employers() {
 
         <div className={styles.wrapper}>
           <aside className={styles.control}>
+            <Link to={"/profile/salaries"} className={styles.actionLink}>
+            Salaries
+            </Link>
             <Link to={"/profile/add-member"} className={styles.actionLink}>
               Add employee
             </Link>

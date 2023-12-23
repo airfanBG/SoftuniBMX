@@ -1,7 +1,6 @@
 ﻿namespace BicycleApp.Services.Services.Orders
 {
     using BicicleApp.Common.Providers.Contracts;
-    using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.Contracts.Factory;
@@ -18,19 +17,16 @@
         private readonly BicycleAppDbContext _db;
         private readonly IStringManipulator _stringManipulator;
         private readonly IOrderFactory _orderFactory;
-        private readonly IGuidProvider _guidProvider;
         private readonly IDateTimeProvider _dateTimeProvider;
 
         public OrderUserService(BicycleAppDbContext db,
                                 IStringManipulator stringManipulator,
                                 IOrderFactory orderFactory,
-                                IGuidProvider guidProvider,
                                 IDateTimeProvider dateTimeProvider)
         {
             _db = db;
             _stringManipulator = stringManipulator;
             _orderFactory = orderFactory;
-            _guidProvider = guidProvider;
             _dateTimeProvider = dateTimeProvider;
         }
 
@@ -85,7 +81,7 @@
                 {
                     return null;
                 }
-
+              
                 var newOrderObject = _orderFactory.CreateUserOrder(newOrder, _dateTimeProvider.Now);
 
                 await _db.Orders.AddAsync(newOrderObject);
@@ -127,8 +123,9 @@
                                                    NameOfEmplоyeeProducedThePart = _stringManipulator.ReturnFullName(ope.Employee.FirstName, ope.Employee.LastName),
                                                    PartModel = ope.Part.Name,
                                                    PartType = ope.Part.Category.Name,
-                                                   PartId = ope.PartId
-
+                                                   PartId = ope.PartId,
+                                                   StartDate = ope.StartDatetime.ToString(),
+                                                   EndDate = ope.EndDatetime.ToString(),
                                                }).ToList()
                             })
                             .ToListAsync();
@@ -151,7 +148,7 @@
                 for (int i = 0; i < quntityOfPart; i++)
                 {
                     string serialNumber = _stringManipulator.SerialNumberGenerator();
-                    string guidKey = _guidProvider.CreateGuid();
+                    string guidKey = _stringManipulator.CreateGuid();
 
                     foreach (var orderPart in newOrder.OrderParts)
                     {

@@ -46,5 +46,9 @@
 
             return serialNumber.ToString();
         }
+        public string CreateGuid()
+        {
+            return Guid.NewGuid().ToString();
+        }
     }
 }

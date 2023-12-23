@@ -6,5 +6,6 @@
         string ReturnFullName(string firstName, string lastName);
         string UrlMaker(string httpScheme, string httpHost, string endPoint, string? values);
         string SerialNumberGenerator();
+        string CreateGuid();
     }
 }

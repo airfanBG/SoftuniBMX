@@ -29,7 +29,7 @@
     {
         private readonly UserManager<BaseUser> userManager;
         private readonly SignInManager<BaseUser> signInManager;
-        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly RoleManager<BaseUserRole> roleManager;
         private readonly BicycleAppDbContext dbContext;
         private readonly IConfiguration configuration;
         private readonly IModelsFactory modelFactory;
@@ -39,7 +39,7 @@
 
         public EmployeeService(UserManager<BaseUser> userManager, 
                                SignInManager<BaseUser> signInManager,
-                               RoleManager<IdentityRole> roleManager,
+                               RoleManager<BaseUserRole> roleManager,
                                BicycleAppDbContext dbContext, 
                                IConfiguration configuration, 
                                IModelsFactory modelFactory, 
@@ -84,7 +84,9 @@
             var result = await this.userManager.CreateAsync(employee, employeeRegisterDto.Password);
 
             var isRoleExists = await roleManager.RoleExistsAsync(employeeRegisterDto.Role.ToLower());
-            var identityRole = new IdentityRole(employeeRegisterDto.Role.ToLower());
+            var identityRole = new BaseUserRole();
+            identityRole.Name = employeeRegisterDto.Role;
+            
             if (!isRoleExists)
             {
                 await roleManager.CreateAsync(identityRole);

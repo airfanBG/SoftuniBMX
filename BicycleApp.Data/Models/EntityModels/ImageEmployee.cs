@@ -1,13 +1,13 @@
 ﻿namespace BicycleApp.Data.Models.EntityModels
 {
     using System.ComponentModel.DataAnnotations;
-
+    using BicycleApp.Data.Interfaces;
     using BicycleApp.Data.Models.IdentityModels;
 
     using Microsoft.EntityFrameworkCore;
 
     [Comment("Table with the location of all images of all employees in tha database")]
-    public class ImageEmployee
+    public class ImageEmployee : IUserImage
     {
         [Key]
         public int Id { get; set; }
@@ -22,7 +22,7 @@
 
         [Required]
         [Comment("Id of the client")]
-        public string EmployeeId { get; set; } = null!;
+        public string UserId { get; set; } = null!;
 
         public virtual Employee Employee { get; set; } = null!;
 
