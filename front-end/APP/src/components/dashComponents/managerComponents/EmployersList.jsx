@@ -167,7 +167,7 @@ function Employers() {
         <div className={styles.wrapper}>
           <aside className={styles.control}>
             <Link to={"/profile/salaries"} className={styles.actionLink}>
-            Salaries
+              Salaries
             </Link>
             <Link to={"/profile/add-member"} className={styles.actionLink}>
               Add employee

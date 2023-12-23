@@ -1,7 +1,7 @@
 import styles from "./Warehouse.module.css";
 
 import LoaderWheel from "../LoaderWheel.jsx";
-import { useContext, useState } from "react";
+import { useContext, useState, memo } from "react";
 import { UserContext } from "../../context/GlobalUserProvider.jsx";
 
 function Warehouse() {
@@ -29,4 +29,4 @@ function Warehouse() {
   );
 }
 
-export default Warehouse;
+export default memo(Warehouse);

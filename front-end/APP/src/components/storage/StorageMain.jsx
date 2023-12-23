@@ -38,18 +38,21 @@ function StorageMain() {
             >
               Warehouse
             </button>
-            <button
-              className={styles.actionLink}
-              onClick={() => onSelectActive("add")}
-            >
-              Add product
-            </button>
+
             <button
               className={styles.actionLink}
               onClick={() => onSelectActive("scrap")}
             >
               Scrap
             </button>
+
+            <button
+              className={styles.actionLink}
+              onClick={() => onSelectActive("add")}
+            >
+              Add product
+            </button>
+
             <button
               className={styles.actionLink}
               onClick={() => onSelectActive("supplier")}
@@ -59,8 +62,8 @@ function StorageMain() {
           </aside>
           <main className={styles.main}>
             {active === "warehouse" && <Warehouse />}
-            {active === "add" && <AddProducts />}
             {active === "scrap" && <Scrap />}
+            {active === "add" && <AddProducts />}
             {active === "supplier" && (
               <AddSupplier onFinish={onSelectActive} active="warehouse" />
             )}
