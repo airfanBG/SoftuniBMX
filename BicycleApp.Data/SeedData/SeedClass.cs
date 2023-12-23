@@ -432,15 +432,201 @@
 
         public List<ImagePart> SeedImagesParts()
         {
-            ImagePart imagePart = new ImagePart()
+
+            ImagePart imagePart1 = new ImagePart()
             {
                 Id = 1,
-                ImageName = "image",
-                ImageUrl = "test",
-                PartId = 1
+                PartId = 1,
+                ImageName = "Frame Road",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/frame1.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart2 = new ImagePart()
+            {
+                Id = 2,
+                PartId = 2,
+                ImageName = "Frame Montain",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/frame2.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart3 = new ImagePart()
+            {
+                Id = 3,
+                PartId = 3,
+                ImageName = "Frame Road woman",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/frame3.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart4 = new ImagePart()
+            {
+                Id = 4,
+                PartId = 4,
+                ImageName = "Wheel of the Year for road",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/wheel1.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart5 = new ImagePart()
+            {
+                Id = 5,
+                PartId = 5,
+                ImageName = "Wheel of the Year for montain",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/wheel2.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart6 = new ImagePart()
+            {
+                Id = 6,
+                PartId = 6,
+                ImageName = "Road wheel best",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/wheel3.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart7 = new ImagePart()
+            {
+                Id = 7,
+                PartId = 7,
+                ImageName = "Shift",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket1.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart8 = new ImagePart()
+            {
+                Id = 8,
+                PartId = 8,
+                ImageName = "Montain Shift",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket2.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart9 = new ImagePart()
+            {
+                Id = 9,
+                PartId = 9,
+                ImageName = "Road Shifts",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket3.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart10 = new ImagePart()
+            {
+                Id = 10,
+                PartId = 10,
+                ImageName = "Road better Shifts",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket4.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart11 = new ImagePart()
+            {
+                Id = 11,
+                PartId = 11,
+                ImageName = "Road budget Shift",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket6.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart12 = new ImagePart()
+            {
+                Id = 12,
+                PartId = 12,
+                ImageName = "Shift",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket5.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart13 = new ImagePart()
+            {
+                Id = 13,
+                PartId = 13,
+                ImageName = "Montain Shift",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket7.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart14 = new ImagePart()
+            {
+                Id = 14,
+                PartId = 14,
+                ImageName = "Budget wheel for road",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/wheel5.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart15 = new ImagePart()
+            {
+                Id = 15,
+                PartId = 15,
+                ImageName = "Budget wheel for a montain",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/wheel8.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart16 = new ImagePart()
+            {
+                Id = 16,
+                PartId = 16,
+                ImageName = "The cheapest road wheel",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/wheel6.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart17 = new ImagePart()
+            {
+                Id = 17,
+                PartId = 17,
+                ImageName = "Road titanium wheel",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/wheel7.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
             };
 
-            return new List<ImagePart> { imagePart };
+            return new List<ImagePart> 
+            { 
+                imagePart1, imagePart2, imagePart3, imagePart4, imagePart5, imagePart6,
+                imagePart7, imagePart8, imagePart9, imagePart10, imagePart11, imagePart12,
+                imagePart13, imagePart14, imagePart15, imagePart16, imagePart17
+            };
         }
 
         public List<ImageClient> SeedImagesClients()
