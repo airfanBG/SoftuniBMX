@@ -30,6 +30,7 @@ import ManagerFinished from "./components/dashComponents/managerComponents/Manag
 import ManagerStatistic from "./components/dashComponents/managerComponents/ManagerStatistic.jsx";
 import ManagerSalaries from "./components/dashComponents/managerComponents/ManagerSalaries.jsx";
 import StorageMain from "./components/storage/StorageMain.jsx";
+import Employers from "./components/dashComponents/managerComponents/Employers.jsx";
 
 // LAZY LOADING
 const CreateBike = lazy(() =>
@@ -97,6 +98,7 @@ function App() {
                     element={<ManagerFinished />}
                   />
                   <Route path={"employers"} element={<EmployersList />} />
+                  {/* <Route path={"employers"} element={<Employers />} /> */}
                   <Route path={"statistic"} element={<ManagerStatistic />} />
                   <Route path={"salaries"} element={<ManagerSalaries />} />
                   <Route path={"add-member"} element={<AddMember />} />
