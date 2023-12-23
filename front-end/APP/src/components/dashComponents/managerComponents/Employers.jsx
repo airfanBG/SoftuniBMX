@@ -3,16 +3,24 @@ import { Link } from "react-router-dom";
 import BoardHeader from "../BoardHeader.jsx";
 import { useState } from "react";
 import PopupInfo from "./PopupInfo.jsx";
+import EmployeesListComponent from "./employeesComponents/EmployeesListComponent.jsx";
+import Salaries from "./employeesComponents/Salaries.jsx";
+import AddMember from "./employeesComponents/AddMember.jsx";
 
 function Employers() {
-  const [selected, setSelected] = useState("employees");
+  const [active, setActive] = useState("employees");
   const [background, setBackground] = useState(false);
   const [person, setPerson] = useState({});
+
+  function onSelectActive(selected) {
+    if (active === selected) return;
+    setActive(selected);
+  }
 
   return (
     <>
       {background && <PopupInfo person={person} onClose={close} />}
-      <h2 className={styles.dashHeadingMain}>Employees List</h2>
+      <h2 className={styles.dashHeadingMain}>Employees</h2>
 
       <section className={styles.board}>
         <BoardHeader />
@@ -20,12 +28,24 @@ function Employers() {
 
         <div className={styles.wrapper}>
           <aside className={styles.control}>
-            <Link to={"/profile/salaries"} className={styles.actionLink}>
+            <button
+              className={styles.actionLink}
+              onClick={() => onSelectActive("employees")}
+            >
+              Employees
+            </button>
+            <button
+              className={styles.actionLink}
+              onClick={() => onSelectActive("salaries")}
+            >
               Salaries
-            </Link>
-            <Link to={"/profile/add-member"} className={styles.actionLink}>
+            </button>
+            <button
+              className={styles.actionLink}
+              onClick={() => onSelectActive("add")}
+            >
               Add employee
-            </Link>
+            </button>
           </aside>
           {/* <main className={styles.main}>
             <h2 className={styles.dashHeading}>Employers list</h2>
@@ -62,6 +82,16 @@ function Employers() {
                 ))}
             </div>
           </main> */}
+
+          <main className={styles.main}>
+            {active === "employees" && <EmployeesListComponent />}
+            {active === "salaries" && <Salaries />}
+            {active === "add" && <AddMember />}
+            {/* {active === "scrap" && <Scrap />}
+            {active === "supplier" && (
+              <AddSupplier onFinish={onSelectActive} active="warehouse" />
+            )} */}
+          </main>
         </div>
       </section>
     </>

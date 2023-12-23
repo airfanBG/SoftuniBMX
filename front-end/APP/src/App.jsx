@@ -15,8 +15,8 @@ import ManagerOrders from "./components/dashComponents/managerComponents/Manager
 import WorkerOrders from "./components/dashComponents/workerComponents/WorkerOrders.jsx";
 import WorkerFinished from "./components/dashComponents/workerComponents/WorkerFinished.jsx";
 import UserInfo from "./components/dashComponents/userComponents/UserInfo.jsx";
-import EmployersList from "./components/dashComponents/managerComponents/EmployersList.jsx";
-import AddMember from "./components/dashComponents/managerComponents/AddMember.jsx";
+// import EmployersList from "./components/dashComponents/managerComponents/EmployersList.jsx";
+// import AddMember from "./components/dashComponents/managerComponents/AddMember.jsx";
 import InProgress from "./components/dashComponents/managerComponents/InProgress.jsx";
 import QControlOrders from "./components/dashComponents/qControlComponents/QControlOrders.jsx";
 import UserTrackOrder from "./components/dashComponents/userComponents/UserTrackOrder.jsx";
@@ -97,11 +97,11 @@ function App() {
                     path={"manager-finished"}
                     element={<ManagerFinished />}
                   />
-                  <Route path={"employers"} element={<EmployersList />} />
-                  {/* <Route path={"employers"} element={<Employers />} /> */}
+                  {/* <Route path={"employers"} element={<EmployersList />} /> */}
+                  <Route path={"employers"} element={<Employers />} />
                   <Route path={"statistic"} element={<ManagerStatistic />} />
                   <Route path={"salaries"} element={<ManagerSalaries />} />
-                  <Route path={"add-member"} element={<AddMember />} />
+                  {/* <Route path={"add-member"} element={<AddMember />} /> */}
                   <Route path={"storage"} element={<StorageMain />} />
 
                   {/* QCONTROL */}

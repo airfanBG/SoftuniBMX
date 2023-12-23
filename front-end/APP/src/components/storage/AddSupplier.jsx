@@ -1,7 +1,7 @@
 import styles from "./AddSupplier.module.css";
 
 import LoaderWheel from "../LoaderWheel.jsx";
-import { useContext, useReducer } from "react";
+import { memo, useContext, useReducer } from "react";
 import { UserContext } from "../../context/GlobalUserProvider.jsx";
 import { PhoneInput } from "react-international-phone";
 import { post } from "../../util/api.js";
@@ -225,4 +225,4 @@ function AddSupplier({ onFinish, active }) {
     </>
   );
 }
-export default AddSupplier;
+export default memo(AddSupplier);

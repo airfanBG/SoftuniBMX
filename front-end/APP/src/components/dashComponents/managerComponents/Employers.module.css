@@ -14,24 +14,27 @@
   margin: 1rem 0;
 }
 .wrapper {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
   gap: 2rem;
   padding: 4rem 1rem 1rem;
+  width: 100%;
 }
 
 .control {
+  grid-column: 1/2;
   background-color: var(--color-border);
-  width: 12%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
   padding: 1rem;
   border-right: 1px solid var(--color-border);
+  min-height: 20rem;
 }
-
 .actionLink:link,
-.actionLink:visited {
+.actionLink:visited,
+button.actionLink {
   width: 100%;
   text-align: center;
   font-size: 1.6rem;
@@ -48,8 +51,12 @@
   border: 1px solid var(--color-line);
 }
 
+.active {
+  font-size: 3rem;
+}
+
 main.main {
-  width: 88%;
+  grid-column: 2/8;
 }
 
 .dashHeading {
@@ -74,17 +81,4 @@ main.main {
   font-size: 1.4rem;
   /* color: var(--color-hd); */
   color: var(--color-main-dark);
-}
-.cardHolder {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  margin-bottom: 4rem;
-}
-.cardHolder:last-child {
-  margin-bottom: 0;
-}
-
-.spacer {
-  margin-bottom: 4rem;
 }
