@@ -67,7 +67,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-52%, -46%);
+  transform: translate(-50%, -46%);
 }
 .circle span.preview {
   /* color: rgb(0, 139, 246); */

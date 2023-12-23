@@ -6,6 +6,7 @@ import { useState } from "react";
 import AddProducts from "./AddProducts.jsx";
 import Scrap from "./Scrap.jsx";
 import Warehouse from "./Warehouse.jsx";
+import AddSupplier from "./AddSupplier.jsx";
 
 function StorageMain() {
   const [background, setBackground] = useState(false);
@@ -49,11 +50,20 @@ function StorageMain() {
             >
               Scrap
             </button>
+            <button
+              className={styles.actionLink}
+              onClick={() => onSelectActive("supplier")}
+            >
+              Add suppliers
+            </button>
           </aside>
           <main className={styles.main}>
             {active === "warehouse" && <Warehouse />}
             {active === "add" && <AddProducts />}
             {active === "scrap" && <Scrap />}
+            {active === "supplier" && (
+              <AddSupplier onFinish={onSelectActive} active="warehouse" />
+            )}
           </main>
         </div>
       </section>
