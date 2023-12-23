@@ -12,7 +12,7 @@
 
 [X] - add employee form
 
-[ ] - validate employee form
+[X] - validate employee form
 
 [ ] - Statistic
 
