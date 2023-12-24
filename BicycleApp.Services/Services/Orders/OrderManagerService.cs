@@ -148,6 +148,11 @@
                                                    PartQuantity = ope.PartQuantity,
                                                    StartDate = ope.StartDatetime.ToString(),
                                                    EndDate = ope.EndDatetime.ToString(),
+                                                   Description = _stringManipulator.GetTextFromProperty(ope.Description),
+                                                   ElementProduceTimeInMinutes = ope.OrdersPartsEmployeesInfos.Where(opei => opei.OrderId == ope.OrderId
+                                                            && opei.PartId == ope.PartId
+                                                            && opei.UniqueKeyForSerialNumber == ope.UniqueKeyForSerialNumber)
+                                                                                                     .Sum(opeis => opeis.ProductionТime.Minutes)
                                                }).ToList()
                             })
                             .ToListAsync();
@@ -188,7 +193,7 @@
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <returns>Task<ICollection<OrderInfoDto>></returns>
-        public async Task<ICollection<OrderInfoDto>> GetAllFinishedOrdersForPeriod(FinishedOrdersDto datesPeriod)
+        public async Task<ICollection<OrderProgretionDto>> GetAllFinishedOrdersForPeriod(FinishedOrdersDto datesPeriod)
         {
             var result =  await _db.Orders
                             .Include(o => o.OrdersPartsEmployees)
@@ -197,23 +202,30 @@
                             .Where(o => o.DateCreated >= datesPeriod.StartDate
                                      && o.DateFinish <= datesPeriod.EndDate
                                      && o.DateFinish != null)
-                            .Select(o => new OrderInfoDto()
+                            .Select(o => new OrderProgretionDto()
                             {
                                 OrderId = o.Id,
                                 SerialNumber = o.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
-                                DateCreated = o.DateCreated.ToString(),
-                                DateFinished = o.DateFinish.ToString(),
-                                OrderParts = o.OrdersPartsEmployees
-                                                .Select(orderPart => new OrderPartInfoDto
-                                                {
-                                                    PartId = orderPart.PartId,
-                                                    Description = _stringManipulator.GetTextFromProperty(orderPart.Description),
-                                                    PartName = orderPart.PartName,
-                                                    PartQuantity = orderPart.PartQuantity,
-                                                    PartQunatityInStock = orderPart.Part.Quantity
-                                                })
-                                                .ToList()
-
+                                DateCreated = o.DateCreated.ToString(DefaultDateFormat),   
+                                DateFinished = o.DateFinish.Value.ToString(DefaultDateFormat),
+                                OrderStates = o.OrdersPartsEmployees
+                                               .Select(ope => new OrderStateDto()
+                                               {
+                                                   IsProduced = ope.IsCompleted,
+                                                   NameOfEmplоyeeProducedThePart = _stringManipulator.ReturnFullName(ope.Employee.FirstName, ope.Employee.LastName),
+                                                   PartModel = ope.PartName,
+                                                   PartType = ope.Part.Category.Name,
+                                                   SerialNumber = ope.SerialNumber,
+                                                   PartId = ope.PartId,
+                                                   PartQuantity = ope.PartQuantity,
+                                                   StartDate = ope.StartDatetime.ToString(),
+                                                   EndDate = ope.EndDatetime.ToString(),
+                                                   Description = _stringManipulator.GetTextFromProperty(ope.Description),
+                                                   ElementProduceTimeInMinutes = ope.OrdersPartsEmployeesInfos.Where(opei => opei.OrderId == ope.OrderId
+                                                            && opei.PartId == ope.PartId
+                                                            && opei.UniqueKeyForSerialNumber == ope.UniqueKeyForSerialNumber)
+                                                                                                     .Sum(opeis => opeis.ProductionТime.Minutes)
+                                               }).ToList()
                             })
 
                             .ToListAsync();
