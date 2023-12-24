@@ -127,7 +127,7 @@
                             .ThenInclude(part => part.Category)
                             .Where(o => o.OrdersPartsEmployees.Any(ope => ope.EmployeeId != null
                                                                               && ope.DatetimeAsigned != null)
-                                                                              && (o.IsDeleted == false 
+                                                                              && (o.IsDeleted == false
                                                                               && o.DateDeleted.Equals(null))
                                                                               && o.DateFinish.Equals(null))
                             .Select(o => new OrderProgretionDto()
@@ -194,9 +194,10 @@
         /// <returns>Task<ICollection<OrderInfoDto>></returns>
         public async Task<ICollection<OrderProgretionDto>> GetAllFinishedOrdersForPeriod(FinishedOrdersDto datesPeriod)
         {
-            var result =  await _db.Orders
+            var result = await _db.Orders
                             .Include(o => o.OrdersPartsEmployees)
-                            .ThenInclude(ope => ope.OrdersPartsEmployeesInfos)//До тук - да вкарам ProductionTime!!!
+                            .ThenInclude(ope => ope.OrdersPartsEmployeesInfos)
+                            .Include(o => o.Client)
                             .AsNoTracking()
                             .Where(o => o.DateCreated >= datesPeriod.StartDate
                                      && o.DateFinish <= datesPeriod.EndDate
@@ -205,8 +206,12 @@
                             {
                                 OrderId = o.Id,
                                 SerialNumber = o.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
-                                DateCreated = o.DateCreated.ToString(DefaultDateFormat),   
+                                DateCreated = o.DateCreated.ToString(DefaultDateFormat),
                                 DateFinished = o.DateFinish.Value.ToString(DefaultDateFormat),
+                                SaleAmount = o.FinalAmount,
+                                ClientName = o.Client.LastName,
+                                ClientEmail = o.Client.Email,
+                                ClientPhone = o.Client.PhoneNumber,
                                 OrderStates = o.OrdersPartsEmployees
                                                .Select(ope => new OrderStateDto()
                                                {
@@ -447,7 +452,7 @@
         public async Task<int> GetTotalProductionTime(int orderId)
         {
             return await _db.OrdersPartsEmployeesInfos
-                .Where(opei=>opei.OrderId == orderId)
+                .Where(opei => opei.OrderId == orderId)
                 .SumAsync(opei => opei.ProductionТime.Minutes);
         }
 
