@@ -7,7 +7,11 @@
 - `serialNumber"`: Уникален идентификатор на велосипеда.
 - `dateCreated`: Дата и час на създаване на поръчката.
 - `dateFinished`: Дата и час на завършване на поръчката.
-- `totalProductionTime`: Общо врема за производство на велосипеда.
+- `totalProductionTime`: Общо времe за производство на велосипеда.
+- `saleAmount`: Общо стойност на поръчката.
+- `clientName`: Фамилия на клиента.
+- `clientEmail`: Имейл на клиента.
+- `clientPhone`: Телефонен номер на клиента.
 - `orderStates`: Колекция от поръчаните части.
 - `partId`: Уникален идентификатор на частта.
 - `partType`: Категория на частта.
@@ -41,6 +45,10 @@ GET /api/manager/finished_orders
     "dateCreated": "15-12-2023",
     "dateFinished": "17-12-2023",
     "totalProductionTime": 25,
+    "saleAmount": 425,
+    "clientName": "Ivanov",
+    "clientEmail": "client@test.bg",
+    "clientPhone": "1234567890",
     "orderStates": [
       {
         "partId": 1,
