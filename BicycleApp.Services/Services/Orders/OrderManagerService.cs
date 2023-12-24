@@ -230,6 +230,11 @@
 
                             .ToListAsync();
 
+            foreach (var order in result)
+            {
+                order.TotalProductionTime = await GetTotalProductionTime(order.OrderId);
+            }
+
             return result;
         }
 
@@ -306,7 +311,7 @@
             {
                 throw new ApplicationException("Database can't retrive data", ex);
             }
-            }
+        }
 
         /// <summary>
         /// The method returns all rejected orders (painding for a part delivery)
@@ -441,6 +446,50 @@
             }).ToList();
 
             return sortedList;
+        }
+
+        public async Task<int> GetTotalProductionTime(int orderId)
+        {
+            return await _db.OrdersPartsEmployeesInfos
+                .Where(opei=>opei.OrderId == orderId)
+                .SumAsync(opei => opei.ProductionТime.Minutes);
+        }
+
+        public async Task<OrderQueryDto> AllDeletedOrdersAsync(int currentPage)
+        {
+            int deliveriesPerPage = 6;
+
+            var result = new OrderQueryDto();
+
+            result.Orders = await _db.Orders
+                   .AsNoTracking()
+                   .Where(o => o.DateDeleted != null && o.IsDeleted == true)
+                   .Skip((currentPage - 1) * deliveriesPerPage)
+                   .Take(deliveriesPerPage)
+                   .Select(ope => new OrderInfoDto
+                   {
+                       OrderId = ope.Id,
+                       SerialNumber = ope.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
+                       DateCreated = ope.DateCreated.ToString(),
+                       OrderParts = ope.OrdersPartsEmployees
+                                   .Select(orderPart => new OrderPartInfoDto
+                                   {
+                                       PartId = orderPart.PartId,
+                                       Description = _stringManipulator.GetTextFromProperty(orderPart.Description),
+                                       PartName = orderPart.PartName,
+                                       PartQuantity = orderPart.PartQuantity,
+                                       PartQunatityInStock = orderPart.Part.Quantity
+                                   })
+                                   .ToList()
+                   })
+                   .ToListAsync();
+
+            result.TotalOrdersCount = await _db.Orders
+                   .AsNoTracking()
+                   .Where(o => o.DateDeleted != null && o.IsDeleted == true)
+                   .CountAsync();
+
+            return result;
         }
     }
 }

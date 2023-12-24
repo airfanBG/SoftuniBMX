@@ -8,9 +8,10 @@
         public string Description { get; set; } = null!;
         public string Intend { get; set; } = null!;
         public List<string> ImageUrls { get; set; } = new List<string>();
-        public string? OEMNumber { get; set; }
+        public string OEMNumber { get; set; } = null!;
         public int Rating { get; set; }
         public int Type { get; set; }
+        public int Quantity { get; set; }
         public decimal SalePrice { get; set; }
     }
 }

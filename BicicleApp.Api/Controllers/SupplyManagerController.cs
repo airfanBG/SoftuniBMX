@@ -1,5 +1,6 @@
 ﻿using BicycleApp.Services.Contracts;
 using BicycleApp.Services.Models.Supply;
+using BicycleApp.Services.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -331,7 +332,7 @@ namespace BicicleApp.Api.Controllers
             {
                 await _supplyManagerService.DeleteSuplierById(suplierId);
 
-                return StatusCode(200);
+                return StatusCode(200, true);
             }
             catch (Exception)
             {
@@ -362,7 +363,7 @@ namespace BicicleApp.Api.Controllers
             {
                 await _supplyManagerService.DeleteDeliveryById(deliveryId);
 
-                return StatusCode(200);
+                return StatusCode(200, true);
             }
             catch (Exception)
             {
@@ -393,7 +394,7 @@ namespace BicicleApp.Api.Controllers
             {
                 await _supplyManagerService.DeletePartOrderById(partOrderId);
 
-                return StatusCode(200);
+                return StatusCode(200, true);
             }
             catch (Exception)
             {
@@ -431,7 +432,7 @@ namespace BicicleApp.Api.Controllers
 
                 if (result)
                 {
-                    return StatusCode(202);
+                    return StatusCode(202, true);
                 }
 
                 return StatusCode(400, editDeliveryDto);
@@ -470,7 +471,7 @@ namespace BicicleApp.Api.Controllers
 
                 if (result)
                 {
-                    return StatusCode(202);
+                    return StatusCode(202, true);
                 }
 
                 return StatusCode(400, editSuplierDto);
@@ -510,13 +511,46 @@ namespace BicicleApp.Api.Controllers
 
                 if (result)
                 {
-                    return StatusCode(202);
+                    return StatusCode(202, true);
                 }
 
                 return StatusCode(400, editPartOrderDto);
             }
             catch (Exception)
             {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpGet]
+        [Route("parts_in_stock")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetAllAvaiableParts([FromQuery] int page = 1)
+        {
+
+            if (page <= 0)
+            {
+                return StatusCode(400);
+            }
+
+            try
+            {
+                var model = await _supplyManagerService.AllPartsInStock(page);
+
+                if (model == null)
+                {
+                    // The model object is null, so return a 204 NoContent
+                    return StatusCode(204);
+                }
+
+                return StatusCode(200, model);
+            }
+            catch (Exception)
+            {
+
                 return StatusCode(500);
             }
         }

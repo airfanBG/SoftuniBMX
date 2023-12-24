@@ -6,6 +6,7 @@
         public string SerialNumber { get; set; } = null!;
         public string DateCreated { get; set; } = null!;
         public string? DateFinished { get; set; } = null!;
+        public string? DateDeleted { get; set; } = null!;
         public ICollection<OrderPartInfoDto> OrderParts { get; set; } = new List<OrderPartInfoDto>();
     }
 }

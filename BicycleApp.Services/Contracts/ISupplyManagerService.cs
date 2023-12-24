@@ -1,4 +1,6 @@
-﻿using BicycleApp.Services.Models.Supply;
+﻿using BicycleApp.Services.Models;
+using BicycleApp.Services.Models.Order;
+using BicycleApp.Services.Models.Supply;
 
 namespace BicycleApp.Services.Contracts
 {
@@ -22,6 +24,7 @@ namespace BicycleApp.Services.Contracts
         Task DeleteSuplierById(int suplierId);
         Task DeleteDeliveryById(int deliveryId);
         Task DeletePartOrderById(int partOrderId);
+        Task<PartQueryDto> AllPartsInStock(int currentPage);
 
         //Task UpdateSuplierPartsInStock(int suplierId, int[] suppliedPartsOemNums);
     }

@@ -1,6 +1,8 @@
 ﻿using BicicleApp.Common.Providers.Contracts;
 using BicycleApp.Data;
 using BicycleApp.Services.Contracts;
+using BicycleApp.Services.Models;
+using BicycleApp.Services.Models.Order;
 using BicycleApp.Services.Models.Supply;
 using Microsoft.EntityFrameworkCore;
 
@@ -289,7 +291,7 @@ namespace BicycleApp.Services.Services
             try
             {
 
-                var partOrderToReject = await _dbContext.PartOrders.FirstAsync(po=>po.Id == partOrderId);
+                var partOrderToReject = await _dbContext.PartOrders.FirstAsync(po => po.Id == partOrderId);
                 partOrderToReject.DateDeleted = _dateTimeProvider.Now;
                 partOrderToReject.IsDeleted = true;
 
@@ -505,10 +507,10 @@ namespace BicycleApp.Services.Services
                 return false;
             }
 
-            partOrder.Note = editePartOrderDto.Note == null? partOrder.Note : editePartOrderDto.Note;
+            partOrder.Note = editePartOrderDto.Note == null ? partOrder.Note : editePartOrderDto.Note;
             partOrder.PartId = editePartOrderDto.PartId == null ? partOrder.PartId : editePartOrderDto.PartId;
-            partOrder.Quantity = editePartOrderDto.Quantity == null? partOrder.Quantity : editePartOrderDto.Quantity;
-            partOrder.SuplierId = editePartOrderDto.SuplierId == null? partOrder.SuplierId : editePartOrderDto.SuplierId;
+            partOrder.Quantity = editePartOrderDto.Quantity == null ? partOrder.Quantity : editePartOrderDto.Quantity;
+            partOrder.SuplierId = editePartOrderDto.SuplierId == null ? partOrder.SuplierId : editePartOrderDto.SuplierId;
 
             await _dbContext.SaveChangesAsync();
 
@@ -549,6 +551,62 @@ namespace BicycleApp.Services.Services
             return await _dbContext.PartOrders
                 .Where(po => po.Id == partOrderId && po.IsDeleted == false)
                 .AnyAsync();
+        }
+
+        /// <summary>
+        /// Gets all avaiable parts in database
+        /// </summary>
+        /// <returns>Dto's collection of all avaiable parts in database</returns>
+        public async Task<PartQueryDto> AllPartsInStock(int currentPage)
+        {
+            int deliveriesPerPage = 6;
+
+            var result = new PartQueryDto();
+
+            try
+            {
+                result.Parts = await _dbContext.Parts
+                .AsNoTracking()
+                .Include(p => p.ImagesParts)
+                .Skip((currentPage - 1) * deliveriesPerPage)
+                .Take(deliveriesPerPage)
+                .Select(p => new PartDto
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    OEMNumber = p.OEMNumber,
+                    Intend = p.Intend,
+                    Description = p.Description,
+                    Type = p.Type,
+                    Quantity = (int)p.Quantity,
+                    Category = p.Category.Name,
+                    Rating = (int)Math.Ceiling(p.Rates
+                                    .Where(r => r.PartId == p.Id)
+                                    .Select(r => r.Rating)
+                                    .Average()) == null
+                                    ? 0
+                                    : (int)Math.Ceiling(p.Rates
+                                    .Where(r => r.PartId == p.Id)
+                                    .Select(r => r.Rating)
+                                    .Average()),
+                    SalePrice = p.SalePrice,
+                    ImageUrls = p.ImagesParts.Where(p => p.PartId == p.Id)
+                    .Select(ip => ip.ImageUrl).ToList()
+                })
+                .ToListAsync();
+
+                result.TotalPartsCount = await _dbContext.Parts
+                            .AsNoTracking()
+                            .Where(p => p.IsDeleted == false && p.DateDeleted.Equals(null))
+                            .CountAsync();
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Database can't retrive data", ex);
+            }
         }
 
 
