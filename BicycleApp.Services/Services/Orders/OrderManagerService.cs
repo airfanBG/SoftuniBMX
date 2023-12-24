@@ -29,7 +29,7 @@
             _stringManipulator = stringManipulator;
             _dateTimeProvider = dateTimeProvider;
         }
-        
+
 
         /// <summary>
         /// Manager accept order and assign it to employee.
@@ -80,7 +80,7 @@
 
             var result = new OrderQueryDto();
 
-            result.Orders =  await _db.Orders
+            result.Orders = await _db.Orders
                    .AsNoTracking()
                    .Where(o => o.OrdersPartsEmployees.Any(ope => ope.EmployeeId == null)
                                                                  && (o.IsDeleted == false && o.DateDeleted.Equals(null)))
@@ -128,7 +128,7 @@
                             .ThenInclude(part => part.Category)
                             .Where(o => o.OrdersPartsEmployees.Any(ope => ope.EmployeeId != null
                                                                               && ope.DatetimeAsigned != null)
-                                                                              && (o.IsDeleted == false 
+                                                                              && (o.IsDeleted == false
                                                                               && o.DateDeleted.Equals(null))
                                                                               && o.DateFinish.Equals(null))
                             .Select(o => new OrderProgretionDto()
@@ -179,7 +179,7 @@
                 int partsNeeded = partsInOrder - quantityOfPartInStock;
 
                 return partsNeeded;
-                }
+            }
             catch (Exception ex)
             {
                 throw new ApplicationException("Database can't retrive data", ex);
@@ -195,9 +195,10 @@
         /// <returns>Task<ICollection<OrderInfoDto>></returns>
         public async Task<ICollection<OrderProgretionDto>> GetAllFinishedOrdersForPeriod(FinishedOrdersDto datesPeriod)
         {
-            var result =  await _db.Orders
+            var result = await _db.Orders
                             .Include(o => o.OrdersPartsEmployees)
-                            .ThenInclude(ope => ope.OrdersPartsEmployeesInfos)//До тук - да вкарам ProductionTime!!!
+                            .ThenInclude(ope => ope.OrdersPartsEmployeesInfos)
+                            .Include(o => o.Client)
                             .AsNoTracking()
                             .Where(o => o.DateCreated >= datesPeriod.StartDate
                                      && o.DateFinish <= datesPeriod.EndDate
@@ -206,8 +207,12 @@
                             {
                                 OrderId = o.Id,
                                 SerialNumber = o.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
-                                DateCreated = o.DateCreated.ToString(DefaultDateFormat),   
+                                DateCreated = o.DateCreated.ToString(DefaultDateFormat),
                                 DateFinished = o.DateFinish.Value.ToString(DefaultDateFormat),
+                                SaleAmount = o.FinalAmount,
+                                ClientName = o.Client.LastName,
+                                ClientEmail = o.Client.Email,
+                                ClientPhone = o.Client.PhoneNumber,
                                 OrderStates = o.OrdersPartsEmployees
                                                .Select(ope => new OrderStateDto()
                                                {
@@ -424,11 +429,11 @@
         }
 
         public async Task<ICollection<EmployeesOverviewForMonthDto>> GetAllEmployees()
-        {            
+        {
             var previusMonth = _dateTimeProvider.PreviousMonthObject;
 
-            var allMonthEmployeeInfo = await _db.Employees.Where(e => e.OrdersPartsEmployees.Any(ope => ope.StartDatetime.Value.Month == previusMonth.PreviousMonth+1
-                                                                                                        && ope.StartDatetime.Value.Year == previusMonth.PreviousYear))                                 
+            var allMonthEmployeeInfo = await _db.Employees.Where(e => e.OrdersPartsEmployees.Any(ope => ope.StartDatetime.Value.Month == previusMonth.PreviousMonth + 1
+                                                                                                        && ope.StartDatetime.Value.Year == previusMonth.PreviousYear))
                                                           .ToListAsync();
 
             var sortedList = allMonthEmployeeInfo.Select(x => new EmployeesOverviewForMonthDto()
@@ -451,7 +456,7 @@
         public async Task<int> GetTotalProductionTime(int orderId)
         {
             return await _db.OrdersPartsEmployeesInfos
-                .Where(opei=>opei.OrderId == orderId)
+                .Where(opei => opei.OrderId == orderId)
                 .SumAsync(opei => opei.ProductionТime.Minutes);
         }
 
