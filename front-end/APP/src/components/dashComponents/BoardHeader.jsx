@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./BoardHeader.module.css";
@@ -35,4 +35,4 @@ function BoardHeader() {
   );
 }
 
-export default BoardHeader;
+export default memo(BoardHeader);
