@@ -1,5 +1,6 @@
 ﻿namespace BicycleApp.Services.Contracts
 {
+    using BicycleApp.Services.Models.IdentityModels;
     using BicycleApp.Services.Models.Order;
     using BicycleApp.Services.Models.Order.OrderManager;
     using BicycleApp.Services.Models.Order.OrderUser;

@@ -4,7 +4,6 @@
     using BicycleApp.Data;
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.HelperClasses.Contracts;
-    using BicycleApp.Services.Models.IdentityModels;
     using BicycleApp.Services.Models.Order;
     using BicycleApp.Services.Models.Order.OrderManager;
     using static BicycleApp.Common.ApplicationGlobalConstants;
@@ -14,7 +13,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using static BicycleApp.Common.ApplicationGlobalConstants;
+    using BicycleApp.Services.Models.IdentityModels;
 
     public class OrderManagerService : IOrderManagerService
     {
@@ -29,7 +28,7 @@
             _stringManipulator = stringManipulator;
             _dateTimeProvider = dateTimeProvider;
         }
-        
+
 
         /// <summary>
         /// Manager accept order and assign it to employee.
@@ -80,7 +79,7 @@
 
             var result = new OrderQueryDto();
 
-            result.Orders =  await _db.Orders
+            result.Orders = await _db.Orders
                    .AsNoTracking()
                    .Where(o => o.OrdersPartsEmployees.Any(ope => ope.EmployeeId == null)
                                                                  && (o.IsDeleted == false && o.DateDeleted.Equals(null)))
@@ -179,7 +178,7 @@
                 int partsNeeded = partsInOrder - quantityOfPartInStock;
 
                 return partsNeeded;
-                }
+            }
             catch (Exception ex)
             {
                 throw new ApplicationException("Database can't retrive data", ex);
@@ -423,29 +422,26 @@
             return false;
         }
 
-        public async Task<ICollection<EmployeesOverviewForMonthDto>> GetAllEmployees()
-        {            
-            var previusMonth = _dateTimeProvider.PreviousMonthObject;
+        public async Task<ICollection<EmployeeInfoDto>> GetAllEmployees()
+        {
+            return await _db.Employees
+                            .Select(e => new EmployeeInfoDto()
+                            {
+                                DateCreated = e.DateCreated.ToString(DefaultDateFormat),
+                                DateOfHire = e.DateOfHire.ToString(DefaultDateFormat),
+                                DateOfLeave = e.DateOfLeave.ToString(),
+                                DateUpdated = e.DateUpdated.ToString(),
+                                Department = e.Department.Name,
+                                Email = e.Email,
+                                Id = e.Id,
+                                FirstName = e.FirstName,
+                                LastName = e.LastName,
+                                IsManeger = e.IsManeger,
+                                PhoneNumber = e.PhoneNumber,
+                                Position = e.Position
 
-            var allMonthEmployeeInfo = await _db.Employees.Where(e => e.OrdersPartsEmployees.Any(ope => ope.StartDatetime.Value.Month == previusMonth.PreviousMonth+1
-                                                                                                        && ope.StartDatetime.Value.Year == previusMonth.PreviousYear))                                 
-                                                          .ToListAsync();
-
-            var sortedList = allMonthEmployeeInfo.Select(x => new EmployeesOverviewForMonthDto()
-            {
-                RoleName = "",
-                EmployeeInfos = new List<EmployeeInfoDto>()
-                {
-                    new EmployeeInfoDto()
-                    {
-                        Id = x.Id,
-                        FirstName = x.FirstName,
-                        LastName = x.LastName
-                    }
-                }
-            }).ToList();
-
-            return sortedList;
+                            }).ToListAsync();
+                            
         }
 
         public async Task<int> GetTotalProductionTime(int orderId)
