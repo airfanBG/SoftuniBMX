@@ -61,11 +61,11 @@
         }
 
         [HttpGet]
-        [Route("get_orders")]
+        [Route("get_orders_ready")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<List<OrderClientShortInfo>>> GetAllMyOrdersShortInfoByStatus([FromQuery] string clientId)
+        public async Task<ActionResult<List<OrderClientShortInfo>>> GetAllMyOrdersShortInfoByStatusReady([FromQuery] string clientId)
         {
             if (clientId == null)
             {
@@ -73,6 +73,31 @@
             }
             try
             {
+                //Use the status id for ready
+                var orders = await _userService.GetAllOrdersForClientByStatus(clientId, 1);
+
+                return Ok(orders);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, clientId);
+            }
+        }
+
+        [HttpGet]
+        [Route("get_orders_archive")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<List<OrderClientShortInfo>>> GetAllMyOrdersShortInfoByStatusSend([FromQuery] string clientId)
+        {
+            if (clientId == null)
+            {
+                return BadRequest(clientId);
+            }
+            try
+            {
+                //Use the status id for already sended orders
                 var orders = await _userService.GetAllOrdersForClientByStatus(clientId, 1);
 
                 return Ok(orders);
