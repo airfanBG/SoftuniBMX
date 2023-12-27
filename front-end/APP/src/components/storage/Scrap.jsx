@@ -86,7 +86,7 @@ function Scrap() {
   if (orders.length > 0)
     return (
       <>
-        <h2 className={styles.dashHeading}>Orders in sequence</h2>
+        <h2 className={styles.dashHeading}>Deleted orders</h2>
         <section className={styles.board}>
           <BoardHeader />
           {loading && <LoaderWheel />}

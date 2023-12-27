@@ -33,6 +33,7 @@ form {
   flex-direction: column;
   font-size: 1.2rem;
   color: var(--color-hd-second);
+  margin-bottom: 0.8rem;
 }
 .label input.input,
 .inputField {
