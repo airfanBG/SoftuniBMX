@@ -40,6 +40,8 @@ const UserProfile = lazy(() => import("./components/UserProfile.jsx"));
 const Login = lazy(() => import("./components/authComponents/Login.jsx"));
 const Home = lazy(() => import("./pages/Homapage/Home.jsx"));
 const About = lazy(() => import("./pages/About/About.jsx"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy.jsx"));
+const Terms = lazy(() => import("./pages/Terms.jsx"));
 const AppLayout = lazy(() => import("./pages/AppLayout.jsx"));
 const PageNotFound = lazy(() => import("./components/PageNotFound.jsx"));
 
@@ -53,6 +55,8 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="about" element={<About />} />
+                <Route path="privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="terms" element={<Terms />} />
                 <Route
                   path="profile"
                   element={

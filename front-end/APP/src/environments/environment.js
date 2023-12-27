@@ -41,6 +41,7 @@ export const environment = {
   in_progress_orders: "/api/manager/orders_in_progress",
   rejected_orders_list: "/api/manager/rejected_orders/",
   all_employees: "/api/manager/all_employees",
+  deleted_orders_list: "/api/manager/deleted_orders?page=",
 
   // BIKE_SERVICES
   frames: "/api/accountpage/frames",
