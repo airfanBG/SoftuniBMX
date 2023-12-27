@@ -18,7 +18,7 @@ namespace BicicleApp.Api.Controllers
 
         [HttpGet]
         [Route("frames")]
-        [AllowAnonymous]//If I have to check if user is autorized and how (this page is for loged in users)!?
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

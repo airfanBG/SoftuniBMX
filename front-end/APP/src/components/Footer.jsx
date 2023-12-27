@@ -1,3 +1,4 @@
+import { memo } from "react";
 import styles from "./Footer.module.css";
 
 import { Link, NavLink } from "react-router-dom";
@@ -134,4 +135,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default memo(Footer);

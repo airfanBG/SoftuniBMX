@@ -1,0 +1,4 @@
+const suppliersInfo = {
+  suppliersName: "",
+  suppliersEmail: "",
+};

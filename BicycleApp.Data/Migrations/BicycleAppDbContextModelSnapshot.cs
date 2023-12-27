@@ -682,11 +682,155 @@ namespace BicycleApp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageName = "image",
-                            ImageUrl = "test",
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Frame Road",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/frame1.webp",
                             IsDeleted = false,
                             PartId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Frame Montain",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/frame2.webp",
+                            IsDeleted = false,
+                            PartId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Frame Road woman",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/frame3.webp",
+                            IsDeleted = false,
+                            PartId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Wheel of the Year for road",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/wheel1.webp",
+                            IsDeleted = false,
+                            PartId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Wheel of the Year for montain",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/wheel2.webp",
+                            IsDeleted = false,
+                            PartId = 5
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Road wheel best",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/wheel3.webp",
+                            IsDeleted = false,
+                            PartId = 6
+                        },
+                        new
+                        {
+                            Id = 7,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Shift",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket1.webp",
+                            IsDeleted = false,
+                            PartId = 7
+                        },
+                        new
+                        {
+                            Id = 8,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Montain Shift",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket2.webp",
+                            IsDeleted = false,
+                            PartId = 8
+                        },
+                        new
+                        {
+                            Id = 9,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Road Shifts",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket3.webp",
+                            IsDeleted = false,
+                            PartId = 9
+                        },
+                        new
+                        {
+                            Id = 10,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Road better Shifts",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket4.webp",
+                            IsDeleted = false,
+                            PartId = 10
+                        },
+                        new
+                        {
+                            Id = 11,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Road budget Shift",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket6.webp",
+                            IsDeleted = false,
+                            PartId = 11
+                        },
+                        new
+                        {
+                            Id = 12,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Shift",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket5.webp",
+                            IsDeleted = false,
+                            PartId = 12
+                        },
+                        new
+                        {
+                            Id = 13,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Montain Shift",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket7.webp",
+                            IsDeleted = false,
+                            PartId = 13
+                        },
+                        new
+                        {
+                            Id = 14,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Budget wheel for road",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/wheel5.webp",
+                            IsDeleted = false,
+                            PartId = 14
+                        },
+                        new
+                        {
+                            Id = 15,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Budget wheel for a montain",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/wheel8.webp",
+                            IsDeleted = false,
+                            PartId = 15
+                        },
+                        new
+                        {
+                            Id = 16,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "The cheapest road wheel",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/wheel6.webp",
+                            IsDeleted = false,
+                            PartId = 16
+                        },
+                        new
+                        {
+                            Id = 17,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Road titanium wheel",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/wheel7.webp",
+                            IsDeleted = false,
+                            PartId = 17
                         });
                 });
 
@@ -3054,12 +3198,10 @@ namespace BicycleApp.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -3138,12 +3280,10 @@ namespace BicycleApp.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -3185,7 +3325,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b327f332-bb4f-4e79-82ec-0211c4a1c80a",
+                            ConcurrencyStamp = "6faaa84e-6b19-4b0e-b8bd-a685e30cf1fe",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "client@test.bg",
                             EmailConfirmed = true,

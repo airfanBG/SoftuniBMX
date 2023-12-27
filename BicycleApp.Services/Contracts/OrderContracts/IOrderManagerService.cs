@@ -1,5 +1,6 @@
 ﻿namespace BicycleApp.Services.Contracts
 {
+    using BicycleApp.Services.Models.IdentityModels;
     using BicycleApp.Services.Models.Order;
     using BicycleApp.Services.Models.Order.OrderManager;
     using BicycleApp.Services.Models.Order.OrderUser;
@@ -9,7 +10,7 @@
     {
         Task<int> AcceptAndAssignOrderByManagerAsync(int orderId);
         Task<OrderQueryDto> AllPendingOrdersAsync(int currentPage);
-        Task<ICollection<OrderInfoDto>> GetAllFinishedOrdersForPeriod(FinishedOrdersDto datesPeriod);
+        Task<ICollection<OrderProgretionDto>> GetAllFinishedOrdersForPeriod(FinishedOrdersDto datesPeriod);
         Task<int> ArePartsNeeded(int partsInOrder, int partInStockId);
         Task<int> ManagerDeleteOrder(int orderId);
         Task<string> SetEmployeeToPart(int partId);

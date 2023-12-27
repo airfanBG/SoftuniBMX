@@ -15,8 +15,8 @@ import ManagerOrders from "./components/dashComponents/managerComponents/Manager
 import WorkerOrders from "./components/dashComponents/workerComponents/WorkerOrders.jsx";
 import WorkerFinished from "./components/dashComponents/workerComponents/WorkerFinished.jsx";
 import UserInfo from "./components/dashComponents/userComponents/UserInfo.jsx";
-import EmployersList from "./components/dashComponents/managerComponents/EmployersList.jsx";
-import AddMember from "./components/dashComponents/managerComponents/AddMember.jsx";
+// import EmployersList from "./components/dashComponents/managerComponents/EmployersList.jsx";
+// import AddMember from "./components/dashComponents/managerComponents/AddMember.jsx";
 import InProgress from "./components/dashComponents/managerComponents/InProgress.jsx";
 import QControlOrders from "./components/dashComponents/qControlComponents/QControlOrders.jsx";
 import UserTrackOrder from "./components/dashComponents/userComponents/UserTrackOrder.jsx";
@@ -28,6 +28,9 @@ import { ErrorProvider } from "./context/ErrorContext.jsx";
 import ManagerRejected from "./components/dashComponents/managerComponents/ManagerRejected.jsx";
 import ManagerFinished from "./components/dashComponents/managerComponents/ManagerFinished.jsx";
 import ManagerStatistic from "./components/dashComponents/managerComponents/ManagerStatistic.jsx";
+import ManagerSalaries from "./components/dashComponents/managerComponents/ManagerSalaries.jsx";
+import StorageMain from "./components/storage/StorageMain.jsx";
+import Employers from "./components/dashComponents/managerComponents/Employers.jsx";
 
 // LAZY LOADING
 const CreateBike = lazy(() =>
@@ -72,8 +75,11 @@ function App() {
                     path={"get-stock"}
                     element={<UserHomeScreenSelection />}
                   />
+                  {/* WORKER */}
                   <Route path="worker-orders" element={<WorkerOrders />} />
                   <Route path={"finished"} element={<WorkerFinished />} />
+
+                  {/* MANAGER */}
                   <Route path={"managerOrders"} element={<ManagerOrders />} />
                   <Route
                     path={"manager-in-progress"}
@@ -91,9 +97,14 @@ function App() {
                     path={"manager-finished"}
                     element={<ManagerFinished />}
                   />
-                  <Route path={"employers"} element={<EmployersList />} />
+                  {/* <Route path={"employers"} element={<EmployersList />} /> */}
+                  <Route path={"employers"} element={<Employers />} />
                   <Route path={"statistic"} element={<ManagerStatistic />} />
-                  <Route path={"add-member"} element={<AddMember />} />
+                  <Route path={"salaries"} element={<ManagerSalaries />} />
+                  {/* <Route path={"add-member"} element={<AddMember />} /> */}
+                  <Route path={"storage"} element={<StorageMain />} />
+
+                  {/* QCONTROL */}
                   <Route
                     path={"q-control-orders"}
                     element={<QControlOrders />}

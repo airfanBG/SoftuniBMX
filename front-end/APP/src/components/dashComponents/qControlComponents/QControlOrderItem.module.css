@@ -108,10 +108,12 @@
   color: var(--color-hd);
 }
 .btn {
-  width: fit-content;
+  /* width: fit-content; */
+  width: 13rem;
   padding: 0.3rem 1rem;
   font-size: 1.6rem;
   text-transform: uppercase;
+  text-align: center;
   color: var(--color-link-light);
   border: 1px solid var(--color-border);
   border-radius: 0.5rem;
@@ -122,6 +124,9 @@
 
 .final {
   margin-top: 1rem;
-  text-align: right;
-  background-color: var(--color-main-dark);
+  /* text-align: right; */
+  background-color: var(--button-blue);
+}
+.final:hover {
+  background-color: var(--button-blue-light);
 }

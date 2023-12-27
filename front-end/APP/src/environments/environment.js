@@ -40,9 +40,13 @@ export const environment = {
   del_order: "/api/manager/delete_order?orderId=", // +id
   in_progress_orders: "/api/manager/orders_in_progress",
   rejected_orders_list: "/api/manager/rejected_orders/",
+  all_employees: "/api/manager/all_employees",
 
   // BIKE_SERVICES
   frames: "/api/accountpage/frames",
   compatible_parts: "/api/accountpage/compatible_parts?id=",
   selected_part: "/api/accountpage/selected_part?id=",
+
+  //STORAGE
+  add_supplier: "/api/supplys_manager/create_suplier",
 };

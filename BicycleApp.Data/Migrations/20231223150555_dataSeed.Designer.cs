@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BicycleApp.Data.Migrations
 {
     [DbContext(typeof(BicycleAppDbContext))]
-    [Migration("20231221170806_Initial")]
-    partial class Initial
+    [Migration("20231223150555_dataSeed")]
+    partial class dataSeed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -685,11 +685,155 @@ namespace BicycleApp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageName = "image",
-                            ImageUrl = "test",
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Frame Road",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/frame1.webp",
                             IsDeleted = false,
                             PartId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Frame Montain",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/frame2.webp",
+                            IsDeleted = false,
+                            PartId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Frame Road woman",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/frame3.webp",
+                            IsDeleted = false,
+                            PartId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Wheel of the Year for road",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/wheel1.webp",
+                            IsDeleted = false,
+                            PartId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Wheel of the Year for montain",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/wheel2.webp",
+                            IsDeleted = false,
+                            PartId = 5
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Road wheel best",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/wheel3.webp",
+                            IsDeleted = false,
+                            PartId = 6
+                        },
+                        new
+                        {
+                            Id = 7,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Shift",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket1.webp",
+                            IsDeleted = false,
+                            PartId = 7
+                        },
+                        new
+                        {
+                            Id = 8,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Montain Shift",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket2.webp",
+                            IsDeleted = false,
+                            PartId = 8
+                        },
+                        new
+                        {
+                            Id = 9,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Road Shifts",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket3.webp",
+                            IsDeleted = false,
+                            PartId = 9
+                        },
+                        new
+                        {
+                            Id = 10,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Road better Shifts",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket4.webp",
+                            IsDeleted = false,
+                            PartId = 10
+                        },
+                        new
+                        {
+                            Id = 11,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Road budget Shift",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket6.webp",
+                            IsDeleted = false,
+                            PartId = 11
+                        },
+                        new
+                        {
+                            Id = 12,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Shift",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket5.webp",
+                            IsDeleted = false,
+                            PartId = 12
+                        },
+                        new
+                        {
+                            Id = 13,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Montain Shift",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket7.webp",
+                            IsDeleted = false,
+                            PartId = 13
+                        },
+                        new
+                        {
+                            Id = 14,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Budget wheel for road",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/wheel5.webp",
+                            IsDeleted = false,
+                            PartId = 14
+                        },
+                        new
+                        {
+                            Id = 15,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Budget wheel for a montain",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/wheel8.webp",
+                            IsDeleted = false,
+                            PartId = 15
+                        },
+                        new
+                        {
+                            Id = 16,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "The cheapest road wheel",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/wheel6.webp",
+                            IsDeleted = false,
+                            PartId = 16
+                        },
+                        new
+                        {
+                            Id = 17,
+                            DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            ImageName = "Road titanium wheel",
+                            ImageUrl = "https://yuchormanski.free.bg/bikes/wheel7.webp",
+                            IsDeleted = false,
+                            PartId = 17
                         });
                 });
 
@@ -3057,12 +3201,10 @@ namespace BicycleApp.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -3141,12 +3283,10 @@ namespace BicycleApp.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -3188,7 +3328,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b327f332-bb4f-4e79-82ec-0211c4a1c80a",
+                            ConcurrencyStamp = "ada7c923-f7a5-46dd-a4eb-b385eb684a8f",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "client@test.bg",
                             EmailConfirmed = true,
@@ -3197,7 +3337,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Ivanov",
                             LockoutEnabled = false,
                             NormalizedEmail = "CLIENT@TEST.BG",
-                            PasswordHash = "AQAAAAIAAYagAAAAEA2mCrvCEpNSrkaLt2BOk3DCsgnXjC50IXoVR33zPzakPJVwtfrPeRxH0EIXZjfPDg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEG0+nJ0mBc6MsYjnZ5F5hdvAZTVoh8A21qBF6POXrdJTRP3nGbGixTjFoVPlrT0lvQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "CLIENT@TEST.BG",
@@ -3212,7 +3352,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "17ce735d-6713-4d0a-8fcb-e4a71ee86f6f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "218e72b1-3adb-4b43-bd3e-8a1b7b791d15",
+                            ConcurrencyStamp = "d8f448c0-4563-40a4-8a48-e5d3dc453623",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "joro@test.bg",
                             EmailConfirmed = true,
@@ -3221,7 +3361,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Georgiev",
                             LockoutEnabled = false,
                             NormalizedEmail = "JORO@TEST.BG",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOa9Va02RMh6kAnZTjuHAfqiXXVdutGiwzd4gpBUdVtf1DT0vMxuyLKhygjWcQJt2Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEN70kMAtjzVpoV3cf17onWexQ2ZXkZM/FQq8rEkHXaS+Fk0Gc8aNqZXEKG+sjti9Lw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "JORO@TEST.BG",
@@ -3236,7 +3376,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "99d3ca6f-2067-4316-a5d7-934c93789521",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2ead155c-0024-48b0-9f7f-c0fc2a4184b8",
+                            ConcurrencyStamp = "0673bba6-dfc2-425b-afa3-47b79fc10ed8",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "powerranger@test.bg",
                             EmailConfirmed = true,
@@ -3245,7 +3385,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Dimitrov",
                             LockoutEnabled = false,
                             NormalizedEmail = "POWERRANGER@TEST.BG",
-                            PasswordHash = "AQAAAAIAAYagAAAAEC4aEg6UP7z5zSm8wWLCskRgRy3ElLrFiI3Rgtv0FFzDEj/vwp+9sseT39rwZNgj4A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMmfqz4odU4s7xRuAS4jjLmmjV8yjI7jV1s92Q8T9QYTYh8o2br4yZjD9EdQ0Ri95g==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "POWERRANGER@TEST.BG",
@@ -3292,7 +3432,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "406e8cf1-acaa-44a8-afec-585ff64bed34",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b4fa08c8-fd38-485c-bef1-d8b821581d99",
+                            ConcurrencyStamp = "e4c550ca-fe74-4dde-b4ed-ca5890908fe2",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "manager@b-free.com",
                             EmailConfirmed = true,
@@ -3301,7 +3441,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Kalinov",
                             LockoutEnabled = false,
                             NormalizedEmail = "MANAGER@B-FREE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPfnfAO1AEyhJCJsDiINBnxx7z6H5qg6W3nNP5CVfJ53hYYOoHUVphdddsAyCbGlkg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENhyISjFGh8iTrTchtTSyld6cAjpmxyG5pOgrOftyCtmLEDK/kcU2RO4k8qlo2o1aw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "MANAGER@B-FREE.COM",
@@ -3316,7 +3456,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "21003785-a275-4139-ae20-af6a6cf8fea8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c300b898-d540-4cd7-891a-55f49b9a4618",
+                            ConcurrencyStamp = "2a059d27-3ffb-4784-9878-9a6991be6bec",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "marinov@b-free.com",
                             EmailConfirmed = true,
@@ -3325,7 +3465,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Marinov",
                             LockoutEnabled = false,
                             NormalizedEmail = "MARINOV@B-FREE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOPnIAsR/M/XoW78HqDSiP752RPJZUVHC68jKiyBGKiSuh43RRhW+viKxo3lz/rzRA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHXm2ckVW9NNc9acROhRkQvnUNGqwVjdKY12ahqfG+jgA6vhrWqdIWR7gy6qYnNNgQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "MARINOV@B-FREE.COM",
@@ -3340,7 +3480,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "17063948-8fdc-417e-8fb7-2ae6bf572f94",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2188ba65-2ea6-413b-8b7d-37e1a75d743f",
+                            ConcurrencyStamp = "b2aa75e7-432d-42be-8c83-a98579e697ff",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "todorov@b-free.com",
                             EmailConfirmed = true,
@@ -3349,7 +3489,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Todorov",
                             LockoutEnabled = false,
                             NormalizedEmail = "TODOROV@B-FREE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECtugVjXzQJQa9jKEJM+U+xj3Q8ZB2EYst//YIIoBXo7KCI36Yhb85JYm8BcYa/laA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPpOBdBAh8j4KajsflrgaputLS524aCec8dII+GnbemGUOpV9PItHSfRIggRmro+3w==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "TODOROV@B-FREE.COM",
@@ -3364,7 +3504,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dc9aecbf-b86c-492c-ba90-8ca327c15569",
+                            ConcurrencyStamp = "925fd055-0246-4b7a-b2bd-a7e2d3fb5937",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "ivanov@b-free.com",
                             EmailConfirmed = true,
@@ -3373,7 +3513,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Ivanov",
                             LockoutEnabled = false,
                             NormalizedEmail = "IVANOV@B-FREE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKAPB6fSP4TUM45qgp/3ZuCU/uORX+ZAroGJBw1hNLWiwPz+ZPzf+Keee+NhcEnrrw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELYyIww4o1hXO8gamDcwXXNNL0O8/Cp+A0sgLN2lLM3vFXv1hbcdu2O+JB+ecAhnJA==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "IVANOV@B-FREE.COM",
@@ -3388,7 +3528,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "29f06920-d2ad-43d8-b362-e2b94d7a7502",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2b969229-592b-4fea-8c13-56a23f796840",
+                            ConcurrencyStamp = "76fe9dff-6db8-4899-aad3-84fd45c91e07",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "atanasov@b-free.com",
                             EmailConfirmed = true,
@@ -3397,7 +3537,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Atanasov",
                             LockoutEnabled = false,
                             NormalizedEmail = "ATANASOV@B-FREE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFg4dEKshYJOxU3RcFVQQzZnNs3Fid/iDG8PkGPN9YdcoEhY6rnfaA3idW1aOtwKuQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMNkFZfuUlZLBlpoj+Iyq8oHmj34HHVE3fD8q2ikVm2wZ3TXA1n6HiSQREPkx0k6oA==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "ATANASOV@B-FREE.COM",
