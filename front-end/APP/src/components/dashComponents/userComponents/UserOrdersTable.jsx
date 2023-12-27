@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./UserOrdersTable.module.css";
 import { useNavigate } from "react-router-dom";
 
+
 function UserOrdersTable({ orders }) {
   const navigatePart = useNavigate("/");
   const navigateOrder = useNavigate("/");

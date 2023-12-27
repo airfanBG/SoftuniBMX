@@ -26,6 +26,7 @@ import { ErrorProvider } from "./context/ErrorContext.jsx";
 import ComponentScaffold from "./components/dashComponents/userComponents/ComponentScaffold.jsx";
 import Contacts from "./pages/Contacts/Contacts.jsx";
 import ComponentUserOrdersReady from "./components/dashComponents/userComponents/ComponentUserOrdersReady.jsx";
+import ComponentUserOrdersArchive from "./components/dashComponents/userComponents/ComponentUserOrdersArchive.jsx"
 
 // LAZY LOADING
 const CreateBike = lazy(() =>
@@ -67,7 +68,7 @@ function App() {
                   />
                   <Route
                     path={"user-archive"}
-                    element={<ComponentScaffold />}
+                    element={<ComponentUserOrdersArchive />}
                   />
                   <Route
                     path={"get-stock"}

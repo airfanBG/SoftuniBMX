@@ -1,4 +1,4 @@
-import styles from "./ComponentUserOrdersReady.module.css";
+import styles from "./ComponentUserOrdersArchive.module.css";
 import UserOrdersTable from "./UserOrdersTable.jsx";
 
 import { useContext, useState } from "react";
@@ -7,10 +7,9 @@ import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 
 import BoardHeader from "../BoardHeader.jsx";
 import LoaderWheel from "../../LoaderWheel.jsx";
-//import { environment } from "../../../environments/environment.js";
 import React, { useEffect } from "react";
 
-function ComponentUserOrdersReady() {
+function ComponentUserOrdersArchive() {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
 
@@ -18,7 +17,7 @@ function ComponentUserOrdersReady() {
   //To be replaced with dinamicly geting the id
   const clientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd";
   //To be replaced with the envirement urls
-  const apiUrl = `https://localhost:7047/api/client_order/get_orders_ready?clientId=${clientId}`;
+  const apiUrl = `https://localhost:7047/api/client_order/get_orders_archive?clientId=${clientId}`;
 
   useEffect(() => {
     fetch(apiUrl)
@@ -49,4 +48,4 @@ function ComponentUserOrdersReady() {
   );
 }
 
-export default ComponentUserOrdersReady;
+export default ComponentUserOrdersArchive;
