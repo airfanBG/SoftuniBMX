@@ -12,7 +12,7 @@ import BoardHeader from "../dashComponents/BoardHeader.jsx";
 
 
 function Warehouse() {
-  const [partList, setPartList] = useState({});
+  /*const [partList, setPartList] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({});
 
@@ -74,7 +74,7 @@ function Warehouse() {
           ))}
       </section>
     </>
-  );
+  );*/
 }
 
 export default memo(Warehouse);

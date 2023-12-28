@@ -20,7 +20,8 @@ export const environment = {
   create_order: "/api/client_order/create",
   orders_in_progress: "/api/client_order/progress?id=", // + id,
   delete_order: "/api/client_order/delete",
-
+  orders_ready: "/api/client_order/get_orders_ready?clientId=",
+  orders_archive: "/api/client_order/get_orders_archive?clientId=",
   // EMPLOYEE
   info_employee: "/api/employee/info?id=", // + id
   worker_order_queue: "/api/employee_order/myOrders?id=",

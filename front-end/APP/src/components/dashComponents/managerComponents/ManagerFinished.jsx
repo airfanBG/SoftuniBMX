@@ -1,10 +1,7 @@
 import styles from "./ManagerFinished.module.css";
 
 import { useEffect, useState } from "react";
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 import BoardHeader from "../BoardHeader.jsx";
 import LoaderWheel from "../../LoaderWheel.jsx";
 
@@ -12,7 +9,7 @@ import { get } from "../../../util/api.js";
 import { environment } from "../../../environments/environment.js";
 
 function ManagerFinished() {
-<<<<<<< Updated upstream
+/**/ 
 
   const [orderList, setOrderList] = useState([]);
   const [error, setError] = useState({});
@@ -61,14 +58,14 @@ function ManagerFinished() {
 
   if (orderList.length === 0)
     return <h2>There is no orders in this category</h2>;
-=======
+/*
   const [loading, setLoading] = useState(false);
   const [orderList, setOrderList] = useState([]);
   const [background, setBackground] = useState(false);
   const [currentOrder, setCurrentOrder] = useState({});
 
   use
->>>>>>> Stashed changes
+>>>>>>> Stashed changes*/
 
   return (
     <>
