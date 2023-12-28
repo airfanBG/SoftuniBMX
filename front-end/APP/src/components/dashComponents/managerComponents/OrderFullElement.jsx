@@ -87,7 +87,7 @@ function OrderElement({ order }) {
                 }
                 <p className={styles.field}>
                   <span className={styles.fieldLabel}>Prodiced time:</span>
-                  {/* {s.elementProduceTimeInMinutes} */}
+                   {s.elementProduceTimeInMinutes} 
                   {jobTIme(s.startDate, s.endDate)}
                 </p>
               </div>
