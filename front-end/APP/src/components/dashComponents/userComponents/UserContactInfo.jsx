@@ -112,7 +112,7 @@ function UserContactInfo({ info, addMoneyBtnHandler }) {
               </div>
             )}
           </div>
-          {user.role === "user" && (
+          {/* {user.role === "user" && (
             <h2 className={styles.infoHeader}>
               <span>Account information</span>
             </h2>
@@ -133,7 +133,7 @@ function UserContactInfo({ info, addMoneyBtnHandler }) {
                 />
               </div>
             </div>
-          )}
+          )} */}
           {user.role === "user" && (
             <h2 className={styles.infoHeader}>
               <span>Add amount</span>
