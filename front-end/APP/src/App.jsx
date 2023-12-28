@@ -31,8 +31,10 @@ import ManagerStatistic from "./components/dashComponents/managerComponents/Mana
 import ManagerSalaries from "./components/dashComponents/managerComponents/ManagerSalaries.jsx";
 import StorageMain from "./components/storage/StorageMain.jsx";
 import Employers from "./components/dashComponents/managerComponents/Employers.jsx";
-import Warehouse from "./components/storage/Warehouse.jsx"
-
+import Warehouse from "./components/storage/Warehouse.jsx";
+import Contacts from "./pages/Contacts/Contacts.jsx";
+import ComponentUserOrdersReady from "./components/dashComponents/userComponents/ComponentUserOrdersReady.jsx";
+import ComponentUserOrdersArchive from "./components/dashComponents/userComponents/ComponentUserOrdersArchive.jsx";
 // LAZY LOADING
 const CreateBike = lazy(() =>
   import("./components/createComponents/CreateBike.jsx")
@@ -56,6 +58,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="about" element={<About />} />
+                <Route path="contacts" element={<Contacts />} />
                 <Route path="privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="terms" element={<Terms />} />
                 <Route
@@ -69,12 +72,18 @@ function App() {
                   <Route index element={<Navigate replace to="info" />} />
                   <Route path="info" element={<UserInfo />} />
                   <Route path={"cart"} element={<Cart />} />
-                  <Route path={"user-ready"} element={<ComponentScaffold />} />
+                  <Route
+                    path={"user-ready"}
+                    element={<ComponentUserOrdersReady />}
+                  />
                   <Route
                     path={"user-in-progress"}
                     element={<UserTrackOrder />}
                   />
-                  <Route path={"user-archive"} element={<UserArchive />} />
+                  <Route
+                    path={"user-archive"}
+                    element={<ComponentUserOrdersArchive />}
+                  />
 
                   <Route
                     path={"get-stock"}
@@ -109,10 +118,7 @@ function App() {
                   {/* <Route path={"add-member"} element={<AddMember />} /> */}
 
                   <Route path={"storage"} element={<StorageMain />} />
-                  <Route
-                    path={"warehouse"}
-                    element={<Warehouse />}
-                  />
+                  <Route path={"warehouse"} element={<Warehouse />} />
                   {/* QCONTROL */}
                   <Route
                     path={"q-control-orders"}
