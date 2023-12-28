@@ -15,8 +15,7 @@ function ComponentUserOrdersReady() {
   const [loading, setLoading] = useState(false);
 
   const [data, setData] = useState([]);
-  //To be replaced with dinamicly geting the id
-  const clientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd";
+  const clientId = user.id;
   //To be replaced with the envirement urls
   const apiUrl = `https://localhost:7047/api/client_order/get_orders_ready?clientId=${clientId}`;
 

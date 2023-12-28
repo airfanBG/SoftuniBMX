@@ -31,13 +31,14 @@
   text-align: start;
 }
 
-.row td ul li{
- display: flex;
- flex-direction: row;
- justify-content: space-between;
- padding-left: 3rem;
+.row td ul li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 3rem;
 }
 
 .row td a:hover {
   color: green;
 }
+

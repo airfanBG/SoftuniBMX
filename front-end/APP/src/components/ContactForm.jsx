@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import emailjs from "emailjs-com";
 import styles from "./ContactForm.module.css";
-import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ContactForm() {
   const [email, setEmail] = useState("");
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
-  const navigate = useNavigate("/");
 
   function send(e) {
     e.preventDefault();
@@ -22,11 +22,11 @@ function ContactForm() {
           title,
           text,
         };
-
+        console.log(templateParams);
         emailjs
           .send(
             "service_3l6cd7l",
-            "template_63o3myd",
+            "template_sl5q3pu",
             templateParams,
             "UD-yZH0_5n_nv3DwV"
           )
@@ -36,18 +36,31 @@ function ContactForm() {
               setEmail("");
               setTitle("");
               setText("");
-              navigate("/");
+              // Use toast notification for non-blocking message
+              toast.success("Email sent successfully.", {
+                position: toast.POSITION.BOTTOM_CENTER,
+                autoClose: false,
+              });
             },
             (error) => {
               console.error("Error sending email:", error);
-              alert("Error sending email");
+              toast.error("Error sending email", {
+                position: toast.POSITION.BOTTOM_CENTER,
+                autoClose: false,
+              });
             }
           );
       } else {
-        alert("Please enter a valid email!");
+        toast.error("Please enter a valid email!", {
+          position: toast.POSITION.BOTTOM_CENTER,
+          autoClose: false,
+        });
       }
     } else {
-      alert("All fields must be filled with data!");
+      toast.error("All fields must be filled with data!", {
+        position: toast.POSITION.BOTTOM_CENTER,
+        autoClose: false,
+      });
     }
   }
 
@@ -97,6 +110,17 @@ function ContactForm() {
           Send your question
         </button>
       </div>
+      <ToastContainer
+        position="center"
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </form>
   );
 }

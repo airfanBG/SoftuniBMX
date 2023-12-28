@@ -17,13 +17,16 @@ function ContactInfo() {
               Name: <span>extremeBMX LTD</span>
             </p>
             <p>
-              Phone: <span>0878258496</span>
+              Phone: <span>+359878258496</span>
             </p>
             <p>
               Email: <span>bicyclemanagementextreme@abv.bg</span>
             </p>
             <p>
               Main office: <span>ul. Filip Avramov, 1712 Mladost 3, Sofia</span>
+            </p>
+            <p className={styles.locations}>
+              Our locations:
             </p>
           </div>
           <GoogleMap />
