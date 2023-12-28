@@ -557,9 +557,9 @@ namespace BicycleApp.Services.Services
         /// Gets all avaiable parts in database
         /// </summary>
         /// <returns>Dto's collection of all avaiable parts in database</returns>
-        public async Task<PartQueryDto> AllPartsInStock(int currentPage)
+        public async Task<PartQueryDto> AllPartsInStock()//int currentPage
         {
-            int deliveriesPerPage = 6;
+            //int deliveriesPerPage = 6;
 
             var result = new PartQueryDto();
 
@@ -568,8 +568,8 @@ namespace BicycleApp.Services.Services
                 result.Parts = await _dbContext.Parts
                 .AsNoTracking()
                 .Include(p => p.ImagesParts)
-                .Skip((currentPage - 1) * deliveriesPerPage)
-                .Take(deliveriesPerPage)
+                //.Skip((currentPage - 1) * deliveriesPerPage)
+                //.Take(deliveriesPerPage)
                 .Select(p => new PartDto
                 {
                     Id = p.Id,

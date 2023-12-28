@@ -52,6 +52,7 @@ function InProgress() {
 
   if (orderList.length === 0)
     return <h2>There is no orders in this category</h2>;
+    
   return (
     <>
       {background && (
