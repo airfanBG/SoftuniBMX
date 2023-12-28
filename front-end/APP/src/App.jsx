@@ -31,6 +31,7 @@ import ManagerStatistic from "./components/dashComponents/managerComponents/Mana
 import ManagerSalaries from "./components/dashComponents/managerComponents/ManagerSalaries.jsx";
 import StorageMain from "./components/storage/StorageMain.jsx";
 import Employers from "./components/dashComponents/managerComponents/Employers.jsx";
+import Warehouse from "./components/storage/Warehouse.jsx"
 
 // LAZY LOADING
 const CreateBike = lazy(() =>
@@ -102,8 +103,12 @@ function App() {
                   <Route path={"statistic"} element={<ManagerStatistic />} />
                   <Route path={"salaries"} element={<ManagerSalaries />} />
                   {/* <Route path={"add-member"} element={<AddMember />} /> */}
-                  <Route path={"storage"} element={<StorageMain />} />
 
+                  <Route path={"storage"} element={<StorageMain />} />
+                  <Route
+                    path={"warehouse"}
+                    element={<Warehouse />}
+                  />
                   {/* QCONTROL */}
                   <Route
                     path={"q-control-orders"}

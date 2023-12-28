@@ -41,6 +41,10 @@ export const environment = {
   in_progress_orders: "/api/manager/orders_in_progress",
   rejected_orders_list: "/api/manager/rejected_orders/",
   all_employees: "/api/manager/all_employees",
+  finished_orders: "/api/manager/finished_orders",
+
+  //SIUPLY_MANAGER
+  parts_in_stock: "/api/supplys_manager/parts_in_stock?page=",
 
   // BIKE_SERVICES
   frames: "/api/accountpage/frames",
