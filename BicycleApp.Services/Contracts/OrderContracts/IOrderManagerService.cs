@@ -1,5 +1,6 @@
 ﻿namespace BicycleApp.Services.Contracts
 {
+    using BicycleApp.Services.Models.IdentityModels;
     using BicycleApp.Services.Models.Order;
     using BicycleApp.Services.Models.Order.OrderManager;
     using BicycleApp.Services.Models.Order.OrderUser;
@@ -17,7 +18,7 @@
         Task<ICollection<OrderInfoDto>> AllRejectedOrdersAsync();
         Task<bool> AcceptAndAssignRejectedOrderByManagerAsync(int orderId);
         Task<ICollection<OrderProgretionDto>> AllOrdersInProgressAsync();
-        Task<ICollection<EmployeesOverviewForMonthDto>> GetAllEmployees();
+        Task<ICollection<EmployeeInfoDto>> GetAllEmployees();
         Task<int> GetTotalProductionTime(int orderId);
         Task<OrderQueryDto> AllDeletedOrdersAsync(int currentPage);
     }

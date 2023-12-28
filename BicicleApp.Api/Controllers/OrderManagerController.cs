@@ -1,5 +1,6 @@
 ﻿using BicycleApp.Data.Models.IdentityModels;
 using BicycleApp.Services.Contracts;
+using BicycleApp.Services.Models.IdentityModels;
 using BicycleApp.Services.Models.Order;
 using BicycleApp.Services.Models.Order.OrderManager;
 using Microsoft.AspNetCore.Authorization;
@@ -273,8 +274,7 @@ namespace BicicleApp.Api.Controllers
         }
 
         [HttpGet("all_employees")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<ICollection<EmployeesOverviewForMonthDto>>> GetAllEmployees()
+        public async Task<ActionResult<ICollection<EmployeeInfoDto>>> GetAllEmployees()
         {
             var allEmployeeCollection = await _orderManagerService.GetAllEmployees();
 

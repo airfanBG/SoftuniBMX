@@ -7,12 +7,24 @@
 - `serialNumber"`: Уникален идентификатор на велосипеда.
 - `dateCreated`: Дата и час на създаване на поръчката.
 - `dateFinished`: Дата и час на завършване на поръчката.
-- `orderParts`: Колекция от поръчаните части.
+- `totalProductionTime`: Общо времe за производство на велосипеда.
+- `saleAmount`: Общо стойност на поръчката.
+- `clientName`: Фамилия на клиента.
+- `clientEmail`: Имейл на клиента.
+- `clientPhone`: Телефонен номер на клиента.
+- `orderStates`: Колекция от поръчаните части.
 - `partId`: Уникален идентификатор на частта.
-- `description`: Описание на частта.
-- `partName`: Наименованието на частта.
+- `partType`: Категория на частта.
+- `partModel`: Наименование, модел на частта.
+- `nameOfEmplоyeeProducedThePart`: Име на работника монтирал частта.
+- `isProduced`: Булева променлива показваща дали е завършена монтажната операция.
+- `serialNumber`: Уникален идентификатор на частта.
+- `employeeId`: Уникален идентификатор на работника.
+- `elementProduceTimeInMinutes`: Време за изпълнение на монтажната операция.
+- `description`: Описание на причината за връщане от страна на качествения контрол.
 - `partQuantity`: Количество на поръчаната част.
-- `partQuantityInStock`: Количество на склад от поръчаната част.
+- `startDate`: Момент на започване на монтажните операции по дадена част.
+- `endDate`: Момент на завършване на монтажните операции по дадена част.
 
 ### Examples:
 
@@ -28,31 +40,57 @@ GET /api/manager/finished_orders
 	
 [
   {
-    "orderId": 1,
-    "serialNumber": "BID12345678",
-    "dateCreated": "2023-12-05 18:49:21.4383734",
-    "dateFinished": "2023-12-05 20:49:21.0000000",
-    "orderParts": [
+    "orderId": 10,
+    "serialNumber": "BIDPASQC123",
+    "dateCreated": "15-12-2023",
+    "dateFinished": "17-12-2023",
+    "totalProductionTime": 25,
+    "saleAmount": 425,
+    "clientName": "Ivanov",
+    "clientEmail": "client@test.bg",
+    "clientPhone": "1234567890",
+    "orderStates": [
       {
         "partId": 1,
+        "partType": "Frame",
+        "partModel": "Frame OG",
+        "nameOfEmplоyeeProducedThePart": "Marin Marinov",
+        "isProduced": true,
+        "serialNumber": "BIDPASQC123",
+        "employeeId": null,
+        "elementProduceTimeInMinutes": 5,
         "description": "test",
-        "partName": "Frame OG",
         "partQuantity": 1,
-        "partQunatityInStock": 2
+        "startDate": "2023-12-16 16:48:13.0000000",
+        "endDate": "2023-12-16 16:53:13.0000000"
       },
       {
         "partId": 2,
+        "partType": "Frame",
+        "partModel": "Wheel of the YearG",
+        "nameOfEmplоyeeProducedThePart": "Todor Todorov",
+        "isProduced": true,
+        "serialNumber": "BIDPASQC123",
+        "employeeId": null,
+        "elementProduceTimeInMinutes": 5,
         "description": "test",
-        "partName": "Wheel of the YearG",
-        "partQuantity": 2,
-        "partQunatityInStock": 4
+        "partQuantity": 1,
+        "startDate": "2023-12-17 09:10:13.0000000",
+        "endDate": "2023-12-17 09:15:13.0000000"
       },
       {
         "partId": 3,
+        "partType": "Frame",
+        "partModel": "Shift",
+        "nameOfEmplоyeeProducedThePart": "Ivan Ivanov",
+        "isProduced": true,
+        "serialNumber": "BIDPASQC123",
+        "employeeId": null,
+        "elementProduceTimeInMinutes": 15,
         "description": "test",
-        "partName": "Shift",
-        "partQuantity": 2,
-        "partQunatityInStock": 3
+        "partQuantity": 1,
+        "startDate": "2023-12-17 10:15:13.0000000",
+        "endDate": "2023-12-17 10:30:13.0000000"
       }
     ]
   }
