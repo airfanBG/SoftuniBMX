@@ -1,4 +1,7 @@
-﻿using BicycleApp.Services.Contracts;
+﻿using BicycleApp.Data.Models.IdentityModels;
+using BicycleApp.Services.Contracts;
+using BicycleApp.Services.Models.IdentityModels;
+using BicycleApp.Services.Models.Order;
 using BicycleApp.Services.Models.Order.OrderManager;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -111,7 +114,7 @@ namespace BicicleApp.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> DeleteOrder([FromQuery] int orderId)
+        public async Task<ActionResult<int>> DeleteOrder([FromQuery] int orderId)
         {
             if (orderId <= 0)
             {
@@ -120,15 +123,19 @@ namespace BicicleApp.Api.Controllers
 
             try
             {
-                await _orderManagerService.ManagerDeleteOrder(orderId);
+                var deletedOrderId = await _orderManagerService.ManagerDeleteOrder(orderId);
 
-                return StatusCode(200);
+                if (deletedOrderId > 0)
+                {
+                    return StatusCode(200, deletedOrderId);
+                }               
             }
             catch (Exception)
             {
-
-                return StatusCode(500);
             }
+
+            int invalidOrderId = 0;
+            return StatusCode(500, invalidOrderId);
         }
 
         [HttpPost]
@@ -153,7 +160,7 @@ namespace BicicleApp.Api.Controllers
                     return StatusCode(400);
                 }
 
-                return Ok(result);
+                return StatusCode(200, result);
 
             }
             catch (Exception)
@@ -186,7 +193,7 @@ namespace BicicleApp.Api.Controllers
                     return StatusCode(400);
                 }
 
-                return StatusCode(200);
+                return StatusCode(200, result);
             }
             catch (Exception)
             {
@@ -250,6 +257,7 @@ namespace BicicleApp.Api.Controllers
             {
                 var result = await _orderManagerService.GetAllFinishedOrdersForPeriod(datesPeriod);
 
+
                 if (result != null)
                 {
                     return StatusCode(StatusCodes.Status202Accepted, result);
@@ -264,5 +272,46 @@ namespace BicicleApp.Api.Controllers
                 return StatusCode(500);
             }
         }
-    }  
+
+        [HttpGet("all_employees")]
+        public async Task<ActionResult<ICollection<EmployeeInfoDto>>> GetAllEmployees()
+        {
+            var allEmployeeCollection = await _orderManagerService.GetAllEmployees();
+
+            return StatusCode(200, allEmployeeCollection);
+        }
+
+        [HttpGet]
+        [Route("deleted_orders")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> DeletedOrders([FromQuery] int page = 1)
+        {
+
+            if (page <= 0)
+            {
+                return StatusCode(400);
+            }
+
+            try
+            {
+                var model = await _orderManagerService.AllDeletedOrdersAsync(page);
+
+                if (model == null)
+                {
+                    // The model object is null, so return a 204 NoContent
+                    return StatusCode(204);
+                }
+
+                return StatusCode(200, model);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(500);
+            }
+        }
+    }
 }

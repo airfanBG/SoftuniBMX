@@ -15,19 +15,26 @@ import ManagerOrders from "./components/dashComponents/managerComponents/Manager
 import WorkerOrders from "./components/dashComponents/workerComponents/WorkerOrders.jsx";
 import WorkerFinished from "./components/dashComponents/workerComponents/WorkerFinished.jsx";
 import UserInfo from "./components/dashComponents/userComponents/UserInfo.jsx";
-import EmployersList from "./components/dashComponents/managerComponents/EmployersList.jsx";
-import AddMember from "./components/dashComponents/managerComponents/AddMember.jsx";
+// import EmployersList from "./components/dashComponents/managerComponents/EmployersList.jsx";
+// import AddMember from "./components/dashComponents/managerComponents/AddMember.jsx";
 import InProgress from "./components/dashComponents/managerComponents/InProgress.jsx";
 import QControlOrders from "./components/dashComponents/qControlComponents/QControlOrders.jsx";
 import UserTrackOrder from "./components/dashComponents/userComponents/UserTrackOrder.jsx";
 import UserHomeScreenSelection from "./components/dashComponents/userComponents/UserHomeScreenSelection.jsx";
+import ComponentScaffold from "./components/dashComponents/userComponents/ComponentScaffold.jsx";
+import UserArchive from "./components/dashComponents/userComponents/UserArchive.jsx";
 import LoaderWheel from "./components/LoaderWheel.jsx";
 import { ErrorProvider } from "./context/ErrorContext.jsx";
-import ComponentScaffold from "./components/dashComponents/userComponents/ComponentScaffold.jsx";
+import ManagerRejected from "./components/dashComponents/managerComponents/ManagerRejected.jsx";
+import ManagerFinished from "./components/dashComponents/managerComponents/ManagerFinished.jsx";
+import ManagerStatistic from "./components/dashComponents/managerComponents/ManagerStatistic.jsx";
+import ManagerSalaries from "./components/dashComponents/managerComponents/ManagerSalaries.jsx";
+import StorageMain from "./components/storage/StorageMain.jsx";
+import Employers from "./components/dashComponents/managerComponents/Employers.jsx";
+import Warehouse from "./components/storage/Warehouse.jsx";
 import Contacts from "./pages/Contacts/Contacts.jsx";
 import ComponentUserOrdersReady from "./components/dashComponents/userComponents/ComponentUserOrdersReady.jsx";
-import ComponentUserOrdersArchive from "./components/dashComponents/userComponents/ComponentUserOrdersArchive.jsx"
-
+import ComponentUserOrdersArchive from "./components/dashComponents/userComponents/ComponentUserOrdersArchive.jsx";
 // LAZY LOADING
 const CreateBike = lazy(() =>
   import("./components/createComponents/CreateBike.jsx")
@@ -36,6 +43,8 @@ const UserProfile = lazy(() => import("./components/UserProfile.jsx"));
 const Login = lazy(() => import("./components/authComponents/Login.jsx"));
 const Home = lazy(() => import("./pages/Homapage/Home.jsx"));
 const About = lazy(() => import("./pages/About/About.jsx"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy.jsx"));
+const Terms = lazy(() => import("./pages/Terms.jsx"));
 const AppLayout = lazy(() => import("./pages/AppLayout.jsx"));
 const PageNotFound = lazy(() => import("./components/PageNotFound.jsx"));
 
@@ -50,6 +59,8 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="about" element={<About />} />
                 <Route path="contacts" element={<Contacts />} />
+                <Route path="privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="terms" element={<Terms />} />
                 <Route
                   path="profile"
                   element={
@@ -61,7 +72,10 @@ function App() {
                   <Route index element={<Navigate replace to="info" />} />
                   <Route path="info" element={<UserInfo />} />
                   <Route path={"cart"} element={<Cart />} />
-                  <Route path={"user-ready"} element={<ComponentUserOrdersReady />} />
+                  <Route
+                    path={"user-ready"}
+                    element={<ComponentUserOrdersReady />}
+                  />
                   <Route
                     path={"user-in-progress"}
                     element={<UserTrackOrder />}
@@ -70,12 +84,16 @@ function App() {
                     path={"user-archive"}
                     element={<ComponentUserOrdersArchive />}
                   />
+
                   <Route
                     path={"get-stock"}
                     element={<UserHomeScreenSelection />}
                   />
+                  {/* WORKER */}
                   <Route path="worker-orders" element={<WorkerOrders />} />
                   <Route path={"finished"} element={<WorkerFinished />} />
+
+                  {/* MANAGER */}
                   <Route path={"managerOrders"} element={<ManagerOrders />} />
                   <Route
                     path={"manager-in-progress"}
@@ -86,12 +104,22 @@ function App() {
                     element={<ComponentScaffold />}
                   />
                   <Route
-                    path={"manager-finished"}
-                    element={<ComponentScaffold />}
+                    path={"manager-rejected"}
+                    element={<ManagerRejected />}
                   />
-                  <Route path={"employers"} element={<EmployersList />} />
-                  <Route path={"statistic"} />
-                  <Route path={"add-member"} element={<AddMember />} />
+                  <Route
+                    path={"manager-finished"}
+                    element={<ManagerFinished />}
+                  />
+                  {/* <Route path={"employers"} element={<EmployersList />} /> */}
+                  <Route path={"employers"} element={<Employers />} />
+                  <Route path={"statistic"} element={<ManagerStatistic />} />
+                  <Route path={"salaries"} element={<ManagerSalaries />} />
+                  {/* <Route path={"add-member"} element={<AddMember />} /> */}
+
+                  <Route path={"storage"} element={<StorageMain />} />
+                  <Route path={"warehouse"} element={<Warehouse />} />
+                  {/* QCONTROL */}
                   <Route
                     path={"q-control-orders"}
                     element={<QControlOrders />}

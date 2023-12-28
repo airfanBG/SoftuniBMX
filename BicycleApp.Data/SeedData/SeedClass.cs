@@ -10,16 +10,19 @@
 
     public class SeedClass
     {
-        public ICollection<IdentityRole> SeedRoles()
+        private DateTime dateCreated = new DateTime(2023,10,10,10,10,00);
+        private DateTime dateUpdated = new DateTime(2023,10,10,11,10,00);
+
+        public ICollection<BaseUserRole> SeedRoles()
         {
-            return new List<IdentityRole>
+            return new List<BaseUserRole>
             {
-                new IdentityRole(){ Id = "6ac1cb3c-2457-4aff-8fa2-c7052ebcea9e", Name = "user", NormalizedName = "user".ToUpper()},
-                new IdentityRole(){ Id = "f0d2cbfa-cdca-4936-9d85-f9a697d39f2b", Name = "manager", NormalizedName = "manager".ToUpper()},
-                new IdentityRole(){ Id = "fa8f997a-4e15-475f-a028-87a9b6e6be56", Name = "frameworker", NormalizedName = "frameworker".ToUpper()},
-                new IdentityRole(){ Id = "a9618213-7ba0-48cf-81d4-00cd16910ec7", Name = "wheelworker", NormalizedName = "wheelworker".ToUpper()},
-                new IdentityRole(){ Id = "566110d3-06fe-4ca2-b34b-9334a842c88f", Name = "accessoriesworker", NormalizedName = "accessoriesworker".ToUpper()},
-                new IdentityRole(){ Id = "ac558b05-a97b-42c8-bd62-dbd33f36d795", Name = "qualitycontrol", NormalizedName = "qualitycontrol".ToUpper()}
+                new BaseUserRole(){ Id = "6ac1cb3c-2457-4aff-8fa2-c7052ebcea9e", Name = "user", NormalizedName = "user".ToUpper()},
+                new BaseUserRole(){ Id = "f0d2cbfa-cdca-4936-9d85-f9a697d39f2b", Name = "manager", NormalizedName = "manager".ToUpper()},
+                new BaseUserRole(){ Id = "fa8f997a-4e15-475f-a028-87a9b6e6be56", Name = "frameworker", NormalizedName = "frameworker".ToUpper()},
+                new BaseUserRole(){ Id = "a9618213-7ba0-48cf-81d4-00cd16910ec7", Name = "wheelworker", NormalizedName = "wheelworker".ToUpper()},
+                new BaseUserRole(){ Id = "566110d3-06fe-4ca2-b34b-9334a842c88f", Name = "accessoriesworker", NormalizedName = "accessoriesworker".ToUpper()},
+                new BaseUserRole(){ Id = "ac558b05-a97b-42c8-bd62-dbd33f36d795", Name = "qualitycontrol", NormalizedName = "qualitycontrol".ToUpper()}
               
             };
         }
@@ -53,12 +56,12 @@
                 FirstName = "Ivan",
                 LastName = "Ivanov",
                 PhoneNumber = "1234567890",
-                DelivaryAddress = "Mladost 1, bl 20",
+                DelivaryAddressId = 1,
                 TownId = 1,
                 IBAN = "BG0012345678910111212",
                 Balance = 1000.00M,
                 IsDeleted = false,
-                DateCreated = DateTime.Now,
+                DateCreated = dateCreated,
                 DateUpdated = null,
                 DateDeleted = null,
                 EmailConfirmed = true
@@ -76,12 +79,12 @@
                 FirstName = "Georgi",
                 LastName = "Georgiev",
                 PhoneNumber = "1234567890",
-                DelivaryAddress = "Mladost 1, bl 20",
+                DelivaryAddressId = 2,
                 TownId = 2,
                 IBAN = "BG0012345678910111212",
                 Balance = 50.00M,
                 IsDeleted = false,
-                DateCreated = DateTime.Now,
+                DateCreated = dateCreated,
                 DateUpdated = null,
                 DateDeleted = null,
                 EmailConfirmed = true
@@ -99,12 +102,12 @@
                 FirstName = "Dimityr",
                 LastName = "Dimitrov",
                 PhoneNumber = "1234567890",
-                DelivaryAddress = "Mladost 1, bl 20",
+                DelivaryAddressId = 3,
                 TownId = 3,
                 IBAN = "BG0012345678910111212",
                 Balance = 1246.00M,
                 IsDeleted = false,
-                DateCreated = DateTime.Now,
+                DateCreated = dateCreated,
                 DateUpdated = null,
                 DateDeleted = null,
                 EmailConfirmed = true
@@ -119,6 +122,46 @@
                 client3
             };
             return list;
+        }
+
+        public ICollection<DelivaryAddress> SeedDelivaryAddresses()
+        {
+            return new List<DelivaryAddress>()
+            {
+                new DelivaryAddress()
+                {
+                    Id = 1,
+                    Country = "Bulgaria",
+                    TownId = 1,
+                    Street = "Mladost",
+                    StrNumber = "1",
+                    Block = "20",
+                    PostCode = "1000"
+                },
+                 new DelivaryAddress()
+                {
+                    Id = 2,
+                    Country = "Bulgaria",
+                    TownId = 2,
+                    Street = "Gadost",
+                    StrNumber = "13",
+                    Block = "20",
+                    District = "Somewhere over the rainbow",
+                    Floor = 3,
+                    PostCode = "4000"
+                },
+                 new DelivaryAddress()
+                {
+                    Id = 3,
+                    Country = "Bulgaria",
+                    TownId = 3,
+                    Street = "Ovcha mogila",
+                    StrNumber = "123",
+                    District = "Near to earth core",
+                    Floor = 3,
+                    PostCode = "1236"
+                },
+            };
         }
 
         public List<Employee> SeedEmployees()
@@ -139,8 +182,8 @@
                 LastName = "Kalinov",
                 PhoneNumber = "1234567890",
                 Position = "manager",
-                DateOfHire = DateTime.Now,
-                DateCreated = DateTime.Now,
+                DateOfHire = dateCreated,
+                DateCreated = dateCreated,
                 DateUpdated = null,
                 DateOfLeave = null,
                 IsDeleted = false,
@@ -163,8 +206,8 @@
                 LastName = "Marinov",
                 PhoneNumber = "1234567890",
                 Position = "FrameWorker",
-                DateOfHire = DateTime.Now,
-                DateCreated = DateTime.Now,
+                DateOfHire = dateCreated,
+                DateCreated = dateCreated,
                 DateUpdated = null,
                 DateOfLeave = null,
                 IsDeleted = false,
@@ -187,8 +230,8 @@
                 LastName = "Todorov",
                 PhoneNumber = "1234567890",
                 Position = "Wheelworker",
-                DateOfHire = DateTime.Now,
-                DateCreated = DateTime.Now,
+                DateOfHire = dateCreated,
+                DateCreated = dateCreated,
                 DateUpdated = null,
                 DateOfLeave = null,
                 IsDeleted = false,
@@ -211,8 +254,8 @@
                 LastName = "Ivanov",
                 PhoneNumber = "1234567890",
                 Position = "Accessoriesworker",
-                DateOfHire = DateTime.Now,
-                DateCreated = DateTime.Now,
+                DateOfHire = dateCreated,
+                DateCreated = dateCreated,
                 DateUpdated = null,
                 DateOfLeave = null,
                 IsDeleted = false,
@@ -235,8 +278,8 @@
                 LastName = "Atanasov",
                 PhoneNumber = "1234567890",
                 Position = "Qualitycontrol",
-                DateOfHire = DateTime.Now,
-                DateCreated = DateTime.Now,
+                DateOfHire = dateCreated,
+                DateCreated = dateCreated,
                 DateUpdated = null,
                 DateOfLeave = null,
                 IsDeleted = false,
@@ -260,8 +303,8 @@
                 ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
                 Title = "Test Title",
                 Description = "Test Description",
-                DateCreated = DateTime.Now,
-                DateUpdated = DateTime.Now
+                DateCreated = dateCreated,
+                DateUpdated = null
             };
 
             return new List<Comment> { comment };
@@ -275,8 +318,8 @@
                 PartId = 1,
                 QuantityDelivered = 2,
                 Note = "text",
-                DateDelivered = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateDelivered = dateCreated,
+                DateUpdated = dateCreated,
                 SuplierId = 1
             };
             Delivary delivary2 = new Delivary()
@@ -285,8 +328,8 @@
                 PartId = 4,
                 QuantityDelivered = 2,
                 Note = "text2",
-                DateDelivered = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateDelivered = dateCreated,
+                DateUpdated = dateCreated,
                 SuplierId = 2
             };
             Delivary delivary3 = new Delivary()
@@ -295,8 +338,8 @@
                 PartId = 7,
                 QuantityDelivered = 1,
                 Note = "text2",
-                DateDelivered = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateDelivered = dateCreated,
+                DateUpdated = dateCreated,
                 SuplierId = 3
             };
             Delivary delivary4 = new Delivary()
@@ -305,8 +348,8 @@
                 PartId = 1,
                 QuantityDelivered = 4,
                 Note = "text4",
-                DateDelivered = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateDelivered = dateCreated,
+                DateUpdated = dateCreated,
                 SuplierId = 1
             };
             Delivary delivary5 = new Delivary()
@@ -315,8 +358,8 @@
                 PartId = 4,
                 QuantityDelivered = 4,
                 Note = "text5",
-                DateDelivered = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateDelivered = dateCreated,
+                DateUpdated = dateCreated,
                 SuplierId = 2
             };
             Delivary delivary6 = new Delivary()
@@ -325,8 +368,8 @@
                 PartId = 7,
                 QuantityDelivered = 2,
                 Note = "text6",
-                DateDelivered = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateDelivered = dateCreated,
+                DateUpdated = dateCreated,
                 SuplierId = 3
             };
             Delivary delivary7 = new Delivary()
@@ -335,8 +378,8 @@
                 PartId = 1,
                 QuantityDelivered = 3,
                 Note = "text7",
-                DateDelivered = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateDelivered = dateCreated,
+                DateUpdated = dateCreated,
                 SuplierId = 1
             };
             Delivary delivary8 = new Delivary()
@@ -345,8 +388,8 @@
                 PartId = 4,
                 QuantityDelivered = 5,
                 Note = "text8",
-                DateDelivered = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateDelivered = dateCreated,
+                DateUpdated = dateCreated,
                 SuplierId = 2
             };
             Delivary delivary9 = new Delivary()
@@ -355,8 +398,8 @@
                 PartId = 7,
                 QuantityDelivered = 4,
                 Note = "text9",
-                DateDelivered = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateDelivered = dateCreated,
+                DateUpdated = dateCreated,
                 SuplierId = 3
             };
 
@@ -370,7 +413,7 @@
                     {
                         Id = 1,
                         Name = "Administration",
-                        DateCreated = DateTime.Now,
+                        DateCreated = dateCreated,
                         DateUpdated = null,
                         DateDeleted = null,
                         IsDeleted = false
@@ -379,7 +422,7 @@
                     {
                         Id = 2,
                         Name = "Workshop",
-                        DateCreated = DateTime.Now,
+                        DateCreated = dateCreated,
                         DateUpdated = null,
                         DateDeleted = null,
                         IsDeleted = false
@@ -389,15 +432,201 @@
 
         public List<ImagePart> SeedImagesParts()
         {
-            ImagePart imagePart = new ImagePart()
+
+            ImagePart imagePart1 = new ImagePart()
             {
                 Id = 1,
-                ImageName = "image",
-                ImageUrl = "test",
-                PartId = 1
+                PartId = 1,
+                ImageName = "Frame Road",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/frame1.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart2 = new ImagePart()
+            {
+                Id = 2,
+                PartId = 2,
+                ImageName = "Frame Montain",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/frame2.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart3 = new ImagePart()
+            {
+                Id = 3,
+                PartId = 3,
+                ImageName = "Frame Road woman",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/frame3.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart4 = new ImagePart()
+            {
+                Id = 4,
+                PartId = 4,
+                ImageName = "Wheel of the Year for road",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/wheel1.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart5 = new ImagePart()
+            {
+                Id = 5,
+                PartId = 5,
+                ImageName = "Wheel of the Year for montain",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/wheel2.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart6 = new ImagePart()
+            {
+                Id = 6,
+                PartId = 6,
+                ImageName = "Road wheel best",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/wheel3.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart7 = new ImagePart()
+            {
+                Id = 7,
+                PartId = 7,
+                ImageName = "Shift",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket1.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart8 = new ImagePart()
+            {
+                Id = 8,
+                PartId = 8,
+                ImageName = "Montain Shift",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket2.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart9 = new ImagePart()
+            {
+                Id = 9,
+                PartId = 9,
+                ImageName = "Road Shifts",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket3.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart10 = new ImagePart()
+            {
+                Id = 10,
+                PartId = 10,
+                ImageName = "Road better Shifts",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket4.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart11 = new ImagePart()
+            {
+                Id = 11,
+                PartId = 11,
+                ImageName = "Road budget Shift",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket6.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart12 = new ImagePart()
+            {
+                Id = 12,
+                PartId = 12,
+                ImageName = "Shift",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket5.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart13 = new ImagePart()
+            {
+                Id = 13,
+                PartId = 13,
+                ImageName = "Montain Shift",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/sprocket7.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart14 = new ImagePart()
+            {
+                Id = 14,
+                PartId = 14,
+                ImageName = "Budget wheel for road",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/wheel5.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart15 = new ImagePart()
+            {
+                Id = 15,
+                PartId = 15,
+                ImageName = "Budget wheel for a montain",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/wheel8.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart16 = new ImagePart()
+            {
+                Id = 16,
+                PartId = 16,
+                ImageName = "The cheapest road wheel",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/wheel6.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            ImagePart imagePart17 = new ImagePart()
+            {
+                Id = 17,
+                PartId = 17,
+                ImageName = "Road titanium wheel",
+                ImageUrl = "https://yuchormanski.free.bg/bikes/wheel7.webp",
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
             };
 
-            return new List<ImagePart> { imagePart };
+            return new List<ImagePart> 
+            { 
+                imagePart1, imagePart2, imagePart3, imagePart4, imagePart5, imagePart6,
+                imagePart7, imagePart8, imagePart9, imagePart10, imagePart11, imagePart12,
+                imagePart13, imagePart14, imagePart15, imagePart16, imagePart17
+            };
         }
 
         public List<ImageClient> SeedImagesClients()
@@ -407,7 +636,7 @@
                 Id = 1,
                 ImageName = "image",
                 ImageUrl = "test",
-                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd"
+                UserId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd"
             };
 
             return new List<ImageClient> { imageClient };
@@ -420,7 +649,7 @@
                 Id = 1,
                 ImageName = "image",
                 ImageUrl = "test",
-                EmployeeId = "21003785-a275-4139-ae20-af6a6cf8fea8"
+                UserId = "21003785-a275-4139-ae20-af6a6cf8fea8"
             };
 
             return new List<ImageEmployee> { imageEmployee };
@@ -439,7 +668,7 @@
                 FinalAmount = 750.00M,
                 PaidAmount = 0,
                 UnpaidAmount = 750.00M,
-                DateCreated = DateTime.Now,
+                DateCreated = dateCreated,
                 DateUpdated = null,
                 DateDeleted = null,
                 IsDeleted = false,
@@ -457,7 +686,7 @@
                 FinalAmount = 850.00M,
                 PaidAmount = 0,
                 UnpaidAmount = 850.00M,
-                DateCreated = DateTime.Now,
+                DateCreated = dateCreated,
                 DateUpdated = null,
                 DateDeleted = null,
                 IsDeleted = false,
@@ -475,7 +704,7 @@
                 FinalAmount = 950.00M,
                 PaidAmount = 0,
                 UnpaidAmount = 750.00M,
-                DateCreated = DateTime.Now,
+                DateCreated = dateCreated,
                 DateUpdated = null,
                 DateDeleted = null,
                 IsDeleted = false,
@@ -493,7 +722,7 @@
                 FinalAmount = 650.00M,
                 PaidAmount = 0,
                 UnpaidAmount = 750.00M,
-                DateCreated = DateTime.Now,
+                DateCreated = dateCreated,
                 DateUpdated = null,
                 DateDeleted = null,
                 IsDeleted = false,
@@ -511,7 +740,7 @@
                 FinalAmount = 850.00M,
                 PaidAmount = 0,
                 UnpaidAmount = 850.00M,
-                DateCreated = DateTime.Now,
+                DateCreated = dateCreated,
                 DateUpdated = null,
                 DateDeleted = null,
                 IsDeleted = false,
@@ -529,7 +758,7 @@
                 FinalAmount = 850.00M,
                 PaidAmount = 0,
                 UnpaidAmount = 650.00M,
-                DateCreated = DateTime.Now,
+                DateCreated = dateCreated,
                 DateUpdated = null,
                 DateDeleted = null,
                 IsDeleted = false,
@@ -547,7 +776,7 @@
                 FinalAmount = 650.00M,
                 PaidAmount = 0,
                 UnpaidAmount = 750.00M,
-                DateCreated = DateTime.Now,
+                DateCreated = dateCreated,
                 DateUpdated = null,
                 DateDeleted = null,
                 IsDeleted = false,
@@ -565,7 +794,7 @@
                 FinalAmount = 850.00M,
                 PaidAmount = 0,
                 UnpaidAmount = 850.00M,
-                DateCreated = DateTime.Now,
+                DateCreated = dateCreated,
                 DateUpdated = null,
                 DateDeleted = null,
                 IsDeleted = false,
@@ -583,7 +812,7 @@
                 FinalAmount = 850.00M,
                 PaidAmount = 0,
                 UnpaidAmount = 650.00M,
-                DateCreated = DateTime.Now,
+                DateCreated = dateCreated,
                 DateUpdated = null,
                 DateDeleted = null,
                 IsDeleted = false,
@@ -600,7 +829,7 @@
                 VAT = 70.83M,
                 FinalAmount = 425.00M,
                 PaidAmount = 0,
-                DateCreated = DateTime.Now,
+                DateCreated = dateCreated,
                 DateUpdated = null,
                 DateDeleted = null,
                 IsDeleted = false,
@@ -623,7 +852,7 @@
                 PartName = "Frame OG",
                 PartPrice = 100.00M,
                 PartQuantity = 1,
-                DatetimeAsigned = DateTime.Now,
+                DatetimeAsigned = dateCreated,
                 StartDatetime = null,
                 EndDatetime = null,
                 Description = "test",
@@ -639,7 +868,7 @@
                 PartName = "Wheel of the YearG",
                 PartPrice = 75.00M,
                 PartQuantity = 2,
-                DatetimeAsigned = DateTime.Now,
+                DatetimeAsigned = dateCreated,
                 StartDatetime = null,
                 EndDatetime = null,
                 Description = "test",
@@ -654,8 +883,8 @@
                 EmployeeId = "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91",
                 PartName = "Shift",
                 PartPrice = 250.00M,
-                PartQuantity = 2,
-                DatetimeAsigned = DateTime.Now,
+                PartQuantity = 1,
+                DatetimeAsigned = dateCreated,
                 StartDatetime = null,
                 EndDatetime = null,
                 Description = "test",
@@ -1144,8 +1373,9 @@
                     CategoryId = 1,
                     Quantity = 32,
                     SalePrice = 100.00M,
+                    Discount = 10.00M,
                     VATCategoryId = 1,
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1162,7 +1392,7 @@
                     Quantity = 43,
                     SalePrice = 90.00M,
                     VATCategoryId = 1,
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1179,7 +1409,7 @@
                     Quantity = 32,
                     SalePrice = 80.00M,
                     VATCategoryId = 1,
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1196,7 +1426,7 @@
                     Quantity = 50,
                     SalePrice = 75.00M,
                     VATCategoryId = 1,
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1213,7 +1443,7 @@
                     Quantity = 40,
                     SalePrice = 85.00M,
                     VATCategoryId = 1,
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1230,7 +1460,7 @@
                     Quantity = 50,
                     SalePrice = 65.00M,
                     VATCategoryId = 1,
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1247,7 +1477,7 @@
                     Quantity = 29,
                     SalePrice = 250.00M,
                     VATCategoryId = 1,
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1264,7 +1494,7 @@
                     Quantity = 19,
                     SalePrice = 350.00M,
                     VATCategoryId = 1,
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1281,7 +1511,7 @@
                     Quantity = 29,
                     SalePrice = 400.00M,
                     VATCategoryId = 1,
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1298,7 +1528,7 @@
                     Quantity = 21,
                     SalePrice = 410.00M,
                     VATCategoryId = 1,
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1315,7 +1545,7 @@
                     Quantity = 21,
                     SalePrice = 290.00M,
                     VATCategoryId = 1,
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1332,7 +1562,7 @@
                     Quantity = 29,
                     SalePrice = 220.00M,
                     VATCategoryId = 1,
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1349,7 +1579,7 @@
                     Quantity = 19,
                     SalePrice = 280.00M,
                     VATCategoryId = 1,
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1366,7 +1596,7 @@
                     Quantity = 50,
                     SalePrice = 65.00M,
                     VATCategoryId = 1,
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1383,7 +1613,7 @@
                     Quantity = 40,
                     SalePrice = 75.00M,
                     VATCategoryId = 1,
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1400,7 +1630,7 @@
                     Quantity = 50,
                     SalePrice = 55.00M,
                     VATCategoryId = 1,
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1417,11 +1647,29 @@
                     Quantity = 50,
                     SalePrice = 95.00M,
                     VATCategoryId = 1,
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
                  },
+                 new Part()
+                 {
+                    Id = 18,
+                    Name = "InvalidPart",
+                    Description = "PartWithHightValueOfDiscountThanSellPrice",
+                    Intend = "",
+                    OEMNumber = "oemtest1",
+                    Type = 1,
+                    CategoryId = 1,
+                    Quantity = 32,
+                    SalePrice = 100.00M,
+                    Discount = 110.00M,
+                    VATCategoryId = 1,
+                    DateCreated = dateCreated,
+                    DateUpdated = null,
+                    DateDeleted = null,
+                    IsDeleted = false
+                 }
             };
         }
 
@@ -1434,7 +1682,7 @@
                     Id = 1,
                     Name = "Frame",
                     ImageUrl = "test",
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1444,7 +1692,7 @@
                     Id = 2,
                     Name = "Wheel",
                     ImageUrl = "test",
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1454,7 +1702,7 @@
                     Id = 3,
                     Name = "Acsessories",
                     ImageUrl = "test",
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1682,7 +1930,7 @@
                 {
                     Id = 1,
                     Name = "Pending approval",
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1691,7 +1939,7 @@
                 {
                     Id = 2,
                     Name = "Approved order",
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1700,7 +1948,7 @@
                 {
                     Id = 3,
                     Name = "Frame management",
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1709,7 +1957,7 @@
                 {
                     Id = 4,
                     Name = "Wheel management",
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1718,7 +1966,7 @@
                 {
                     Id = 5,
                     Name = "Shift management",
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1727,7 +1975,7 @@
                 {
                     Id = 6,
                     Name = "Quality control",
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1736,7 +1984,7 @@
                 {
                     Id = 7,
                     Name = "Send order",
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
@@ -1756,8 +2004,8 @@
                 Email = "text@test.bg",
                 ContactName = "Pesh Peshev",
                 CategoryName = "Frame",
-                DateCreated = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateCreated = dateCreated,
+                DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             };
@@ -1771,8 +2019,8 @@
                 Email = "text2@test.bg",
                 ContactName = "Pesho Peshev",
                 CategoryName = "Wheel",
-                DateCreated = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateCreated = dateCreated,
+                DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             };
@@ -1786,8 +2034,8 @@
                 Email = "text3@test.bg",
                 ContactName = "Ivan Peshev",
                 CategoryName = "Acsessories",
-                DateCreated = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateCreated = dateCreated,
+                DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             };
@@ -1802,8 +2050,8 @@
                     {
                         Id = 1,
                         Name = "Sofia",
-                        DateCreated = DateTime.Now,
-                        DateUpdated = DateTime.Now,
+                        DateCreated = dateCreated,
+                        DateUpdated = dateUpdated,
                         DateDeleted = null,
                         IsDeleted = false
                     },
@@ -1811,7 +2059,7 @@
                 {
                     Id = 2,
                         Name = "Varna",
-                        DateCreated = DateTime.Now,
+                        DateCreated = dateCreated,
                         DateUpdated =null,
                         DateDeleted = null,
                         IsDeleted = false
@@ -1820,7 +2068,7 @@
                 {
                     Id = 3,
                         Name = "Burgas",
-                        DateCreated = DateTime.Now,
+                        DateCreated = dateCreated,
                         DateUpdated =null,
                         DateDeleted = null,
                         IsDeleted = false
@@ -1834,8 +2082,8 @@
             {
                 Id = 1,
                 VATPercent = 20.00M,
-                DateCreated = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateCreated = dateCreated,
+                DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             };
@@ -1848,8 +2096,8 @@
             {
                 Id = 1,
                 OemPartNumber = "oemtest1",
-                DateCreated = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateCreated = dateCreated,
+                DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             };
@@ -1857,96 +2105,96 @@
             {
                 Id = 2,
                 OemPartNumber = "oemtest2",
-                DateCreated = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateCreated = dateCreated,
+                DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             }; PartInStock partInStock3 = new PartInStock()
             {
                 Id = 3,
                 OemPartNumber = "oemtest3",
-                DateCreated = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateCreated = dateCreated,
+                DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             }; PartInStock partInStock4 = new PartInStock()
             {
                 Id = 4,
                 OemPartNumber = "oemtest4",
-                DateCreated = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateCreated = dateCreated,
+                DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             }; PartInStock partInStock5 = new PartInStock()
             {
                 Id = 5,
                 OemPartNumber = "oemtest5",
-                DateCreated = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateCreated = dateCreated,
+                DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             }; PartInStock partInStock6 = new PartInStock()
             {
                 Id = 6,
                 OemPartNumber = "oemtest6",
-                DateCreated = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateCreated = dateCreated,
+                DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             }; PartInStock partInStock7 = new PartInStock()
             {
                 Id = 7,
                 OemPartNumber = "oemtest7",
-                DateCreated = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateCreated = dateCreated,
+                DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             }; PartInStock partInStock8 = new PartInStock()
             {
                 Id = 8,
                 OemPartNumber = "oemtest8",
-                DateCreated = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateCreated = dateCreated,
+                DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             }; PartInStock partInStock9 = new PartInStock()
             {
                 Id = 9,
                 OemPartNumber = "oemtest9",
-                DateCreated = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateCreated = dateCreated,
+                DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             }; PartInStock partInStock10 = new PartInStock()
             {
                 Id = 10,
                 OemPartNumber = "oemtest10",
-                DateCreated = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateCreated = dateCreated,
+                DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             }; PartInStock partInStock11 = new PartInStock()
             {
                 Id = 11,
                 OemPartNumber = "oemtest11",
-                DateCreated = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateCreated = dateCreated,
+                DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             }; PartInStock partInStock12 = new PartInStock()
             {
                 Id = 12,
                 OemPartNumber = "oemtest12",
-                DateCreated = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateCreated = dateCreated,
+                DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             }; PartInStock partInStock13 = new PartInStock()
             {
                 Id = 13,
                 OemPartNumber = "oemtest13",
-                DateCreated = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateCreated = dateCreated,
+                DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             };
@@ -1973,8 +2221,8 @@
                 PartId = 1,
                 Quantity = 2,
                 Note = "text",
-                DateCreated = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateCreated = dateCreated,
+                DateUpdated = dateUpdated,
                 SuplierId = 1
             };
             PartOrder partOrder2 = new PartOrder()
@@ -1983,8 +2231,8 @@
                 PartId = 4,
                 Quantity = 2,
                 Note = "text2",
-                DateCreated = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateCreated = dateCreated,
+                DateUpdated = dateUpdated,
                 SuplierId = 2
             };
             PartOrder partOrder3 = new PartOrder()
@@ -1993,8 +2241,8 @@
                 PartId = 7,
                 Quantity = 1,
                 Note = "text2",
-                DateCreated = DateTime.Now,
-                DateUpdated = DateTime.Now,
+                DateCreated = dateCreated,
+                DateUpdated = dateUpdated,
                 SuplierId = 3
             };
 

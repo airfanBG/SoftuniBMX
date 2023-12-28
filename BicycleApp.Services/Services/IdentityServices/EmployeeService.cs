@@ -24,13 +24,12 @@
     using Microsoft.AspNetCore.WebUtilities;
     using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Services.HelperClasses.Contracts;
-    using BicycleApp.Services.Models.Order;
 
     public class EmployeeService : IEmployeeService
     {
         private readonly UserManager<BaseUser> userManager;
         private readonly SignInManager<BaseUser> signInManager;
-        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly RoleManager<BaseUserRole> roleManager;
         private readonly BicycleAppDbContext dbContext;
         private readonly IConfiguration configuration;
         private readonly IModelsFactory modelFactory;
@@ -40,7 +39,7 @@
 
         public EmployeeService(UserManager<BaseUser> userManager, 
                                SignInManager<BaseUser> signInManager,
-                               RoleManager<IdentityRole> roleManager,
+                               RoleManager<BaseUserRole> roleManager,
                                BicycleAppDbContext dbContext, 
                                IConfiguration configuration, 
                                IModelsFactory modelFactory, 
@@ -66,7 +65,7 @@
         /// <returns>True or False</returns>
         /// <exception cref="ArgumentNullException">If input data is null</exception>
         /// <exception cref="ArgumentException">If employee already exists</exception>
-        public async Task<bool> RegisterEmployeeAsync(EmployeeRegisterDto employeeRegisterDto, string httpScheme, string httpHost)
+        public async Task<string> RegisterEmployeeAsync(EmployeeRegisterDto employeeRegisterDto, string httpScheme, string httpHost)
         {
             if (employeeRegisterDto == null)
             {
@@ -85,7 +84,9 @@
             var result = await this.userManager.CreateAsync(employee, employeeRegisterDto.Password);
 
             var isRoleExists = await roleManager.RoleExistsAsync(employeeRegisterDto.Role.ToLower());
-            var identityRole = new IdentityRole(employeeRegisterDto.Role.ToLower());
+            var identityRole = new BaseUserRole();
+            identityRole.Name = employeeRegisterDto.Role;
+            
             if (!isRoleExists)
             {
                 await roleManager.CreateAsync(identityRole);
@@ -95,7 +96,7 @@
 
             if (result == null)
             {
-                return false;
+                return string.Empty;
             }
 
             if (result.Succeeded)
@@ -108,10 +109,10 @@
                 var emailSenderResult = emailSender.IsSendedEmailForVerification(employee.Email, $"{employee.FirstName} {employee.LastName}", callback);
                 if (emailSenderResult)
                 {
-                    return true;
+                    return stringManipulator.ReturnFullName(employee.FirstName, employee.LastName);
                 }
             }
-            return false;
+            return string.Empty;
         }
 
         /// <summary>
@@ -179,11 +180,14 @@
                 .Select(d => d.Name)
                 .FirstOrDefaultAsync();
 
+            var roles = await userManager.GetRolesAsync(employee);
+
             return new EmployeeInfoDto()
             {
                 Id = employee.Id,
                 FirstName = employee.FirstName,
                 LastName = employee.LastName,
+                //Role = roles.Count > 1 ? string.Join(", ", roles) : roles[0],
                 Email = employee.Email,
                 Position = employee.Position,
                 Department = department,
@@ -307,30 +311,6 @@
                 throw new Exception(e.Message);
             }
 
-        }
-
-        public async Task<AllEmployeesDto?> GetAllEmployees()
-        {
-            try
-            {
-                return await dbContext.Roles
-                                  .Where(r => r.Name != "user")
-                                  .Select(s => new AllEmployeesDto()
-                                  {
-                                      Roles = new List<EmployeeRoleDto>()
-                                      {
-                                          new EmployeeRoleDto()
-                                          {
-
-                                          }
-                                      }
-                                  })
-                                  .FirstAsync();
-            }
-            catch (Exception)
-            {
-            }
-            return null;
         }
 
         /// <summary>

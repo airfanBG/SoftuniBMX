@@ -31,7 +31,8 @@ function InProgress() {
           message: "Something went wrong. Service can not get data!",
         });
       }
-      setOrderList(result);
+      const sortedResult = result.sort((a, b) => a.dateCreated - b.dateCreated);
+      setOrderList(sortedResult);
       setLoading(false);
     }
     getInProgressOrders();
@@ -51,6 +52,7 @@ function InProgress() {
 
   if (orderList.length === 0)
     return <h2>There is no orders in this category</h2>;
+    
   return (
     <>
       {background && (
@@ -67,7 +69,7 @@ function InProgress() {
           {loading && <LoaderWheel />}
           {orderList.map((order, i) => (
             <OrderInProgress
-              key={order.id}
+              key={order.orderId}
               order={order}
               i={i + 1}
               onOrderButtonClick={onOrderButtonClick}

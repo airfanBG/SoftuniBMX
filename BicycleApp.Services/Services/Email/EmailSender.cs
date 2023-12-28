@@ -12,11 +12,7 @@
 
     using System;
     using System.Security.Cryptography;
-    using System.Security.Policy;
     using System.Text;
-    using System.Text.Encodings.Web;
-    using static BicycleApp.Common.EntityValidationConstants;
-    using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
     public class EmailSender : IEmailSender
     {

@@ -1,6 +1,6 @@
 import styles from "./QControlOrderItem.module.css";
 
-import { useReducer, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import LoaderWheel from "../../LoaderWheel.jsx";
 import { timeResolver } from "../../../util/resolvers.js";
 import { del, post } from "../../../util/api.js";
@@ -15,6 +15,8 @@ const initialState = {
   textFrame: "",
   textWheel: "",
   textAccessory: "",
+  btnText: "",
+  status: false,
 };
 
 function reducer(state, action) {
@@ -33,6 +35,8 @@ function reducer(state, action) {
       return { ...state, textWheel: action.payload };
     case "textAccessory":
       return { ...state, textAccessory: action.payload };
+    case "setBtnText":
+      return { ...state, btnText: action.payload };
 
     default:
       throw new Error("Unknown action type");
@@ -49,10 +53,24 @@ function QControlOrderItem({ product, onReBuild }) {
       textFrame,
       textWheel,
       textAccessory,
+      btnText,
+      status,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
+
   const snNumber = uuidv4();
+
+  useEffect(() => {
+    if (frameCheck && wheelCheck && accessoryCheck) {
+      dispatch({ type: "setBtnText", payload: "Pass control" });
+    } else if (frameCheck || wheelCheck || accessoryCheck) {
+      dispatch({ type: "setBtnText", payload: "Rebuild" });
+    } else if (!frameCheck || !wheelCheck || !accessoryCheck) {
+      dispatch({ type: "setBtnText", payload: "Scrap" });
+    }
+  }, [accessoryCheck, frameCheck, wheelCheck]);
+
   const finalResult = { ...product };
 
   function checkboxHandler(e) {
@@ -80,15 +98,15 @@ function QControlOrderItem({ product, onReBuild }) {
     finalResult.orderStates[2].isProduced = accessoryCheck;
     finalResult.orderStates[2].description = textAccessory;
 
-    console.log(finalResult);
-
     if (Object.values(valuesCheck).every((x) => x === true)) {
       result = await post(environment.pass_qControl + product.orderId);
-    } else if (Object.value(valuesCheck).every((x) => x === false)) {
+      console.log("pass");
+    } else if (Object.values(valuesCheck).every((x) => x === false)) {
       // TODO: отива за брак - ендпоинт
-      console.log(finalResult);
+      console.log("scrap");
     } else {
       result = await post(environment.return_qControl, finalResult);
+      console.log("some pass");
     }
     console.log(result);
   }
@@ -241,7 +259,7 @@ function QControlOrderItem({ product, onReBuild }) {
             className={`${styles.btn} ${styles.final}`}
             onClick={onControl}
           >
-            Quality Control
+            {btnText}
           </button>
         </div>
       </figure>

@@ -1,15 +1,19 @@
 ﻿namespace BicycleApp.Services.Services.Orders
 {
     using BicicleApp.Common.Providers.Contracts;
-    using BicycleApp.Common.Providers.Contracts;
+
     using BicycleApp.Data;
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Contracts.OrderContracts;
     using BicycleApp.Services.HelperClasses.Contracts;
+    using BicycleApp.Services.Models;
+    using BicycleApp.Services.Models.Order.OrderManager;
     using BicycleApp.Services.Models.Order.OrderUser;
     using BicycleApp.Services.Models.Order.OrderUser.Contracts;
+
     using Microsoft.EntityFrameworkCore;
+
     using static BicycleApp.Common.ApplicationGlobalConstants;
 
     public class OrderUserService : IOrderUserService
@@ -17,19 +21,16 @@
         private readonly BicycleAppDbContext _db;
         private readonly IStringManipulator _stringManipulator;
         private readonly IOrderFactory _orderFactory;
-        private readonly IGuidProvider _guidProvider;
         private readonly IDateTimeProvider _dateTimeProvider;
 
         public OrderUserService(BicycleAppDbContext db,
                                 IStringManipulator stringManipulator,
                                 IOrderFactory orderFactory,
-                                IGuidProvider guidProvider,
                                 IDateTimeProvider dateTimeProvider)
         {
             _db = db;
             _stringManipulator = stringManipulator;
             _orderFactory = orderFactory;
-            _guidProvider = guidProvider;
             _dateTimeProvider = dateTimeProvider;
         }
 
@@ -76,13 +77,23 @@
                 newOrder.Description = _stringManipulator.GetTextFromProperty(order.Description);
                 newOrder.SaleAmount = totalAmount - totalDiscount - totalVAT;
 
-                var newOrderId = await _orderFactory.CreateUserOrderAsync(newOrder);
-                newOrder.OrderId = newOrderId;
+                var client = await _db.Clients.FirstAsync(c => c.Id == order.ClientId);
 
-                if (newOrderId != 0)
+                var isThereEnoughMoney = CheckBalance(client.Balance, newOrder.FinalAmount);
+
+                if (!isThereEnoughMoney)
                 {
-                    return newOrder;
+                    return null;
                 }
+
+                var newOrderObject = _orderFactory.CreateUserOrder(newOrder, _dateTimeProvider.Now);
+
+                await _db.Orders.AddAsync(newOrderObject);
+                await _db.SaveChangesAsync();
+
+                newOrder.OrderId = newOrderObject.Id;
+
+                return newOrder;
             }
             catch (Exception)
             {
@@ -116,11 +127,13 @@
                                                    NameOfEmplоyeeProducedThePart = _stringManipulator.ReturnFullName(ope.Employee.FirstName, ope.Employee.LastName),
                                                    PartModel = ope.Part.Name,
                                                    PartType = ope.Part.Category.Name,
-                                                   PartId = ope.PartId
-
+                                                   PartId = ope.PartId,
+                                                   StartDate = ope.StartDatetime.ToString(),
+                                                   EndDate = ope.EndDatetime.ToString(),
                                                }).ToList()
                             })
                             .ToListAsync();
+
         }
 
         /// <summary>
@@ -139,11 +152,11 @@
                 for (int i = 0; i < quntityOfPart; i++)
                 {
                     string serialNumber = _stringManipulator.SerialNumberGenerator();
-                    string guidKey = _guidProvider.CreateGuid();
+                    string guidKey = _stringManipulator.CreateGuid();
 
                     foreach (var orderPart in newOrder.OrderParts)
                     {
-                        var ope = await _orderFactory.CreateOrderPartEmployeeProduct(newOrder.OrderId, guidKey, serialNumber, orderPart.PartId, orderPart.PartName, orderPart.PartQuantity, orderPart.PartPrice);
+                        var ope = await _orderFactory.CreateOrderPartEmployeeProduct(newOrder.OrderId, guidKey, serialNumber, orderPart.PartId, orderPart.PartName, orderPart.PartQuantity, orderPart.PartPrice, _dateTimeProvider.Now);
 
                         orderPartEmployeeCollection.Add(ope);
                     }
@@ -208,5 +221,82 @@
             }
         }
 
+        /// <summary>
+        /// Check and reduce client`s balance by needed amount for order. If it`s successful return <see langword="true"/>, otherwise <see langword="false"/>.    
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <param name="percentageOfDeduction"></param>
+        /// <param name="newOrder"></param>
+        /// <returns>Task<bool></returns>
+        public async Task<bool> DeductionByAmount(string clientId, decimal percentageOfDeduction, IOrder newOrder)
+        {
+            try
+            {
+                var client = await _db.Clients.FirstAsync(c => c.Id == clientId);
+
+                decimal neededMoneyForOrder = Math.Round(newOrder.FinalAmount * (percentageOfDeduction / 100));
+
+                client.Balance -= neededMoneyForOrder;
+
+                var order = await _db.Orders.FirstAsync(o => o.Id == newOrder.OrderId);
+                order.PaidAmount = neededMoneyForOrder;
+                order.UnpaidAmount = newOrder.FinalAmount - neededMoneyForOrder;
+
+                await _db.SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception)
+            {
+            }
+
+            return false;
+        }
+
+        private bool CheckBalance(decimal clientBalanceAmount, decimal orderAmount)
+        {
+            if (clientBalanceAmount >= orderAmount)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Collection of all client orders with a specific status
+        /// </summary>
+        /// <param name="userId">Client Id</param>
+        /// <returns>Collection of models</returns>
+        /// <exception cref="ArgumentNullException">If userIs is null</exception>
+        public async Task<ICollection<OrderClientShortInfo>> GetAllOrdersForClientByStatus(string userId, int status)
+        {
+            if (userId == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            var orders = await _db.Orders
+                .Include(o => o.OrdersPartsEmployees)
+                .ThenInclude(p => p.Part)
+                .Where(o => o.ClientId == userId && o.StatusId == status)
+                .OrderByDescending(o => o.DateCreated)
+                .Select(r => new OrderClientShortInfo()
+                {
+                    OrderId = r.Id,
+                    OrderDate = r.DateCreated.ToString(DefaultDateFormat),
+                    Amount = r.FinalAmount,
+                    SerialNumber = r.OrdersPartsEmployees.First().SerialNumber,
+                    Parts = r.OrdersPartsEmployees
+                    .Select(pa => new PartShortInfoDto()
+                    {
+                        Id = pa.PartId,
+                        Name = pa.PartName
+                    })
+                    .ToList()
+                })
+                .ToListAsync();
+
+            return orders;
+        }
     }
 }

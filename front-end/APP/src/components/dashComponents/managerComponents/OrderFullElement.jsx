@@ -1,7 +1,28 @@
+import { timeResolver } from "../../../util/resolvers.js";
 import styles from "./OrderFullElement.module.css";
 
 function OrderElement({ order }) {
-  const { serialNumber, id, dateCreated, orderParts } = order;
+  const { serialNumber, orderId: id, dateCreated, orderStates } = order;
+
+  function jobTIme(t1, t2) {
+    let timeResult = "";
+    const date1 = new Date(t1).getTime();
+    const date2 = new Date(t2).getTime();
+    // TODO: only for development
+    if (date2 - date1 < 100000) {
+      timeResult = timeResolver(date1, Math.floor(Math.random() * 10 * date2));
+    } else {
+      timeResult = timeResolver(date1, date2);
+    }
+
+    return timeResult;
+  }
+
+  function orderStatus(s, e) {
+    if (s === null && e === null) return "In Queue";
+    else if (!!s && e === null) return "In Process";
+    else if (!!s && !!e) return "Finished";
+  }
 
   return (
     <div className={styles.container}>
@@ -22,21 +43,27 @@ function OrderElement({ order }) {
           {id}
         </p>
         <p className={styles.date}>
-          <span className={styles.label}>Date:</span>
+          <span className={styles.label}>Date created:</span>
           {dateCreated.replaceAll("/", ".")}
         </p>
       </header>
 
       <div className={styles.orderStatesList}>
-        {orderParts.map((s, i) => (
+        {orderStates.map((s, i) => (
           <div key={i} className={styles.sector}>
             <div className={styles.block}>
-              <h3 className={styles.line}>{s.partName}</h3>
+              <h3 className={styles.line}>{s.partType}</h3>
 
-              <p className={styles.field}>
-                <span className={styles.fieldLabel}>Model:</span>
-                {s.partModel}
-              </p>
+              <div className={styles.metaData}>
+                <p className={styles.field}>
+                  <span className={styles.fieldLabel}>OEM Number:</span>
+                  {s.serialNumber}
+                </p>
+                <p className={styles.field}>
+                  <span className={styles.fieldLabel}>Quantity:</span>
+                  {s.partQuantity}
+                </p>
+              </div>
 
               <div className={styles.metaData}>
                 <p className={styles.field}>
@@ -46,13 +73,31 @@ function OrderElement({ order }) {
                 <p
                   className={styles.field}
                   style={
-                    s.isComplete
+                    s.isProduced
                       ? { color: "var(--button-agree)" }
                       : { color: "var(--color-main-dark)" }
                   }
                 >
                   <span className={styles.fieldLabel}>Status:</span>
-                  {s.isComplete ? "Finished" : "In Process"}
+                  {/* {s.isProduced ? "Finished" : "In Process"} */}
+                  {orderStatus(s.startDate, s.endDate)}
+                </p>
+              </div>
+              <div className={`${styles.metaData} ${styles.emptyField}`}>
+                {
+                  <p className={styles.field}>
+                    <span className={`${styles.fieldLabel} `}>
+                      Description:
+                    </span>
+                    {s.description}
+                  </p>
+                }
+                <p className={styles.field}>
+                  <span className={styles.fieldLabel}>Prodiced time:</span>
+                  {/* {s.elementProduceTimeInMinutes} */}
+                  {!!s.startDate &&
+                    !!s.endDate &&
+                    jobTIme(s.startDate, s.endDate)}
                 </p>
               </div>
             </div>
@@ -66,40 +111,16 @@ function OrderElement({ order }) {
 export default OrderElement;
 
 // {
-//   "orderId": 1,
-//   "serialNumber": "BID12345678",
-//   "dateCreated": "2023-12-17 13:09:57.5250286",
-//   "dateFinished": null,
-//   "orderParts": [
-//       {
-//           "partId": 1,
-//           "description": "test",
-//           "partName": "Frame OG",
-//           "partQuantity": 1,
-//           "partQunatityInStock": 28,
-//           "startDate": "2023-12-17 13:29:56.3270000",
-//           "endDate": "2023-12-17 13:35:34.6850000",
-//           "isComplete": true
-//       },
-//       {
-//           "partId": 2,
-//           "description": "test",
-//           "partName": "Wheel of the YearG",
-//           "partQuantity": 1,
-//           "partQunatityInStock": 42,
-//           "startDate": "2023-12-17 13:37:52.4510000",
-//           "endDate": "2023-12-17 13:37:53.6690000",
-//           "isComplete": true
-//       },
-//       {
-//           "partId": 3,
-//           "description": "test",
-//           "partName": "Shift",
-//           "partQuantity": 1,
-//           "partQunatityInStock": 32,
-//           "startDate": "2023-12-17 13:38:19.7070000",
-//           "endDate": "2023-12-17 13:38:20.7370000",
-//           "isComplete": true
-//       }
-//   ]
+//   "partId": 1,
+//   "partType": "Frame",
+//   "partModel": "Frame Road",
+//   "nameOfEmplоyeeProducedThePart": "Marin Marinov",
+//   "isProduced": true,
+//   "serialNumber": "oemtest1",
+//   "employeeId": null,
+//   "elementProduceTimeInMinutes": null,
+//   "description": null,
+//   "partQuantity": 1,
+//   "startDate": "2023-12-21 22:59:26.6380000",
+//   "endDate": "2023-12-21 22:59:35.8470000"
 // }

@@ -8,7 +8,7 @@
 
         Task<ClientReturnDto> LoginClientAsync(ClientLoginDto clientDto);
 
-        Task<ClientInfoDto?> GetClientInfoAsync(string Id);
+        Task<ClientEditDto?> GetClientInfoAsync(string Id);
 
         Task<bool> ChangeClientPasswordAsync(ClientPasswordChangeDto clientPasswordChangeDto);
         Task ConfirmEmailAsync(string clientId, string code);
@@ -21,6 +21,6 @@
 
         Task<bool> ResetPasswordToDefault(string email);
 
-        Task<bool> EditClientInfoAsync(ClientEditDto clientEditDto);
+        Task<string> EditClientInfoAsync(ClientEditDto clientEditDto);
     }
 }

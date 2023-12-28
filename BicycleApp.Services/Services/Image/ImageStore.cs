@@ -1,22 +1,32 @@
 ﻿namespace BicycleApp.Services.Services.Image
 {
+    using BicycleApp.Data;
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Models.Image;
+    using static BicycleApp.Common.UserConstants;
 
     using Microsoft.AspNetCore.Http;
 
     using System.Text;
     using System.Threading.Tasks;
+    using BicycleApp.Data.Models.EntityModels;
+    using BicycleApp.Services.HelperClasses.Contracts;
 
     public class ImageStore : IImageStore
     {
+        private readonly BicycleAppDbContext _db;
         private readonly IUserImageFactory _userImageFactory;
+        private readonly IStringManipulator _stringManipulator;
 
         public ImageStore(
-            IUserImageFactory userImageFactory)
-        {            
+            BicycleAppDbContext db,
+            IUserImageFactory userImageFactory,
+            IStringManipulator stringManipulator)
+        {
+            _db = db;
             _userImageFactory = userImageFactory;
+            _stringManipulator = stringManipulator;
         }
 
         /// <summary>
@@ -66,30 +76,50 @@
 
                     if (allowedExtensions.Contains(imageExtension))
                     {
-                        string fileName = Guid.NewGuid().ToString();
+                        string fileName = _stringManipulator.CreateGuid();
                         string filePath = Path.Combine(userPath, $"{fileName}.{imageExtension}");
 
                         bool isUserImageExist = await _userImageFactory.CheckForExistingUserImage(userImageDto.Id, userImageDto.Role);
 
                         if (isUserImageExist)
                         {
-                            var isSuccessfulUpdated = await _userImageFactory.UpdateUserImage(userImageDto.Id, userImageDto.Role, filePath);
+                            var updatedImage = await _userImageFactory.UpdateUserImage(userImageDto.Id, userImageDto.Role, filePath);
 
-                            if (!isSuccessfulUpdated)
+                            if (updatedImage == null)
                             {
                                 return false;
+                            }
+                            if (userImageDto.Role.ToLower() != CLIENT)
+                            {
+                                 _db.ImagesEmployees.Update((ImageEmployee)updatedImage);
+                            }
+                            else
+                            {
+                                 _db.ImagesClients.Update((ImageClient)updatedImage);
                             }
                         }
                         else
                         {
-                            var isSuccessfulCreated = await _userImageFactory.CreateUserImage(userImageDto.Id, userImageDto.Role, filePath, fileName);
+                            var createdUserImage = await _userImageFactory.CreateUserImage(userImageDto.Id, userImageDto.Role, filePath, fileName);
 
-                            if (!isSuccessfulCreated)
+                            if (createdUserImage == null)
                             {
                                 return false;
                             }
+
+                            if (userImageDto.Role.ToLower() != CLIENT)
+                            {
+                                await _db.ImagesEmployees.AddAsync((ImageEmployee)createdUserImage);
+                            }
+                            else
+                            {
+                                await _db.ImagesClients.AddAsync((ImageClient)createdUserImage);
+                            }
                         }
+
+                        await _db.SaveChangesAsync();
                         AddImage(userPath, filePath, userImageDto.ImageToSave);
+
                         return true;
                     }
                 }

@@ -5,9 +5,9 @@
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.Models;
     using BicycleApp.Services.Models.IdentityModels;
+    using BicycleApp.Services.Models.IdentityModels.Contracts;
     using BicycleApp.Services.Models.Supply;
     using System;
-    using System.Text;
 
     public class ModelsFactory : IModelsFactory
     {
@@ -22,48 +22,11 @@
             };
         }
 
-        public Client CreateNewClientModel(ClientRegisterDto clientRegisterDto)
+        public Client CreateNewClientModel(IBaseClientDto clientRegisterDto)
         {
-            //Transform the address dto in to a string
-            var sb = new StringBuilder();
-            ClientAddressDto innerDto = clientRegisterDto.DelivaryAddress;
-
-            if (!string.IsNullOrWhiteSpace(innerDto.Country))
-            {
-                sb.Append($"{innerDto.Country} ");
-            }
-            if (!string.IsNullOrWhiteSpace(innerDto.PostCode))
-            {
-                sb.Append($"{innerDto.PostCode} ");
-            }
-            if (!string.IsNullOrWhiteSpace(innerDto.District))
-            {
-                sb.Append($"{innerDto.District} ");
-            }
-            if (!string.IsNullOrWhiteSpace(innerDto.Block))
-            {
-                sb.Append($"{innerDto.Block} ");
-            }
-            if (innerDto.Floor.HasValue)
-            {
-                sb.Append($"{innerDto.Floor} ");
-            }
-            if (!string.IsNullOrWhiteSpace(innerDto.Apartment))
-            {
-                sb.Append($"{innerDto.Apartment} ");
-            }
-            if (!string.IsNullOrWhiteSpace(innerDto.Street))
-            {
-                sb.Append($"{innerDto.Street} ");
-            }
-            if (!string.IsNullOrWhiteSpace(innerDto.StrNumber))
-            {
-                sb.Append($"{innerDto.StrNumber}");
-            }
-
+            
             return new Client()
             {
-
                 FirstName = clientRegisterDto.FirstName,
                 LastName = clientRegisterDto.LastName,
                 Email = clientRegisterDto.Email,
@@ -71,7 +34,7 @@
                 UserName = clientRegisterDto.Email,
                 NormalizedUserName = clientRegisterDto.Email.ToUpper(),
                 PhoneNumber = clientRegisterDto.PhoneNumber,
-                DelivaryAddress = sb.ToString(),
+                DelivaryAddress = CreateNewDelivaryAddress(clientRegisterDto.DelivaryAddress),
                 IBAN = clientRegisterDto.IBAN,
                 Balance = clientRegisterDto.Balance,
                 DateCreated = DateTime.UtcNow,
@@ -138,7 +101,8 @@
                 NormalizedUserName = employeeRegisterDto.Email.ToUpper(),
                 PhoneNumber = employeeRegisterDto.PhoneNumber,
                 UserName = employeeRegisterDto.Email,
-                Position = employeeRegisterDto.Position
+                Position = employeeRegisterDto.Position,
+                EmailConfirmed = true
             };
         }
 
@@ -204,6 +168,20 @@
                 DateDeleted = null,
                 DateUpdated = DateTime.UtcNow,
                 IsDeleted = false,
+            };
+        }
+        public DelivaryAddress CreateNewDelivaryAddress(IDelivaryAddressDto clientDelivaryAddressDto)
+        {
+            return new DelivaryAddress()
+            {
+                Street = clientDelivaryAddressDto.Street,
+                StrNumber = clientDelivaryAddressDto.StrNumber,
+                Apartment = clientDelivaryAddressDto.Apartment,
+                Block = clientDelivaryAddressDto.Block,
+                Country = clientDelivaryAddressDto.Country,
+                District = clientDelivaryAddressDto.District,
+                Floor = clientDelivaryAddressDto.Floor,
+                PostCode = clientDelivaryAddressDto.PostCode
             };
         }
     }

@@ -2,21 +2,26 @@
 {
     using BicycleApp.Services.Contracts.OrderContracts;
     using BicycleApp.Services.Models.Order.OrderUser;
+
     using Microsoft.AspNetCore.Mvc;
+
+    using static Org.BouncyCastle.Math.EC.ECCurve;
 
     [Route("api/client_order")]
     [ApiController]
     public class ClientOrderController : ControllerBase
     {
         private readonly IOrderUserService _userService;
-        public ClientOrderController(IOrderUserService userService)
+        private readonly IConfiguration _config;
+        public ClientOrderController(IOrderUserService userService, IConfiguration config)
         {
             _userService = userService;
+            _config = config;
         }
 
 
         [HttpPost("create")]
-        public async Task<ActionResult<SuccessOrderInfo>> UserCreateOrder([FromBody]UserOrderDto userOrder)
+        public async Task<ActionResult<SuccessOrderInfo>> UserCreateOrder([FromBody] UserOrderDto userOrder)
         {
             if (!ModelState.IsValid)
             {
@@ -30,21 +35,28 @@
 
                 if (result)
                 {
-                    var successOrder = (SuccessOrderInfo)_userService.SuccessCreatedOrder(createdOrder);
+                    var advancePaymentPercentage = decimal.Parse(_config.GetSection("AdvancePaymentPercentage").Value);
 
-                    return Ok(successOrder);
+                    var isReducedAmoutForOrder = await _userService.DeductionByAmount(userOrder.ClientId, advancePaymentPercentage, createdOrder);
+
+                    if (isReducedAmoutForOrder)
+                    {
+                        var successOrder = (SuccessOrderInfo)_userService.SuccessCreatedOrder(createdOrder);
+
+                        return Ok(successOrder);
+                    }
                 }
             }
             return BadRequest();
         }
 
         [HttpPost("progress")]
-        public async Task<ActionResult<ICollection<OrderProgretionDto>>> GetOrderProgress([FromQuery]string id)
-        {           
+        public async Task<ActionResult<ICollection<OrderProgretionDto>>> GetOrderProgress([FromQuery] string id)
+        {
             var userOrdersProgression = await _userService.GetOrdersProgresions(id);
 
             if (userOrdersProgression != null)
-        {
+            {
                 return Ok(userOrdersProgression);
             }
 
@@ -59,5 +71,52 @@
             return Ok();
         }
 
+        [HttpGet]
+        [Route("get_orders_ready")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<List<OrderClientShortInfo>>> GetAllMyOrdersShortInfoByStatusReady([FromQuery] string clientId)
+        {
+            if (clientId == null)
+            {
+                return BadRequest(clientId);
+            }
+            try
+            {
+                //Use the status id for ready
+                var orders = await _userService.GetAllOrdersForClientByStatus(clientId, 6);
+
+                return Ok(orders);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, clientId);
+            }
+        }
+
+        [HttpGet]
+        [Route("get_orders_archive")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<List<OrderClientShortInfo>>> GetAllMyOrdersShortInfoByStatusSend([FromQuery] string clientId)
+        {
+            if (clientId == null)
+            {
+                return BadRequest(clientId);
+            }
+            try
+            {
+                //Use the status id for already sended orders
+                var orders = await _userService.GetAllOrdersForClientByStatus(clientId, 7);
+
+                return Ok(orders);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, clientId);
+            }
+        }
     }
 }

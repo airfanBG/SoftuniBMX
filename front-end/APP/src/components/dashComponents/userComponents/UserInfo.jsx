@@ -56,7 +56,10 @@ function UserInfo() {
     }
   }
 
-  function addMoneyBtnHandler() {}
+  function addMoneyBtnHandler(e, amount) {
+    e.preventDefault();
+    console.log(e.target.value);
+  }
 
   function editBtnHandler() {
     setEdit(true);
@@ -102,7 +105,13 @@ function UserInfo() {
             </div>
           </figure>
 
-          {!edit && <UserContactInfo info={info} setInfo={setInfo} />}
+          {!edit && (
+            <UserContactInfo
+              info={info}
+              setInfo={setInfo}
+              addMoneyBtnHandler={addMoneyBtnHandler}
+            />
+          )}
           {edit && (
             <EditContactInfo info={info} setInfo={setInfo} base64={base64} />
           )}

@@ -8,7 +8,7 @@
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
-    public class BicycleAppDbContext : IdentityDbContext
+    public class BicycleAppDbContext : IdentityDbContext<BaseUser, BaseUserRole, string>
     {
         public BicycleAppDbContext() : base()
         {
@@ -23,53 +23,55 @@
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
-        //    optionsBuilder.UseSqlServer("Server=DESKTOP-TP2JLNJ\\SQLEXPRESS;Database=BicycleNewDB;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False");
+        //    optionsBuilder.UseSqlServer("Server=DESKTOP-O0P5VDC\\SQLEXPRESS;Database=BicycleNewDB;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False");
         //}
 
         //Identity Tables
-        public DbSet<BaseUser> BaseUsers { get; set; } = null!;
-        public DbSet<Client> Clients { get; set; } = null!;
+        public virtual DbSet<BaseUser> BaseUsers { get; set; } = null!;
+        public virtual DbSet<BaseUserRole> BaseUserRoles { get; set; } = null!;
+        public virtual DbSet<Client> Clients { get; set; } = null!;
 
-        public DbSet<Employee> Employees { get; set; } = null!;
+        public virtual DbSet<Employee> Employees { get; set; } = null!;
 
         //Entities
-        public DbSet<Town> Towns { get; set; } = null!;
+        public virtual DbSet<Town> Towns { get; set; } = null!;
 
-        public DbSet<Department> Departments { get; set; } = null!;
+        public virtual DbSet<Department> Departments { get; set; } = null!;
 
-        public DbSet<Part> Parts { get; set; } = null!;
+        public virtual DbSet<Part> Parts { get; set; } = null!;
 
-        public DbSet<PartCategory> PartCategories { get; set; } = null!;
+        public virtual DbSet<PartCategory> PartCategories { get; set; } = null!;
 
-        public DbSet<ImagePart> ImagesParts { get; set; } = null!;
+        public virtual DbSet<ImagePart> ImagesParts { get; set; } = null!;
 
-        public DbSet<ImageClient> ImagesClients { get; set; } = null!;
+        public virtual DbSet<ImageClient> ImagesClients { get; set; } = null!;
 
-        public DbSet<ImageEmployee> ImagesEmployees { get; set; } = null!;
+        public virtual DbSet<ImageEmployee> ImagesEmployees { get; set; } = null!;
 
-        public DbSet<VATCategory> VATCategories { get; set; } = null!;
+        public virtual DbSet<VATCategory> VATCategories { get; set; } = null!;
 
-        public DbSet<Rate> Rates { get; set; } = null!;
+        public virtual DbSet<Rate> Rates { get; set; } = null!;
 
-        public DbSet<Delivary> Delivaries { get; set; } = null!;
+        public virtual DbSet<Delivary> Delivaries { get; set; } = null!;
+        public virtual DbSet<DelivaryAddress> DelivaryAddresses { get; set; } = null!;
 
-        public DbSet<Suplier> Supliers { get; set; } = null!;
+        public virtual DbSet<Suplier> Supliers { get; set; } = null!;
 
-        public DbSet<Comment> Comments { get; set; } = null!;
+        public virtual DbSet<Comment> Comments { get; set; } = null!;
 
-        public DbSet<Order> Orders { get; set; } = null!;
+        public virtual DbSet<Order> Orders { get; set; } = null!;
 
-        public DbSet<Status> Statuses { get; set; } = null!;
+        public virtual DbSet<Status> Statuses { get; set; } = null!;
 
-        public DbSet<OrderPartEmployee> OrdersPartsEmployees { get; set; } = null!;
-        public DbSet<OrderPartEmployeeInfo> OrdersPartsEmployeesInfos { get; set; } = null!;
+        public virtual DbSet<OrderPartEmployee> OrdersPartsEmployees { get; set; } = null!;
+        public virtual DbSet<OrderPartEmployeeInfo> OrdersPartsEmployeesInfos { get; set; } = null!;
 
-        public DbSet<BikeStandartModel> BikesStandartModels { get; set; } = null!;
+        public virtual DbSet<BikeStandartModel> BikesStandartModels { get; set; } = null!;
 
-        public DbSet<BikeModelPart> BikeModelsParts { get; set; } = null!;
-        public DbSet<PartOrder> PartOrders { get; set; } = null!;
-        public DbSet<PartInStock> PartsInStock { get; set; } = null!;
-        public DbSet<CompatablePart> CompatableParts { get; set; } = null!;
+        public virtual DbSet<BikeModelPart> BikeModelsParts { get; set; } = null!;
+        public virtual DbSet<PartOrder> PartOrders { get; set; } = null!;
+        public virtual DbSet<PartInStock> PartsInStock { get; set; } = null!;
+        public virtual DbSet<CompatablePart> CompatableParts { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -147,7 +149,7 @@
                 entity
                     .HasOne(ic => ic.Client)
                     .WithMany(c => c.Images)
-                    .HasForeignKey(ic => ic.ClientId)
+                    .HasForeignKey(ic => ic.UserId)
                     .OnDelete(DeleteBehavior.NoAction);
             });
 
@@ -157,7 +159,7 @@
                 entity
                     .HasOne(ie => ie.Employee)
                     .WithMany(e => e.ImagesEmployees)
-                    .HasForeignKey(ie => ie.EmployeeId)
+                    .HasForeignKey(ie => ie.UserId)
                     .OnDelete(DeleteBehavior.NoAction);
             });
 
@@ -336,10 +338,11 @@
             builder.Entity<Status>(entity => entity.HasData(seeder.SeedStatuses()));
             builder.Entity<Suplier>(entity => entity.HasData(seeder.SeedSuplieres()));
             builder.Entity<Town>(entity => entity.HasData(seeder.SeedTowns()));
+            builder.Entity<DelivaryAddress>(entity => entity.HasData(seeder.SeedDelivaryAddresses()));
             builder.Entity<VATCategory>(entity => entity.HasData(seeder.SeedVATCategories()));
             builder.Entity<PartInStock>(entity => entity.HasData(seeder.SeedPartsInStock()));
             builder.Entity<PartOrder>(entity => entity.HasData(seeder.SeedPartOrders()));
-            builder.Entity<IdentityRole>(entity => entity.HasData(seeder.SeedRoles()));
+            builder.Entity<BaseUserRole>(entity => entity.HasData(seeder.SeedRoles()));
             builder.Entity<IdentityUserRole<string>>(entity => entity.HasData(seeder.SeedRolesUsers()));
             builder.Entity<BikeStandartModel>(entity => entity.HasData(seeder.SeedBikeStandartModels()));
             builder.Entity<BikeModelPart>(entity => entity.HasData(seeder.SeedBikeModelPartls()));

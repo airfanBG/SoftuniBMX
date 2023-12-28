@@ -84,3 +84,7 @@
   color: var(--color-hd);
   padding-inline: 0.1rem;
 }
+
+.emptyField {
+  min-height: 3.2rem;
+}

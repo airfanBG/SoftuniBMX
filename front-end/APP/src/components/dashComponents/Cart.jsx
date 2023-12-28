@@ -124,7 +124,11 @@ function Cart() {
     }
   }
 
-  function orderCancelHandler() {}
+  function onCancelClick() {
+    clearOrderData();
+    navigate("/profile");
+    setHasOrder(false);
+  }
 
   return (
     <>
@@ -180,22 +184,38 @@ function Cart() {
                 rows="4"
               ></textarea>
               <div className={styles.control}>
-                <div className={styles.count}>
-                  <label htmlFor="qtySelect">Quantity:</label>
-                  <select
-                    className={styles.quantity}
-                    value={select}
-                    onChange={onChangeHandler}
-                    id={"qtySelect"}
-                    required
-                  >
-                    <option value=""></option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </select>
+                <div className={styles.controlLeft}>
+                  <div className={styles.count}>
+                    <label htmlFor="qtySelect">Quantity:</label>
+                    {/* <input type="text" list="qtySelect" />
+                    <datalist
+                      id="qtySelect"
+                      className={styles.quantity}
+                      value={select}
+                      onChange={onChangeHandler}
+                      required
+                    >
+                      <option value="Internet Explorer" />
+                      <option value="Firefox" />
+                    </datalist> */}
+                    <select
+                      className={styles.quantity}
+                      value={select}
+                      onChange={onChangeHandler}
+                      id={"qtySelect"}
+                      required
+                    >
+                      <option value=""></option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                  </div>
+                  <button className={styles.iconBox} onClick={onCancelClick}>
+                    <ion-icon name="trash-outline"></ion-icon>
+                  </button>
                 </div>
 
                 <div className={styles.priceBlock}>
