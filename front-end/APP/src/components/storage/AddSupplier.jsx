@@ -1,7 +1,7 @@
 import styles from "./AddSupplier.module.css";
 
 import LoaderWheel from "../LoaderWheel.jsx";
-import { useContext, useReducer, useState } from "react";
+import { memo, useContext, useReducer } from "react";
 import { UserContext } from "../../context/GlobalUserProvider.jsx";
 import { PhoneInput } from "react-international-phone";
 import { post } from "../../util/api.js";
@@ -59,7 +59,6 @@ function AddSupplier({ onFinish, active }) {
     },
     dispatch,
   ] = useReducer(reducer, initialState);
-  const navigate = useNavigate();
 
   function setReducerState(e) {
     const type = e.target.name;
@@ -84,7 +83,7 @@ function AddSupplier({ onFinish, active }) {
       category_name: category,
     };
 
-    // const result = await post(environment.add_supplier, data);
+    const result = await post(environment.add_supplier, data);
     // console.log(result);
 
     onFinish(active);
@@ -226,4 +225,4 @@ function AddSupplier({ onFinish, active }) {
     </>
   );
 }
-export default AddSupplier;
+export default memo(AddSupplier);

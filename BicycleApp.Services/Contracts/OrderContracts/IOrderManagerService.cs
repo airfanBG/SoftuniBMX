@@ -18,5 +18,7 @@
         Task<bool> AcceptAndAssignRejectedOrderByManagerAsync(int orderId);
         Task<ICollection<OrderProgretionDto>> AllOrdersInProgressAsync();
         Task<ICollection<EmployeesOverviewForMonthDto>> GetAllEmployees();
+        Task<int> GetTotalProductionTime(int orderId);
+        Task<OrderQueryDto> AllDeletedOrdersAsync(int currentPage);
     }
 }

@@ -126,7 +126,7 @@ namespace BicicleApp.Api.Controllers
 
                 if (deletedOrderId > 0)
                 {
-                    return Ok(deletedOrderId);
+                    return StatusCode(200, deletedOrderId);
                 }               
             }
             catch (Exception)
@@ -159,7 +159,7 @@ namespace BicicleApp.Api.Controllers
                     return StatusCode(400);
                 }
 
-                return Ok(result);
+                return StatusCode(200, result);
 
             }
             catch (Exception)
@@ -192,7 +192,7 @@ namespace BicicleApp.Api.Controllers
                     return StatusCode(400);
                 }
 
-                return StatusCode(200);
+                return StatusCode(200, result);
             }
             catch (Exception)
             {
@@ -256,6 +256,7 @@ namespace BicicleApp.Api.Controllers
             {
                 var result = await _orderManagerService.GetAllFinishedOrdersForPeriod(datesPeriod);
 
+
                 if (result != null)
                 {
                     return StatusCode(StatusCodes.Status202Accepted, result);
@@ -272,11 +273,45 @@ namespace BicicleApp.Api.Controllers
         }
 
         [HttpGet("all_employees")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<ICollection<EmployeesOverviewForMonthDto>>> GetAllEmployees()
         {
             var allEmployeeCollection = await _orderManagerService.GetAllEmployees();
 
-            return Ok(allEmployeeCollection);
+            return StatusCode(200, allEmployeeCollection);
         }
-    }  
+
+        [HttpGet]
+        [Route("deleted_orders")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> DeletedOrders([FromQuery] int page = 1)
+        {
+
+            if (page <= 0)
+            {
+                return StatusCode(400);
+            }
+
+            try
+            {
+                var model = await _orderManagerService.AllDeletedOrdersAsync(page);
+
+                if (model == null)
+                {
+                    // The model object is null, so return a 204 NoContent
+                    return StatusCode(204);
+                }
+
+                return StatusCode(200, model);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(500);
+            }
+        }
+    }
 }
