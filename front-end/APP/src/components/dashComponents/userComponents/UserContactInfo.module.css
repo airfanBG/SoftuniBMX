@@ -10,6 +10,10 @@
   margin-bottom: 1.8rem;
 }
 
+/* .infoHeader:last-child{
+
+} */
+
 .infoHeader span {
   display: block;
   width: fit-content;
@@ -24,7 +28,7 @@
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;
-  margin: 1rem 0 2rem;
+  margin: 1rem 0 4rem;
   font-size: 1.8rem;
   /* color: var(--color-hd); */
   row-gap: 1.6rem;

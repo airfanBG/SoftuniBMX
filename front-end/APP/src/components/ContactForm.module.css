@@ -1,0 +1,77 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 70%;
+  height: auto;
+  background-color: wheat;
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 3rem;
+  font-family: inherit;
+  font-size: x-large;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.divForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.labelForm {
+  display: block;
+  max-width: 12rem;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  background-color: var(--color-link-light);
+}
+
+.formContainer .divForm input {
+  max-width: 30%;
+  padding: 0.5rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: white;
+  font-size: medium;
+}
+
+.spanForm {
+  color: red;
+}
+
+.formContainer textarea {
+  padding: 0.5rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: white;
+  font-size: medium;
+}
+
+.divForm2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.divForm2 button {
+  display: block;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: black;
+  color: white;
+}
+
+.divForm2 button:hover {
+    display: block;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 1rem;
+    background-color: rgb(4, 57, 4);
+    color: burlywood;
+  }
+  
