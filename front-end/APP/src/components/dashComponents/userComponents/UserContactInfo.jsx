@@ -1,14 +1,14 @@
 import styles from "./UserContactInfo.module.css";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 import ContactInfoElement from "../ContactInfoElement.jsx";
 import { userInfo } from "../../../userServices/userService.js";
 import { formatCurrency } from "../../../util/resolvers.js";
 
-function UserContactInfo({ info }) {
+function UserContactInfo({ info, addMoneyBtnHandler }) {
   const { user } = useContext(UserContext);
-
+  const [amount, setAmount] = useState(0);
   return (
     <>
       {info && (
@@ -16,6 +16,7 @@ function UserContactInfo({ info }) {
           <h2 className={styles.infoHeader}>
             <span>Contact information</span>
           </h2>
+
           <div className={styles.fullData}>
             <div className={styles.row}>
               <ContactInfoElement
@@ -111,12 +112,12 @@ function UserContactInfo({ info }) {
               </div>
             )}
           </div>
-          {info.role === "user" && (
+          {user.role === "user" && (
             <h2 className={styles.infoHeader}>
               <span>Account information</span>
             </h2>
           )}
-          {info.role === "user" && (
+          {user.role === "user" && (
             <div className={styles.fullData}>
               <div className={styles.row}>
                 <ContactInfoElement
@@ -130,6 +131,28 @@ function UserContactInfo({ info }) {
                   label={"IBAN"}
                   width={"60%"}
                 />
+              </div>
+            </div>
+          )}
+          {user.role === "user" && (
+            <h2 className={styles.infoHeader}>
+              <span>Add amount</span>
+            </h2>
+          )}
+          {user.role === "user" && (
+            <div className={styles.fullData}>
+              <div className={styles.row}>
+                <form onSubmit={() => addMoneyBtnHandler(amount)}>
+                  <label
+                    htmlFor=""
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                  >
+                    Amount
+                    <input type="number" />
+                  </label>
+                  <button>Add</button>
+                </form>
               </div>
             </div>
           )}
