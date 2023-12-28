@@ -1,14 +1,14 @@
 import styles from "./UserContactInfo.module.css";
 
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 import ContactInfoElement from "../ContactInfoElement.jsx";
 import { userInfo } from "../../../userServices/userService.js";
 import { formatCurrency } from "../../../util/resolvers.js";
 
-function UserContactInfo({ info, addMoneyBtnHandler }) {
+function UserContactInfo({ info }) {
   const { user } = useContext(UserContext);
-  const [amount, setAmount] = useState(0);
+
   return (
     <>
       {info && (
@@ -16,7 +16,6 @@ function UserContactInfo({ info, addMoneyBtnHandler }) {
           <h2 className={styles.infoHeader}>
             <span>Contact information</span>
           </h2>
-
           <div className={styles.fullData}>
             <div className={styles.row}>
               <ContactInfoElement
@@ -112,12 +111,12 @@ function UserContactInfo({ info, addMoneyBtnHandler }) {
               </div>
             )}
           </div>
-          {/* {user.role === "user" && (
+          {info.role === "user" && (
             <h2 className={styles.infoHeader}>
               <span>Account information</span>
             </h2>
           )}
-          {user.role === "user" && (
+          {info.role === "user" && (
             <div className={styles.fullData}>
               <div className={styles.row}>
                 <ContactInfoElement
@@ -131,28 +130,7 @@ function UserContactInfo({ info, addMoneyBtnHandler }) {
                   label={"IBAN"}
                   width={"60%"}
                 />
-              </div>
-            </div>
-          )} */}
-          {user.role === "user" && (
-            <h2 className={styles.infoHeader}>
-              <span>Add amount</span>
-            </h2>
-          )}
-          {user.role === "user" && (
-            <div className={styles.fullData}>
-              <div className={styles.row}>
-                <form onSubmit={() => addMoneyBtnHandler(amount)}>
-                  <label
-                    htmlFor=""
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                  >
-                    Amount
-                    <input type="number" />
-                  </label>
-                  <button>Add</button>
-                </form>
+                div{" "}
               </div>
             </div>
           )}
