@@ -25,11 +25,12 @@ function ContactInfo() {
             <p>
               Main office: <span>ul. Filip Avramov, 1712 Mladost 3, Sofia</span>
             </p>
-            <p className={styles.locations}>
-              Our locations:
-            </p>
+            <p className={styles.locations}>Our locations:</p>
           </div>
           <GoogleMap />
+          <div className={styles.contactDiv}>
+            If you have any questions, you can contact us using this form:
+          </div>
           <ContactForm />
         </div>
       </div>
