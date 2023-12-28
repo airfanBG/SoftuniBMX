@@ -12,5 +12,6 @@
         ISuccessOrderInfo SuccessCreatedOrder(IOrderPartsEmplyee successOrder);
         Task DeleteOrder(string userId, int orderId);
         Task<bool> DeductionByAmount(string clientId, decimal percentageOfDeduction, IOrder newOrder);
+        Task<ICollection<OrderClientShortInfo>> GetAllOrdersForClientByStatus(string userId, int status);
     }
 }

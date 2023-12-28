@@ -1,15 +1,19 @@
 ﻿namespace BicycleApp.Services.Services.Orders
 {
     using BicicleApp.Common.Providers.Contracts;
+
     using BicycleApp.Data;
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Contracts.OrderContracts;
     using BicycleApp.Services.HelperClasses.Contracts;
+    using BicycleApp.Services.Models;
     using BicycleApp.Services.Models.Order.OrderManager;
     using BicycleApp.Services.Models.Order.OrderUser;
     using BicycleApp.Services.Models.Order.OrderUser.Contracts;
+
     using Microsoft.EntityFrameworkCore;
+
     using static BicycleApp.Common.ApplicationGlobalConstants;
 
     public class OrderUserService : IOrderUserService
@@ -81,7 +85,7 @@
                 {
                     return null;
                 }
-              
+
                 var newOrderObject = _orderFactory.CreateUserOrder(newOrder, _dateTimeProvider.Now);
 
                 await _db.Orders.AddAsync(newOrderObject);
@@ -256,6 +260,43 @@
                 return true;
             }
             return false;
+        }
+
+        /// <summary>
+        /// Collection of all client orders with a specific status
+        /// </summary>
+        /// <param name="userId">Client Id</param>
+        /// <returns>Collection of models</returns>
+        /// <exception cref="ArgumentNullException">If userIs is null</exception>
+        public async Task<ICollection<OrderClientShortInfo>> GetAllOrdersForClientByStatus(string userId, int status)
+        {
+            if (userId == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            var orders = await _db.Orders
+                .Include(o => o.OrdersPartsEmployees)
+                .ThenInclude(p => p.Part)
+                .Where(o => o.ClientId == userId && o.StatusId == status)
+                .OrderByDescending(o => o.DateCreated)
+                .Select(r => new OrderClientShortInfo()
+                {
+                    OrderId = r.Id,
+                    OrderDate = r.DateCreated.ToString(DefaultDateFormat),
+                    Amount = r.FinalAmount,
+                    SerialNumber = r.OrdersPartsEmployees.First().SerialNumber,
+                    Parts = r.OrdersPartsEmployees
+                    .Select(pa => new PartShortInfoDto()
+                    {
+                        Id = pa.PartId,
+                        Name = pa.PartName
+                    })
+                    .ToList()
+                })
+                .ToListAsync();
+
+            return orders;
         }
     }
 }

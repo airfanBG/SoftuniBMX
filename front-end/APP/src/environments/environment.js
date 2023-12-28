@@ -20,6 +20,8 @@ export const environment = {
   create_order: "/api/client_order/create",
   orders_in_progress: "/api/client_order/progress?id=", // + id,
   delete_order: "/api/client_order/delete",
+  orders_ready: "/api/client_order/get_orders_ready?clientId=",
+  orders_archive: "/api/client_order/get_orders_archive?clientId=",
 
   // EMPLOYEE
   info_employee: "/api/employee/info?id=", // + id
@@ -46,7 +48,6 @@ export const environment = {
   //SIUPLY_MANAGER
   parts_in_stock: "/api/supplys_manager/parts_in_stock?page=",
   deleted_orders_list: "/api/manager/deleted_orders?page=",
-
 
   // BIKE_SERVICES
   frames: "/api/accountpage/frames",
