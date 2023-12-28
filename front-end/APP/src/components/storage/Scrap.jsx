@@ -9,21 +9,36 @@ import LoaderWheel from "../LoaderWheel.jsx";
 import Order from "../dashComponents/managerComponents/Order.jsx";
 import { get } from "../../util/api.js";
 import { environment } from "../../environments/environment.js";
+import Paginator from "../Paginator.jsx";
 
 const initialState = {
+  orders: {},
+  dataReceived: [],
+  length: 0,
+  page: 1,
+  rerender: false,
   loading: false,
-  status: false,
-  orders: [],
+  itemPerPage: 6,
 };
 
 function reducer(state, action) {
   switch (action.type) {
-    case "loading":
-      return { ...state, loading: true };
-    case "component/rerender":
-      return { ...state, status: !state.status, loading: false };
     case "orders/received":
-      return { ...state, orders: action.payload, loading: false };
+      return { ...state, orders: action.payload };
+    case "data/received":
+      return {
+        ...state,
+        dataReceived: action.payload,
+        length: action.payload.length,
+      };
+    case "length/isSet":
+      return { ...state, length: action.payload };
+    case "page/hasChanged":
+      return { ...state, page: action.payload };
+    case "toRerender":
+      return { ...state, rerender: !state.rerender };
+    case "isLoading":
+      return { ...state, loading: action.payload };
 
     default:
       throw new Error("Unknown action type");
@@ -31,104 +46,76 @@ function reducer(state, action) {
 }
 
 function Scrap() {
-  const { user } = useContext(UserContext);
-  // const [loading, setLoading] = useState(false);
-
-  const [{ loading, status, orders }, dispatch] = useReducer(
-    reducer,
-    initialState
-  );
+  const [{ orders, length, page, rerender, loading, itemPerPage }, dispatch] =
+    useReducer(reducer, initialState);
 
   useEffect(
     function () {
-      async function getOrders() {
-        // const result = await get(environment); //TODO: FIX THIS
-        const data = [
-          {
-            orderId: 2,
-            serialNumber: "BID12345679",
-            dateCreated: "2023-10-10 10:10:00.0000000",
-            dateFinished: null,
-            orderParts: [
-              {
-                partId: 1,
-                description: "test",
-                oemNumber: null,
-                categoryName: null,
-                partName: "Frame OG",
-                partQuantity: 1,
-                partQunatityInStock: 32,
-                startDate: null,
-                endDate: null,
-                employeeName: null,
-                isComplete: false,
-              },
-              {
-                partId: 4,
-                description: "test",
-                oemNumber: null,
-                categoryName: null,
-                partName: "Wheel of the Year for road",
-                partQuantity: 1,
-                partQunatityInStock: 50,
-                startDate: null,
-                endDate: null,
-                employeeName: null,
-                isComplete: false,
-              },
-              {
-                partId: 12,
-                description: "test",
-                oemNumber: null,
-                categoryName: null,
-                partName: "Shift",
-                partQuantity: 1,
-                partQunatityInStock: 29,
-                startDate: null,
-                endDate: null,
-                employeeName: null,
-                isComplete: false,
-              },
-            ],
-          },
-        ];
-        const result = data;
-        dispatch({ type: "loading" });
-        dispatch({ type: "orders/received", payload: result });
+      dispatch({ type: "isLoading", payload: true });
+      const abortController = new AbortController();
+      async function getOrdersPagination() {
+        const data = await get(environment.deleted_orders_list + page);
+        // console.log(data);
+
+        dispatch({ type: "length/isSet", payload: data.totalOrdersCount });
+        dispatch({ type: "orders/received", payload: data.orders });
+        dispatch({ type: "isLoading", payload: false });
+        if (Math.ceil(data.totalOrdersCount / itemPerPage) < page) {
+          dispatch({ type: "page/hasChanged", payload: 1 });
+        }
       }
-      getOrders();
+      getOrdersPagination();
+
+      return () => abortController.abort();
     },
-    [status]
+    [rerender, page, itemPerPage]
   );
 
-  function rerender() {
-    dispatch({ type: "loading" });
-    dispatch({ type: "component/rerender" });
+  function handlePage(page) {
+    dispatch({ type: "page/hasChanged", payload: page });
   }
 
-  return (
-    <>
-      <h2 className={styles.dashHeading}>Scrap</h2>
+  function onStatusChange() {
+    dispatch({ type: "isLoading", payload: true });
+    dispatch({ type: "toRerender" });
+    dispatch({ type: "isLoading", payload: false });
+    console.log("re-render");
+  }
 
-      <section className={styles.board}>
-        {/* <BoardHeader /> */}
-        {loading && <LoaderWheel />}
-        <div className={styles.orders}>
-          {orders.length === 0 && <h2>There is no rejected orders</h2>}
-          {orders &&
-            orders.map((order) => (
+  if (orders.length === 0) return <h2>There is no orders in this category</h2>;
+  if (orders.length > 0)
+    return (
+      <>
+        <h2 className={styles.dashHeading}>Deleted orders</h2>
+        <section className={styles.board}>
+          <BoardHeader />
+          {loading && <LoaderWheel />}
+          <div className={styles.orders}>
+            {orders.map((order) => (
               <Order
                 key={order.orderId}
                 order={order}
-                onStatusChange={rerender}
+                onStatusChange={onStatusChange}
                 isRejected={false}
                 isDeleted={false}
               />
             ))}
-        </div>
-      </section>
-    </>
-  );
+          </div>
+          <Paginator
+            page={page}
+            pages={length}
+            countOnPage={itemPerPage}
+            size={24}
+            fontSize={1.6}
+            // bgColor=""
+            // brColor=""
+            brRadius={3}
+            handlePage={handlePage}
+            // selected="red"
+          />
+        </section>
+      </>
+    );
 }
 
 export default Scrap;

@@ -18,6 +18,12 @@ function OrderElement({ order }) {
     return timeResult;
   }
 
+  function orderStatus(s, e) {
+    if (s === null && e === null) return "In Queue";
+    else if (!!s && e === null) return "In Process";
+    else if (!!s && !!e) return "Finished";
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
@@ -73,7 +79,8 @@ function OrderElement({ order }) {
                   }
                 >
                   <span className={styles.fieldLabel}>Status:</span>
-                  {s.isProduced ? "Finished" : "In Process"}
+                  {/* {s.isProduced ? "Finished" : "In Process"} */}
+                  {orderStatus(s.startDate, s.endDate)}
                 </p>
               </div>
               <div className={`${styles.metaData} ${styles.emptyField}`}>
@@ -87,8 +94,10 @@ function OrderElement({ order }) {
                 }
                 <p className={styles.field}>
                   <span className={styles.fieldLabel}>Prodiced time:</span>
-                   {s.elementProduceTimeInMinutes} 
-                  {jobTIme(s.startDate, s.endDate)}
+                  {/* {s.elementProduceTimeInMinutes} */}
+                  {!!s.startDate &&
+                    !!s.endDate &&
+                    jobTIme(s.startDate, s.endDate)}
                 </p>
               </div>
             </div>
