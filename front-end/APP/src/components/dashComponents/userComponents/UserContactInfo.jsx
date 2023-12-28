@@ -130,6 +130,7 @@ function UserContactInfo({ info }) {
                   label={"IBAN"}
                   width={"60%"}
                 />
+                div div{" "}
               </div>
             </div>
           )}

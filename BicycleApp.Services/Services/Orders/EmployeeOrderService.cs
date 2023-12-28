@@ -1,5 +1,6 @@
 ﻿namespace BicycleApp.Services.Services.Order
 {
+    using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;
@@ -11,18 +12,21 @@
     using System.Linq;
     using System.Threading.Tasks;
     using static BicycleApp.Common.ApplicationGlobalConstants;
+    using static BicycleApp.Common.UserConstants;
 
     public class EmployeeOrderService : IEmployeeOrderService
     {
         private readonly BicycleAppDbContext dbContext;
         private readonly UserManager<Employee> userManager;
         private readonly IEmployeeFactory employeeFactory;
+        private readonly IOptionProvider optionProvider;
 
-        public EmployeeOrderService(BicycleAppDbContext dbContext, UserManager<Employee> userManager, IEmployeeFactory employeeFactory)
+        public EmployeeOrderService(BicycleAppDbContext dbContext, UserManager<Employee> userManager, IEmployeeFactory employeeFactory, IOptionProvider optionProvider)
         {
             this.dbContext = dbContext;
             this.userManager = userManager;
             this.employeeFactory = employeeFactory;
+            this.optionProvider = optionProvider;
         }
 
         /// <summary>
@@ -110,35 +114,81 @@
                 throw new ArgumentException($"Employee with {employeeId} does not exists!");
             }
 
-            var orders = await dbContext.OrdersPartsEmployees
-            .Include(ep => ep.Part)
-            .Include(ep => ep.Order)
-            .Include(opei => opei.OrdersPartsEmployeesInfos)
-            .Where(ep => ep.EmployeeId == employeeId && ep.EndDatetime == null && ep.IsCompleted == false)
-            .OrderBy(o => o.OrderId)
-            .Select(p => new PartOrdersDto()
+            try
             {
-                PartId = p.PartId,
-                OrderId = p.OrderId,
-                PartName = p.Part.Name,
-                PartOEMNumber = p.Part.OEMNumber,
-                DatetimeAsigned = p.DatetimeAsigned.Value.ToString(DefaultDateWithTimeFormat),
-                DatetimeStarted = p.StartDatetime.Value.ToString(DefaultDateWithTimeFormat),
-                DatetimeFinished = null,
-                Description = p.OrdersPartsEmployeesInfos.Where(o => p.OrderId == o.OrderId && p.PartId == o.PartId && p.UniqueKeyForSerialNumber == o.UniqueKeyForSerialNumber).OrderBy(id => id.Id).LastOrDefault().DescriptionForWorker,
-                OrderSerialNumber = p.SerialNumber,
-                Quantity = p.PartQuantity
-            })
-            .ToListAsync();
+                var currentEmployeePosition = employeeExists.Position;
 
-            EmployeePartOrdersDto ordersDto = new EmployeePartOrdersDto()
+                var previousWoerkerPositionName = optionProvider.GetPreviousWorkerPositionName(currentEmployeePosition);
+
+                List<PartOrdersDto> orders = new List<PartOrdersDto>();
+
+                if (currentEmployeePosition.ToLower() == FRAMEWORKER)
+                {
+                    orders = await dbContext.OrdersPartsEmployees
+                                .Include(ep => ep.Part)
+                                .Include(ep => ep.Order)
+                                .Include(opei => opei.OrdersPartsEmployeesInfos)
+                                .Where(ep => ep.EmployeeId == employeeId
+                                             && ep.EndDatetime == null
+                                             && ep.IsCompleted == false)
+                                .OrderBy(o => o.OrderId)
+                                .Select(p => new PartOrdersDto()
+                                {
+                                    PartId = p.PartId,
+                                    OrderId = p.OrderId,
+                                    PartName = p.Part.Name,
+                                    PartOEMNumber = p.Part.OEMNumber,
+                                    DatetimeAsigned = p.DatetimeAsigned.Value.ToString(DefaultDateWithTimeFormat),
+                                    DatetimeStarted = p.StartDatetime.Value.ToString(DefaultDateWithTimeFormat),
+                                    DatetimeFinished = null,
+                                    Description = p.OrdersPartsEmployeesInfos.Where(o => p.OrderId == o.OrderId && p.PartId == o.PartId && p.UniqueKeyForSerialNumber == o.UniqueKeyForSerialNumber).OrderBy(id => id.Id).LastOrDefault().DescriptionForWorker,
+                                    OrderSerialNumber = p.SerialNumber,
+                                    Quantity = p.PartQuantity
+                                })
+                                .ToListAsync();
+                }
+                else 
+                {
+                    orders = await dbContext.OrdersPartsEmployees
+                                .Include(ep => ep.Part)
+                                .Include(ep => ep.Order)
+                                .Include(opei => opei.OrdersPartsEmployeesInfos)
+                                .Where(ep => ep.EmployeeId == employeeId
+                                             && ep.EndDatetime == null
+                                             && ep.IsCompleted == false
+                                             && ep.Order.OrdersPartsEmployees.Any(ope => ope.Employee.Position == previousWoerkerPositionName
+                                                                                         && ope.OrderId == ep.OrderId
+                                                                                         && ope.IsCompleted == true))
+                                .OrderBy(o => o.OrderId)
+                                .Select(p => new PartOrdersDto()
+                                {
+                                    PartId = p.PartId,
+                                    OrderId = p.OrderId,
+                                    PartName = p.Part.Name,
+                                    PartOEMNumber = p.Part.OEMNumber,
+                                    DatetimeAsigned = p.DatetimeAsigned.Value.ToString(DefaultDateWithTimeFormat),
+                                    DatetimeStarted = p.StartDatetime.Value.ToString(DefaultDateWithTimeFormat),
+                                    DatetimeFinished = null,
+                                    Description = p.OrdersPartsEmployeesInfos.Where(o => p.OrderId == o.OrderId && p.PartId == o.PartId && p.UniqueKeyForSerialNumber == o.UniqueKeyForSerialNumber).OrderBy(id => id.Id).LastOrDefault().DescriptionForWorker,
+                                    OrderSerialNumber = p.SerialNumber,
+                                    Quantity = p.PartQuantity
+                                })
+                                .ToListAsync();
+                }
+
+                EmployeePartOrdersDto ordersDto = new EmployeePartOrdersDto()
+                {
+                    EmployeeId = employeeId,
+                    Orders = orders
+                };
+
+                return ordersDto;
+            }
+            catch (Exception)
             {
-                EmployeeId = employeeId,
-                Orders = orders
-            };
-
-            return ordersDto;
+            }
+            return null;
         }
-       
+
     }
 }

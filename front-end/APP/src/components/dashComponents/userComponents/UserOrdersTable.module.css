@@ -1,0 +1,44 @@
+.table {
+  max-width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+  font-family: inherit;
+  border-collapse: collapse;
+}
+
+.head {
+  font-size: 2rem;
+}
+
+.rowHead {
+  height: 3rem;
+}
+
+.row:hover {
+  background-color: lightgrey;
+}
+
+.row th,
+.row td {
+  border: 1px solid black;
+  padding: 0.5rem;
+  margin: 0;
+}
+
+.row td ul {
+  padding: 0;
+  margin: 0;
+  text-align: start;
+}
+
+.row td ul li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 3rem;
+}
+
+.row td a:hover {
+  color: green;
+}
+

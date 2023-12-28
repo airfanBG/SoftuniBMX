@@ -10,6 +10,7 @@
 .saveBtn {
   background-color: var(--button-blue);
   width: calc(100% - 2rem);
+  grid-column: 2/3;
   margin-left: auto;
   padding: 0.2rem 1rem;
   font-size: 2rem;

@@ -35,5 +35,29 @@
         {
             return _configuration.GetSection("RegisterEmailConfirmEndPoint:Employee").Value;
         }
+
+        public string? GetPreviousWorkerPositionName(string currentWorkerPosition)
+        {
+            var positionFlow = _configuration.GetSection("StandartOrderWorkFlow").GetChildren();
+
+            int currentPossition = 0;
+
+            foreach (var item in positionFlow)
+            {               
+                if (item.Key.ToLower() == currentWorkerPosition.ToLower())
+                {
+                    currentPossition = int.Parse(item.Value);
+                    break;
+                }
+            }
+            var previousPosition = currentPossition - 1;
+            if (previousPosition <= 1)
+            {
+                return positionFlow.FirstOrDefault(x => int.Parse(x.Value) == 2).Key;
+            }
+
+            return positionFlow.FirstOrDefault(x => int.Parse(x.Value) == previousPosition).Key;
+
+        }
     }
 }

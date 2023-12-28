@@ -2,7 +2,9 @@
 {
     using BicycleApp.Services.Contracts.OrderContracts;
     using BicycleApp.Services.Models.Order.OrderUser;
+
     using Microsoft.AspNetCore.Mvc;
+
     using static Org.BouncyCastle.Math.EC.ECCurve;
 
     [Route("api/client_order")]
@@ -19,7 +21,7 @@
 
 
         [HttpPost("create")]
-        public async Task<ActionResult<SuccessOrderInfo>> UserCreateOrder([FromBody]UserOrderDto userOrder)
+        public async Task<ActionResult<SuccessOrderInfo>> UserCreateOrder([FromBody] UserOrderDto userOrder)
         {
             if (!ModelState.IsValid)
             {
@@ -49,12 +51,12 @@
         }
 
         [HttpPost("progress")]
-        public async Task<ActionResult<ICollection<OrderProgretionDto>>> GetOrderProgress([FromQuery]string id)
-        {           
+        public async Task<ActionResult<ICollection<OrderProgretionDto>>> GetOrderProgress([FromQuery] string id)
+        {
             var userOrdersProgression = await _userService.GetOrdersProgresions(id);
 
             if (userOrdersProgression != null)
-        {
+            {
                 return Ok(userOrdersProgression);
             }
 
@@ -69,5 +71,52 @@
             return Ok();
         }
 
+        [HttpGet]
+        [Route("get_orders_ready")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<List<OrderClientShortInfo>>> GetAllMyOrdersShortInfoByStatusReady([FromQuery] string clientId)
+        {
+            if (clientId == null)
+            {
+                return BadRequest(clientId);
+            }
+            try
+            {
+                //Use the status id for ready
+                var orders = await _userService.GetAllOrdersForClientByStatus(clientId, 6);
+
+                return Ok(orders);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, clientId);
+            }
+        }
+
+        [HttpGet]
+        [Route("get_orders_archive")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<List<OrderClientShortInfo>>> GetAllMyOrdersShortInfoByStatusSend([FromQuery] string clientId)
+        {
+            if (clientId == null)
+            {
+                return BadRequest(clientId);
+            }
+            try
+            {
+                //Use the status id for already sended orders
+                var orders = await _userService.GetAllOrdersForClientByStatus(clientId, 7);
+
+                return Ok(orders);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, clientId);
+            }
+        }
     }
 }
