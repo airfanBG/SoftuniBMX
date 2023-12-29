@@ -56,9 +56,8 @@ function UserInfo() {
     }
   }
 
-  function addMoneyBtnHandler(e, amount) {
-    e.preventDefault();
-    console.log(e.target.value);
+  function addMoneyBtnHandler(amount) {
+    console.log(amount);
   }
 
   function editBtnHandler() {
