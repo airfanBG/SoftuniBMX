@@ -22,6 +22,7 @@ export const environment = {
   delete_order: "/api/client_order/delete",
   orders_ready: "/api/client_order/get_orders_ready?clientId=",
   orders_archive: "/api/client_order/get_orders_archive?clientId=",
+  update_balance: "/api/client/bankUpdate",
 
   // EMPLOYEE
   info_employee: "/api/employee/info?id=", // + id

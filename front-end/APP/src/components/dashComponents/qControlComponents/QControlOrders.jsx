@@ -34,46 +34,11 @@ function reducer(state, action) {
     case "hasChunk":
       return { ...state, chunkData: action.payload };
     case "rerender":
-      return { ...state, status: !state.status };
+      return { ...state, status: !state.status, loading: false };
     default:
       throw new Error("Unknown action type");
   }
 }
-
-const MOCK_DATA = {
-  totalOrdersCount: 7,
-  orders: [
-    {
-      orderId: 3,
-      serialNumber: "BID12345680",
-      dateCreated: "2023-12-12 18:09:55.3200734",
-      dateFinished: null,
-      orderParts: [
-        {
-          partId: 1,
-          description: "test",
-          partName: "Frame OG",
-          partQuantity: 1,
-          partQunatityInStock: 2,
-        },
-        {
-          partId: 5,
-          description: "test",
-          partName: "Wheel of the Year for montain",
-          partQuantity: 6,
-          partQunatityInStock: 40,
-        },
-        {
-          partId: 11,
-          description: "test",
-          partName: "Road budget Shifts",
-          partQuantity: 4,
-          partQunatityInStock: 21,
-        },
-      ],
-    },
-  ],
-};
 
 function QControlOrders() {
   const [
@@ -116,6 +81,7 @@ function QControlOrders() {
         dispatch({ type: "setLength", payload: finished.length });
       }
       getOrders();
+      dispatch({ type: "isLoading", payload: false });
 
       return () => abortController.abort();
     },
@@ -137,7 +103,7 @@ function QControlOrders() {
   function reBuild() {
     dispatch({ type: "isLoading", payload: true });
     dispatch({ type: "rerender" });
-    dispatch({ type: "isLoading", payload: false });
+    // dispatch({ type: "isLoading", payload: false });
   }
   return (
     <>
