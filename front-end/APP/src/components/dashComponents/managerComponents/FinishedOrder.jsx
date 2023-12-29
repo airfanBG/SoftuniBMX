@@ -9,9 +9,12 @@ function FinishedOrder({ order, i, onOrderButtonClick }) {
   return (
     <>
       <div className={styles.orderLine}>
-        <p>#{order.orderId}.</p>
+      <p className={styles.serial}>
+          <span>Order Number:</span>
+          {order.orderId}
+        </p>
         <p className={styles.serial}>
-          <span>SN:</span>
+          <span>Serial Number:</span>
           {order.serialNumber}
         </p>
         <p className={styles.dateCreated}>

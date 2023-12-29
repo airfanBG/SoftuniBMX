@@ -14,6 +14,7 @@ import Popup from "../../Popup.jsx";
 
 function ManagerFinished() {
 
+   
   const [background, setBackground] = useState(false);
   const [currentOrder, setCurrentOrder] = useState({});
   
@@ -21,9 +22,9 @@ function ManagerFinished() {
   const [loading, setLoading] = useState(false);
   const [orderList, setOrderList] = useState([]);
 
-  // State to hold user input
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+    // State to hold user input
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
 
     const abortController = new AbortController();
 
