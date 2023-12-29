@@ -14,6 +14,7 @@ function UserContactInfo({ info, addMoneyBtnHandler }) {
     e.preventDefault();
     if (amount < 1 || amount === "") return;
     addMoneyBtnHandler(amount);
+    setAmount("");
   }
 
   return (
