@@ -68,7 +68,7 @@
         /// </summary>
         /// <param name="orderId"></param>
         /// <returns>Task<bool></returns>
-        public async Task<bool> OrderPassQualityAssurance(int orderId)
+        public async Task<int> OrderPassQualityAssurance(int orderId)
         {
             try
             {
@@ -77,12 +77,12 @@
                 passedOrder.DateFinish = _dateTimeProvider.Now;
 
                 await _db.SaveChangesAsync();
-                return true;
+                return passedOrder.Id;
             }
             catch (Exception)
             {
             }
-            return false;
+            return 0;
         }
 
         /// <summary>
