@@ -1,6 +1,6 @@
 import styles from "./QControlOrderItem.module.css";
 
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import LoaderWheel from "../../LoaderWheel.jsx";
 import { timeResolver } from "../../../util/resolvers.js";
 import { del, post } from "../../../util/api.js";
@@ -37,6 +37,16 @@ function reducer(state, action) {
       return { ...state, textAccessory: action.payload };
     case "setBtnText":
       return { ...state, btnText: action.payload };
+    case "reset/All":
+      return {
+        ...state,
+        frameCheck: "",
+        textFrame: "",
+        wheelCheck: "",
+        textWheel: "",
+        accessoryCheck: "",
+        textAccessory: "",
+      };
 
     default:
       throw new Error("Unknown action type");
@@ -58,6 +68,15 @@ function QControlOrderItem({ product, onReBuild }) {
     },
     dispatch,
   ] = useReducer(reducer, initialState);
+
+  const ref = useRef([]);
+
+  const Unchecked = () => {
+    console.log(ref.current.length);
+    for (let i = 0; i < ref.current.length; i++) {
+      ref.current[i].checked = false;
+    }
+  };
 
   useEffect(() => {
     if (frameCheck && wheelCheck && accessoryCheck) {
@@ -95,18 +114,23 @@ function QControlOrderItem({ product, onReBuild }) {
     finalResult.orderStates[1].description = textWheel;
     finalResult.orderStates[2].isProduced = accessoryCheck;
     finalResult.orderStates[2].description = textAccessory;
+    // finalResult.clientName = "";
+    // finalResult.clientEmail = "";
+    // finalResult.clientPhone = "";
 
     if (Object.values(valuesCheck).every((x) => x === true)) {
-      // result = await post(environment.pass_qControl + product.orderId);
-      console.log(environment.pass_qControl + product.orderId);
+      result = await post(environment.pass_qControl + product.orderId);
+      console.log("pass");
     } else if (Object.values(valuesCheck).every((x) => x === false)) {
       // TODO: отива за брак - ендпоинт
       console.log("scrap");
     } else {
       result = await post(environment.return_qControl, finalResult);
-      console.log(finalResult);
+      console.log("rebuild");
     }
-    // console.log(result);
+    console.log(result);
+    dispatch({ type: "reset/All" });
+    Unchecked();
     onReBuild();
   }
 
@@ -159,6 +183,7 @@ function QControlOrderItem({ product, onReBuild }) {
               name={"frameText"}
               onChange={textHandler}
               rows={2}
+              value={textFrame}
             ></textarea>
             <input
               className={styles.checkbox}
@@ -166,6 +191,9 @@ function QControlOrderItem({ product, onReBuild }) {
               name="frameIsCheck"
               value={frameCheck}
               onChange={checkboxHandler}
+              ref={(element) => {
+                ref.current[0] = element;
+              }}
             />
           </div>
         </section>
@@ -200,6 +228,7 @@ function QControlOrderItem({ product, onReBuild }) {
               name={"wheelText"}
               onChange={textHandler}
               rows={2}
+              value={textWheel}
             ></textarea>
             <input
               className={styles.checkbox}
@@ -207,6 +236,9 @@ function QControlOrderItem({ product, onReBuild }) {
               name="wheelIsCheck"
               value={wheelCheck}
               onChange={checkboxHandler}
+              ref={(element) => {
+                ref.current[1] = element;
+              }}
             />
           </div>
         </section>
@@ -241,6 +273,7 @@ function QControlOrderItem({ product, onReBuild }) {
               name={"accessoryText"}
               onChange={textHandler}
               rows={2}
+              value={textAccessory}
             ></textarea>
             <input
               className={styles.checkbox}
@@ -248,6 +281,9 @@ function QControlOrderItem({ product, onReBuild }) {
               name="accessoryIsCheck"
               value={accessoryCheck}
               onChange={checkboxHandler}
+              ref={(element) => {
+                ref.current[2] = element;
+              }}
             />
           </div>
         </section>

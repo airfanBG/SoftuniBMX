@@ -34,7 +34,7 @@ function reducer(state, action) {
     case "hasChunk":
       return { ...state, chunkData: action.payload };
     case "rerender":
-      return { ...state, status: !state.status };
+      return { ...state, status: !state.status, loading: false };
     default:
       throw new Error("Unknown action type");
   }
@@ -81,6 +81,7 @@ function QControlOrders() {
         dispatch({ type: "setLength", payload: finished.length });
       }
       getOrders();
+      dispatch({ type: "isLoading", payload: false });
 
       return () => abortController.abort();
     },
@@ -102,7 +103,7 @@ function QControlOrders() {
   function reBuild() {
     dispatch({ type: "isLoading", payload: true });
     dispatch({ type: "rerender" });
-    dispatch({ type: "isLoading", payload: false });
+    // dispatch({ type: "isLoading", payload: false });
   }
   return (
     <>
