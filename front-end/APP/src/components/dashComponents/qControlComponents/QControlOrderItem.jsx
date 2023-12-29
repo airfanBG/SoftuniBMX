@@ -72,7 +72,7 @@ function QControlOrderItem({ product, onReBuild }) {
   const ref = useRef([]);
 
   const Unchecked = () => {
-    console.log(ref.current.length);
+    // console.log(ref.current.length);
     for (let i = 0; i < ref.current.length; i++) {
       ref.current[i].checked = false;
     }
@@ -114,9 +114,14 @@ function QControlOrderItem({ product, onReBuild }) {
     finalResult.orderStates[1].description = textWheel;
     finalResult.orderStates[2].isProduced = accessoryCheck;
     finalResult.orderStates[2].description = textAccessory;
-    // finalResult.clientName = "";
-    // finalResult.clientEmail = "";
-    // finalResult.clientPhone = "";
+
+    // IF no explanation when is not pass element
+    if (
+      (!frameCheck && !textFrame) ||
+      (!wheelCheck && !textWheel) ||
+      (!accessoryCheck && !textAccessory)
+    )
+      return;
 
     if (Object.values(valuesCheck).every((x) => x === true)) {
       result = await post(environment.pass_qControl + product.orderId);
@@ -128,10 +133,9 @@ function QControlOrderItem({ product, onReBuild }) {
       result = await post(environment.return_qControl, finalResult);
       console.log("rebuild");
     }
-    console.log(result);
+    onReBuild();
     dispatch({ type: "reset/All" });
     Unchecked();
-    onReBuild();
   }
 
   return (

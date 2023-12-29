@@ -34,7 +34,13 @@ function reducer(state, action) {
     case "hasChunk":
       return { ...state, chunkData: action.payload };
     case "rerender":
-      return { ...state, status: !state.status, loading: false };
+      return {
+        ...state,
+        status: !state.status,
+        loading: false,
+        // chunkData: [],
+        // orderList: [],
+      };
     default:
       throw new Error("Unknown action type");
   }
@@ -46,9 +52,11 @@ function QControlOrders() {
     dispatch,
   ] = useReducer(reducer, initialState);
 
-  const dataArray = useMemo(() => {
-    return [];
-  }, []);
+  // const dataArray = useMemo(() => {
+  //   return [];
+  // }, []);
+
+  // console.log("on start");
 
   useEffect(
     function () {
@@ -57,6 +65,8 @@ function QControlOrders() {
       async function getOrders() {
         const result = await get(environment.quality_assurance);
 
+        const dataArray = [];
+
         if (!result) {
           dispatch({ type: "isLoading", payload: false });
           return dispatch({
@@ -64,14 +74,6 @@ function QControlOrders() {
             payload: "Something went wrong. Service can not get data!",
           });
         }
-        // const finished = result.filter((x) => {
-        //   if (
-        //     x.orderStates[0].isProduced === true &&
-        //     x.orderStates[1].isProduced === true &&
-        //     x.orderStates[2].isProduced === true
-        //   )
-        //     return x;
-        // });
         const finished = result.slice();
         for (let i = 0; i < finished.length; i += itemPerPage) {
           const chunk = finished.slice(i, i + itemPerPage);
@@ -85,7 +87,7 @@ function QControlOrders() {
 
       return () => abortController.abort();
     },
-    [status, dataArray, itemPerPage]
+    [status, itemPerPage, length]
   );
 
   useEffect(
@@ -93,7 +95,7 @@ function QControlOrders() {
       dispatch({ type: "orders/hasOrders", payload: chunkData[page - 1] });
       dispatch({ type: "isLoading", payload: false });
     },
-    [chunkData, page]
+    [orderList, chunkData, page]
   );
 
   function handlePage(page) {
@@ -102,7 +104,10 @@ function QControlOrders() {
 
   function reBuild() {
     dispatch({ type: "isLoading", payload: true });
+    // dispatch({ type: "orders/hasOrders", payload: [] });
+    // dispatch({ type: "hasChunk", payload: [] });
     dispatch({ type: "rerender" });
+
     // dispatch({ type: "isLoading", payload: false });
   }
   return (
@@ -114,6 +119,7 @@ function QControlOrders() {
         {loading && <LoaderWheel />}
         <div className={styles.orders}>
           {orderList &&
+            orderList.length > 0 &&
             orderList.map((order, i) => (
               <QControlOrderItem
                 product={order}
