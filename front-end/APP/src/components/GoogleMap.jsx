@@ -60,10 +60,13 @@ function GoogleMap() {
     <div
       id="map"
       style={{
-        width: "70%",
-        height: "40rem",
-        border: "1px solid black",
+        // width: "70%",
+        width: "50%",
+        // height: "40rem",
+        height: "50rem",
         marginBottom: "1rem",
+        border: "1px solid var(--color-border)",
+        borderRadius: "0.3rem",
       }}
     ></div>
   );

@@ -59,8 +59,6 @@ function QControlOrderItem({ product, onReBuild }) {
     dispatch,
   ] = useReducer(reducer, initialState);
 
-  const snNumber = uuidv4();
-
   useEffect(() => {
     if (frameCheck && wheelCheck && accessoryCheck) {
       dispatch({ type: "setBtnText", payload: "Pass control" });
@@ -99,16 +97,17 @@ function QControlOrderItem({ product, onReBuild }) {
     finalResult.orderStates[2].description = textAccessory;
 
     if (Object.values(valuesCheck).every((x) => x === true)) {
-      result = await post(environment.pass_qControl + product.orderId);
-      console.log("pass");
+      // result = await post(environment.pass_qControl + product.orderId);
+      console.log(environment.pass_qControl + product.orderId);
     } else if (Object.values(valuesCheck).every((x) => x === false)) {
       // TODO: отива за брак - ендпоинт
       console.log("scrap");
     } else {
       result = await post(environment.return_qControl, finalResult);
-      console.log("some pass");
+      console.log(finalResult);
     }
-    console.log(result);
+    // console.log(result);
+    onReBuild();
   }
 
   return (
