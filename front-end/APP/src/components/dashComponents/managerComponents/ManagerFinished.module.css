@@ -16,3 +16,47 @@
   gap: 2rem;
   background-color: #fff;
 }
+.section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 2rem;
+}
+
+form {
+  width: 100%;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
+  color: var(--color-hd-second);
+}
+.label input.input,
+.inputField {
+  font-size: 1.8rem;
+  color: var(--color-main-dark);
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.3rem;
+}
+
+.inputField {
+  padding: 0.1rem 1rem;
+}
+
+.btnAdd {
+  background-color: var(--bg-color);
+  color: var(--color-link-light);
+  width: fit-content;
+  font-size: 2rem;
+  padding: 0.2rem 1.4rem;
+  margin-top: 1.3rem;
+  text-transform: uppercase;
+  border-radius: 0.3rem;
+  align-self: flex-end;
+}
+
+.btnAdd:hover {
+  background-color: var(--bg-color-light);
+}

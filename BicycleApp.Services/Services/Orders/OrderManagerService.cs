@@ -201,7 +201,8 @@
                             .AsNoTracking()
                             .Where(o => o.DateCreated >= datesPeriod.StartDate
                                      && o.DateFinish <= datesPeriod.EndDate
-                                     && o.DateFinish != null)
+                                     && o.DateFinish != null
+                                     && o.DateDeleted == null)//До тук, явно има да дооправя тази сложна заявка ProductionTme не ми работи нещо!!!
                             .Select(o => new OrderProgretionDto()
                             {
                                 OrderId = o.Id,
@@ -219,7 +220,7 @@
                                                    NameOfEmplоyeeProducedThePart = _stringManipulator.ReturnFullName(ope.Employee.FirstName, ope.Employee.LastName),
                                                    PartModel = ope.PartName,
                                                    PartType = ope.Part.Category.Name,
-                                                   SerialNumber = ope.SerialNumber,
+                                                   SerialNumber = ope.Part.OEMNumber,
                                                    PartId = ope.PartId,
                                                    PartQuantity = ope.PartQuantity,
                                                    StartDate = ope.StartDatetime.ToString(),
