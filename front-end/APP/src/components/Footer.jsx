@@ -25,26 +25,27 @@ function Footer() {
           </p>
 
           <section className={styles["social-icons"]}>
-            <Link to={"#"}>
+            <Link to={"https://github.com/airfanBG/SoftuniBMX"}>
               <i className="fa-brands fa-square-github" />
             </Link>
-            <Link to={"#"}>
+            <Link to={"/"}>
               <i className="fa-brands fa-square-facebook" />
             </Link>
-            <Link to={"#"}>
+            <Link to={"/"}>
               <i className="fa-brands fa-instagram" />
             </Link>
-            <Link to={"#"}>
+            <Link to={"/"}>
               <i className="fa-brands fa-linkedin" />
             </Link>
           </section>
+
           <p className={styles.copyright}>
             All rights reserved - ©{new Date().getFullYear()}
           </p>
         </figure>
 
         <figure className={styles["footer-links"]}>
-          <ul className={styles["footer-list"]} role="list">
+          {/* <ul className={styles["footer-list"]} role="list">
             <li className={styles["footer-list-item"]}>
               <Link to={"#"} className={styles["footer-link"]}>
                 Option 1
@@ -70,38 +71,46 @@ function Footer() {
                 Option 5
               </Link>
             </li>
-          </ul>
+          </ul> */}
+          <h3 className={styles.footerTextHeading}>Some text</h3>
+          <p className={styles.footerText}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam in
+            iste eveniet molestias voluptatem est obcaecati quo quas sint
+            aliquid iure quos fugit, facere quod perspiciatis vero a expedita
+            fugiat corporis. Earum illum expedita culpa laboriosam esse,
+            reiciendis in temporibus animi. Tempore similique rerum ut placeat
+            nam vero quo! Est itaque temporibus consequatur quis amet commodi
+            similique atque quas dicta ipsum laboriosam, illum nobis quo soluta
+            accusantium alias repudiandae!
+          </p>
         </figure>
+
         <figure className={styles["footer-links"]}>
           <ul className={styles["footer-list"]} role="list">
             <li className={styles["footer-list-item"]}>
-              <Link to={"#"} className={styles["footer-link"]}>
-                Option 1
+              <Link to={"/"} className={styles["footer-link"]}>
+                Copyright
               </Link>
             </li>
             <li className={styles["footer-list-item"]}>
-              <Link to={"#"} className={styles["footer-link"]}>
-                Option 2
+              <Link to={"/"} className={styles["footer-link"]}>
+                Sitemap
               </Link>
             </li>
             <li className={styles["footer-list-item"]}>
-              <Link to={"#"} className={styles["footer-link"]}>
-                Option 3
+              <Link to={"/privacy-policy"} className={styles["footer-link"]}>
+                Privacy Policy
               </Link>
             </li>
             <li className={styles["footer-list-item"]}>
-              <Link to={"#"} className={styles["footer-link"]}>
-                Option 4
-              </Link>
-            </li>
-            <li className={styles["footer-list-item"]}>
-              <Link to={"#"} className={styles["footer-link"]}>
-                Option 5
+              <Link to={"/terms"} className={styles["footer-link"]}>
+                Terms of Use
               </Link>
             </li>
           </ul>
         </figure>
-        <figure className={styles["footer-links"]}>
+
+        {/* <figure className={styles["footer-links"]}>
           <ul className={styles["footer-list"]} role="list">
             <li className={styles["footer-list-item"]}>
               <Link to={"#"} className={styles["footer-link"]}>
@@ -129,7 +138,7 @@ function Footer() {
               </Link>
             </li>
           </ul>
-        </figure>
+        </figure> */}
       </section>
     </footer>
   );

@@ -24,7 +24,7 @@ namespace BicycleApp.Services.Contracts
         Task DeleteSuplierById(int suplierId);
         Task DeleteDeliveryById(int deliveryId);
         Task DeletePartOrderById(int partOrderId);
-        Task<PartQueryDto> AllPartsInStock(int currentPage);
+        Task<PartQueryDto> AllPartsInStock();//int currentPage
 
         //Task UpdateSuplierPartsInStock(int suplierId, int[] suppliedPartsOemNums);
     }

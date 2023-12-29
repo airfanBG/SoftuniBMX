@@ -1,29 +1,25 @@
 import styles from "./Warehouse.module.css";
 
 import LoaderWheel from "../LoaderWheel.jsx";
-import { useContext, useState, memo } from "react";
-import { UserContext } from "../../context/GlobalUserProvider.jsx";
+import { useEffect, useState, memo } from "react";
+
+import { get } from "../../util/api.js";
+import { environment } from "../../environments/environment.js";
+
+import PartInWarehouse from "./PartInWarehouse.jsx";
+import BoardHeader from "../dashComponents/BoardHeader.jsx";
 
 function Warehouse() {
-  const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
-
-  // Response
-  const receivedData = {
-    category: "",
-    partName: "",
-    oemNUmber: "",
-    quantity: "",
-    partId: "",
-  };
+  const [error, setError] = useState({});
 
   return (
     <>
       <h2 className={styles.dashHeading}>Warehouse</h2>
 
       <section className={styles.board}>
+        <BoardHeader />
         {loading && <LoaderWheel />}
-        {/* всички части */}
       </section>
     </>
   );
