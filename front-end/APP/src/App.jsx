@@ -35,6 +35,8 @@ import Warehouse from "./components/storage/Warehouse.jsx";
 import Contacts from "./pages/Contacts/Contacts.jsx";
 import ComponentUserOrdersReady from "./components/dashComponents/userComponents/ComponentUserOrdersReady.jsx";
 import ComponentUserOrdersArchive from "./components/dashComponents/userComponents/ComponentUserOrdersArchive.jsx";
+import ComponentUserOrder from "./components/dashComponents/userComponents/ComponentUserOrder.jsx";
+
 // LAZY LOADING
 const CreateBike = lazy(() =>
   import("./components/createComponents/CreateBike.jsx")
@@ -84,7 +86,10 @@ function App() {
                     path={"user-archive"}
                     element={<ComponentUserOrdersArchive />}
                   />
-
+                  <Route
+                    path="user-order/:orderId"
+                    element={<ComponentUserOrder />}
+                  />
                   <Route
                     path={"get-stock"}
                     element={<UserHomeScreenSelection />}

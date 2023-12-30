@@ -118,5 +118,31 @@
                 return StatusCode(500, clientId);
             }
         }
+
+        [HttpGet]
+        [Route("find")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<OrderDtoInfo>> GetOrderById([FromQuery] int orderId)
+        {
+            try
+            {
+                var order = await _userService.GetOrderById(orderId);
+
+                if (order == null)
+                {
+                    return BadRequest(orderId);
+                }
+
+                return Ok(order);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, orderId);
+            }
+        }
+
+
     }
 }
