@@ -5,7 +5,7 @@
     using BicycleApp.Data;
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.Models;
-
+    using BicycleApp.Services.Models.Order.OrderUser;
     using Microsoft.EntityFrameworkCore;
 
     using static BicycleApp.Common.ApplicationGlobalConstants;
@@ -40,7 +40,12 @@
                         ModelName = e.ModelName,
                         ImageUrl = e.ImageUrl,
                         Price = e.Price,
-                        Description = e.Description
+                        Description = e.Description,
+                        OrderParts = e.BikeModelsParts.Select( p => new OrderPartIdDto()
+                                                                {
+                                                                    PartId = p.PartId
+                                                                })
+                                                       .ToList()
                     })
                     .ToListAsync();
 

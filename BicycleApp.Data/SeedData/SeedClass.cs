@@ -1983,6 +1983,15 @@
                 new Status()
                 {
                     Id = 7,
+                    Name = "Paid order",
+                    DateCreated = dateCreated,
+                    DateUpdated = null,
+                    DateDeleted = null,
+                    IsDeleted = false
+                },
+                new Status()
+                {
+                    Id = 8,
                     Name = "Send order",
                     DateCreated = dateCreated,
                     DateUpdated = null,
