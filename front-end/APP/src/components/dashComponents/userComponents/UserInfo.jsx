@@ -12,10 +12,14 @@ import { updateUserData, userInfo } from "../../../userServices/userService.js";
 
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 import EditContactInfo from "./EditContactInfo.jsx";
+import LoaderWheel from "../../LoaderWheel.jsx";
+import { put } from "../../../util/api.js";
+import { environment } from "../../../environments/environment.js";
 
 function UserInfo() {
   const { user, updateUser } = useContext(UserContext);
-  const [add, setAdd] = useState("");
+  // const [add, setAdd] = useState("");
+  const [loading, setLoading] = useState(false);
   const [image, setImage] = useState(null);
   const [base64, setBase64] = useState("");
   const [edit, setEdit] = useState(false);
@@ -24,6 +28,7 @@ function UserInfo() {
 
   useEffect(
     function () {
+      setLoading(true);
       async function getClientInfo() {
         const data = await userInfo(user.id, user.role);
         setInfo({ ...data });
@@ -32,6 +37,7 @@ function UserInfo() {
         }
       }
       getClientInfo();
+      setLoading(false);
     },
     [user]
   );
@@ -56,9 +62,19 @@ function UserInfo() {
     }
   }
 
-  function addMoneyBtnHandler(e, amount) {
-    e.preventDefault();
-    console.log(e.target.value);
+  async function addMoneyBtnHandler(amount) {
+    setLoading(true);
+
+    const data = {
+      id: user.id,
+      // "iban": "string",
+      balance: Number(amount),
+    };
+
+    const result = await put(environment.update_balance, data);
+    updateUser({ ...user, balance: user.balance + amount });
+    // console.log(result);
+    setLoading(false);
   }
 
   function editBtnHandler() {
@@ -69,7 +85,7 @@ function UserInfo() {
       <h2 className={styles.dashHeading}>
         {user.firstName} {user.lastName}
       </h2>
-
+      {loading && <LoaderWheel />}
       <section className={styles.board}>
         <BoardHeader />
 

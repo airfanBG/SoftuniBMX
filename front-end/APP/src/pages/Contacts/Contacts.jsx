@@ -12,7 +12,7 @@ function ContactInfo() {
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.contactInfo}>
-            <h2>Contact Information</h2>
+            <h2 className={styles.contactInfoHd}>Contact Information</h2>
             <p>
               Name: <span>extremeBMX LTD</span>
             </p>
