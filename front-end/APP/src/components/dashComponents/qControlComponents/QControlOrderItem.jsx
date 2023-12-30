@@ -6,6 +6,7 @@ import { timeResolver } from "../../../util/resolvers.js";
 import { del, post } from "../../../util/api.js";
 import { environment } from "../../../environments/environment.js";
 import { v4 as uuidv4 } from "uuid"; //unique ID
+import { onDeleteHandler } from "../managerComponents/managerActions/orderActions.js";
 
 const initialState = {
   loading: false,
@@ -128,7 +129,11 @@ function QControlOrderItem({ product, onReBuild }) {
       console.log("pass");
     } else if (Object.values(valuesCheck).every((x) => x === false)) {
       // TODO: отива за брак - ендпоинт
+      const result = await onDeleteHandler(product.orderId);
       console.log("scrap");
+      onReBuild();
+      dispatch({ type: "reset/All" });
+      Unchecked();
     } else {
       result = await post(environment.return_qControl, finalResult);
       console.log("rebuild");
