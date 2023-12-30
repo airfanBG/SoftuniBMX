@@ -87,3 +87,42 @@ button.closeIcon {
   border-radius: 0.2rem;
   /* border: 1px solid var(--color-border); */
 }
+
+/* IN SALARY MODE */
+
+.inSalary {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.inSalary .heading {
+  margin-bottom: unset;
+  border-bottom: none;
+}
+
+.inSalary .info {
+  text-transform: uppercase;
+  background-color: unset;
+}
+
+.inSalary .info span {
+  display: none;
+}
+
+.oneRow {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.oneRow .info {
+  padding: 0.3rem 3rem 0 0rem;
+  background-color: unset;
+  font-size: 1.8rem;
+}
+.oneRow .info span {
+  text-transform: uppercase;
+  color: var(--color-hd);
+}
