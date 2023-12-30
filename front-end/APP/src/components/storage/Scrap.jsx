@@ -82,40 +82,45 @@ function Scrap() {
     console.log("re-render");
   }
 
-  if (orders.length === 0) return <h2>There is no orders in this category</h2>;
-  if (orders.length > 0)
-    return (
-      <>
-        <h2 className={styles.dashHeading}>Deleted orders</h2>
-        <section className={styles.board}>
-          <BoardHeader />
-          {loading && <LoaderWheel />}
-          <div className={styles.orders}>
-            {orders.map((order) => (
-              <Order
-                key={order.orderId}
-                order={order}
-                onStatusChange={onStatusChange}
-                isRejected={false}
-                isDeleted={false}
-              />
-            ))}
-          </div>
-          <Paginator
-            page={page}
-            pages={length}
-            countOnPage={itemPerPage}
-            size={24}
-            fontSize={1.6}
-            // bgColor=""
-            // brColor=""
-            brRadius={3}
-            handlePage={handlePage}
-            // selected="red"
-          />
-        </section>
-      </>
-    );
+  // if (orders.length === 0) return <h2>There is no orders in this category</h2>;
+  // if (orders.length > 0)
+  return (
+    <>
+      <h2 className={styles.dashHeading}>Deleted orders</h2>
+      <section className={styles.board}>
+        {loading && <LoaderWheel />}
+        {orders && orders.length > 0 && (
+          <>
+            <div className={styles.orders}>
+              {orders.map((order) => (
+                <Order
+                  key={order.orderId}
+                  order={order}
+                  onStatusChange={onStatusChange}
+                  isRejected={false}
+                  isDeleted={false}
+                  isScrap={true}
+                />
+              ))}
+            </div>
+            <Paginator
+              page={page}
+              pages={length}
+              countOnPage={itemPerPage}
+              size={24}
+              fontSize={1.6}
+              // bgColor=""
+              // brColor=""
+              brRadius={3}
+              handlePage={handlePage}
+              // selected="red"
+            />
+          </>
+        )}
+        {orders?.length === 0 && <h2>There is no orders in this category</h2>}
+      </section>
+    </>
+  );
 }
 
 export default Scrap;
