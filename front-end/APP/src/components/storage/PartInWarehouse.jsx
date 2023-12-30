@@ -1,10 +1,7 @@
 import { useState, useContext } from "react";
 import styles from "./PartInWarehouse.module.css";
 
-
 function PartInWarehouse({ part, i }) {
-
-
   return (
     <>
       <div className={styles.box}>
@@ -35,10 +32,10 @@ function PartInWarehouse({ part, i }) {
                 {part.description}
               </p>
               <div className={styles.qtyBlock}>
-              <p className={styles.content}>
-                <span>Category:</span>
-                {part.category}
-              </p>
+                <p className={styles.content}>
+                  <span>Category:</span>
+                  {part.category}
+                </p>
               </div>
             </div>
             <div className={styles.info}>
@@ -51,19 +48,13 @@ function PartInWarehouse({ part, i }) {
                 {part.salePrice}.00 BGN
               </p>
               <div className={styles.qtyBlock}>
-              <p
+                <p
                   className={`${styles.qty} ${
-                    part.quantity < 6
-                      ? styles.notEnough
-                      : null
+                    part.quantity < 6 ? styles.notEnough : null
                   }`}
                 >
                   <span
-                    className={`${
-                      part.quantity < 6
-                        ? styles.notEnough
-                        : null
-                    }`}
+                    className={`${part.quantity < 6 ? styles.notEnough : null}`}
                   >
                     Parts in stock:
                   </span>
@@ -71,9 +62,13 @@ function PartInWarehouse({ part, i }) {
                 </p>
               </div>
             </div>
-         </div>
+          </div>
           <div className={styles.picture}>
-          <img src={part.imageUrls[0]} alt={part.category} className={styles["card-img"]} />
+            <img
+              src={part.imageUrls[0]}
+              alt={part.category}
+              className={styles["card-img"]}
+            />
           </div>
         </section>
       </div>

@@ -1,3 +1,11 @@
+.box {
+  padding-inline: 1rem;
+  border: 1px solid var(--color-border-hover);
+  border-radius: 0.5rem;
+}
+.additional {
+  border-bottom: 1px solid var(--color-line);
+}
 .section {
   width: 100%;
   display: flex;
@@ -5,8 +13,8 @@
   gap: 1rem;
   margin-bottom: 0.5rem;
   padding: 1rem;
-  border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
+  /* border: 1px solid var(--color-border);
+  border-radius: 0.5rem; */
 }
 .mainInfo {
   border-bottom: 1px solid var(--color-border);
@@ -43,9 +51,9 @@
 .content {
   display: block;
   width: 35%;
-  height: 30px;
+  /* height: 30px; */
   font-size: 1.6rem;
-  line-height: 1;
+  line-height: 1.2;
   overflow: hidden;
 }
 
@@ -55,6 +63,7 @@
   color: var(--color-hd-second);
   margin-right: 1rem;
   width: 50%;
+  text-transform: uppercase;
 }
 
 .qtyBlock {
@@ -74,16 +83,17 @@
   font-size: 1.2rem;
   color: var(--color-hd-second);
   margin-right: 1rem;
-  width: 50%;
+  width: 55%;
+  text-transform: uppercase;
 }
 
 .picture {
   width: 120px;
-  height: 100px; 
+  height: 100px;
   padding: 1rem 0;
   display: flex;
   flex-direction: column;
-  justify-content:center;
+  justify-content: center;
 }
 
 .notEnough,

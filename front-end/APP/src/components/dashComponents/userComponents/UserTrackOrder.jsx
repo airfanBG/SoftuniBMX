@@ -54,8 +54,8 @@ function UserTrackOrder() {
     setBackground(false);
   }
 
-  if (orderList.length === 0)
-    return <h2>There is no orders in this category</h2>;
+  // if (orderList.length === 0)
+  //   return <h2>There is no orders in this category</h2>;
   return (
     <>
       {background && (
@@ -68,12 +68,15 @@ function UserTrackOrder() {
       </h2>
       <section className={styles.board}>
         <BoardHeader />
-        <div className={styles.orders}>
-          {loading && <LoaderWheel />}
-          {orderList.map((order, i) => (
-            <OrderInProgress key={order.orderId} order={order} i={i} />
-          ))}
-        </div>
+        {orderList.length > 0 && (
+          <div className={styles.orders}>
+            {loading && <LoaderWheel />}
+            {orderList.map((order, i) => (
+              <OrderInProgress key={order.orderId} order={order} i={i} />
+            ))}
+          </div>
+        )}
+        {orderList.length === 0 && <h2>There is no orders in this category</h2>}
       </section>
     </>
   );

@@ -22,7 +22,7 @@ function ContactForm() {
           title,
           text,
         };
-        console.log(templateParams);
+        // console.log(templateParams);
         emailjs
           .send(
             "service_3l6cd7l",

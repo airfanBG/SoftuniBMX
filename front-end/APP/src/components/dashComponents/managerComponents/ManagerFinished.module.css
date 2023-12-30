@@ -16,14 +16,23 @@
   gap: 2rem;
   background-color: #fff;
 }
+
+.boardHeading {
+  font-size: 2rem;
+  color: var(--color-hd-second);
+}
+
 .section {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: 2rem;
+  gap: 1rem;
 }
 
-form {
+form.form {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .label {
@@ -39,6 +48,7 @@ form {
   padding: 0.8rem 1rem;
   border: 1px solid var(--color-border);
   border-radius: 0.3rem;
+  width: 20rem;
 }
 
 .inputField {
@@ -48,13 +58,14 @@ form {
 .btnAdd {
   background-color: var(--bg-color);
   color: var(--color-link-light);
-  width: fit-content;
+  /* width: fit-content; */
+  width: 19.5rem;
   font-size: 2rem;
-  padding: 0.2rem 1.4rem;
+  padding: 0.4rem 1.4rem;
   margin-top: 1.3rem;
   text-transform: uppercase;
   border-radius: 0.3rem;
-  align-self: flex-end;
+  /* align-self: flex-end; */
 }
 
 .btnAdd:hover {
