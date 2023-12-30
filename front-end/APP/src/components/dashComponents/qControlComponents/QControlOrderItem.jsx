@@ -128,12 +128,8 @@ function QControlOrderItem({ product, onReBuild }) {
       result = await post(environment.pass_qControl + product.orderId);
       console.log("pass");
     } else if (Object.values(valuesCheck).every((x) => x === false)) {
-      // TODO: отива за брак - ендпоинт
       const result = await onDeleteHandler(product.orderId);
       console.log("scrap");
-      onReBuild();
-      dispatch({ type: "reset/All" });
-      Unchecked();
     } else {
       result = await post(environment.return_qControl, finalResult);
       console.log("rebuild");

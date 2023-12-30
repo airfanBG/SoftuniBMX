@@ -78,10 +78,10 @@
                 passedOrder.StatusId++;
                 var finishDate = _dateTimeProvider.Now;
                 passedOrder.DateFinish = finishDate;
-                foreach (var orderPartEmployee in passedOrder.OrdersPartsEmployees)
-                {
-                    orderPartEmployee.DateFinish = finishDate;
-                }
+                //foreach (var orderPartEmployee in passedOrder.OrdersPartsEmployees)
+                //{
+                //    orderPartEmployee.DateFinish = finishDate;
+                //}
 
                 await _db.SaveChangesAsync();
                 return passedOrder.Id;
