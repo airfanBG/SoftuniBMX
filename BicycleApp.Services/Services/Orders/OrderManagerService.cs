@@ -202,7 +202,7 @@
                             .Where(o => o.DateCreated >= datesPeriod.StartDate
                                      && o.DateFinish <= datesPeriod.EndDate
                                      && o.DateFinish != null
-                                     && o.DateDeleted == null)//До тук, явно има да дооправя тази сложна заявка ProductionTme не ми работи нещо!!!
+                                     && o.DateDeleted == null)
                             .Select(o => new OrderProgretionDto()
                             {
                                 OrderId = o.Id,
