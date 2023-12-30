@@ -72,9 +72,16 @@
         {
             try
             {
-                var passedOrder = await _db.Orders.FirstAsync(o => o.Id == orderId);
+                var passedOrder = await _db.Orders
+                                           .Include(ope => ope.OrdersPartsEmployees)
+                                           .FirstAsync(o => o.Id == orderId);
                 passedOrder.StatusId++;
-                passedOrder.DateFinish = _dateTimeProvider.Now;
+                var finishDate = _dateTimeProvider.Now;
+                passedOrder.DateFinish = finishDate;
+                foreach (var orderPartEmployee in passedOrder.OrdersPartsEmployees)
+                {
+                    orderPartEmployee.DateFinish = finishDate;
+                }
 
                 await _db.SaveChangesAsync();
                 return passedOrder.Id;
