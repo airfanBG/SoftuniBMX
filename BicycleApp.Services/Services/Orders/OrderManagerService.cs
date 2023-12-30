@@ -203,6 +203,7 @@
                                      && o.DateFinish <= datesPeriod.EndDate
                                      && o.DateFinish != null
                                      && o.DateDeleted == null)//До тук, явно има да дооправя тази сложна заявка ProductionTme не ми работи нещо!!!
+                                     && o.DateDeleted == null)
                             .Select(o => new OrderProgretionDto()
                             {
                                 OrderId = o.Id,
@@ -211,6 +212,7 @@
                                 DateFinished = o.DateFinish.Value.ToString(DefaultDateFormat),
                                 SaleAmount = o.FinalAmount,
                                 ClientName = o.Client.LastName,
+                                ClientName = _stringManipulator.ReturnFullName(o.Client.FirstName, o.Client.LastName),
                                 ClientEmail = o.Client.Email,
                                 ClientPhone = o.Client.PhoneNumber,
                                 OrderStates = o.OrdersPartsEmployees
