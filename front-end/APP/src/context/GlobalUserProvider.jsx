@@ -9,20 +9,23 @@ function GlobalUser({ children }) {
   const [user, setUser] = useState("");
   const [hasOrder, setHasOrder] = useState(false);
 
-  useEffect(function () {
-    const data = getUserData();
-    if (data) {
-      const result = setUser(data);
-    }
+  useEffect(
+    function () {
+      const data = getUserData();
+      if (data) {
+        const result = setUser(data);
+      }
 
-    const order = getOrderData();
-    if (order && user.role === "user") {
-      setHasOrder(true);
-    } else {
-      clearOrderData();
-      setHasOrder(false);
-    }
-  }, []);
+      const order = getOrderData();
+      if (order && user.role === "user") {
+        setHasOrder(true);
+      } else {
+        clearOrderData();
+        setHasOrder(false);
+      }
+    },
+    [user.role]
+  );
 
   function updateUser(userData) {
     setUser(userData);

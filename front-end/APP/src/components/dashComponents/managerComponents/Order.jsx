@@ -7,7 +7,13 @@ import {
   approveHandlerAction,
 } from "./managerActions/orderActions.js";
 
-function Order({ order, onStatusChange, isRejected = true, isDeleted = true }) {
+function Order({
+  order,
+  onStatusChange,
+  isRejected = true,
+  isDeleted = true,
+  isScrap = false,
+}) {
   const { orderId, dateCreated, serialNumber, orderParts } = order;
   const frame = orderParts[0];
   const wheel = orderParts[1];
@@ -51,7 +57,7 @@ function Order({ order, onStatusChange, isRejected = true, isDeleted = true }) {
         </div>
 
         <section className={styles.section}>
-          <div className={styles.itemInfo}>
+          <div className={!isScrap ? styles.itemInfo : styles.itemInfoScrap}>
             <div className={styles.info}>
               <p className={styles.content}>
                 <span>Frame:</span>
@@ -158,37 +164,47 @@ function Order({ order, onStatusChange, isRejected = true, isDeleted = true }) {
             </div>
           </div>
 
-          <div className={styles.actions}>
-            {isDeleted && (
-              <Button
-                type={"approve"}
-                onClick={onBtnClickHandler}
-                // onClick={() => approveHandler(id)}
-                id={orderId}
-                disabled={
-                  frame.partQuantity > frame.partQunatityInStock ||
-                  wheel.partQuantity > wheel.partQunatityInStock ||
-                  accessory.partQuantity > accessory.partQunatityInStock
-                }
-              >
-                Approve
-              </Button>
-            )}
+          {!isScrap && (
+            <div className={styles.actions}>
+              {isDeleted && (
+                <Button
+                  type={"approve"}
+                  onClick={onBtnClickHandler}
+                  // onClick={() => approveHandler(id)}
+                  id={orderId}
+                  disabled={
+                    frame.partQuantity > frame.partQunatityInStock ||
+                    wheel.partQuantity > wheel.partQunatityInStock ||
+                    accessory.partQuantity > accessory.partQunatityInStock
+                  }
+                >
+                  Approve
+                </Button>
+              )}
 
-            {isRejected && (
-              <Button type={"reject"} onClick={onBtnClickHandler} id={orderId}>
-                {/* <Button type={"reject"} onClick={() => rejectHandler(id)} id={id}> */}
-                Reject
-              </Button>
-            )}
+              {isRejected && (
+                <Button
+                  type={"reject"}
+                  onClick={onBtnClickHandler}
+                  id={orderId}
+                >
+                  {/* <Button type={"reject"} onClick={() => rejectHandler(id)} id={id}> */}
+                  Reject
+                </Button>
+              )}
 
-            {isDeleted && (
-              <Button type={"delete"} onClick={onBtnClickHandler} id={orderId}>
-                {/* <Button type={"delete"} onClick={() => deleteHandler(id)} id={id}> */}
-                Delete
-              </Button>
-            )}
-          </div>
+              {isDeleted && (
+                <Button
+                  type={"delete"}
+                  onClick={onBtnClickHandler}
+                  id={orderId}
+                >
+                  {/* <Button type={"delete"} onClick={() => deleteHandler(id)} id={id}> */}
+                  Delete
+                </Button>
+              )}
+            </div>
+          )}
         </section>
       </div>
     </>

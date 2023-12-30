@@ -1,13 +1,21 @@
 import styles from "./UserContactInfo.module.css";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 import ContactInfoElement from "../ContactInfoElement.jsx";
 import { userInfo } from "../../../userServices/userService.js";
 import { formatCurrency } from "../../../util/resolvers.js";
 
-function UserContactInfo({ info }) {
+function UserContactInfo({ info, addMoneyBtnHandler }) {
   const { user } = useContext(UserContext);
+  const [amount, setAmount] = useState("");
+
+  function onAddAmountHandler(e) {
+    e.preventDefault();
+    if (amount < 1 || amount === "") return;
+    addMoneyBtnHandler(amount);
+    setAmount("");
+  }
 
   return (
     <>
@@ -44,7 +52,7 @@ function UserContactInfo({ info }) {
               />
             </div>
 
-            {info.role === "user" && (
+            {user.role === "user" && (
               <div className={styles.row}>
                 <ContactInfoElement
                   content={info.address.street}
@@ -60,7 +68,7 @@ function UserContactInfo({ info }) {
               </div>
             )}
 
-            {info.role === "user" && (
+            {user.role === "user" && (
               <div className={styles.row}>
                 <ContactInfoElement
                   content={info.address.block}
@@ -81,7 +89,7 @@ function UserContactInfo({ info }) {
               </div>
             )}
 
-            {info.role === " user" && (
+            {user.role === " user" && (
               <div className={styles.row}>
                 <ContactInfoElement
                   content={info.city}
@@ -102,7 +110,7 @@ function UserContactInfo({ info }) {
               </div>
             )}
 
-            {info.role === "user" && (
+            {user.role === "user" && (
               <div className={styles.row}>
                 <ContactInfoElement
                   content={info.address.country}
@@ -111,12 +119,12 @@ function UserContactInfo({ info }) {
               </div>
             )}
           </div>
-          {info.role === "user" && (
+          {/* {user.role === "user" && (
             <h2 className={styles.infoHeader}>
               <span>Account information</span>
             </h2>
           )}
-          {info.role === "user" && (
+          {user.role === "user" && (
             <div className={styles.fullData}>
               <div className={styles.row}>
                 <ContactInfoElement
@@ -130,8 +138,25 @@ function UserContactInfo({ info }) {
                   label={"IBAN"}
                   width={"60%"}
                 />
-                div div{" "}
               </div>
+            </div>
+          )} */}
+
+          {user.role === "user" && (
+            <div className={styles.formContainer}>
+              <form onSubmit={onAddAmountHandler} className={styles.form}>
+                <label htmlFor="" className={styles.labelInput}>
+                  {/* Add amount */}
+                  <input
+                    type="number"
+                    className={styles.balanceInput}
+                    value={amount}
+                    onChange={(e) => setAmount(Number(e.target.value))}
+                    placeholder={"Add amount"}
+                  />
+                </label>
+                <button className={styles.amountBtn}>Add to balance</button>
+              </form>
             </div>
           )}
         </div>

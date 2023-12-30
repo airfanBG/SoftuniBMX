@@ -7,7 +7,7 @@
     public interface IQualityAssuranceService
     {
         Task<ICollection<OrderProgretionDto>> GetAllReadyOrder();
-        Task<bool> OrderPassQualityAssurance(int orderId);
+        Task<int> OrderPassQualityAssurance(int orderId);
         Task<ICollection<RemanufacturingPartEmployeeInfoDto>> RemanufacturingPart(IOrderProgretionDto orderProgretionDto);
     }
 }

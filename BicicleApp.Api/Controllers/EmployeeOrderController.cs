@@ -123,13 +123,13 @@
         [Route("quality_assurance")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> PassedQualityAssuranceOrder([FromQuery] int orderId)
+        public async Task<ActionResult<int>> PassedQualityAssuranceOrder([FromQuery] int orderId)
         {
-            var isPassed = await qualityAssuranceService.OrderPassQualityAssurance(orderId);
+            var passedOrderId = await qualityAssuranceService.OrderPassQualityAssurance(orderId);
 
-            if (isPassed)
+            if (passedOrderId > 0)
             {
-                return Ok();
+                return Ok(passedOrderId);
             }
 
             return BadRequest();
