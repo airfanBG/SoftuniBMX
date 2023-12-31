@@ -75,7 +75,11 @@
             var mainOrder = await dbContext.Orders
                 .Where(o => o.Id == order.OrderId)
                 .FirstAsync();
-            mainOrder.StatusId = 7;
+            mainOrder.StatusId++;
+            if (mainOrder.StatusId > 6)
+            {
+                mainOrder.StatusId = 6;
+            }
 
             TimeSpan partProductionTime = (TimeSpan)(order.EndDatetime - order.StartDatetime);
             TimeSpan minimumSpan = TimeSpan.Parse("00:00:00.0000000");
