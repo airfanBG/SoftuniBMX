@@ -125,4 +125,15 @@ button.closeIcon {
 .oneRow .info span {
   text-transform: uppercase;
   color: var(--color-hd);
+  background-color: unset;
+}
+
+.infoFullLine {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.8rem;
+}
+
+.infoFullLine span {
+  font-size: 1.2rem;
 }

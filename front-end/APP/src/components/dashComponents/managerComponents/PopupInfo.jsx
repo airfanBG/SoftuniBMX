@@ -3,15 +3,9 @@ import styles from "./PopupInfo.module.css";
 import { Link } from "react-router-dom";
 
 import { User } from "@phosphor-icons/react";
+import { getMonthName } from "../../../util/resolvers.js";
 
 function PopupInfo({ person, onClose, isSalaries = false }) {
-  function getMonthName() {
-    const prevMonth = new Date();
-    prevMonth.setMonth(prevMonth.getMonth() - 1);
-    return new Intl.DateTimeFormat("en-GB", { month: "long" }).format(
-      prevMonth
-    );
-  }
   return (
     <div className={styles.modalBg} onClick={onClose}>
       <figure className={styles.fullInfo} onClick={(e) => e.stopPropagation()}>
@@ -104,6 +98,12 @@ function PopupInfo({ person, onClose, isSalaries = false }) {
                 <p className={`${styles.info}`}>
                   <span>Hours/Mont:</span>
                   75 hours 45 minutes
+                </p>
+              </div>
+              <div className={styles.oneRow}>
+                <p className={`${styles.infoFullLine}`}>
+                  <span>If current date is bwn 1 & 5:</span>
+                  1000lw
                 </p>
               </div>
             </div>
