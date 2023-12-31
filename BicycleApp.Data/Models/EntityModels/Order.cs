@@ -73,6 +73,9 @@
         [Comment("Date of the deletion of the order")]
         public DateTime? DateDeleted { get; set; }
 
+        [Comment("Date of the order sended")]
+        public DateTime? DateSended { get; set; }
+
         [Required]
         [Comment("Is the order deleted: Yes/No")]
         public bool IsDeleted { get; set; } = false;

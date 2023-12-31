@@ -2,19 +2,19 @@
 {
     using BicicleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
+    using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.HelperClasses.Contracts;
+    using BicycleApp.Services.Models.IdentityModels;
     using BicycleApp.Services.Models.Order;
     using BicycleApp.Services.Models.Order.OrderManager;
-    using static BicycleApp.Common.ApplicationGlobalConstants;
     using BicycleApp.Services.Models.Order.OrderUser;
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-
-    using BicycleApp.Services.Models.IdentityModels;
-    using BicycleApp.Services.HelperClasses;
+    using static BicycleApp.Common.ApplicationGlobalConstants;
+    using static BicycleApp.Common.EntityValidationConstants;
 
     public class OrderManagerService : IOrderManagerService
     {
@@ -496,6 +496,46 @@
                    .CountAsync();
 
             return result;
+        }
+
+        /// <summary>
+        /// Gets all sended orders.
+        /// </summary>
+        /// <returns>Task<ICollection<OrderSendedDto>></returns>
+        public async Task<ICollection<OrderSendedDto>> AllSendedOrdersAsync()
+        {
+            return await _db.Orders
+                            .Include(o => o.OrdersPartsEmployees)
+                            .ThenInclude(ope => ope.OrdersPartsEmployeesInfos)
+                            .Include(o => o.Client)
+                            .AsNoTracking()
+                            .Where(o => o.DateFinish != null
+                                     && o.DateDeleted == null)
+                            .Select(o => new OrderSendedDto()
+                            {
+                                OrderId = o.Id,
+                                SerialNumber = o.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
+                                SaleAmount = o.FinalAmount,
+                                ClientName = _stringManipulator.ReturnFullName(o.Client.FirstName, o.Client.LastName),
+                                ClientEmail = o.Client.Email,
+                                ClientAdress = new ClientAddressDto 
+                                {
+                                    Street = o.Client.DelivaryAddress.Street,
+                                    StrNumber = o.Client.DelivaryAddress.StrNumber,
+                                    Apartment = o.Client.DelivaryAddress.Apartment,
+                                    Block = o.Client.DelivaryAddress.Block,
+                                    Country = o.Client.DelivaryAddress.Country,
+                                    District = o.Client.DelivaryAddress.District,
+                                    Floor = o.Client.DelivaryAddress.Floor,
+                                    PostCode = o.Client.DelivaryAddress.PostCode
+                                }
+                            })
+                            .ToListAsync();
+        }
+
+        public Task<bool> SendOrderAsync(int orderId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

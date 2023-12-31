@@ -88,9 +88,9 @@ function FinishedOrderElement({ order, i, onFinishedOrderButtonClick  }) {
             </div>
           </div>
         ))}
-                {user.role !== "user" && (
-          <button
-            className={styles.btn}
+          {user.role !== "user" && (
+          <button 
+          className={styles.btn}
             onClick={() => onFinishedOrderButtonClick(order)}//Трябва да прати orderId на ендпойнта за изпращане!?
           >
             Send order
