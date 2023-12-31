@@ -435,6 +435,7 @@
         public async Task<ICollection<EmployeeInfoDto>> GetAllEmployees()
         {
             return await _db.Employees
+                            .AsNoTracking()
                             .Select(e => new EmployeeInfoDto()
                             {
                                 DateCreated = e.DateCreated.ToString(DefaultDateFormat),

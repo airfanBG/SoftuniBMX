@@ -104,11 +104,7 @@ function QControlOrders() {
 
   function reBuild() {
     dispatch({ type: "isLoading", payload: true });
-    // dispatch({ type: "orders/hasOrders", payload: [] });
-    // dispatch({ type: "hasChunk", payload: [] });
     dispatch({ type: "rerender" });
-
-    // dispatch({ type: "isLoading", payload: false });
   }
   return (
     <>

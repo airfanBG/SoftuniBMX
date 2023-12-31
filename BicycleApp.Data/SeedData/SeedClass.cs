@@ -834,7 +834,7 @@
                 DateDeleted = null,
                 IsDeleted = false,
                 DateFinish = null,
-                StatusId = 1
+                StatusId = 6
             };
 
             return new List<Order> { order, order2, order3, order4, order5, order6, order7, order8, order9, order10 };
@@ -1983,7 +1983,7 @@
                 new Status()
                 {
                     Id = 7,
-                    Name = "Send order",
+                    Name = "Sended order",
                     DateCreated = dateCreated,
                     DateUpdated = null,
                     DateDeleted = null,
