@@ -41,11 +41,11 @@ function reducer(state, action) {
     case "reset/All":
       return {
         ...state,
-        frameCheck: "",
+        frameCheck: false,
         textFrame: "",
-        wheelCheck: "",
+        wheelCheck: false,
         textWheel: "",
-        accessoryCheck: "",
+        accessoryCheck: false,
         textAccessory: "",
       };
 
@@ -89,8 +89,6 @@ function QControlOrderItem({ product, onReBuild }) {
     }
   }, [accessoryCheck, frameCheck, wheelCheck]);
 
-  const finalResult = { ...product };
-
   function checkboxHandler(e) {
     dispatch({ type: e.target.name, payload: e.target.checked });
   }
@@ -106,9 +104,9 @@ function QControlOrderItem({ product, onReBuild }) {
   }
 
   async function onControl() {
-    let result = {};
+    const finalResult = { ...product };
+    // let result = {};
     const valuesCheck = { frameCheck, wheelCheck, accessoryCheck };
-
     finalResult.orderStates[0].isProduced = frameCheck;
     finalResult.orderStates[0].description = textFrame;
     finalResult.orderStates[1].isProduced = wheelCheck;
@@ -122,18 +120,29 @@ function QControlOrderItem({ product, onReBuild }) {
       (!wheelCheck && !textWheel) ||
       (!accessoryCheck && !textAccessory)
     )
-      return;
+      return window.alert("You must add reason to scrap it!");
 
+    // IF PASS
     if (Object.values(valuesCheck).every((x) => x === true)) {
-      result = await post(environment.pass_qControl + product.orderId);
+      // result = await post(environment.pass_qControl + Number(product.orderId));
+      console.log("in pass");
+      await post(environment.pass_qControl + product.orderId);
       console.log("pass");
-    } else if (Object.values(valuesCheck).every((x) => x === false)) {
-      const result = await onDeleteHandler(product.orderId);
+    }
+    // IF NOT PASS
+    else if (Object.values(valuesCheck).every((x) => x === false)) {
+      // result = await onDeleteHandler(product.orderId);
+      await onDeleteHandler(product.orderId);
       console.log("scrap");
-    } else {
-      result = await post(environment.return_qControl, finalResult);
+    }
+    // IF PARTIALLY PASS
+    else {
+      // console.log(finalResult);
+      // result = await post(environment.return_qControl, finalResult);
+      await post(environment.return_qControl, finalResult);
       console.log("rebuild");
     }
+
     onReBuild();
     dispatch({ type: "reset/All" });
     Unchecked();
