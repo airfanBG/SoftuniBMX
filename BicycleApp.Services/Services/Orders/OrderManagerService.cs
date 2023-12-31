@@ -14,6 +14,7 @@
     using System.Threading.Tasks;
 
     using BicycleApp.Services.Models.IdentityModels;
+    using BicycleApp.Services.HelperClasses;
 
     public class OrderManagerService : IOrderManagerService
     {
@@ -210,9 +211,12 @@
                                 DateCreated = o.DateCreated.ToString(DefaultDateFormat),
                                 DateFinished = o.DateFinish.Value.ToString(DefaultDateFormat),
                                 SaleAmount = o.FinalAmount,
-                                ClientName = o.Client.LastName,
+                                ClientName = _stringManipulator.ReturnFullName(o.Client.FirstName, o.Client.LastName),
                                 ClientEmail = o.Client.Email,
                                 ClientPhone = o.Client.PhoneNumber,
+                                PaidAmount = o.PaidAmount,
+                                UnpaidAmount = o.UnpaidAmount,
+                                FinalAmount = o.FinalAmount,
                                 OrderStates = o.OrdersPartsEmployees
                                                .Select(ope => new OrderStateDto()
                                                {

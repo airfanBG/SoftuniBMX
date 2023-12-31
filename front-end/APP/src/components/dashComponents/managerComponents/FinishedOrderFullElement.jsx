@@ -1,8 +1,13 @@
 import { timeResolver } from "../../../util/resolvers.js";
+import { useState, useContext } from "react";
 import styles from "./FinishedOrderFullElement.module.css";
 
-function FinishedOrderElement({ order }) {
-  const { clientName, clientEmail, totalProductionTime, orderStates } = order;
+import { UserContext } from "../../../context/GlobalUserProvider.jsx";
+
+function FinishedOrderElement({ order, i, onFinishedOrderButtonClick  }) {
+  const { user } = useContext(UserContext);
+
+  const { clientName, paidAmount, unpaidAmount, finalAmount, orderStates } = order;
 
   return (
     <div className={styles.container}>
@@ -13,19 +18,32 @@ function FinishedOrderElement({ order }) {
       </div>
 
       <header className={styles.header}>
-        <p className={styles.heading}>
-          <span className={styles.label}>Client name:</span>
-          {clientName}
-        </p>
-        <p className={styles.orderId}>
-          <span className={styles.label}>Client email:</span>
-          {clientEmail}
-        </p>
         <p className={styles.date}>
-          <span className={styles.label}>Production time:</span>
-          {totalProductionTime} minutes
+          <span className={styles.label}>Paid amount:</span>
+          {paidAmount}.00 BGN
         </p>
+        <div className={styles.qtyBlock}>
+                <p
+                  className={`${styles.qty} ${
+                    unpaidAmount > 0 ? styles.notEnough : null
+                  }`}
+                >
+                  <span
+                    className={`${unpaidAmount > 0 ? styles.notEnough : null}`}
+                  >
+                    Unpaid amount:
+                  </span>
+                  {unpaidAmount}.00 BGN
+                </p>
+          </div>
+
+        <p className={styles.date}>
+          <span className={styles.label}>Total amount:</span>
+          {finalAmount}.00 BGN
+        </p>
+        
       </header>
+
 
       <div className={styles.orderStatesList}>
         {orderStates.map((s, i) => (
@@ -42,11 +60,23 @@ function FinishedOrderElement({ order }) {
                   <span className={styles.fieldLabel}>Part model:</span>
                   {s.partModel}
                 </p>
-              </div>
-              <div className={styles.metaData}>
                 <p className={styles.field}>
                   <span className={styles.fieldLabel}>Part quantity:</span>
                   {s.partQuantity}
+                </p>
+              </div>
+              <div className={styles.metaData}>
+                <p className={styles.field}>
+                  <span className={styles.fieldLabel}>Description:</span>
+                  {s.description}
+                </p>
+                <p className={styles.field}>
+                  <span className={styles.fieldLabel}>Employee Name:</span>
+                  {s.nameOfEmplоyeeProducedThePart}
+                </p>
+                <p className={styles.field}>
+                  <span className={styles.fieldLabel}>Prodiced time:</span>
+                  {s.elementProduceTimeInMinutes}
                 </p>
               </div>
               <div className={styles.metaData}>
@@ -58,6 +88,14 @@ function FinishedOrderElement({ order }) {
             </div>
           </div>
         ))}
+                {user.role !== "user" && (
+          <button
+            className={styles.btn}
+            onClick={() => onFinishedOrderButtonClick(order)}//Трябва да прати orderId на ендпойнта за изпращане!?
+          >
+            Send order
+          </button>
+        )}
       </div>
     </div>
   );
