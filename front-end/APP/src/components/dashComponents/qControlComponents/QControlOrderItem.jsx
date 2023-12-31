@@ -125,7 +125,6 @@ function QControlOrderItem({ product, onReBuild }) {
     // IF PASS
     if (Object.values(valuesCheck).every((x) => x === true)) {
       // result = await post(environment.pass_qControl + Number(product.orderId));
-      console.log("in pass");
       await post(environment.pass_qControl + product.orderId);
       console.log("pass");
     }
