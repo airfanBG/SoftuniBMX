@@ -21,5 +21,7 @@
         Task<ICollection<EmployeeInfoDto>> GetAllEmployees();
         Task<int> GetTotalProductionTime(int orderId);
         Task<OrderQueryDto> AllDeletedOrdersAsync(int currentPage);
+        Task<ICollection<OrderSendedDto>> AllSendedOrdersAsync();
+        Task<bool> SendOrderAsync(int orderId);
     }
 }

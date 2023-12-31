@@ -21,28 +21,30 @@ function ManagerFinished() {
   const [orderList, setOrderList] = useState([]);
 
   // State to hold user input
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [startDate, setStartDate] = useState('2023-01-01');
+  const [endDate, setEndDate] = useState(new Date().toLocaleString());
 
-  const abortController = new AbortController();
-
-  async function getFinishedOrders(e) {
-    e.preventDefault();
+  useEffect(function() {
     setLoading(true);
-    const queryString = `?startDate=${startDate}&endDate=${endDate}`;
-    const result = await get(environment.finished_orders + queryString);
-    if (!result) {
-      setLoading(false);
-      return setError({
-        message: "Something went wrong. Service can not get data!",
-      });
-    }
-    setOrderList(result);
-    setLoading(false);
+    const abortController = new AbortController();
 
-    if (orderList.length === 0)
-      return <h2>There is no orders in this category</h2>;
-  }
+    async function getFinishedOrders() {
+      const queryString = `?startDate=${startDate}&endDate=${endDate}`;
+      const result = await get(environment.finished_orders + queryString);
+      if (!result) {
+        setLoading(false);
+        return setError({
+          message: "Something went wrong. Service can not get data!",
+        });
+      }
+      const sortedResult = result.sort((a, b) => a.dateCreated - b.dateCreated);
+      setOrderList(sortedResult);
+      setLoading(false);
+    }
+    getFinishedOrders();
+
+    return () => abortController.abort();
+  }, [startDate, endDate]);
 
   function onOrderButtonClick(o) {
     setCurrentOrder(o);
@@ -53,6 +55,9 @@ function ManagerFinished() {
     setCurrentOrder({});
     setBackground(false);
   }
+
+  if (orderList.length === 0)
+  return <h2>There is no orders in this category</h2>;
 
   return (
     <>
@@ -82,7 +87,7 @@ function ManagerFinished() {
                 onChange={(e) => setEndDate(e.target.value)}
               />
             </label>
-            <button className={styles.btnAdd} onClick={getFinishedOrders}>
+            <button className={styles.btnAdd} onClick={useEffect}>
               Get Orders
             </button>
           </form>

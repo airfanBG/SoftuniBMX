@@ -1,7 +1,8 @@
 .container {
   font-size: 1.6rem;
   min-width: 60rem;
-  padding-top: 2rem;
+  min-height: 50rem;
+  padding-top: 0.8rem;
 }
 
 .logo {
@@ -9,7 +10,7 @@
   justify-content: flex-start;
   align-items: center;
   position: absolute;
-  top: 1.6rem;
+  top: 1.8rem;
 }
 .logoFirstLine {
   font-size: 2rem;
@@ -28,7 +29,7 @@
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   color: var(--color-main-dark);
   margin-bottom: 2.4rem;
   border-bottom: 0.2rem solid var(--color-line);
@@ -39,13 +40,6 @@
 }
 .date {
   font-size: 2rem;
-}
-
-.label {
-  font-size: 1.6rem;
-  font-weight: 400;
-  color: var(--color-hd);
-  margin-right: 0.5rem;
 }
 
 .sector {
@@ -64,7 +58,7 @@
 
 .metaData {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns:1fr 1fr 1fr;
   column-gap: 1rem;
 }
 .field {
@@ -87,4 +81,44 @@
 
 .emptyField {
   min-height: 3.2rem;
+}
+.btn {
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--color-line);
+  position:absolute;
+  right: 2rem;
+  bottom: 2rem;
+}
+
+.notEnough,
+.qty span.notEnough {
+  /* font-size: 1.6rem; */
+  font-weight: 500;
+  color: red;
+}
+.qtyBlock {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+}
+.label {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--color-hd);
+  margin-right: 0.5rem;
+}
+
+.qty {
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+}
+.qty span {
+  display: block;
+  font-size: 1.2rem;
+  color: var(--color-hd-second);
+  margin-right: 1rem;
+  width: 55%;
+  text-transform: uppercase;
 }
