@@ -21,30 +21,37 @@ function ManagerFinished() {
   const [orderList, setOrderList] = useState([]);
 
   // State to hold user input
-  const [startDate, setStartDate] = useState('2023-01-01');
-  const [endDate, setEndDate] = useState(new Date().toLocaleString());
+  const [startDate, setStartDate] = useState("2023-04-11");
+  const [endDate, setEndDate] = useState(
+    new Date().toLocaleDateString("en-CA")
+  );
 
-  useEffect(function() {
-    setLoading(true);
-    const abortController = new AbortController();
+  useEffect(
+    function () {
+      setLoading(true);
+      const abortController = new AbortController();
 
-    async function getFinishedOrders() {
-      const queryString = `?startDate=${startDate}&endDate=${endDate}`;
-      const result = await get(environment.finished_orders + queryString);
-      if (!result) {
+      async function getFinishedOrders() {
+        const queryString = `?startDate=${startDate}&endDate=${endDate}`;
+        const result = await get(environment.finished_orders + queryString);
+        if (!result) {
+          setLoading(false);
+          return setError({
+            message: "Something went wrong. Service can not get data!",
+          });
+        }
+        const sortedResult = result.sort(
+          (a, b) => a.dateCreated - b.dateCreated
+        );
+        setOrderList(sortedResult);
         setLoading(false);
-        return setError({
-          message: "Something went wrong. Service can not get data!",
-        });
       }
-      const sortedResult = result.sort((a, b) => a.dateCreated - b.dateCreated);
-      setOrderList(sortedResult);
-      setLoading(false);
-    }
-    getFinishedOrders();
+      getFinishedOrders();
 
-    return () => abortController.abort();
-  }, [startDate, endDate]);
+      return () => abortController.abort();
+    },
+    [startDate, endDate]
+  );
 
   function onOrderButtonClick(o) {
     setCurrentOrder(o);
@@ -56,65 +63,87 @@ function ManagerFinished() {
     setBackground(false);
   }
 
-  if (orderList.length === 0)
-  return <h2>There is no orders in this category</h2>;
+  function onFinishedOrderButtonClick() {
+    setCurrentOrder({});
+    setBackground(false);
+  }
 
   return (
     <>
       <section className={styles.board}>
         <BoardHeader />
         {loading && <LoaderWheel />}
+        {/* {orderList && orderList.length > 0 && ( */}
+        <>
+          <h2 className={styles.boardHeading}>Select time period:</h2>
 
-        <h2 className={styles.boardHeading}>Select time period:</h2>
-
-        <section className={styles.section}>
-          <form className={styles.form}>
-            <label className={styles.label}>
-              Start Date:
-              <input
-                className={styles.input}
-                type="date"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
-              />
-            </label>
-            <label className={styles.label}>
-              End Date:
-              <input
-                className={styles.input}
-                type="date"
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-              />
-            </label>
-            <button className={styles.btnAdd} onClick={useEffect}>
-              Get Orders
-            </button>
-          </form>
-        </section>
+          <section className={styles.section}>
+            <form className={styles.form}>
+              <label className={styles.label}>
+                Start Date:
+                <input
+                  className={styles.input}
+                  type="date"
+                  value={startDate}
+                  onChange={(e) =>
+                    setStartDate(
+                      new Date(e.target.value).toLocaleDateString("en-CA")
+                    )
+                  }
+                />
+              </label>
+              <label className={styles.label}>
+                End Date:
+                <input
+                  className={styles.input}
+                  type="date"
+                  value={endDate}
+                  onChange={(e) =>
+                    setEndDate(
+                      new Date(e.target.value).toLocaleDateString("en-CA")
+                    )
+                  }
+                />
+              </label>
+              <button className={styles.btnAdd} onClick={useEffect}>
+                Get Orders
+              </button>
+            </form>
+          </section>
+        </>
+        {/* )} */}
+        {orderList.length === 0 && (
+          <h2>There is no orders in selected time interval</h2>
+        )}
       </section>
-
-      {background && (
-        <Popup onClose={close}>
-          <FinishedOrderFullElement order={currentOrder} />
-        </Popup>
+      {orderList && orderList.length > 0 && (
+        <>
+          {background && (
+            <Popup onClose={close}>
+              <FinishedOrderFullElement
+                order={currentOrder}
+                onFinishedOrderButtonClick={onFinishedOrderButtonClick}
+              />
+            </Popup>
+          )}
+          <h2 className={styles.dashHeading}>
+            Orders in sequence by time of creation
+          </h2>
+          <section className={styles.board}>
+            <div className={styles.orders}>
+              {loading && <LoaderWheel />}
+              {orderList.map((order, i) => (
+                <FinishedOrder
+                  key={order.orderId}
+                  order={order}
+                  i={i + 1}
+                  onOrderButtonClick={onOrderButtonClick}
+                />
+              ))}
+            </div>
+          </section>
+        </>
       )}
-      <h2 className={styles.dashHeading}>
-        Orders in sequence by time of creation
-      </h2>
-      <section className={styles.board}>
-        <div className={styles.orders}>
-          {loading && <LoaderWheel />}
-          {orderList.map((order, i) => (
-            <FinishedOrder
-              key={order.orderId}
-              order={order}
-              i={i + 1}
-              onOrderButtonClick={onOrderButtonClick}
-            />
-          ))}
-        </div>
-      </section>
     </>
   );
 }

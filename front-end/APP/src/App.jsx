@@ -35,6 +35,7 @@ import Warehouse from "./components/storage/Warehouse.jsx";
 import Contacts from "./pages/Contacts/Contacts.jsx";
 import ComponentUserOrdersReady from "./components/dashComponents/userComponents/ComponentUserOrdersReady.jsx";
 import ComponentUserOrdersArchive from "./components/dashComponents/userComponents/ComponentUserOrdersArchive.jsx";
+import ManagerDispatched from "./components/dashComponents/managerComponents/ManagerDispatched.jsx";
 // LAZY LOADING
 const CreateBike = lazy(() =>
   import("./components/createComponents/CreateBike.jsx")
@@ -106,6 +107,10 @@ function App() {
                   <Route
                     path={"manager-rejected"}
                     element={<ManagerRejected />}
+                  />
+                  <Route
+                    path={"manager-dispatched"}
+                    element={<ManagerDispatched />}
                   />
                   <Route
                     path={"manager-finished"}
