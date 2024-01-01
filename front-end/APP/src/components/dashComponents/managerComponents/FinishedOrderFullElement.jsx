@@ -4,10 +4,11 @@ import styles from "./FinishedOrderFullElement.module.css";
 
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 
-function FinishedOrderElement({ order, i, onFinishedOrderButtonClick  }) {
+function FinishedOrderElement({ order, i, onFinishedOrderButtonClick }) {
   const { user } = useContext(UserContext);
 
-  const { clientName, paidAmount, unpaidAmount, finalAmount, orderStates } = order;
+  const { clientName, paidAmount, unpaidAmount, finalAmount, orderStates } =
+    order;
 
   return (
     <div className={styles.container}>
@@ -23,27 +24,23 @@ function FinishedOrderElement({ order, i, onFinishedOrderButtonClick  }) {
           {paidAmount}.00 BGN
         </p>
         <div className={styles.qtyBlock}>
-                <p
-                  className={`${styles.qty} ${
-                    unpaidAmount > 0 ? styles.notEnough : null
-                  }`}
-                >
-                  <span
-                    className={`${unpaidAmount > 0 ? styles.notEnough : null}`}
-                  >
-                    Unpaid amount:
-                  </span>
-                  {unpaidAmount}.00 BGN
-                </p>
-          </div>
+          <p
+            className={`${styles.qty} ${
+              unpaidAmount > 0 ? styles.notEnough : null
+            }`}
+          >
+            <span className={`${unpaidAmount > 0 ? styles.notEnough : null}`}>
+              Unpaid amount:
+            </span>
+            {unpaidAmount}.00 BGN
+          </p>
+        </div>
 
         <p className={styles.date}>
           <span className={styles.label}>Total amount:</span>
           {finalAmount}.00 BGN
         </p>
-        
       </header>
-
 
       <div className={styles.orderStatesList}>
         {orderStates.map((s, i) => (
@@ -79,19 +76,19 @@ function FinishedOrderElement({ order, i, onFinishedOrderButtonClick  }) {
                   {s.elementProduceTimeInMinutes}
                 </p>
               </div>
-              <div className={styles.metaData}>
+              {/* <div className={styles.metaData}>
                 <p className={styles.field}>
                   <span className={styles.fieldLabel}>Description:</span>
                   {s.description}
                 </p>
-              </div>
+              </div> */}
             </div>
           </div>
         ))}
-          {user.role !== "user" && (
-          <button 
-          className={styles.btn}
-            onClick={() => onFinishedOrderButtonClick(order)}//Трябва да прати orderId на ендпойнта за изпращане!?
+        {user.role !== "user" && (
+          <button
+            className={styles.btn}
+            onClick={() => onFinishedOrderButtonClick(order)} //Трябва да прати orderId на ендпойнта за изпращане!?
           >
             Send order
           </button>

@@ -19,6 +19,7 @@ function ManagerFinished() {
   const [error, setError] = useState({});
   const [loading, setLoading] = useState(false);
   const [orderList, setOrderList] = useState([]);
+  const [rerender, setRerender] = useState(false);
 
   // State to hold user input
   const [startDate, setStartDate] = useState("2023-04-11");
@@ -50,7 +51,7 @@ function ManagerFinished() {
 
       return () => abortController.abort();
     },
-    [startDate, endDate]
+    [startDate, endDate, rerender]
   );
 
   function onOrderButtonClick(o) {
@@ -63,9 +64,11 @@ function ManagerFinished() {
     setBackground(false);
   }
 
-  function onFinishedOrderButtonClick() {
+  function onFinishedOrderButtonClick(order) {
     setCurrentOrder({});
     setBackground(false);
+    setRerender(!rerender);
+    console.log(order);
   }
 
   return (
@@ -105,9 +108,9 @@ function ManagerFinished() {
                   }
                 />
               </label>
-              <button className={styles.btnAdd} onClick={useEffect}>
+              {/* <button className={styles.btnAdd} onClick={useEffect}>
                 Get Orders
-              </button>
+              </button> */}
             </form>
           </section>
         </>
