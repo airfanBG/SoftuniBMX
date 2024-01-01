@@ -926,7 +926,7 @@ namespace BicycleApp.Data.Migrations
                             IsDeleted = false,
                             PaidAmount = 0m,
                             SaleAmount = 625.00m,
-                            StatusId = 1,
+                            StatusId = 2,
                             UnpaidAmount = 750.00m,
                             VAT = 125.00m
                         },
@@ -3202,10 +3202,12 @@ namespace BicycleApp.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -3284,10 +3286,12 @@ namespace BicycleApp.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -3329,7 +3333,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "acb6f12a-ba9b-4c9c-bbd1-d3bb82c6cbd9",
+                            ConcurrencyStamp = "641a158d-3579-4271-9219-c34e81299d54",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "client@test.bg",
                             EmailConfirmed = true,
@@ -3338,7 +3342,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Ivanov",
                             LockoutEnabled = false,
                             NormalizedEmail = "CLIENT@TEST.BG",
-                            PasswordHash = "AQAAAAIAAYagAAAAEL1Z4RAz0F/dRcUhGoVpAMoV14maIiptccAZ1Vu4KgVEywYKCoEi/BnCkCKTOeR6FQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKvQHFrOaddoSIkDJf0i2/x9oq923dPwcQ1M0aA9H1r91CYcRZZNAAu4TKBvV9e2Vg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "CLIENT@TEST.BG",
@@ -3353,7 +3357,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "17ce735d-6713-4d0a-8fcb-e4a71ee86f6f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7a165924-9d57-4451-8d8b-62995430f250",
+                            ConcurrencyStamp = "d0c01788-7748-4b93-8ebc-05fe982c66f0",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "joro@test.bg",
                             EmailConfirmed = true,
@@ -3362,7 +3366,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Georgiev",
                             LockoutEnabled = false,
                             NormalizedEmail = "JORO@TEST.BG",
-                            PasswordHash = "AQAAAAIAAYagAAAAED6816aI0w0Ih7BK7CxM8ZqpCWQ8dhjIAYp38P/xIwn4uaii6FgZrFgjx2+x4egXww==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHWsleb9BQEfcxxdVPo3SIQn4/1gLMuk/cjiUkmgOpyNw5K6pQNIaUT5HEtp26HmxQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "JORO@TEST.BG",
@@ -3377,7 +3381,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "99d3ca6f-2067-4316-a5d7-934c93789521",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0d11e927-f15e-49a3-a03e-677e6f1f0ae5",
+                            ConcurrencyStamp = "6e23cf4e-54fd-4ddf-a003-78040f4ada49",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "powerranger@test.bg",
                             EmailConfirmed = true,
@@ -3386,7 +3390,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Dimitrov",
                             LockoutEnabled = false,
                             NormalizedEmail = "POWERRANGER@TEST.BG",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGXMgiK+75n60aa6Jy2JsjcFuwQLd9fZdZlfvyxKYc+9Jbjv/9+aIgXUR9RUdy0g9Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPBBOKlAK5hrgucSBkUKDksK8sklEMxLvveLbUIX4K7jfQt8j9IXC6ymq31sS9Qm8g==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "POWERRANGER@TEST.BG",
@@ -3433,7 +3437,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "406e8cf1-acaa-44a8-afec-585ff64bed34",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cfd49e64-737e-4c52-84b6-106d8e0c84ec",
+                            ConcurrencyStamp = "2cbab459-3032-481d-a6f5-a4e476248b5e",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "manager@b-free.com",
                             EmailConfirmed = true,
@@ -3442,7 +3446,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Kalinov",
                             LockoutEnabled = false,
                             NormalizedEmail = "MANAGER@B-FREE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJ9RH1oaQ5wGsZYRKPcX41NIMiF0n2d57j9wu1XVtQ/eaCC6JWOa8pkDXDpvhOPtUg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENidGSIdLSZ1874PzzVPlcU76i7sFHldl8qs3vzhtS6KkJ9pMv5+mCsacOsdIJDlIg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "MANAGER@B-FREE.COM",
@@ -3457,7 +3461,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "21003785-a275-4139-ae20-af6a6cf8fea8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7887f79b-3c85-470a-90a4-fe6a73e9d22b",
+                            ConcurrencyStamp = "9bd9cfce-93f4-4982-a4fc-c2cfc41ba0dc",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "marinov@b-free.com",
                             EmailConfirmed = true,
@@ -3466,7 +3470,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Marinov",
                             LockoutEnabled = false,
                             NormalizedEmail = "MARINOV@B-FREE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOCpmAJCqaClIt4eJy/ERGZhUVmKtYc6AeJvlLv2/0YekbDGiiWVq6LIMziHcq3+6w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAfJJGMusjxq44NsFdV+AeEqcXT1WZfcGDqF4bg1W+OabiNva9CTnNnrxOF1ZPLXXQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "MARINOV@B-FREE.COM",
@@ -3481,7 +3485,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "17063948-8fdc-417e-8fb7-2ae6bf572f94",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f41e961a-2226-41d2-8f6e-f6288fc02d27",
+                            ConcurrencyStamp = "03901d67-e598-4a9c-8199-8ff320b3fcfe",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "todorov@b-free.com",
                             EmailConfirmed = true,
@@ -3490,7 +3494,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Todorov",
                             LockoutEnabled = false,
                             NormalizedEmail = "TODOROV@B-FREE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMQOP8emzw2bto3evZc9MJUppesnqX8vQwxqGgP6fGFmFi5k4TikKVGzaIIWWo6vKQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEsxaqlGMju79wMIhVw69/EWgxtDwXC6w8TYORBUOj5TPwDNkJQJuB+GzIo/zN2O6Q==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "TODOROV@B-FREE.COM",
@@ -3505,7 +3509,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "68faf50b-0610-478c-a481-757cbc95da6e",
+                            ConcurrencyStamp = "e7505017-31f2-4b39-954e-866e44bc67eb",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "ivanov@b-free.com",
                             EmailConfirmed = true,
@@ -3514,7 +3518,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Ivanov",
                             LockoutEnabled = false,
                             NormalizedEmail = "IVANOV@B-FREE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHxUewx/eke4+DvgUkSGqdwDveu1H+myfCOrmKtt5ePtT78AnU+YOhL8tkIPUgRRQg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHSjYEzpJImDAlc3l4ZR5aRukFpKnMv/Atu7qA2O28Z1/WoZuZY+DqVA1be8Yhv9Jw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "IVANOV@B-FREE.COM",
@@ -3529,7 +3533,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "29f06920-d2ad-43d8-b362-e2b94d7a7502",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0a310ffb-80fb-49aa-9925-2719c4a21b5c",
+                            ConcurrencyStamp = "ea01a7bb-e73f-4752-be72-b83206a812e6",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "atanasov@b-free.com",
                             EmailConfirmed = true,
@@ -3538,7 +3542,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Atanasov",
                             LockoutEnabled = false,
                             NormalizedEmail = "ATANASOV@B-FREE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJ6QyeJacqMLrmj5TMBnBZmkqnxbSwjVWkR4f5TVI/YD6vwuK8DiSayt2gFb+fJpeg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHDLnUmBxzvcK97oFVnb/PzKMUeo8BxlvP//KtD0I8njProaAu0WyXVDTemtHAvzow==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "ATANASOV@B-FREE.COM",

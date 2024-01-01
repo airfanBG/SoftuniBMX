@@ -673,7 +673,7 @@
                 DateDeleted = null,
                 IsDeleted = false,
                 DateFinish = null,
-                StatusId = 1
+                StatusId = 2
             };
             Order order2 = new Order()
             {
