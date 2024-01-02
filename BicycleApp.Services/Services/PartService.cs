@@ -4,7 +4,9 @@
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.Models;
+
     using Microsoft.EntityFrameworkCore;
+
     using System.Threading.Tasks;
 
     public class PartService : IPartService
@@ -67,7 +69,7 @@
             part.SalePrice = partEditDto.SalePrice;
             part.VATCategoryId = partEditDto.VATCategoryId;
             part.DateUpdated = DateTime.UtcNow;
-            
+
             await dbContext.SaveChangesAsync();
             return true;
         }
@@ -99,6 +101,40 @@
                 PartCategories = partCategories,
                 VatCategories = vatCategories
             };
+        }
+
+        /// <summary>
+        /// Returns full info for a part
+        /// </summary>
+        /// <param name="partId">Id of the part</param>
+        /// <returns>Dto or null</returns>
+        public async Task<PartFullInfoDto?> GetPartById(int partId)
+        {
+            PartFullInfoDto? partDto = await dbContext.Parts
+                 .Where(p => p.Id == partId)
+                 .Select(p => new PartFullInfoDto()
+                 {
+                     Name = p.Name,
+                     Description = p.Description,
+                     Intend = p.Intend,
+                     OEMNumber = p.OEMNumber,
+                     SalePrice = p.SalePrice,
+                     Type = p.Type,
+                     Category = p.Category.Name
+                 })
+                 .FirstOrDefaultAsync();
+
+            if (partDto == null)
+            {
+                return null;
+            }
+
+            partDto.Images = await dbContext.ImagesParts
+                .Where(p => p.Id == partId)
+                .Select(i => i.ImageUrl)
+                .ToListAsync();
+
+            return partDto;
         }
     }
 }

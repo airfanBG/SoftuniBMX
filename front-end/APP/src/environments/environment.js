@@ -58,4 +58,7 @@ export const environment = {
 
   //STORAGE
   add_supplier: "/api/supplys_manager/create_suplier",
+
+  //PART
+  find_part: "/api/part/find?partId=", // + id
 };

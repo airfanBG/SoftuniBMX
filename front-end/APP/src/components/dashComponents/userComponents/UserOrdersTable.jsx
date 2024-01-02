@@ -7,9 +7,7 @@ function UserOrdersTable({ orders }) {
   const navigateOrder = useNavigate("/");
 
   function viewPart(partId) {
-    //for now and to be fixed
-    console.log(partId);
-    navigatePart("/");
+    navigatePart(`/part/${partId}`);
   }
 
   function viewOrder(orderId) {

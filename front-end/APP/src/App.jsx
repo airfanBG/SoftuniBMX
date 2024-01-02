@@ -36,7 +36,7 @@ import Contacts from "./pages/Contacts/Contacts.jsx";
 import ComponentUserOrdersReady from "./components/dashComponents/userComponents/ComponentUserOrdersReady.jsx";
 import ComponentUserOrdersArchive from "./components/dashComponents/userComponents/ComponentUserOrdersArchive.jsx";
 import ComponentUserOrder from "./components/dashComponents/userComponents/ComponentUserOrder.jsx";
-
+import PartInfo from "./components/PartInfo.jsx"
 // LAZY LOADING
 const CreateBike = lazy(() =>
   import("./components/createComponents/CreateBike.jsx")
@@ -63,6 +63,7 @@ function App() {
                 <Route path="contacts" element={<Contacts />} />
                 <Route path="privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="terms" element={<Terms />} />
+                <Route path="part/:partId" element={<PartInfo />} />
                 <Route
                   path="profile"
                   element={
