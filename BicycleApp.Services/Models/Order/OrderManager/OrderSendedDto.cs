@@ -13,6 +13,7 @@
         public string ClientName { get; set; } = null!;
         public string ClientEmail { get; set; } = null!;
         public string ClientPhone { get; set; } = null!;
+        public string SendDate { get; set; } = null!;
         public ClientAddressDto ClientAdress { get; set; } = null!;
         public string ImageUrl { get; set; } = null!;
     }
