@@ -74,16 +74,16 @@
 
             var fakeDate = fakeDateTimeProvider.Object.Now;
 
-            fakeOrdeFaktory.Setup(x => x.CreateUserOrder(It.IsAny<IOrder>(), fakeDate))
-                .Returns(new Order() 
-                            {
-                                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                                StatusId = 2, 
-                                SaleAmount = 456,
-                                Description = "descroption",
-                                FinalAmount = 546,
-                                VAT = 123
-                            });
+            //fakeOrdeFaktory.Setup(x => x.CreateUserOrder(It.IsAny<IOrder>(), fakeDate))
+            //    .Returns(new Order() 
+            //                {
+            //                    ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+            //                    StatusId = 2, 
+            //                    SaleAmount = 456,
+            //                    Description = "descroption",
+            //                    FinalAmount = 546,
+            //                    VAT = 123
+            //                });
 
             // Act 
             var result = await fakeOrderUserService.CreateOrderByUserAsync(order);

@@ -7,7 +7,7 @@
 
     public class OrderFactory : IOrderFactory
     {  
-        public Order CreateUserOrder(IOrder order, DateTime currentTime)
+        public async Task<Order> CreateUserOrder(IOrder order, DateTime currentTime)
         {
               return new Order()
                 {

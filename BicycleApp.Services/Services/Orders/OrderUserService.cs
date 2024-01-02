@@ -86,7 +86,7 @@
                     return null;
                 }
 
-                var newOrderObject = _orderFactory.CreateUserOrder(newOrder, _dateTimeProvider.Now);
+                var newOrderObject = await _orderFactory.CreateUserOrder(newOrder, _dateTimeProvider.Now);
 
                 await _db.Orders.AddAsync(newOrderObject);
                 await _db.SaveChangesAsync();
