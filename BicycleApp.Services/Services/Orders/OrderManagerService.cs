@@ -203,6 +203,7 @@
                             .Where(o => o.DateCreated >= datesPeriod.StartDate
                                      && o.DateFinish <= datesPeriod.EndDate
                                      && o.DateFinish != null
+                                     && o.DateSended == null
                                      && o.DateDeleted == null)
                             .Select(o => new OrderProgretionDto()
                             {
@@ -505,12 +506,13 @@
         /// <returns>Task<ICollection<OrderSendedDto>></returns>
         public async Task<ICollection<OrderSendedDto>> AllSendedOrdersAsync()
         {
-            return await _db.Orders
+            return await _db.Orders//Трия миграцията и пускам отново InitisalMigration
                             .Include(o => o.OrdersPartsEmployees)
                             .ThenInclude(ope => ope.OrdersPartsEmployeesInfos)
                             .Include(o => o.Client)
                             .AsNoTracking()
                             .Where(o => o.DateFinish != null
+                                     && o.DateSended != null
                                      && o.DateDeleted == null)
                             .Select(o => new OrderSendedDto()
                             {
@@ -519,6 +521,7 @@
                                 SaleAmount = o.FinalAmount,
                                 ClientName = _stringManipulator.ReturnFullName(o.Client.FirstName, o.Client.LastName),
                                 ClientEmail = o.Client.Email,
+                                SendDate = o.DateSended.ToString(),
                                 ClientAdress = new ClientAddressDto 
                                 {
                                     Street = o.Client.DelivaryAddress.Street,
@@ -534,9 +537,26 @@
                             .ToListAsync();
         }
 
-        public Task<bool> SendOrderAsync(int orderId)
+        public async Task<bool> SendOrderAsync(int orderId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var orderForSend = await _db.Orders.Where(o => o.Id == orderId
+                                                                        && o.DateFinish != null
+                                                                        && o.DateDeleted == null)
+                                                                        .FirstAsync();
+
+                orderForSend.DateSended = _dateTimeProvider.Now;
+                orderForSend.StatusId++;
+
+                await _db.SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception)
+            {
+            }
+            return false;
         }
     }
 }
