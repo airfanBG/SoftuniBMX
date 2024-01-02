@@ -87,6 +87,11 @@ function App() {
                     path={"user-archive"}
                     element={<ComponentUserOrdersArchive />}
                   />
+
+                  <Route
+                    path={"user-archive"}
+                    element={<ComponentUserOrdersArchive />}
+                  />
                   <Route
                     path="user-order/:orderId"
                     element={<ComponentUserOrder />}

@@ -4,9 +4,7 @@
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.Models;
-
     using Microsoft.EntityFrameworkCore;
-
     using System.Threading.Tasks;
 
     public class PartService : IPartService
