@@ -118,14 +118,22 @@ function PopupInfo({ person, onClose, isSalaries = false, times }) {
                   {minutesToHours(times.pastMonthEmployeeWorkingMinutes)}
                 </p>
               </div>
-              {new Date().getDate() > 5 && (
+
+              <button
+                onClick={() => setReveal(!reveal)}
+                style={{ textAlign: "right" }}
+              >
+                <ion-icon name="logo-euro"></ion-icon>
+              </button>
+
+              {/* {new Date().getDate() > 5 && (
                 <button
                   onClick={() => setReveal(!reveal)}
                   style={{ textAlign: "right" }}
                 >
                   <ion-icon name="logo-euro"></ion-icon>
                 </button>
-              )}
+              )} */}
               {reveal && (
                 <div className={styles.oneRow}>
                   <div className={`${styles.info}`}>
