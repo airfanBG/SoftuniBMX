@@ -42,6 +42,13 @@
   position: relative;
 }
 
+.eyeIcon {
+  position: absolute;
+  top: 1.3rem;
+  right: 1rem;
+  font-size: 2.4rem;
+}
+
 form.form .inputField input,
 form.form .inputField select,
 #inputField {
