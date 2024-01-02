@@ -3,7 +3,7 @@ import styles from "./PopupInfo.module.css";
 import { Link } from "react-router-dom";
 
 import { User } from "@phosphor-icons/react";
-import { getMonthName } from "../../../util/resolvers.js";
+import { getMonthName, minutesToHours } from "../../../util/resolvers.js";
 import { useState } from "react";
 
 function PopupInfo({ person, onClose, isSalaries = false, times }) {
@@ -12,11 +12,11 @@ function PopupInfo({ person, onClose, isSalaries = false, times }) {
   );
   const [salary, setSalary] = useState("");
 
-  function minutesToHours(t) {
-    const hours = parseInt(t / 60);
-    const minutes = t % 60;
-    return `${hours} hours and ${minutes} minutes`;
-  }
+  // function minutesToHours(t) {
+  //   const hours = parseInt(t / 60);
+  //   const minutes = t % 60;
+  //   return `${hours} hours and ${minutes} minutes`;
+  // }
 
   return (
     <div className={styles.modalBg} onClick={onClose}>
