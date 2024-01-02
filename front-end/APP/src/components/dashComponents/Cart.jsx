@@ -107,6 +107,7 @@ function Cart() {
     const userPayment = { ...user, balance: userReducedBalance };
     setLoading(true);
     try {
+      console.log(currentOrder);
       const orderResponse = await post(environment.create_order, currentOrder);
       console.log(orderResponse);
 

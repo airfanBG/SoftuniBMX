@@ -3,9 +3,21 @@ import styles from "./PopupInfo.module.css";
 import { Link } from "react-router-dom";
 
 import { User } from "@phosphor-icons/react";
-import { getMonthName } from "../../../util/resolvers.js";
+import { getMonthName, minutesToHours } from "../../../util/resolvers.js";
+import { useState } from "react";
 
-function PopupInfo({ person, onClose, isSalaries = false }) {
+function PopupInfo({ person, onClose, isSalaries = false, times }) {
+  const [reveal, setReveal] = useState(
+    new Date().getDate() >= 1 && new Date().getDate() <= 5 ? true : false
+  );
+  const [salary, setSalary] = useState("");
+
+  // function minutesToHours(t) {
+  //   const hours = parseInt(t / 60);
+  //   const minutes = t % 60;
+  //   return `${hours} hours and ${minutes} minutes`;
+  // }
+
   return (
     <div className={styles.modalBg} onClick={onClose}>
       <figure className={styles.fullInfo} onClick={(e) => e.stopPropagation()}>
@@ -87,25 +99,60 @@ function PopupInfo({ person, onClose, isSalaries = false }) {
               </div>
               <div className={styles.oneRow}>
                 <p className={`${styles.info}`}>
-                  <span>Current Mont Hours:</span>5 hours 15 minutes
+                  <span>
+                    Current Mont Hours -{" "}
+                    {new Date().toLocaleDateString(undefined, {
+                      month: "long",
+                    })}
+                  </span>
+                  {minutesToHours(times.currentMonthEmployeeWorkingMinutes)}
                 </p>
               </div>
               <div className={styles.oneRow}>
                 <p className={`${styles.info}`}>
-                  <span>Last Mont:</span>
+                  <span>Last Mont</span>
                   {getMonthName()}
                 </p>
                 <p className={`${styles.info}`}>
-                  <span>Hours/Mont:</span>
-                  75 hours 45 minutes
+                  <span>Hours/Mont</span>
+                  {minutesToHours(times.pastMonthEmployeeWorkingMinutes)}
                 </p>
               </div>
-              <div className={styles.oneRow}>
-                <p className={`${styles.infoFullLine}`}>
-                  <span>If current date is bwn 1 & 5:</span>
-                  1000lw
-                </p>
-              </div>
+
+              <button
+                onClick={() => setReveal(!reveal)}
+                style={{ textAlign: "right" }}
+              >
+                <ion-icon name="logo-euro"></ion-icon>
+              </button>
+
+              {/* {new Date().getDate() > 5 && (
+                <button
+                  onClick={() => setReveal(!reveal)}
+                  style={{ textAlign: "right" }}
+                >
+                  <ion-icon name="logo-euro"></ion-icon>
+                </button>
+              )} */}
+              {reveal && (
+                <div className={styles.oneRow}>
+                  <div className={`${styles.info}`}>
+                    <span>Salary</span>
+                    <input
+                      list="salary"
+                      className={styles.input}
+                      type="tel"
+                      value={salary}
+                      onChange={(e) => setSalary(e.target.value)}
+                      onFocus={() => setSalary("")}
+                    />
+                    <datalist id="salary">
+                      <option value="1000" />
+                    </datalist>
+                  </div>
+                  <button className={styles.btn}>Pay salary</button>
+                </div>
+              )}
             </div>
           </div>
         )}

@@ -54,4 +54,16 @@ function getMonthName() {
   return monthNames.at(lastMont);
 }
 
-export { imageResolver, timeResolver, formatCurrency, getMonthName };
+function minutesToHours(t) {
+  const hours = parseInt(t / 60);
+  const minutes = t % 60;
+  return `${hours} hours and ${minutes} minutes`;
+}
+
+export {
+  imageResolver,
+  timeResolver,
+  formatCurrency,
+  getMonthName,
+  minutesToHours,
+};

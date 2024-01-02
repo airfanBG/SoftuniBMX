@@ -4,12 +4,15 @@ import { useEffect, useState } from "react";
 import { getEmployers } from "../../../../customHooks/useEmployers.js";
 import LoaderWheel from "../../../LoaderWheel.jsx";
 import PopupInfo from "../PopupInfo.jsx";
+import { get } from "../../../../util/api.js";
+import { environment } from "../../../../environments/environment.js";
 
 function Salaries() {
   const [loading, setLoading] = useState(false);
   const [employeesList, setEmployeesList] = useState([]);
   const [person, setPerson] = useState({});
   const [background, setBackground] = useState(false);
+  const [times, setTimes] = useState({});
 
   useEffect(function () {
     async function getEmps() {
@@ -23,20 +26,28 @@ function Salaries() {
     getEmps();
   }, []);
 
-  function setEmployee(e) {
+  async function setEmployee(e) {
+    const data = await get(environment.worker_times + e.id);
     setPerson(e);
+    setTimes(data);
     setBackground(true);
   }
 
   function close(e) {
     setPerson({});
+    setTimes({});
     setBackground(false);
   }
 
   return (
     <>
       {background && (
-        <PopupInfo person={person} onClose={close} isSalaries={true} />
+        <PopupInfo
+          person={person}
+          onClose={close}
+          isSalaries={true}
+          times={times}
+        />
       )}
 
       <h2 className={styles.dashHeading}>Employees List</h2>

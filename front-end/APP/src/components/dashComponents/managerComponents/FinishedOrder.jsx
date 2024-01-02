@@ -9,7 +9,7 @@ function FinishedOrder({ order, i, onOrderButtonClick }) {
   return (
     <>
       <div className={styles.orderLine}>
-      <p className={styles.serial}>
+        <p className={styles.serial}>
           <span>#ON:</span>
           {order.orderId}
         </p>
@@ -25,14 +25,18 @@ function FinishedOrder({ order, i, onOrderButtonClick }) {
           <span>Finished:</span>
           {order.dateFinished.split(" ").at(0).replaceAll("/", ".")}
         </p>
+        <p className={styles.dateCreated}>
+          <span>Total time:</span>
+          {order.totalProductionTime}
+        </p>
         <p className={styles.serial}>
           <span className={styles.label}>Client:</span>
           {order.clientName}
         </p>
-        <p className={styles.serial}>
+        {/* <p className={styles.serial}>
           <span className={styles.label}>Email:</span>
           {order.clientEmail}
-        </p>
+        </p> */}
         {user.role !== "user" && (
           <button
             className={styles.btn}

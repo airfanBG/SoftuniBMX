@@ -11,30 +11,34 @@ import LimitedRoute from "./pages/LimitedRoute.jsx";
 import ForgottenPassword from "./components/authComponents/ForgottenPassword.jsx";
 import Register from "./components/authComponents/Register.jsx";
 import Cart from "./components/dashComponents/Cart.jsx";
-import ManagerOrders from "./components/dashComponents/managerComponents/ManagerOrders.jsx";
-import WorkerOrders from "./components/dashComponents/workerComponents/WorkerOrders.jsx";
-import WorkerFinished from "./components/dashComponents/workerComponents/WorkerFinished.jsx";
-import UserInfo from "./components/dashComponents/userComponents/UserInfo.jsx";
-// import EmployersList from "./components/dashComponents/managerComponents/EmployersList.jsx";
-// import AddMember from "./components/dashComponents/managerComponents/AddMember.jsx";
-import InProgress from "./components/dashComponents/managerComponents/InProgress.jsx";
-import QControlOrders from "./components/dashComponents/qControlComponents/QControlOrders.jsx";
 import UserTrackOrder from "./components/dashComponents/userComponents/UserTrackOrder.jsx";
+import UserInfo from "./components/dashComponents/userComponents/UserInfo.jsx";
 import UserHomeScreenSelection from "./components/dashComponents/userComponents/UserHomeScreenSelection.jsx";
 import ComponentScaffold from "./components/dashComponents/userComponents/ComponentScaffold.jsx";
+import ComponentUserOrdersArchive from "./components/dashComponents/userComponents/ComponentUserOrdersArchive.jsx";
+import ComponentUserOrdersReady from "./components/dashComponents/userComponents/ComponentUserOrdersReady.jsx";
 import UserArchive from "./components/dashComponents/userComponents/UserArchive.jsx";
-import LoaderWheel from "./components/LoaderWheel.jsx";
-import { ErrorProvider } from "./context/ErrorContext.jsx";
+
+import WorkerOrders from "./components/dashComponents/workerComponents/WorkerOrders.jsx";
+import WorkerFinished from "./components/dashComponents/workerComponents/WorkerFinished.jsx";
+// import EmployersList from "./components/dashComponents/managerComponents/EmployersList.jsx";
+// import AddMember from "./components/dashComponents/managerComponents/AddMember.jsx";
+import QControlOrders from "./components/dashComponents/qControlComponents/QControlOrders.jsx";
+import ManagerOrders from "./components/dashComponents/managerComponents/ManagerOrders.jsx";
+import InProgress from "./components/dashComponents/managerComponents/InProgress.jsx";
 import ManagerRejected from "./components/dashComponents/managerComponents/ManagerRejected.jsx";
 import ManagerFinished from "./components/dashComponents/managerComponents/ManagerFinished.jsx";
-import ManagerStatistic from "./components/dashComponents/managerComponents/ManagerStatistic.jsx";
 import ManagerSalaries from "./components/dashComponents/managerComponents/ManagerSalaries.jsx";
-import StorageMain from "./components/storage/StorageMain.jsx";
+import ManagerStatistic from "./components/dashComponents/managerComponents/ManagerStatistic.jsx";
+import ManagerDispatched from "./components/dashComponents/managerComponents/ManagerDispatched.jsx";
 import Employers from "./components/dashComponents/managerComponents/Employers.jsx";
+
+import StorageMain from "./components/storage/StorageMain.jsx";
 import Warehouse from "./components/storage/Warehouse.jsx";
 import Contacts from "./pages/Contacts/Contacts.jsx";
-import ComponentUserOrdersReady from "./components/dashComponents/userComponents/ComponentUserOrdersReady.jsx";
-import ComponentUserOrdersArchive from "./components/dashComponents/userComponents/ComponentUserOrdersArchive.jsx";
+import LoaderWheel from "./components/LoaderWheel.jsx";
+import { ErrorProvider } from "./context/ErrorContext.jsx";
+import MonthlySalary from "./components/dashComponents/MonthlySalary.jsx";
 // LAZY LOADING
 const CreateBike = lazy(() =>
   import("./components/createComponents/CreateBike.jsx")
@@ -108,6 +112,10 @@ function App() {
                     element={<ManagerRejected />}
                   />
                   <Route
+                    path={"manager-dispatched"}
+                    element={<ManagerDispatched />}
+                  />
+                  <Route
                     path={"manager-finished"}
                     element={<ManagerFinished />}
                   />
@@ -124,6 +132,7 @@ function App() {
                     path={"q-control-orders"}
                     element={<QControlOrders />}
                   />
+                  <Route path={"employee-salary"} element={<MonthlySalary />} />
                 </Route>
                 <Route
                   path="app"

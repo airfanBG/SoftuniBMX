@@ -14,6 +14,7 @@
   flex-direction: column;
   gap: 2rem;
   background-color: #fff;
+  position: relative;
 }
 
 .result {
@@ -87,4 +88,50 @@
 
 .btn:hover {
   background-color: var(--qControl-pass);
+}
+
+.confirmation {
+  background-color: var(--color-link-light);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.confirmContent {
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+  border: 1px solid var(--color-line);
+  border-radius: 0.3rem;
+}
+
+.contentText {
+  font-size: 2rem;
+  color: var(--color-main-dark);
+}
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn {
+  /* width: fit-content;
+  padding: 1rem 2rem; */
+}
+
+.decline {
+  background-color: var(--qControl-rej);
+}
+.decline:hover {
+  background-color: var(--qControl-rej-hover);
+}
+
+.error {
+  font-size: 2rem;
+  color: var(--color-warning);
 }
