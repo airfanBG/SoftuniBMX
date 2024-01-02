@@ -1,7 +1,8 @@
+import styles from "./BoardHeader.module.css";
+
 import { memo, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import styles from "./BoardHeader.module.css";
 // import { UserContext } from "../UserProfile.jsx";
 import Balance from "./Balance.jsx";
 import Category from "./Category.jsx";
@@ -28,9 +29,17 @@ function BoardHeader() {
       {(user.role === "accessoriesworker" ||
         user.role === "frameworker" ||
         user.role === "wheelworker") && <Category />}
-      <button className={styles.logout} onClick={onLogout}>
-        Logout
-      </button>
+
+      <div className={`${styles.logout} ${styles.userControls}`}>
+        {true && (
+          <Link to={"/profile/employee-salary"} className={styles.salary}>
+            Monthly Salary
+          </Link>
+        )}
+        <button className={styles.logout} onClick={onLogout}>
+          Logout
+        </button>
+      </div>
     </header>
   );
 }

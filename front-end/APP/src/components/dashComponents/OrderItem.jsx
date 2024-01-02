@@ -46,8 +46,9 @@ function OrderItem({ product, onBtnHandler, orderIndex, orderId }) {
           </p>
           <p className={styles.model}>
             <span>Date created: </span>
-            {/* {product.datetimeAsigned.split(" ").at(0).replaceAll("/", ".")} */}
-            {product.datetimeAsigned}
+            {product.datetimeAsigned
+              ? product.datetimeAsigned.split(" ").at(0).replaceAll("/", ".")
+              : ""}
           </p>
         </header>
 
@@ -83,7 +84,7 @@ function OrderItem({ product, onBtnHandler, orderIndex, orderId }) {
             product.datetimeFinished.replaceAll("/", ".")}
         </p>
         <p className={styles.partId}>
-          ID# {product.partId + "-" + product.partId}
+          ID# {product.orderId + "-" + product.partId}
         </p>
         {/* </div> */}
 

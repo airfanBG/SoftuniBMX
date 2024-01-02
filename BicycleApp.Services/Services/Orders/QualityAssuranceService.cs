@@ -68,21 +68,28 @@
         /// </summary>
         /// <param name="orderId"></param>
         /// <returns>Task<bool></returns>
-        public async Task<bool> OrderPassQualityAssurance(int orderId)
+        public async Task<int> OrderPassQualityAssurance(int orderId)
         {
             try
             {
-                var passedOrder = await _db.Orders.FirstAsync(o => o.Id == orderId);
-                passedOrder.StatusId++;
-                passedOrder.DateFinish = _dateTimeProvider.Now;
+                var passedOrder = await _db.Orders
+                                           .Include(ope => ope.OrdersPartsEmployees)
+                                           .FirstAsync(o => o.Id == orderId);
+                passedOrder.StatusId = 7;
+                var finishDate = _dateTimeProvider.Now;
+                passedOrder.DateFinish = finishDate;
+               foreach (var orderPartEmployee in passedOrder.OrdersPartsEmployees)
+               {
+                   orderPartEmployee.DateFinish = finishDate;
+               }
 
                 await _db.SaveChangesAsync();
-                return true;
+                return passedOrder.Id;
             }
             catch (Exception)
             {
             }
-            return false;
+            return 0;
         }
 
         /// <summary>

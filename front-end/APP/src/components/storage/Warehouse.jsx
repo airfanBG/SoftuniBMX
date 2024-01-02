@@ -1,7 +1,7 @@
 import styles from "./Warehouse.module.css";
 
 import LoaderWheel from "../LoaderWheel.jsx";
-import {useEffect, useState, memo } from "react";
+import { useEffect, useState, memo } from "react";
 
 import { get } from "../../util/api.js";
 import { environment } from "../../environments/environment.js";
@@ -20,7 +20,7 @@ function Warehouse() {
     const abortController = new AbortController();
 
     async function getPartsInWarehouse() {
-      const result = await get(environment.parts_in_stock ); 
+      const result = await get(environment.parts_in_stock);
       if (!result) {
         setLoading(false);
         return setError({
@@ -35,24 +35,18 @@ function Warehouse() {
     return () => abortController.abort();
   }, []);
 
-  if (partList.length === 0)
-    return <h2>There is no parts in stock</h2>;
+  if (partList.length === 0) return <h2>There is no parts in stock</h2>;
 
   return (
     <>
-
       <h2 className={styles.dashHeading}>Warehouse</h2>
 
       <section className={styles.board}>
-        <BoardHeader />
+        {/* <BoardHeader /> */}
         {loading && <LoaderWheel />}
         {partList.map((part, i) => (
-            <PartInWarehouse
-              key={part.id}
-              part={part}
-              i={i + 1}
-            />
-          ))}
+          <PartInWarehouse key={part.id} part={part} i={i + 1} />
+        ))}
       </section>
     </>
   );

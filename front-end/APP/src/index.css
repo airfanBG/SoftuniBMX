@@ -24,6 +24,8 @@ html {
   --button-color-hover: #a4c3b2;
   --button-agree: #397800;
   --button-agree-hover: #008451;
+  /* --button-agree: #416700; */
+  /* --button-agree-hover: #759a39; */
   --button-disagree: #c92a2a;
   --button-disagree-hover: #d93a35;
   --button-gray: #798897;
@@ -37,8 +39,10 @@ html {
   --bg-color-light: #5e5e5e;
   --qControl-pass: #4d8076;
   --qControl-pass-hover: #4d8076;
-  --qControl-rej: #a55331;
-  --qControl-rej-hover: #d27955;
+  /* --qControl-rej: #a55331; */
+  /* --qControl-rej-hover: #d27955; */
+  --qControl-rej: #a53531;
+  --qControl-rej-hover: #b75d5a;
 }
 
 body {
@@ -72,7 +76,7 @@ body {
 
 .modal {
   width: 100%;
-  min-height: 74.2vh;
+  min-height: 74.5vh;
   display: flex;
   align-items: center;
   justify-content: center;

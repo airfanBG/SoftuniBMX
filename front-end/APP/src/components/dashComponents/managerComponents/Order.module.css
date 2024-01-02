@@ -1,12 +1,21 @@
+.box {
+  padding-inline: 1rem;
+  border: 1px solid var(--color-border-hover);
+  border-radius: 0.5rem;
+}
+.additional {
+  border-bottom: 1px solid var(--color-line);
+}
+
 .section {
   width: 100%;
   display: flex;
   /* flex-direction: column; */
   gap: 1rem;
   margin-bottom: 0.5rem;
-  padding: 1rem;
-  border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
+  padding: 1rem 1rem 0;
+  /* border: 1px solid var(--color-border); */
+  /* border-radius: 0.5rem; */
 }
 .mainInfo {
   border-bottom: 1px solid var(--color-border);
@@ -29,6 +38,9 @@
   width: 90%;
   border-right: 1px solid var(--color-border);
 }
+.itemInfoScrap {
+  width: 100%;
+}
 
 .info {
   width: 98%;
@@ -38,6 +50,10 @@
   gap: 0.5rem;
   padding: 0.2rem 0;
   border-bottom: 1px solid var(--color-border);
+}
+
+.info:last-child {
+  border-bottom: none;
 }
 
 .content {
@@ -54,7 +70,8 @@
   font-size: 1.2rem;
   color: var(--color-hd-second);
   margin-right: 1rem;
-  width: 50%;
+  width: 100%;
+  text-transform: uppercase;
 }
 
 .qtyBlock {
@@ -67,6 +84,7 @@
 .qty {
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
   font-size: 1.4rem;
 }
 .qty span {
@@ -75,6 +93,7 @@
   color: var(--color-hd-second);
   margin-right: 1rem;
   width: 50%;
+  text-transform: uppercase;
 }
 
 .actions {

@@ -2,18 +2,19 @@
 {
     using BicicleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
+    using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.HelperClasses.Contracts;
+    using BicycleApp.Services.Models.IdentityModels;
     using BicycleApp.Services.Models.Order;
     using BicycleApp.Services.Models.Order.OrderManager;
-    using static BicycleApp.Common.ApplicationGlobalConstants;
     using BicycleApp.Services.Models.Order.OrderUser;
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-
-    using BicycleApp.Services.Models.IdentityModels;
+    using static BicycleApp.Common.ApplicationGlobalConstants;
+    using static BicycleApp.Common.EntityValidationConstants;
 
     public class OrderManagerService : IOrderManagerService
     {
@@ -201,7 +202,9 @@
                             .AsNoTracking()
                             .Where(o => o.DateCreated >= datesPeriod.StartDate
                                      && o.DateFinish <= datesPeriod.EndDate
-                                     && o.DateFinish != null)
+                                     && o.DateFinish != null
+                                     && o.DateSended == null
+                                     && o.DateDeleted == null)
                             .Select(o => new OrderProgretionDto()
                             {
                                 OrderId = o.Id,
@@ -209,9 +212,12 @@
                                 DateCreated = o.DateCreated.ToString(DefaultDateFormat),
                                 DateFinished = o.DateFinish.Value.ToString(DefaultDateFormat),
                                 SaleAmount = o.FinalAmount,
-                                ClientName = o.Client.LastName,
+                                ClientName = _stringManipulator.ReturnFullName(o.Client.FirstName, o.Client.LastName),
                                 ClientEmail = o.Client.Email,
                                 ClientPhone = o.Client.PhoneNumber,
+                                PaidAmount = o.PaidAmount,
+                                UnpaidAmount = o.UnpaidAmount,
+                                FinalAmount = o.FinalAmount,
                                 OrderStates = o.OrdersPartsEmployees
                                                .Select(ope => new OrderStateDto()
                                                {
@@ -219,7 +225,7 @@
                                                    NameOfEmplоyeeProducedThePart = _stringManipulator.ReturnFullName(ope.Employee.FirstName, ope.Employee.LastName),
                                                    PartModel = ope.PartName,
                                                    PartType = ope.Part.Category.Name,
-                                                   SerialNumber = ope.SerialNumber,
+                                                   SerialNumber = ope.Part.OEMNumber,
                                                    PartId = ope.PartId,
                                                    PartQuantity = ope.PartQuantity,
                                                    StartDate = ope.StartDatetime.ToString(),
@@ -430,6 +436,7 @@
         public async Task<ICollection<EmployeeInfoDto>> GetAllEmployees()
         {
             return await _db.Employees
+                            .AsNoTracking()
                             .Select(e => new EmployeeInfoDto()
                             {
                                 DateCreated = e.DateCreated.ToString(DefaultDateFormat),
@@ -491,6 +498,65 @@
                    .CountAsync();
 
             return result;
+        }
+
+        /// <summary>
+        /// Gets all sended orders.
+        /// </summary>
+        /// <returns>Task<ICollection<OrderSendedDto>></returns>
+        public async Task<ICollection<OrderSendedDto>> AllSendedOrdersAsync()
+        {
+            return await _db.Orders//Трия миграцията и пускам отново InitisalMigration
+                            .Include(o => o.OrdersPartsEmployees)
+                            .ThenInclude(ope => ope.OrdersPartsEmployeesInfos)
+                            .Include(o => o.Client)
+                            .AsNoTracking()
+                            .Where(o => o.DateFinish != null
+                                     && o.DateSended != null
+                                     && o.DateDeleted == null)
+                            .Select(o => new OrderSendedDto()
+                            {
+                                OrderId = o.Id,
+                                SerialNumber = o.OrdersPartsEmployees.Select(sn => sn.SerialNumber).FirstOrDefault(),
+                                SaleAmount = o.FinalAmount,
+                                ClientName = _stringManipulator.ReturnFullName(o.Client.FirstName, o.Client.LastName),
+                                ClientEmail = o.Client.Email,
+                                SendDate = o.DateSended.ToString(),
+                                ClientAdress = new ClientAddressDto 
+                                {
+                                    Street = o.Client.DelivaryAddress.Street,
+                                    StrNumber = o.Client.DelivaryAddress.StrNumber,
+                                    Apartment = o.Client.DelivaryAddress.Apartment,
+                                    Block = o.Client.DelivaryAddress.Block,
+                                    Country = o.Client.DelivaryAddress.Country,
+                                    District = o.Client.DelivaryAddress.District,
+                                    Floor = o.Client.DelivaryAddress.Floor,
+                                    PostCode = o.Client.DelivaryAddress.PostCode
+                                }
+                            })
+                            .ToListAsync();
+        }
+
+        public async Task<bool> SendOrderAsync(int orderId)
+        {
+            try
+            {
+                var orderForSend = await _db.Orders.Where(o => o.Id == orderId
+                                                                        && o.DateFinish != null
+                                                                        && o.DateDeleted == null)
+                                                                        .FirstAsync();
+
+                orderForSend.DateSended = _dateTimeProvider.Now;
+                orderForSend.StatusId++;
+
+                await _db.SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception)
+            {
+            }
+            return false;
         }
     }
 }

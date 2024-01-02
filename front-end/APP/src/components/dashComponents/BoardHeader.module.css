@@ -20,3 +20,21 @@
   color: var(--color-secondary-hd);
   margin-left: auto;
 }
+
+.userControls {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.userControls a:link,
+.userControls a:visited {
+  text-decoration: none;
+  color: var(--color-main-dark);
+  transition: all 0.3s ease-in;
+}
+
+.userControls a:hover,
+.userControls a:active {
+  color: var(--bg-color);
+}

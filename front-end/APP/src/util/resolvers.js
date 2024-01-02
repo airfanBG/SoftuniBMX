@@ -21,4 +21,49 @@ function formatCurrency(value) {
   }).format(value);
 }
 
-export { imageResolver, timeResolver, formatCurrency };
+function getMonthName() {
+  // не ми харесва , защото на 31-ви не подава следващия месец
+  // const prevMonth = new Date();
+  // prevMonth.setMonth(prevMonth.getMonth() - 1);
+  // return new Intl.DateTimeFormat("en-GB", { month: "long" }).format(
+  //   prevMonth
+  // );
+
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const lastMont =
+    new Date()
+      .toLocaleDateString(undefined, {
+        month: "numeric",
+      })
+      .split("/")
+      .at(0) - 2;
+  return monthNames.at(lastMont);
+}
+
+function minutesToHours(t) {
+  const hours = parseInt(t / 60);
+  const minutes = t % 60;
+  return `${hours} hours and ${minutes} minutes`;
+}
+
+export {
+  imageResolver,
+  timeResolver,
+  formatCurrency,
+  getMonthName,
+  minutesToHours,
+};

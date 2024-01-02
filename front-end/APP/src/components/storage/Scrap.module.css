@@ -17,3 +17,9 @@
   gap: 2rem;
   background-color: #fff;
 }
+
+.orders {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}

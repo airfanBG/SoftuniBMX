@@ -12,9 +12,12 @@
         public string? DateFinished { get; set; } = null!;
         public int TotalProductionTime { get; set; }
         public decimal SaleAmount { get; set; }
-        public string ClientName { get; set; } = null!;
-        public string ClientEmail { get; set; } = null!;
-        public string ClientPhone { get; set; } = null!;
+        public string? ClientName { get; set; }
+        public string? ClientEmail { get; set; }
+        public string? ClientPhone { get; set; }
+        public decimal PaidAmount { get; set; }
+        public decimal UnpaidAmount { get; set; }
+        public decimal FinalAmount { get; set; }
         public ICollection<OrderStateDto> OrderStates { get; set; } = new List<OrderStateDto>();
     }
 }
