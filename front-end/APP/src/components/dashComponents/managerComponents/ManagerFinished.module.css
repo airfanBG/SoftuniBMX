@@ -17,6 +17,27 @@
   background-color: #fff;
 }
 
+.dateContainer {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.element {
+  display: flex;
+  flex-direction: column;
+}
+
+.infoHeading {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.list {
+  list-style: disc;
+  font-size: 1.6rem;
+  color: var(--color-hd);
+}
+
 .boardHeading {
   font-size: 2rem;
   color: var(--color-hd-second);
@@ -26,6 +47,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+  margin-top: 2rem;
 }
 
 form.form {

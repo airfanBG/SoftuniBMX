@@ -1,4 +1,4 @@
-import { timeResolver } from "../../../util/resolvers.js";
+import { minutesToHours, timeResolver } from "../../../util/resolvers.js";
 import { useState, useContext } from "react";
 import styles from "./FinishedOrderFullElement.module.css";
 
@@ -44,6 +44,21 @@ function FinishedOrderElement({ order, i, onFinishedOrderButtonClick }) {
 
       <div className={styles.orderStatesList}>
         {/* Имена и Email */}
+        <div className={styles.headLine}>
+          <p className={`${styles.field} ${styles.headElement}`}>
+            <span className={styles.fieldLabel}>Client name:</span>
+            {order.clientName}
+          </p>
+          <p className={`${styles.field} ${styles.headElement}`}>
+            <span className={styles.fieldLabel}>Email:</span>
+            <button
+              to="javascript:void(0)"
+              onClick={() => (window.location = `mailto:${order.clientEmail}`)}
+            >
+              {order.clientEmail}
+            </button>
+          </p>
+        </div>
 
         {orderStates.map((s, i) => (
           <div key={i} className={styles.sector}>
@@ -75,7 +90,7 @@ function FinishedOrderElement({ order, i, onFinishedOrderButtonClick }) {
                 </p>
                 <p className={styles.field}>
                   <span className={styles.fieldLabel}>Prodiced time:</span>
-                  {s.elementProduceTimeInMinutes}
+                  {minutesToHours(s.elementProduceTimeInMinutes)}
                 </p>
               </div>
               {/* <div className={styles.metaData}>
