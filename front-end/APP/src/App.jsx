@@ -38,6 +38,7 @@ import Warehouse from "./components/storage/Warehouse.jsx";
 import Contacts from "./pages/Contacts/Contacts.jsx";
 import LoaderWheel from "./components/LoaderWheel.jsx";
 import { ErrorProvider } from "./context/ErrorContext.jsx";
+import MonthlySalary from "./components/dashComponents/MonthlySalary.jsx";
 // LAZY LOADING
 const CreateBike = lazy(() =>
   import("./components/createComponents/CreateBike.jsx")
@@ -131,6 +132,7 @@ function App() {
                     path={"q-control-orders"}
                     element={<QControlOrders />}
                   />
+                  <Route path={"employee-salary"} element={<MonthlySalary />} />
                 </Route>
                 <Route
                   path="app"
