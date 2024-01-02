@@ -33,7 +33,7 @@ function FinishedOrderElement({ order, i, onFinishedOrderButtonClick }) {
               Unpaid amount:
             </span>
             {unpaidAmount}.00 BGN
-          </p>
+        </p>
         </div>
 
         <p className={styles.date}>
@@ -74,6 +74,8 @@ function FinishedOrderElement({ order, i, onFinishedOrderButtonClick }) {
                   <span className={styles.fieldLabel}>Part model:</span>
                   {s.partModel}
                 </p>
+              </div>
+              <div className={styles.metaData}>
                 <p className={styles.field}>
                   <span className={styles.fieldLabel}>Part quantity:</span>
                   {s.partQuantity}

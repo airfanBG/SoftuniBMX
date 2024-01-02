@@ -89,6 +89,27 @@ function QControlOrderItem({ product, onReBuild }) {
     }
   }, [accessoryCheck, frameCheck, wheelCheck]);
 
+  const finalResult = { ...product };
+
+  const ref = useRef([]);
+
+  const Unchecked = () => {
+    // console.log(ref.current.length);
+    for (let i = 0; i < ref.current.length; i++) {
+      ref.current[i].checked = false;
+    }
+  };
+
+  useEffect(() => {
+    if (frameCheck && wheelCheck && accessoryCheck) {
+      dispatch({ type: "setBtnText", payload: "Pass control" });
+    } else if (frameCheck || wheelCheck || accessoryCheck) {
+      dispatch({ type: "setBtnText", payload: "Rebuild" });
+    } else if (!frameCheck || !wheelCheck || !accessoryCheck) {
+      dispatch({ type: "setBtnText", payload: "Scrap" });
+    }
+  }, [accessoryCheck, frameCheck, wheelCheck]);
+
   function checkboxHandler(e) {
     dispatch({ type: e.target.name, payload: e.target.checked });
   }
