@@ -11,6 +11,8 @@ import { PASS_REGEX } from "../../../../util/util.js";
 
 function AddMember() {
   const [phone, setPhone] = useState("");
+  const [fieldType, setFieldType] = useState(false);
+  const [fieldTypeRe, setFieldTypeRe] = useState(false);
   const navigate = useNavigate();
   const [
     {
@@ -171,7 +173,7 @@ function AddMember() {
             <div className={styles.inputField}>
               <label htmlFor="password/input">Password</label>
               <input
-                type="password"
+                type={fieldType ? "text" : "password"}
                 id="password/input"
                 value={password}
                 name={password}
@@ -180,6 +182,17 @@ function AddMember() {
                 onFocus={clearInput}
                 required
               />
+              <div className={styles.eyeIcon}>
+                {fieldType ? (
+                  <button onClick={() => setFieldType(!fieldType)}>
+                    <ion-icon name="eye-off-outline"></ion-icon>
+                  </button>
+                ) : (
+                  <button onClick={() => setFieldType(!fieldType)}>
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </button>
+                )}
+              </div>
               {error["password/input"] && (
                 <p className={styles.error}>Invalid password</p>
               )}
@@ -188,7 +201,7 @@ function AddMember() {
             <div className={styles.inputField}>
               <label htmlFor="repass/input">Repeat password</label>
               <input
-                type="password"
+                type={fieldTypeRe ? "text" : "password"}
                 id="repass/input"
                 value={repass}
                 onChange={onSetInputData}
@@ -196,6 +209,17 @@ function AddMember() {
                 onFocus={clearInput}
                 required
               />
+              <div className={styles.eyeIcon}>
+                {fieldTypeRe ? (
+                  <button onClick={() => setFieldTypeRe(!fieldTypeRe)}>
+                    <ion-icon name="eye-off-outline"></ion-icon>
+                  </button>
+                ) : (
+                  <button onClick={() => setFieldTypeRe(!fieldTypeRe)}>
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </button>
+                )}
+              </div>
               {error["repass/input"] && (
                 <p className={styles.error}>Password do not match</p>
               )}
