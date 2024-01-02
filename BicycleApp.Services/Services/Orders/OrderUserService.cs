@@ -144,9 +144,7 @@
         public async Task<bool> CreateOrderPartEmployeeByUserOrder(IOrderPartsEmplyee newOrder)
         {
             try
-            {
-                var orderPartEmployeeCollection = new List<OrderPartEmployee>();
-
+            {    
                 int quntityOfPart = newOrder.OrderQuantity;
 
                 for (int i = 0; i < quntityOfPart; i++)
@@ -158,11 +156,10 @@
                     {
                         var ope = await _orderFactory.CreateOrderPartEmployeeProduct(newOrder.OrderId, guidKey, serialNumber, orderPart.PartId, orderPart.PartName, orderPart.PartQuantity, orderPart.PartPrice, _dateTimeProvider.Now);
 
-                        orderPartEmployeeCollection.Add(ope);
+                        await _db.OrdersPartsEmployees.AddAsync(ope);
                     }
                 }
 
-                await _db.OrdersPartsEmployees.AddRangeAsync(orderPartEmployeeCollection);
                 await _db.SaveChangesAsync();
 
                 return true;
