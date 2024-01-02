@@ -6,7 +6,7 @@
     public interface IOrderFactory
     {
         Order CreateUserOrder(IOrder order, DateTime currentTime);
-        public IOrderPartDto CreateOrderPartFromUserOrder(string partName, int partQuantity, int partId, decimal productPrice);
+        public Task<IOrderPartDto> CreateOrderPartFromUserOrder(string partName, int partQuantity, int partId, decimal productPrice);
         public Task<OrderPartEmployee> CreateOrderPartEmployeeProduct(int orderId, string uniqueKeyForSerialNumber, string serialNumber, int partId, string partName, int partQuantity, decimal partPrice, DateTime currentDate);
         public ISuccessOrderInfo CreateSuccessOrderItems(IOrderPartsEmplyee successOrder);
     }

@@ -24,7 +24,7 @@
                     StatusId = order.StatusId
                 };
         }
-        public IOrderPartDto CreateOrderPartFromUserOrder(string partName, int partQuantity, int partId, decimal productPrice)
+        public async Task<IOrderPartDto> CreateOrderPartFromUserOrder(string partName, int partQuantity, int partId, decimal productPrice)
         {
             return new OrderPartDto()
             {

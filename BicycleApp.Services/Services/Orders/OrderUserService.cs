@@ -67,7 +67,7 @@
                     }
                     totalVAT += Math.Round(((currentProductTotalPrice - currentProductTotalDiscount) * vatCategory.VATPercent) / (100 + vatCategory.VATPercent), 2);
                     decimal productPrice = currentPart.SalePrice - currentPart.Discount;
-                    var currentOrderPartToSave = _orderFactory.CreateOrderPartFromUserOrder(currentPart.Name, 1, orderPart.PartId, productPrice);
+                    var currentOrderPartToSave = await _orderFactory.CreateOrderPartFromUserOrder(currentPart.Name, 1, orderPart.PartId, productPrice);
                     newOrder.OrderParts.Add(currentOrderPartToSave);
                 }
 
@@ -151,8 +151,8 @@
 
                 for (int i = 0; i < quntityOfPart; i++)
                 {
-                    string serialNumber = _stringManipulator.SerialNumberGenerator();
-                    string guidKey = _stringManipulator.CreateGuid();
+                    string serialNumber = await _stringManipulator.SerialNumberGenerator();
+                    string guidKey = await _stringManipulator.CreateGuid();
 
                     foreach (var orderPart in newOrder.OrderParts)
                     {
