@@ -43,6 +43,8 @@ function FinishedOrderElement({ order, i, onFinishedOrderButtonClick }) {
       </header>
 
       <div className={styles.orderStatesList}>
+        {/* Имена и Email */}
+
         {orderStates.map((s, i) => (
           <div key={i} className={styles.sector}>
             <div className={styles.block}>

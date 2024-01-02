@@ -27,6 +27,16 @@ function ManagerFinished() {
     new Date().toLocaleDateString("en-CA")
   );
 
+  // function getLastMonth() {
+  //   let [year, month, day] = new Date().toLocaleDateString("en-CA").split("-");
+  //   if (month === 1) {
+  //     month = 12;
+  //     year = year - 1;
+  //   }
+  //   console.log(`${year}-${month}-${day}`);
+  //   return `${year}-${month - 1}-${day}`;
+  // }
+
   useEffect(
     function () {
       setLoading(true);
@@ -65,10 +75,11 @@ function ManagerFinished() {
   }
 
   function onFinishedOrderButtonClick(order) {
+    // TUK
+    console.log(order);
     setCurrentOrder({});
     setBackground(false);
     setRerender(!rerender);
-    console.log(order);
   }
 
   return (
