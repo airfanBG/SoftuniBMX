@@ -6,26 +6,8 @@ import {
   StyleSheet,
   PDFViewer,
 } from "@react-pdf/renderer";
-// Create styles
-const styles = StyleSheet.create({
-  page: {
-    backgroundColor: "#fff",
-    color: "black",
-  },
-  section: {
-    margin: 10,
-    padding: 10,
-  },
-  viewer: {
-    // width: window.innerWidth / 2, //the pdf viewer will take up all of the width and height
-    // height: window.innerHeight ,
-    width: "100%",
-    height: "1200px",
-  },
-  empName: {
-    fontSize: "30px",
-  },
-});
+import { styles } from "./MonthlySalaryDocumentStyles.js";
+
 function MonthlySalaryDocument() {
   return (
     <PDFViewer style={styles.viewer}>
