@@ -5,12 +5,11 @@ import { UserContext } from "../../context/GlobalUserProvider.jsx";
 
 function MonthlySalaryDocument() {
   const { user } = useContext(UserContext);
+  const { firstName, lastName } = user;
 
   return (
     <PDFViewer style={styles.viewer}>
-      {/* Start of the document*/}
       <Document>
-        {/*render a single page*/}
         <Page size="A5" style={styles.page} orientation={"landscape"}>
           <View style={styles.header}>
             <View style={{ width: "50%" }}>
@@ -20,7 +19,7 @@ function MonthlySalaryDocument() {
               <Text style={styles.headerField}>
                 Name:{" "}
                 <Text style={styles.empName}>
-                  {user.firstName} {user.lastName}
+                  {firstName} {lastName}
                 </Text>
               </Text>
             </View>

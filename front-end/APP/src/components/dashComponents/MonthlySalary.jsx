@@ -21,6 +21,11 @@ function MonthlySalary() {
             <ion-icon name="wallet-outline"></ion-icon>
             {/* <ion-icon name="chevron-down-outline"></ion-icon> */}
             <p className={styles.walletText}>Get money</p>
+            {/* <PDFDownloadLink document={<Test />} fileName="somename.pdf">
+              {({ blob, url, loading, error }) =>
+                loading ? "Loading document..." : "Download now!"
+              }
+            </PDFDownloadLink> */}
           </div>
         </div>
       </section>
@@ -28,3 +33,7 @@ function MonthlySalary() {
   );
 }
 export default MonthlySalary;
+
+function Test() {
+  return <div>tests</div>;
+}
