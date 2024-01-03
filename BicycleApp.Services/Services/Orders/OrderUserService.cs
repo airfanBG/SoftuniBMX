@@ -88,12 +88,15 @@
 
                 var newOrderObject = await _orderFactory.CreateUserOrder(newOrder, _dateTimeProvider.Now);
 
-                await _db.Orders.AddAsync(newOrderObject);
-                await _db.SaveChangesAsync();
+                if (newOrderObject != null)
+                {
+                    await _db.Orders.AddAsync(newOrderObject);
+                    await _db.SaveChangesAsync();
 
-                newOrder.OrderId = newOrderObject.Id;
+                    newOrder.OrderId = newOrderObject.Id;
 
-                return newOrder;
+                    return newOrder;
+                }
             }
             catch (Exception)
             {

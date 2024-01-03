@@ -7,9 +7,11 @@
 
     public class OrderFactory : IOrderFactory
     {  
-        public async Task<Order> CreateUserOrder(IOrder order, DateTime currentTime)
+        public async Task<Order?> CreateUserOrder(IOrder order, DateTime currentTime)
         {
-              return new Order()
+            try
+            {
+                return new Order()
                 {
                     FinalAmount = order.FinalAmount,
                     PaidAmount = order.PaidAmount,
@@ -23,6 +25,11 @@
                     IsDeleted = order.IsDeleted,
                     StatusId = order.StatusId
                 };
+            }
+            catch (Exception)
+            {
+            }
+            return null;
         }
         public async Task<IOrderPartDto> CreateOrderPartFromUserOrder(string partName, int partQuantity, int partId, decimal productPrice)
         {
