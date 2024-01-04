@@ -24,7 +24,7 @@ function ErrorProvider({ children }) {
   const [{ error, message }, dispatch] = useReducer(reducer, initialState);
 
   function errorHandler(error) {
-    console.log("error");
+    // console.log("error");
     if (error !== "") {
       dispatch({ type: "error/set", payload: error });
       dispatch({ type: "error/message", payload: true });

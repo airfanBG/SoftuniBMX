@@ -12,19 +12,19 @@ function FinishedOrderElement({ order, i, onFinishedOrderButtonClick }) {
   const { clientName, paidAmount, unpaidAmount, finalAmount, orderStates } =
     order;
 
-    function jobTIme(t1, t2) {
-      let timeResult = "";
-      const date1 = new Date(t1).getTime();
-      const date2 = new Date(t2).getTime();
-      // TODO: only for development
-      if (date2 - date1 < 100000) {
-        timeResult = timeResolver(date1, Math.floor(Math.random() * 10 * date2));
-      } else {
-        timeResult = timeResolver(date1, date2);
-      }
-  
-      return timeResult;
-    }  
+  function jobTIme(t1, t2) {
+    let timeResult = "";
+    const date1 = new Date(t1).getTime();
+    const date2 = new Date(t2).getTime();
+    // TODO: only for development
+    if (date2 - date1 < 100000) {
+      timeResult = timeResolver(date1, Math.floor(Math.random() * 10 * date2));
+    } else {
+      timeResult = timeResolver(date1, date2);
+    }
+
+    return timeResult;
+  }
 
   return (
     <div className={styles.container}>
@@ -125,9 +125,9 @@ function FinishedOrderElement({ order, i, onFinishedOrderButtonClick }) {
           <button
             className={styles.btn}
             onClick={() => onFinishedOrderButtonClick(order)} //Трябва да прати orderId на ендпойнта за изпращане!?
-            disabled={
-              unpaidAmount > 0
-            }
+            // disabled={
+            //   unpaidAmount > 0
+            // }
           >
             Send order
           </button>
