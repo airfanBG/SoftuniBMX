@@ -8,5 +8,6 @@
         public string? ClientEmailConfirmEnpoint();
         public string? EmployeeEmailConfirmEnpoint();
         string? GetPreviousWorkerPositionName(string currentWorkerPosition);
+        public string? GetDefaultUserRelativePath();
     }
 }

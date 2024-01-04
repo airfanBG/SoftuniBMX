@@ -59,5 +59,10 @@
             return positionFlow.FirstOrDefault(x => int.Parse(x.Value) == previousPosition).Key;
 
         }
+
+        public string? GetDefaultUserRelativePath()
+        {
+            return _configuration.GetSection("DefaultImagesRelativePath:User").Value;
+        }
     }
 }

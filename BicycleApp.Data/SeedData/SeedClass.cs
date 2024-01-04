@@ -124,6 +124,20 @@
             return list;
         }
 
+        public ICollection<ImageClient> SeedImagesClients()
+        {
+            return new List<ImageClient>()
+            {
+                new ImageClient()
+                {
+                    Id = 1,
+                    ImageName = "94b08466-e8ff-443a-86b8-91ea623b209b",
+                    UserId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                    ImageUrl = "wwwroot/files/profiles/client/2024/1/94b08466-e8ff-443a-86b8-91ea623b209b/94b08466-e8ff-443a-86b8-91ea623b209b.jpg"
+                }
+            };
+        }
+
         public ICollection<DelivaryAddress> SeedDelivaryAddresses()
         {
             return new List<DelivaryAddress>()
@@ -627,19 +641,6 @@
                 imagePart7, imagePart8, imagePart9, imagePart10, imagePart11, imagePart12,
                 imagePart13, imagePart14, imagePart15, imagePart16, imagePart17
             };
-        }
-
-        public List<ImageClient> SeedImagesClients()
-        {
-            ImageClient imageClient = new ImageClient()
-            {
-                Id = 1,
-                ImageName = "image",
-                ImageUrl = "test",
-                UserId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd"
-            };
-
-            return new List<ImageClient> { imageClient };
         }
 
         public List<ImageEmployee> SeedImagesEmployees()

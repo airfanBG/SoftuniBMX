@@ -66,8 +66,8 @@
         public async Task<string?> GetUserImagePathAsync(string userId, string userRole)
         {
             string filePath = string.Empty;
-
-            if (userRole.ToLower() != CLIENT)
+            // TODO: Make it CLIENT from BicycleApp.Common.UserConstants. "user" comes form FE             
+            if (userRole.ToLower() != "user")
             {
                 var imageEmployee = await _db.ImagesEmployees.FirstOrDefaultAsync(ie => ie.UserId == userId);
                 filePath = imageEmployee.ImageUrl;

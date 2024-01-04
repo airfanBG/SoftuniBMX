@@ -13,5 +13,7 @@
         public decimal? Balance { get; set; }
 
         public bool Result { get; set; }
+
+        public string? Image { get; set; } 
     }
 }

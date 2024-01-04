@@ -2,7 +2,7 @@
 {
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.Models.IdentityModels;
-
+    using BicycleApp.Services.Models.Image;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -11,10 +11,12 @@
     public class ClientController : ControllerBase
     {
         private readonly IClientService clientService;
+        private readonly IImageStore imageStore;
 
-        public ClientController(IClientService clientService)
+        public ClientController(IClientService clientService, IImageStore imageStore)
         {
             this.clientService = clientService;
+            this.imageStore = imageStore;
         }
 
         [HttpPost]
@@ -355,6 +357,23 @@
             {
                 return StatusCode(500);
             }
+        }
+        [HttpPost]
+        [Route("add_avatar")]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> AddClientImage([FromForm] UserImageDto userImageDto)
+        {
+            var result = await imageStore.IsAddedOrReplacedUserImage(userImageDto);
+
+            if (result)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
         }
     }
 }
