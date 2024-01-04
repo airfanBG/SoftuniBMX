@@ -27,6 +27,7 @@ function Warehouse() {
           message: "Something went wrong. Service can not get data!",
         });
       }
+      // sort collection in acceding order
       const sorted = result.parts.sort((a, b) => a.quantity - b.quantity);
 
       setPartList(sorted);
