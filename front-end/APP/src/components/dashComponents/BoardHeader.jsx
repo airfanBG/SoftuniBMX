@@ -31,7 +31,7 @@ function BoardHeader() {
         user.role === "wheelworker") && <Category />}
 
       <div className={`${styles.logout} ${styles.userControls}`}>
-        {true && (
+        {true && user.role !== "user" && (
           <Link to={"/profile/employee-salary"} className={styles.salary}>
             Monthly Salary
           </Link>

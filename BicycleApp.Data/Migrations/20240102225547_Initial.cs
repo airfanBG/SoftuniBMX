@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BicycleApp.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -506,8 +506,8 @@ namespace BicycleApp.Data.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -551,8 +551,8 @@ namespace BicycleApp.Data.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -880,11 +880,11 @@ namespace BicycleApp.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DateCreated", "DateDeleted", "DateOfHire", "DateOfLeave", "DateUpdated", "DepartmentId", "Discriminator", "Email", "EmailConfirmed", "FirstName", "IsDeleted", "IsManeger", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Position", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "17063948-8fdc-417e-8fb7-2ae6bf572f94", 0, "91f57437-1e88-4e7f-ba3c-36fac60722e8", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 2, "Employee", "todorov@b-free.com", true, "Todor", false, false, "Todorov", false, null, "TODOROV@B-FREE.COM", null, "AQAAAAIAAYagAAAAEGdcwEWWsn2q1BKx3EhJsvXO4b9x5mMX1eqAIjcpIgP68emLILhKQe1C8SEdVYCPKg==", "1234567890", false, "Wheelworker", "TODOROV@B-FREE.COM", false, "todorov@b-free.com" },
-                    { "21003785-a275-4139-ae20-af6a6cf8fea8", 0, "f37500cc-33da-4168-9e64-d0a799700005", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 2, "Employee", "marinov@b-free.com", true, "Marin", false, false, "Marinov", false, null, "MARINOV@B-FREE.COM", null, "AQAAAAIAAYagAAAAEDWU4RJufVEZaMKST3jxut9CXUrNQAqOMoy6gklCPzYweKPxL6auDD7mLWnGhFGpWA==", "1234567890", false, "FrameWorker", "MARINOV@B-FREE.COM", false, "marinov@b-free.com" },
-                    { "29f06920-d2ad-43d8-b362-e2b94d7a7502", 0, "ad1d0b0a-e4e9-417d-908c-7d7777da52f2", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 2, "Employee", "atanasov@b-free.com", true, "Atanas", false, false, "Atanasov", false, null, "ATANASOV@B-FREE.COM", null, "AQAAAAIAAYagAAAAEEgQw7iBoeuzbOT800VPF39jv7N5hO/nrMkPq94aOREaQ4DI8eQso2phbmLwyQzPww==", "1234567890", false, "Qualitycontrol", "ATANASOV@B-FREE.COM", false, "atanasov@b-free.com" },
-                    { "406e8cf1-acaa-44a8-afec-585ff64bed34", 0, "3c6c7080-ce03-4758-9008-71923e3057b2", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 1, "Employee", "manager@b-free.com", true, "Kalin", false, true, "Kalinov", false, null, "MANAGER@B-FREE.COM", null, "AQAAAAIAAYagAAAAEA10yV7Y2jVR6MANBtddrWaB6sOkTmFD1XWVYiHoWSbxsfC5DI8SPVU7QWVBgRptsg==", "1234567890", false, "manager", "MANAGER@B-FREE.COM", false, "manager@b-free.com" },
-                    { "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91", 0, "f4809feb-d21e-46bd-b4a0-8bb0e3859c3b", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 2, "Employee", "ivanov@b-free.com", true, "Ivan", false, false, "Ivanov", false, null, "IVANOV@B-FREE.COM", null, "AQAAAAIAAYagAAAAEMagmMb4pGGJHCvIwJVh6SR0yydiABlJrhFjWTshQuncMgrtlwAdwsSN2HrOU2sDpw==", "1234567890", false, "Accessoriesworker", "IVANOV@B-FREE.COM", false, "ivanov@b-free.com" }
+                    { "17063948-8fdc-417e-8fb7-2ae6bf572f94", 0, "52eacd5b-2d9d-4b9c-b1e0-fd2e247989b0", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 2, "Employee", "todorov@b-free.com", true, "Todor", false, false, "Todorov", false, null, "TODOROV@B-FREE.COM", null, "AQAAAAIAAYagAAAAECbM5168GCcQQ1wowtNDfXJ23fAz13/Y2E7lUHWUG68dV0DTHzJWeIoKtnpETIBmHg==", "1234567890", false, "Wheelworker", "TODOROV@B-FREE.COM", false, "todorov@b-free.com" },
+                    { "21003785-a275-4139-ae20-af6a6cf8fea8", 0, "520d3c1b-c069-4f6a-ba1c-8d67eac6d71a", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 2, "Employee", "marinov@b-free.com", true, "Marin", false, false, "Marinov", false, null, "MARINOV@B-FREE.COM", null, "AQAAAAIAAYagAAAAEKHmaIAgV+CRhEJkWQ58dVi7DN/zuHlVBYBbhtHznHRaWCfFTbMM8DhtSEYzVqSiKg==", "1234567890", false, "FrameWorker", "MARINOV@B-FREE.COM", false, "marinov@b-free.com" },
+                    { "29f06920-d2ad-43d8-b362-e2b94d7a7502", 0, "9171631c-c426-45b4-8355-a11d74a800b2", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 2, "Employee", "atanasov@b-free.com", true, "Atanas", false, false, "Atanasov", false, null, "ATANASOV@B-FREE.COM", null, "AQAAAAIAAYagAAAAEK8x2j49UmjwxaG/76GNM2o2Wnrvjaf5Ddls62ZNRU3TbyDBrO10PMDVrf53sIA9aA==", "1234567890", false, "Qualitycontrol", "ATANASOV@B-FREE.COM", false, "atanasov@b-free.com" },
+                    { "406e8cf1-acaa-44a8-afec-585ff64bed34", 0, "3cf97dae-2216-4af5-a0fa-1aaf20cc7086", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 1, "Employee", "manager@b-free.com", true, "Kalin", false, true, "Kalinov", false, null, "MANAGER@B-FREE.COM", null, "AQAAAAIAAYagAAAAELeoy7MMQQpwQECeOa2QeZ6ABvYkVR5hLPyiNjKoWKesC7jSgulHwemDiQHS318XjQ==", "1234567890", false, "manager", "MANAGER@B-FREE.COM", false, "manager@b-free.com" },
+                    { "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91", 0, "942ad9d0-3d92-49d3-8a23-7e155df805fe", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 2, "Employee", "ivanov@b-free.com", true, "Ivan", false, false, "Ivanov", false, null, "IVANOV@B-FREE.COM", null, "AQAAAAIAAYagAAAAEOWq6CendCVDcAWtZWSrFUPCLHSnxx5msubqG5OxJg1oKg5ojjswSA6Amn0j/dM2jQ==", "1234567890", false, "Accessoriesworker", "IVANOV@B-FREE.COM", false, "ivanov@b-free.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -939,9 +939,9 @@ namespace BicycleApp.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Balance", "ConcurrencyStamp", "DateCreated", "DateDeleted", "DateUpdated", "DelivaryAddressId", "Discriminator", "Email", "EmailConfirmed", "FirstName", "IBAN", "IsDeleted", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TownId", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "17ce735d-6713-4d0a-8fcb-e4a71ee86f6f", 0, 50.00m, "02b45772-2512-49f7-b4f7-1a5e07803678", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 2, "Client", "joro@test.bg", true, "Georgi", "BG0012345678910111212", false, "Georgiev", false, null, "JORO@TEST.BG", null, "AQAAAAIAAYagAAAAEOSaIMp7deEqDtueVrO1+Z2YhCjOWfbrZ8zPv/SvpLCUI1eujCyeuJLyPeMisgCjwg==", "1234567890", false, "JORO@TEST.BG", 2, false, "joro@test.bg" },
-                    { "99d3ca6f-2067-4316-a5d7-934c93789521", 0, 1246.00m, "756b53e6-3470-4efc-8d74-8edf92f28a06", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 3, "Client", "powerranger@test.bg", true, "Dimityr", "BG0012345678910111212", false, "Dimitrov", false, null, "POWERRANGER@TEST.BG", null, "AQAAAAIAAYagAAAAEBASb8K7W0DkH6zp5CAX421e1mSyL3bgYpUKMyi9amDXObg0j5F8MqcbIfUNAJBr7Q==", "1234567890", false, "POWERRANGER@TEST.BG", 3, false, "powerranger@test.bg" },
-                    { "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", 0, 1000.00m, "3c10a9f9-7c04-4d7b-8edb-49760846d06a", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 1, "Client", "client@test.bg", true, "Ivan", "BG0012345678910111212", false, "Ivanov", false, null, "CLIENT@TEST.BG", null, "AQAAAAIAAYagAAAAEA5EhjsirJsDEwuwGpppbDhJZs6rQteZtnkznROXyIjL06wJVfhcqyV+s/nR50M2XA==", "1234567890", false, "CLIENT@TEST.BG", 1, false, "client@test.bg" }
+                    { "17ce735d-6713-4d0a-8fcb-e4a71ee86f6f", 0, 50.00m, "ffbc6210-91de-4e3d-aeb4-7a0396302df2", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 2, "Client", "joro@test.bg", true, "Georgi", "BG0012345678910111212", false, "Georgiev", false, null, "JORO@TEST.BG", null, "AQAAAAIAAYagAAAAEHPfVdXtlyNhVj6mg39k9EUvLt62y6K9AZ10TmhQYUNMr0IZnKglFAnCOCpXQMzPzQ==", "1234567890", false, "JORO@TEST.BG", 2, false, "joro@test.bg" },
+                    { "99d3ca6f-2067-4316-a5d7-934c93789521", 0, 1246.00m, "05806b87-e94f-44b0-b092-6e589bf26368", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 3, "Client", "powerranger@test.bg", true, "Dimityr", "BG0012345678910111212", false, "Dimitrov", false, null, "POWERRANGER@TEST.BG", null, "AQAAAAIAAYagAAAAEEukN4CWNubhV5hnLnL0XFSWk7Q7FVxnlEBCJm9AIT1Kix7W979JhX39+ZxASM7O4g==", "1234567890", false, "POWERRANGER@TEST.BG", 3, false, "powerranger@test.bg" },
+                    { "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", 0, 1000.00m, "c3f12c2b-e18c-4930-9ccc-e4e4f9e6d2af", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 1, "Client", "client@test.bg", true, "Ivan", "BG0012345678910111212", false, "Ivanov", false, null, "CLIENT@TEST.BG", null, "AQAAAAIAAYagAAAAEGDJLDZsCmGEWso1jqeqUHxRmqHtbhLtwUVzVIsnzWUa7rR4h+smaHVFHjp2yOleJw==", "1234567890", false, "CLIENT@TEST.BG", 1, false, "client@test.bg" }
                 });
 
             migrationBuilder.InsertData(
@@ -1040,7 +1040,7 @@ namespace BicycleApp.Data.Migrations
                 columns: new[] { "Id", "ClientId", "DateCreated", "DateDeleted", "DateFinish", "DateSended", "DateUpdated", "Description", "Discount", "FinalAmount", "IsDeleted", "PaidAmount", "SaleAmount", "StatusId", "UnpaidAmount", "VAT" },
                 values: new object[,]
                 {
-                    { 1, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, null, null, "", 0m, 750.00m, false, 0m, 625.00m, 1, 750.00m, 125.00m },
+                    { 1, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, null, null, "", 0m, 750.00m, false, 0m, 625.00m, 2, 750.00m, 125.00m },
                     { 2, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, null, null, "test2", 0m, 850.00m, false, 0m, 725.00m, 1, 850.00m, 125.00m },
                     { 3, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, null, null, "test3", 0m, 950.00m, false, 0m, 825.00m, 1, 750.00m, 125.00m },
                     { 4, "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, null, null, "test4", 0m, 650.00m, false, 0m, 525.00m, 1, 750.00m, 125.00m },

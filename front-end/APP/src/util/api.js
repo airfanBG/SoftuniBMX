@@ -40,7 +40,8 @@ async function request(method, url, data) {
     // alert(error.message);
     clearUserData();
 
-    throw new Error(error.message);
+    // throw new Error(error.message);
+    return { isError: error };
   }
 }
 
