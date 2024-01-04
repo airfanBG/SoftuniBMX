@@ -84,51 +84,17 @@ function ManagerFinished() {
 
   return (
     <>
-      {/* <section className={styles.board}> */}
-      {/* <BoardHeader /> */}
-      {/* {loading && <LoaderWheel />} */}
-
-      {/* <h2 className={styles.boardHeading}>Select time period:</h2> */}
-
-      {/* <section className={styles.section}> */}
-      {/* <form className={styles.form}> */}
-      {/* <label className={styles.label}>
-              Start Date:
-              <input
-                className={styles.input}
-                type="date"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
-              />
-            </label> */}
-      {/* <label className={styles.label}>
-              End Date:
-              <input
-                className={styles.input}
-                type="date"
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-              />
-            </label> */}
-      {/* <button className={styles.btnAdd} onClick={getFinishedOrders}>
-              Get Orders
-            </button> */}
-      {/* </form> */}
-      {/* </section> */}
-      {/* </section> */}
-
-      {background && (
+      {/* {background && (
         <Popup onClose={close}>
           <FinishedOrderFullElement order={currentOrder} />
         </Popup>
-      )}
+      )} */}
       <h2 className={styles.dashHeading}>
         Orders in sequence by time of creation
       </h2>
       <section className={styles.board}>
         <BoardHeader />
         {loading && <LoaderWheel />}
-        {/* {orderList && orderList.length > 0 && ( */}
         <div className={styles.dateContainer}>
           <div className={styles.element}>
             <h2 className={styles.boardHeading}>Select time period:</h2>
@@ -160,9 +126,6 @@ function ManagerFinished() {
                     }
                   />
                 </label>
-                {/* <button className={styles.btnAdd} onClick={useEffect}>
-                Get Orders
-              </button> */}
               </form>
             </section>
           </div>
@@ -183,11 +146,10 @@ function ManagerFinished() {
             </ul>
           </aside>
         </div>
-        {/* )} */}
-        {orderList.length === 0 && (
-          <h2>There is no orders in selected time interval</h2>
-        )}
       </section>
+      {orderList.length === 0 && (
+        <h2>There is no orders in selected time interval</h2>
+      )}
       {orderList && orderList.length > 0 && (
         <>
           {background && (
