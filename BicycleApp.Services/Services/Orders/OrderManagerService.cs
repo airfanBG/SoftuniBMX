@@ -201,7 +201,7 @@
                             .Include(o => o.Client)
                             .AsNoTracking()
                             .Where(o => o.DateCreated >= datesPeriod.StartDate
-                                     && o.DateFinish <= datesPeriod.EndDate
+                                     && o.DateFinish <= datesPeriod.EndDate.AddDays(1)
                                      && o.DateFinish != null
                                      && o.DateSended == null
                                      && o.DateDeleted == null)
@@ -506,7 +506,7 @@
         /// <returns>Task<ICollection<OrderSendedDto>></returns>
         public async Task<ICollection<OrderSendedDto>> AllSendedOrdersAsync()
         {
-            return await _db.Orders//Трия миграцията и пускам отново InitisalMigration
+            return await _db.Orders
                             .Include(o => o.OrdersPartsEmployees)
                             .ThenInclude(ope => ope.OrdersPartsEmployeesInfos)
                             .Include(o => o.Client)
@@ -521,7 +521,9 @@
                                 SaleAmount = o.FinalAmount,
                                 ClientName = _stringManipulator.ReturnFullName(o.Client.FirstName, o.Client.LastName),
                                 ClientEmail = o.Client.Email,
-                                SendDate = o.DateSended.ToString(),
+                                ClientPhone = o.Client.PhoneNumber,
+                                SendDate = _stringManipulator.GetTextFromProperty(o.DateSended.Value.ToString(DefaultDateFormat)),
+                                ImageUrl = _db.BikesStandartModels.Select(b => b.ImageUrl).FirstOrDefault(),
                                 ClientAdress = new ClientAddressDto 
                                 {
                                     Street = o.Client.DelivaryAddress.Street,

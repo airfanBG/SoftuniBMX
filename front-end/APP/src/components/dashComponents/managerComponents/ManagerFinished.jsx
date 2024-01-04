@@ -11,6 +11,7 @@ import { environment } from "../../../environments/environment.js";
 import FinishedOrderFullElement from "./FinishedOrderFullElement.jsx";
 import FinishedOrder from "./FinishedOrder.jsx";
 import Popup from "../../Popup.jsx";
+import {onSendHandler} from "../../dashComponents/managerComponents/managerActions/orderActions.js"
 
 function ManagerFinished() {
   const [background, setBackground] = useState(false);
@@ -75,8 +76,8 @@ function ManagerFinished() {
   }
 
   function onFinishedOrderButtonClick(order) {
-    // TUK
-    console.log(order);
+    const result = onSendHandler(order.orderId);
+    console.log(result);
     setCurrentOrder({});
     setBackground(false);
     setRerender(!rerender);

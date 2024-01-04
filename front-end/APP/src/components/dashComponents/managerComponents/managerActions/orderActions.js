@@ -14,5 +14,9 @@ async function onDeleteHandler(id) {
   const deleted = await post(`${environment.del_order}${id}`);
   return deleted;
 }
+async function onSendHandler(id) {
+  const sended = await post(`${environment.send_order}${id}`);
+  return sended;
+}
 
-export { approveHandlerAction, onRejectHandler, onDeleteHandler };
+export { approveHandlerAction, onRejectHandler, onDeleteHandler, onSendHandler };

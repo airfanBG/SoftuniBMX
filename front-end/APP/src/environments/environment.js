@@ -46,6 +46,8 @@ export const environment = {
   rejected_orders_list: "/api/manager/rejected_orders/",
   all_employees: "/api/manager/all_employees",
   finished_orders: "/api/manager/finished_orders",
+  send_order: "/api/manager/send_order?orderId=",// +id
+  sended_orders: "/api/manager/sended_orders",
 
   //SIUPLY_MANAGER
   parts_in_stock: "/api/supplys_manager/parts_in_stock?page=",
