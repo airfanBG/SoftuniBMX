@@ -4,8 +4,6 @@ import styles from "./FinishedOrderFullElement.module.css";
 
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 
-//import { timeResolver } from "../../../util/resolvers.js";
-
 function FinishedOrderElement({ order, i, onFinishedOrderButtonClick }) {
   const { user } = useContext(UserContext);
 
@@ -112,12 +110,6 @@ function FinishedOrderElement({ order, i, onFinishedOrderButtonClick }) {
                     jobTIme(s.startDate, s.endDate)}
                 </p>
               </div>
-              {/* <div className={styles.metaData}>
-                <p className={styles.field}>
-                  <span className={styles.fieldLabel}>Description:</span>
-                  {s.description}
-                </p>
-              </div> */}
             </div>
           </div>
         ))}
@@ -138,18 +130,3 @@ function FinishedOrderElement({ order, i, onFinishedOrderButtonClick }) {
 }
 
 export default FinishedOrderElement;
-
-// {
-//   "partId": 1,
-//   "partType": "Frame",
-//   "partModel": "Frame Road",
-//   "nameOfEmplоyeeProducedThePart": "Marin Marinov",
-//   "isProduced": true,
-//   "serialNumber": "oemtest1",
-//   "employeeId": null,
-//   "elementProduceTimeInMinutes": null,
-//   "description": null,
-//   "partQuantity": 1,
-//   "startDate": "2023-12-21 22:59:26.6380000",
-//   "endDate": "2023-12-21 22:59:35.8470000"
-// }
