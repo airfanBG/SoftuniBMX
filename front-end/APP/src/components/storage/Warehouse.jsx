@@ -28,6 +28,7 @@ function Warehouse() {
         });
       }
       const sorted = result.parts.sort((a, b) => a.quantity - b.quantity);
+
       setPartList(sorted);
       setLoading(false);
     }
