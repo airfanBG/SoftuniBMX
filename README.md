@@ -29,11 +29,13 @@
 ### [`GET /api/manager/pending_orders`](/ReadMeFiles/Manager/pending_orders.md)
 ### [`GET /api/manager/rejected_orders`](/ReadMeFiles/Manager/rejected_orders.md)
 ### [`GET /api/manager/orders_in_progress`](/ReadMeFiles/Manager/orders_in_progress.md)
-### [`POST /api/manager/delete_order?orderId=3`](/ReadMeFiles/Manager/delete_order.md)
-### [`POST /api/manager/approve_order?orderId=3`](/ReadMeFiles/Manager/approve_order.md)
-### [`POST /api/manager/approve_rejected_order?orderId=3`](/ReadMeFiles/Manager/approve_rejected_order.md)
-### [`POST /api/manager/reject_order?orderId=3`](/ReadMeFiles/Manager/reject_order.md)
+### [`POST /api/manager/delete_order?orderId=`](/ReadMeFiles/Manager/delete_order.md)
+### [`POST /api/manager/approve_order?orderId=`](/ReadMeFiles/Manager/approve_order.md)
+### [`POST /api/manager/approve_rejected_order?orderId=`](/ReadMeFiles/Manager/approve_rejected_order.md)
+### [`POST /api/manager/reject_order?orderId=`](/ReadMeFiles/Manager/reject_order.md)
 ### [`GET /api/manager/finished_orders`](/ReadMeFiles/Manager/finished_orders.md)
+### [`POST /api/manager/send_order?orderId=`](/ReadMeFiles/Manager/send_order.md)
+### [`GET /api/manager/sended_orders`](/ReadMeFiles/Manager/sended_orders.md)
 
 - SuplyManagerController дава възможността да се ползва функционалността на SuplyManagerService. 
 
