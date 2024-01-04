@@ -84,15 +84,15 @@ function ManagerFinished() {
 
   return (
     <>
-      <section className={styles.board}>
-        <BoardHeader />
-        {loading && <LoaderWheel />}
+      {/* <section className={styles.board}> */}
+      {/* <BoardHeader /> */}
+      {/* {loading && <LoaderWheel />} */}
 
-        <h2 className={styles.boardHeading}>Select time period:</h2>
+      {/* <h2 className={styles.boardHeading}>Select time period:</h2> */}
 
-        <section className={styles.section}>
-          <form className={styles.form}>
-            <label className={styles.label}>
+      {/* <section className={styles.section}> */}
+      {/* <form className={styles.form}> */}
+      {/* <label className={styles.label}>
               Start Date:
               <input
                 className={styles.input}
@@ -100,8 +100,8 @@ function ManagerFinished() {
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
               />
-            </label>
-            <label className={styles.label}>
+            </label> */}
+      {/* <label className={styles.label}>
               End Date:
               <input
                 className={styles.input}
@@ -109,13 +109,13 @@ function ManagerFinished() {
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
               />
-            </label>
-            <button className={styles.btnAdd} onClick={getFinishedOrders}>
+            </label> */}
+      {/* <button className={styles.btnAdd} onClick={getFinishedOrders}>
               Get Orders
-            </button>
-          </form>
-        </section>
-      </section>
+            </button> */}
+      {/* </form> */}
+      {/* </section> */}
+      {/* </section> */}
 
       {background && (
         <Popup onClose={close}>
