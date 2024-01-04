@@ -14,7 +14,7 @@ function reducer(state, action) {
     case "error/message":
       return { ...state, message: action.payload };
     case "error/clear":
-      return { initialState };
+      return { ...state, error: false, message: "" };
 
     default:
       throw new Error("Unknown action type");

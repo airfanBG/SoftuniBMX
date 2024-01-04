@@ -298,5 +298,38 @@
 
             return orders;
         }
+
+        /// <summary>
+        /// Retusnt info abouth a client order
+        /// </summary>
+        /// <param name="orderId">Id of the order</param>
+        /// <returns>Dto</returns>
+        public async Task<OrderDtoInfo?> GetOrderById(int orderId)
+        {
+            var order = await _db.Orders
+                .Where(o => o.Id == orderId)
+                .Select(o => new OrderDtoInfo()
+                {
+                    SerialNumber = _db.OrdersPartsEmployees
+                    .Where(op => op.OrderId == orderId)
+                    .Select(op => op.SerialNumber)
+                    .First(),
+                    Description = o.Description,
+                    FinalAmount = $"{o.FinalAmount:f2}",
+                    UnpaidAmount = $"{o.UnpaidAmount:f2}",
+                    Status = o.Status.Name,
+                    DateCreated = o.DateCreated.ToString(DefaultDateFormat),
+                    DateFinished = o.DateFinish != null ? o.DateFinish.Value.ToString(DefaultDateFormat) : "in progres"
+                })
+                .FirstOrDefaultAsync();
+
+            if (order == null)
+            {
+                return null;
+            }
+
+            return order;
+
+        }
     }
 }

@@ -11,7 +11,7 @@ function BikeModel({ imageUrl, model, price, top, description, id }) {
   const bikeId = id;
 
   function onClickSelection() {
-    if (user) {
+    if (user && user.role === "user") {
       setStockBike({
         userId: user.id,
         bikeId: id,
@@ -39,13 +39,15 @@ function BikeModel({ imageUrl, model, price, top, description, id }) {
           </span>
           <p>
             {/* <p className={styles["card-pf"]}> */}
-            <Link
-              to={user ? "/profile/get-stock" : "/auth/login"}
-              className={styles["card-link"]}
-              onClick={onClickSelection}
-            >
-              Get it!
-            </Link>
+            {user.role === "user" && (
+              <Link
+                to={user ? "/profile/get-stock" : "/auth/login"}
+                className={styles["card-link"]}
+                onClick={onClickSelection}
+              >
+                Get it!
+              </Link>
+            )}
           </p>
         </div>
       </div>

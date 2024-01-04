@@ -84,7 +84,7 @@ function OrderItem({ product, onBtnHandler, orderIndex, orderId }) {
             product.datetimeFinished.replaceAll("/", ".")}
         </p>
         <p className={styles.partId}>
-          ID# {product.partId + "-" + product.partId}
+          ID# {product.orderId + "-" + product.partId}
         </p>
         {/* </div> */}
 

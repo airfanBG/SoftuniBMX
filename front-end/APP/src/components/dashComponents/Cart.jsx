@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 
 import styles from "./Cart.module.css";
 
@@ -11,7 +11,7 @@ import { clearOrderData, getOrderData, getStockData } from "../../util/util.js";
 //   getOneWheel,
 // } from "../../bikeServices/service.js";
 import LoaderWheel from "../LoaderWheel.jsx";
-import { get, post, put } from "../../util/api.js";
+import { post } from "../../util/api.js";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/GlobalUserProvider.jsx";
 import { environment } from "../../environments/environment.js";
@@ -26,36 +26,40 @@ function Cart() {
   const [userText, setUserText] = useState("");
   const [select, setSelect] = useState("");
   const [error, setError] = useState({});
-  const [headImg, setHeadImg] = useState({ frame: "", wheel: "", parts: "" });
+  const [headImg, setHeadImg] = useState({});
 
   const navigate = useNavigate();
 
-  const order = getOrderData();
+  const order = useMemo(() => {
+    return getOrderData();
+  }, []);
   const defaultBike = getStockData();
 
   // if (defaultBike) navigate("/profile/get-stock");
 
-  useEffect(function () {
-    const abortController = new AbortController();
-    setLoading(true);
-    if (!order) {
-      return setLoading(false);
-    }
-    // console.log(order);
-    const { frame, wheel, parts } = order;
+  useEffect(
+    function () {
+      const abortController = new AbortController();
+      setLoading(true);
+      if (!order) {
+        return setLoading(false);
+      }
+      // console.log(order);
+      const { frame, wheel, parts } = order;
 
-    setHeadImg({
-      ...headImg,
-      frame: frame.imageUrls[0],
-      wheel: wheel.imageUrls[0],
-      parts: parts.imageUrls[0],
-    });
-    setFrame({ ...frame });
-    setWheel({ ...wheel });
-    setParts({ ...parts });
-    setLoading(false);
-    return () => abortController.abort();
-  }, []);
+      setHeadImg({
+        frame: frame.imageUrls[0],
+        wheel: wheel.imageUrls[0],
+        parts: parts.imageUrls[0],
+      });
+      setFrame({ ...frame });
+      setWheel({ ...wheel });
+      setParts({ ...parts });
+      setLoading(false);
+      return () => abortController.abort();
+    },
+    [order]
+  );
 
   function onChangeHandler(e) {
     setSelect(Number(e.target.value));
@@ -107,6 +111,7 @@ function Cart() {
     const userPayment = { ...user, balance: userReducedBalance };
     setLoading(true);
     try {
+      console.log(currentOrder);
       const orderResponse = await post(environment.create_order, currentOrder);
       console.log(orderResponse);
 

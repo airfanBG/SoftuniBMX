@@ -5,15 +5,19 @@ import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 
 function OrderInProgress({ order, i, onOrderButtonClick }) {
   const { user } = useContext(UserContext);
+  // console.log(order);
 
   function statusCheck(index) {
     const base = order.orderStates;
 
     let result = null;
 
-    if (base[index].isProduced) {
+    if (base[index]?.isProduced) {
       result = <span className={styles.icon}>&#10004;</span>;
-    } else if (base[index].startDate === null && base[index].endDate === null) {
+    } else if (
+      base[index]?.startDate === null &&
+      base[index]?.endDate === null
+    ) {
       result = (
         <span
           className={`${styles.ionIcon} ${styles.preview} ${
@@ -23,7 +27,10 @@ function OrderInProgress({ order, i, onOrderButtonClick }) {
           <ion-icon name="hourglass-outline"></ion-icon>
         </span>
       );
-    } else if (base[index].startDate !== null && base[index].endDate === null) {
+    } else if (
+      base[index]?.startDate !== null &&
+      base[index]?.endDate === null
+    ) {
       result = (
         <span
           className={`${styles.ionIcon} ${styles.started} ${

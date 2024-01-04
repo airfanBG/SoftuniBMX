@@ -77,6 +77,7 @@ function Login() {
       ...err,
       [e.target.name]: "",
     }));
+    setResError({ status: false, message: "" });
   }
 
   async function formSubmitHandler(e) {
@@ -119,18 +120,19 @@ function Login() {
       loginUser(currentUser);
       updateUser(currentUser);
       setUserData(currentUser);
-      // setIsLoading(false);
+      setIsLoading(false);
       // navigate("/");
     } catch (err) {
       setResError({
         status: true,
         message: "Email or Password do not match",
       });
+      setIsLoading(false);
 
-      setTimeout(() => {
-        navigate("/");
-        clearUserData();
-      }, "3000");
+      clearUserData();
+      // setTimeout(() => {
+      //   navigate("/");
+      // }, "3000");
       throw new Error(err.message);
     }
   }

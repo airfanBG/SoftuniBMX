@@ -201,8 +201,9 @@
                             .Include(o => o.Client)
                             .AsNoTracking()
                             .Where(o => o.DateCreated >= datesPeriod.StartDate
-                                     && o.DateFinish <= datesPeriod.EndDate
+                                     && o.DateFinish <= datesPeriod.EndDate.AddDays(1)
                                      && o.DateFinish != null
+                                     && o.DateSended == null
                                      && o.DateDeleted == null)
                             .Select(o => new OrderProgretionDto()
                             {
@@ -511,6 +512,7 @@
                             .Include(o => o.Client)
                             .AsNoTracking()
                             .Where(o => o.DateFinish != null
+                                     && o.DateSended != null
                                      && o.DateDeleted == null)
                             .Select(o => new OrderSendedDto()
                             {
@@ -519,6 +521,9 @@
                                 SaleAmount = o.FinalAmount,
                                 ClientName = _stringManipulator.ReturnFullName(o.Client.FirstName, o.Client.LastName),
                                 ClientEmail = o.Client.Email,
+                                ClientPhone = o.Client.PhoneNumber,
+                                SendDate = _stringManipulator.GetTextFromProperty(o.DateSended.Value.ToString(DefaultDateFormat)),
+                                ImageUrl = _db.BikesStandartModels.Select(b => b.ImageUrl).FirstOrDefault(),
                                 ClientAdress = new ClientAddressDto 
                                 {
                                     Street = o.Client.DelivaryAddress.Street,
@@ -534,9 +539,26 @@
                             .ToListAsync();
         }
 
-        public Task<bool> SendOrderAsync(int orderId)
+        public async Task<bool> SendOrderAsync(int orderId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var orderForSend = await _db.Orders.Where(o => o.Id == orderId
+                                                                        && o.DateFinish != null
+                                                                        && o.DateDeleted == null)
+                                                                        .FirstAsync();
+
+                orderForSend.DateSended = _dateTimeProvider.Now;
+                orderForSend.StatusId++;
+
+                await _db.SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception)
+            {
+            }
+            return false;
         }
     }
 }
