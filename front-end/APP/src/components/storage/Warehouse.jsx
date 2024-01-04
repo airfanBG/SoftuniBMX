@@ -27,7 +27,8 @@ function Warehouse() {
           message: "Something went wrong. Service can not get data!",
         });
       }
-      setPartList(result.parts);
+      const sorted = result.parts.sort((a, b) => a.quantity - b.quantity);
+      setPartList(sorted);
       setLoading(false);
     }
     getPartsInWarehouse();
