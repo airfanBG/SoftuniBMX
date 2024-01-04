@@ -89,16 +89,16 @@ function QControlOrderItem({ product, onReBuild }) {
     }
   }, [accessoryCheck, frameCheck, wheelCheck]);
 
-  const finalResult = { ...product };
+  // const finalResult = { ...product };
 
-  const ref = useRef([]);
+  // const ref = useRef([]);
 
-  const Unchecked = () => {
-    // console.log(ref.current.length);
-    for (let i = 0; i < ref.current.length; i++) {
-      ref.current[i].checked = false;
-    }
-  };
+  // const Unchecked = () => {
+  //   // console.log(ref.current.length);
+  //   for (let i = 0; i < ref.current.length; i++) {
+  //     ref.current[i].checked = false;
+  //   }
+  // };
 
   useEffect(() => {
     if (frameCheck && wheelCheck && accessoryCheck) {
