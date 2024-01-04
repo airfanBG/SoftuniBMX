@@ -82,6 +82,8 @@ namespace BicycleApp.Services.Services
                     Intend = p.Intend,
                     Type = p.Type,
                     SalePrice = p.SalePrice,
+                    ImageUrls = p.ImagesParts.Where(p => p.PartId == p.Id)
+                    .Select(ip => ip.ImageUrl).ToList(),
                     OEMNumber = p.OEMNumber,
                     Rating = (int)Math.Ceiling(p.Rates
                                     .Where(r => r.PartId == p.Id)
@@ -126,6 +128,7 @@ namespace BicycleApp.Services.Services
                     Intend = p.Intend,
                     Type = p.Type,
                     SalePrice = p.SalePrice,
+                    ImageUrls = GetImageUrls(id),
                     OEMNumber = p.OEMNumber,
                     Rating = (int)Math.Ceiling(p.Rates
                                     .Where(r => r.PartId == p.Id)
@@ -133,9 +136,6 @@ namespace BicycleApp.Services.Services
                                     .Average())
                 })
                 .FirstAsync();
-
-                var imageUrls = GetImageUrls(id);
-                result.ImageUrls = imageUrls;
 
                 return result;
             }
