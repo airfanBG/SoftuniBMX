@@ -56,7 +56,7 @@ function ManagerRejected() {
 
   return (
     <>
-      <h2 className={styles.dashHeading}>Selected items</h2>
+      <h2 className={styles.dashHeading}>Rejected orders</h2>
 
       <section className={styles.board}>
         <BoardHeader />

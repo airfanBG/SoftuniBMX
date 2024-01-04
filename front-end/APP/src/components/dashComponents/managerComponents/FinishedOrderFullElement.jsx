@@ -1,14 +1,30 @@
-import { timeResolver } from "../../../util/resolvers.js";
+import { minutesToHours, timeResolver } from "../../../util/resolvers.js";
 import { useState, useContext } from "react";
 import styles from "./FinishedOrderFullElement.module.css";
 
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
+
+//import { timeResolver } from "../../../util/resolvers.js";
 
 function FinishedOrderElement({ order, i, onFinishedOrderButtonClick }) {
   const { user } = useContext(UserContext);
 
   const { clientName, paidAmount, unpaidAmount, finalAmount, orderStates } =
     order;
+
+    function jobTIme(t1, t2) {
+      let timeResult = "";
+      const date1 = new Date(t1).getTime();
+      const date2 = new Date(t2).getTime();
+      // TODO: only for development
+      if (date2 - date1 < 100000) {
+        timeResult = timeResolver(date1, Math.floor(Math.random() * 10 * date2));
+      } else {
+        timeResult = timeResolver(date1, date2);
+      }
+  
+      return timeResult;
+    }  
 
   return (
     <div className={styles.container}>
@@ -44,6 +60,21 @@ function FinishedOrderElement({ order, i, onFinishedOrderButtonClick }) {
 
       <div className={styles.orderStatesList}>
         {/* Имена и Email */}
+        <div className={styles.headLine}>
+          <p className={`${styles.field} ${styles.headElement}`}>
+            <span className={styles.fieldLabel}>Client name:</span>
+            {order.clientName}
+          </p>
+          <p className={`${styles.field} ${styles.headElement}`}>
+            <span className={styles.fieldLabel}>Email:</span>
+            <button
+              to="javascript:void(0)"
+              onClick={() => (window.location = `mailto:${order.clientEmail}`)}
+            >
+              {order.clientEmail}
+            </button>
+          </p>
+        </div>
 
         {orderStates.map((s, i) => (
           <div key={i} className={styles.sector}>
@@ -75,7 +106,10 @@ function FinishedOrderElement({ order, i, onFinishedOrderButtonClick }) {
                 </p>
                 <p className={styles.field}>
                   <span className={styles.fieldLabel}>Prodiced time:</span>
-                  {s.elementProduceTimeInMinutes}
+                  {/* {s.elementProduceTimeInMinutes} */}
+                  {!!s.startDate &&
+                    !!s.endDate &&
+                    jobTIme(s.startDate, s.endDate)}
                 </p>
               </div>
               {/* <div className={styles.metaData}>
@@ -91,6 +125,9 @@ function FinishedOrderElement({ order, i, onFinishedOrderButtonClick }) {
           <button
             className={styles.btn}
             onClick={() => onFinishedOrderButtonClick(order)} //Трябва да прати orderId на ендпойнта за изпращане!?
+            disabled={
+              unpaidAmount > 0
+            }
           >
             Send order
           </button>

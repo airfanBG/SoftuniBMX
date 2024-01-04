@@ -11,6 +11,7 @@ import { environment } from "../../../environments/environment.js";
 import FinishedOrderFullElement from "./FinishedOrderFullElement.jsx";
 import FinishedOrder from "./FinishedOrder.jsx";
 import Popup from "../../Popup.jsx";
+import {onSendHandler} from "../../dashComponents/managerComponents/managerActions/orderActions.js"
 
 function ManagerFinished() {
   const [background, setBackground] = useState(false);
@@ -75,8 +76,8 @@ function ManagerFinished() {
   }
 
   function onFinishedOrderButtonClick(order) {
-    // TUK
-    console.log(order);
+    const result = onSendHandler(order.orderId);
+    console.log(result);
     setCurrentOrder({});
     setBackground(false);
     setRerender(!rerender);
@@ -84,52 +85,72 @@ function ManagerFinished() {
 
   return (
     <>
+      {/* {background && (
+        <Popup onClose={close}>
+          <FinishedOrderFullElement order={currentOrder} />
+        </Popup>
+      )} */}
+      <h2 className={styles.dashHeading}>
+        Orders in sequence by time of creation
+      </h2>
       <section className={styles.board}>
         <BoardHeader />
         {loading && <LoaderWheel />}
-        {/* {orderList && orderList.length > 0 && ( */}
-        <>
-          <h2 className={styles.boardHeading}>Select time period:</h2>
-
-          <section className={styles.section}>
-            <form className={styles.form}>
-              <label className={styles.label}>
-                Start Date:
-                <input
-                  className={styles.input}
-                  type="date"
-                  value={startDate}
-                  onChange={(e) =>
-                    setStartDate(
-                      new Date(e.target.value).toLocaleDateString("en-CA")
-                    )
-                  }
-                />
-              </label>
-              <label className={styles.label}>
-                End Date:
-                <input
-                  className={styles.input}
-                  type="date"
-                  value={endDate}
-                  onChange={(e) =>
-                    setEndDate(
-                      new Date(e.target.value).toLocaleDateString("en-CA")
-                    )
-                  }
-                />
-              </label>
-              {/* <button className={styles.btnAdd} onClick={useEffect}>
-                Get Orders
-              </button> */}
-            </form>
-          </section>
-        </>
-        {/* )} */}
-        {orderList.length === 0 && (
-          <h2>There is no orders in selected time interval</h2>
-        )}
+        <div className={styles.dateContainer}>
+          <div className={styles.element}>
+            <h2 className={styles.boardHeading}>Select time period:</h2>
+            <section className={styles.section}>
+              <form className={styles.form}>
+                <label className={styles.label}>
+                  Start Date:
+                  <input
+                    className={styles.input}
+                    type="date"
+                    value={startDate}
+                    onChange={(e) =>
+                      setStartDate(
+                        new Date(e.target.value).toLocaleDateString("en-CA")
+                      )
+                    }
+                  />
+                </label>
+                <label className={styles.label}>
+                  End Date:
+                  <input
+                    className={styles.input}
+                    type="date"
+                    value={endDate}
+                    onChange={(e) =>
+                      setEndDate(
+                        new Date(e.target.value).toLocaleDateString("en-CA")
+                      )
+                    }
+                  />
+                </label>
+              </form>
+            </section>
+          </div>
+          <aside className={styles.element}>
+            <h3 className={styles.infoHeading}>
+              Information about selecting date interval
+            </h3>
+            <ul className={styles.list}>
+              <li>On initial render will be displayed all available orders</li>
+              <li>
+                If select start date will limit the interval between selected
+                date and today
+              </li>
+              <li>
+                When select start and end date will be displayed only orders,
+                created in selected time interval
+              </li>
+            </ul>
+          </aside>
+        </div>
       </section>
+      {orderList.length === 0 && (
+        <h2>There is no orders in selected time interval</h2>
+      )}
       {orderList && orderList.length > 0 && (
         <>
           {background && (

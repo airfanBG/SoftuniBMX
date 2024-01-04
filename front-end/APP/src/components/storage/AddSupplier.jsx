@@ -7,6 +7,7 @@ import { PhoneInput } from "react-international-phone";
 import { post } from "../../util/api.js";
 import { environment } from "../../environments/environment.js";
 import { useNavigate } from "react-router-dom";
+import { useError } from "../../context/ErrorContext.jsx";
 
 const initialState = {
   loading: false,
@@ -18,6 +19,7 @@ const initialState = {
   address: "",
   category: "",
   vat_number: "1098749853583475834",
+  hasError: false,
 };
 
 function reducer(state, action) {
@@ -38,6 +40,10 @@ function reducer(state, action) {
       return { ...state, address: action.payload };
     case "category/added":
       return { ...state, category: action.payload };
+    case "error/set":
+      return { ...state, hasError: true };
+    case "error/clear":
+      return { ...state, hasError: false };
     default:
       throw new Error("Unknown action type");
   }
@@ -45,6 +51,7 @@ function reducer(state, action) {
 
 function AddSupplier({ onFinish, active }) {
   const { user } = useContext(UserContext);
+  const { error, errorHandler } = useError();
   const [
     {
       loading,
@@ -56,10 +63,11 @@ function AddSupplier({ onFinish, active }) {
       address,
       category,
       vat_number,
+      hasError,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
-
+  console.log(error?.title);
   function setReducerState(e) {
     const type = e.target.name;
     const payload = e.target.value;
@@ -67,11 +75,13 @@ function AddSupplier({ onFinish, active }) {
   }
 
   function fieldInfo(e) {
+    errorHandler();
     dispatch({ type: "input/onFocus", payload: e.target.name });
   }
 
   async function onSubmitHandler(e) {
     e.preventDefault();
+    dispatch({ type: "error/clear" });
 
     const data = {
       name: supplier,
@@ -84,15 +94,26 @@ function AddSupplier({ onFinish, active }) {
     };
 
     const result = await post(environment.add_supplier, data);
-    // console.log(result);
-
-    onFinish(active);
+    if (result.isError) {
+      errorHandler(result.isError);
+      dispatch({ type: "error/set" });
+    } else {
+      onFinish(active);
+    }
+    console.log(result);
   }
   return (
     <>
       <h2 className={styles.dashHeading}>Add Suppliers</h2>
 
       <section className={styles.board}>
+        {hasError && (
+          <div className={styles.error}>
+            {/* <h2>{error.title}</h2> */}
+            <h2>uigergyiuert</h2>
+            <button>Close</button>
+          </div>
+        )}
         {/* <BoardHeader /> */}
         {loading && <LoaderWheel />}
 

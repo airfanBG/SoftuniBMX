@@ -3,8 +3,12 @@ import styles from "./FinishedOrder.module.css";
 
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 
+import { totalTimeResolver } from "../../../util/resolvers.js";
+
 function FinishedOrder({ order, i, onOrderButtonClick }) {
   const { user } = useContext(UserContext);
+
+
 
   return (
     <>
@@ -27,7 +31,9 @@ function FinishedOrder({ order, i, onOrderButtonClick }) {
         </p>
         <p className={styles.dateCreated}>
           <span>Total time:</span>
-          {order.totalProductionTime}
+          {/* {order.totalProductionTime} */}
+          {order.totalProductionTime &&
+                    totalTimeResolver(order.totalProductionTime)}
         </p>
         <p className={styles.serial}>
           <span className={styles.label}>Client:</span>

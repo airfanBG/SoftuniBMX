@@ -37,3 +37,9 @@
   border-bottom: 1px solid var(--color-border-hover);
   padding-bottom: 0.8rem;
 }
+.orders {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding: 1rem 0;
+}

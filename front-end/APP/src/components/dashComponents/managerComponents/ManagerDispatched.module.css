@@ -6,7 +6,7 @@
 }
 
 .board {
-  width: 100%;
+  width: 120%;
   min-height: 100px;
   border: 1px solid var(--color-border);
   border-radius: 5px;
@@ -15,4 +15,10 @@
   flex-direction: column;
   gap: 2rem;
   background-color: #fff;
+}
+.orders {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding: 1rem 0;
 }

@@ -7,15 +7,11 @@ function UserOrdersTable({ orders }) {
   const navigateOrder = useNavigate("/");
 
   function viewPart(partId) {
-    //for now and to be fixed
-    console.log(partId);
-    navigatePart("/about");
+    navigatePart(`/part/${partId}`);
   }
 
   function viewOrder(orderId) {
-    //for now and to be fixed
-    console.log(orderId);
-    navigateOrder("/about");
+    navigateOrder(`/profile/user-order/${orderId}`);
   }
 
   return (

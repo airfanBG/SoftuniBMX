@@ -14,6 +14,16 @@ function timeResolver(t1, t2) {
   return roundedHours + " hours and " + roundedMinutes + " minutes.";
 }
 
+function totalTimeResolver(minutes) {
+  const hours = minutes / 60;
+  const roundedHours = Math.floor(hours);
+  const min = (hours - roundedHours) * 60;
+  const roundedMinutes = Math.round(min);
+
+  // console.log(rhours + " hours and " + rminutes + " minutes.");
+  return roundedHours + " hours and " + roundedMinutes + " minutes.";
+}
+
 function formatCurrency(value) {
   return new Intl.NumberFormat("bg", {
     style: "currency",
@@ -66,4 +76,5 @@ export {
   formatCurrency,
   getMonthName,
   minutesToHours,
+  totalTimeResolver
 };
