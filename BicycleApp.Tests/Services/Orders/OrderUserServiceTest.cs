@@ -59,7 +59,6 @@
             // Assert
             Assert.IsNull(result);
         }
-
         [Test]
         public async Task CreateOrderByUserAsync_Should_ReturNewOrderObject_WhenUserSuccesfulyMadeOrder()
         {
