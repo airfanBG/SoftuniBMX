@@ -11,5 +11,7 @@
         Task<bool> EditPart(PartEditDto partEditDto);
 
         Task<PartGetDto> GetCategoties();
+
+        Task<PartFullInfoDto?> GetPartById(int partId);
     }
 }

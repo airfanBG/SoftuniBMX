@@ -16,8 +16,16 @@
   flex-direction: column;
   gap: 2rem;
   background-color: #fff;
+  position: relative;
 }
-
+.error {
+  position: absolute;
+  z-index: 10;
+  color: var(--color-warning);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .section {
   display: grid;
   grid-template-columns: 1fr 1fr;

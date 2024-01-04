@@ -37,7 +37,7 @@
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> AddPart([FromBody]PartAddDto partAddDto)
+        public async Task<ActionResult> AddPart([FromBody] PartAddDto partAddDto)
         {
             if (partAddDto == null)
             {
@@ -95,6 +95,36 @@
             catch (Exception)
             {
                 return StatusCode(500);
+            }
+        }
+
+        [HttpGet]
+        [Route("find")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<PartFullInfoDto>> GetPartById([FromQuery] int partId)
+        {
+            if (partId == null)
+            {
+                return BadRequest(partId);
+            }
+
+            try
+            {
+                var part = await partService.GetPartById(partId);
+
+                if (part == null)
+                {
+                    return NotFound(partId);
+                }
+
+                return Ok(part);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, partId);
             }
         }
     }

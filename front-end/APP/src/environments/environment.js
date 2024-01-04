@@ -20,8 +20,9 @@ export const environment = {
   create_order: "/api/client_order/create",
   orders_in_progress: "/api/client_order/progress?id=", // + id,
   delete_order: "/api/client_order/delete",
-  orders_ready: "/api/client_order/get_orders_ready?clientId=",
-  orders_archive: "/api/client_order/get_orders_archive?clientId=",
+  orders_ready: "/api/client_order/get_orders_ready?clientId=", // + id
+  orders_archive: "/api/client_order/get_orders_archive?clientId=", // + id
+  find_order: "/api/client_order/find?orderId=", // + id
   update_balance: "/api/client/bankUpdate",
 
   // EMPLOYEE
@@ -60,4 +61,7 @@ export const environment = {
 
   //STORAGE
   add_supplier: "/api/supplys_manager/create_suplier",
+
+  //PART
+  find_part: "/api/part/find?partId=", // + id
 };
