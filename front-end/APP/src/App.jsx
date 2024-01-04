@@ -20,20 +20,14 @@ import UserInfo from "./components/dashComponents/userComponents/UserInfo.jsx";
 import InProgress from "./components/dashComponents/managerComponents/InProgress.jsx";
 import QControlOrders from "./components/dashComponents/qControlComponents/QControlOrders.jsx";
 import UserTrackOrder from "./components/dashComponents/userComponents/UserTrackOrder.jsx";
-import UserInfo from "./components/dashComponents/userComponents/UserInfo.jsx";
 import UserHomeScreenSelection from "./components/dashComponents/userComponents/UserHomeScreenSelection.jsx";
 import ComponentScaffold from "./components/dashComponents/userComponents/ComponentScaffold.jsx";
 import ComponentUserOrdersArchive from "./components/dashComponents/userComponents/ComponentUserOrdersArchive.jsx";
 import ComponentUserOrdersReady from "./components/dashComponents/userComponents/ComponentUserOrdersReady.jsx";
 import UserArchive from "./components/dashComponents/userComponents/UserArchive.jsx";
 
-import WorkerOrders from "./components/dashComponents/workerComponents/WorkerOrders.jsx";
-import WorkerFinished from "./components/dashComponents/workerComponents/WorkerFinished.jsx";
 // import EmployersList from "./components/dashComponents/managerComponents/EmployersList.jsx";
 // import AddMember from "./components/dashComponents/managerComponents/AddMember.jsx";
-import QControlOrders from "./components/dashComponents/qControlComponents/QControlOrders.jsx";
-import ManagerOrders from "./components/dashComponents/managerComponents/ManagerOrders.jsx";
-import InProgress from "./components/dashComponents/managerComponents/InProgress.jsx";
 import ManagerRejected from "./components/dashComponents/managerComponents/ManagerRejected.jsx";
 import ManagerFinished from "./components/dashComponents/managerComponents/ManagerFinished.jsx";
 import ManagerStatistic from "./components/dashComponents/managerComponents/ManagerStatistic.jsx";
@@ -42,10 +36,12 @@ import StorageMain from "./components/storage/StorageMain.jsx";
 import Employers from "./components/dashComponents/managerComponents/Employers.jsx";
 import Warehouse from "./components/storage/Warehouse.jsx";
 import Contacts from "./pages/Contacts/Contacts.jsx";
-import ComponentUserOrdersReady from "./components/dashComponents/userComponents/ComponentUserOrdersReady.jsx";
-import ComponentUserOrdersArchive from "./components/dashComponents/userComponents/ComponentUserOrdersArchive.jsx";
 import ComponentUserOrder from "./components/dashComponents/userComponents/ComponentUserOrder.jsx";
-import PartInfo from "./components/PartInfo.jsx"
+import PartInfo from "./components/PartInfo.jsx";
+import { ErrorProvider } from "./context/ErrorContext.jsx";
+import LoaderWheel from "./components/LoaderWheel.jsx";
+import ManagerDispatched from "./components/dashComponents/managerComponents/ManagerDispatched.jsx";
+import MonthlySalary from "./components/dashComponents/MonthlySalary.jsx";
 // LAZY LOADING
 const CreateBike = lazy(() =>
   import("./components/createComponents/CreateBike.jsx")
