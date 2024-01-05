@@ -34,14 +34,16 @@ function Salaries() {
   }
 
   async function paySalary(amount, baseSalary, id) {
+    setLoading(true);
     const bonus = Number(amount) - baseSalary;
     const data = {
       bonus: bonus,
       employeeId: id,
     };
-    console.log(data);
     const result = await post(environment.pay_salary, data);
-    console.log(result);
+    // console.log(result);
+    setLoading(false);
+    close();
   }
 
   function close(e) {

@@ -152,10 +152,9 @@ function PopupInfo({ person, onClose, isSalaries = false, times, paySalary }) {
                   </div>
                   <button
                     className={styles.btn}
-                    onClick={() => {
-                      paySalary(salary, person.baseSalary, person.id);
-                      onClose();
-                    }}
+                    onClick={() =>
+                      paySalary(salary, person.baseSalary, person.id)
+                    }
                     disabled={salary === ""}
                   >
                     Pay salary
