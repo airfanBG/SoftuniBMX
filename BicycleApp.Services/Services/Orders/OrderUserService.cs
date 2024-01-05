@@ -1,6 +1,6 @@
 ﻿namespace BicycleApp.Services.Services.Orders
 {
-    using BicicleApp.Common.Providers.Contracts;
+    using BicycleApp.Common.Providers.Contracts;
 
     using BicycleApp.Data;
     using BicycleApp.Services.Contracts.Factory;

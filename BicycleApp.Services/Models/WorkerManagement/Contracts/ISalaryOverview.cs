@@ -5,6 +5,6 @@
         public string EmployeeId { get; set; }
         public string EmployeeName { get; set; }
         public string CurrentMonth { get; set; }
-        public string TotalSalary { get; set; }
+        public decimal TotalSalary { get; set; }
     }
 }

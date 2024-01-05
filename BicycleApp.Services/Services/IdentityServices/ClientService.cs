@@ -3,10 +3,8 @@
     using System.IdentityModel.Tokens.Jwt;
     using System.Security.Claims;
     using System.Text;
-    using BicicleApp.Common.Providers.Contracts;
     using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
-    using BicycleApp.Data.Interfaces;
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.HelperClasses.Contracts;

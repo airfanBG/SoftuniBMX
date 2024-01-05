@@ -1,10 +1,9 @@
 namespace BicicleApp.Api
 {
     using System.Text;
-    using BicicleApp.Common.Providers.Contracts;
+    using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Common;
     using BicycleApp.Common.Providers;
-    using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;

@@ -1,20 +1,29 @@
 ﻿namespace BicycleApp.Services.Services
 {
     using BicycleApp.Common.Providers.Contracts;
+    using static BicycleApp.Common.ApplicationGlobalConstants;
     using BicycleApp.Data;
     using BicycleApp.Services.Contracts;
+    using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Models.WorkerManagement;
     using BicycleApp.Services.Models.WorkerManagement.Contracts;
     using Microsoft.EntityFrameworkCore;
+    using BicycleApp.Services.HelperClasses.Contracts;
 
     public class WorkerManagement: IWorkerManagement
     {
         private readonly BicycleAppDbContext _db;
         private readonly IOptionProvider _optionProvider;
-        public WorkerManagement(BicycleAppDbContext db, IOptionProvider optionProvider)
+        private readonly IEmployeeFactory _employeeFactory;
+        private readonly IDateTimeProvider _dateTimeProvider;
+        private readonly IStringManipulator _stringManipulator;
+        public WorkerManagement(BicycleAppDbContext db, IOptionProvider optionProvider, IEmployeeFactory employeeFactory, IDateTimeProvider dateTimeProvider, IStringManipulator stringManipulator)
         {
             _db = db;
             _optionProvider = optionProvider;
+            _employeeFactory = employeeFactory;
+            _dateTimeProvider = dateTimeProvider;
+            _stringManipulator = stringManipulator;
         }
 
         public async Task<SalaryOverview> EmployeeSalaryCalculation(ITotalSalary baseSalary)
@@ -24,6 +33,7 @@
             try
             {
                 var employee = await _db.Employees
+                                        .AsNoTracking()
                                         .Include(es => es.EmployeeMonthSalaryInfos)
                                         .FirstAsync(e => e.Id == baseSalary.EmployeeId);
 
@@ -32,8 +42,21 @@
                 decimal internshipRate = salaryAccrualPercentagesValues.InternshipRate;
 
                 var internshipValue = InternshipValueCalculation(employee.BaseSalary, allInternshipMonths, internshipRate);
+                var currentDate = _dateTimeProvider.Now;
 
-                return new SalaryOverview();
+                var salaryInfo = _employeeFactory.CreateEmployeeMonthSalaryInfo(employee.BaseSalary, internshipValue, baseSalary.Bonus, salaryAccrualPercentagesValues, employee.Id, currentDate);
+
+                await _db.EmployeesMonthsSalariesInfos.AddAsync(salaryInfo);
+                await _db.SaveChangesAsync();
+
+                return new SalaryOverview()
+                {
+                    TotalSalary = salaryInfo.BaseSalary + salaryInfo.InternshipValue + salaryInfo.MonthBonus,
+                    CurrentMonth = salaryInfo.Month.ToString(DefaultDateFormat),
+                    EmployeeId = salaryInfo.EmployeeId,
+                    EmployeeName = _stringManipulator.ReturnFullName(employee.FirstName, employee.LastName)
+                };
+                        
             }
             catch (Exception)
             {
@@ -43,7 +66,11 @@
 
         private decimal InternshipValueCalculation(decimal baseSalary, int internshipMonths, decimal internshipRate)
         {
-            throw new NotImplementedException();
+            int internshipYears = internshipMonths / 12;
+            decimal internshipAllYearsRate = internshipYears * internshipRate;
+            decimal internshipValue = Math.Round((baseSalary * (internshipAllYearsRate / 100)), 2);
+
+            return internshipValue;
         }
     }
 }

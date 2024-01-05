@@ -1,8 +1,7 @@
-﻿using BicicleApp.Common.Providers.Contracts;
+﻿using BicycleApp.Common.Providers.Contracts;
 using BicycleApp.Data;
 using BicycleApp.Services.Contracts;
 using BicycleApp.Services.Models;
-using BicycleApp.Services.Models.Order;
 using BicycleApp.Services.Models.Supply;
 using Microsoft.EntityFrameworkCore;
 

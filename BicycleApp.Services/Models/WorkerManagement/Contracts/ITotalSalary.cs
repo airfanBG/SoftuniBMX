@@ -2,7 +2,7 @@
 {
     public interface ITotalSalary
     {
-        public decimal? Bonus { get; set; }
+        public decimal Bonus { get; set; }
         public string EmployeeId { get; set; }
     }
 }

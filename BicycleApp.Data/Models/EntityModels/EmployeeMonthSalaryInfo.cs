@@ -38,5 +38,7 @@
 
         [Precision(7, 2)]
         public decimal NetSalary { get; set; }
+
+        public bool IsSalaryTaken { get; set; }
     }
 }

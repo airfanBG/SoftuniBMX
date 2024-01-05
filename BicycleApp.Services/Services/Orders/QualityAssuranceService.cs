@@ -9,7 +9,7 @@
     using Microsoft.EntityFrameworkCore;
 
     using System.Threading.Tasks;
-    using BicicleApp.Common.Providers.Contracts;
+    using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Services.Models.Order;
     using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Models.Order.OrderUser.Contracts;

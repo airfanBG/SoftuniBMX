@@ -1,6 +1,5 @@
 ﻿namespace BicycleApp.Services.Services
 {
-    using BicicleApp.Common.Providers.Contracts;
     using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
     using BicycleApp.Services.Contracts;

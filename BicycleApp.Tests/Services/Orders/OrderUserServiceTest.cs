@@ -1,6 +1,6 @@
 ﻿namespace BicycleApp.Tests.Services.Orders
 {
-    using BicicleApp.Common.Providers.Contracts;
+    using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Tests.SeedData;
@@ -54,7 +54,7 @@
             };
 
             // Act 
-            var result = await fakeOrderUserService.CreateOrderByUserAsync(order);
+            var result = fakeOrderUserService.CreateOrderByUser(order);
 
             // Assert
             Assert.IsNull(result);
@@ -75,7 +75,7 @@
             var fakeDate = fakeDateTimeProvider.Object.Now;
 
             fakeOrdeFaktory.Setup(x => x.CreateUserOrder(It.IsAny<IOrder>(), fakeDate))
-                .ReturnsAsync(new Order()
+                .Returns(new Order()
                 {
                     ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
                     StatusId = 2,
@@ -86,7 +86,7 @@
                 });
 
             // Act 
-            var result = await fakeOrderUserService.CreateOrderByUserAsync(order);
+            var result =  fakeOrderUserService.CreateOrderByUser(order);
 
             // Assert
             Assert.IsNotNull(result);
@@ -105,7 +105,7 @@
             };           
 
             // Act 
-            var result = await fakeOrderUserService.CreateOrderByUserAsync(order);
+            var result = fakeOrderUserService.CreateOrderByUser(order);
 
             // Assert
             Assert.IsNull(result);
@@ -124,7 +124,7 @@
             };
 
             // Act
-            var result = await fakeOrderUserService.CreateOrderByUserAsync(order);
+            var result = fakeOrderUserService.CreateOrderByUser(order);
 
             // Assert
             Assert.IsNull(result);

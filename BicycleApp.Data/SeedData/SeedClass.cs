@@ -334,7 +334,8 @@
                     ZO = 48.00M,
                     DDFL = 129.33M,
                     NetSalary = 1163.97M,
-                    Month = new DateTime(2023,11,11)
+                    Month = new DateTime(2023,11,11),
+                    IsSalaryTaken = false
                 },
                 new EmployeeMonthSalaryInfo()
                 {
@@ -348,7 +349,8 @@
                     ZO = 48.00M,
                     DDFL = 129.33M,
                     NetSalary = 1163.97M,
-                    Month = new DateTime(2023,11,11)
+                    Month = new DateTime(2023,11,11),
+                    IsSalaryTaken = false
                 },
                 new EmployeeMonthSalaryInfo()
                 {
@@ -362,7 +364,8 @@
                     ZO = 48.00M,
                     DDFL = 129.33M,
                     NetSalary = 1163.97M,
-                    Month = new DateTime(2023,11,11)
+                    Month = new DateTime(2023,11,11),
+                    IsSalaryTaken = false
                 },
                  new EmployeeMonthSalaryInfo()
                 {
@@ -376,7 +379,8 @@
                     ZO = 48.00M,
                     DDFL = 129.33M,
                     NetSalary = 1163.97M,
-                    Month = new DateTime(2023,11,11)
+                    Month = new DateTime(2023,11,11),
+                    IsSalaryTaken = false
                 },
                   new EmployeeMonthSalaryInfo()
                  {
@@ -390,7 +394,8 @@
                      ZO = 48.00M,
                      DDFL = 129.33M,
                      NetSalary = 1163.97M,
-                     Month = new DateTime(2023,11,11)
+                     Month = new DateTime(2023,11,11),
+                    IsSalaryTaken = false
                  }
             };
         }

@@ -14,7 +14,8 @@
             this.workerМanagement = workerМanagement;
         }
 
-        public async Task<IActionResult> EmployeeSalaryCalculation([FromBody] TotalSalary totalSalary)
+        [HttpPost("salary")]
+        public async Task<ActionResult<SalaryOverview>> EmployeeSalaryCalculation([FromBody] TotalSalary totalSalary)
         {
             var result = await workerМanagement.EmployeeSalaryCalculation(totalSalary);
 
