@@ -71,7 +71,9 @@
         private async Task<bool> IsSalaryAccruedCurrentMonth(string employeeId)
         {
             var currentDate = _dateTimeProvider.Now;
-            var currentMonthAccruedCheck = await _db.EmployeesMonthsSalariesInfos.FirstOrDefaultAsync(x =>x.EmployeeId == employeeId && x.Month.Month == currentDate.Month && x.Month.Year == currentDate.Year);
+            var currentMonthAccruedCheck = await _db.EmployeesMonthsSalariesInfos.FirstOrDefaultAsync(x => x.EmployeeId == employeeId 
+                                                                                                           && x.Month.Month == currentDate.Month 
+                                                                                                           && x.Month.Year == currentDate.Year);
             if (currentMonthAccruedCheck != null)
             {
                 return false;
