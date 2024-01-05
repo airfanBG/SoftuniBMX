@@ -25,7 +25,7 @@
     using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Services.HelperClasses.Contracts;
     using BicycleApp.Services.Contracts.Factory;
-    using BicycleApp.Services.Models.IdentityModels.Contracts;
+    using BicycleApp.Data.Models.EntityModels;
 
     public class EmployeeService : IEmployeeService
     {
@@ -333,6 +333,25 @@
 
         }
 
+        public async Task<string> GetSalary(string employeeId)
+        {
+            var currentDate = dateTimeProvider.Now;
+            var salaryInfo = await dbContext.EmployeesMonthsSalariesInfos.LastOrDefaultAsync(s => s.IsSalaryTaken == false
+                                                                                         && s.EmployeeId == employeeId
+                                                                                         && s.Month.Month == currentDate.Month
+                                                                                         && s.Month.Year == currentDate.Year);
+            if (salaryInfo != null)
+            {
+                salaryInfo.IsSalaryTaken = true;
+
+                await dbContext.SaveChangesAsync();
+
+                return salaryInfo.Month.ToString();
+            }
+
+            return string.Empty;
+        }
+
         /// <summary>
         /// This method creates a Jwt token
         /// </summary>
@@ -367,5 +386,6 @@
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
     }
 }

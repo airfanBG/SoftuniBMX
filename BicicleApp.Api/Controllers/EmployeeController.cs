@@ -200,6 +200,22 @@
             return BadRequest();
         }
 
+        [HttpPost]
+        [Route("get_salary")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetSalary([FromQuery] string employeeId)
+        {
+            var result = await employeeService.GetSalary(employeeId);
+
+            if (!string.IsNullOrEmpty(result))
+            {
+                return Ok(result);
+            }
+
+            return BadRequest();
+        }
+
         [HttpGet]
         [Route("emailConfirm")]
         [ProducesResponseType(StatusCodes.Status200OK)]
