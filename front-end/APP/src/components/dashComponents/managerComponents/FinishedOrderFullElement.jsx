@@ -9,8 +9,7 @@ import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 function FinishedOrderElement({ order, i, onFinishedOrderButtonClick }) {
   const { user } = useContext(UserContext);
 
-  const { clientName, paidAmount, unpaidAmount, finalAmount, orderStates } =
-    order;
+  const { clientName, paidAmount, unpaidAmount, finalAmount, orderStates } = order;
 
     function jobTIme(t1, t2) {
       let timeResult = "";
@@ -124,7 +123,7 @@ function FinishedOrderElement({ order, i, onFinishedOrderButtonClick }) {
         {user.role !== "user" && (
           <button
             className={styles.btn}
-            onClick={() => onFinishedOrderButtonClick(order)} //Трябва да прати orderId на ендпойнта за изпращане!?
+            onClick={() => onFinishedOrderButtonClick(order)} 
             disabled={
               unpaidAmount > 0
             }
