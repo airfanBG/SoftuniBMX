@@ -41,9 +41,7 @@ function reducer(state, action) {
     case "category/added":
       return { ...state, category: action.payload };
     case "error/set":
-      return { ...state, hasError: true };
-    case "error/clear":
-      return { ...state, hasError: false };
+      return { ...state, hasError: action.payload };
     default:
       throw new Error("Unknown action type");
   }
@@ -67,7 +65,6 @@ function AddSupplier({ onFinish, active }) {
     },
     dispatch,
   ] = useReducer(reducer, initialState);
-  console.log(error?.title);
   function setReducerState(e) {
     const type = e.target.name;
     const payload = e.target.value;
@@ -79,9 +76,13 @@ function AddSupplier({ onFinish, active }) {
     dispatch({ type: "input/onFocus", payload: e.target.name });
   }
 
+  function errorCLear() {
+    dispatch({ type: "error/set", payload: false });
+  }
+
   async function onSubmitHandler(e) {
     e.preventDefault();
-    dispatch({ type: "error/clear" });
+    dispatch({ type: "error/set", payload: false });
 
     const data = {
       name: supplier,
@@ -96,7 +97,7 @@ function AddSupplier({ onFinish, active }) {
     const result = await post(environment.add_supplier, data);
     if (result.isError) {
       errorHandler(result.isError);
-      dispatch({ type: "error/set" });
+      dispatch({ type: "error/set", payload: true });
     } else {
       onFinish(active);
     }
@@ -109,9 +110,15 @@ function AddSupplier({ onFinish, active }) {
       <section className={styles.board}>
         {hasError && (
           <div className={styles.error}>
-            {/* <h2>{error.title}</h2> */}
-            <h2>uigergyiuert</h2>
-            <button>Close</button>
+            <button className={styles.errorBtn} onClick={errorCLear}>
+              <ion-icon name="close-sharp"></ion-icon>
+            </button>
+            {/* {Object.values(error.errors).map((e, i) => (
+              <h2 key={i} className={styles.errorMessage}>
+                {e}
+              </h2>
+            ))} */}
+            <h2 className={styles.errorMessage}>{error.title}</h2>
           </div>
         )}
         {/* <BoardHeader /> */}

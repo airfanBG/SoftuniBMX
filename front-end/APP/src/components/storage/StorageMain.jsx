@@ -50,7 +50,7 @@ function StorageMain() {
               className={styles.actionLink}
               onClick={() => onSelectActive("add")}
             >
-              Add product
+              Request parts
             </button>
 
             <button

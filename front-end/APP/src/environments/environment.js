@@ -47,12 +47,13 @@ export const environment = {
   rejected_orders_list: "/api/manager/rejected_orders/",
   all_employees: "/api/manager/all_employees",
   finished_orders: "/api/manager/finished_orders",
-  send_order: "/api/manager/send_order?orderId=",// +id
+  send_order: "/api/manager/send_order?orderId=", // +id
   sended_orders: "/api/manager/sended_orders",
 
   //SIUPLY_MANAGER
   parts_in_stock: "/api/supplys_manager/parts_in_stock?page=",
   deleted_orders_list: "/api/manager/deleted_orders?page=",
+  suppliers_list: "/api/supplys_manager/supliers",
 
   // BIKE_SERVICES
   frames: "/api/accountpage/frames",
