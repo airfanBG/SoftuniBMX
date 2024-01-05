@@ -251,15 +251,6 @@
             return false;
         }
 
-        private bool CheckBalance(decimal clientBalanceAmount, decimal orderAmount)
-        {
-            if (clientBalanceAmount >= orderAmount)
-            {
-                return true;
-            }
-            return false;
-        }
-
         /// <summary>
         /// Collection of all client orders with a specific status
         /// </summary>
@@ -284,6 +275,8 @@
                     OrderDate = r.DateCreated.ToString(DefaultDateFormat),
                     Amount = r.FinalAmount,
                     SerialNumber = r.OrdersPartsEmployees.First().SerialNumber,
+                    UnpaidAmount = r.UnpaidAmount,
+                    PaidAmount = r.PaidAmount,
                     Parts = r.OrdersPartsEmployees
                     .Select(pa => new PartShortInfoDto()
                     {
@@ -328,6 +321,41 @@
 
             return order;
 
+        }
+        public async Task<int> PaymentOfRemaindAmountOfOrder(string clientId, int orderId)
+        {
+            try
+            {
+                var client = await _db.Clients.Include(o => o.Orders)
+                                                   .FirstAsync(c => c.Id == clientId);
+
+                var clientOrder = client.Orders.First(o => o.Id == orderId);
+
+                var chackBalance = CheckBalance(client.Balance, clientOrder.UnpaidAmount);
+
+                if (chackBalance)
+                {
+                    var total = clientOrder.FinalAmount;
+                    clientOrder.PaidAmount = total;
+                    clientOrder.UnpaidAmount = 0;
+
+                    await _db.SaveChangesAsync();
+
+                    return clientOrder.Id;
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return 0;
+        }
+        private bool CheckBalance(decimal clientBalanceAmount, decimal orderAmount)
+        {
+            if (clientBalanceAmount >= orderAmount)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

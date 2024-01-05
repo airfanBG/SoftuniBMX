@@ -14,5 +14,6 @@
         Task<bool> DeductionByAmount(string clientId, decimal percentageOfDeduction, IOrder newOrder);
         Task<ICollection<OrderClientShortInfo>> GetAllOrdersForClientByStatus(string userId, int status);
         Task<OrderDtoInfo?> GetOrderById(int orderId);
+        Task<int> PaymentOfRemaindAmountOfOrder(string clientId, int orderId);
     }
 }

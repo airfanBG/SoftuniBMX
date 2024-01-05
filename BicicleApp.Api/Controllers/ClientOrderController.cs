@@ -5,8 +5,6 @@
 
     using Microsoft.AspNetCore.Mvc;
 
-    using static Org.BouncyCastle.Math.EC.ECCurve;
-
     [Route("api/client_order")]
     [ApiController]
     public class ClientOrderController : ControllerBase
@@ -141,6 +139,21 @@
             {
                 return StatusCode(500, orderId);
             }
+        }
+
+        [HttpPost("payment")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> PaymentOfRemaindAmountOfOrder([FromQuery] string userId, [FromQuery] int orderId)
+        {
+           var paidOrderId = await _userService.PaymentOfRemaindAmountOfOrder(userId, orderId);
+
+            if (paidOrderId > 0)
+            {
+                return Ok(paidOrderId);
+            }
+
+            return BadRequest();
         }
     }
 }
