@@ -24,6 +24,8 @@
     using Microsoft.AspNetCore.WebUtilities;
     using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Services.HelperClasses.Contracts;
+    using BicycleApp.Services.Contracts.Factory;
+    using BicycleApp.Services.Models.IdentityModels.Contracts;
 
     public class EmployeeService : IEmployeeService
     {
@@ -36,6 +38,8 @@
         private readonly IEmailSender emailSender;
         private readonly IOptionProvider optionProvider;
         private readonly IStringManipulator stringManipulator;
+        private readonly IEmployeeFactory employeeFactory;
+        private readonly IDateTimeProvider dateTimeProvider;
 
         public EmployeeService(UserManager<BaseUser> userManager, 
                                SignInManager<BaseUser> signInManager,
@@ -45,7 +49,9 @@
                                IModelsFactory modelFactory, 
                                IEmailSender emailSender, 
                                IOptionProvider optionProvider, 
-                               IStringManipulator stringManipulator)
+                               IStringManipulator stringManipulator,
+                               IEmployeeFactory employeeFactory,
+                               IDateTimeProvider dateTimeProvider)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -56,6 +62,8 @@
             this.emailSender = emailSender;
             this.optionProvider = optionProvider;
             this.stringManipulator = stringManipulator;
+            this.employeeFactory = employeeFactory;
+            this.dateTimeProvider = dateTimeProvider;
         }
 
         /// <summary>
@@ -128,7 +136,7 @@
                 throw new ArgumentNullException(nameof(employeeDto));
             }
 
-            var employee = await this.userManager.FindByEmailAsync(employeeDto.Email);
+            var employee = await dbContext.Employees.Include(es => es.EmployeeMonthSalaryInfos).FirstOrDefaultAsync(e => e.Email == employeeDto.Email);
 
             if (employee == null)
             {
@@ -146,6 +154,17 @@
             if (result.Succeeded)
             {
                 var roles = await userManager.GetRolesAsync(employee);
+                var currentDate = dateTimeProvider.Now;
+                var untakenSalary = employee.EmployeeMonthSalaryInfos.LastOrDefault(s => s.IsSalaryTaken == false 
+                                                                                         && s.EmployeeId == employee.Id
+                                                                                         && s.Month.Month == currentDate.Month 
+                                                                                         && s.Month.Year == currentDate.Year);
+                EmployeeSalaryInfoDto? employeeSalaryInfo = null;
+                if (untakenSalary != null)
+                {
+                    employeeSalaryInfo = employeeFactory.CreateEmployeeSalaryInfoDto(untakenSalary.BaseSalary, untakenSalary.InternshipValue, untakenSalary.MonthBonus, untakenSalary.DOO, untakenSalary.DZPO, untakenSalary.ZO, untakenSalary.DDFL, untakenSalary.NetSalary, untakenSalary.Month.ToString());
+                }
+
                 return new EmployeeReturnDto()
                 {
                     EmployeeId = employee.Id,
@@ -153,6 +172,7 @@
                     Token = await this.GenerateJwtTokenAsync(employee),
                     Role = roles[0],
                     Result = true,
+                    EmployeeSalaryInfo = employeeSalaryInfo
                 };
             }
             else

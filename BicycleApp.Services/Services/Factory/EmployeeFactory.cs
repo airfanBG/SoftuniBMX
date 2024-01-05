@@ -3,6 +3,8 @@
     using BicycleApp.Common.Models;
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.Contracts.Factory;
+    using BicycleApp.Services.Models.IdentityModels;
+    using BicycleApp.Services.Models.IdentityModels.Contracts;
     using BicycleApp.Services.Models.Order;
     using System;
 
@@ -57,6 +59,22 @@
                 ZO = zoValue,
                 DDFL = ddflValue,
                 NetSalary = netSalaryValue,
+                Month = currentDate
+            };
+        }
+
+        public EmployeeSalaryInfoDto? CreateEmployeeSalaryInfoDto(decimal baseSalary, decimal internshipValue, decimal monthBonus, decimal doo, decimal dzpo, decimal zo, decimal ddfl, decimal netSlalary, string currentDate)
+        {
+            return new EmployeeSalaryInfoDto()
+            {
+                BaseSalary = baseSalary,
+                InternshipValue = internshipValue,
+                MonthBonus = monthBonus,
+                DOO = doo,
+                DZPO = dzpo,
+                ZO = zo,
+                DDFL = ddfl,
+                NetSalary = netSlalary,
                 Month = currentDate
             };
         }
