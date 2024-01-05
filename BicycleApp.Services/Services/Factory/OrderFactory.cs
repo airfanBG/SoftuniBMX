@@ -24,7 +24,7 @@
                  StatusId = order.StatusId
              };
         }
-        public IOrderPartDto CreateOrderPartFromUserOrder(string partName, int partQuantity, int partId, decimal productPrice)
+        public OrderPartDto CreateOrderPartFromUserOrder(string partName, int partQuantity, int partId, decimal productPrice)
         {
             return new OrderPartDto()
             {
@@ -52,7 +52,7 @@
             return  ope;
         }
 
-        public ISuccessOrderInfo CreateSuccessOrderItems(IOrderPartsEmplyee successOrder)
+        public SuccessOrderInfo CreateSuccessOrderItems(IOrderPartsEmplyee successOrder)
         {
             return new SuccessOrderInfo()
             {
@@ -74,6 +74,5 @@
                 }).ToList()
             };
         }
-
     }
 }

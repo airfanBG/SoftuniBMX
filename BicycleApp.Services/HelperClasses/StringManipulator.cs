@@ -40,7 +40,7 @@
 
             for (int i = 0; i <= numberOfrandoms; i++)
             {
-                int randomCharIndex = random.Next(0, allowedChars.Length + 1);
+                int randomCharIndex = random.Next(0, allowedChars.Length);
                 serialNumber.Append(allowedChars[randomCharIndex]);
             }
 
