@@ -28,7 +28,7 @@
 
         public async Task<SalaryOverview> EmployeeSalaryCalculation(ITotalSalary baseSalary)
         {
-            var isSalaryAccruedCurrentMonth = await IsSalaryAccruedCurrentMonth();
+            var isSalaryAccruedCurrentMonth = await IsSalaryAccruedCurrentMonth(baseSalary.EmployeeId);
             if (baseSalary.Bonus >= 0 && isSalaryAccruedCurrentMonth)
             {
                 try
@@ -68,10 +68,10 @@
             return null;
         }
 
-        private async Task<bool> IsSalaryAccruedCurrentMonth()
+        private async Task<bool> IsSalaryAccruedCurrentMonth(string employeeId)
         {
             var currentDate = _dateTimeProvider.Now;
-            var currentMonthAccruedCheck = await _db.EmployeesMonthsSalariesInfos.FirstOrDefaultAsync(x => x.Month.Month == currentDate.Month && x.Month.Year == currentDate.Year);
+            var currentMonthAccruedCheck = await _db.EmployeesMonthsSalariesInfos.FirstOrDefaultAsync(x =>x.EmployeeId == employeeId && x.Month.Month == currentDate.Month && x.Month.Year == currentDate.Year);
             if (currentMonthAccruedCheck != null)
             {
                 return false;
