@@ -28,40 +28,56 @@
 
         public async Task<SalaryOverview> EmployeeSalaryCalculation(ITotalSalary baseSalary)
         {
-            var salaryAccrualPercentagesValues = _optionProvider.GetSalaryAccrualPercentages();
-
-            try
+            var isSalaryAccruedCurrentMonth = await IsSalaryAccruedCurrentMonth();
+            if (baseSalary.Bonus >= 0 && isSalaryAccruedCurrentMonth)
             {
-                var employee = await _db.Employees
-                                        .AsNoTracking()
-                                        .Include(es => es.EmployeeMonthSalaryInfos)
-                                        .FirstAsync(e => e.Id == baseSalary.EmployeeId);
-
-                int internshipInBMX = employee.EmployeeMonthSalaryInfos.Count;
-                int allInternshipMonths = employee.InternshipInMonths + internshipInBMX;
-                decimal internshipRate = salaryAccrualPercentagesValues.InternshipRate;
-
-                var internshipValue = InternshipValueCalculation(employee.BaseSalary, allInternshipMonths, internshipRate);
-                var currentDate = _dateTimeProvider.Now;
-
-                var salaryInfo = _employeeFactory.CreateEmployeeMonthSalaryInfo(employee.BaseSalary, internshipValue, baseSalary.Bonus, salaryAccrualPercentagesValues, employee.Id, currentDate);
-
-                await _db.EmployeesMonthsSalariesInfos.AddAsync(salaryInfo);
-                await _db.SaveChangesAsync();
-
-                return new SalaryOverview()
+                try
                 {
-                    TotalSalary = salaryInfo.BaseSalary + salaryInfo.InternshipValue + salaryInfo.MonthBonus,
-                    CurrentMonth = salaryInfo.Month.ToString(DefaultDateFormat),
-                    EmployeeId = salaryInfo.EmployeeId,
-                    EmployeeName = _stringManipulator.ReturnFullName(employee.FirstName, employee.LastName)
-                };
-                        
+                    var salaryAccrualPercentagesValues = _optionProvider.GetSalaryAccrualPercentages();
+                    var employee = await _db.Employees
+                                            .AsNoTracking()
+                                            .Include(es => es.EmployeeMonthSalaryInfos)
+                                            .FirstAsync(e => e.Id == baseSalary.EmployeeId);
+
+                    int internshipInBMX = employee.EmployeeMonthSalaryInfos.Count;
+                    int allInternshipMonths = employee.InternshipInMonths + internshipInBMX;
+                    decimal internshipRate = salaryAccrualPercentagesValues.InternshipRate;
+
+                    var currentDate = _dateTimeProvider.Now;
+                    var internshipValue = InternshipValueCalculation(employee.BaseSalary, allInternshipMonths, internshipRate);
+
+                    var salaryInfo = _employeeFactory.CreateEmployeeMonthSalaryInfo(employee.BaseSalary, internshipValue, baseSalary.Bonus, salaryAccrualPercentagesValues, employee.Id, currentDate);
+
+                    await _db.EmployeesMonthsSalariesInfos.AddAsync(salaryInfo);
+                    await _db.SaveChangesAsync();
+
+                    return new SalaryOverview()
+                    {
+                        TotalSalary = salaryInfo.BaseSalary + salaryInfo.InternshipValue + salaryInfo.MonthBonus,
+                        CurrentMonth = salaryInfo.Month.ToString(DefaultDateFormat),
+                        EmployeeId = salaryInfo.EmployeeId,
+                        EmployeeName = _stringManipulator.ReturnFullName(employee.FirstName, employee.LastName)
+                    };
+
+                }
+                catch (Exception)
+                {
+                }
             }
-            catch (Exception)
-            {
-            }
+
             return null;
+        }
+
+        private async Task<bool> IsSalaryAccruedCurrentMonth()
+        {
+            var currentDate = _dateTimeProvider.Now;
+            var currentMonthAccruedCheck = await _db.EmployeesMonthsSalariesInfos.FirstOrDefaultAsync(x => x.Month.Month == currentDate.Month && x.Month.Year == currentDate.Year);
+            if (currentMonthAccruedCheck != null)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private decimal InternshipValueCalculation(decimal baseSalary, int internshipMonths, decimal internshipRate)

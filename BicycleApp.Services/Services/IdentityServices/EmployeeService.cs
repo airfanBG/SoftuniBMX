@@ -155,7 +155,8 @@
             {
                 var roles = await userManager.GetRolesAsync(employee);
                 var currentDate = dateTimeProvider.Now;
-                var untakenSalary = employee.EmployeeMonthSalaryInfos.LastOrDefault(s => s.IsSalaryTaken == false 
+                var untakenSalary = employee.EmployeeMonthSalaryInfos.OrderBy(o => o.Id)
+                                                                     .LastOrDefault(s => s.IsSalaryTaken == false 
                                                                                          && s.EmployeeId == employee.Id
                                                                                          && s.Month.Month == currentDate.Month 
                                                                                          && s.Month.Year == currentDate.Year);
@@ -336,10 +337,11 @@
         public async Task<string> GetSalary(string employeeId)
         {
             var currentDate = dateTimeProvider.Now;
-            var salaryInfo = await dbContext.EmployeesMonthsSalariesInfos.LastOrDefaultAsync(s => s.IsSalaryTaken == false
-                                                                                         && s.EmployeeId == employeeId
-                                                                                         && s.Month.Month == currentDate.Month
-                                                                                         && s.Month.Year == currentDate.Year);
+            var salaryInfo = await dbContext.EmployeesMonthsSalariesInfos.OrderBy(o => o.Id)
+                                                                         .LastOrDefaultAsync(s => s.IsSalaryTaken == false
+                                                                                                  && s.EmployeeId == employeeId
+                                                                                                  && s.Month.Month == currentDate.Month
+                                                                                                  && s.Month.Year == currentDate.Year);
             if (salaryInfo != null)
             {
                 salaryInfo.IsSalaryTaken = true;
