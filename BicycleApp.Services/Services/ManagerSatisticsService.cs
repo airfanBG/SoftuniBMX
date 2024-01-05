@@ -5,7 +5,6 @@
     using BicycleApp.Data;
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.Models.ManagerStatistics;
-    using BicycleApp.Services.Models.ManagerStatistics.Contracts;
     using Microsoft.EntityFrameworkCore;
     using System.Threading.Tasks;
 
@@ -13,12 +12,10 @@
     {
         private readonly BicycleAppDbContext _db;
         private readonly IDateTimeProvider _dateTimeProvider;
-        private readonly IOptionProvider _optionProvider;
-        public ManagerSatisticsService(BicycleAppDbContext db, IDateTimeProvider dateTimeProvider, IOptionProvider optionProvider)
+        public ManagerSatisticsService(BicycleAppDbContext db, IDateTimeProvider dateTimeProvider)
         {
             _db = db;
             _dateTimeProvider = dateTimeProvider;
-            _optionProvider = optionProvider;
         }
         public async Task<PastAndCurrentEmployeeWorkingMinutesDto> GetEmployeeOutputForThePastAndCurrentMonth(string employeeId)
         {
@@ -51,32 +48,6 @@
             return pastAndCurrentEmployeeWorkingMinutes;
         }
 
-        public async Task<SalaryOverview> EmployeeSalaryCalculation(IBaseSalary baseSalary)
-        {
-            //try
-            //{
-            //    var employee = await _db.Employees
-            //                            .Include(es => es.EmployeeMonthSalaryInfos)
-            //                            .FirstAsync(e => e.Id == baseSalary.EmployeeId);
-
-            //    int internshipInBMX = employee.EmployeeMonthSalaryInfos.Count;
-            //    int allInternshipMonths = employee.InternshipInMonths + internshipInBMX;
-            //    decimal internshipRate = _optionProvider.
-
-
-            //    var internshipValue = InternshipValueCalculation(employee.BaseSalary, allInternshipMonths, );
-
-            //}
-            //catch (Exception)
-            //{
-            //}
-
-            throw new NotImplementedException();
-        }
-
-        private decimal InternshipValueCalculation(decimal baseSalary, int internshipMonths, decimal internshipRate)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

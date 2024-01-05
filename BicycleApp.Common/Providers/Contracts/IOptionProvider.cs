@@ -1,5 +1,7 @@
 ﻿namespace BicycleApp.Common.Providers.Contracts
 {
+    using BicycleApp.Common.Models;
+
     public interface IOptionProvider
     {
         public string? ClientDefautPassword();
@@ -7,7 +9,8 @@
         public string? EmailAccoutPassword();
         public string? ClientEmailConfirmEnpoint();
         public string? EmployeeEmailConfirmEnpoint();
-        string? GetPreviousWorkerPositionName(string currentWorkerPosition);
+        public string? GetPreviousWorkerPositionName(string currentWorkerPosition);
         public string? GetDefaultUserRelativePath();
+        public SalaryAccrualPercentages GetSalaryAccrualPercentages();
     }
 }

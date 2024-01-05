@@ -1,5 +1,5 @@
-﻿namespace BicycleApp.Services.Models.ManagerStatistics.Contracts
-{   
+﻿namespace BicycleApp.Services.Models.WorkerManagement.Contracts
+{
     public interface ISalaryOverview
     {
         public string EmployeeId { get; set; }

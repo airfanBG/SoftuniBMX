@@ -72,7 +72,11 @@
 
             return new SalaryAccrualPercentages()
             {
-                
+                InternshipRate = decimal.Parse(salaryAccrualPercentagesValues.GetSection("InternshipRate").Value),
+                DOO = decimal.Parse(salaryAccrualPercentagesValues.GetSection("DOO").Value),
+                DZPO = decimal.Parse(salaryAccrualPercentagesValues.GetSection("DZPO").Value),
+                ZO = decimal.Parse(salaryAccrualPercentagesValues.GetSection("ZO").Value),
+                DDFL = decimal.Parse(salaryAccrualPercentagesValues.GetSection("DDFL").Value)                
             };
         }
     }

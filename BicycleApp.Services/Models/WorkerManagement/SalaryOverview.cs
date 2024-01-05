@@ -1,6 +1,6 @@
-﻿namespace BicycleApp.Services.Models.ManagerStatistics
+﻿namespace BicycleApp.Services.Models.WorkerManagement
 {
-    using BicycleApp.Services.Models.ManagerStatistics.Contracts;
+    using BicycleApp.Services.Models.WorkerManagement.Contracts;
 
     public class SalaryOverview : ISalaryOverview
     {
