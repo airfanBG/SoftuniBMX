@@ -203,7 +203,9 @@
                 IsDeleted = false,
                 DepartmentId = 1,
                 IsManeger = true,
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                BaseSalary = 1500,
+                InternshipInMonths = 7
             };
             manager.PasswordHash = hasher.HashPassword(manager, pass);
 
@@ -227,7 +229,9 @@
                 IsDeleted = false,
                 DepartmentId = 2,
                 IsManeger = false,
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                BaseSalary = 1500,
+                InternshipInMonths = 42
             };
             employee.PasswordHash = hasher.HashPassword(employee, pass);
 
@@ -251,7 +255,9 @@
                 IsDeleted = false,
                 DepartmentId = 2,
                 IsManeger = false,
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                BaseSalary = 1500,
+                InternshipInMonths = 0
             };
             worker2.PasswordHash = hasher.HashPassword(worker2, pass);
 
@@ -275,7 +281,9 @@
                 IsDeleted = false,
                 DepartmentId = 2,
                 IsManeger = false,
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                BaseSalary = 1500,
+                InternshipInMonths = 12
             };
             worker3.PasswordHash = hasher.HashPassword(worker3, pass);
 
@@ -299,13 +307,92 @@
                 IsDeleted = false,
                 DepartmentId = 2,
                 IsManeger = false,
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                BaseSalary = 1500,
+                InternshipInMonths = 15
             };
             worker4.PasswordHash = hasher.HashPassword(worker4, pass);
 
             employees.Add(worker4);
 
             return employees;
+        }
+
+        public ICollection<EmployeeMonthSalaryInfo> SeedEmployeeMonthSalaryInfos()
+        {
+            return new List<EmployeeMonthSalaryInfo>()
+            {
+                new EmployeeMonthSalaryInfo()
+                {
+                    Id = 1,
+                    EmployeeId = "406e8cf1-acaa-44a8-afec-585ff64bed34",
+                    BaseSalary = 1500M,
+                    InternshipValue = 0,
+                    MonthBonus = 0,
+                    DOO = 125.70M,
+                    DZPO = 33.00M,
+                    ZO = 48.00M,
+                    DDFL = 129.33M,
+                    NetSalary = 1163.97M,
+                    Month = new DateTime(2023,11,11)
+                },
+                new EmployeeMonthSalaryInfo()
+                {
+                    Id = 2,
+                    EmployeeId = "21003785-a275-4139-ae20-af6a6cf8fea8",
+                    BaseSalary = 1500M,
+                    InternshipValue = 0,
+                    MonthBonus = 0,
+                    DOO = 125.70M,
+                    DZPO = 33.00M,
+                    ZO = 48.00M,
+                    DDFL = 129.33M,
+                    NetSalary = 1163.97M,
+                    Month = new DateTime(2023,11,11)
+                },
+                new EmployeeMonthSalaryInfo()
+                {
+                    Id = 3,
+                    EmployeeId = "17063948-8fdc-417e-8fb7-2ae6bf572f94",
+                    BaseSalary = 1500M,
+                    InternshipValue = 0,
+                    MonthBonus = 0,
+                    DOO = 125.70M,
+                    DZPO = 33.00M,
+                    ZO = 48.00M,
+                    DDFL = 129.33M,
+                    NetSalary = 1163.97M,
+                    Month = new DateTime(2023,11,11)
+                },
+                 new EmployeeMonthSalaryInfo()
+                {
+                    Id = 4,
+                    EmployeeId = "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91",
+                    BaseSalary = 1500M,
+                    InternshipValue = 0,
+                    MonthBonus = 0,
+                    DOO = 125.70M,
+                    DZPO = 33.00M,
+                    ZO = 48.00M,
+                    DDFL = 129.33M,
+                    NetSalary = 1163.97M,
+                    Month = new DateTime(2023,11,11)
+                },
+                  new EmployeeMonthSalaryInfo()
+                 {
+                     Id = 5,
+                     EmployeeId = "29f06920-d2ad-43d8-b362-e2b94d7a7502",
+                     BaseSalary = 1500M,
+                     InternshipValue = 0,
+                     MonthBonus = 0,
+                     DOO = 125.70M,
+                     DZPO = 33.00M,
+                     ZO = 48.00M,
+                     DDFL = 129.33M,
+                     NetSalary = 1163.97M,
+                     Month = new DateTime(2023,11,11)
+                 }
+            };
         }
 
         public List<Comment> SeedComments()

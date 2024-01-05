@@ -304,6 +304,8 @@ namespace BicycleApp.Data.Migrations
                     DateOfHire = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Date of hire of the employee"),
                     DateOfLeave = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Date of termination of the employee"),
                     DepartmentId = table.Column<int>(type: "int", nullable: true, comment: "Id of the current department of the employee"),
+                    BaseSalary = table.Column<decimal>(type: "decimal(7,2)", precision: 7, scale: 2, nullable: true, comment: "Base salary of hired employee"),
+                    InternshipInMonths = table.Column<int>(type: "int", nullable: true, comment: "Internship in months for salary calculation"),
                     IsManeger = table.Column<bool>(type: "bit", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -598,6 +600,34 @@ namespace BicycleApp.Data.Migrations
                 comment: "Table of all comments for all parts in the database");
 
             migrationBuilder.CreateTable(
+                name: "EmployeesMonthsSalariesInfos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Month = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BaseSalary = table.Column<decimal>(type: "decimal(7,2)", precision: 7, scale: 2, nullable: false),
+                    InternshipValue = table.Column<decimal>(type: "decimal(7,2)", precision: 7, scale: 2, nullable: false),
+                    MonthBonus = table.Column<decimal>(type: "decimal(7,2)", precision: 7, scale: 2, nullable: false),
+                    DOO = table.Column<decimal>(type: "decimal(7,2)", precision: 7, scale: 2, nullable: false),
+                    DZPO = table.Column<decimal>(type: "decimal(7,2)", precision: 7, scale: 2, nullable: false),
+                    ZO = table.Column<decimal>(type: "decimal(7,2)", precision: 7, scale: 2, nullable: false),
+                    DDFL = table.Column<decimal>(type: "decimal(7,2)", precision: 7, scale: 2, nullable: false),
+                    NetSalary = table.Column<decimal>(type: "decimal(7,2)", precision: 7, scale: 2, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmployeesMonthsSalariesInfos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EmployeesMonthsSalariesInfos_AspNetUsers_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ImagesClients",
                 columns: table => new
                 {
@@ -877,14 +907,14 @@ namespace BicycleApp.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DateCreated", "DateDeleted", "DateOfHire", "DateOfLeave", "DateUpdated", "DepartmentId", "Discriminator", "Email", "EmailConfirmed", "FirstName", "IsDeleted", "IsManeger", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Position", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                columns: new[] { "Id", "AccessFailedCount", "BaseSalary", "ConcurrencyStamp", "DateCreated", "DateDeleted", "DateOfHire", "DateOfLeave", "DateUpdated", "DepartmentId", "Discriminator", "Email", "EmailConfirmed", "FirstName", "InternshipInMonths", "IsDeleted", "IsManeger", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Position", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "17063948-8fdc-417e-8fb7-2ae6bf572f94", 0, "ddeee39b-d34a-4614-8f06-95e8e267d0ee", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 2, "Employee", "todorov@b-free.com", true, "Todor", false, false, "Todorov", false, null, "TODOROV@B-FREE.COM", null, "AQAAAAIAAYagAAAAEJ4LTeBmBZAx11EVLS5a8pX+7QMXceR/+D1xVWA3MBGYZ7v0uajVZBWIhvKQCZLCjQ==", "1234567890", false, "Wheelworker", "TODOROV@B-FREE.COM", false, "todorov@b-free.com" },
-                    { "21003785-a275-4139-ae20-af6a6cf8fea8", 0, "0501fd3a-0bb6-41e2-bf5c-09a5f9a0488f", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 2, "Employee", "marinov@b-free.com", true, "Marin", false, false, "Marinov", false, null, "MARINOV@B-FREE.COM", null, "AQAAAAIAAYagAAAAEI45yGkB0/2WMoDP2PzaU2WYM995jauiPZ43HzBZNmSMNcgEeVQBU2KezLZBVCK1Sg==", "1234567890", false, "FrameWorker", "MARINOV@B-FREE.COM", false, "marinov@b-free.com" },
-                    { "29f06920-d2ad-43d8-b362-e2b94d7a7502", 0, "7339d7e0-5bb3-4ba0-bbd5-b99a0c360538", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 2, "Employee", "atanasov@b-free.com", true, "Atanas", false, false, "Atanasov", false, null, "ATANASOV@B-FREE.COM", null, "AQAAAAIAAYagAAAAEJJe3pvcxWvfTcvxw0LYtE7v0NhPcF77BN8k/Hd3EpweRur940ASFnW982RR5r0xSw==", "1234567890", false, "Qualitycontrol", "ATANASOV@B-FREE.COM", false, "atanasov@b-free.com" },
-                    { "406e8cf1-acaa-44a8-afec-585ff64bed34", 0, "b1ec619d-6e89-4f2b-958c-f8e018843c5c", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 1, "Employee", "manager@b-free.com", true, "Kalin", false, true, "Kalinov", false, null, "MANAGER@B-FREE.COM", null, "AQAAAAIAAYagAAAAEHXXtSJnBfMWO1CrGjPZG6ImgtVD8aIrNKSzwue+5tCfGQPE1MbJ5kSx4sRhJ3kaUA==", "1234567890", false, "manager", "MANAGER@B-FREE.COM", false, "manager@b-free.com" },
-                    { "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91", 0, "82239de2-9eb1-4d00-b2c1-dda38b4395ea", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 2, "Employee", "ivanov@b-free.com", true, "Ivan", false, false, "Ivanov", false, null, "IVANOV@B-FREE.COM", null, "AQAAAAIAAYagAAAAENtoRfuyTASQ/R2kty3Zsu3v3k4sE5jbCG9iGuNDNxG0BTYPW6xw59QvrfcXSxhIZQ==", "1234567890", false, "Accessoriesworker", "IVANOV@B-FREE.COM", false, "ivanov@b-free.com" }
+                    { "17063948-8fdc-417e-8fb7-2ae6bf572f94", 0, 1500m, "dbad8ddf-1d54-48f5-b575-94c93a3219f9", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 2, "Employee", "todorov@b-free.com", true, "Todor", 0, false, false, "Todorov", false, null, "TODOROV@B-FREE.COM", null, "AQAAAAIAAYagAAAAEEDUK7ueSrmNFCbrDnc3TpHPRcEM0ChFtHOyl+bYTAQRHASCKujIu3PknnAsGcVHOg==", "1234567890", false, "Wheelworker", "TODOROV@B-FREE.COM", false, "todorov@b-free.com" },
+                    { "21003785-a275-4139-ae20-af6a6cf8fea8", 0, 1500m, "36861e4c-28d3-49b7-aa2b-221d49e1fed8", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 2, "Employee", "marinov@b-free.com", true, "Marin", 42, false, false, "Marinov", false, null, "MARINOV@B-FREE.COM", null, "AQAAAAIAAYagAAAAEIopKWl2JDFDFMjH6ejcSzN9MbbeYzyFdFa/JMZpALxSHtPGtsfzOV34KOuGzSMjGw==", "1234567890", false, "FrameWorker", "MARINOV@B-FREE.COM", false, "marinov@b-free.com" },
+                    { "29f06920-d2ad-43d8-b362-e2b94d7a7502", 0, 1500m, "28bc9cce-5799-4dda-bb68-bc4febc86a23", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 2, "Employee", "atanasov@b-free.com", true, "Atanas", 15, false, false, "Atanasov", false, null, "ATANASOV@B-FREE.COM", null, "AQAAAAIAAYagAAAAENe93t+AVi3e3in/J8uxl2rWpdst4fR8xilZE4affuKAvz+uoKzMTX2Kecsmt7hPow==", "1234567890", false, "Qualitycontrol", "ATANASOV@B-FREE.COM", false, "atanasov@b-free.com" },
+                    { "406e8cf1-acaa-44a8-afec-585ff64bed34", 0, 1500m, "379b5421-c86a-4439-8be2-7d9b7dcde450", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 1, "Employee", "manager@b-free.com", true, "Kalin", 7, false, true, "Kalinov", false, null, "MANAGER@B-FREE.COM", null, "AQAAAAIAAYagAAAAEBQ6JumbWSl2rPPu5BHdR1VaRqrTvR4p9mERKeRSDXX2tZVfwcPCn+XKZWiABt4gSQ==", "1234567890", false, "manager", "MANAGER@B-FREE.COM", false, "manager@b-free.com" },
+                    { "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91", 0, 1500m, "a389e482-ba8a-496f-ad43-36b1569d9d0a", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 2, "Employee", "ivanov@b-free.com", true, "Ivan", 12, false, false, "Ivanov", false, null, "IVANOV@B-FREE.COM", null, "AQAAAAIAAYagAAAAEKnRFRaAH1ZI7WtS8UM4YDNe4CCtlq2SKb+/ddv/f4RAhLSsScEo7xQWUSUbc1K3NQ==", "1234567890", false, "Accessoriesworker", "IVANOV@B-FREE.COM", false, "ivanov@b-free.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -939,9 +969,9 @@ namespace BicycleApp.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Balance", "ConcurrencyStamp", "DateCreated", "DateDeleted", "DateUpdated", "DelivaryAddressId", "Discriminator", "Email", "EmailConfirmed", "FirstName", "IBAN", "IsDeleted", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TownId", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "17ce735d-6713-4d0a-8fcb-e4a71ee86f6f", 0, 50.00m, "2b89257e-9853-48cc-9b26-ee2b4ad47339", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 2, "Client", "joro@test.bg", true, "Georgi", "BG0012345678910111212", false, "Georgiev", false, null, "JORO@TEST.BG", null, "AQAAAAIAAYagAAAAEHsRgE+Z6H2c4tnPFnn92cQwTxKZtPFSV+goS+yyJ1f4o58eL4MGMmBR7SvjsEKJaw==", "1234567890", false, "JORO@TEST.BG", 2, false, "joro@test.bg" },
-                    { "99d3ca6f-2067-4316-a5d7-934c93789521", 0, 1246.00m, "8fb8e1e9-8e09-4567-b1e2-e197eeee1c63", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 3, "Client", "powerranger@test.bg", true, "Dimityr", "BG0012345678910111212", false, "Dimitrov", false, null, "POWERRANGER@TEST.BG", null, "AQAAAAIAAYagAAAAEJzkXDGLO+Dz+69n9PAep7BS0emuAxUMmgPnXY0qtJBnPD0tB0O//cb3nnXLo8I1zQ==", "1234567890", false, "POWERRANGER@TEST.BG", 3, false, "powerranger@test.bg" },
-                    { "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", 0, 1000.00m, "605ce186-570f-471b-a512-fc061f377295", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 1, "Client", "client@test.bg", true, "Ivan", "BG0012345678910111212", false, "Ivanov", false, null, "CLIENT@TEST.BG", null, "AQAAAAIAAYagAAAAEG3CIAZWpQCU5QER2pz9HKNpyz+AEzT4miMxcKLqmMGyr52zP01cCPOIKYwqUtJsxg==", "1234567890", false, "CLIENT@TEST.BG", 1, false, "client@test.bg" }
+                    { "17ce735d-6713-4d0a-8fcb-e4a71ee86f6f", 0, 50.00m, "3ceba630-472d-4985-881b-0592e65dc863", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 2, "Client", "joro@test.bg", true, "Georgi", "BG0012345678910111212", false, "Georgiev", false, null, "JORO@TEST.BG", null, "AQAAAAIAAYagAAAAEDhhWGW9Ri59QOMnyYbZixyBibrKT3qh8/s55+e3YMzHr2fPCboVWtupcXVe/xkykg==", "1234567890", false, "JORO@TEST.BG", 2, false, "joro@test.bg" },
+                    { "99d3ca6f-2067-4316-a5d7-934c93789521", 0, 1246.00m, "847c46f3-bc96-4b17-87fc-bb0be3290b7b", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 3, "Client", "powerranger@test.bg", true, "Dimityr", "BG0012345678910111212", false, "Dimitrov", false, null, "POWERRANGER@TEST.BG", null, "AQAAAAIAAYagAAAAEHECEZqZH+lOpDlWk7/dgY0+see5wmJO3Ot7VB0IYh132I24GEHGtRks+TZnVL0aQA==", "1234567890", false, "POWERRANGER@TEST.BG", 3, false, "powerranger@test.bg" },
+                    { "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd", 0, 1000.00m, "527c324b-82c4-42cb-8d24-4d4274fa10d3", new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), null, null, 1, "Client", "client@test.bg", true, "Ivan", "BG0012345678910111212", false, "Ivanov", false, null, "CLIENT@TEST.BG", null, "AQAAAAIAAYagAAAAEIVxqsVrrShajdFyZ143kxYvt5NzLbRG1yXNt4jWJE9f3Av5r9kVkr5QNOjjcr+Qsg==", "1234567890", false, "CLIENT@TEST.BG", 1, false, "client@test.bg" }
                 });
 
             migrationBuilder.InsertData(
@@ -974,6 +1004,18 @@ namespace BicycleApp.Data.Migrations
                     { 7, null, new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), false, "text7", 1, 3.0, 1 },
                     { 8, null, new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), false, "text8", 4, 5.0, 2 },
                     { 9, null, new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified), false, "text9", 7, 4.0, 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "EmployeesMonthsSalariesInfos",
+                columns: new[] { "Id", "BaseSalary", "DDFL", "DOO", "DZPO", "EmployeeId", "InternshipValue", "Month", "MonthBonus", "NetSalary", "ZO" },
+                values: new object[,]
+                {
+                    { 1, 1500m, 129.33m, 125.70m, 33.00m, "406e8cf1-acaa-44a8-afec-585ff64bed34", 0m, new DateTime(2023, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, 1163.97m, 48.00m },
+                    { 2, 1500m, 129.33m, 125.70m, 33.00m, "21003785-a275-4139-ae20-af6a6cf8fea8", 0m, new DateTime(2023, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, 1163.97m, 48.00m },
+                    { 3, 1500m, 129.33m, 125.70m, 33.00m, "17063948-8fdc-417e-8fb7-2ae6bf572f94", 0m, new DateTime(2023, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, 1163.97m, 48.00m },
+                    { 4, 1500m, 129.33m, 125.70m, 33.00m, "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91", 0m, new DateTime(2023, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, 1163.97m, 48.00m },
+                    { 5, 1500m, 129.33m, 125.70m, 33.00m, "29f06920-d2ad-43d8-b362-e2b94d7a7502", 0m, new DateTime(2023, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, 1163.97m, 48.00m }
                 });
 
             migrationBuilder.InsertData(
@@ -1230,6 +1272,11 @@ namespace BicycleApp.Data.Migrations
                 column: "TownId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_EmployeesMonthsSalariesInfos_EmployeeId",
+                table: "EmployeesMonthsSalariesInfos",
+                column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ImagesClients_UserId",
                 table: "ImagesClients",
                 column: "UserId");
@@ -1334,6 +1381,9 @@ namespace BicycleApp.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Delivaries");
+
+            migrationBuilder.DropTable(
+                name: "EmployeesMonthsSalariesInfos");
 
             migrationBuilder.DropTable(
                 name: "ImagesClients");

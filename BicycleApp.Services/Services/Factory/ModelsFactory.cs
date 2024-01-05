@@ -102,7 +102,9 @@
                 PhoneNumber = employeeRegisterDto.PhoneNumber,
                 UserName = employeeRegisterDto.Email,
                 Position = employeeRegisterDto.Position,
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                BaseSalary = InitialSalary(),
+                InternshipInMonths = RandomInternshipInMonths()
             };
         }
 
@@ -183,6 +185,17 @@
                 Floor = clientDelivaryAddressDto.Floor,
                 PostCode = clientDelivaryAddressDto.PostCode
             };
+        }
+
+        private decimal InitialSalary()
+        {
+            return 1500.00M;
+        }
+        private int RandomInternshipInMonths()
+        {
+            var random = new Random();
+
+            return random.Next(1, 101);
         }
     }
 }

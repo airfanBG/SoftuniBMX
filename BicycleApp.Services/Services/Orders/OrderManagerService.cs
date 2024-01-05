@@ -450,7 +450,8 @@
                                 LastName = e.LastName,
                                 IsManeger = e.IsManeger,
                                 PhoneNumber = e.PhoneNumber,
-                                Position = e.Position
+                                Position = e.Position,
+                                BaseSalary = e.BaseSalary
 
                             }).ToListAsync();
                             

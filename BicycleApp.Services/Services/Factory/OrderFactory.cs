@@ -7,31 +7,24 @@
 
     public class OrderFactory : IOrderFactory
     {  
-        public async Task<Order?> CreateUserOrder(IOrder order, DateTime currentTime)
+        public Order? CreateUserOrder(IOrder order, DateTime currentTime)
         {
-            try
-            {
-                return new Order()
-                {
-                    FinalAmount = order.FinalAmount,
-                    PaidAmount = order.PaidAmount,
-                    SaleAmount = order.SaleAmount,
-                    UnpaidAmount = order.UnpaidAmount,
-                    VAT = order.VAT,
-                    ClientId = order.ClientId,
-                    DateCreated = currentTime,
-                    Description = order.Description,
-                    Discount = order.Discount,
-                    IsDeleted = order.IsDeleted,
-                    StatusId = order.StatusId
-                };
-            }
-            catch (Exception)
-            {
-            }
-            return null;
+             return new Order()
+             {
+                 FinalAmount = order.FinalAmount,
+                 PaidAmount = order.PaidAmount,
+                 SaleAmount = order.SaleAmount,
+                 UnpaidAmount = order.UnpaidAmount,
+                 VAT = order.VAT,
+                 ClientId = order.ClientId,
+                 DateCreated = currentTime,
+                 Description = order.Description,
+                 Discount = order.Discount,
+                 IsDeleted = order.IsDeleted,
+                 StatusId = order.StatusId
+             };
         }
-        public async Task<IOrderPartDto> CreateOrderPartFromUserOrder(string partName, int partQuantity, int partId, decimal productPrice)
+        public IOrderPartDto CreateOrderPartFromUserOrder(string partName, int partQuantity, int partId, decimal productPrice)
         {
             return new OrderPartDto()
             {
@@ -42,7 +35,7 @@
             };
         }
 
-        public async Task<OrderPartEmployee> CreateOrderPartEmployeeProduct(int orderId, string uniqueKeyForSerialNumber, string serialNumber, int partId, string partName, int partQuantity, decimal partPrice, DateTime currentDate)
+        public OrderPartEmployee CreateOrderPartEmployeeProduct(int orderId, string uniqueKeyForSerialNumber, string serialNumber, int partId, string partName, int partQuantity, decimal partPrice, DateTime currentDate)
         {
             var ope = new OrderPartEmployee()
             {

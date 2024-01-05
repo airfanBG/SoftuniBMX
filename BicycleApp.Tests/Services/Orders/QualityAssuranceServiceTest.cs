@@ -56,10 +56,16 @@
                 .ReturnsDbSet(seeder.SeedImagesClients());
             fakeContext.Setup(x => x.ImagesEmployees)
                 .ReturnsDbSet(seeder.SeedImagesEmployees());
+
+
             fakeContext.Setup(x => x.Orders)
                 .ReturnsDbSet(seeder.SeedOrders());
+
+
             fakeContext.Setup(x => x.OrdersPartsEmployees)
                 .ReturnsDbSet(seeder.SeedOrdersPartsEmployees());
+
+
             fakeContext.Setup(x => x.OrdersPartsEmployeesInfos)
                 .ReturnsDbSet(seeder.SeedOrderOrderParsEmployeeInfos());
             fakeContext.Setup(x => x.Parts)

@@ -82,7 +82,7 @@
 
                     if (allowedExtensions.Contains(imageExtension))
                     {
-                        string fileName = await _stringManipulator.CreateGuid();
+                        string fileName =  _stringManipulator.CreateGuid();
                         string filePath = Path.Combine(userPath, $"{fileName}.{imageExtension}");
 
                         bool isUserImageExist = await _userImageFactory.CheckForExistingUserImage(userImageDto.Id, userImageDto.Role);

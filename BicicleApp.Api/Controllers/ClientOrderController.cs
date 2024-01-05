@@ -27,11 +27,11 @@
             {
                 return BadRequest();
             }
-            var createdOrder = await _userService.CreateOrderByUserAsync(userOrder);
+            var createdOrder = _userService.CreateOrderByUser(userOrder);
 
             if (createdOrder != null)
             {
-                var result = await _userService.CreateOrderPartEmployeeByUserOrder(createdOrder);
+                var result = _userService.CreateOrderPartEmployeeByUserOrder(createdOrder);
 
                 if (result)
                 {

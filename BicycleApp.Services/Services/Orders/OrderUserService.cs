@@ -3,12 +3,10 @@
     using BicicleApp.Common.Providers.Contracts;
 
     using BicycleApp.Data;
-    using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Contracts.OrderContracts;
     using BicycleApp.Services.HelperClasses.Contracts;
     using BicycleApp.Services.Models;
-    using BicycleApp.Services.Models.Order.OrderManager;
     using BicycleApp.Services.Models.Order.OrderUser;
     using BicycleApp.Services.Models.Order.OrderUser.Contracts;
 
@@ -39,7 +37,7 @@
         /// </summary>
         /// <param name="order"></param>
         /// <returns>Task<int></returns>
-        public async Task<IOrderPartsEmplyee?> CreateOrderByUserAsync(IUserOrderDto order)
+        public IOrderPartsEmplyee? CreateOrderByUser(IUserOrderDto order)
         {
             try
             {
@@ -52,11 +50,11 @@
                 decimal totalDiscount = 0M;
                 decimal totalVAT = 0M;
 
-                var vatCategory = await _db.VATCategories.AsNoTracking().FirstAsync(v => v.Id == order.VATId);
+                var vatCategory =  _db.VATCategories.AsNoTracking().First(v => v.Id == order.VATId);
 
                 foreach (var orderPart in order.OrderParts)
                 {
-                    var currentPart = await _db.Parts.FirstAsync(p => p.Id == orderPart.PartId);
+                    var currentPart = _db.Parts.First(p => p.Id == orderPart.PartId);
                     decimal currentProductTotalPrice = Math.Round(currentPart.SalePrice * order.OrderQuantity, 2);
                     totalAmount += currentProductTotalPrice;
                     decimal currentProductTotalDiscount = Math.Round(currentPart.Discount * order.OrderQuantity, 2);
@@ -67,7 +65,7 @@
                     }
                     totalVAT += Math.Round(((currentProductTotalPrice - currentProductTotalDiscount) * vatCategory.VATPercent) / (100 + vatCategory.VATPercent), 2);
                     decimal productPrice = currentPart.SalePrice - currentPart.Discount;
-                    var currentOrderPartToSave = await _orderFactory.CreateOrderPartFromUserOrder(currentPart.Name, 1, orderPart.PartId, productPrice);
+                    var currentOrderPartToSave =  _orderFactory.CreateOrderPartFromUserOrder(currentPart.Name, 1, orderPart.PartId, productPrice);
                     newOrder.OrderParts.Add(currentOrderPartToSave);
                 }
 
@@ -77,7 +75,7 @@
                 newOrder.Description = _stringManipulator.GetTextFromProperty(order.Description);
                 newOrder.SaleAmount = totalAmount - totalDiscount - totalVAT;
 
-                var client = await _db.Clients.FirstAsync(c => c.Id == order.ClientId);
+                var client = _db.Clients.First(c => c.Id == order.ClientId);
 
                 var isThereEnoughMoney = CheckBalance(client.Balance, newOrder.FinalAmount);
 
@@ -86,12 +84,12 @@
                     return null;
                 }
 
-                var newOrderObject = await _orderFactory.CreateUserOrder(newOrder, _dateTimeProvider.Now);
+                var newOrderObject =  _orderFactory.CreateUserOrder(newOrder, _dateTimeProvider.Now);
 
                 if (newOrderObject != null)
                 {
-                    await _db.Orders.AddAsync(newOrderObject);
-                    await _db.SaveChangesAsync();
+                     _db.Orders.Add(newOrderObject);
+                     _db.SaveChanges();
 
                     newOrder.OrderId = newOrderObject.Id;
 
@@ -144,7 +142,7 @@
         /// </summary>
         /// <param name="newOrder"></param>
         /// <returns>Task<bool></returns>
-        public async Task<bool> CreateOrderPartEmployeeByUserOrder(IOrderPartsEmplyee newOrder)
+        public bool CreateOrderPartEmployeeByUserOrder(IOrderPartsEmplyee newOrder)
         {
             try
             {    
@@ -152,18 +150,18 @@
 
                 for (int i = 0; i < quntityOfPart; i++)
                 {
-                    string serialNumber = await _stringManipulator.SerialNumberGenerator();
-                    string guidKey = await _stringManipulator.CreateGuid();
+                    string serialNumber =  _stringManipulator.SerialNumberGenerator();
+                    string guidKey =  _stringManipulator.CreateGuid();
 
                     foreach (var orderPart in newOrder.OrderParts)
                     {
-                        var ope = await _orderFactory.CreateOrderPartEmployeeProduct(newOrder.OrderId, guidKey, serialNumber, orderPart.PartId, orderPart.PartName, orderPart.PartQuantity, orderPart.PartPrice, _dateTimeProvider.Now);
+                        var ope = _orderFactory.CreateOrderPartEmployeeProduct(newOrder.OrderId, guidKey, serialNumber, orderPart.PartId, orderPart.PartName, orderPart.PartQuantity, orderPart.PartPrice, _dateTimeProvider.Now);
 
-                        await _db.OrdersPartsEmployees.AddAsync(ope);
+                        _db.OrdersPartsEmployees.Add(ope);
                     }
                 }
 
-                await _db.SaveChangesAsync();
+                _db.SaveChanges();
 
                 return true;
             }

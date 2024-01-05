@@ -29,7 +29,7 @@
         /// Generator of serial number.
         /// </summary>
         /// <returns>string</returns>
-        public async Task<string> SerialNumberGenerator()
+        public string SerialNumberGenerator()
         {
             StringBuilder serialNumber = new StringBuilder("BID");
             int numberOfrandoms = 7;
@@ -46,7 +46,7 @@
 
             return serialNumber.ToString();
         }
-        public async Task<string> CreateGuid()
+        public string CreateGuid()
         {
             return Guid.NewGuid().ToString();
         }
