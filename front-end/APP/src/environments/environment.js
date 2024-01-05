@@ -49,6 +49,7 @@ export const environment = {
   finished_orders: "/api/manager/finished_orders",
   send_order: "/api/manager/send_order?orderId=", // +id
   sended_orders: "/api/manager/sended_orders",
+  pay_salary: "/api/worker_management/salary",
 
   //SIUPLY_MANAGER
   parts_in_stock: "/api/supplys_manager/parts_in_stock?page=",

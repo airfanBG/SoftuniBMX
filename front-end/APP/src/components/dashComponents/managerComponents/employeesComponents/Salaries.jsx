@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { getEmployers } from "../../../../customHooks/useEmployers.js";
 import LoaderWheel from "../../../LoaderWheel.jsx";
 import PopupInfo from "../PopupInfo.jsx";
-import { get } from "../../../../util/api.js";
+import { get, post } from "../../../../util/api.js";
 import { environment } from "../../../../environments/environment.js";
 
 function Salaries() {
@@ -33,6 +33,17 @@ function Salaries() {
     setBackground(true);
   }
 
+  async function paySalary(amount, baseSalary, id) {
+    const bonus = Number(amount) - baseSalary;
+    const data = {
+      bonus: bonus,
+      employeeId: id,
+    };
+    console.log(data);
+    const result = await post(environment.pay_salary, data);
+    console.log(result);
+  }
+
   function close(e) {
     setPerson({});
     setTimes({});
@@ -47,6 +58,7 @@ function Salaries() {
           onClose={close}
           isSalaries={true}
           times={times}
+          paySalary={paySalary}
         />
       )}
 
