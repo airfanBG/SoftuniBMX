@@ -24,8 +24,5 @@
         Task<OrderQueryDto> AllDeletedOrdersAsync(int currentPage);
         Task<ICollection<OrderSendedDto>> AllSendedOrdersAsync();
         Task<bool> SendOrderAsync(int orderId);
-        Task <OrderStatisticDto> GetOrderStatistics(FinishedOrdersDto datesPeriod);
-        Task <PartStatisticDto> GetPartStatistics(FinishedOrdersDto datesPeriod);
-        Task <StatisticsDto> GetStatistics(FinishedOrdersDto datesPeriod);
     }
 }

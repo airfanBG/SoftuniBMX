@@ -2,13 +2,13 @@
 {    
     public class PartStatisticDto
     {
-        public string BestselerPartNameTotal { get; set; } = null!;
-        public string BestselerPartOemNumTotal { get; set; } = null!;
-        public int BestselerPartSoldTotal { get; set; }
-        public decimal BestselerPartTotalIncome { get; set; }
+        public string TotalBestselerPartName { get; set; } = null!;
+        public int TotalBestselerPartId { get; set; } 
+        public int TotalBestselerPartOrderedCount { get; set; }
+        public decimal TotalBestselerPartIncome { get; set; }
         public string BestselerPartName { get; set; } = null!;
-        public string BestselerPartOemNum { get; set; } = null!;
-        public int BestselerSold { get; set; }
-        public decimal BestselerIncome { get; set; }
+        public int BestselerPartId { get; set; } 
+        public int BestselerPartOrderedCount { get; set; }
+        public decimal BestselerPartIncome { get; set; }
     }
 }

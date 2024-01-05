@@ -562,53 +562,5 @@
             return false;
         }
 
-        public async Task<OrderStatisticDto> GetOrderStatistics(FinishedOrdersDto datesPeriod)
-        {
-            return await _db.Orders
-                .AsNoTracking()
-                .Select(o => new OrderStatisticDto
-                {
-                    TotalIncome = _db.Orders.Sum(o => o.SaleAmount),
-                    TotalSendedOrdersCount = _db.Orders.Count(),
-                    IncomeForSelectedPeriod = _db.Orders.Where(o => o.DateCreated >= datesPeriod.StartDate
-                                     && o.DateFinish <= datesPeriod.EndDate.AddDays(1)
-                                     && o.DateFinish != null
-                                     && o.DateDeleted == null).Sum(o => o.SaleAmount),
-                    SendedOrdersCountForSelectedPeriod = _db.Orders.Where(o => o.DateCreated >= datesPeriod.StartDate
-                                     && o.DateFinish <= datesPeriod.EndDate.AddDays(1)
-                                     && o.DateFinish != null
-                                     && o.DateDeleted == null).Count()
-                })
-                .FirstAsync();
-        }
-
-        public async Task<PartStatisticDto> GetPartStatistics(FinishedOrdersDto datesPeriod)
-        {
-            //var partsFromFinishedOrders = await _db.OrdersPartsEmployees
-            //    .Select(ope => ope.Part)
-            //    .OrderByDescending(ope => ope.PartsInOrder.)
-            //    .ToListAsync();
-
-
-
-
-
-            //var result = await _db.Parts
-            //    .AsNoTracking()
-            //    .Select(p => new PartStatisticDto
-            //    {
-            //        BestselerPartNameTotal = 
-            //    })
-            //    .FirstAsync();
-
-            //return result;
-
-            throw new NotImplementedException();
-        }
-
-        public Task<StatisticsDto> GetStatistics(FinishedOrdersDto datesPeriod)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
