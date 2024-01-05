@@ -50,9 +50,9 @@ function InProgress() {
     setBackground(false);
   }
 
-  if (orderList.length === 0)
-    return <h2>There is no orders in this category</h2>;
-    
+  // if (orderList.length === 0)
+  //   return <h2>There is no orders in this category</h2>;
+
   return (
     <>
       {background && (
@@ -65,16 +65,23 @@ function InProgress() {
       </h2>
       <section className={styles.board}>
         <BoardHeader />
+
+        {orderList.length === 0 && (
+          <h2 style={{ margin: "3rem 0 0 0" }}>
+            There is no orders in this category
+          </h2>
+        )}
         <div className={styles.orders}>
           {loading && <LoaderWheel />}
-          {orderList.map((order, i) => (
-            <OrderInProgress
-              key={order.orderId}
-              order={order}
-              i={i + 1}
-              onOrderButtonClick={onOrderButtonClick}
-            />
-          ))}
+          {orderList &&
+            orderList.map((order, i) => (
+              <OrderInProgress
+                key={order.orderId}
+                order={order}
+                i={i + 1}
+                onOrderButtonClick={onOrderButtonClick}
+              />
+            ))}
         </div>
       </section>
     </>

@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 import BoardHeader from "../BoardHeader.jsx";
 import LoaderWheel from "../../LoaderWheel.jsx";
 
-import { get } from "../../../util/api.js";
+import { get, post } from "../../../util/api.js";
 import { environment } from "../../../environments/environment.js";
 
 import FinishedOrderFullElement from "./FinishedOrderFullElement.jsx";
 import FinishedOrder from "./FinishedOrder.jsx";
 import Popup from "../../Popup.jsx";
-import {onSendHandler} from "../../dashComponents/managerComponents/managerActions/orderActions.js"
+import { onSendHandler } from "../../dashComponents/managerComponents/managerActions/orderActions.js";
 
 function ManagerFinished() {
   const [background, setBackground] = useState(false);
@@ -55,6 +55,7 @@ function ManagerFinished() {
         const sortedResult = result.sort(
           (a, b) => a.dateCreated - b.dateCreated
         );
+        console.log("hasResult");
         setOrderList(sortedResult);
         setLoading(false);
       }
@@ -75,12 +76,13 @@ function ManagerFinished() {
     setBackground(false);
   }
 
-  function onFinishedOrderButtonClick(order) {
-    const result = onSendHandler(order.orderId);
+  async function onFinishedOrderButtonClick(order) {
+    // const result = onSendHandler(order.orderId);
+    const result = await post(`${environment.send_order}${order.orderId}`);
+    setRerender(!rerender);
     console.log(result);
     setCurrentOrder({});
     setBackground(false);
-    setRerender(!rerender);
   }
 
   return (

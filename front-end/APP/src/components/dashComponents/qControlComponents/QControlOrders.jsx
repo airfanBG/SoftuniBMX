@@ -126,6 +126,7 @@ function QControlOrders() {
                 onReBuild={reBuild}
               />
             ))}
+          {orderList === undefined && <h2>You have no orders to inspect</h2>}
         </div>
         <div className={styles.paginator}>
           <Paginator
