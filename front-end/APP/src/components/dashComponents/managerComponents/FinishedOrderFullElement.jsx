@@ -1,10 +1,10 @@
+import styles from "./FinishedOrderFullElement.module.css";
 import {
   formatCurrency,
   minutesToHours,
   timeResolver,
 } from "../../../util/resolvers.js";
 import { useState, useContext } from "react";
-import styles from "./FinishedOrderFullElement.module.css";
 
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 
@@ -122,10 +122,9 @@ function FinishedOrderElement({ order, i, onFinishedOrderButtonClick }) {
         {user.role !== "user" && (
           <button
             className={styles.btn}
+            style={unpaidAmount > 0 ? { cursor: "not-allowed" } : null}
             onClick={() => onFinishedOrderButtonClick(order)} //Трябва да прати orderId на ендпойнта за изпращане!?
-            // disabled={
-            //   unpaidAmount > 0
-            // }
+            disabled={unpaidAmount > 0}
           >
             {unpaidAmount > 0 ? "UNPAID" : "Send order"}
           </button>

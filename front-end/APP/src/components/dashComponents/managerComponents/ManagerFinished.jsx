@@ -55,7 +55,7 @@ function ManagerFinished() {
         const sortedResult = result.sort(
           (a, b) => a.dateCreated - b.dateCreated
         );
-        console.log("hasResult");
+        // console.log("hasResult");
         setOrderList(sortedResult);
         setLoading(false);
       }
