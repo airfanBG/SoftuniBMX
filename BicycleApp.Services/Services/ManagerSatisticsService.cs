@@ -71,7 +71,6 @@
         }
         public async Task<PartStatisticDto> GetPartStatistics(FinishedOrdersDto datesPeriod)
         {
-            var step1 = 5;
 
             var bestSelerPart = await _db.OrdersPartsEmployees
                 .GroupBy(ope => ope.PartId)
@@ -87,9 +86,6 @@
                 .OrderByDescending(og => og.GroupCount)
                 .Take(1)
                 .FirstAsync();
-
-
-            var step2 = 5;
 
             var bestSelerPartForPeriod = await _db.OrdersPartsEmployees
                 .AsNoTracking()
@@ -115,11 +111,11 @@
             {
                 TotalBestselerPartId = bestSelerPart.PartId,
                 TotalBestselerPartName = bestSelerPart.PartName,
-                TotalBestselerPartOrderedCount = bestSelerPart.PartQuantity,
+                TotalBestselerPartOrderedCount = bestSelerPart.OrderedCount,
                 TotalBestselerPartIncome = bestSelerPart.PartIncome,
                 BestselerPartName = bestSelerPartForPeriod.BestselerPartName,
                 BestselerPartId = bestSelerPartForPeriod.BestselerPartId,
-                //BestselerPartQuantitySold = bestSelerPartForPeriod.BestselerPartSoldQuantity,
+                BestselerPartOrderedCount = bestSelerPartForPeriod.BestselerPartOrderedCount,
                 BestselerPartIncome = bestSelerPartForPeriod.BestselerPartIncome,
 
             };
@@ -128,9 +124,15 @@
 
         }
 
-        public Task<StatisticsDto> GetStatistics(FinishedOrdersDto datesPeriod)
+        public async Task<StatisticsDto> GetStatistics(FinishedOrdersDto datesPeriod)
         {
-            throw new NotImplementedException();
+            var result = new StatisticsDto
+            {
+                OrderStatistics = await GetOrderStatistics(datesPeriod),
+                PartStatistics = await GetPartStatistics(datesPeriod)
+            };
+
+            return result;
         }
     }
 }

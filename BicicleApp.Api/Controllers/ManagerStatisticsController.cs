@@ -31,12 +31,12 @@
         }
 
         [HttpGet]
-        [Route("order_statistics")]
+        [Route("order_part_statistics")]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> OrderStatistics([FromQuery] FinishedOrdersDto datesPeriod)
+        public async Task<ActionResult> Statistics([FromQuery] FinishedOrdersDto datesPeriod)
         {
             if (datesPeriod == null)
             {
@@ -50,45 +50,7 @@
 
             try
             {
-                var result = await _managerSatisticsService.GetOrderStatistics(datesPeriod);
-
-
-                if (result != null)
-                {
-                    return StatusCode(StatusCodes.Status202Accepted, result);
-                }
-                else
-                {
-                    return StatusCode(422, datesPeriod);
-                }
-            }
-            catch (Exception)
-            {
-                return StatusCode(500);
-            }
-        }
-
-        [HttpGet]
-        [Route("part_statistics")]
-        [ProducesResponseType(StatusCodes.Status202Accepted)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> PartStatistics([FromQuery] FinishedOrdersDto datesPeriod)
-        {
-            if (datesPeriod == null)
-            {
-                return StatusCode(400);
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return StatusCode(422, datesPeriod);
-            }
-
-            try
-            {
-                var result = await _managerSatisticsService.GetPartStatistics(datesPeriod);
+                var result = await _managerSatisticsService.GetStatistics(datesPeriod);
 
 
                 if (result != null)
