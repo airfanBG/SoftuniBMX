@@ -113,7 +113,14 @@ function EditContactInfo({ info, setInfo, base64 }) {
       };
     }
 
-    updateUserData(id, data, role);
+    // UPDATE CONTEXT USER
+    updateUser({
+      ...user,
+      firstName: firstName,
+      lastName: lastName,
+      balance: balance,
+      imageUrl: updatedImg,
+    });
 
     const result = await updateUserData(id, data, role);
     // console.log(result);
@@ -132,13 +139,14 @@ function EditContactInfo({ info, setInfo, base64 }) {
       imageUrl: updatedImg,
     });
 
-    // UPDATE CONTEXT USER
-    updateUser({
-      ...user,
-      firstName: firstName,
-      lastName: lastName,
-      balance: balance,
-    });
+    // // UPDATE CONTEXT USER
+    // updateUser({
+    //   ...user,
+    //   firstName: firstName,
+    //   lastName: lastName,
+    //   balance: balance,
+    //   imageUrl: updatedImg,
+    // });
 
     // NAVIGATE TO USER PROFILE PAGE
     navigate("/profile");
