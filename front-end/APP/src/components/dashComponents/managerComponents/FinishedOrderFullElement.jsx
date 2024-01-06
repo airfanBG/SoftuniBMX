@@ -1,6 +1,10 @@
-import { minutesToHours, timeResolver } from "../../../util/resolvers.js";
-import { useState, useContext } from "react";
 import styles from "./FinishedOrderFullElement.module.css";
+import {
+  formatCurrency,
+  minutesToHours,
+  timeResolver,
+} from "../../../util/resolvers.js";
+import { useState, useContext } from "react";
 
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 
@@ -9,7 +13,8 @@ import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 function FinishedOrderElement({ order, i, onFinishedOrderButtonClick }) {
   const { user } = useContext(UserContext);
 
-  const { clientName, paidAmount, unpaidAmount, finalAmount, orderStates } = order;
+  const { clientName, paidAmount, unpaidAmount, finalAmount, orderStates } =
+    order;
 
   function jobTIme(t1, t2) {
     let timeResult = "";
@@ -35,8 +40,8 @@ function FinishedOrderElement({ order, i, onFinishedOrderButtonClick }) {
 
       <header className={styles.header}>
         <p className={styles.date}>
-          <span className={styles.label}>Paid amount:</span>
-          {paidAmount}.00 BGN
+          <span className={styles.label}>Paid:</span>
+          {formatCurrency(paidAmount)}
         </p>
         <div className={styles.qtyBlock}>
           <p
@@ -45,15 +50,15 @@ function FinishedOrderElement({ order, i, onFinishedOrderButtonClick }) {
             }`}
           >
             <span className={`${unpaidAmount > 0 ? styles.notEnough : null}`}>
-              Unpaid amount:
+              REMAINING:
             </span>
-            {unpaidAmount}.00 BGN
+            {formatCurrency(unpaidAmount)}
           </p>
         </div>
 
         <p className={styles.date}>
-          <span className={styles.label}>Total amount:</span>
-          {finalAmount}.00 BGN
+          <span className={styles.label}>Total:</span>
+          {formatCurrency(finalAmount)}
         </p>
       </header>
 
@@ -117,13 +122,11 @@ function FinishedOrderElement({ order, i, onFinishedOrderButtonClick }) {
         {user.role !== "user" && (
           <button
             className={styles.btn}
-
+            style={unpaidAmount > 0 ? { cursor: "not-allowed" } : null}
             onClick={() => onFinishedOrderButtonClick(order)} //Трябва да прати orderId на ендпойнта за изпращане!?
-            // disabled={
-            //   unpaidAmount > 0
-            // }
+            disabled={unpaidAmount > 0}
           >
-            Send order
+            {unpaidAmount > 0 ? "UNPAID" : "Send order"}
           </button>
         )}
       </div>
