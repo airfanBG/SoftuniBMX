@@ -98,6 +98,7 @@ function EditContactInfo({ info, setInfo, base64 }) {
         iban,
         balance,
         address: newAddress,
+        imageUrl: updatedImg,
       };
     } else {
       data = {
@@ -108,12 +109,13 @@ function EditContactInfo({ info, setInfo, base64 }) {
         position: info?.position,
         dateOfHire: info?.dateOfHire,
         isManager: info?.isManager,
+        imageUrl: updatedImg,
       };
     }
 
     updateUserData(id, data, role);
 
-    // const result = await updateUserData(id, data, role);
+    const result = await updateUserData(id, data, role);
     // console.log(result);
 
     // IF RESULT IS OK UPDATE CONTEXT
