@@ -168,7 +168,7 @@
                     Balance = user.Balance,
                     Image = await imageStore.GetUserImage(client.Id, userRole),
                     Result = true,
-                    IsAnyOrderReady = user.Orders.Any(o => o.DateFinish != null && o.DateSended == null)
+                    IsAnyOrderReady = user.Orders.Any(o => o.DateFinish != null && o.DateSended == null && o.ClientId == client.Id)
                 };
             }
             else
