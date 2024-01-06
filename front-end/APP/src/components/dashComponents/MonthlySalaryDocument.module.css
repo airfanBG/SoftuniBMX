@@ -1,0 +1,274 @@
+/* .board {
+    position: relative;
+  } */
+.wrapperPDF {
+  display: grid;
+  place-content: center;
+  padding: 2rem;
+}
+.pdfContainer {
+  width: 750px;
+  border: 1px solid var(--color-main-dark);
+}
+.headerPDF {
+  background-color: rgb(228, 228, 228);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 15rem;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--color-main-dark);
+}
+.header1 {
+  grid-column: 1/2;
+  width: 100%;
+}
+.header2 {
+  grid-column: 2/3;
+  width: 100%;
+}
+.logoPDF {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+}
+.logoFirstLinePDF {
+  font-size: 2.2rem;
+  font-weight: 500;
+  letter-spacing: 0.4rem;
+  color: var(--color-main-dark);
+  text-decoration: none;
+}
+.logoFirstLinePDF span {
+  color: red;
+  letter-spacing: 0.2rem;
+}
+
+.logoSecondaryPDF {
+  font-size: 1.4rem;
+  margin-left: 2.1rem;
+}
+
+.headerContent,
+.infoContent {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.headerText {
+  width: 80%;
+  font-size: 1.6rem;
+  color: var(--color-main-dark);
+}
+
+.label {
+  width: 20%;
+  font-size: 1.4rem;
+  color: var(--color-hd);
+}
+.header2 .headerText,
+.header2 .label {
+  width: 50%;
+}
+
+.textId {
+  font-size: 1.2rem;
+}
+
+.header2 .headerText {
+  text-align: right;
+}
+
+/* INFO */
+
+.infoContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0.5rem 2rem 2rem;
+  border-bottom: 1px solid var(--color-main-dark);
+}
+.info1 {
+  grid-column: 1/2;
+  width: 100%;
+}
+.info2 {
+  grid-column: 2/3;
+  width: 100%;
+}
+.infoContent {
+  justify-content: unset;
+}
+.infoLabel {
+  min-width: 10rem;
+  margin-right: 3rem;
+  font-size: 1.4rem;
+  color: var(--color-hd);
+}
+.infoText {
+  font-size: 1.6rem;
+  color: var(--color-main-dark);
+}
+
+.tableContainer {
+  display: grid;
+  grid-template-columns: repeat(28, 1fr);
+  border-bottom: 1px solid var(--color-main-dark);
+}
+.tableCode {
+  grid-column: 1/2;
+  text-align: center;
+  border-right: 1px solid var(--color-main-dark);
+}
+.tableIncome {
+  grid-column: 2/8;
+  border-right: 1px solid var(--color-main-dark);
+}
+
+.tableCount {
+  grid-column: 8/10;
+  text-align: right;
+  border-right: 1px solid var(--color-main-dark);
+}
+.tableCorrection {
+  grid-column: 10/12;
+  border-right: 1px solid var(--color-main-dark);
+}
+.tableAmount {
+  grid-column: 12/15;
+  text-align: right;
+
+  border-right: 1px solid var(--color-main-dark);
+}
+
+.tableCode2 {
+  grid-column: 15/16;
+  text-align: center;
+  border-right: 1px solid var(--color-main-dark);
+}
+.tableHolds {
+  grid-column: 16/22;
+  border-right: 1px solid var(--color-main-dark);
+}
+.tableCount2 {
+  grid-column: 22/24;
+  text-align: right;
+  border-right: 1px solid var(--color-main-dark);
+}
+.tableCorrection2 {
+  grid-column: 24/26;
+  border-right: 1px solid var(--color-main-dark);
+}
+.tableAmount2 {
+  grid-column: 26/29;
+  text-align: right;
+}
+
+p.tableCode,
+p.tableIncome,
+p.tableCount,
+p.tableCorrection,
+p.tableAmount,
+p.tableCode2,
+p.tableHolds,
+p.tableCount2,
+p.tableCorrection2,
+p.tableAmount2 {
+  font-size: 1rem;
+  padding: 0.5rem 0;
+  text-align: center;
+  border-bottom: 1px solid var(--color-main-dark);
+}
+
+div.tableCode,
+div.tableIncome,
+div.tableCount,
+div.tableCorrection,
+div.tableAmount,
+div.tableCode2,
+div.tableHolds,
+div.tableCount2,
+div.tableCorrection2,
+div.tableAmount2 {
+  font-size: 1.2rem;
+  padding: 0 0.5rem 0;
+}
+div.tableCode:last-child,
+div.tableIncome:last-child,
+div.tableCount:last-child,
+div.tableCorrection:last-child,
+div.tableAmount:last-child,
+div.tableCode2:last-child,
+div.tableHolds:last-child,
+div.tableCount2:last-child,
+div.tableCorrection2:last-child,
+div.tableAmount2:last-child {
+  margin-bottom: 1rem;
+}
+
+.totalContainer,
+.signContainer {
+  background-color: rgb(228, 228, 228);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--color-main-dark);
+}
+
+.totalContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  border-right: 1px solid var(--color-main-dark);
+}
+.totalContent:last-child {
+  border-right: none;
+}
+.totalInfo {
+  font-size: 1.4rem;
+}
+.totalInfo2 {
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.signContainer {
+  padding: 1rem 1rem;
+}
+.signInfo2 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-align: right;
+}
+
+.sign {
+  margin-top: 3rem;
+  font-size: 1.2rem;
+}
+
+.controls {
+  display: flex;
+  position: relative;
+}
+.print {
+  position: absolute;
+  width: 30rem;
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 2rem 2rem 0 1rem;
+  z-index: 1;
+}
+
+.btn {
+  height: 3.5rem;
+  border-bottom: 2px solid transparent;
+}
+.btn:hover {
+  border-bottom: 2px solid var(--color-line);
+}
+
+.walletText {
+  font-size: 2.2rem;
+}
