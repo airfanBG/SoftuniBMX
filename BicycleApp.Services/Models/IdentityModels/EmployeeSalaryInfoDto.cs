@@ -4,7 +4,7 @@
 
     public class EmployeeSalaryInfoDto : IEmployeeSalaryInfo
     {
-        public string Month { get; set; } = null!;
+        public EmployeeSalaryDateDto Month { get; set; } = null!;
         public decimal BaseSalary { get; set; }
         public decimal InternshipValue { get; set; }
         public decimal MonthBonus { get; set; }

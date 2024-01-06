@@ -75,7 +75,7 @@
                 ZO = zo,
                 DDFL = ddfl,
                 NetSalary = netSlalary,
-                Month = currentDate
+                Month = new EmployeeSalaryDateDto() { Date = currentDate }
             };
         }
     }
