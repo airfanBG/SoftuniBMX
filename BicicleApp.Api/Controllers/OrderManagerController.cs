@@ -373,5 +373,6 @@ namespace BicicleApp.Api.Controllers
                 return StatusCode(500);
             }
         }
+
     }
 }

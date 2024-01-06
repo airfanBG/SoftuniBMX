@@ -104,6 +104,7 @@ function Login() {
           : result.clientFullName.split(" ").at(1),
         role: result.role,
         id: result.employeeId ? result.employeeId : result.clientId,
+        salary: result.employeeSalaryInfo,
       };
       // if (result.balance) {
       //   currentUser.balance = Number(result.balance.toFixed(2));

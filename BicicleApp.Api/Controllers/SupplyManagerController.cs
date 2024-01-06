@@ -135,7 +135,7 @@ namespace BicicleApp.Api.Controllers
 
                 if (result)
                 {
-                    return StatusCode(201);
+                    return StatusCode(201, true);
                 }
 
                 return StatusCode(400, createDeliveryDto);
@@ -169,7 +169,7 @@ namespace BicicleApp.Api.Controllers
 
                 if (result)
                 {
-                    return StatusCode(201);
+                    return StatusCode(201, true);
                 }
 
                 return StatusCode(400, createSuplierDto);
@@ -203,7 +203,7 @@ namespace BicicleApp.Api.Controllers
 
                 if (result)
                 {
-                    return StatusCode(201);
+                    return StatusCode(201, true);
                 }
 
                 return StatusCode(400, createPartOrderDto);
