@@ -335,6 +335,8 @@
 
                 if (chackBalance)
                 {
+                    client.Balance -= clientOrder.UnpaidAmount;
+
                     var total = clientOrder.FinalAmount;
                     clientOrder.PaidAmount = total;
                     clientOrder.UnpaidAmount = 0;
