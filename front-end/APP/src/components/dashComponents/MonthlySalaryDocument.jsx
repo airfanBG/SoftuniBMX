@@ -1,15 +1,14 @@
 import { useContext } from "react";
 import styles from "./MonthlySalaryDocument.module.css";
 import { Preview, print } from "react-html2pdf";
-import { UserContext } from "../../context/GlobalUserProvider.jsx";
 import {
   formatCurrency,
   getMonthName,
   getWeekdaysInMonth,
 } from "../../util/resolvers.js";
 
-function Salary() {
-  const { user } = useContext(UserContext);
+function Salary({ getSalary, user }) {
+  // const { user } = useContext(UserContext);
   const { firstName, lastName } = user;
   const salaryMonth = user.salary.month.split(" ").at(0).replaceAll("/", ".");
   const base = formatCurrency(Number(user.salary.baseSalary));
@@ -29,7 +28,7 @@ function Salary() {
   return (
     <>
       {/* template */}
-      <Preview id={"jsx-template"}>
+      <Preview id={"jsx-template"} style={{ position: "inherit" }}>
         <div className={styles.wrapperPDF}>
           <div className={styles.pdfContainer}>
             {/* HEADER */}
@@ -266,7 +265,7 @@ function Salary() {
           >
             <ion-icon name="print-outline"></ion-icon>
           </button>
-          <button className={styles.btn}>
+          <button className={styles.btn} onClick={getSalary}>
             <ion-icon name="wallet-outline"></ion-icon>
           </button>
         </div>

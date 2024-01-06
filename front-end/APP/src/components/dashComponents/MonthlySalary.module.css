@@ -24,6 +24,14 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  position: relative;
+}
+
+.errorContainer {
+  padding-top: 2rem;
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--color-warning);
 }
 
 /* .wallet {

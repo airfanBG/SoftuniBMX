@@ -32,6 +32,7 @@ export const environment = {
   worker_order_end: "/api/employee_order/end",
   worker_order: "/api/employee_order/",
   worker_times: "/api/manager_statistics?employeeId=",
+  worker_get_salary: "/api/employee/get_salary?employeeId=",
 
   // QUALITY_CONTROL
   quality_assurance: "/api/employee_order/quality_assurance",

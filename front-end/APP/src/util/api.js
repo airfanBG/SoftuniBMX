@@ -31,7 +31,7 @@ async function request(method, url, data) {
       if (response.status == 403) {
         clearUserData();
       }
-      const error = result;
+      const error = { result, statusCode: response.status };
       throw error;
     }
 
@@ -41,6 +41,7 @@ async function request(method, url, data) {
     clearUserData();
 
     // throw new Error(error.message);
+    console.log(error);
     return { isError: error };
   }
 }
