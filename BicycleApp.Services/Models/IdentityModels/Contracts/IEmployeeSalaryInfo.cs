@@ -2,7 +2,7 @@
 {    
     public interface IEmployeeSalaryInfo
     {
-        public EmployeeSalaryDateDto Month { get; set; }
+        public string Month { get; set; }
         public decimal BaseSalary { get; set; }
         public decimal InternshipValue { get; set; }
         public decimal MonthBonus { get; set; }

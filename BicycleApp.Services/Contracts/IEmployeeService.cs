@@ -17,6 +17,6 @@
         Task<bool> ResetPasswordToDefault(string email);
 
         Task ConfirmEmailAsync(string emmployeeId, string code);
-        Task<string> GetSalary(string employeeId);
+        Task<EmployeeSalaryDateDto?> GetSalary(string employeeId);
     }
 }

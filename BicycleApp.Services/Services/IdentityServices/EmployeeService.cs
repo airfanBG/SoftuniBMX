@@ -334,7 +334,7 @@
 
         }
 
-        public async Task<string> GetSalary(string employeeId)
+        public async Task<EmployeeSalaryDateDto?> GetSalary(string employeeId)
         {
             var currentDate = dateTimeProvider.Now;
             var salaryInfo = await dbContext.EmployeesMonthsSalariesInfos.OrderBy(o => o.Id)
@@ -348,10 +348,10 @@
 
                 await dbContext.SaveChangesAsync();
 
-                return salaryInfo.Month.ToString();
+                return new EmployeeSalaryDateDto() { Date = salaryInfo.Month.ToString() };
             }
 
-            return string.Empty;
+            return null;
         }
 
         /// <summary>

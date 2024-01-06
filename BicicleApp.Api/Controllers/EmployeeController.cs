@@ -208,7 +208,7 @@
         {
             var result = await employeeService.GetSalary(employeeId);
 
-            if (!string.IsNullOrEmpty(result))
+            if (result != null)
             {
                 return Ok(result);
             }
