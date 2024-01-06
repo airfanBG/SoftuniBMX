@@ -1,5 +1,7 @@
 ﻿namespace BicycleApp.Services.Models.IdentityModels
 {
+    using System.Text.Json.Serialization;
+
     public class ClientReturnDto
     {
         public string? ClientId { get; set; }
@@ -14,6 +16,9 @@
 
         public bool Result { get; set; }
 
-        public string? Image { get; set; } 
+        [JsonPropertyName("imageUrl")]
+        public string? Image { get; set; }
+
+        public bool IsAnyOrderReady { get; set; }
     }
 }

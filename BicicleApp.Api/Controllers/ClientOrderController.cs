@@ -83,7 +83,7 @@
             try
             {
                 //Use the status id for ready
-                var orders = await _userService.GetAllOrdersForClientByStatus(clientId, 6);
+                var orders = await _userService.GetAllOrdersForClientByStatus(clientId, 7);
 
                 return Ok(orders);
             }
@@ -107,7 +107,7 @@
             try
             {
                 //Use the status id for already sended orders
-                var orders = await _userService.GetAllOrdersForClientByStatus(clientId, 7);
+                var orders = await _userService.GetAllOrdersForClientByStatus(clientId, 8);
 
                 return Ok(orders);
             }

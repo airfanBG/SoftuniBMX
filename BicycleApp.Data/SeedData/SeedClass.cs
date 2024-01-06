@@ -2077,6 +2077,15 @@
                 new Status()
                 {
                     Id = 7,
+                    Name = "Ready order",
+                    DateCreated = dateCreated,
+                    DateUpdated = null,
+                    DateDeleted = null,
+                    IsDeleted = false
+                },
+                new Status()
+                {
+                    Id = 8,
                     Name = "Sended order",
                     DateCreated = dateCreated,
                     DateUpdated = null,

@@ -337,6 +337,7 @@
                 {
                     client.Balance -= clientOrder.UnpaidAmount;
 
+                    clientOrder.StatusId++;
                     var total = clientOrder.FinalAmount;
                     clientOrder.PaidAmount = total;
                     clientOrder.UnpaidAmount = 0;
