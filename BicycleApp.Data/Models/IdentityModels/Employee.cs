@@ -15,6 +15,7 @@
         {
             this.OrdersPartsEmployees = new HashSet<OrderPartEmployee>();
             this.ImagesEmployees = new HashSet<ImageEmployee>();
+            this.EmployeeMonthSalaryInfos = new HashSet<EmployeeMonthSalaryInfo>();
         }
 
 
@@ -34,6 +35,15 @@
         [Comment("Id of the current department of the employee")]
         public int DepartmentId { get; set; }
 
+        [Required]
+        [Comment("Base salary of hired employee")]
+        [Precision(7,2)]
+        public decimal BaseSalary { get; set; }
+
+        [Required]
+        [Comment("Internship in months for salary calculation")]
+        public int InternshipInMonths { get; set; }
+
         public virtual Department Department { get; set; } = null!;
 
         public virtual ICollection<OrderPartEmployee> OrdersPartsEmployees { get; set; }
@@ -42,5 +52,6 @@
         public bool IsManeger { get; set; } = false;
 
         public virtual ICollection<ImageEmployee> ImagesEmployees { get; set; }       
+        public virtual ICollection<EmployeeMonthSalaryInfo> EmployeeMonthSalaryInfos { get; set; }       
     }
 }

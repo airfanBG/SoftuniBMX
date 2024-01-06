@@ -1,9 +1,9 @@
 ﻿namespace BicycleApp.Tests.Services.Orders
 {
-    using BicicleApp.Common.Providers.Contracts;
+    using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
     using BicycleApp.Data.Models.EntityModels;
-    using BicycleApp.Data.SeedData;
+    using BicycleApp.Tests.SeedData;
     using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Contracts.OrderContracts;
     using BicycleApp.Services.HelperClasses.Contracts;
@@ -54,7 +54,7 @@
             };
 
             // Act 
-            var result = await fakeOrderUserService.CreateOrderByUserAsync(order);
+            var result = fakeOrderUserService.CreateOrderByUser(order);
 
             // Assert
             Assert.IsNull(result);
@@ -75,18 +75,18 @@
             var fakeDate = fakeDateTimeProvider.Object.Now;
 
             fakeOrdeFaktory.Setup(x => x.CreateUserOrder(It.IsAny<IOrder>(), fakeDate))
-                .Returns(new Order() 
-                            {
-                                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                                StatusId = 2, 
-                                SaleAmount = 456,
-                                Description = "descroption",
-                                FinalAmount = 546,
-                                VAT = 123
-                            });
+                .Returns(new Order()
+                {
+                    ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                    StatusId = 2,
+                    SaleAmount = 456,
+                    Description = "descroption",
+                    FinalAmount = 546,
+                    VAT = 123
+                });
 
             // Act 
-            var result = await fakeOrderUserService.CreateOrderByUserAsync(order);
+            var result =  fakeOrderUserService.CreateOrderByUser(order);
 
             // Assert
             Assert.IsNotNull(result);
@@ -105,13 +105,13 @@
             };           
 
             // Act 
-            var result = await fakeOrderUserService.CreateOrderByUserAsync(order);
+            var result = fakeOrderUserService.CreateOrderByUser(order);
 
             // Assert
             Assert.IsNull(result);
         }
         [Test]
-        public async Task CreateOrderByUserAsync_Should_ReturTrue_WhenOrderIsCorrectlyCalculatedWithoutDiscount()
+        public async Task CreateOrderByUserAsync_Should_ReturNull_WhenClientDoNotHaveEnoughBalance()
         {
             // Arrange
             IUserOrderDto order = new UserOrderDto()
@@ -120,20 +120,15 @@
                 Description = "someDescription",
                 OrderQuantity = 1,
                 VATId = 1,
-                OrderParts = new List<OrderPartIdDto>() { new OrderPartIdDto() { PartId = 2 }, new OrderPartIdDto() { PartId = 4 }, new OrderPartIdDto() { PartId = 7 } }
+                OrderParts = new List<OrderPartIdDto>() { new OrderPartIdDto() { PartId = 2 } }
             };
 
-            decimal sumOfParts = 0;
-            foreach (var orderedPart in order.OrderParts)
-            {
-                sumOfParts += fakeContext.Object.Parts.FirstOrDefault(p => p.Id == orderedPart.PartId).SalePrice;
-            }
-
-            // Act 
-            var result = await fakeOrderUserService.CreateOrderByUserAsync(order);
+            // Act
+            var result = fakeOrderUserService.CreateOrderByUser(order);
 
             // Assert
-            Assert.AreEqual(sumOfParts, result.FinalAmount);
+            Assert.IsNull(result);
         }
+
     }
 }

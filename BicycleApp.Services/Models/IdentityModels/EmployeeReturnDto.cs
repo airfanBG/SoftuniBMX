@@ -11,5 +11,6 @@
         public string? Token { get; set; }
 
         public bool Result { get; set; }
+        public EmployeeSalaryInfoDto? EmployeeSalaryInfo { get; set; }
     }
 }

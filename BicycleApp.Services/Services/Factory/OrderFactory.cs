@@ -7,24 +7,24 @@
 
     public class OrderFactory : IOrderFactory
     {  
-        public Order CreateUserOrder(IOrder order, DateTime currentTime)
+        public Order? CreateUserOrder(IOrder order, DateTime currentTime)
         {
-              return new Order()
-                {
-                    FinalAmount = order.FinalAmount,
-                    PaidAmount = order.PaidAmount,
-                    SaleAmount = order.SaleAmount,
-                    UnpaidAmount = order.UnpaidAmount,
-                    VAT = order.VAT,
-                    ClientId = order.ClientId,
-                    DateCreated = currentTime,
-                    Description = order.Description,
-                    Discount = order.Discount,
-                    IsDeleted = order.IsDeleted,
-                    StatusId = order.StatusId
-                };
+             return new Order()
+             {
+                 FinalAmount = order.FinalAmount,
+                 PaidAmount = order.PaidAmount,
+                 SaleAmount = order.SaleAmount,
+                 UnpaidAmount = order.UnpaidAmount,
+                 VAT = order.VAT,
+                 ClientId = order.ClientId,
+                 DateCreated = currentTime,
+                 Description = order.Description,
+                 Discount = order.Discount,
+                 IsDeleted = order.IsDeleted,
+                 StatusId = order.StatusId
+             };
         }
-        public IOrderPartDto CreateOrderPartFromUserOrder(string partName, int partQuantity, int partId, decimal productPrice)
+        public OrderPartDto CreateOrderPartFromUserOrder(string partName, int partQuantity, int partId, decimal productPrice)
         {
             return new OrderPartDto()
             {
@@ -35,7 +35,7 @@
             };
         }
 
-        public async Task<OrderPartEmployee> CreateOrderPartEmployeeProduct(int orderId, string uniqueKeyForSerialNumber, string serialNumber, int partId, string partName, int partQuantity, decimal partPrice, DateTime currentDate)
+        public OrderPartEmployee CreateOrderPartEmployeeProduct(int orderId, string uniqueKeyForSerialNumber, string serialNumber, int partId, string partName, int partQuantity, decimal partPrice, DateTime currentDate)
         {
             var ope = new OrderPartEmployee()
             {
@@ -52,7 +52,7 @@
             return  ope;
         }
 
-        public ISuccessOrderInfo CreateSuccessOrderItems(IOrderPartsEmplyee successOrder)
+        public SuccessOrderInfo CreateSuccessOrderItems(IOrderPartsEmplyee successOrder)
         {
             return new SuccessOrderInfo()
             {
@@ -74,6 +74,5 @@
                 }).ToList()
             };
         }
-
     }
 }

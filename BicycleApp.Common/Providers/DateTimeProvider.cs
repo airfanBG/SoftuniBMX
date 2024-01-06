@@ -1,6 +1,6 @@
 ﻿namespace BicycleApp.Common
 {
-    using BicicleApp.Common.Providers.Contracts;
+    using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Common.Models;
     using System;
 

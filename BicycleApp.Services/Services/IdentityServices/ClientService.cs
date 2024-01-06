@@ -3,7 +3,6 @@
     using System.IdentityModel.Tokens.Jwt;
     using System.Security.Claims;
     using System.Text;
-    using BicicleApp.Common.Providers.Contracts;
     using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
     using BicycleApp.Data.Models.IdentityModels;
@@ -31,6 +30,7 @@
         private readonly IStringManipulator stringManipulator;
         private readonly IOptionProvider optionProvider;
         private readonly IDateTimeProvider dateTimeProvider;
+        private readonly IImageStore imageStore;
 
         public ClientService(UserManager<BaseUser> userManager,
                              SignInManager<BaseUser> signInManager,
@@ -41,7 +41,8 @@
                              IEmailSender emailSender,
                              IStringManipulator stringManipulator,
                              IOptionProvider optionProvider,
-                             IDateTimeProvider dateTimeProvider)
+                             IDateTimeProvider dateTimeProvider,
+                             IImageStore imageStore)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -53,6 +54,7 @@
             this.stringManipulator = stringManipulator;
             this.optionProvider = optionProvider;
             this.dateTimeProvider = dateTimeProvider;
+            this.imageStore = imageStore;
         }
 
         /// <summary>
@@ -157,13 +159,15 @@
                     .FirstOrDefaultAsync();
 
                 var roles = await userManager.GetRolesAsync(client);
+                var userRole = roles[0];
                 return new ClientReturnDto()
                 {
                     ClientId = client.Id,
                     ClientFullName = $"{client.FirstName} {client.LastName}",
-                    Role = roles[0],
+                    Role = userRole,
                     Token = await this.GenerateJwtTokenAsync(client),
                     Balance = balance,
+                    Image = await imageStore.GetUserImage(client.Id, userRole),
                     Result = true
                 };
             }

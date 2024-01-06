@@ -30,7 +30,6 @@
         public virtual DbSet<BaseUser> BaseUsers { get; set; } = null!;
         public virtual DbSet<BaseUserRole> BaseUserRoles { get; set; } = null!;
         public virtual DbSet<Client> Clients { get; set; } = null!;
-
         public virtual DbSet<Employee> Employees { get; set; } = null!;
 
         //Entities
@@ -72,6 +71,8 @@
         public virtual DbSet<PartOrder> PartOrders { get; set; } = null!;
         public virtual DbSet<PartInStock> PartsInStock { get; set; } = null!;
         public virtual DbSet<CompatablePart> CompatableParts { get; set; } = null!;
+        public virtual DbSet<EmployeeMonthSalaryInfo> EmployeesMonthsSalariesInfos { get; set; } = null!;
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -346,6 +347,7 @@
             builder.Entity<IdentityUserRole<string>>(entity => entity.HasData(seeder.SeedRolesUsers()));
             builder.Entity<BikeStandartModel>(entity => entity.HasData(seeder.SeedBikeStandartModels()));
             builder.Entity<BikeModelPart>(entity => entity.HasData(seeder.SeedBikeModelPartls()));
+            builder.Entity<EmployeeMonthSalaryInfo>(entity => entity.HasData(seeder.SeedEmployeeMonthSalaryInfos()));
 
             base.OnModelCreating(builder);
         }

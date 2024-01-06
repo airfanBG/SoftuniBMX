@@ -12,21 +12,25 @@
     using System.Threading.Tasks;
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.HelperClasses.Contracts;
+    using BicycleApp.Common.Providers.Contracts;
 
     public class ImageStore : IImageStore
     {
         private readonly BicycleAppDbContext _db;
         private readonly IUserImageFactory _userImageFactory;
         private readonly IStringManipulator _stringManipulator;
+        private readonly IOptionProvider _optionProvider;
 
         public ImageStore(
             BicycleAppDbContext db,
             IUserImageFactory userImageFactory,
-            IStringManipulator stringManipulator)
+            IStringManipulator stringManipulator,
+            IOptionProvider optionProvider)
         {
             _db = db;
             _userImageFactory = userImageFactory;
             _stringManipulator = stringManipulator;
+            _optionProvider = optionProvider;
         }
 
         /// <summary>
@@ -39,17 +43,19 @@
         {
             try
             {
-                var userPath = await _userImageFactory.GetUserImagePathAsync(userId, userRole);
+                string userPath = string.Empty;
+
+                userPath = await _userImageFactory.GetUserImagePathAsync(userId, userRole);
 
                 if (string.IsNullOrEmpty(userPath))
                 {
-                    return null;
+                    userPath = _optionProvider.GetDefaultUserRelativePath();
                 }
 
-                var currentDirectory = Directory.GetCurrentDirectory();
-                var fullPath = Path.Combine(currentDirectory, userPath);
+                //var currentDirectory = Directory.GetCurrentDirectory();
+                //var fullPath = Path.Combine(currentDirectory, userPath);
 
-                return fullPath;
+                return userPath;
             }
             catch (Exception)
             {
@@ -76,7 +82,7 @@
 
                     if (allowedExtensions.Contains(imageExtension))
                     {
-                        string fileName = _stringManipulator.CreateGuid();
+                        string fileName =  _stringManipulator.CreateGuid();
                         string filePath = Path.Combine(userPath, $"{fileName}.{imageExtension}");
 
                         bool isUserImageExist = await _userImageFactory.CheckForExistingUserImage(userImageDto.Id, userImageDto.Role);

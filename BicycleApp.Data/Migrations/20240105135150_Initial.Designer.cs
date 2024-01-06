@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BicycleApp.Data.Migrations
 {
     [DbContext(typeof(BicycleAppDbContext))]
-    [Migration("20240102225547_Initial")]
+    [Migration("20240105135150_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -546,6 +546,140 @@ namespace BicycleApp.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("BicycleApp.Data.Models.EntityModels.EmployeeMonthSalaryInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("BaseSalary")
+                        .HasPrecision(7, 2)
+                        .HasColumnType("decimal(7,2)");
+
+                    b.Property<decimal>("DDFL")
+                        .HasPrecision(7, 2)
+                        .HasColumnType("decimal(7,2)");
+
+                    b.Property<decimal>("DOO")
+                        .HasPrecision(7, 2)
+                        .HasColumnType("decimal(7,2)");
+
+                    b.Property<decimal>("DZPO")
+                        .HasPrecision(7, 2)
+                        .HasColumnType("decimal(7,2)");
+
+                    b.Property<string>("EmployeeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal>("InternshipValue")
+                        .HasPrecision(7, 2)
+                        .HasColumnType("decimal(7,2)");
+
+                    b.Property<bool>("IsSalaryTaken")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Month")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("MonthBonus")
+                        .HasPrecision(7, 2)
+                        .HasColumnType("decimal(7,2)");
+
+                    b.Property<decimal>("NetSalary")
+                        .HasPrecision(7, 2)
+                        .HasColumnType("decimal(7,2)");
+
+                    b.Property<decimal>("ZO")
+                        .HasPrecision(7, 2)
+                        .HasColumnType("decimal(7,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("EmployeesMonthsSalariesInfos");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BaseSalary = 1500m,
+                            DDFL = 129.33m,
+                            DOO = 125.70m,
+                            DZPO = 33.00m,
+                            EmployeeId = "406e8cf1-acaa-44a8-afec-585ff64bed34",
+                            InternshipValue = 0m,
+                            IsSalaryTaken = false,
+                            Month = new DateTime(2023, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MonthBonus = 0m,
+                            NetSalary = 1163.97m,
+                            ZO = 48.00m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BaseSalary = 1500m,
+                            DDFL = 129.33m,
+                            DOO = 125.70m,
+                            DZPO = 33.00m,
+                            EmployeeId = "21003785-a275-4139-ae20-af6a6cf8fea8",
+                            InternshipValue = 0m,
+                            IsSalaryTaken = false,
+                            Month = new DateTime(2023, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MonthBonus = 0m,
+                            NetSalary = 1163.97m,
+                            ZO = 48.00m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BaseSalary = 1500m,
+                            DDFL = 129.33m,
+                            DOO = 125.70m,
+                            DZPO = 33.00m,
+                            EmployeeId = "17063948-8fdc-417e-8fb7-2ae6bf572f94",
+                            InternshipValue = 0m,
+                            IsSalaryTaken = false,
+                            Month = new DateTime(2023, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MonthBonus = 0m,
+                            NetSalary = 1163.97m,
+                            ZO = 48.00m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BaseSalary = 1500m,
+                            DDFL = 129.33m,
+                            DOO = 125.70m,
+                            DZPO = 33.00m,
+                            EmployeeId = "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91",
+                            InternshipValue = 0m,
+                            IsSalaryTaken = false,
+                            Month = new DateTime(2023, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MonthBonus = 0m,
+                            NetSalary = 1163.97m,
+                            ZO = 48.00m
+                        },
+                        new
+                        {
+                            Id = 5,
+                            BaseSalary = 1500m,
+                            DDFL = 129.33m,
+                            DOO = 125.70m,
+                            DZPO = 33.00m,
+                            EmployeeId = "29f06920-d2ad-43d8-b362-e2b94d7a7502",
+                            InternshipValue = 0m,
+                            IsSalaryTaken = false,
+                            Month = new DateTime(2023, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MonthBonus = 0m,
+                            NetSalary = 1163.97m,
+                            ZO = 48.00m
+                        });
+                });
+
             modelBuilder.Entity("BicycleApp.Data.Models.EntityModels.ImageClient", b =>
                 {
                     b.Property<int>("Id")
@@ -582,8 +716,8 @@ namespace BicycleApp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            ImageName = "image",
-                            ImageUrl = "test",
+                            ImageName = "94b08466-e8ff-443a-86b8-91ea623b209b",
+                            ImageUrl = "wwwroot/files/profiles/client/2024/1/94b08466-e8ff-443a-86b8-91ea623b209b/94b08466-e8ff-443a-86b8-91ea623b209b.jpg",
                             UserId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd"
                         });
                 });
@@ -1062,10 +1196,10 @@ namespace BicycleApp.Data.Migrations
                             Discount = 0m,
                             FinalAmount = 425.00m,
                             IsDeleted = false,
-                            PaidAmount = 0m,
+                            PaidAmount = 85m,
                             SaleAmount = 354.17m,
                             StatusId = 6,
-                            UnpaidAmount = 0m,
+                            UnpaidAmount = 340m,
                             VAT = 70.83m
                         });
                 });
@@ -3336,7 +3470,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c3f12c2b-e18c-4930-9ccc-e4e4f9e6d2af",
+                            ConcurrencyStamp = "e5967266-868c-4406-86ce-dfd82de4dc22",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "client@test.bg",
                             EmailConfirmed = true,
@@ -3345,7 +3479,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Ivanov",
                             LockoutEnabled = false,
                             NormalizedEmail = "CLIENT@TEST.BG",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDJLDZsCmGEWso1jqeqUHxRmqHtbhLtwUVzVIsnzWUa7rR4h+smaHVFHjp2yOleJw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDqCTXeJxf+f0B47rML83MpGBgoZ6BbBe30UnHgrAoA9aqk/A+xLYQKatO2JSzo+5Q==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "CLIENT@TEST.BG",
@@ -3360,7 +3494,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "17ce735d-6713-4d0a-8fcb-e4a71ee86f6f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ffbc6210-91de-4e3d-aeb4-7a0396302df2",
+                            ConcurrencyStamp = "ce1daab9-e6cd-4a0c-b51c-c018a31c240f",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "joro@test.bg",
                             EmailConfirmed = true,
@@ -3369,7 +3503,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Georgiev",
                             LockoutEnabled = false,
                             NormalizedEmail = "JORO@TEST.BG",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHPfVdXtlyNhVj6mg39k9EUvLt62y6K9AZ10TmhQYUNMr0IZnKglFAnCOCpXQMzPzQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELoPzdeRLm5w16FrkY1PTdu0FgEp/dhNlhWcFaRidGm0ZEfSAykipeEznn4IczCRDg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "JORO@TEST.BG",
@@ -3384,7 +3518,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "99d3ca6f-2067-4316-a5d7-934c93789521",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "05806b87-e94f-44b0-b092-6e589bf26368",
+                            ConcurrencyStamp = "4e15cc37-027b-4e03-8d7a-d0111549c87b",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "powerranger@test.bg",
                             EmailConfirmed = true,
@@ -3393,7 +3527,7 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Dimitrov",
                             LockoutEnabled = false,
                             NormalizedEmail = "POWERRANGER@TEST.BG",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEukN4CWNubhV5hnLnL0XFSWk7Q7FVxnlEBCJm9AIT1Kix7W979JhX39+ZxASM7O4g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJsHxmotEwMLHniKj+LKbEJJDNQDyy96YJaUtCMff9SoD7rAEDZTiFUjjEtzDivnww==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "POWERRANGER@TEST.BG",
@@ -3410,6 +3544,11 @@ namespace BicycleApp.Data.Migrations
                 {
                     b.HasBaseType("BicycleApp.Data.Models.IdentityModels.BaseUser");
 
+                    b.Property<decimal>("BaseSalary")
+                        .HasPrecision(7, 2)
+                        .HasColumnType("decimal(7,2)")
+                        .HasComment("Base salary of hired employee");
+
                     b.Property<DateTime>("DateOfHire")
                         .HasColumnType("datetime2")
                         .HasComment("Date of hire of the employee");
@@ -3421,6 +3560,10 @@ namespace BicycleApp.Data.Migrations
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int")
                         .HasComment("Id of the current department of the employee");
+
+                    b.Property<int>("InternshipInMonths")
+                        .HasColumnType("int")
+                        .HasComment("Internship in months for salary calculation");
 
                     b.Property<bool>("IsManeger")
                         .HasColumnType("bit");
@@ -3440,7 +3583,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "406e8cf1-acaa-44a8-afec-585ff64bed34",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3cf97dae-2216-4af5-a0fa-1aaf20cc7086",
+                            ConcurrencyStamp = "ecb2d007-6192-46f0-b204-c30b02d9f36c",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "manager@b-free.com",
                             EmailConfirmed = true,
@@ -3449,14 +3592,16 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Kalinov",
                             LockoutEnabled = false,
                             NormalizedEmail = "MANAGER@B-FREE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAELeoy7MMQQpwQECeOa2QeZ6ABvYkVR5hLPyiNjKoWKesC7jSgulHwemDiQHS318XjQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEEBTHN6mtQrAcNsdBwBtyrJ2VsrbBKbf6nsqndCe/3c5RXpHLi2gmCYVUCaHiInAw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "MANAGER@B-FREE.COM",
                             TwoFactorEnabled = false,
                             UserName = "manager@b-free.com",
+                            BaseSalary = 1500m,
                             DateOfHire = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             DepartmentId = 1,
+                            InternshipInMonths = 7,
                             IsManeger = true,
                             Position = "manager"
                         },
@@ -3464,7 +3609,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "21003785-a275-4139-ae20-af6a6cf8fea8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "520d3c1b-c069-4f6a-ba1c-8d67eac6d71a",
+                            ConcurrencyStamp = "9f2f4e28-6c38-4927-bfba-9ab736255f39",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "marinov@b-free.com",
                             EmailConfirmed = true,
@@ -3473,14 +3618,16 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Marinov",
                             LockoutEnabled = false,
                             NormalizedEmail = "MARINOV@B-FREE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKHmaIAgV+CRhEJkWQ58dVi7DN/zuHlVBYBbhtHznHRaWCfFTbMM8DhtSEYzVqSiKg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIwF489muwD12oDCx1SqjyBkXf3jcmszvyiwBHrhO9rilyJIHkAOfRWOr2nDf65ceQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "MARINOV@B-FREE.COM",
                             TwoFactorEnabled = false,
                             UserName = "marinov@b-free.com",
+                            BaseSalary = 1500m,
                             DateOfHire = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             DepartmentId = 2,
+                            InternshipInMonths = 42,
                             IsManeger = false,
                             Position = "FrameWorker"
                         },
@@ -3488,7 +3635,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "17063948-8fdc-417e-8fb7-2ae6bf572f94",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "52eacd5b-2d9d-4b9c-b1e0-fd2e247989b0",
+                            ConcurrencyStamp = "72f0bcd6-5868-40a2-8e26-6f383fd815bc",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "todorov@b-free.com",
                             EmailConfirmed = true,
@@ -3497,14 +3644,16 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Todorov",
                             LockoutEnabled = false,
                             NormalizedEmail = "TODOROV@B-FREE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECbM5168GCcQQ1wowtNDfXJ23fAz13/Y2E7lUHWUG68dV0DTHzJWeIoKtnpETIBmHg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDlt1R1iKUrrSWamrOD32e8n5Su5ZF/ec/A476PpwhDnCy4jpsANY/+eLkwKHoOcow==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "TODOROV@B-FREE.COM",
                             TwoFactorEnabled = false,
                             UserName = "todorov@b-free.com",
+                            BaseSalary = 1500m,
                             DateOfHire = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             DepartmentId = 2,
+                            InternshipInMonths = 0,
                             IsManeger = false,
                             Position = "Wheelworker"
                         },
@@ -3512,7 +3661,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "942ad9d0-3d92-49d3-8a23-7e155df805fe",
+                            ConcurrencyStamp = "a85c218f-245e-4f12-81ad-44c77dd8f192",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "ivanov@b-free.com",
                             EmailConfirmed = true,
@@ -3521,14 +3670,16 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Ivanov",
                             LockoutEnabled = false,
                             NormalizedEmail = "IVANOV@B-FREE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOWq6CendCVDcAWtZWSrFUPCLHSnxx5msubqG5OxJg1oKg5ojjswSA6Amn0j/dM2jQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEM4iOPJz5h6zf6FQ5jLetelIJK9X1jEBzXYOf6NCyQLcST90FWq/haklUUE1EO2wCw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "IVANOV@B-FREE.COM",
                             TwoFactorEnabled = false,
                             UserName = "ivanov@b-free.com",
+                            BaseSalary = 1500m,
                             DateOfHire = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             DepartmentId = 2,
+                            InternshipInMonths = 12,
                             IsManeger = false,
                             Position = "Accessoriesworker"
                         },
@@ -3536,7 +3687,7 @@ namespace BicycleApp.Data.Migrations
                         {
                             Id = "29f06920-d2ad-43d8-b362-e2b94d7a7502",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9171631c-c426-45b4-8355-a11d74a800b2",
+                            ConcurrencyStamp = "e9d485cf-95e9-4242-9b22-9e83192e071c",
                             DateCreated = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             Email = "atanasov@b-free.com",
                             EmailConfirmed = true,
@@ -3545,14 +3696,16 @@ namespace BicycleApp.Data.Migrations
                             LastName = "Atanasov",
                             LockoutEnabled = false,
                             NormalizedEmail = "ATANASOV@B-FREE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEK8x2j49UmjwxaG/76GNM2o2Wnrvjaf5Ddls62ZNRU3TbyDBrO10PMDVrf53sIA9aA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHfSf7vFv3vYTmdp/H0WqvQwuFGQVuBtB84SqgUoaiwXKVZwe/l1Y+xDma0Z3/siHA==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "ATANASOV@B-FREE.COM",
                             TwoFactorEnabled = false,
                             UserName = "atanasov@b-free.com",
+                            BaseSalary = 1500m,
                             DateOfHire = new DateTime(2023, 10, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
                             DepartmentId = 2,
+                            InternshipInMonths = 15,
                             IsManeger = false,
                             Position = "Qualitycontrol"
                         });
@@ -3624,6 +3777,17 @@ namespace BicycleApp.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Town");
+                });
+
+            modelBuilder.Entity("BicycleApp.Data.Models.EntityModels.EmployeeMonthSalaryInfo", b =>
+                {
+                    b.HasOne("BicycleApp.Data.Models.IdentityModels.Employee", "Employee")
+                        .WithMany("EmployeeMonthSalaryInfos")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("BicycleApp.Data.Models.EntityModels.ImageClient", b =>
@@ -3957,6 +4121,8 @@ namespace BicycleApp.Data.Migrations
 
             modelBuilder.Entity("BicycleApp.Data.Models.IdentityModels.Employee", b =>
                 {
+                    b.Navigation("EmployeeMonthSalaryInfos");
+
                     b.Navigation("ImagesEmployees");
 
                     b.Navigation("OrdersPartsEmployees");

@@ -1,6 +1,6 @@
 ﻿namespace BicycleApp.Services.Services.Order
 {
-    using BicicleApp.Common.Providers.Contracts;
+    using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;
@@ -451,7 +451,8 @@
                                 LastName = e.LastName,
                                 IsManeger = e.IsManeger,
                                 PhoneNumber = e.PhoneNumber,
-                                Position = e.Position
+                                Position = e.Position,
+                                BaseSalary = e.BaseSalary
 
                             }).ToListAsync();
 

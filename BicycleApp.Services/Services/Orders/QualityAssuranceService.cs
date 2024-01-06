@@ -9,7 +9,7 @@
     using Microsoft.EntityFrameworkCore;
 
     using System.Threading.Tasks;
-    using BicicleApp.Common.Providers.Contracts;
+    using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Services.Models.Order;
     using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Models.Order.OrderUser.Contracts;
@@ -34,6 +34,8 @@
         /// <returns>Task<ICollection<OrderProgretionDto>></returns>
         public async Task<ICollection<OrderProgretionDto>> GetAllReadyOrder()
         {
+            var sadas = 23;
+            var asdasdads = await _db.Orders.Include(x => x.OrdersPartsEmployees).ToListAsync();
             return await _db.Orders
                             .AsNoTracking()
                             .Where(o => o.DateFinish == null 

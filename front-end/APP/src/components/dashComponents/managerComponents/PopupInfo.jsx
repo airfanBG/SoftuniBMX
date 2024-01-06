@@ -6,7 +6,7 @@ import { User } from "@phosphor-icons/react";
 import { getMonthName, minutesToHours } from "../../../util/resolvers.js";
 import { useState } from "react";
 
-function PopupInfo({ person, onClose, isSalaries = false, times }) {
+function PopupInfo({ person, onClose, isSalaries = false, times, paySalary }) {
   const [reveal, setReveal] = useState(
     new Date().getDate() >= 1 && new Date().getDate() <= 5 ? true : false
   );
@@ -147,10 +147,18 @@ function PopupInfo({ person, onClose, isSalaries = false, times }) {
                       onFocus={() => setSalary("")}
                     />
                     <datalist id="salary">
-                      <option value="1000" />
+                      <option value={person.baseSalary} />
                     </datalist>
                   </div>
-                  <button className={styles.btn}>Pay salary</button>
+                  <button
+                    className={styles.btn}
+                    onClick={() =>
+                      paySalary(salary, person.baseSalary, person.id)
+                    }
+                    disabled={salary === ""}
+                  >
+                    Pay salary
+                  </button>
                 </div>
               )}
             </div>

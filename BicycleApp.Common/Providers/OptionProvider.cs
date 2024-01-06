@@ -1,5 +1,6 @@
 ﻿namespace BicycleApp.Common.Providers
 {
+    using BicycleApp.Common.Models;
     using BicycleApp.Common.Providers.Contracts;
     using Microsoft.Extensions.Configuration;
 
@@ -58,6 +59,25 @@
 
             return positionFlow.FirstOrDefault(x => int.Parse(x.Value) == previousPosition).Key;
 
+        }
+
+        public string? GetDefaultUserRelativePath()
+        {
+            return _configuration.GetSection("DefaultImagesRelativePath:User").Value;
+        }
+
+        public SalaryAccrualPercentages GetSalaryAccrualPercentages()
+        {
+            var salaryAccrualPercentagesValues = _configuration.GetSection("SalaryAccrualPercentages");
+
+            return new SalaryAccrualPercentages()
+            {
+                InternshipRate = decimal.Parse(salaryAccrualPercentagesValues.GetSection("InternshipRate").Value),
+                DOO = decimal.Parse(salaryAccrualPercentagesValues.GetSection("DOO").Value),
+                DZPO = decimal.Parse(salaryAccrualPercentagesValues.GetSection("DZPO").Value),
+                ZO = decimal.Parse(salaryAccrualPercentagesValues.GetSection("ZO").Value),
+                DDFL = decimal.Parse(salaryAccrualPercentagesValues.GetSection("DDFL").Value)                
+            };
         }
     }
 }

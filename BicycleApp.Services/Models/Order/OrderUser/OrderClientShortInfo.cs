@@ -9,6 +9,8 @@
         public string OrderDate { get; set; } = null!;
 
         public decimal Amount { get; set; }
+        public decimal UnpaidAmount { get; set; }
+        public decimal PaidAmount { get; set; }
 
         public List<PartShortInfoDto> Parts { get; set; } = new List<PartShortInfoDto>();
 

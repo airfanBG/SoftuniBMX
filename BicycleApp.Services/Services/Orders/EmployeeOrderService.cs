@@ -86,7 +86,7 @@
 
             if (partOrdersStartEndDto != null && partProductionTime > minimumSpan)
             {
-                var partInfo = await employeeFactory.CreateOrderPartEmployeeInfo(partProductionTime, order.OrderId, order.UniqueKeyForSerialNumber, order.PartId);
+                var partInfo = employeeFactory.CreateOrderPartEmployeeInfo(partProductionTime, order.OrderId, order.UniqueKeyForSerialNumber, order.PartId);
 
                 await dbContext.OrdersPartsEmployeesInfos.AddAsync(partInfo);
                 await dbContext.SaveChangesAsync();

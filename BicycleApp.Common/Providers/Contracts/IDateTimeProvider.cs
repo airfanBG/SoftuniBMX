@@ -1,4 +1,4 @@
-﻿namespace BicicleApp.Common.Providers.Contracts
+﻿namespace BicycleApp.Common.Providers.Contracts
 {
     using BicycleApp.Common.Models;
 
