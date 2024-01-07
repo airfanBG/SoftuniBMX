@@ -2,18 +2,14 @@ import styles from "./OrderPartStatistic.module.css";
 
 import { useEffect, useState } from "react";
 
-
 import { environment } from "../../../environments/environment.js";
 import LoaderWheel from "../../LoaderWheel.jsx";
 import { get } from "../../../util/api.js";
 
-
 function OrderPartStatistic() {
-
   const [error, setError] = useState({});
   const [loading, setLoading] = useState(false);
   const [resultObject, setResultObject] = useState({});
-
 
   // State to hold user input
   const [startDate, setStartDate] = useState("2023-04-11");
@@ -39,7 +35,9 @@ function OrderPartStatistic() {
 
       async function getStatistics() {
         const queryString = `?startDate=${startDate}&endDate=${endDate}`;
-        const result = await get(environment.statistic_orders_part + queryString);
+        const result = await get(
+          environment.statistic_orders_part + queryString
+        );
         if (!result) {
           setLoading(false);
           return setError({
@@ -103,45 +101,45 @@ function OrderPartStatistic() {
           </div>
           <aside className={styles.block}>
             <div>
-              <h3 className={styles.infoHeading}>
-                Summary information
-              </h3>
+              <h3 className={styles.infoHeading}>Summary information</h3>
               <p className={styles.serial}>
                 <span>Total income:</span>
-                {resultObject.orderStatistics.totalIncome} BGN
+                {resultObject.orderStatistics?.totalIncome} BGN
               </p>
               <p className={styles.serial}>
                 <span>Total sended orders:</span>
-                {resultObject.orderStatistics.totalSendedOrdersCount} Pcs.
+                {resultObject.orderStatistics?.totalSendedOrdersCount} Pcs.
               </p>
               <p className={styles.serial}>
                 <span>Bestseler part:</span>
-                {resultObject.partStatistics.totalBestselerPartName} 
+                {resultObject.partStatistics?.totalBestselerPartName}
               </p>
               <p className={styles.serial}>
                 <span>Sold bestseler part:</span>
-                {resultObject.partStatistics.totalBestselerPartSoldCount} Pcs.
+                {resultObject.partStatistics?.totalBestselerPartSoldCount} Pcs.
               </p>
               <p className={styles.serial}>
                 <span>Bestseler income:</span>
-                {resultObject.partStatistics.totalBestselerPartIncome}.00 BGN
+                {resultObject.partStatistics?.totalBestselerPartIncome}.00 BGN
               </p>
             </div>
             <div>
-            <h3 className={styles.infoHeading}>
-              Information about selecting date interval
-            </h3>
-            <ul className={styles.list}>
-              <li>On initial render will be displayed all available orders</li>
-              <li>
-                If select start date will limit the interval between selected
-                date and today
-              </li>
-              <li>
-                When select start and end date will be displayed only orders,
-                created in selected time interval
-              </li>
-            </ul>
+              <h3 className={styles.infoHeading}>
+                Information about selecting date interval
+              </h3>
+              <ul className={styles.list}>
+                <li>
+                  On initial render will be displayed all available orders
+                </li>
+                <li>
+                  If select start date will limit the interval between selected
+                  date and today
+                </li>
+                <li>
+                  When select start and end date will be displayed only orders,
+                  created in selected time interval
+                </li>
+              </ul>
             </div>
           </aside>
         </div>
@@ -151,30 +149,33 @@ function OrderPartStatistic() {
         <h2 className={styles.dashHeading}>
           Orders in selected time interval:
         </h2>
+
         <section className={styles.board}>
           <p className={styles.serial}>
             <span>Income for selected period:</span>
-            {resultObject.orderStatistics.incomeForSelectedPeriod} BGN
+            {resultObject.orderStatistics?.incomeForSelectedPeriod} BGN
           </p>
           <p className={styles.serial}>
             <span>Sended orders for selected period:</span>
-            {resultObject.orderStatistics.sendedOrdersCountForSelectedPeriod} Pcs.
+            {
+              resultObject.orderStatistics?.sendedOrdersCountForSelectedPeriod
+            }{" "}
+            Pcs.
           </p>
           <p className={styles.serial}>
             <span>Bestseler part for selected period:</span>
-            {resultObject.partStatistics.bestselerPartName} 
+            {resultObject.partStatistics?.bestselerPartName}
           </p>
           <p className={styles.serial}>
             <span>Sold bestseler for selected period:</span>
-            {resultObject.partStatistics.bestselerPartSoldCount} Pcs.
+            {resultObject.partStatistics?.bestselerPartSoldCount} Pcs.
           </p>
           <p className={styles.serial}>
             <span>Bestseler income for selected period:</span>
-            {resultObject.partStatistics.bestselerPartIncome}.00 BGN
+            {resultObject.partStatistics?.bestselerPartIncome}.00 BGN
           </p>
         </section>
       </>
-
     </>
   );
 }
