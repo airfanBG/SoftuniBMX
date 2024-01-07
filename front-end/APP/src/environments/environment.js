@@ -69,4 +69,7 @@ export const environment = {
 
   //PART
   find_part: "/api/part/find?partId=", // + id
+
+  //COMMENT
+  find_comment: "/api/comment/find?clientId=",// + clientId + &partId=partId
 };

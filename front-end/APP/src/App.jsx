@@ -37,7 +37,6 @@ import QControlOrders from "./components/dashComponents/qControlComponents/QCont
 import ComponentScaffold from "./components/dashComponents/userComponents/ComponentScaffold.jsx";
 import Contacts from "./pages/Contacts/Contacts.jsx";
 import ComponentUserOrder from "./components/dashComponents/userComponents/ComponentUserOrder.jsx";
-import PartInfo from "./components/PartInfo.jsx";
 import { ErrorProvider } from "./context/ErrorContext.jsx";
 import LoaderWheel from "./components/LoaderWheel.jsx";
 
@@ -67,7 +66,6 @@ function App() {
                 <Route path="contacts" element={<Contacts />} />
                 <Route path="privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="terms" element={<Terms />} />
-                <Route path="part/:partId" element={<PartInfo />} />
                 <Route
                   path="profile"
                   element={
