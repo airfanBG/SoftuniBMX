@@ -121,25 +121,10 @@
   padding: 3rem 0 0;
 }
 
-/* {
-    "orderId": 11,
-    "serialNumber": "BID09BMTA11",
-    "orderDate": "07/01/2024",
-    "amount": 565,
-    "unpaidAmount": 452,
-    "paidAmount": 113,
-    "parts": [
-        {
-            "id": 1,
-            "name": "Frame Road"
-        },
-        {
-            "id": 4,
-            "name": "Wheel of the Year for road"
-        },
-        {
-            "id": 9,
-            "name": "Road Shifts"
-        }
-    ]
-} */
+.fullImg img {
+  border-radius: 0.3rem;
+}
+
+.errorContainer {
+  color: red;
+}

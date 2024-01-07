@@ -5,7 +5,7 @@ import { useState } from "react";
 import { formatCurrency } from "../../../util/resolvers.js";
 import Popup from "../../Popup.jsx";
 
-function ReadyOrder({ order }) {
+function ReadyOrder({ order, payed, error, message }) {
   const [background, setBackground] = useState(false);
 
   function close(e) {
@@ -17,6 +17,13 @@ function ReadyOrder({ order }) {
         <Popup onClose={close}>
           <div className={styles.fullImg}>
             <img src="https://yuchormanski.free.bg/bikes/bike-1.webp" alt="" />
+          </div>
+        </Popup>
+      )}
+      {error && (
+        <Popup onClose={close}>
+          <div className={styles.errorContainer}>
+            <h3>message</h3>
           </div>
         </Popup>
       )}
@@ -61,7 +68,10 @@ function ReadyOrder({ order }) {
                 <span>Paid:</span>
                 {formatCurrency(order.paidAmount)}
               </p>
-              <button className={styles.btn}>
+              <button
+                className={styles.btn}
+                onClick={() => payed(order.orderId)}
+              >
                 <span>rest:</span>
                 {formatCurrency(order.unpaidAmount)}
               </button>

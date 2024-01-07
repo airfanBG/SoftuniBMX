@@ -7,10 +7,14 @@ import ReadyOrderInfo from "../ReadyOrderInfo.jsx";
 
 function Navigation() {
   const { user, hasOrder } = useContext(UserContext);
-  const [readyOrder, setReadyOrder] = useState(false);
+  const [readyOrder, setReadyOrder] = useState(user.orderIsReady);
   useEffect(() => {
-    if (user.orderIsReady) setReadyOrder(true);
-  }, [user.orderIsReady]);
+    if (user.orderIsReady) {
+      setReadyOrder(true);
+    } else {
+      setReadyOrder(false);
+    }
+  }, [user]);
   return (
     <>
       <div className={styles.navigation}>

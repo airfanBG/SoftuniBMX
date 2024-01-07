@@ -24,6 +24,7 @@ export const environment = {
   orders_archive: "/api/client_order/get_orders_archive?clientId=", // + id
   find_order: "/api/client_order/find?orderId=", // + id
   update_balance: "/api/client/bankUpdate",
+  rest_payment: "/api/client_order/payment?",
 
   // EMPLOYEE
   info_employee: "/api/employee/info?id=", // + id
