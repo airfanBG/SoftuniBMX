@@ -335,6 +335,10 @@
 
                 if (chackBalance)
                 {
+                    client.Balance -= clientOrder.UnpaidAmount;
+
+                    clientOrder.DateSended = _dateTimeProvider.Now;
+                    clientOrder.StatusId++;
                     var total = clientOrder.FinalAmount;
                     clientOrder.PaidAmount = total;
                     clientOrder.UnpaidAmount = 0;
