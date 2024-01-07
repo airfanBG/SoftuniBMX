@@ -1,13 +1,16 @@
 import styles from "./Navigation.module.css";
 
-import { memo, useContext } from "react";
+import { memo, useContext, useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "../../context/GlobalUserProvider.jsx";
 import ReadyOrderInfo from "../ReadyOrderInfo.jsx";
 
 function Navigation() {
   const { user, hasOrder } = useContext(UserContext);
-
+  const [readyOrder, setReadyOrder] = useState(false);
+  useEffect(() => {
+    if (user.orderIsReady) setReadyOrder(true);
+  }, [user.orderIsReady]);
   return (
     <>
       <div className={styles.navigation}>
@@ -83,7 +86,7 @@ function Navigation() {
           </ul>
         </nav>
       </div>
-      {user.orderIsReady && <ReadyOrderInfo />}
+      {readyOrder && <ReadyOrderInfo hideReady={setReadyOrder} />}
     </>
   );
 }

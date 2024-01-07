@@ -18,3 +18,8 @@
     transform: rotateY(360deg);
   }
 }
+
+.closeBtn {
+  position: absolute;
+  top: 1rem;
+}
