@@ -17,6 +17,7 @@ function ComponentUserOrdersReady() {
   const { user, updateUser } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
+  const [error, setError] = useState();
   const [render, setRender] = useState(false);
   // const [_, forceRerender] = useReducer((x) => !x, true);
 
@@ -28,14 +29,18 @@ function ComponentUserOrdersReady() {
     getData();
   }, [user.id, render]);
 
-  async function orderIsPayed(orderId) {
+  async function orderIsPayed(orderId, sum) {
     const query = `userId=${user.id}&orderId=${orderId}`;
     const result = await post(environment.rest_payment + query);
-    setRender(!render);
-    // forceRerender();
-    console.log(user);
-    updateUser({ ...user, orderIsReady: false });
-    console.log(user);
+    if (result.isError) {
+      setError({ error: true, message: result.title });
+    } else {
+      // forceRerender();
+      console.log(user);
+      updateUser({ ...user, orderIsReady: false, balance: user.balance - sum });
+      console.log(user);
+      setRender(!render);
+    }
   }
 
   return (
@@ -50,7 +55,14 @@ function ComponentUserOrdersReady() {
           {data &&
             data.length > 0 &&
             data.map((order, i) => (
-              <ReadyOrder key={i} order={order} payed={orderIsPayed} />
+              <ReadyOrder
+                key={i}
+                order={order}
+                payed={orderIsPayed}
+                error={error?.error}
+                message={error?.message}
+                clearError={setError}
+              />
             ))}
           {data.length === 0 && (
             <h3>You have no ready orders at this moment</h3>
