@@ -83,7 +83,7 @@ function Navigation() {
           </ul>
         </nav>
       </div>
-      <ReadyOrderInfo />
+      {user.orderIsReady && <ReadyOrderInfo />}
     </>
   );
 }
