@@ -79,9 +79,8 @@
                     var imageClient = await _db.ImagesClients.FirstAsync(ie => ie.UserId == userId);
                     filePath = imageClient.ImageUrl;
                 }
-                var replacedFilePath = filePath.Replace("\\", "/");
 
-                return replacedFilePath;
+                return filePath;
             }
             catch (Exception)
             {
