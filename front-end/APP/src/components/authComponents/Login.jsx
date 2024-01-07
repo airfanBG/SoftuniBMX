@@ -105,6 +105,7 @@ function Login() {
         role: result.role,
         id: result.employeeId ? result.employeeId : result.clientId,
         salary: result.employeeSalaryInfo,
+        orderIsReady: result.isAnyOrderReady,
       };
       // if (result.balance) {
       //   currentUser.balance = Number(result.balance.toFixed(2));
