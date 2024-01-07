@@ -10,6 +10,8 @@ import LoaderWheel from "../../LoaderWheel.jsx";
 import { environment } from "../../../environments/environment.js";
 import React, { useEffect } from "react";
 import { get } from "../../../util/api.js";
+import Order from "../managerComponents/Order.jsx";
+import ReadyOrder from "./ReadyOrder.jsx";
 
 function ComponentUserOrdersReady() {
   const { user } = useContext(UserContext);
@@ -23,7 +25,7 @@ function ComponentUserOrdersReady() {
       setData(result);
     }
     getData();
-  }, []);
+  }, [user.id]);
 
   return (
     <>
@@ -32,7 +34,15 @@ function ComponentUserOrdersReady() {
       <section className={styles.board}>
         <BoardHeader />
         {loading && <LoaderWheel />}
-        <UserOrdersTable orders={data} />
+        {/* <UserOrdersTable orders={data} /> */}
+        <div className={styles.ordersBlock}>
+          {data &&
+            data.length > 0 &&
+            data.map((order, i) => <ReadyOrder key={i} order={order} />)}
+          {data.length === 0 && (
+            <h3>You have no ready orders at this moment</h3>
+          )}
+        </div>
       </section>
     </>
   );
