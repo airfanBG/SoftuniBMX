@@ -52,17 +52,17 @@
   display: block;
   width: 35%;
   /* height: 30px; */
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   line-height: 1.2;
   overflow: hidden;
 }
 
 .content span {
   display: block;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: var(--color-hd-second);
   margin-right: 1rem;
-  width: 50%;
+  /* width: 50%; */
   text-transform: uppercase;
 }
 
@@ -88,8 +88,9 @@
 }
 
 .picture {
-  width: 120px;
-  height: 100px;
+  /* width: 120px; */
+  /* height: 100px; */
+  width: 30%;
   padding: 1rem 0;
   display: flex;
   flex-direction: column;
@@ -106,8 +107,8 @@
 .card-img {
   width: 100%;
   object-fit: contain;
-  transition: all 0.4s ease-in-out;
+  /* transition: all 0.4s ease-in-out;
   z-index: 1;
   border-bottom: 2px solid transparent;
-  box-shadow: 2px 2px 10px transparent;
+  box-shadow: 2px 2px 10px transparent; */
 }

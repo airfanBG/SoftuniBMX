@@ -31,29 +31,25 @@ function DispathedOrder({ order, i }) {
                 <span>Client email:</span>
                 {order.clientEmail}
               </p>
-              <div className={styles.itemInfo}>
-                <p className={styles.content}>
-                  <span>Client phone:</span>
-                  {order.clientPhone}
-                </p>
-              </div>
-            </div>
-            <div className={styles.info}>
+              {/* <div className={styles.itemInfo}> */}
+              <p className={styles.content}>
+                <span>Client phone:</span>
+                {order.clientPhone}
+              </p>
               <p className={styles.content}>
                 <span>Dispatch date:</span>
                 {order.sendDate}
               </p>
+              {/* </div> */}
+            </div>
+            <div className={styles.info}>
               <p className={styles.content}>
-                <span>Adress:</span>
+                <span>Country:</span>
                 {order.clientAdress.country}
               </p>
               <p className={styles.content}>
                 <span>District:</span>
                 {order.clientAdress.district}
-              </p>
-              <p className={styles.content}>
-                <span>Building number:</span>
-                {order.clientAdress.block}
               </p>
               <p className={styles.content}>
                 <span>Street name:</span>
@@ -62,6 +58,12 @@ function DispathedOrder({ order, i }) {
               <p className={styles.content}>
                 <span>Street number:</span>
                 {order.clientAdress.strNumber}
+              </p>
+            </div>
+            <div className={styles.info}>
+              <p className={styles.content}>
+                <span>Building number:</span>
+                {order.clientAdress.block}
               </p>
               <p className={styles.content}>
                 <span>Floor:</span>
