@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import styles from "./PartInWarehouse.module.css";
 
-function PartInWarehouse({ part, i }) {
+function PartInWarehouse({ part }) {
   return (
     <>
       <div className={styles.box}>
@@ -31,13 +31,12 @@ function PartInWarehouse({ part, i }) {
                 <span>Description:</span>
                 {part.description}
               </p>
-              <div className={styles.qtyBlock}>
-                <p className={styles.content}>
-                  <span>Category:</span>
-                  {part.category}
-                </p>
+              <div className={styles.category}>
+                <span>Category:</span>
+                <p className={styles.catContent}>{part.category}</p>
               </div>
             </div>
+
             <div className={styles.info}>
               <p className={styles.content}>
                 <span>Rating:</span>

@@ -31,7 +31,7 @@ function UserInfo() {
       setLoading(true);
       async function getClientInfo() {
         const data = await userInfo(user.id, user.role);
-        console.log(data);
+        // console.log(data);
         setInfo({ ...data });
         if (data.role === "user") {
           setInfo({ ...data, balance: Number(data.balance.toFixed(2)) });
@@ -43,6 +43,7 @@ function UserInfo() {
     [user]
   );
 
+  // upload image file from local machine
   async function handleFileUpload(e) {
     const [file] = e.target.files;
     // console.log(file);

@@ -3,6 +3,7 @@
   top: 100px;
   right: 3rem;
   z-index: 9999;
+  padding-right: 1rem;
 }
 .waviy span {
   position: relative;
@@ -17,4 +18,10 @@
   80% {
     transform: rotateY(360deg);
   }
+}
+
+.closeBtn {
+  position: absolute;
+  top: 1rem;
+  right: 0;
 }
