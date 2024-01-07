@@ -19,13 +19,22 @@
 
 .salaryWrapper {
   width: 100%;
-  height: 650px;
+  /* height: 650px; */
   background-color: #fff;
   display: flex;
   align-items: flex-start;
+  justify-content: center;
+  position: relative;
 }
 
-.wallet {
+.errorContainer {
+  padding-top: 2rem;
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--color-warning);
+}
+
+/* .wallet {
   width: 20rem;
   font-size: 4rem;
   display: flex;
@@ -37,4 +46,4 @@
 
 .walletText {
   font-size: 2.2rem;
-}
+} */

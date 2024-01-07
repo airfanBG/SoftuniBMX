@@ -133,7 +133,7 @@
                     Id = 1,
                     ImageName = "94b08466-e8ff-443a-86b8-91ea623b209b",
                     UserId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                    ImageUrl = "wwwroot/files/profiles/client/2024/1/94b08466-e8ff-443a-86b8-91ea623b209b/94b08466-e8ff-443a-86b8-91ea623b209b.jpg"
+                    ImageUrl = "wwwroot\\files\\profiles\\client\\2024\\1\\ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd\\94b08466-e8ff-443a-86b8-91ea623b209b.jpg"
                 }
             };
         }
@@ -335,7 +335,7 @@
                     DDFL = 129.33M,
                     NetSalary = 1163.97M,
                     Month = new DateTime(2023,11,11),
-                    IsSalaryTaken = false
+                    IsSalaryTaken = true
                 },
                 new EmployeeMonthSalaryInfo()
                 {
@@ -350,7 +350,7 @@
                     DDFL = 129.33M,
                     NetSalary = 1163.97M,
                     Month = new DateTime(2023,11,11),
-                    IsSalaryTaken = false
+                    IsSalaryTaken = true
                 },
                 new EmployeeMonthSalaryInfo()
                 {
@@ -365,7 +365,7 @@
                     DDFL = 129.33M,
                     NetSalary = 1163.97M,
                     Month = new DateTime(2023,11,11),
-                    IsSalaryTaken = false
+                    IsSalaryTaken = true
                 },
                  new EmployeeMonthSalaryInfo()
                 {
@@ -380,7 +380,7 @@
                     DDFL = 129.33M,
                     NetSalary = 1163.97M,
                     Month = new DateTime(2023,11,11),
-                    IsSalaryTaken = false
+                    IsSalaryTaken = true
                 },
                   new EmployeeMonthSalaryInfo()
                  {
@@ -395,7 +395,7 @@
                      DDFL = 129.33M,
                      NetSalary = 1163.97M,
                      Month = new DateTime(2023,11,11),
-                    IsSalaryTaken = false
+                    IsSalaryTaken = true
                  }
             };
         }
@@ -2077,6 +2077,15 @@
                 new Status()
                 {
                     Id = 7,
+                    Name = "Ready order",
+                    DateCreated = dateCreated,
+                    DateUpdated = null,
+                    DateDeleted = null,
+                    IsDeleted = false
+                },
+                new Status()
+                {
+                    Id = 8,
                     Name = "Sended order",
                     DateCreated = dateCreated,
                     DateUpdated = null,

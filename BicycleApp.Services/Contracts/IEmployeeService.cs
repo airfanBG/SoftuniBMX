@@ -8,7 +8,7 @@
     {
         Task<string> RegisterEmployeeAsync(EmployeeRegisterDto employeeRegisterDto, string httpScheme, string httpHost);
 
-        Task<EmployeeReturnDto> LoginEmployeeAsync(EmployeeLoginDto employeeDto);
+        Task<EmployeeReturnDto> LoginEmployeeAsync(EmployeeLoginDto employeeDto, string httpScheme, string httpHost, string httpPathBase);
 
         Task<EmployeeInfoDto?> GetEmployeeInfoAsync(string Id);
 
@@ -17,6 +17,6 @@
         Task<bool> ResetPasswordToDefault(string email);
 
         Task ConfirmEmailAsync(string emmployeeId, string code);
-        Task<string> GetSalary(string employeeId);
+        Task<EmployeeSalaryDateDto?> GetSalary(string employeeId);
     }
 }

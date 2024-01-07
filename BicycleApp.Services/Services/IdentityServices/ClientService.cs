@@ -128,7 +128,7 @@
         /// <param name="clientDto">Information for the client to be sign in</param>
         /// <returns>A responce and dto with info for the client</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public async Task<ClientReturnDto> LoginClientAsync(ClientLoginDto clientDto)
+        public async Task<ClientReturnDto> LoginClientAsync(ClientLoginDto clientDto, string httpScheme, string httpHost, string httpPathBase)
         {
             if (clientDto == null)
             {
@@ -153,10 +153,9 @@
 
             if (result.Succeeded)
             {
-                decimal? balance = await dbContext.Clients
-                    .Where(b => b.Id == client.Id)
-                    .Select(b => b.Balance)
-                    .FirstOrDefaultAsync();
+                var user = await dbContext.Clients
+                                          .Include(o => o.Orders)
+                                          .FirstOrDefaultAsync(b => b.Id == client.Id);
 
                 var roles = await userManager.GetRolesAsync(client);
                 var userRole = roles[0];
@@ -166,9 +165,10 @@
                     ClientFullName = $"{client.FirstName} {client.LastName}",
                     Role = userRole,
                     Token = await this.GenerateJwtTokenAsync(client),
-                    Balance = balance,
-                    Image = await imageStore.GetUserImage(client.Id, userRole),
-                    Result = true
+                    Balance = user.Balance,
+                    Image = await imageStore.GetUserImage(client.Id, userRole, httpScheme, httpHost, httpPathBase),
+                    Result = true,
+                    IsAnyOrderReady = user.Orders.Any(o => o.DateFinish != null && o.DateSended == null && o.ClientId == client.Id)
                 };
             }
             else

@@ -19,7 +19,10 @@
 
             return fullname.ToString();
         }
-
+        public string UrlImageMaker(string httpScheme, string httpHost, string httpPathBase, string endPoint)
+        {
+            return $"{httpScheme}://{httpHost}{httpPathBase}/{endPoint}";
+        }
         public string UrlMaker(string httpScheme, string httpHost, string endPoint, string? values)
         {
             return $"{httpScheme}://{httpHost}/{endPoint}?{values}";

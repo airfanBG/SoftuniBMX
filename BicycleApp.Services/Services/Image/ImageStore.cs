@@ -39,7 +39,7 @@
         /// <param name="userId"></param>
         /// <param name="userRole"></param>
         /// <returns>string</returns>
-        public async Task<string?> GetUserImage(string userId, string userRole)
+        public async Task<string?> GetUserImage(string userId, string userRole, string httpScheme, string httpHost, string httpPathBase)
         {
             try
             {
@@ -52,10 +52,10 @@
                     userPath = _optionProvider.GetDefaultUserRelativePath();
                 }
 
-                //var currentDirectory = Directory.GetCurrentDirectory();
-                //var fullPath = Path.Combine(currentDirectory, userPath);
+                var imagePath = _stringManipulator.UrlImageMaker(httpScheme, httpHost, httpPathBase, userPath);
+                var slashRaplace = imagePath.Replace("\\", "/");
 
-                return userPath;
+                return slashRaplace;
             }
             catch (Exception)
             {
@@ -83,13 +83,16 @@
                     if (allowedExtensions.Contains(imageExtension))
                     {
                         string fileName =  _stringManipulator.CreateGuid();
-                        string filePath = Path.Combine(userPath, $"{fileName}.{imageExtension}");
+                        string filePath = Path.Combine(userPath, $"{fileName}.{imageExtension}"); ;
 
                         bool isUserImageExist = await _userImageFactory.CheckForExistingUserImage(userImageDto.Id, userImageDto.Role);
 
+                        var removeRootFolder = filePath.Split("\\").Skip(1);
+                        var relativePathForDB = string.Join("\\", removeRootFolder);
+
                         if (isUserImageExist)
                         {
-                            var updatedImage = await _userImageFactory.UpdateUserImage(userImageDto.Id, userImageDto.Role, filePath);
+                            var updatedImage = await _userImageFactory.UpdateUserImage(userImageDto.Id, userImageDto.Role, relativePathForDB, fileName);
 
                             if (updatedImage == null)
                             {
@@ -106,7 +109,7 @@
                         }
                         else
                         {
-                            var createdUserImage = await _userImageFactory.CreateUserImage(userImageDto.Id, userImageDto.Role, filePath, fileName);
+                            var createdUserImage = await _userImageFactory.CreateUserImage(userImageDto.Id, userImageDto.Role, relativePathForDB, fileName);
 
                             if (createdUserImage == null)
                             {

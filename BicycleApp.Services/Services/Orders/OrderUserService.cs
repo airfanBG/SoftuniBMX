@@ -329,12 +329,16 @@
                 var client = await _db.Clients.Include(o => o.Orders)
                                                    .FirstAsync(c => c.Id == clientId);
 
-                var clientOrder = client.Orders.First(o => o.Id == orderId);
+                var clientOrder = client.Orders.First(o => o.Id == orderId && o.DateFinish != null);
 
                 var chackBalance = CheckBalance(client.Balance, clientOrder.UnpaidAmount);
 
                 if (chackBalance)
                 {
+                    client.Balance -= clientOrder.UnpaidAmount;
+
+                    clientOrder.DateSended = _dateTimeProvider.Now;
+                    clientOrder.StatusId++;
                     var total = clientOrder.FinalAmount;
                     clientOrder.PaidAmount = total;
                     clientOrder.UnpaidAmount = 0;

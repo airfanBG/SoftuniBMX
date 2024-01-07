@@ -98,6 +98,7 @@ function EditContactInfo({ info, setInfo, base64 }) {
         iban,
         balance,
         address: newAddress,
+        imageUrl: updatedImg,
       };
     } else {
       data = {
@@ -108,12 +109,20 @@ function EditContactInfo({ info, setInfo, base64 }) {
         position: info?.position,
         dateOfHire: info?.dateOfHire,
         isManager: info?.isManager,
+        imageUrl: updatedImg,
       };
     }
 
-    updateUserData(id, data, role);
+    // UPDATE CONTEXT USER
+    updateUser({
+      ...user,
+      firstName: firstName,
+      lastName: lastName,
+      balance: balance,
+      imageUrl: updatedImg,
+    });
 
-    // const result = await updateUserData(id, data, role);
+    const result = await updateUserData(id, data, role);
     // console.log(result);
 
     // IF RESULT IS OK UPDATE CONTEXT
@@ -130,13 +139,14 @@ function EditContactInfo({ info, setInfo, base64 }) {
       imageUrl: updatedImg,
     });
 
-    // UPDATE CONTEXT USER
-    updateUser({
-      ...user,
-      firstName: firstName,
-      lastName: lastName,
-      balance: balance,
-    });
+    // // UPDATE CONTEXT USER
+    // updateUser({
+    //   ...user,
+    //   firstName: firstName,
+    //   lastName: lastName,
+    //   balance: balance,
+    //   imageUrl: updatedImg,
+    // });
 
     // NAVIGATE TO USER PROFILE PAGE
     navigate("/profile");

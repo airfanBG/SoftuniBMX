@@ -110,6 +110,7 @@
   /* font-size: 1.6rem; */
   font-weight: 500;
   color: red;
+  cursor: not-allowed;
 }
 .qtyBlock {
   align-self: center;

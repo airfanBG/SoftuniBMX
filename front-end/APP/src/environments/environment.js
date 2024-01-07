@@ -24,6 +24,7 @@ export const environment = {
   orders_archive: "/api/client_order/get_orders_archive?clientId=", // + id
   find_order: "/api/client_order/find?orderId=", // + id
   update_balance: "/api/client/bankUpdate",
+  rest_payment: "/api/client_order/payment?",
 
   // EMPLOYEE
   info_employee: "/api/employee/info?id=", // + id
@@ -32,6 +33,7 @@ export const environment = {
   worker_order_end: "/api/employee_order/end",
   worker_order: "/api/employee_order/",
   worker_times: "/api/manager_statistics?employeeId=",
+  worker_get_salary: "/api/employee/get_salary?employeeId=",
 
   // QUALITY_CONTROL
   quality_assurance: "/api/employee_order/quality_assurance",

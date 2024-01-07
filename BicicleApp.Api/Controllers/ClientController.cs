@@ -103,7 +103,10 @@
                 }
 
                 //Login
-                var responce = await clientService.LoginClientAsync(clientLoginDto);
+                var httpScheme = Request.Scheme;
+                var httpHost = Request.Host.Value;
+                var httpPathBase = Request.PathBase;
+                var responce = await clientService.LoginClientAsync(clientLoginDto, httpScheme, httpHost, httpPathBase);
 
                 if (responce.Result)
                 {

@@ -1,6 +1,6 @@
 import styles from "./ReadyOrderInfo.module.css";
 
-function ReadyOrderInfo() {
+function ReadyOrderInfo({ hideReady }) {
   return (
     <div className={styles.waviy}>
       <span style={{ animationDelay: "calc(0.2s * 1)" }}>r</span>
@@ -8,15 +8,15 @@ function ReadyOrderInfo() {
       <span style={{ animationDelay: "calc(0.2s * 3)" }}>a</span>
       <span style={{ animationDelay: "calc(0.2s * 4)" }}>d</span>
       <span style={{ animationDelay: "calc(0.2s * 5)" }}>y</span>
-      <span style={{ opacity: 0 }}>j</span>
-      <span
-        style={{
-          color: "var(--color-hd)",
-          fontSize: "1.2rem",
-        }}
+      <span style={{ animationDelay: "calc(0.2s * 6)" }}>!</span>
+      {/* <span style={{ opacity: 0 }}>j</span> */}
+      <button
+        onClick={() => hideReady(false)}
+        className={styles.closeBtn}
+        style={window.location.pathname === "/" ? { color: "#fff" } : null}
       >
-        X
-      </span>
+        &#10006;
+      </button>
     </div>
   );
 }
