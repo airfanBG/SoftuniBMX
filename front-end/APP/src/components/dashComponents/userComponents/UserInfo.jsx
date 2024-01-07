@@ -43,6 +43,7 @@ function UserInfo() {
     [user]
   );
 
+  // upload image file from local machine
   async function handleFileUpload(e) {
     const [file] = e.target.files;
     // console.log(file);
