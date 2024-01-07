@@ -25,7 +25,6 @@
     using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Services.HelperClasses.Contracts;
     using BicycleApp.Services.Contracts.Factory;
-    using BicycleApp.Data.Models.EntityModels;
 
     public class EmployeeService : IEmployeeService
     {
@@ -40,6 +39,7 @@
         private readonly IStringManipulator stringManipulator;
         private readonly IEmployeeFactory employeeFactory;
         private readonly IDateTimeProvider dateTimeProvider;
+        private readonly IImageStore imageStore;
 
         public EmployeeService(UserManager<BaseUser> userManager, 
                                SignInManager<BaseUser> signInManager,
@@ -51,7 +51,8 @@
                                IOptionProvider optionProvider, 
                                IStringManipulator stringManipulator,
                                IEmployeeFactory employeeFactory,
-                               IDateTimeProvider dateTimeProvider)
+                               IDateTimeProvider dateTimeProvider,
+                               IImageStore imageStore)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -64,6 +65,7 @@
             this.stringManipulator = stringManipulator;
             this.employeeFactory = employeeFactory;
             this.dateTimeProvider = dateTimeProvider;
+            this.imageStore = imageStore;
         }
 
         /// <summary>
@@ -129,7 +131,7 @@
         /// <param name="employeeDto">Input data for the employee</param>
         /// <returns>Respons as Dto</returns>
         /// <exception cref="ArgumentNullException">If input data is null</exception>
-        public async Task<EmployeeReturnDto> LoginEmployeeAsync(EmployeeLoginDto employeeDto)
+        public async Task<EmployeeReturnDto> LoginEmployeeAsync(EmployeeLoginDto employeeDto, string httpScheme, string httpHost, string httpPathBase)
         {
             if (employeeDto == null)
             {
@@ -154,6 +156,7 @@
             if (result.Succeeded)
             {
                 var roles = await userManager.GetRolesAsync(employee);
+                var role = roles[0];
                 var currentDate = dateTimeProvider.Now;
                 var untakenSalary = employee.EmployeeMonthSalaryInfos.OrderBy(o => o.Id)
                                                                      .LastOrDefault(s => s.IsSalaryTaken == false 
@@ -171,9 +174,10 @@
                     EmployeeId = employee.Id,
                     EmployeeFullName = $"{employee.FirstName} {employee.LastName}",
                     Token = await this.GenerateJwtTokenAsync(employee),
-                    Role = roles[0],
+                    Role = role,
                     Result = true,
-                    EmployeeSalaryInfo = employeeSalaryInfo
+                    EmployeeSalaryInfo = employeeSalaryInfo,
+                    Image = await imageStore.GetUserImage(employee.Id, role, httpScheme, httpHost, httpPathBase)
                 };
             }
             else

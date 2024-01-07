@@ -99,7 +99,10 @@
                 }
 
                 //Login
-                var responce = await employeeService.LoginEmployeeAsync(employeeLoginDto);
+                var httpScheme = Request.Scheme;
+                var httpHost = Request.Host.Value;
+                var httpPathBase = Request.PathBase;
+                var responce = await employeeService.LoginEmployeeAsync(employeeLoginDto, httpScheme, httpScheme, httpPathBase);
 
                 if (responce.Result)
                 {
