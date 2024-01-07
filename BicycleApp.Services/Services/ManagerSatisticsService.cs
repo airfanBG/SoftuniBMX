@@ -68,6 +68,7 @@
                                      && o.DateDeleted == null).Count()
                 })
                 .FirstAsync();
+            ;
         }
         public async Task<PartStatisticDto> GetPartStatistics(FinishedOrdersDto datesPeriod)
         {
@@ -78,7 +79,7 @@
                 {
                     PartId = group.Key,
                     PartName = group.Select(gn => gn.PartName).First(),
-                    OrderedCount = group.Select(pqy => pqy.PartQuantity).Count(),//.Sum().Aggregate((sum, val) => sum + val),//OrderedCount
+                    SoldCount = group.Select(pqy => Convert.ToInt32(pqy.PartQuantity)).Sum(),// Convert.ToInt32(pqy.PartQuantity)).Sum()
                     PartIncome = group.Select(pinc => pinc.PartPrice).Sum(),
                     GroupCount = group.Count(),
 
@@ -98,7 +99,7 @@
                 {
                     BestselerPartId = group.Key,
                     BestselerPartName = group.Select(gn => gn.PartName).First(),
-                    BestselerPartOrderedCount = group.Select(pq => pq.PartQuantity).Count(),
+                    BestselerPartSoldCount = group.Select(pq => Convert.ToInt32(pq.PartQuantity)).Sum(),
                     BestselerPartIncome = group.Select(pinc => pinc.PartPrice).Sum(),
                     GroupCount = group.Count()
 
@@ -111,11 +112,11 @@
             {
                 TotalBestselerPartId = bestSelerPart.PartId,
                 TotalBestselerPartName = bestSelerPart.PartName,
-                TotalBestselerPartOrderedCount = bestSelerPart.OrderedCount,
+                TotalBestselerPartSoldCount = bestSelerPart.SoldCount,
                 TotalBestselerPartIncome = bestSelerPart.PartIncome,
                 BestselerPartName = bestSelerPartForPeriod.BestselerPartName,
                 BestselerPartId = bestSelerPartForPeriod.BestselerPartId,
-                BestselerPartOrderedCount = bestSelerPartForPeriod.BestselerPartOrderedCount,
+                BestselerPartSoldCount = bestSelerPartForPeriod.BestselerPartSoldCount,
                 BestselerPartIncome = bestSelerPartForPeriod.BestselerPartIncome,
 
             };
