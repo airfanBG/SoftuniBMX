@@ -133,7 +133,7 @@
                     Id = 1,
                     ImageName = "94b08466-e8ff-443a-86b8-91ea623b209b",
                     UserId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                    ImageUrl = "wwwroot/files/profiles/client/2024/1/94b08466-e8ff-443a-86b8-91ea623b209b/94b08466-e8ff-443a-86b8-91ea623b209b.jpg"
+                    ImageUrl = "wwwroot\\files\\profiles\\client\\2024\\1\\ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd\\94b08466-e8ff-443a-86b8-91ea623b209b.jpg"
                 }
             };
         }

@@ -128,7 +128,7 @@
         /// <param name="clientDto">Information for the client to be sign in</param>
         /// <returns>A responce and dto with info for the client</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public async Task<ClientReturnDto> LoginClientAsync(ClientLoginDto clientDto)
+        public async Task<ClientReturnDto> LoginClientAsync(ClientLoginDto clientDto, string httpScheme, string httpHost, string httpPathBase)
         {
             if (clientDto == null)
             {
@@ -166,7 +166,7 @@
                     Role = userRole,
                     Token = await this.GenerateJwtTokenAsync(client),
                     Balance = user.Balance,
-                    Image = await imageStore.GetUserImage(client.Id, userRole),
+                    Image = await imageStore.GetUserImage(client.Id, userRole, httpScheme, httpHost, httpPathBase),
                     Result = true,
                     IsAnyOrderReady = user.Orders.Any(o => o.DateFinish != null && o.DateSended == null && o.ClientId == client.Id)
                 };

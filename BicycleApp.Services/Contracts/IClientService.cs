@@ -6,7 +6,7 @@
     {
         Task<bool> RegisterClientAsync(ClientRegisterDto clientDto, string httpScheme, string httpHost);
 
-        Task<ClientReturnDto> LoginClientAsync(ClientLoginDto clientDto);
+        Task<ClientReturnDto> LoginClientAsync(ClientLoginDto clientDto, string httpScheme, string httpHost, string httpPathBase);
 
         Task<ClientEditDto?> GetClientInfoAsync(string Id);
 

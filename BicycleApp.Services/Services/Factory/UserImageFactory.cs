@@ -65,22 +65,30 @@
         }
         public async Task<string?> GetUserImagePathAsync(string userId, string userRole)
         {
-            string filePath = string.Empty;
-            // TODO: Make it CLIENT from BicycleApp.Common.UserConstants. "user" comes form FE             
-            if (userRole.ToLower() != "user")
+            try
             {
-                var imageEmployee = await _db.ImagesEmployees.FirstOrDefaultAsync(ie => ie.UserId == userId);
-                filePath = imageEmployee.ImageUrl;
-            }
-            else
-            {
-                var imageClient = await _db.ImagesClients.FirstOrDefaultAsync(ie => ie.UserId == userId);
-                filePath = imageClient.ImageUrl;
-            }
+                string filePath = string.Empty;
+                // TODO: Make it CLIENT from BicycleApp.Common.UserConstants. "user" comes form FE             
+                if (userRole.ToLower() != "user")
+                {
+                    var imageEmployee = await _db.ImagesEmployees.FirstAsync(ie => ie.UserId == userId);
+                    filePath = imageEmployee.ImageUrl;
+                }
+                else
+                {
+                    var imageClient = await _db.ImagesClients.FirstAsync(ie => ie.UserId == userId);
+                    filePath = imageClient.ImageUrl;
+                }
+                var replacedFilePath = filePath.Replace("\\", "/");
 
-            return filePath;
+                return replacedFilePath;
+            }
+            catch (Exception)
+            {
+            }
+            return null;
         }
-        public async Task<IUserImage?> UpdateUserImage(string userId, string userRole, string filePath)
+        public async Task<IUserImage?> UpdateUserImage(string userId, string userRole, string filePath, string imageName)
         {
             if (!string.IsNullOrEmpty(userId)
                 && !string.IsNullOrEmpty(userRole)
@@ -96,6 +104,7 @@
 
                         if (userUpdatedImage != null)
                         {
+                            userUpdatedImage.ImageName = imageName;
                             userUpdatedImage.ImageUrl = filePath;
                         }
                     }
@@ -105,6 +114,7 @@
 
                         if (userUpdatedImage != null)
                         {
+                            userUpdatedImage.ImageName = imageName;
                             userUpdatedImage.ImageUrl = filePath;
                         }
                     }
