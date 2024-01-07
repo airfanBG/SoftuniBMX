@@ -3,6 +3,7 @@
   top: 100px;
   right: 3rem;
   z-index: 9999;
+  padding-right: 1rem;
 }
 .waviy span {
   position: relative;
@@ -22,4 +23,5 @@
 .closeBtn {
   position: absolute;
   top: 1rem;
+  right: 0;
 }
