@@ -6,6 +6,9 @@
 
 Приложението обслужва пълната функционалност на предприятие за производство на велосипеди, както и неговото менажиране. Заводът произвежда три основни модела велосипеди, като в зависимост от избора на клиента всеки компонент може да има по няколко разновидности.
 
+Приложението дава възможност потребителя сам да сглоби велосипед, като избере, поетапно от възможностите - рамка, колела и аксесоари.
+При избиране на страницата CREATE се прави първоначална заявка за зареждане на възможностите за избор на рамка, като основна част на велосипеда.
+
 Приложението покрива всички дейности за потребителския избор и работения процес.
 
 ##### От страна на клиента
@@ -30,17 +33,17 @@
 
 ##### Използвани технологии
 
-- Front-end - React.js, HTML/CSS
+- Front-end - React.js, JavaScript, HTML/CSS
 - Back-end - ASP.NET, MySQL
 
 ## Съдържание и навигиране в приложението
 
 1. [Стартова страница](/FrontEndReadMeFiles/IndexPage/indexPage.md)
 2. [Създаване на профил и влизане в системата](/FrontEndReadMeFiles/Autentication/Register.md)
-   - ! [Registration](/FrontEndReadMeFiles/Autentication/Register.md)
+   - [Registration](/FrontEndReadMeFiles/Autentication/Register.md)
    - ! [Login](/FrontEndReadMeFiles/Autentication/Login.md)
    - ! [Forgot password](/FrontEndReadMeFiles/Autentication/ForgotPassword.md)
-3. [Клиент](/FrontEndReadMeFiles/ClientFiles/Profile.md) - Клиент - възможности
+3. [Клиент](/FrontEndReadMeFiles/ClientFiles/Profile.md)
    - [Профилна страница](/FrontEndReadMeFiles/ClientFiles/Profile.md)
    - [Редактиране на профил](/FrontEndReadMeFiles/ClientFiles/EditProfile.md)
    - [Създаване на поръчка](/FrontEndReadMeFiles/ClientFiles/Order.md)
@@ -52,13 +55,21 @@
    - [Edit profile](/FrontEndReadMeFiles/Employee/EditProfile.md)
    - [Orders](/FrontEndReadMeFiles/Employee/EditProfile.md)
 
-5. [Управител](/FrontEndReadMeFiles/Employee/Profile.md)
+5. [Качествен контрол]()
+6. [Управител](/FrontEndReadMeFiles/Employee/Profile.md)
 
    - [New Orders](/FrontEndReadMeFiles/Manager/NewOrders.md)
    - [Production](/FrontEndReadMeFiles/Manager/Production.md)
    - [Finished]()
    - [Dispatched]()
    - [Employers](/FrontEndReadMeFiles/Manager/Employers.md)
-     - [Add Employee](/FrontEndReadMeFiles/Manager/AddEmployee.md)
+   - [Add Employee](/FrontEndReadMeFiles/Manager/AddEmployee.md)
    - [Storage]()
    - [Statistic]()
+
+7. [Крайни точки]()
+
+   - Селекция
+     - [Рамки](/ReadMeFiles_BE/AccountPage/Frames.md)
+     - [Избрана част](/ReadMeFiles_BE/AccountPage/SelectedPart.md)
+     - [Съвместими части](/ReadMeFiles_BE/AccountPage/CompatibleParts.md)
