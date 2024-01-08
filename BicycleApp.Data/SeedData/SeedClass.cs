@@ -131,9 +131,16 @@
                 new ImageClient()
                 {
                     Id = 1,
-                    ImageName = "94b08466-e8ff-443a-86b8-91ea623b209b",
+                    ImageName = "360cc923-f472-45f7-afec-9bc81e94f529",
                     UserId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                    ImageUrl = "wwwroot\\files\\profiles\\client\\2024\\1\\ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd\\94b08466-e8ff-443a-86b8-91ea623b209b.jpg"
+                    ImageUrl = "files\\profiles\\client\\2024\\1\\ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd\\360cc923-f472-45f7-afec-9bc81e94f529.webp"
+                },
+                new ImageClient()
+                {
+                    Id = 2,
+                    ImageName = "ac67c52e-1ed8-4a33-bc4b-2cb178c87759",
+                    UserId = "99d3ca6f-2067-4316-a5d7-934c93789521",
+                    ImageUrl = "files\\profiles\\client\\2024\\1\\99d3ca6f-2067-4316-a5d7-934c93789521\\ac67c52e-1ed8-4a33-bc4b-2cb178c87759.png"
                 }
             };
         }

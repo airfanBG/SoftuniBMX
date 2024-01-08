@@ -53,9 +53,8 @@
                 }
 
                 var imagePath = _stringManipulator.UrlImageMaker(httpScheme, httpHost, httpPathBase, userPath);
-                var slashRaplace = imagePath.Replace("\\", "/");
 
-                return slashRaplace;
+                return imagePath;
             }
             catch (Exception)
             {

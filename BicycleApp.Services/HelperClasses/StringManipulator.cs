@@ -1,5 +1,6 @@
 ﻿namespace BicycleApp.Services.HelperClasses
 {
+    using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.HelperClasses.Contracts;
     using System.Text;
 
@@ -21,7 +22,10 @@
         }
         public string UrlImageMaker(string httpScheme, string httpHost, string httpPathBase, string endPoint)
         {
-            return $"{httpScheme}://{httpHost}{httpPathBase}/{endPoint}";
+
+            var slashRaplace = endPoint.Replace("\\", "/");
+
+            return httpScheme + "://" + httpHost + httpPathBase + "/" + slashRaplace;
         }
         public string UrlMaker(string httpScheme, string httpHost, string endPoint, string? values)
         {
