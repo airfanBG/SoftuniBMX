@@ -35,7 +35,7 @@
 
 ## Съдържание и навигиране в приложението
 
-1. Стартова страница
+1. [Стартова страница](/FrontEndReadMeFiles/IndexPage/indexPage.md)
 2. [Client](/FrontEndReadMeFiles/ClientFiles/Profile.md) - Клиент - възможности
    - [Profile page](/FrontEndReadMeFiles/ClientFiles/Profile.md)
    - [Edit profile](/FrontEndReadMeFiles/ClientFiles/EditProfile.md)
