@@ -74,7 +74,7 @@
             {
                 var userPath = GetRelativePathToUser(userImageDto.Role, userImageDto.Id);
 
-                string[] allowedExtensions = { "jpg", "jpeg", "png", "gif", "pdf" };
+                string[] allowedExtensions = { "jpg", "jpeg", "png", "gif", "pdf", "webp" };
 
                 if (userImageDto.ImageToSave != null && userImageDto.ImageToSave.Length > 0)
                 {

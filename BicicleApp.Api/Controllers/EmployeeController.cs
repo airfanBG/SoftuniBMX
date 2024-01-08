@@ -2,7 +2,7 @@
 {
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.Models.IdentityModels;
-
+    using BicycleApp.Services.Models.Image;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
@@ -11,10 +11,12 @@
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeService employeeService;
+        private readonly IImageStore imageStore;
 
-        public EmployeeController(IEmployeeService employeeService)     
+        public EmployeeController(IEmployeeService employeeService, IImageStore imageStore)     
         {
             this.employeeService = employeeService;
+            this.imageStore = imageStore;
         }
 
         [HttpPost]
@@ -102,7 +104,7 @@
                 var httpScheme = Request.Scheme;
                 var httpHost = Request.Host.Value;
                 var httpPathBase = Request.PathBase;
-                var responce = await employeeService.LoginEmployeeAsync(employeeLoginDto, httpScheme, httpScheme, httpPathBase);
+                var responce = await employeeService.LoginEmployeeAsync(employeeLoginDto, httpScheme, httpHost, httpPathBase);
 
                 if (responce.Result)
                 {
@@ -230,6 +232,24 @@
             await employeeService.ConfirmEmailAsync(userId, code);
 
             return Ok();
+        }
+
+        [HttpPost]
+        [Route("add_avatar")]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> AddEmployeeImage([FromForm] UserImageDto userImageDto)
+        {
+            var result = await imageStore.IsAddedOrReplacedUserImage(userImageDto);
+
+            if (result)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
         }
     }
 }

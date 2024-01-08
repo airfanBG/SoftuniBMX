@@ -735,17 +735,46 @@
             };
         }
 
-        public List<ImageEmployee> SeedImagesEmployees()
+        public ICollection<ImageEmployee> SeedImagesEmployees()
         {
-            ImageEmployee imageEmployee = new ImageEmployee()
+            return new List<ImageEmployee>
             {
-                Id = 1,
-                ImageName = "image",
-                ImageUrl = "test",
-                UserId = "21003785-a275-4139-ae20-af6a6cf8fea8"
+                new ImageEmployee()
+                {
+                    Id = 1,
+                    ImageName = "3d740d0b-cd96-4400-9227-802b1526e1e3",
+                    ImageUrl = "files\\profiles\\frameworker\\2024\\1\\21003785-a275-4139-ae20-af6a6cf8fea8\\3d740d0b-cd96-4400-9227-802b1526e1e3.webp",
+                    UserId = "21003785-a275-4139-ae20-af6a6cf8fea8"
+                },
+                new ImageEmployee()
+                {
+                    Id = 2,
+                    ImageName = "847865b4-fadb-47e7-9388-77fd88fce299",
+                    ImageUrl = "files\\profiles\\manager\\2024\\1\\406e8cf1-acaa-44a8-afec-585ff64bed34\\847865b4-fadb-47e7-9388-77fd88fce299.webp",
+                    UserId = "406e8cf1-acaa-44a8-afec-585ff64bed34"
+                },
+                new ImageEmployee()
+                {
+                    Id = 3,
+                    ImageName = "bd310982-51c0-48e5-8f41-441d9438dc92",
+                    ImageUrl = "files\\profiles\\wheelworker\\2024\\1\\17063948-8fdc-417e-8fb7-2ae6bf572f94\\bd310982-51c0-48e5-8f41-441d9438dc92.jpeg",
+                    UserId = "17063948-8fdc-417e-8fb7-2ae6bf572f94"
+                },
+                 new ImageEmployee()
+                {
+                    Id = 4,
+                    ImageName = "798f325c-4905-4fbd-bcf1-c8e0d384aec1",
+                    ImageUrl = "files\\profiles\\accessoriesworker\\2024\\1\\6af8468c-63f1-4bf2-8f88-e24b3f7a8f91\\798f325c-4905-4fbd-bcf1-c8e0d384aec1.jpeg",
+                    UserId = "6af8468c-63f1-4bf2-8f88-e24b3f7a8f91"
+                },
+                  new ImageEmployee()
+                {
+                    Id = 5,
+                    ImageName = "d65a448e-f9bf-459f-a998-bfc023f81ea9",
+                    ImageUrl = "files\\profiles\\qualitycontrol\\2024\\1\\29f06920-d2ad-43d8-b362-e2b94d7a7502\\d65a448e-f9bf-459f-a998-bfc023f81ea9.webp",
+                    UserId = "29f06920-d2ad-43d8-b362-e2b94d7a7502"
+                },
             };
-
-            return new List<ImageEmployee> { imageEmployee };
         }
 
         public List<Order> SeedOrders()
