@@ -68,15 +68,63 @@ function UserTrackOrder() {
       </h2>
       <section className={styles.board}>
         <BoardHeader />
-        {orderList.length > 0 && (
-          <div className={styles.orders}>
-            {loading && <LoaderWheel />}
-            {orderList.map((order, i) => (
-              <OrderInProgress key={order.orderId} order={order} i={i} />
-            ))}
-          </div>
-        )}
-        {orderList.length === 0 && <h2>There is no orders in this category</h2>}
+        <div className={styles.ordersContainer}>
+          {orderList.length > 0 && (
+            <div className={styles.orders}>
+              {loading && <LoaderWheel />}
+              {orderList.map((order, i) => (
+                <OrderInProgress key={order.orderId} order={order} i={i} />
+              ))}
+            </div>
+          )}
+          {orderList.length === 0 && (
+            <h2>There is no orders in this category</h2>
+          )}
+          <aside className={styles.ordersAside}>
+            <h3 className={styles.element}>Element information</h3>
+            <div className={styles.listInfo}>
+              <p className={styles.listItem}>
+                <span
+                  className={styles.listIcon}
+                  style={{ color: "rgb(4, 164, 175)" }}
+                >
+                  <ion-icon name="hourglass-outline"></ion-icon>
+                </span>
+                <span className={styles.listItemText}>
+                  - The order is accepted and awaiting approval
+                </span>
+              </p>
+
+              <p className={styles.listItem}>
+                <span
+                  className={styles.listIcon}
+                  style={{ color: "rgb(246, 152, 0)" }}
+                >
+                  <ion-icon name="hammer-outline"></ion-icon>
+                </span>
+                <span className={styles.listItemText}>
+                  - The order is in production
+                </span>
+              </p>
+
+              <p className={styles.listItem}>
+                <span
+                  className={styles.listIcon}
+                  style={{
+                    color: "green",
+                    fontWeight: 700,
+                    fontSize: "2rem",
+                  }}
+                >
+                  &#10004;
+                </span>
+                <span className={styles.listItemText}>
+                  - The order is in Quality control
+                </span>
+              </p>
+            </div>
+          </aside>
+        </div>
       </section>
     </>
   );

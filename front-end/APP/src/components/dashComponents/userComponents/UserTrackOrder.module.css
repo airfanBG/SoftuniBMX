@@ -1,4 +1,4 @@
- .dashHeading {
+.dashHeading {
   font-size: 2.2rem;
   text-transform: uppercase;
   color: var(--color-secondary-hd);
@@ -38,10 +38,52 @@
   background-color: #fff;
   border-radius: 5px;
 }
-
+.ordersContainer {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
 .orders {
   display: flex;
+  width: 80%;
   flex-direction: column;
   align-items: center;
   padding: 1rem 0;
+}
+
+.ordersAside {
+  width: 20%;
+}
+
+.element {
+  width: fit-content;
+  padding: 0 2rem 0.2rem 0.2rem;
+  margin: 2rem 0 0.5rem 3.5rem;
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--color-main-dark);
+  border-bottom: 1px solid var(--color-border);
+}
+.listInfo {
+  padding: 1rem;
+  list-style: none;
+  font-size: 1.8rem;
+}
+.listItem {
+  position: relative;
+  margin-bottom: 3rem;
+}
+
+.listIcon {
+  position: absolute;
+  top: -0.2rem;
+  font-size: 2rem;
+}
+
+.listItemText {
+  display: block;
+  margin-left: 2.5rem;
+  font-size: 1.4rem;
+  color: var(--color-main-dark);
+  height: 20px;
 }

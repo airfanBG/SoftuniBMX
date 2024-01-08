@@ -89,7 +89,7 @@ namespace BicicleApp.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<CommentEditDto>> GetComment([FromQuery] string clientId, [FromQuery] int partId)
         {
-            if (clientId == null)
+            if (clientId == null || partId == null)
             {
                 return BadRequest();
             }
@@ -97,10 +97,6 @@ namespace BicicleApp.Api.Controllers
             try
             {
                 var model = await commentService.GetCommentAsync(clientId, partId);
-                if (model == null)
-                {
-                    return BadRequest();
-                }
 
                 return Ok(model);
             }

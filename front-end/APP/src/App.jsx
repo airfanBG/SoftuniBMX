@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Suspense, lazy } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 // AUTH
 import { GlobalUser } from "./context/GlobalUserProvider.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
@@ -37,9 +38,9 @@ import QControlOrders from "./components/dashComponents/qControlComponents/QCont
 import ComponentScaffold from "./components/dashComponents/userComponents/ComponentScaffold.jsx";
 import Contacts from "./pages/Contacts/Contacts.jsx";
 import ComponentUserOrder from "./components/dashComponents/userComponents/ComponentUserOrder.jsx";
-import PartInfo from "./components/PartInfo.jsx";
 import { ErrorProvider } from "./context/ErrorContext.jsx";
 import LoaderWheel from "./components/LoaderWheel.jsx";
+import ErrorBoundaryPage from "./pages/ErrorBoundaryPage.jsx";
 
 // LAZY LOADING
 const CreateBike = lazy(() =>
@@ -56,120 +57,124 @@ const PageNotFound = lazy(() => import("./components/PageNotFound.jsx"));
 
 function App() {
   return (
-    <AuthProvider>
-      <GlobalUser>
-        <ErrorProvider>
-          <BrowserRouter>
-            <Suspense fallback={<LoaderWheel />}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="about" element={<About />} />
-                <Route path="contacts" element={<Contacts />} />
-                <Route path="privacy-policy" element={<PrivacyPolicy />} />
-                <Route path="terms" element={<Terms />} />
-                <Route path="part/:partId" element={<PartInfo />} />
-                <Route
-                  path="profile"
-                  element={
-                    <ProtectedRoute>
-                      <UserProfile />
-                    </ProtectedRoute>
-                  }
-                >
-                  <Route index element={<Navigate replace to="info" />} />
-                  <Route path="info" element={<UserInfo />} />
-                  <Route path={"cart"} element={<Cart />} />
+    <ErrorBoundary FallbackComponent={ErrorBoundaryPage}>
+      <AuthProvider>
+        <GlobalUser>
+          <ErrorProvider>
+            <BrowserRouter>
+              <Suspense fallback={<LoaderWheel />}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="about" element={<About />} />
+                  <Route path="contacts" element={<Contacts />} />
+                  <Route path="privacy-policy" element={<PrivacyPolicy />} />
+                  <Route path="terms" element={<Terms />} />
                   <Route
-                    path={"user-ready"}
-                    element={<ComponentUserOrdersReady />}
-                  />
-                  <Route
-                    path={"user-in-progress"}
-                    element={<UserTrackOrder />}
-                  />
-                  <Route
-                    path={"user-archive"}
-                    element={<ComponentUserOrdersArchive />}
-                  />
+                    path="profile"
+                    element={
+                      <ProtectedRoute>
+                        <UserProfile />
+                      </ProtectedRoute>
+                    }
+                  >
+                    <Route index element={<Navigate replace to="info" />} />
+                    <Route path="info" element={<UserInfo />} />
+                    <Route path={"cart"} element={<Cart />} />
+                    <Route
+                      path={"user-ready"}
+                      element={<ComponentUserOrdersReady />}
+                    />
+                    <Route
+                      path={"user-in-progress"}
+                      element={<UserTrackOrder />}
+                    />
+                    <Route
+                      path={"user-archive"}
+                      element={<ComponentUserOrdersArchive />}
+                    />
 
-                  <Route
-                    path={"user-archive"}
-                    element={<ComponentUserOrdersArchive />}
-                  />
-                  <Route
-                    path="user-order/:orderId"
-                    element={<ComponentUserOrder />}
-                  />
-                  <Route
-                    path={"get-stock"}
-                    element={<UserHomeScreenSelection />}
-                  />
-                  {/* WORKER */}
-                  <Route path="worker-orders" element={<WorkerOrders />} />
-                  <Route path={"finished"} element={<WorkerFinished />} />
+                    <Route
+                      path={"user-archive"}
+                      element={<ComponentUserOrdersArchive />}
+                    />
+                    <Route
+                      path="user-order/:orderId"
+                      element={<ComponentUserOrder />}
+                    />
+                    <Route
+                      path={"get-stock"}
+                      element={<UserHomeScreenSelection />}
+                    />
+                    {/* WORKER */}
+                    <Route path="worker-orders" element={<WorkerOrders />} />
+                    <Route path={"finished"} element={<WorkerFinished />} />
 
-                  {/* MANAGER */}
-                  <Route path={"managerOrders"} element={<ManagerOrders />} />
-                  <Route
-                    path={"manager-in-progress"}
-                    element={<InProgress />}
-                  />
-                  <Route
-                    path={"manager-ready"}
-                    element={<ComponentScaffold />}
-                  />
-                  <Route
-                    path={"manager-rejected"}
-                    element={<ManagerRejected />}
-                  />
-                  <Route
-                    path={"manager-dispatched"}
-                    element={<ManagerDispatched />}
-                  />
-                  <Route
-                    path={"manager-finished"}
-                    element={<ManagerFinished />}
-                  />
-                  <Route path={"employers"} element={<Employers />} />
-                  <Route path={"statistic"} element={<ManagerStatistic />} />
-                  <Route path={"salaries"} element={<ManagerSalaries />} />
+                    {/* MANAGER */}
+                    <Route path={"managerOrders"} element={<ManagerOrders />} />
+                    <Route
+                      path={"manager-in-progress"}
+                      element={<InProgress />}
+                    />
+                    <Route
+                      path={"manager-ready"}
+                      element={<ComponentScaffold />}
+                    />
+                    <Route
+                      path={"manager-rejected"}
+                      element={<ManagerRejected />}
+                    />
+                    <Route
+                      path={"manager-dispatched"}
+                      element={<ManagerDispatched />}
+                    />
+                    <Route
+                      path={"manager-finished"}
+                      element={<ManagerFinished />}
+                    />
+                    <Route path={"employers"} element={<Employers />} />
+                    <Route path={"statistic"} element={<ManagerStatistic />} />
+                    <Route path={"salaries"} element={<ManagerSalaries />} />
 
-                  <Route path={"storage"} element={<StorageMain />} />
-                  <Route path={"warehouse"} element={<Warehouse />} />
-                  {/* QCONTROL */}
+                    <Route path={"storage"} element={<StorageMain />} />
+                    <Route path={"warehouse"} element={<Warehouse />} />
+                    {/* QCONTROL */}
+                    <Route
+                      path={"q-control-orders"}
+                      element={<QControlOrders />}
+                    />
+                    <Route
+                      path={"employee-salary"}
+                      element={<MonthlySalary />}
+                    />
+                  </Route>
                   <Route
-                    path={"q-control-orders"}
-                    element={<QControlOrders />}
-                  />
-                  <Route path={"employee-salary"} element={<MonthlySalary />} />
-                </Route>
-                <Route
-                  path="app"
-                  element={
-                    <LimitedRoute>
-                      <AppLayout />
-                    </LimitedRoute>
-                  }
-                >
-                  <Route index element={<Navigate replace to="create" />} />
-                  <Route path={"create"} element={<CreateBike />} />
-                </Route>
-                <Route path="auth" element={<Auth />}>
-                  <Route index element={<Navigate replace to="login" />} />
-                  <Route path="login" element={<Login />} />
-                  <Route path="register" element={<Register />} />
-                  <Route
-                    path="forgotten-password"
-                    element={<ForgottenPassword />}
-                  />
-                </Route>
-                <Route path="*" element={<PageNotFound />} />
-              </Routes>
-            </Suspense>
-          </BrowserRouter>
-        </ErrorProvider>
-      </GlobalUser>
-    </AuthProvider>
+                    path="app"
+                    element={
+                      <LimitedRoute>
+                        <AppLayout />
+                      </LimitedRoute>
+                    }
+                  >
+                    <Route index element={<Navigate replace to="create" />} />
+                    <Route path={"create"} element={<CreateBike />} />
+                  </Route>
+                  <Route path="auth" element={<Auth />}>
+                    <Route index element={<Navigate replace to="login" />} />
+                    <Route path="login" element={<Login />} />
+                    <Route path="register" element={<Register />} />
+                    <Route
+                      path="forgotten-password"
+                      element={<ForgottenPassword />}
+                    />
+                  </Route>
+                  <Route path="*" element={<PageNotFound />} />
+                </Routes>
+              </Suspense>
+            </BrowserRouter>
+          </ErrorProvider>
+        </GlobalUser>
+      </AuthProvider>
+    </ErrorBoundary>
   );
 }
 

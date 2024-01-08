@@ -15,15 +15,14 @@ function ComponentUserOrdersArchive() {
   const [loading, setLoading] = useState(false);
 
   const [data, setData] = useState([]);
- 
+
   useEffect(() => {
     async function getData() {
       const result = await get(environment.orders_archive + user.id);
       setData(result);
     }
     getData();
-  }, []);
-  
+  }, [user.id]);
 
   return (
     <>

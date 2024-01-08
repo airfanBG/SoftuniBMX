@@ -49,8 +49,8 @@ function OrderInProgress({ order, i, onOrderButtonClick }) {
       <div className={styles.orderLine}>
         <p>#{order.orderId}.</p>
         <p className={styles.serial}>
-          <span>SN:</span>
-          {order.serialNumber}
+          <span className={styles.label}>Serial Number:</span>
+          <span className={styles.orderLineContent}>{order.serialNumber}</span>
         </p>
         <div className={styles.figureLine}>
           <div className={styles.circle}>
@@ -71,8 +71,10 @@ function OrderInProgress({ order, i, onOrderButtonClick }) {
         </div>
 
         <p className={styles.dateCreated}>
-          <span>Date Created:</span>
-          {order.dateCreated.split(" ").at(0).replaceAll("/", ".")}
+          <span className={styles.label}>Date Created:</span>
+          <span className={styles.orderLineContent}>
+            {order.dateCreated.split(" ").at(0).replaceAll("/", ".")}
+          </span>
         </p>
         {user.role !== "user" && (
           <button
