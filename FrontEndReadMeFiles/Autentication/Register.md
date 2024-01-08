@@ -15,7 +15,7 @@
   - Поне една цифра
 - повторение на паролата
 
-![Clipboard01](https://github.com/yuchormanski/React-BMX-Project/assets/693307/cac3fae7-1f78-42d7-8280-2040d4b07ef5)
+![Clipboard03](https://github.com/airfanBG/SoftuniBMX/assets/693307/45736f53-c2b7-42e3-b2af-5f2893285d47)
 
 Формата е изпълнена от контролирани React инпут полета, динамично извеждащи информация за грешка при попълване.
 
@@ -29,7 +29,7 @@ EMAIL = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-
 PASSWORD = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/;
 ```
 
-![Clipboard01](https://github.com/yuchormanski/React-BMX-Project/assets/693307/ada2a79b-d1bc-458e-b8e6-c032b34c4146)
+![Clipboard04](https://github.com/airfanBG/SoftuniBMX/assets/693307/f11918ff-b011-46f6-9720-3e3638a8d127)
 
 При правилно попълнена форма, системата изпраща връзка за потвърждение на посоченият имейл адрес
 
