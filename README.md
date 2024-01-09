@@ -53,6 +53,7 @@
    - [Профилна страница](/FrontEndReadMeFiles/ClientFiles/Profile.md)
    - [Редактиране на профил](/FrontEndReadMeFiles/ClientFiles/EditProfile.md)
    - [Създаване на поръчка](/FrontEndReadMeFiles/ClientFiles/Order.md)
+   - [Потребителска кошница](/FrontEndReadMeFiles/ClientFiles/Cart.md)
    - [Проследяване на поръчка]()
    - [Готови поръчки]()
    - [Архив]()
