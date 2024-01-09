@@ -168,7 +168,7 @@
                     StrNumber = "13",
                     Block = "20",
                     District = "Somewhere over the rainbow",
-                    Floor = 3,
+                    Floor = "3",
                     PostCode = "4000"
                 },
                  new DelivaryAddress()
@@ -179,7 +179,7 @@
                     Street = "Ovcha mogila",
                     StrNumber = "123",
                     District = "Near to earth core",
-                    Floor = 3,
+                    Floor = "3",
                     PostCode = "1236"
                 },
             };
