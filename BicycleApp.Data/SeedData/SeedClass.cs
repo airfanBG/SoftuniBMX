@@ -407,20 +407,42 @@
             };
         }
 
-        public List<Comment> SeedComments()
+        public ICollection<Comment> SeedComments()
         {
-            Comment comment = new Comment()
+            return new List<Comment>()
             {
-                Id = 1,
-                PartId = 1,
-                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                Title = "Test Title",
-                Description = "Test Description",
-                DateCreated = dateCreated,
-                DateUpdated = null
+                new Comment()
+                {
+                    Id = 1,
+                    PartId = 1,
+                    ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                    Title = "Test Title",
+                    Description = "Test Description",
+                    DateCreated = dateCreated,
+                    DateUpdated = null
+                },
+                new Comment()
+                {
+                    Id = 2,
+                    PartId = 4,
+                    ClientId = "17ce735d-6713-4d0a-8fcb-e4a71ee86f6f",
+                    Title = "Second Title",
+                    Description = "Second description",
+                    DateCreated = dateCreated,
+                    DateUpdated = null
+                },
+                new Comment()
+                {
+                    Id = 3,
+                    PartId = 7,
+                    ClientId = "99d3ca6f-2067-4316-a5d7-934c93789521",
+                    Title = "Third Title",
+                    Description = "Third description",
+                    DateCreated = dateCreated,
+                    DateUpdated = null
+                },
             };
 
-            return new List<Comment> { comment };
         }
 
         public List<Delivary> SeedDelivaries()

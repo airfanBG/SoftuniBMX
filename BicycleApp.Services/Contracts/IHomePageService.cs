@@ -6,6 +6,6 @@
 
     public interface IHomePageService
     {
-        Task<IndexPageDto?> GetIndexPageData();
+        Task<IndexPageDto?> GetIndexPageData(string httpScheme, string httpHost, string httpPathBase);
     }
 }

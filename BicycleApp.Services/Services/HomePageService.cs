@@ -6,6 +6,8 @@
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.Models;
     using BicycleApp.Services.Models.Order.OrderUser;
+    using static BicycleApp.Common.UserConstants;
+
     using Microsoft.EntityFrameworkCore;
 
     using static BicycleApp.Common.ApplicationGlobalConstants;
@@ -13,10 +15,12 @@
     public class HomePageService : IHomePageService
     {
         private readonly BicycleAppDbContext dbContext;
+        private readonly IImageStore imageStore;
 
-        public HomePageService(BicycleAppDbContext dbContext)
+        public HomePageService(BicycleAppDbContext dbContext, IImageStore imageStore)
         {
             this.dbContext = dbContext;
+            this.imageStore = imageStore;
         }
 
         /// <summary>
@@ -24,7 +28,7 @@
         /// </summary>
         /// <returns>IndexPageDto or null</returns>
         /// <exception cref="Exception">Throws Exeption if there is an error with the data exptraction from the database</exception>
-        public async Task<IndexPageDto?> GetIndexPageData()
+        public async Task<IndexPageDto?> GetIndexPageData(string httpScheme, string httpHost, string httpPathBase)
         {
             IndexPageDto? indexDto = null;
 
@@ -73,8 +77,7 @@
                         PartId = x.PartId,
                         PartName = x.Part.Name,
                         ClientId = x.ClientId,
-                        //To be fixed when we set the default client image
-                        ClientImageUrl = x.Client.Images.First().ImageUrl,
+                        ClientImageUrl =  imageStore.GetUserImage(x.ClientId, CLIENT, httpScheme, httpHost, httpPathBase).Result,
                         ClientFullName = $"{x.Client.FirstName} {x.Client.LastName}",
                         CommentDescription = x.Description,
                         DateCreated = x.DateCreated.ToString(DefaultDateFormat)

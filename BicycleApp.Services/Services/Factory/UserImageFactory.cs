@@ -67,9 +67,8 @@
         {
             try
             {
-                string filePath = string.Empty;
-                // TODO: Make it CLIENT from BicycleApp.Common.UserConstants. "user" comes form FE             
-                if (userRole.ToLower() != "user")
+                string filePath = string.Empty;     
+                if (userRole.ToLower() != CLIENT)
                 {
                     var imageEmployee = await _db.ImagesEmployees.FirstAsync(ie => ie.UserId == userId);
                     filePath = imageEmployee.ImageUrl;
