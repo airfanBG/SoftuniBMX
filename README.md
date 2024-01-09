@@ -43,7 +43,7 @@
    - [Registration](/FrontEndReadMeFiles/Autentication/Register.md)
    - [Login](/FrontEndReadMeFiles/Autentication/Login.md)
    - [Forgot password](/FrontEndReadMeFiles/Autentication/ForgotPassword.md)
-3. #### [Клиент](/README.md)
+3. #### [Клиент]()
    - [Профилна страница](/FrontEndReadMeFiles/ClientFiles/Profile.md)
    - [Редактиране на профил](/FrontEndReadMeFiles/ClientFiles/EditProfile.md)
    - [Създаване на поръчка](/FrontEndReadMeFiles/ClientFiles/Order.md)
