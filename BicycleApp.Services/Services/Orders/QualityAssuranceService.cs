@@ -34,35 +34,44 @@
         /// <returns>Task<ICollection<OrderProgretionDto>></returns>
         public async Task<ICollection<OrderProgretionDto>> GetAllReadyOrder()
         {
-            var sadas = 23;
-            var asdasdads = await _db.Orders.Include(x => x.OrdersPartsEmployees).ToListAsync();
-            return await _db.Orders
-                            .AsNoTracking()
-                            .Where(o => o.DateFinish == null 
-                                        && o.IsDeleted == false
-                                        && o.OrdersPartsEmployees.Where(ope => ope.OrderId == o.Id).All(ope => ope.IsCompleted == true))
-                            .Select(o => new OrderProgretionDto()
-                            {
-                                OrderId = o.Id,
-                                DateCreated = o.DateCreated.ToString(DefaultDateWithTimeFormat),
-                                OrderStates = o.OrdersPartsEmployees
-                                               .Select(ope => new OrderStateDto()
-                                               {
-                                                   PartId = ope.PartId,
-                                                   PartModel = ope.PartName,
-                                                   PartType = ope.Part.Category.Name,
-                                                   NameOfEmplоyeeProducedThePart = _stringManipulator.ReturnFullName(ope.Employee.FirstName, ope.Employee.LastName),
-                                                   EmployeeId = ope.EmployeeId,
-                                                   SerialNumber = ope.SerialNumber,
-                                                   IsProduced = ope.IsCompleted,
-                                                   ElementProduceTimeInMinutes = ope.OrdersPartsEmployeesInfos.Where(opei => opei.OrderId == ope.OrderId 
-                                                                                                               && opei.PartId == ope.PartId 
-                                                                                                               && opei.UniqueKeyForSerialNumber == ope.UniqueKeyForSerialNumber)
-                                                                                                     .Sum(opeis => opeis.ProductionТime.Minutes)
-                                               })
-                                               .ToList()
-                            })
-                            .ToListAsync();
+            var list = _db.Orders.ToList();
+            try
+            {
+                return await _db.Orders
+                           .AsNoTracking()
+                           .Where(o => o.DateFinish == null
+                                       && o.IsDeleted == false
+                                       && o.OrdersPartsEmployees.Where(ope => ope.OrderId == o.Id).All(ope => ope.IsCompleted == true))
+                           .Select(o => new OrderProgretionDto()
+                           {
+                               OrderId = o.Id,
+                               DateCreated = o.DateCreated.ToString(DefaultDateWithTimeFormat),
+                               OrderStates = o.OrdersPartsEmployees
+                                              .Select(ope => new OrderStateDto()
+                                              {
+                                                  PartId = ope.PartId,
+                                                  PartModel = ope.PartName,
+                                                  PartType = ope.Part.Category.Name,
+                                                  NameOfEmplоyeeProducedThePart = _stringManipulator.ReturnFullName(ope.Employee.FirstName, ope.Employee.LastName),
+                                                  EmployeeId = ope.EmployeeId,
+                                                  SerialNumber = ope.SerialNumber,
+                                                  IsProduced = ope.IsCompleted,
+                                                  ElementProduceTimeInMinutes = ope.OrdersPartsEmployeesInfos.Where(opei => opei.OrderId == ope.OrderId
+                                                                                                              && opei.PartId == ope.PartId
+                                                                                                              && opei.UniqueKeyForSerialNumber == ope.UniqueKeyForSerialNumber)
+                                                                                                    .Sum(opeis => opeis.ProductionТime.Minutes)
+                                              })
+                                              .ToList()
+                           })
+                           .ToListAsync();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
         }
 
         /// <summary>

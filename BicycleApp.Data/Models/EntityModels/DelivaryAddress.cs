@@ -26,7 +26,7 @@
         [StringLength(DelivaryAddressConstants.BlockMaxValue)]
         public string? Block { get; set; }
 
-        public int? Floor { get; set; }
+        public string? Floor { get; set; }
 
         [StringLength(DelivaryAddressConstants.ApartamentMaxValue)]
         public string? Apartment { get; set; }

@@ -28,7 +28,10 @@
         {
             try
             {
-                IndexPageDto? dto = await homePageService.GetIndexPageData();
+                var httpScheme = Request.Scheme;
+                var httpHost = Request.Host.Value;
+                var httpPathBase = Request.PathBase;
+                IndexPageDto? dto = await homePageService.GetIndexPageData(httpScheme, httpHost, httpPathBase);
              
                 if (dto == null)
                 {
