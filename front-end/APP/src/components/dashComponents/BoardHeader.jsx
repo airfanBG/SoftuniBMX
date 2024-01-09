@@ -16,6 +16,8 @@ function BoardHeader() {
   const { user, updateUser } = useContext(UserContext);
   const navigate = useNavigate();
 
+  const partPage = window.location.pathname.includes("/app/part/");
+
   function onLogout() {
     const exit = logout();
     logoutUser();
@@ -25,7 +27,7 @@ function BoardHeader() {
   return (
     <header className={styles.boardHeader}>
       {user === "free" && <Guest />}
-      {user.role === "user" && <Balance user={user} />}
+      {user.role === "user" && !partPage && <Balance user={user} />}
       {(user.role === "accessoriesworker" ||
         user.role === "frameworker" ||
         user.role === "wheelworker") && <Category />}

@@ -10,16 +10,11 @@ const starContainerStyle = {
   display: "flex",
 };
 
-// usage
-// const [compRating, setCompRating] = useState(0);
-// <StarsRating color="#FFA81E" maxRating={4} onSetRating={setCompRating} and-so-on/>;
-
 export default function StarsRating({
   maxRating = 5,
   color = "#fcc419",
   size = 32,
   className = "",
-  messages = [],
   defaultRating = 0,
   onSetRating,
 }) {
@@ -30,13 +25,6 @@ export default function StarsRating({
     setRating(rating);
     onSetRating(rating);
   }
-
-  const textStyle = {
-    lineHeight: "1",
-    margin: "0",
-    color,
-    fontSize: `${size / 1.5}px`,
-  };
 
   return (
     <div style={containerStyle} className={className}>
@@ -53,11 +41,6 @@ export default function StarsRating({
           />
         ))}
       </div>
-      <p style={textStyle}>
-        {messages.length === maxRating
-          ? messages[tempRating ? tempRating - 1 : rating - 1]
-          : tempRating || rating || ""}
-      </p>
     </div>
   );
 }

@@ -41,6 +41,7 @@ import ComponentUserOrder from "./components/dashComponents/userComponents/Compo
 import { ErrorProvider } from "./context/ErrorContext.jsx";
 import LoaderWheel from "./components/LoaderWheel.jsx";
 import ErrorBoundaryPage from "./pages/ErrorBoundaryPage.jsx";
+import PartInfo from "./components/PartInfo.jsx";
 
 // LAZY LOADING
 const CreateBike = lazy(() =>
@@ -157,6 +158,7 @@ function App() {
                   >
                     <Route index element={<Navigate replace to="create" />} />
                     <Route path={"create"} element={<CreateBike />} />
+                    <Route path={"part/:id"} element={<PartInfo />} />
                   </Route>
                   <Route path="auth" element={<Auth />}>
                     <Route index element={<Navigate replace to="login" />} />

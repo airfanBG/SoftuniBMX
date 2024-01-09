@@ -81,7 +81,7 @@ function UserTrackOrder() {
             <h2>There is no orders in this category</h2>
           )}
           <aside className={styles.ordersAside}>
-            <h3 className={styles.element}>Element information</h3>
+            <h3 className={styles.element}>Icon information</h3>
             <div className={styles.listInfo}>
               <p className={styles.listItem}>
                 <span
