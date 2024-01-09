@@ -38,25 +38,32 @@
 
 ## Съдържание и навигиране в приложението
 
-1. #### [Стартова страница](/FrontEndReadMeFiles/IndexPage/indexPage.md)
-2. #### [Създаване на профил и влизане в системата](/FrontEndReadMeFiles/Autentication/Register.md)
+1. <h4 style='text-decoration:underline'>Стартова страница</h4>
+
+   - [Index Page](/FrontEndReadMeFiles/IndexPage/indexPage.md)
+
+2. <h4 style='text-decoration:underline'>Създаване на профил и влизане в системата</h4>
+
    - [Registration](/FrontEndReadMeFiles/Autentication/Register.md)
    - [Login](/FrontEndReadMeFiles/Autentication/Login.md)
    - [Forgot password](/FrontEndReadMeFiles/Autentication/ForgotPassword.md)
-3. #### [Клиент](/README.md)
+
+3. <h4 style='text-decoration:underline'>Клиент</h4>
+
    - [Профилна страница](/FrontEndReadMeFiles/ClientFiles/Profile.md)
    - [Редактиране на профил](/FrontEndReadMeFiles/ClientFiles/EditProfile.md)
    - [Създаване на поръчка](/FrontEndReadMeFiles/ClientFiles/Order.md)
    - [Проследяване на поръчка]()
    - [Готови поръчки]()
    - [Архив]()
-4. [Служители](/FrontEndReadMeFiles/Employee/Profile.md)
+
+4. <h4 style='text-decoration:underline'>Служители</h4>
 
    - [Edit profile](/FrontEndReadMeFiles/Employee/EditProfile.md)
    - [Orders](/FrontEndReadMeFiles/Employee/EditProfile.md)
 
-5. [Качествен контрол]()
-6. [Управител](/FrontEndReadMeFiles/Employee/Profile.md)
+5. <h4 style='text-decoration:underline'> Качествен контрол</h4>
+6. <h4 style='text-decoration:underline'>Управител</h4>
 
    - [New Orders](/FrontEndReadMeFiles/Manager/NewOrders.md)
    - [Production](/FrontEndReadMeFiles/Manager/Production.md)
@@ -67,8 +74,7 @@
    - [Storage]()
    - [Statistic]()
 
-7. [Крайни точки]()
-
+7. <h4 style='text-decoration:underline'>Крайни точки</h4>
    - Селекция
      - [Рамки](/ReadMeFiles_BE/AccountPage/Frames.md)
      - [Избрана част](/ReadMeFiles_BE/AccountPage/SelectedPart.md)
