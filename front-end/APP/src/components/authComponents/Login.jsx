@@ -91,7 +91,7 @@ function Login() {
     try {
       setIsLoading(true);
       const result = await login(user);
-      // console.log(result);
+      console.log(result);
 
       const currentUser = {
         balance: result.balance,
@@ -106,6 +106,7 @@ function Login() {
         id: result.employeeId ? result.employeeId : result.clientId,
         salary: result.employeeSalaryInfo,
         orderIsReady: result.isAnyOrderReady,
+        imageUrl: result.imageUrl,
       };
       // if (result.balance) {
       //   currentUser.balance = Number(result.balance.toFixed(2));
