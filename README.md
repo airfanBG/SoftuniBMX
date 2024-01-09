@@ -48,7 +48,7 @@
    - [Login](/FrontEndReadMeFiles/Autentication/Login.md)
    - [Forgot password](/FrontEndReadMeFiles/Autentication/ForgotPassword.md)
 
-3. <h4 style='text-decoration:underline'>Клиент</h4>
+3. #### [Клиент](/README.md)
 
    - [Профилна страница](/FrontEndReadMeFiles/ClientFiles/Profile.md)
    - [Редактиране на профил](/FrontEndReadMeFiles/ClientFiles/EditProfile.md)
