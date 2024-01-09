@@ -38,12 +38,12 @@
 
 ## Съдържание и навигиране в приложението
 
-1. [Стартова страница](/FrontEndReadMeFiles/IndexPage/indexPage.md)
-2. [Създаване на профил и влизане в системата](/FrontEndReadMeFiles/Autentication/Register.md)
+1. #### [Стартова страница](/FrontEndReadMeFiles/IndexPage/indexPage.md)
+2. #### [Създаване на профил и влизане в системата](/FrontEndReadMeFiles/Autentication/Register.md)
    - [Registration](/FrontEndReadMeFiles/Autentication/Register.md)
    - [Login](/FrontEndReadMeFiles/Autentication/Login.md)
-   - ! [Forgot password](/FrontEndReadMeFiles/Autentication/ForgotPassword.md)
-3. [Клиент](/FrontEndReadMeFiles/ClientFiles/Profile.md)
+   - [Forgot password](/FrontEndReadMeFiles/Autentication/ForgotPassword.md)
+3. #### [Клиент](/README.md)
    - [Профилна страница](/FrontEndReadMeFiles/ClientFiles/Profile.md)
    - [Редактиране на профил](/FrontEndReadMeFiles/ClientFiles/EditProfile.md)
    - [Създаване на поръчка](/FrontEndReadMeFiles/ClientFiles/Order.md)
