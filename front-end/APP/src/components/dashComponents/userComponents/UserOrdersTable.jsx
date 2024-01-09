@@ -165,7 +165,7 @@ function UserOrdersTable({ orders }) {
                         onClick={(e) => {
                           e.preventDefault();
                           // viewPart(part.id);
-                          navigate("/app/part/part.id");
+                          navigate(`/app/part/${part.id}`);
                         }}
                       >
                         View Part

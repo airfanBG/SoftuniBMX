@@ -28,6 +28,14 @@ function BoardHeader() {
     <header className={styles.boardHeader}>
       {user === "free" && <Guest />}
       {user.role === "user" && !partPage && <Balance user={user} />}
+      {user.role === "user" && partPage && (
+        <div className={styles.back}>
+          <button onClick={() => navigate(-1)} className={styles.backBtn}>
+            Back
+          </button>
+          {/* <span className={styles.arrow}>&#10229;</span> */}
+        </div>
+      )}
       {(user.role === "accessoriesworker" ||
         user.role === "frameworker" ||
         user.role === "wheelworker") && <Category />}

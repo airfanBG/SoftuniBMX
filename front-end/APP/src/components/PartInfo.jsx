@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 function PartInfo() {
   const { id } = useParams(); // id-то на детаила
   const [userRating, setUserRating] = useState(0); // рейтинга , който оставя потребителя
-  const [partRating, setPartRating] = useState(2); // рейтинга на частта
+  const [partRating, setPartRating] = useState(0); // рейтинга на частта
 
   return (
     <>
