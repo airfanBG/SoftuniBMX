@@ -41,7 +41,7 @@
 1. [Стартова страница](/FrontEndReadMeFiles/IndexPage/indexPage.md)
 2. [Създаване на профил и влизане в системата](/FrontEndReadMeFiles/Autentication/Register.md)
    - [Registration](/FrontEndReadMeFiles/Autentication/Register.md)
-   - ! [Login](/FrontEndReadMeFiles/Autentication/Login.md)
+   - [Login](/FrontEndReadMeFiles/Autentication/Login.md)
    - ! [Forgot password](/FrontEndReadMeFiles/Autentication/ForgotPassword.md)
 3. [Клиент](/FrontEndReadMeFiles/ClientFiles/Profile.md)
    - [Профилна страница](/FrontEndReadMeFiles/ClientFiles/Profile.md)
