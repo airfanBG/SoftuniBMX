@@ -28,7 +28,6 @@ function Salaries() {
 
   async function setEmployee(e) {
     const data = await get(environment.worker_times + e.id);
-    console.log(data);
     setPerson(e);
     setTimes(data);
     setBackground(true);
