@@ -1,18 +1,10 @@
-### Employee - Edit customer information
+###### [Back to content](/README.md)
 
-#### Content
-
-- [Front-end](/FrontEndReadMeFiles/README.md)
-- [Back-end](/FrontEndReadMeFiles/README.md)
-- [Main](/README.md)
+### Employee - Edit information
 
 Има възможност за редактиране на данните, добавяне на допълнителна сума в сметката му . както и избор на снимка от локалната му машина. Допустимите файлово разширения са jpeg и png.
 
 Редактираната информация се изпраща към базата с данни на адрес:
-
-### `PUT /users/:id`
-
-във формат:
 
 ```json
 {

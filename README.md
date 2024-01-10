@@ -55,8 +55,8 @@
    - [Създаване на поръчка](/FrontEndReadMeFiles/ClientFiles/Order.md)
    - [Потребителска кошница](/FrontEndReadMeFiles/ClientFiles/Cart.md)
    - [Проследяване на поръчка](/FrontEndReadMeFiles/ClientFiles/TrackOrder.md)
-   - [Готови поръчки]()
-   - [Архив]()
+   - [Готови поръчки](/FrontEndReadMeFiles/ClientFiles/Ready.md)
+   - [Архив](/FrontEndReadMeFiles/ClientFiles/Archive.md)
 
 4. <h4 style='text-decoration:underline'>Служители</h4>
 
@@ -76,7 +76,11 @@
    - [Statistic]()
 
 7. <h4 style='text-decoration:underline'>Крайни точки</h4>
-   - Селекция
-     - [Рамки](/ReadMeFiles_BE/AccountPage/Frames.md)
-     - [Избрана част](/ReadMeFiles_BE/AccountPage/SelectedPart.md)
-     - [Съвместими части](/ReadMeFiles_BE/AccountPage/CompatibleParts.md)
+
+   `Части`
+
+   - [Рамки](/ReadMeFiles_BE/AccountPage/Frames.md)
+
+   - [Избрана част](/ReadMeFiles_BE/AccountPage/SelectedPart.md)
+
+   - [Съвместими части](/ReadMeFiles_BE/AccountPage/CompatibleParts.md)

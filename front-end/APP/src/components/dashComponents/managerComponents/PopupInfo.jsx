@@ -17,7 +17,6 @@ function PopupInfo({ person, onClose, isSalaries = false, times, paySalary }) {
   //   const minutes = t % 60;
   //   return `${hours} hours and ${minutes} minutes`;
   // }
-
   return (
     <div className={styles.modalBg} onClick={onClose}>
       <figure className={styles.fullInfo} onClick={(e) => e.stopPropagation()}>

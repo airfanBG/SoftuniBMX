@@ -32,7 +32,8 @@ export const environment = {
   worker_order_start: "/api/employee_order/start",
   worker_order_end: "/api/employee_order/end",
   worker_order: "/api/employee_order/",
-  worker_times: "/api/manager_statistics?employeeId=",
+  // worker_times: "/api/manager_statistics?employeeId=",
+  worker_times: "/api/manager_statistics/employee_statistics?employeeId=",
   worker_get_salary: "/api/employee/get_salary?employeeId=",
 
   // QUALITY_CONTROL
@@ -71,5 +72,5 @@ export const environment = {
   find_part: "/api/part/find?partId=", // + id
 
   //COMMENT
-  find_comment: "/api/comment/find?clientId=",// + clientId + &partId=partId
+  find_comment: "/api/comment/find?clientId=", // + clientId + &partId=partId
 };
