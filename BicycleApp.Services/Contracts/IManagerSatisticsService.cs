@@ -10,5 +10,8 @@
         Task<OrderStatisticDto> GetOrderStatistics(FinishedOrdersDto datesPeriod);
         Task<PartStatisticDto> GetPartStatistics(FinishedOrdersDto datesPeriod);
         Task<StatisticsDto> GetStatistics(FinishedOrdersDto datesPeriod);
+        Task<StatisticEmployeeDto> EmployeeFullStatistics();
+        Task<StatisticEmployeeDto> EmployeePeriodStatistics(FinishedOrdersDto datesPeriod);
+        Task<EmployeeStatisticsDto> GetEmployeesStatistics(FinishedOrdersDto datesPeriod);
     }
 }
