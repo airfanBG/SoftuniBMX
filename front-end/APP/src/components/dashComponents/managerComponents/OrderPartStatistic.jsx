@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { environment } from "../../../environments/environment.js";
 import LoaderWheel from "../../LoaderWheel.jsx";
 import { get } from "../../../util/api.js";
+import { formatCurrency } from "../../../util/resolvers.js";
 
 function OrderPartStatistic() {
   const [error, setError] = useState({});
@@ -67,7 +68,7 @@ function OrderPartStatistic() {
         {loading && <LoaderWheel />}
         <div className={styles.dateContainer}>
           <div className={styles.element}>
-            <h2 className={styles.boardHeading}>Select time period:</h2>
+            <h3 className={styles.boardHeading}>Select time period</h3>
             <section className={styles.section}>
               <form className={styles.form}>
                 <label className={styles.label}>
@@ -100,11 +101,16 @@ function OrderPartStatistic() {
             </section>
           </div>
           <aside className={styles.block}>
-            <div>
+            <div className={styles.summary}>
               <h3 className={styles.infoHeading}>Summary information</h3>
               <p className={styles.serial}>
                 <span>Total income:</span>
-                {resultObject.orderStatistics?.totalIncome} BGN
+                {!formatCurrency(
+                  resultObject.orderStatistics?.totalIncome
+                ).includes("NaN")
+                  ? formatCurrency(resultObject.orderStatistics?.totalIncome)
+                  : formatCurrency(0)}
+                {/* {resultObject.orderStatistics?.totalIncome} BGN */}
               </p>
               <p className={styles.serial}>
                 <span>Total sended orders:</span>
@@ -120,10 +126,16 @@ function OrderPartStatistic() {
               </p>
               <p className={styles.serial}>
                 <span>Bestseler income:</span>
-                {resultObject.partStatistics?.totalBestselerPartIncome}.00 BGN
+                {!formatCurrency(
+                  resultObject.partStatistics?.totalBestselerPartIncome
+                ).includes("NaN")
+                  ? formatCurrency(
+                      resultObject.partStatistics?.totalBestselerPartIncome
+                    )
+                  : formatCurrency(0)}
               </p>
             </div>
-            <div>
+            <div className={styles.intervalInfo}>
               <h3 className={styles.infoHeading}>
                 Information about selecting date interval
               </h3>
@@ -146,9 +158,7 @@ function OrderPartStatistic() {
       </section>
 
       <>
-        <h2 className={styles.dashHeading}>
-          Orders in selected time interval:
-        </h2>
+        <h2 className={styles.listHeading}>Orders in selected time interval</h2>
 
         <section className={styles.board}>
           <p className={styles.serial}>

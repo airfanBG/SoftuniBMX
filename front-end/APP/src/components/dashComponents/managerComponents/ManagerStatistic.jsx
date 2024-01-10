@@ -22,7 +22,7 @@ function ManagerStatistic() {
 
   return (
     <>
-      <h2 className={styles.dashHeadingMain}>Storage</h2>
+      <h2 className={styles.dashHeadingMain}>Statistic</h2>
 
       <section className={styles.board}>
         <BoardHeader />
@@ -33,18 +33,18 @@ function ManagerStatistic() {
               className={styles.actionLink}
               onClick={() => onSelectActive("order-part-statistic")}
             >
-              Order part statistic
+              Parts
             </button>
 
             <button
               className={styles.actionLink}
               onClick={() => onSelectActive("employee-statistic")}
             >
-             Employee statistic
+              Employees
             </button>
           </aside>
           <main className={styles.main}>
-            {active === "order-part-statistic" && <OrderPartStatistic/>}
+            {active === "order-part-statistic" && <OrderPartStatistic />}
             {active === "employee-statistic" && <EmployeeStatistic />}
           </main>
         </div>
