@@ -84,3 +84,7 @@
    - [Избрана част](/ReadMeFiles_BE/AccountPage/SelectedPart.md)
 
    - [Съвместими части](/ReadMeFiles_BE/AccountPage/CompatibleParts.md)
+
+8. <h4>Принципна диаграма на архитектурата</h4>
+
+   - [Архитектура](http://yuchormanski.free.bg/bikes/high-level-dependencies.html)
