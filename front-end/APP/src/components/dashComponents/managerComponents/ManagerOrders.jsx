@@ -76,7 +76,7 @@ function ManagerOrders() {
     dispatch({ type: "isLoading", payload: true });
     dispatch({ type: "toRerender" });
     dispatch({ type: "isLoading", payload: false });
-    console.log("re-render");
+    // console.log("re-render");
   }
 
   return (

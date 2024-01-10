@@ -31,7 +31,6 @@ function OrderPartStatistic() {
   useEffect(
     function () {
       setLoading(true);
-      console.log("in");
       const abortController = new AbortController();
 
       async function getStatistics() {
@@ -46,7 +45,7 @@ function OrderPartStatistic() {
           });
         }
 
-        console.log(result);
+        // console.log(result);
         setResultObject(result);
         setLoading(false);
       }

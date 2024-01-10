@@ -43,9 +43,7 @@ function ComponentUserOrdersReady() {
       setError({ error: true, message: result.title });
     } else {
       // forceRerender();
-      console.log(user);
       updateUser({ ...user, orderIsReady: false, balance: user.balance - sum });
-      console.log(user);
       setRender(!render);
     }
   }

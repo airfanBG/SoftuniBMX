@@ -101,7 +101,7 @@ function AddSupplier({ onFinish, active }) {
     } else {
       onFinish(active);
     }
-    console.log(result);
+    // console.log(result);
   }
   return (
     <>

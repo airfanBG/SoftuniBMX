@@ -34,7 +34,6 @@ function WorkerOrders() {
   );
   function onBtnHandler() {
     setIsFinished(!isFinished);
-    console.log("rerender");
   }
   return (
     <>

@@ -60,7 +60,6 @@ function UserHomeScreenSelection() {
 
   async function onConfirm() {
     const [frame, wheel, parts] = bike.parts;
-    console.log(frame.partId);
 
     //user balance after order
     const userReducedBalance = user.balance - bike.price * 0.2;
@@ -90,7 +89,6 @@ function UserHomeScreenSelection() {
     setLoading(true);
     try {
       const orderResponse = await post(environment.create_order, currentOrder);
-      console.log(orderResponse);
     } catch (err) {
       console.error(err);
       setError(true);

@@ -3,7 +3,6 @@ import styles from "./ComponentUserOrdersInfo.module.css";
 import React from "react";
 
 function ComponentUserOrderInfo({ data }) {
-  console.log(data);
   return (
     <>
       <section>

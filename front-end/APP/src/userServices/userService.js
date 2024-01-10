@@ -12,7 +12,6 @@ async function userInfo(id, role) {
 function updateUserData(id, data, role) {
   let result;
   if (role === "user") {
-    console.log(data);
     result = put(environment.update_client, data);
   } else {
     // result = put(environment.update_employee + id, data);

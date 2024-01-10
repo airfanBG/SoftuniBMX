@@ -66,7 +66,6 @@ function Register() {
   function phoneValidate(e) {
     const userPhone = e.target.value.split(" ").at(1);
     if (userPhone.length < 6) {
-      console.log("here");
       return setInputError((err) => ({
         ...err,
         [e.target.name]: "Invalid phone number",

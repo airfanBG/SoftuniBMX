@@ -25,7 +25,7 @@ function MonthlySalary() {
     const gotSalary = { ...user, salary: null };
 
     const result = await post(environment.worker_get_salary + user.id);
-    console.log(result);
+    // console.log(result);
     setLoading(false);
 
     if (result?.isError) {
