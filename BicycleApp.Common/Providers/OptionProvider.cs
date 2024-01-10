@@ -61,11 +61,6 @@
 
         }
 
-        public string? GetDefaultUserRelativePath()
-        {
-            return _configuration.GetSection("DefaultImagesRelativePath:User").Value;
-        }
-
         public SalaryAccrualPercentages GetSalaryAccrualPercentages()
         {
             var salaryAccrualPercentagesValues = _configuration.GetSection("SalaryAccrualPercentages");

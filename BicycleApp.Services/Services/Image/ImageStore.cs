@@ -12,25 +12,21 @@
     using System.Threading.Tasks;
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.HelperClasses.Contracts;
-    using BicycleApp.Common.Providers.Contracts;
 
     public class ImageStore : IImageStore
     {
         private readonly BicycleAppDbContext _db;
         private readonly IUserImageFactory _userImageFactory;
         private readonly IStringManipulator _stringManipulator;
-        private readonly IOptionProvider _optionProvider;
 
         public ImageStore(
             BicycleAppDbContext db,
             IUserImageFactory userImageFactory,
-            IStringManipulator stringManipulator,
-            IOptionProvider optionProvider)
+            IStringManipulator stringManipulator)
         {
             _db = db;
             _userImageFactory = userImageFactory;
             _stringManipulator = stringManipulator;
-            _optionProvider = optionProvider;
         }
 
         /// <summary>
@@ -43,18 +39,14 @@
         {
             try
             {
-                string userPath = string.Empty;
+                string userPath = await _userImageFactory.GetUserImagePathAsync(userId, userRole);
 
-                userPath = await _userImageFactory.GetUserImagePathAsync(userId, userRole);
-
-                if (string.IsNullOrEmpty(userPath))
+                if (userPath != null)
                 {
-                    userPath = _optionProvider.GetDefaultUserRelativePath();
-                }
+                    var imagePath = _stringManipulator.UrlImageMaker(httpScheme, httpHost, httpPathBase, userPath);
 
-                var imagePath = _stringManipulator.UrlImageMaker(httpScheme, httpHost, httpPathBase, userPath);
-
-                return imagePath;
+                    return imagePath;
+                }     
             }
             catch (Exception)
             {

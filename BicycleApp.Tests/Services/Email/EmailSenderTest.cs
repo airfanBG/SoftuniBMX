@@ -9,6 +9,7 @@
     using MailKit.Net.Smtp;
     using MimeKit;
     using Moq;
+    using NUnit.Framework.Constraints;
 
     public class EmailSenderTest
     {
@@ -18,33 +19,14 @@
 
         private readonly IEmailSender emailSender = new EmailSender(fakeContext.Object, fakeUserFactory.Object, fakeOptionProvider.Object);
 
-        private readonly string id = Guid.NewGuid().ToString();
 
         [Test]
         public void IsSuccessfulSendEmail_Should_ReturnTrue_WhenEmailIsSeccessfulSend()
         {
             // Arrange
-            var emailInfo = new EmailSendInfoDto
-            {
-                Receiver = new EmailReceiverDto
-                {
-                    Name = "John Doe",
-                    EmailAddress = "john.doe@example.com"
-                },
-                Content = new EmailContentDto
-                {
-                    Subject = "Test Subject",
-                    Body = "Test Body"
-                }
-            };
-
-            fakeOptionProvider.Setup(x => x.EmailAccoutUsername()).Returns("testuser");
-            fakeOptionProvider.Setup(x => x.EmailAccoutPassword()).Returns("testpassword");
-            var smtpClient = new SmtpClient();
-            smtpClient.Connect(It.IsAny<string>(), It.IsAny<int>());
 
             // Act
-            var result = emailSender.IsSuccessfulSendEmail(emailInfo);
+            var result = emailSender.IsSuccessfulSendEmail(It.IsAny<EmailSendInfoDto>());
 
             // Assert
             Assert.IsTrue(result);

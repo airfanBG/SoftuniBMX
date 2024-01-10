@@ -10,7 +10,6 @@
         public string? ClientEmailConfirmEnpoint();
         public string? EmployeeEmailConfirmEnpoint();
         public string? GetPreviousWorkerPositionName(string currentWorkerPosition);
-        public string? GetDefaultUserRelativePath();
         public SalaryAccrualPercentages GetSalaryAccrualPercentages();
     }
 }
