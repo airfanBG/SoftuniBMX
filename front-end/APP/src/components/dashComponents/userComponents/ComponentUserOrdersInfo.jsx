@@ -3,31 +3,30 @@ import styles from "./ComponentUserOrdersInfo.module.css";
 import React from "react";
 
 function ComponentUserOrderInfo({ data }) {
-  console.log(data);
   return (
     <>
       <section>
         <div className={styles.orderContainer}>
           <h2>Order {data.serialNumber}</h2>
           <div className={styles.orderDetails}>
-            <div>
+            <p>
               <strong>Description:</strong> {data.description}
-            </div>
-            <div>
+            </p>
+            <p>
               <strong>Amount:</strong> {data.finalAmount}
-            </div>
-            <div>
+            </p>
+            <p>
               <strong>Unpaid Amount:</strong> {data.unpaidAmount}
-            </div>
-            <div>
+            </p>
+            <p>
               <strong>Status:</strong> {data.status}
-            </div>
-            <div>
+            </p>
+            <p>
               <strong>Date Created:</strong> {data.dateCreated}
-            </div>
-            <div>
+            </p>
+            <p>
               <strong>Date Finished:</strong> {data.dateFinished}
-            </div>
+            </p>
           </div>
         </div>
       </section>

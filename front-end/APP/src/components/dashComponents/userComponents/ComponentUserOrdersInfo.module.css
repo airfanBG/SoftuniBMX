@@ -8,10 +8,10 @@
 }
 
 .orderDetails {
-    display: flex;
-    flex-direction: column;
-    margin-top: 1rem;
-    font-size: small;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  font-size: small;
 }
 
 .orderContainer h2 {
