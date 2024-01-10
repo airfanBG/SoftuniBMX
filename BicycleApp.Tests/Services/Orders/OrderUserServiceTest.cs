@@ -3,7 +3,6 @@
     using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
     using BicycleApp.Data.Models.EntityModels;
-    using BicycleApp.Tests.SeedData;
     using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Contracts.OrderContracts;
     using BicycleApp.Services.HelperClasses.Contracts;
@@ -26,18 +25,7 @@
         [OneTimeSetUp]
         public void SetUp()
         {
-            var seeder = new SeedClass();
 
-            fakeDateTimeProvider.Setup(x => x.Now).Returns(new DateTime(2023, 11, 11, 11, 11, 00));
-
-            fakeContext.Setup(x => x.VATCategories)
-               .ReturnsDbSet(seeder.SeedVATCategories());
-            fakeContext.Setup(x => x.Parts)
-                .ReturnsDbSet(seeder.SeedParts());
-            fakeContext.Setup(x => x.Clients)
-                .ReturnsDbSet(seeder.SeedClients());
-            fakeContext.Setup(x => x.Orders)
-                .ReturnsDbSet(seeder.SeedOrders());
         }
 
         [Test]

@@ -5,6 +5,7 @@ import Popup from "../../Popup";
 import { get } from "../../../util/api";
 import ComponentUserOrderInfo from "./ComponentUserOrdersInfo";
 import { environment } from "../../../environments/environment.js";
+import { useNavigate } from "react-router-dom";
 
 function UserOrdersTable({ orders }) {
   const [background, setBackground] = useState(false);
@@ -13,6 +14,7 @@ function UserOrdersTable({ orders }) {
   const [data, setData] = useState({});
   const [comment, setComment] = useState({});
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
 
   //View Part
   function viewPart(partId) {
@@ -162,7 +164,8 @@ function UserOrdersTable({ orders }) {
                         href="#"
                         onClick={(e) => {
                           e.preventDefault();
-                          viewPart(part.id);
+                          // viewPart(part.id);
+                          navigate(`/app/part/${part.id}`);
                         }}
                       >
                         View Part

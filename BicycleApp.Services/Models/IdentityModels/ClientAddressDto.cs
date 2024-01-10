@@ -18,7 +18,7 @@
         public string? Block { get; set; }
 
         [JsonPropertyName("floor")]
-        public int? Floor { get; set; }
+        public string? Floor { get; set; }
 
         [JsonPropertyName("apartment")]
         public string? Apartment { get; set; }

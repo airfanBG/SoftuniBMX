@@ -31,7 +31,7 @@ function UserInfo() {
       setLoading(true);
       async function getClientInfo() {
         const data = await userInfo(user.id, user.role);
-        // console.log(data);
+        console.log(data);
         setInfo({ ...data });
         if (data.role === "user") {
           setInfo({ ...data, balance: Number(data.balance.toFixed(2)) });
@@ -94,11 +94,11 @@ function UserInfo() {
         <div className={styles.userInfoWrapper}>
           <figure className={styles.mainInfo}>
             <div className={styles["imgHolder"]}>
-              {!info.imageUrl && (
+              {!user.imageUrl && (
                 <User size={196} color="#363636" weight="thin" />
               )}
-              {info.imageUrl && (
-                <img className={styles.userImg} src={info.imageUrl} alt="" />
+              {user.imageUrl && (
+                <img className={styles.userImg} src={user.imageUrl} alt="" />
               )}
               {edit && (
                 <label htmlFor="imgFile">

@@ -38,3 +38,14 @@
 .userControls a:active {
   color: var(--bg-color);
 }
+
+.back {
+  position: relative;
+}
+.backBtn {
+  font-size: 1.8rem;
+}
+span.arrow {
+  position: absolute;
+  bottom: 0;
+}
