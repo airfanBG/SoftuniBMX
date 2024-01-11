@@ -11,14 +11,14 @@
 
 Приложението покрива всички дейности за потребителския избор и работения процес.
 
-##### 👤 От страна на клиента
+#### 👤 От страна на клиента
 
 - избор на някой от базовите велосипеди или асемблиране на собствен модел от възможните предоставени като избор части.
 - Проследяване на поръчката до нейното завършване
 - Редактиране на клиентския профил
 - Добавяне на средства за изплащане на избрания продукт
 
-##### 🏭 От страна на предприятието
+#### 🏭 От страна на предприятието
 
 - Изработване на избраната селекция и одобрение от качествен контрол
 - Проследяване на работния процес
@@ -88,9 +88,9 @@
 
 <!-- 7. <h4 style='text-decoration:underline'>[Крайни точки](/ReadMeFiles_BE)</h4> -->
 
-7. #### [Крайни точки](/BE_README.md)
+7. #### 📍 [Крайни точки](/BE_README.md)
 
-8. #### [Архитектура](http://yuchormanski.free.bg/bikes/high-level-dependencies.html)
+8. #### 🔗 [Архитектура](http://yuchormanski.free.bg/bikes/high-level-dependencies.html)
 
 ## 👥 Team
 
@@ -108,9 +108,11 @@
 
 ### 🤝 Contributing
 
-Ако харесвате нашата работа, моля, подкрепете ни като оставите звезда.
+Ако харесвате нашата работа, моля, подкрепете ни като оставите <!-- Place this tag where you want the button to render. -->
+<a class="github-button" href="https://github.com/airfanBG/SoftuniBMX" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star airfanBG/SoftuniBMX on GitHub">Звезда⭐</a>.
 
-If you would like to suppurt us you could do it by giving a star.
+If you would like to suppurt us you could do it by giving a <!-- Place this tag where you want the button to render. -->
+<a class="github-button" href="https://github.com/airfanBG/SoftuniBMX" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star airfanBG/SoftuniBMX on GitHub">Star ⭐</a>.
 
 ### 📧 Contact Us
 
