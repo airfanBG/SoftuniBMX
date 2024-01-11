@@ -10,6 +10,7 @@
         public string Category { get; set; } = null!;
         public List<string> Images { get; set; } = new List<string>();
         public decimal SalePrice { get; set; }
+        public double Rating { get; set; }
 
         public static implicit operator PartFullInfoDto?(Task<PartFullInfoDto>? v)
         {

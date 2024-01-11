@@ -122,6 +122,8 @@ namespace BicicleApp.Api
             builder.Services.AddScoped<ISupplyManagerService, SupplyManagerService>();
             builder.Services.AddScoped<IManagerSatisticsService, ManagerSatisticsService>();
             builder.Services.AddScoped<IWorkerManagement, WorkerManagement>();
+            builder.Services.AddScoped<IRatingService, RatingService>();
+            builder.Services.AddScoped<IRatingFactory, RatingFactory>();
 
             var app = builder.Build();
 

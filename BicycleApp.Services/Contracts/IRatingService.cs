@@ -8,5 +8,6 @@
         Task<double> GetAverageRatePerPart(int partId);
         Task<bool> UpdateRating(IRatingDto ratingInfo);
         Task<bool> RemoveRating(IRatingDto ratingInfo);
+        Task<bool> ClientRateExists(int partId, string clientId);
     }
 }
