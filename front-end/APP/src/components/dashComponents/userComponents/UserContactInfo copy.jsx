@@ -9,12 +9,6 @@ import { formatCurrency } from "../../../util/resolvers.js";
 function UserContactInfo({ info, addMoneyBtnHandler }) {
   const { user } = useContext(UserContext);
   const [amount, setAmount] = useState("");
-  const [card, setCard] = useState("");
-  const [expDate, setExpDate] = useState("");
-  const [cardName, setCardName] = useState(
-    user.firstName + " " + user.lastName
-  );
-  const [cvv, setCvv] = useState("");
   const [isAccount, setIsAccount] = useState(false);
 
   function onAddAmountHandler(e) {
@@ -146,57 +140,16 @@ function UserContactInfo({ info, addMoneyBtnHandler }) {
           {isAccount && (
             <div className={styles.formContainer}>
               <form onSubmit={onAddAmountHandler} className={styles.form}>
-                <div className={styles.formContainer}>
-                  <label htmlFor="" className={styles.labelInput}>
-                    card number
-                  </label>
-                  <input
-                    type="tel"
-                    className={styles.balanceInput}
-                    value={card}
-                    onChange={(e) => setCard(Number(e.target.value))}
-                    // placeholder={"Add card number"}
-                  />
-                </div>
-
-                <div className={styles.formContainer}>
-                  <label htmlFor="" className={styles.labelInput}>
-                    card number
-                  </label>
-                  <input
-                    type="text"
-                    className={styles.balanceInput}
-                    value={cardName}
-                    onChange={(e) => setCardName(e.target.value.trim())}
-                    minLength={15}
-                    maxLength={19}
-                  />
-                </div>
-                <div className={styles.formContainer}>
-                  <label htmlFor="" className={styles.labelInput}>
-                    expiration date
-                  </label>
-                  <input
-                    type="date"
-                    className={styles.balanceInput}
-                    value={expDate}
-                    onChange={(e) => setExpDate(e.target.value.trim())}
-                  />
-                </div>
-
-                <div className={styles.formContainer}>
-                  <label htmlFor="" className={styles.labelInput}>
-                    cvv
-                  </label>
+                <label htmlFor="" className={styles.labelInput}>
+                  {/* Add amount */}
                   <input
                     type="number"
                     className={styles.balanceInput}
-                    value={cvv}
-                    onChange={(e) => setCvv(Number(e.target.value))}
-                    placeholder={"Add cvv"}
+                    value={amount}
+                    onChange={(e) => setAmount(Number(e.target.value))}
+                    placeholder={"Add amount"}
                   />
-                </div>
-
+                </label>
                 <button className={styles.amountBtn}>Add to balance</button>
               </form>
             </div>
@@ -224,6 +177,24 @@ function UserContactInfo({ info, addMoneyBtnHandler }) {
               </div>
             </div>
           )} */}
+
+          {user.role === "user" && (
+            <div className={styles.formContainer}>
+              <form onSubmit={onAddAmountHandler} className={styles.form}>
+                <label htmlFor="" className={styles.labelInput}>
+                  {/* Add amount */}
+                  <input
+                    type="number"
+                    className={styles.balanceInput}
+                    value={amount}
+                    onChange={(e) => setAmount(Number(e.target.value))}
+                    placeholder={"Add amount"}
+                  />
+                </label>
+                <button className={styles.amountBtn}>Add to balance</button>
+              </form>
+            </div>
+          )}
         </div>
       )}
     </>
