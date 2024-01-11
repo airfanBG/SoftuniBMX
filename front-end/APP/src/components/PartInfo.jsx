@@ -15,6 +15,7 @@ function PartInfo() {
   const [partRating, setPartRating] = useState(0); // рейтинга на частта
   const [data, setData] = useState({});
   const [comment, setComment] = useState({});
+  const [partOldRating, setPartOldRating] = useState(false);
 
   window.scrollTo(0, 0);
 
@@ -28,48 +29,51 @@ function PartInfo() {
     getData(id);
 
     async function getComment() {
-      try {
-        const result = await get(
-          environment.find_comment + user.id + `&partId=${id}`
-        );
+      // try {
+      //   const result = await get(
+      //     environment.find_comment + user.id + `&partId=${id}`
+      //   );
 
-        if (result) {
-          setComment({});
-        } else {
-          setComment(result);
-        }
-      } catch {
-        console.error("error");
-      }
+      //   if (result) {
+      //     setComment({});
+      //   } else {
+      //     setComment(result);
+      //   }
+      // } catch {
+      //   console.error("error");
+      // }
+      const result = await get(
+        environment.find_comment + user.id + `&partId=${id}`
+      );
+      const receivedRating = await get(
+        environment.get_client_rate + id + "&clientId=" + user.id
+      );
+      if (result === undefined) return;
+      if (receivedRating === partOldRating) return;
+      setComment(result);
+      setPartOldRating(receivedRating);
     }
 
     getComment();
-  }, [id, user.id]);
+  }, [id, partOldRating, user.id]);
 
-  useEffect(() => {
-    async function addRating() {
-      const result = await get(
-        environment.get_client_rate + id + "&clientId=" + user.id
-      );
-      if (result === false) {
-        const obj = {
-          clientId: user.id,
-          partId: id,
-          rating: userRating,
-        };
-        const r = await post(environment.set_client_rate, obj);
-      } else {
-        /*const r = await put(environment.update_client_rate, {
-          clientId: userId,
-          partId: partId,
-          rating: userRating,
-        });*/
-        console.log("put");
-      }
+  async function addRating(r) {
+    let result;
+
+    const obj = {
+      clientId: user.id,
+      partId: id,
+      rating: r,
+    };
+
+    if (!partOldRating) {
+      result = await post(environment.set_client_rate, obj);
+    } else {
+      result = await put(environment.update_client_rate, obj);
     }
-
-    addRating();
-  }, [userRating, id, user.id]);
+    console.log(result);
+    setPartOldRating(r);
+  }
 
   return (
     <>
@@ -88,6 +92,7 @@ function PartInfo() {
                   maxRating={5}
                   onSetRating={setUserRating}
                   defaultRating={partRating}
+                  submitRating={addRating}
                 />
               </div>
             </div>
@@ -110,7 +115,7 @@ function PartInfo() {
               <p>
                 Sale Price: <span>{data.salePrice}</span>
               </p>
-              <p>Current rating: {partRating}</p>
+              <p>Current rating: {partRating.toFixed(1)}</p>
             </div>
           </div>
           <div>coment</div>
