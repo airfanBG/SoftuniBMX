@@ -126,8 +126,8 @@ If you would like to suppurt us you could do it by giving a star.
 
 ### 📜 Лиценз / License
 
-- <img src="https://flagpedia.net/data/flags/h120/bg.webp" width="20"> - Този проект е лицензиран съгласно MIT лиценз. Вижте лицензния файл за подробности.
+- <img src="https://flagpedia.net/data/flags/h120/bg.webp" width="20"> - Този проект е лицензиран съгласно MIT лиценз. Вижте [лицензния](https://github.com/airfanBG/SoftuniBMX/tree/develop?tab=License-1-ov-file) файл за подробности.
 
-- <img src="https://flagpedia.net/data/flags/w580/gb.webp" width="20" /> - This project is licensed under the MIT License. See the LICENSE file for details.
+- <img src="https://flagpedia.net/data/flags/w580/gb.webp" width="20" /> - This project is licensed under the MIT License. See the [LICENSE](https://github.com/airfanBG/SoftuniBMX/tree/develop?tab=License-1-ov-file) file for details.
 
 🌐 Thank you for joining us on this journey to Bike production! 🌐
