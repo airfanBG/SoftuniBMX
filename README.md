@@ -88,9 +88,9 @@
 
 <!-- 7. <h4 style='text-decoration:underline'>[Крайни точки](/ReadMeFiles_BE)</h4> -->
 
-7. #### [Крайни точки](/BE_README.md)
+7. #### 📍 [Крайни точки](/BE_README.md)
 
-8. #### [Архитектура](http://yuchormanski.free.bg/bikes/high-level-dependencies.html)
+8. #### 🔗 [Архитектура](http://yuchormanski.free.bg/bikes/high-level-dependencies.html)
 
 ## 👥 Team
 
@@ -109,9 +109,10 @@
 ### 🤝 Contributing
 
 Ако харесвате нашата работа, моля, подкрепете ни като оставите <!-- Place this tag where you want the button to render. -->
-<a class="github-button" href="https://github.com/airfanBG/SoftuniBMX" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star airfanBG/SoftuniBMX on GitHub">Star</a>.
+<a class="github-button" href="https://github.com/airfanBG/SoftuniBMX" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star airfanBG/SoftuniBMX on GitHub">Звезда⭐</a>.
 
-If you would like to suppurt us you could do it by giving a star.
+If you would like to suppurt us you could do it by giving a <!-- Place this tag where you want the button to render. -->
+<a class="github-button" href="https://github.com/airfanBG/SoftuniBMX" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star airfanBG/SoftuniBMX on GitHub">Star ⭐</a>.
 
 ### 📧 Contact Us
 
