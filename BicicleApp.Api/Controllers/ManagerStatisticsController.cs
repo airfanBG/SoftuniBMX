@@ -88,7 +88,11 @@
 
             try
             {
-                var result = await _managerSatisticsService.GetEmployeesStatistics(datesPeriod);
+                var httpScheme = Request.Scheme;
+                var httpHost = Request.Host.Value;
+                var httpPathBase = Request.PathBase;
+
+                var result = await _managerSatisticsService.GetEmployeesStatistics(datesPeriod, httpScheme, httpHost, httpPathBase);
 
 
                 if (result != null)

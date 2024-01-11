@@ -6,6 +6,8 @@ import { environment } from "../../../environments/environment.js";
 import LoaderWheel from "../../LoaderWheel.jsx";
 import { get } from "../../../util/api.js";
 
+import { User } from "@phosphor-icons/react";
+
 function OrderPartStatistic() {
   const [error, setError] = useState({});
   const [loading, setLoading] = useState(false);
@@ -102,25 +104,13 @@ function OrderPartStatistic() {
           <aside className={styles.block}>
             <div>
               <h3 className={styles.infoHeading}>Summary information</h3>
-              <p className={styles.serial}>
+              <p className={styles.info}>
                 <span>Total income:</span>
                 {resultObject.orderStatistics?.totalIncome} BGN
               </p>
-              <p className={styles.serial}>
+              <p className={styles.info}>
                 <span>Total sended orders:</span>
                 {resultObject.orderStatistics?.totalSendedOrdersCount} Pcs.
-              </p>
-              <p className={styles.serial}>
-                <span>Bestseler part:</span>
-                {resultObject.partStatistics?.totalBestselerPartName}
-              </p>
-              <p className={styles.serial}>
-                <span>Sold bestseler part:</span>
-                {resultObject.partStatistics?.totalBestselerPartSoldCount} Pcs.
-              </p>
-              <p className={styles.serial}>
-                <span>Bestseler income:</span>
-                {resultObject.partStatistics?.totalBestselerPartIncome}.00 BGN
               </p>
             </div>
             <div>
@@ -143,6 +133,52 @@ function OrderPartStatistic() {
             </div>
           </aside>
         </div>
+        <div>
+          <h3 className={styles.infoHeading}>
+            Best seler part:
+          </h3>
+          <figure className={styles.figure}>
+            <div className={styles["imgHolder"]}>
+              {resultObject.partTotalStatistics?.partName ? (
+                <img
+                  className={styles.tumbs}
+                  src={resultObject.partTotalStatistics?.imageUrl}
+                  alt={`${resultObject.partTotalStatistics?.partName} image`}
+                />
+              ) : (
+                <User
+                  size={48}
+                  color="#363636"
+                  weight="thin"
+                  className={styles.baseImg}
+                />
+              )}
+            </div>
+            <section className={styles.workerInfo}>
+              <h2 className={styles.heading} >
+                {resultObject.employeeFullStatistics?.proudWorkerName}
+              </h2>
+              <p className={`${styles.info}`}>
+                <span>Part name:</span>
+                {resultObject.partTotalStatistics?.partName}
+              </p>
+              <div className={styles.infoBox}>
+                <p className={`${styles.info}`}>
+                  <span>Serial number:</span>
+                  {resultObject.partTotalStatistics?.serialNumber}
+                </p>
+                <p className={`${styles.info}`}>
+                  <span>Solded count:</span>
+                  {resultObject.partTotalStatistics?.partSoldCount} Pcs.
+                </p>
+                <p className={`${styles.info}`}>
+                  <span>Income:</span>
+                  {resultObject.partTotalStatistics?.partIncome} BGN
+                </p>
+              </div>
+            </section>
+          </figure>
+        </div>
       </section>
 
       <>
@@ -151,29 +187,65 @@ function OrderPartStatistic() {
         </h2>
 
         <section className={styles.board}>
-          <p className={styles.serial}>
-            <span>Income for selected period:</span>
+          <p className={styles.info}>
+            <span>Total income:</span>
             {resultObject.orderStatistics?.incomeForSelectedPeriod} BGN
           </p>
-          <p className={styles.serial}>
-            <span>Sended orders for selected period:</span>
+          <p className={styles.info}>
+            <span>Total sended orders:</span>
             {
               resultObject.orderStatistics?.sendedOrdersCountForSelectedPeriod
             }{" "}
             Pcs.
           </p>
-          <p className={styles.serial}>
-            <span>Bestseler part for selected period:</span>
-            {resultObject.partStatistics?.bestselerPartName}
-          </p>
-          <p className={styles.serial}>
-            <span>Sold bestseler for selected period:</span>
-            {resultObject.partStatistics?.bestselerPartSoldCount} Pcs.
-          </p>
-          <p className={styles.serial}>
-            <span>Bestseler income for selected period:</span>
-            {resultObject.partStatistics?.bestselerPartIncome}.00 BGN
-          </p>
+
+
+          <div>
+            <h3 className={styles.infoHeading}>
+              Best seler part for selected period:
+            </h3>
+            <figure className={styles.figure}>
+              <div className={styles["imgHolder"]}>
+                {resultObject.partPeriodStatistics?.partName ? (
+                  <img
+                    className={styles.tumbs}
+                    src={resultObject.partPeriodStatistics?.imageUrl}
+                    alt={`${resultObject.partPeriodStatistics?.partName} image`}
+                  />
+                ) : (
+                  <User
+                    size={48}
+                    color="#363636"
+                    weight="thin"
+                    className={styles.baseImg}
+                  />
+                )}
+              </div>
+              <section className={styles.workerInfo}>
+                <h2 className={styles.heading} >
+                  {resultObject.partPeriodStatistics?.proudWorkerName}
+                </h2>
+                <p className={`${styles.info}`}>
+                  <span>Part name:</span>
+                  {resultObject.partPeriodStatistics?.partName}
+                </p>
+                <div className={styles.infoBox}>
+                  <p className={`${styles.info}`}>
+                    <span>Serial number:</span>
+                    {resultObject.partPeriodStatistics?.serialNumber}
+                  </p>
+                  <p className={`${styles.info}`}>
+                    <span>Solded count:</span>
+                    {resultObject.partPeriodStatistics?.partSoldCount} Pcs.
+                  </p>
+                  <p className={`${styles.info}`}>
+                    <span>Income:</span>
+                    {resultObject.partPeriodStatistics?.partIncome} BGN
+                  </p>
+                </div>
+              </section>
+            </figure>
+          </div>
         </section>
       </>
     </>

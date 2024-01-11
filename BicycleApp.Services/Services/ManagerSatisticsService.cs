@@ -9,24 +9,30 @@
     using BicycleApp.Services.Models;
     using BicycleApp.Services.Models.ManagerStatistics;
     using BicycleApp.Services.Models.Order.OrderManager;
+    using BicycleApp.Services.Services.Image;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Query;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Xaml.Permissions;
 
+    using static BicycleApp.Common.UserConstants;
+
     public class ManagerSatisticsService : IManagerSatisticsService
     {
         private readonly BicycleAppDbContext _db;
         private readonly IDateTimeProvider _dateTimeProvider;
         private readonly IStringManipulator _stringManipulator;
+        private readonly IImageStore _imageStore;
         public ManagerSatisticsService(BicycleAppDbContext db, 
             IDateTimeProvider dateTimeProvider,
-            IStringManipulator stringManipulator)
+            IStringManipulator stringManipulator,
+            IImageStore imageStore)
         {
             _db = db;
             _dateTimeProvider = dateTimeProvider;
             _stringManipulator = stringManipulator;
+            _imageStore = imageStore;
         }
 
         public async Task<PastAndCurrentEmployeeWorkingMinutesDto> GetEmployeeOutputForThePastAndCurrentMonth(string employeeId)
@@ -61,7 +67,7 @@
         }
 
 
-        public async Task<StatisticEmployeeDto> EmployeeFullStatistics()
+        public async Task<StatisticEmployeeDto> EmployeeFullStatistics(string httpScheme, string httpHost, string httpPathBase)
         {
             //BestWorker(without descriptions from QA with max worked time)
             var bestWorker = await _db.OrdersPartsEmployeesInfos
@@ -111,7 +117,7 @@
                 {
                     Name = _stringManipulator.ReturnFullName(x.Employee.FirstName, x.Employee.LastName),
                     DepartmentName = x.Employee.Department.Name,
-                    EmployeeImgUrl = x.ImageUrl
+                    EmployeeImgUrl = _imageStore.GetUserImage(bestEmployeId.ToString(), EMPLOYEE, httpScheme, httpHost, httpPathBase).Result
                 }).FirstAsync();
 
             var subDepartmentName = await _db.Parts.Where(p => p.CategoryId == bestWorker.PartCategoryId).Select(x => x.Category.Name).FirstAsync();
@@ -131,7 +137,7 @@
             return employeeFullStatistics;
         }
 
-        public async Task<StatisticEmployeeDto> EmployeePeriodStatistics(FinishedOrdersDto datesPeriod)
+        public async Task<StatisticEmployeeDto> EmployeePeriodStatistics(FinishedOrdersDto datesPeriod, string httpScheme, string httpHost, string httpPathBase)
         {
             //BestWorkerForPeriod
             var bestPeriodWorker = await _db.OrdersPartsEmployeesInfos
@@ -187,8 +193,9 @@
                 {
                     Name = _stringManipulator.ReturnFullName(x.Employee.FirstName, x.Employee.LastName),
                     DepartmentName = x.Employee.Department.Name,
-                    EmployeeImgUrl = x.ImageUrl
+                    EmployeeImgUrl = _imageStore.GetUserImage(periodEmployeId.ToString(), EMPLOYEE, httpScheme, httpHost, httpPathBase).Result
                 }).FirstAsync();
+
 
             var subDepartmentPeriodName = await _db.Parts.Where(p => p.CategoryId == bestPeriodWorker.PartCategoryId).Select(x => x.Category.Name).FirstAsync();
 
@@ -207,13 +214,13 @@
             return employeePeriodStatistics;
         }
 
-        public async Task<EmployeeStatisticsDto> GetEmployeesStatistics(FinishedOrdersDto datesPeriod)
+        public async Task<EmployeeStatisticsDto> GetEmployeesStatistics(FinishedOrdersDto datesPeriod, string httpScheme, string httpHost, string httpPathBase)
         {
 
             var result = new EmployeeStatisticsDto()
             {
-                EmployeeFullStatistics = await EmployeeFullStatistics(),
-                EmployeePeriodStatistics = await EmployeePeriodStatistics(datesPeriod),
+                EmployeeFullStatistics = await EmployeeFullStatistics(httpScheme, httpHost, httpPathBase),
+                EmployeePeriodStatistics = await EmployeePeriodStatistics(datesPeriod, httpScheme, httpHost, httpPathBase),
             };
             ;
             return result;
@@ -246,15 +253,23 @@
                 .FirstAsync();
 
         }
-        public async Task<PartStatisticDto> GetPartStatistics(FinishedOrdersDto datesPeriod)
-        {
 
+        public async Task<PartStatisticDto> GetTotalPartStatistics()
+        {
             var bestSelerPart = await _db.OrdersPartsEmployees
+                .AsNoTracking()
+                .Include(ope => ope.Order)
+                .Include(o => o.Part)
+                .ThenInclude(x => x.ImagesParts)
+                .Where(o => o.DateFinish != null
+                         && o.Order.DateSended != null
+                         && o.DateDeleted == null)
                 .GroupBy(ope => ope.PartId)
                 .Select(group => new
                 {
                     PartId = group.Key,
                     PartName = group.Select(gn => gn.PartName).First(),
+                    SerialNumber = group.Select(gn => gn.SerialNumber).First(),
                     SoldCount = group.Select(pqy => Convert.ToInt32(pqy.PartQuantity)).Sum(),
                     PartIncome = group.Select(pinc => pinc.PartPrice).Sum(),
                     GroupCount = group.Count(),
@@ -264,38 +279,58 @@
                 .Take(1)
                 .FirstAsync();
 
+            var result = new PartStatisticDto
+            {
+                PartName = bestSelerPart.PartName,
+                SerialNumber = bestSelerPart.SerialNumber,
+                PartId = bestSelerPart.PartId,
+                ImageUrl = _db.ImagesParts.Where(ip => ip.PartId == bestSelerPart.PartId).Select(ip => ip.ImageUrl).First().ToString(),
+                PartSoldCount = bestSelerPart.SoldCount,
+                PartIncome = bestSelerPart.PartIncome,
+            };
+
+            return result;
+        }
+        public async Task<PartStatisticDto> GetPeriodPartStatistics(FinishedOrdersDto datesPeriod)
+        {
+
             var bestSelerPartForPeriod = await _db.OrdersPartsEmployees
                 .AsNoTracking()
-                .Where(o => o.DateCreated >= datesPeriod.StartDate
-                                     && o.DateFinish <= datesPeriod.EndDate.AddDays(1)
-                                     && o.DateFinish != null
-                                     && o.DateDeleted == null)
+                .Include(ope => ope.Order)
+                .Include(o => o.Part)
+                .ThenInclude(x=>x.ImagesParts)
+                .Where(ope => ope.DateCreated >= datesPeriod.StartDate
+                                     && ope.DateFinish <= datesPeriod.EndDate.AddDays(1)
+                                     && ope.DateFinish != null
+                                     && ope.Order.DateSended != null
+                                     && ope.DateDeleted == null)
                 .GroupBy(ope => ope.PartId)
                 .Select(group => new
                 {
-                    BestselerPartId = group.Key,
-                    BestselerPartName = group.Select(gn => gn.PartName).First(),
-                    BestselerPartSoldCount = group.Select(pq => Convert.ToInt32(pq.PartQuantity)).Sum(),
-                    BestselerPartIncome = group.Select(pinc => pinc.PartPrice).Sum(),
+                    PartName = group.Select(gn => gn.PartName).First(),
+                    PartId = group.Key,
+                    SerialNumber = group.Select(g => g.SerialNumber).First(),
+                    PartSoldCount = group.Select(pq => Convert.ToInt32(pq.PartQuantity)).Sum(),
+                    PartIncome = group.Select(pinc => pinc.PartPrice).Sum(),
                     GroupCount = group.Count()
 
                 })
                 .OrderByDescending(og => og.GroupCount)
                 .Take(1)
                 .FirstAsync();
+          
 
             var result = new PartStatisticDto
             {
-                TotalBestselerPartId = bestSelerPart.PartId,
-                TotalBestselerPartName = bestSelerPart.PartName,
-                TotalBestselerPartSoldCount = bestSelerPart.SoldCount,
-                TotalBestselerPartIncome = bestSelerPart.PartIncome,
-                BestselerPartName = bestSelerPartForPeriod.BestselerPartName,
-                BestselerPartId = bestSelerPartForPeriod.BestselerPartId,
-                BestselerPartSoldCount = bestSelerPartForPeriod.BestselerPartSoldCount,
-                BestselerPartIncome = bestSelerPartForPeriod.BestselerPartIncome,
-
+                PartName = bestSelerPartForPeriod.PartName,
+                SerialNumber = bestSelerPartForPeriod.SerialNumber,
+                PartId = bestSelerPartForPeriod.PartId,
+                ImageUrl  = _db.ImagesParts.Where(ip => ip.PartId == bestSelerPartForPeriod.PartId).Select(ip => ip.ImageUrl).First().ToString(),
+                PartSoldCount = bestSelerPartForPeriod.PartSoldCount,
+                PartIncome = bestSelerPartForPeriod.PartIncome,
             };
+
+            ;
 
             return result;
 
@@ -306,10 +341,12 @@
             var result = new StatisticsDto
             {
                 OrderStatistics = await GetOrderStatistics(datesPeriod),
-                PartStatistics = await GetPartStatistics(datesPeriod)
+                PartTotalStatistics = await GetTotalPartStatistics(),
+                PartPeriodStatistics = await GetPeriodPartStatistics(datesPeriod)
             };
 
             return result;
         }
+
     }
 }

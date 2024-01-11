@@ -116,12 +116,12 @@ function ManagerStatistic() {
               </h3>
               <p className={styles.info}>
                 <span>Total worked minutes:</span>
-                {resultObject.employeeFullStatistics.totalWorkedMinutes}
+                {resultObject.employeeFullStatistics?.totalWorkedMinutes}
               </p>
-              <br/>
+              <br />
               <p className={styles.info}>
                 <span>Total worked orders:</span>
-                {resultObject.employeeFullStatistics.totalWorkedOrders} Pcs.
+                {resultObject.employeeFullStatistics?.totalWorkedOrders} Pcs.
               </p>
             </div>
             <div>
@@ -143,13 +143,78 @@ function ManagerStatistic() {
           </aside>
         </div>
         <div>
+          <h3 className={styles.infoHeading}>
+            He is our proud:
+          </h3>
+          <figure className={styles.figure}>
+            <div className={styles["imgHolder"]}>
+              {resultObject.employeeFullStatistics?.proudWorkerWorkedImageUrl ? (
+                <img
+                  className={styles.tumbs}
+                  src={resultObject.employeeFullStatistics?.proudWorkerWorkedImageUrl}
+                  alt={`${resultObject.employeeFullStatistics?.proudWorkerName} image`}
+                />
+              ) : (
+                <User
+                  size={48}
+                  color="#363636"
+                  weight="thin"
+                  className={styles.baseImg}
+                />
+              )}
+            </div>
+
+            <section className={styles.workerInfo}>
+              <h2 className={styles.heading} >
+                {resultObject.employeeFullStatistics?.proudWorkerName}
+              </h2>
+              <div className={styles.infoBox}>
+                <p className={`${styles.info}`}>
+                  <span>Department:</span>
+                  {resultObject.employeeFullStatistics?.proudWorkerDepartment}
+                </p>
+                <p className={`${styles.info}`}>
+                  <span>Position:</span>
+                  {resultObject.employeeFullStatistics?.proudWorkerSubDepartment}
+                </p>
+                <p className={`${styles.info}`}>
+                  <span>Orders:</span>
+                  {resultObject.employeeFullStatistics?.proudWorkerWorkedOrders}
+                </p>
+                <p className={`${styles.info}`}>
+                  <span>Minutes:</span>
+                  {resultObject.employeeFullStatistics?.proudWorkerWorkedMinutes}
+                </p>
+              </div>
+            </section>
+          </figure>
+        </div>
+      </section>
+      <>
+        <h2 className={styles.dashHeading}>
+          Employee statistic in selected time interval:
+        </h2>
+        <section className={styles.board}>
+          <p className={styles.info}>
+            <span>Total worked minutes:</span>
+            {resultObject.employeePeriodStatistics?.totalWorkedMinutes}
+          </p>
+          <p className={styles.info}>
+            <span>Total worked orders:</span>
+            {resultObject.employeePeriodStatistics?.totalWorkedOrders} Pcs.
+          </p>
+
+          <div>
+          <h3 className={styles.infoHeading}>
+            He is the best at that time period:
+          </h3>
             <figure className={styles.figure}>
               <div className={styles["imgHolder"]}>
-                {resultObject.employeeFullStatistics.proudWorkerWorkedImageUrl ? (
+                {resultObject.employeeFullStatistics?.proudWorkerWorkedImageUrl ? (
                   <img
                     className={styles.tumbs}
-                    src={resultObject.employeeFullStatistics.proudWorkerWorkedImageUrl}
-                    alt={`${resultObject.employeeFullStatistics.proudWorkerName} image`}
+                    src={resultObject.employeeFullStatistics?.proudWorkerWorkedImageUrl}
+                    alt={`${resultObject.employeeFullStatistics?.proudWorkerName} image`}
                   />
                 ) : (
                   <User
@@ -160,48 +225,31 @@ function ManagerStatistic() {
                   />
                 )}
               </div>
-
               <section className={styles.workerInfo}>
                 <h2 className={styles.heading} >
-                  {resultObject.employeeFullStatistics.proudWorkerName}
+                  {resultObject.employeePeriodStatistics?.proudWorkerName}
                 </h2>
                 <div className={styles.infoBox}>
                   <p className={`${styles.info}`}>
                     <span>Department:</span>
-                    {resultObject.employeeFullStatistics.proudWorkerDepartment}
+                    {resultObject.employeePeriodStatistics?.proudWorkerDepartment}
                   </p>
                   <p className={`${styles.info}`}>
                     <span>Position:</span>
-                    {resultObject.employeeFullStatistics.proudWorkerSubDepartment}
+                    {resultObject.employeePeriodStatistics?.proudWorkerSubDepartment}
                   </p>
                   <p className={`${styles.info}`}>
                     <span>Orders:</span>
-                    {resultObject.employeeFullStatistics.proudWorkerWorkedOrders}
+                    {resultObject.employeePeriodStatistics?.proudWorkerWorkedOrders}
                   </p>
                   <p className={`${styles.info}`}>
                     <span>Minutes:</span>
-                    {resultObject.employeeFullStatistics.proudWorkerWorkedMinutes}
+                    {resultObject.employeePeriodStatistics?.proudWorkerWorkedMinutes}
                   </p>
                 </div>
               </section>
             </figure>
           </div>
-      </section>
-      <>
-        <h2 className={styles.dashHeading}>
-          Employee statistic in selected time interval:
-        </h2>
-        <section className={styles.board}>
-          <p className={styles.serial}>
-            <span>Worked minutes:</span>
-            {resultObject.employeePeriodStatistics.totalWorkedMinutes}
-          </p>
-          <p className={styles.serial}>
-            <span>Worked orders:</span>
-            {resultObject.employeePeriodStatistics.totalWorkedOrders} Pcs.
-          </p>
-
-
 
         </section>
       </>

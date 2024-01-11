@@ -42,7 +42,7 @@ margin-right: 1rem;
 
 .dateContainer {
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 1.6fr 4fr;
 }
 
 .element {
@@ -149,14 +149,14 @@ form.form {
 }
 
 .info {
-  width: 15rem;
+  width: 14rem;
   font-size: 1.8rem;
   color: var(--color-main-dark);
   position: relative;
   padding: 0.3rem 0 0 3rem;
   border: 1px solid var(--color-border);
   border-radius: 0.3rem;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.9rem;
 }
 
 
