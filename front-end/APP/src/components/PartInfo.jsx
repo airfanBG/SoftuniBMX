@@ -27,13 +27,15 @@ function PartInfo() {
     }
     getData(id);
 
-    async function getComment(partId, clientId) {
+    async function getComment() {
       try {
         const result = await get(
-          environment.find_comment + clientId + `&partId=${partId}`
+          environment.find_comment + user.id + `&partId=${id}`
         );
 
-        if (result !== null) {
+        if (result) {
+          setComment({});
+        } else {
           setComment(result);
         }
       } catch {
@@ -41,20 +43,21 @@ function PartInfo() {
       }
     }
 
-    getComment(id, user.id);
+    getComment();
   }, [id, user.id]);
 
   useEffect(() => {
-    async function getRating(partId, userId) {
+    async function addRating() {
       const result = await get(
-        environment.get_client_rate + partId + "&clientId=" + userId
+        environment.get_client_rate + id + "&clientId=" + user.id
       );
       if (result === false) {
-        const r = await post(environment.set_client_rate, {
-          clientId: userId,
-          partId: partId,
+        const obj = {
+          clientId: user.id,
+          partId: id,
           rating: userRating,
-        });
+        };
+        const r = await post(environment.set_client_rate, obj);
       } else {
         /*const r = await put(environment.update_client_rate, {
           clientId: userId,
@@ -65,8 +68,8 @@ function PartInfo() {
       }
     }
 
-    getRating(id, user.id);
-  }, [partRating, id, user.id]);
+    addRating();
+  }, [userRating, id, user.id]);
 
   return (
     <>
