@@ -17,7 +17,7 @@ function AddProducts() {
       if (!result.isError) {
         setSuppliers(result);
       }
-      console.log(result);
+      // console.log(result);
     }
     getSuppliers();
   }, []);

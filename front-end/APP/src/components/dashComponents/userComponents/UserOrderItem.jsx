@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 function UserOrderItem({ order }) {
   const [orderStatus, setOrderStatus] = useState("In Process");
   const titles = ["Frame", "Wheels", "Accessory"];
-  console.log(order.orderStates);
 
   useEffect(
     function () {

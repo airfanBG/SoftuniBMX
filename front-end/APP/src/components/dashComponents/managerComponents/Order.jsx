@@ -23,16 +23,13 @@ function Order({
     let result = {};
     if (type === "approve") {
       result = await approveHandlerAction(orderId);
-      console.log(result);
       onStatusChange();
     } else if (type === "reject") {
       result = await onRejectHandler(orderId);
-      console.log(result);
       onStatusChange();
     } else if (type === "delete") {
       if (window.confirm("Delete this order?")) {
         result = await onDeleteHandler(orderId);
-        console.log(result);
         onStatusChange();
       }
     }

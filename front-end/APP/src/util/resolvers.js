@@ -1,6 +1,6 @@
-function imageResolver(imgArray) {
-  console.log(imgArray);
-}
+// function imageResolver(imgArray) {
+//   console.log(imgArray);
+// }
 
 function timeResolver(t1, t2) {
   const diff = (t2 - t1) / (1000 * 60);
@@ -93,7 +93,7 @@ function getWeekdaysInMonth() {
 }
 
 export {
-  imageResolver,
+  // imageResolver,
   timeResolver,
   formatCurrency,
   getMonthName,

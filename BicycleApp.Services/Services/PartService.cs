@@ -132,6 +132,12 @@
                 .Select(i => i.ImageUrl)
                 .ToListAsync();
 
+            var rates = await dbContext.Rates
+                 .Where(p => p.PartId == partId)
+                 .Select(r => r.Rating)
+                 .ToArrayAsync();
+            partDto.Rating = rates.Average();
+                
             return partDto;
         }
     }

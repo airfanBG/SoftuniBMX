@@ -56,7 +56,7 @@
    - [Потребителска кошница](/FrontEndReadMeFiles/ClientFiles/Cart.md)
    - [Проследяване на поръчка](/FrontEndReadMeFiles/ClientFiles/TrackOrder.md)
    - [Готови поръчки](/FrontEndReadMeFiles/ClientFiles/Ready.md)
-   - [Архив](/FrontEndReadMeFiles/ClientFiles/Archive.md)
+   - ! [Архив](/FrontEndReadMeFiles/ClientFiles/Archive.md)
 
 4. <h4 style='text-decoration:underline'>Служители</h4>
 
@@ -84,3 +84,7 @@
    - [Избрана част](/ReadMeFiles_BE/AccountPage/SelectedPart.md)
 
    - [Съвместими части](/ReadMeFiles_BE/AccountPage/CompatibleParts.md)
+
+8. <h4>Принципна диаграма на архитектурата</h4>
+
+   - [Архитектура](http://yuchormanski.free.bg/bikes/high-level-dependencies.html)

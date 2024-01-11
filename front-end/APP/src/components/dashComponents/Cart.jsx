@@ -97,7 +97,6 @@ function Cart() {
         },
       ],
     };
-    // console.log(currentOrder);
 
     if (
       user.balance <
@@ -111,13 +110,11 @@ function Cart() {
     const userPayment = { ...user, balance: userReducedBalance };
     setLoading(true);
     try {
-      console.log(currentOrder);
       const orderResponse = await post(environment.create_order, currentOrder);
-      console.log(orderResponse);
+      // console.log(orderResponse);
 
       //TAKE MONEY FROM USER ACCOUNT
       // const userAfterOrder = await put(`/users/${user.id}`, userPayment);
-      // console.log(userAfterOrder);
     } catch (err) {
       console.error(err);
     } finally {

@@ -53,17 +53,14 @@ function ForgottenPassword() {
     if (email.split("@")[1] === "b-free.com") {
       reset = await post(`/api/employee/reset?email=${email}`, email);
     } else {
-      console.log("fsdsdf");
       reset = await post(`/api/client/reset?email=${email}`, email);
     }
-    console.log(reset);
 
     setTimeout(function info() {
       navigate("/auth/login");
       setIsLoading(false);
     }, 3000);
     setEmailHasSent(true);
-    console.log(email);
   }
 
   return (

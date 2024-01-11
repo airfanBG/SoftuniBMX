@@ -32,7 +32,6 @@ function OrderPartStatistic() {
   useEffect(
     function () {
       setLoading(true);
-      console.log("in");
       const abortController = new AbortController();
 
       async function getStatistics() {
@@ -47,7 +46,7 @@ function OrderPartStatistic() {
           });
         }
 
-        console.log(result);
+        // console.log(result);
         setResultObject(result);
         setLoading(false);
       }
@@ -69,7 +68,7 @@ function OrderPartStatistic() {
         {loading && <LoaderWheel />}
         <div className={styles.dateContainer}>
           <div className={styles.element}>
-            <h2 className={styles.boardHeading}>Select time period:</h2>
+            <h3 className={styles.boardHeading}>Select time period</h3>
             <section className={styles.section}>
               <form className={styles.form}>
                 <label className={styles.label}>
@@ -102,18 +101,23 @@ function OrderPartStatistic() {
             </section>
           </div>
           <aside className={styles.block}>
-            <div>
+            <div className={styles.summary}>
               <h3 className={styles.infoHeading}>Summary information</h3>
               <p className={styles.info}>
                 <span>Total income:</span>
-                {resultObject.orderStatistics?.totalIncome} BGN
+                {!formatCurrency(
+                  resultObject.orderStatistics?.totalIncome
+                ).includes("NaN")
+                  ? formatCurrency(resultObject.orderStatistics?.totalIncome)
+                  : formatCurrency(0)}
+                {/* {resultObject.orderStatistics?.totalIncome} BGN */}
               </p>
               <p className={styles.info}>
                 <span>Total sended orders:</span>
                 {resultObject.orderStatistics?.totalSendedOrdersCount} Pcs.
               </p>
             </div>
-            <div>
+            <div className={styles.intervalInfo}>
               <h3 className={styles.infoHeading}>
                 Information about selecting date interval
               </h3>
@@ -182,9 +186,7 @@ function OrderPartStatistic() {
       </section>
 
       <>
-        <h2 className={styles.dashHeading}>
-          Orders in selected time interval:
-        </h2>
+        <h2 className={styles.listHeading}>Orders in selected time interval</h2>
 
         <section className={styles.board}>
           <p className={styles.info}>

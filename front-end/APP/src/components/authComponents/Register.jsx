@@ -66,7 +66,6 @@ function Register() {
   function phoneValidate(e) {
     const userPhone = e.target.value.split(" ").at(1);
     if (userPhone.length < 6) {
-      console.log("here");
       return setInputError((err) => ({
         ...err,
         [e.target.name]: "Invalid phone number",
@@ -205,7 +204,8 @@ function Register() {
         postCode: values.postCode,
         district: values.district,
         block: values.block,
-        floor: Number(values.floor),
+        floor: values.floor,
+        // floor: Number(values.floor),
         apartment: values.apartment,
         street: values.street,
         strNumber: values.strNumber,
@@ -214,7 +214,6 @@ function Register() {
 
     try {
       setIsLoading(true);
-      // console.log(user);
       const regResponse = await register(user);
 
       if (regResponse.code) {
@@ -226,7 +225,7 @@ function Register() {
         navigate("/");
         setIsLoading(false);
         setValues(initialState);
-      }, 2000);
+      }, 1000);
     } catch (err) {
       setTimeout(() => {
         navigate("/");

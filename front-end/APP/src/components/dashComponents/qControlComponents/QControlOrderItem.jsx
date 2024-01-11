@@ -147,20 +147,17 @@ function QControlOrderItem({ product, onReBuild }) {
     if (Object.values(valuesCheck).every((x) => x === true)) {
       // result = await post(environment.pass_qControl + Number(product.orderId));
       await post(environment.pass_qControl + product.orderId);
-      console.log("pass");
     }
     // IF NOT PASS
     else if (Object.values(valuesCheck).every((x) => x === false)) {
       // result = await onDeleteHandler(product.orderId);
       await onDeleteHandler(product.orderId);
-      console.log("scrap");
     }
     // IF PARTIALLY PASS
     else {
       // console.log(finalResult);
       // result = await post(environment.return_qControl, finalResult);
       await post(environment.return_qControl, finalResult);
-      console.log("rebuild");
     }
 
     onReBuild();

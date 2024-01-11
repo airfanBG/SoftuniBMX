@@ -24,8 +24,8 @@ function Home() {
         try {
           const data = await get(environment.indexPage);
 
-          // const brakeHeapRelation = [...data.defaultBikes];
-          // const currentTop = brakeHeapRelation
+          if (!data) return;
+
           const currentTop = [...data.defaultBikes]
             .sort((a, b) => b.price - a.price)
             .at(0).price;

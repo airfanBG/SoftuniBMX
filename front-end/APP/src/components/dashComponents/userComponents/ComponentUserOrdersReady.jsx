@@ -12,6 +12,7 @@ import React, { useEffect } from "react";
 import { get, post } from "../../../util/api.js";
 import Order from "../managerComponents/Order.jsx";
 import ReadyOrder from "./ReadyOrder.jsx";
+import { Link } from "react-router-dom";
 
 function ComponentUserOrdersReady() {
   const { user, updateUser } = useContext(UserContext);
@@ -19,6 +20,7 @@ function ComponentUserOrdersReady() {
   const [data, setData] = useState([]);
   const [error, setError] = useState();
   const [render, setRender] = useState(false);
+  const [notEnough, setNotEnough] = useState(false);
   // const [_, forceRerender] = useReducer((x) => !x, true);
 
   useEffect(() => {
@@ -30,15 +32,18 @@ function ComponentUserOrdersReady() {
   }, [user.id, render]);
 
   async function orderIsPayed(orderId, sum) {
+    if (user.balance < sum) {
+      setNotEnough(true);
+      return;
+    }
+
     const query = `userId=${user.id}&orderId=${orderId}`;
     const result = await post(environment.rest_payment + query);
     if (result.isError) {
       setError({ error: true, message: result.title });
     } else {
       // forceRerender();
-      console.log(user);
       updateUser({ ...user, orderIsReady: false, balance: user.balance - sum });
-      console.log(user);
       setRender(!render);
     }
   }
@@ -51,23 +56,33 @@ function ComponentUserOrdersReady() {
         <BoardHeader />
         {loading && <LoaderWheel />}
         {/* <UserOrdersTable orders={data} /> */}
-        <div className={styles.ordersBlock}>
-          {data &&
-            data.length > 0 &&
-            data.map((order, i) => (
-              <ReadyOrder
-                key={i}
-                order={order}
-                payed={orderIsPayed}
-                error={error?.error}
-                message={error?.message}
-                clearError={setError}
-              />
-            ))}
-          {data.length === 0 && (
-            <h3>You have no ready orders at this moment</h3>
-          )}
-        </div>
+
+        {notEnough && (
+          <div className={styles.ordersBlock}>
+            <p>You have not enough money to pay your bill.</p>
+            Please, go to your {<Link to={"/profile"}>profile page</Link>} and
+            fill your bank account to finish payment.
+          </div>
+        )}
+        {!notEnough && (
+          <div className={styles.ordersBlock}>
+            {data &&
+              data.length > 0 &&
+              data.map((order, i) => (
+                <ReadyOrder
+                  key={i}
+                  order={order}
+                  payed={orderIsPayed}
+                  error={error?.error}
+                  message={error?.message}
+                  clearError={setError}
+                />
+              ))}
+            {data.length === 0 && (
+              <h3>You have no ready orders at this moment</h3>
+            )}
+          </div>
+        )}
       </section>
     </>
   );
