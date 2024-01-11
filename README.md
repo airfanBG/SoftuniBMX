@@ -88,3 +88,42 @@
 8. <h4>Принципна диаграма на архитектурата</h4>
 
    - [Архитектура](http://yuchormanski.free.bg/bikes/high-level-dependencies.html)
+
+### 👥 Meet the Creators
+
+Connect with us on LinkedIn:
+
+[Даниел Дамянов / Daniel Damyanov ]()
+
+[Николай Ючормански / Nikolay Yuchormanski]()
+
+[Тодор Тодоров]()
+
+[Красимир Илиев]()
+
+[Георги Колев]()
+
+### 🤝 Contributing
+
+Ако харесвате нашата работа, моля, подкрепете ни като оставите звезда.
+
+<!-- If you would like to suppurt us you could do it by giving a star. -->
+
+📧 Contact Us
+Connect with us on LinkedIn:
+
+Даниел Дамянов
+
+Николай Ючормански
+
+Тодор Тодоров
+
+Красимир Илиев
+
+Георги Колев
+
+📜 Лиценз / License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+🌐 Thank you for joining us on this journey to Bike production! 🌐
