@@ -8,6 +8,8 @@ import LoaderWheel from "../../LoaderWheel.jsx";
 import { get } from "../../../util/api.js";
 import { environment } from "../../../environments/environment.js";
 
+import { User } from "@phosphor-icons/react";
+
 
 function ManagerStatistic() {
 
@@ -39,7 +41,7 @@ function ManagerStatistic() {
 
       async function getStatistics() {
         const queryString = `?startDate=${startDate}&endDate=${endDate}`;
-        const result = await get(environment.statistic_orders_part + queryString);
+        const result = await get(environment.employees_full_statistic + queryString);
         if (!result) {
           setLoading(false);
           return setError({
@@ -62,13 +64,13 @@ function ManagerStatistic() {
 
   // console.log(orderStatistics.totalIncome);
   // console.log(partStatistics.totalBestselerPartIncome);
-    console.log(resultObject);
+  console.log(resultObject);
 
   return (
     <>
 
       <h2 className={styles.dashHeading}>
-        Orders in sequence by time of creation
+        Employee statistics:
       </h2>
       <section className={styles.board}>
         <BoardHeader />
@@ -108,49 +110,101 @@ function ManagerStatistic() {
             </section>
           </div>
           <aside className={styles.block}>
-            <h3 className={styles.infoHeading}>
-              Summary information
-            </h3>
-            <p className={styles.serial}>
-              <span>Total income:</span>
-              {resultObject.orderStatistics.totalIncome}
-            </p>
-          </aside>
-          <aside className={styles.element}>
-            <h3 className={styles.infoHeading}>
-              Information about selecting date interval
-            </h3>
-            <ul className={styles.list}>
-              <li>On initial render will be displayed all available orders</li>
-              <li>
-                If select start date will limit the interval between selected
-                date and today
-              </li>
-              <li>
-                When select start and end date will be displayed only orders,
-                created in selected time interval
-              </li>
-            </ul>
+            <div>
+              <h3 className={styles.infoHeading}>
+                Summary employees statistics:
+              </h3>
+              <p className={styles.info}>
+                <span>Total worked minutes:</span>
+                {resultObject.employeeFullStatistics.totalWorkedMinutes}
+              </p>
+              <br/>
+              <p className={styles.info}>
+                <span>Total worked orders:</span>
+                {resultObject.employeeFullStatistics.totalWorkedOrders} Pcs.
+              </p>
+            </div>
+            <div>
+              <h3 className={styles.infoHeading}>
+                Information about selecting date interval
+              </h3>
+              <ul className={styles.list}>
+                <li>On initial render will be displayed all available orders</li>
+                <li>
+                  If select start date will limit the interval between selected
+                  date and today
+                </li>
+                <li>
+                  When select start and end date will be displayed only orders,
+                  created in selected time interval
+                </li>
+              </ul>
+            </div>
           </aside>
         </div>
+        <div>
+            <figure className={styles.figure}>
+              <div className={styles["imgHolder"]}>
+                {resultObject.employeeFullStatistics.proudWorkerWorkedImageUrl ? (
+                  <img
+                    className={styles.tumbs}
+                    src={resultObject.employeeFullStatistics.proudWorkerWorkedImageUrl}
+                    alt={`${resultObject.employeeFullStatistics.proudWorkerName} image`}
+                  />
+                ) : (
+                  <User
+                    size={48}
+                    color="#363636"
+                    weight="thin"
+                    className={styles.baseImg}
+                  />
+                )}
+              </div>
+
+              <section className={styles.workerInfo}>
+                <h2 className={styles.heading} >
+                  {resultObject.employeeFullStatistics.proudWorkerName}
+                </h2>
+                <div className={styles.infoBox}>
+                  <p className={`${styles.info}`}>
+                    <span>Department:</span>
+                    {resultObject.employeeFullStatistics.proudWorkerDepartment}
+                  </p>
+                  <p className={`${styles.info}`}>
+                    <span>Position:</span>
+                    {resultObject.employeeFullStatistics.proudWorkerSubDepartment}
+                  </p>
+                  <p className={`${styles.info}`}>
+                    <span>Orders:</span>
+                    {resultObject.employeeFullStatistics.proudWorkerWorkedOrders}
+                  </p>
+                  <p className={`${styles.info}`}>
+                    <span>Minutes:</span>
+                    {resultObject.employeeFullStatistics.proudWorkerWorkedMinutes}
+                  </p>
+                </div>
+              </section>
+            </figure>
+          </div>
       </section>
+      <>
+        <h2 className={styles.dashHeading}>
+          Employee statistic in selected time interval:
+        </h2>
+        <section className={styles.board}>
+          <p className={styles.serial}>
+            <span>Worked minutes:</span>
+            {resultObject.employeePeriodStatistics.totalWorkedMinutes}
+          </p>
+          <p className={styles.serial}>
+            <span>Worked orders:</span>
+            {resultObject.employeePeriodStatistics.totalWorkedOrders} Pcs.
+          </p>
 
-        <h2>There is no orders in selected time interval</h2>
-
-        <>
-          <h2 className={styles.dashHeading}>
-            Orders in sequence by time of creation
-          </h2>
-          <section className={styles.board}>
-            <p className={styles.serial}>
-              <span>Income:</span>
-              {resultObject.orderStatistics.incomeForSelectedPeriod}
-            </p>
 
 
- 
-          </section>
-        </>
+        </section>
+      </>
 
     </>
   );

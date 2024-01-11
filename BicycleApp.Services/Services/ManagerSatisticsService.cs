@@ -100,8 +100,8 @@
                 .SumAsync(x => x.Minutes);
 
 
-            var totalWorkedOrders = _db.Orders.Where(o => o.DateFinish != null
-                  && o.DateDeleted == null).Count();
+            var totalWorkedOrders = _db.OrdersPartsEmployees.Where(ope => ope.DateFinish != null
+                  && ope.DateDeleted == null).Count();
 
             var ourProudWorker = await _db.ImagesEmployees
                 .AsNoTracking()
@@ -215,7 +215,7 @@
                 EmployeeFullStatistics = await EmployeeFullStatistics(),
                 EmployeePeriodStatistics = await EmployeePeriodStatistics(datesPeriod),
             };
-
+            ;
             return result;
 
         }

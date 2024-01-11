@@ -54,6 +54,7 @@ export const environment = {
   sended_orders: "/api/manager/sended_orders",
   pay_salary: "/api/worker_management/salary",
   statistic_orders_part: "/api/manager_statistics/order_part_statistics",
+  employees_full_statistic: "/api/manager_statistics/employees_full_statistics",
 
   //SIUPLY_MANAGER
   parts_in_stock: "/api/supplys_manager/parts_in_stock?page=",
