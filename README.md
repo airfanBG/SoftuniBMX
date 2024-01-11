@@ -2,7 +2,7 @@
 
 ![hweader](https://github.com/airfanBG/SoftuniBMX/assets/693307/ca4ea5d2-f7f4-449c-b83c-59e0e1e312e8)
 
-### Резюме
+## Резюме
 
 Приложението обслужва пълната функционалност на предприятие за производство на велосипеди, както и неговото менажиране. Заводът произвежда три основни модела велосипеди, като в зависимост от избора на клиента всеки компонент може да има по няколко разновидности.
 
@@ -11,14 +11,14 @@
 
 Приложението покрива всички дейности за потребителския избор и работения процес.
 
-##### От страна на клиента
+##### 👤 От страна на клиента
 
 - избор на някой от базовите велосипеди или асемблиране на собствен модел от възможните предоставени като избор части.
 - Проследяване на поръчката до нейното завършване
 - Редактиране на клиентския профил
 - Добавяне на средства за изплащане на избрания продукт
 
-##### От страна на предприятието
+##### 🏭 От страна на предприятието
 
 - Изработване на избраната селекция и одобрение от качествен контрол
 - Проследяване на работния процес
@@ -31,12 +31,17 @@
 - Добавяне на нови доставчици
 - Извършване на нови поръчки при недостатъчна наличност на части
 
-##### Използвани технологии
+## ⚙️ Използвани технологии
 
-- Front-end - React.js, JavaScript, HTML/CSS
-- Back-end - ASP.NET, MySQL
+- Front-end
+  - React.js
+  - JavaScript
+  - HTML/CSS
+- Back-end
+  - ASP.NET
+  - MySQL
 
-## Съдържание и навигиране в приложението
+## 📃 Съдържание и навигиране в приложението
 
 1. <h4 style='text-decoration:underline'>Стартова страница</h4>
 
@@ -52,6 +57,7 @@
 
    - [Профилна страница](/FrontEndReadMeFiles/ClientFiles/Profile.md)
    - [Редактиране на профил](/FrontEndReadMeFiles/ClientFiles/EditProfile.md)
+   - ! [Банкова информация](/FrontEndReadMeFiles/ClientFiles/)
    - [Създаване на поръчка](/FrontEndReadMeFiles/ClientFiles/Order.md)
    - [Потребителска кошница](/FrontEndReadMeFiles/ClientFiles/Cart.md)
    - [Проследяване на поръчка](/FrontEndReadMeFiles/ClientFiles/TrackOrder.md)
@@ -60,70 +66,68 @@
 
 4. <h4 style='text-decoration:underline'>Служители</h4>
 
-   - [Edit profile](/FrontEndReadMeFiles/Employee/EditProfile.md)
-   - [Orders](/FrontEndReadMeFiles/Employee/EditProfile.md)
+   - [Профилна страница](/FrontEndReadMeFiles/ClientFiles/Profile.md)
+   - ! [Поръчки за отдела](/FrontEndReadMeFiles/Employee/EditProfile.md)
 
 5. <h4 style='text-decoration:underline'> Качествен контрол</h4>
+
+   - [Профилна страница](/FrontEndReadMeFiles/ClientFiles/Profile.md)
+   - ! [Одобрение на поръчки](/FrontEndReadMeFiles/Manager/NewOrders.md)
+
 6. <h4 style='text-decoration:underline'>Управител</h4>
 
-   - [New Orders](/FrontEndReadMeFiles/Manager/NewOrders.md)
-   - [Production](/FrontEndReadMeFiles/Manager/Production.md)
-   - [Finished]()
-   - [Dispatched]()
-   - [Employers](/FrontEndReadMeFiles/Manager/Employers.md)
-   - [Add Employee](/FrontEndReadMeFiles/Manager/AddEmployee.md)
-   - [Storage]()
-   - [Statistic]()
+   - ! [Нови поръчки](/FrontEndReadMeFiles/Manager/NewOrders.md)
+   - ! [В продукция](/FrontEndReadMeFiles/Manager/Production.md)
+   - ! [Завършени]()
+   - ! [Изпратени]()
+   - ! [Служители](/FrontEndReadMeFiles/Manager/Employers.md)
+   - ! [Нов служител](/FrontEndReadMeFiles/Manager/AddEmployee.md)
+   - ! [Заплати](/FrontEndReadMeFiles/Manager/)
+   - ! [Склад]()
+   - ! [Статистика]()
 
-7. <h4 style='text-decoration:underline'>Крайни точки</h4>
+<!-- 7. <h4 style='text-decoration:underline'>[Крайни точки](/ReadMeFiles_BE)</h4> -->
 
-   `Части`
+7. #### [Крайни точки](/BE_README.md)
 
-   - [Рамки](/ReadMeFiles_BE/AccountPage/Frames.md)
+8. #### [Архитектура](http://yuchormanski.free.bg/bikes/high-level-dependencies.html)
 
-   - [Избрана част](/ReadMeFiles_BE/AccountPage/SelectedPart.md)
+## 👥 Team
 
-   - [Съвместими части](/ReadMeFiles_BE/AccountPage/CompatibleParts.md)
+<img src="https://cdn-icons-png.flaticon.com/256/174/174857.png" width="15"> - Connect with us on LinkedIn:
 
-8. <h4>Принципна диаграма на архитектурата</h4>
+- [Daniel Damyanov ]()
 
-   - [Архитектура](http://yuchormanski.free.bg/bikes/high-level-dependencies.html)
+- [Nikolay Yuchormanski](www.linkedin.com/in/nikolay-yuchormanski-b34975255)
 
-### 👥 Meet the Creators
+- [Todor Todorov](https://www.linkedin.com/in/тодор-тодоров-178aaa263/)
 
-Connect with us on LinkedIn:
+- [Krasimir Iliev]()
 
-[Даниел Дамянов / Daniel Damyanov ]()
-
-[Николай Ючормански / Nikolay Yuchormanski]()
-
-[Тодор Тодоров]()
-
-[Красимир Илиев]()
-
-[Георги Колев]()
+- [Georgi Kolev]()
 
 ### 🤝 Contributing
 
 Ако харесвате нашата работа, моля, подкрепете ни като оставите звезда.
 
-<!-- If you would like to suppurt us you could do it by giving a star. -->
+If you would like to suppurt us you could do it by giving a star.
 
-📧 Contact Us
-Connect with us on LinkedIn:
+### 📧 Contact Us
 
-Даниел Дамянов
+- [Даниел Дамянов]()
 
-Николай Ючормански
+- Nikolay Yuchormanski - [yuchormanski@gmail.com](mailto:yuchormanski@gmail.com)
 
-Тодор Тодоров
+- Todor Todorov - [t.todorov135@gmail.com,](mailto:t.todorov135@gmail.com)
 
-Красимир Илиев
+- [Krasimir Iliev]()
 
-Георги Колев
+- [Georgi Kolev]()
 
-📜 Лиценз / License
+### 📜 Лиценз / License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+- <img src="https://flagpedia.net/data/flags/h120/bg.webp" width="20"> - Този проект е лицензиран съгласно MIT лиценз. Вижте лицензния файл за подробности.
+
+- <img src="https://flagpedia.net/data/flags/w580/gb.webp" width="20" /> - This project is licensed under the MIT License. See the LICENSE file for details.
 
 🌐 Thank you for joining us on this journey to Bike production! 🌐
