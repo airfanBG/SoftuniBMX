@@ -102,7 +102,7 @@
 
 - [Todor Todorov](https://www.linkedin.com/in/тодор-тодоров-178aaa263/)
 
-- [Krasimir Iliev]()
+- [Krasimir Iliev](https://www.linkedin.com/in/krasimir-iliev-bb4189238/)
 
 - [Georgi Kolev]()
 
