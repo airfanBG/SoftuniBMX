@@ -7,6 +7,7 @@ import LoaderWheel from "../../LoaderWheel.jsx";
 import { get } from "../../../util/api.js";
 
 import { User } from "@phosphor-icons/react";
+import { formatCurrency } from "../../../util/resolvers.js";
 
 function OrderPartStatistic() {
   const [error, setError] = useState({});
@@ -138,9 +139,7 @@ function OrderPartStatistic() {
           </aside>
         </div>
         <div>
-          <h3 className={styles.infoHeading}>
-            Best seler part:
-          </h3>
+          <h3 className={styles.infoHeading}>Best seler part:</h3>
           <figure className={styles.figure}>
             <div className={styles["imgHolder"]}>
               {resultObject.partTotalStatistics?.partName ? (
@@ -159,7 +158,7 @@ function OrderPartStatistic() {
               )}
             </div>
             <section className={styles.workerInfo}>
-              <h2 className={styles.heading} >
+              <h2 className={styles.heading}>
                 {resultObject.employeeFullStatistics?.proudWorkerName}
               </h2>
               <p className={`${styles.info}`}>
@@ -201,7 +200,6 @@ function OrderPartStatistic() {
             Pcs.
           </p>
 
-
           <div>
             <h3 className={styles.infoHeading}>
               Best seler part for selected period:
@@ -224,7 +222,7 @@ function OrderPartStatistic() {
                 )}
               </div>
               <section className={styles.workerInfo}>
-                <h2 className={styles.heading} >
+                <h2 className={styles.heading}>
                   {resultObject.partPeriodStatistics?.proudWorkerName}
                 </h2>
                 <p className={`${styles.info}`}>
