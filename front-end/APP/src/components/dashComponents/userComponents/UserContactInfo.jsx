@@ -5,6 +5,7 @@ import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 import ContactInfoElement from "../ContactInfoElement.jsx";
 import { userInfo } from "../../../userServices/userService.js";
 import { formatCurrency } from "../../../util/resolvers.js";
+import CreditCard from "../../CreditCard.jsx";
 
 function UserContactInfo({ info, addMoneyBtnHandler }) {
   const { user } = useContext(UserContext);
@@ -18,10 +19,11 @@ function UserContactInfo({ info, addMoneyBtnHandler }) {
   const [isAccount, setIsAccount] = useState(false);
 
   function onAddAmountHandler(e) {
-    e.preventDefault();
-    if (amount < 1 || amount === "") return;
-    addMoneyBtnHandler(amount);
-    setAmount("");
+    // e.preventDefault();
+    // if (amount < 1 || amount === "") return;
+    // console.log(e.target.value);
+    // addMoneyBtnHandler(amount);
+    // setAmount("");
   }
 
   function switcher(panel) {
@@ -145,7 +147,7 @@ function UserContactInfo({ info, addMoneyBtnHandler }) {
 
           {isAccount && (
             <div className={styles.formContainer}>
-              <form onSubmit={onAddAmountHandler} className={styles.form}>
+              {/* <form onSubmit={onAddAmountHandler} className={styles.form}>
                 <div className={styles.formContainer}>
                   <label htmlFor="" className={styles.labelInput}>
                     card number
@@ -198,7 +200,8 @@ function UserContactInfo({ info, addMoneyBtnHandler }) {
                 </div>
 
                 <button className={styles.amountBtn}>Add to balance</button>
-              </form>
+              </form> */}
+              <CreditCard amountBtnHandler={onAddAmountHandler} />
             </div>
           )}
 
