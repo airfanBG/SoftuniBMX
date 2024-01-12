@@ -106,12 +106,12 @@ function OrderPartStatistic() {
               <h3 className={styles.infoHeading}>Summary information</h3>
               <p className={styles.info}>
                 <span>Total income:</span>
-                {/* {!formatCurrency(
+                {!formatCurrency(
                   resultObject.orderStatistics?.totalIncome
                 ).includes("NaN")
                   ? formatCurrency(resultObject.orderStatistics?.totalIncome)
-                  : formatCurrency(0)} */}
-                {resultObject.orderStatistics?.totalIncome} BGN
+                  : formatCurrency(0)}
+                {/* {resultObject.orderStatistics?.totalIncome} BGN */}
               </p>
               <p className={styles.info}>
                 <span>Total sended orders:</span>
@@ -176,7 +176,12 @@ function OrderPartStatistic() {
                 </p>
                 <p className={`${styles.info}`}>
                   <span>Income:</span>
-                  {resultObject.partTotalStatistics?.partIncome} BGN
+                  {!formatCurrency(
+                  resultObject.orderStatistics?.totalIncome
+                ).includes("NaN")
+                  ? formatCurrency(resultObject.partTotalStatistics?.partIncome)
+                  : formatCurrency(0)}
+                  {/* {resultObject.partTotalStatistics?.partIncome} BGN */}
                 </p>
               </div>
             </section>
@@ -190,7 +195,12 @@ function OrderPartStatistic() {
         <section className={styles.board}>
           <p className={styles.info}>
             <span>Total income:</span>
-            {resultObject.orderStatistics?.incomeForSelectedPeriod} BGN
+            {!formatCurrency(
+                  resultObject.orderStatistics?.totalIncome
+                ).includes("NaN")
+                  ? formatCurrency(resultObject.orderStatistics?.incomeForSelectedPeriod)
+                  : formatCurrency(0)}
+            {/* {resultObject.orderStatistics?.incomeForSelectedPeriod} BGN */}
           </p>
           <p className={styles.info}>
             <span>Total sended orders:</span>
@@ -240,7 +250,12 @@ function OrderPartStatistic() {
                   </p>
                   <p className={`${styles.info}`}>
                     <span>Income:</span>
-                    {resultObject.partPeriodStatistics?.partIncome} BGN
+                    {!formatCurrency(
+                  resultObject.orderStatistics?.totalIncome
+                ).includes("NaN")
+                  ? formatCurrency(resultObject.partPeriodStatistics?.partIncome)
+                  : formatCurrency(0)}
+                    {/* {resultObject.partPeriodStatistics?.partIncome} BGN */}
                   </p>
                 </div>
               </section>

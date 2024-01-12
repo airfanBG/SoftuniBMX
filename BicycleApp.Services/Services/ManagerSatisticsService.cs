@@ -2,19 +2,14 @@
 {
     using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Data;
-    using BicycleApp.Data.Models.EntityModels;
-    using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.HelperClasses.Contracts;
     using BicycleApp.Services.Models;
     using BicycleApp.Services.Models.ManagerStatistics;
     using BicycleApp.Services.Models.Order.OrderManager;
-    using BicycleApp.Services.Services.Image;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.Query;
     using System.Linq;
     using System.Threading.Tasks;
-    using System.Xaml.Permissions;
 
     using static BicycleApp.Common.UserConstants;
 
@@ -66,61 +61,19 @@
             return pastAndCurrentEmployeeWorkingMinutes;
         }
 
-
         public async Task<StatisticEmployeeDto> EmployeeFullStatistics(string httpScheme, string httpHost, string httpPathBase)
         {
-            //BestWorker(without descriptions from QA with max worked time)
-            var bestWorker = await _db.OrdersPartsEmployeesInfos
-                .AsNoTracking()
-                .Include(ope => ope.OrderPartEmployee)
-                .Where(ope => ope.OrderPartEmployee.DateFinish != null
-                            && ope.OrderPartEmployee.DateDeleted == null)
-                .Where(opei => opei.DescriptionForWorker == null)
-                .GroupBy(opei => opei.OrderPartEmployee.Part.CategoryId)
-                .Select(group => new
-                {
-                    PartCategoryId = group.Key,
-                    WorkedTime = group.Select(x => x.ProductionТime.Minutes).Sum(),
-                    WorkedOrdersCount = group.Select(x => x.OrderId).Count(),
-                })
-                .OrderByDescending(group => group.WorkedTime)
-                .Take(1)
-                .FirstAsync();
+            var bestWorker = await GetBestWorkerAsync();
 
-            var bestEmployeeId = await _db.Parts
-                .AsNoTracking()
-                .Where(p => p.CategoryId == bestWorker.PartCategoryId)
-                .Select(p => p.OrdersPartsEmployees.Select(ope => ope.EmployeeId))
-                .Take(1)
-                .FirstAsync();
+            var bestEmployeeId = await GetBestEmployeeIdAsync(bestWorker.PartCategoryId);
 
-            string bestEmployeId = bestEmployeeId.FirstOrDefault();
+            var totalWorkedMinutes = await GetTotalWorkedMinutesAsync();
 
+            var totalWorkedOrders = await GetTotalWorkedOrdersAsync();
 
-            var totalWorkedMinutes = await _db.OrdersPartsEmployees
-                .AsNoTracking()
-                .Include(opei => opei.OrdersPartsEmployeesInfos)
-                .Where(ope => ope.DateFinish != null
-                            && ope.DateDeleted == null)
-                .SelectMany(x => x.OrdersPartsEmployeesInfos.Select(x => x.ProductionТime))
-                .SumAsync(x => x.Minutes);
+            var ourProudWorker = await GetOurProudWorkerAsync(bestEmployeeId, httpScheme, httpHost, httpPathBase);
 
-
-            var totalWorkedOrders = _db.OrdersPartsEmployees.Where(ope => ope.DateFinish != null
-                  && ope.DateDeleted == null).Count();
-
-            var ourProudWorker = await _db.ImagesEmployees
-                .AsNoTracking()
-                .Include(x => x.Employee)
-                .Where(x => x.UserId == bestEmployeId)
-                .Select(x => new
-                {
-                    Name = _stringManipulator.ReturnFullName(x.Employee.FirstName, x.Employee.LastName),
-                    DepartmentName = x.Employee.Department.Name,
-                    EmployeeImgUrl = _imageStore.GetUserImage(bestEmployeId.ToString(), EMPLOYEE, httpScheme, httpHost, httpPathBase).Result
-                }).FirstAsync();
-
-            var subDepartmentName = await _db.Parts.Where(p => p.CategoryId == bestWorker.PartCategoryId).Select(x => x.Category.Name).FirstAsync();
+            var subDepartmentName = await GetSubDepartmentNameAsync(bestWorker.PartCategoryId);
 
             var employeeFullStatistics = new StatisticEmployeeDto()
             {
@@ -137,16 +90,13 @@
             return employeeFullStatistics;
         }
 
-        public async Task<StatisticEmployeeDto> EmployeePeriodStatistics(FinishedOrdersDto datesPeriod, string httpScheme, string httpHost, string httpPathBase)
+        private async Task<dynamic> GetBestWorkerAsync()
         {
-            //BestWorkerForPeriod
-            var bestPeriodWorker = await _db.OrdersPartsEmployeesInfos
+            return await _db.OrdersPartsEmployeesInfos
                 .AsNoTracking()
                 .Include(ope => ope.OrderPartEmployee)
-                .Where(ope => ope.OrderPartEmployee.DateCreated >= datesPeriod.StartDate
-                       && ope.OrderPartEmployee.DateFinish <= datesPeriod.EndDate.AddDays(1)
-                       && ope.OrderPartEmployee.DateFinish != null
-                       && ope.OrderPartEmployee.DateDeleted == null)
+                .Where(ope => ope.OrderPartEmployee.DateFinish != null
+                              && ope.OrderPartEmployee.DateDeleted == null)
                 .Where(opei => opei.DescriptionForWorker == null)
                 .GroupBy(opei => opei.OrderPartEmployee.Part.CategoryId)
                 .Select(group => new
@@ -158,46 +108,74 @@
                 .OrderByDescending(group => group.WorkedTime)
                 .Take(1)
                 .FirstAsync();
+        }
 
-            var periodWorkedMinutes = await _db.OrdersPartsEmployees
+        private async Task<string> GetBestEmployeeIdAsync(int partCategoryId)
+        {
+            var bestEmployeeId = await _db.Parts
                 .AsNoTracking()
-                .Include(opei => opei.OrdersPartsEmployeesInfos)
-                .Where(ope => ope.DateCreated >= datesPeriod.StartDate
-                       && ope.DateFinish <= datesPeriod.EndDate.AddDays(1)
-                       && ope.DateFinish != null
-                       && ope.DateDeleted == null)
-                .Where(ope => ope.DateFinish != null
-                            && ope.DateDeleted == null)
-                .SelectMany(x => x.OrdersPartsEmployeesInfos.Select(x => x.ProductionТime))
-                .SumAsync(x => x.Minutes);
-
-            var periodEmployeeId = await _db.Parts
-                .AsNoTracking()
-                .Where(p => p.CategoryId == bestPeriodWorker.PartCategoryId)
-                .Select(x => x.OrdersPartsEmployees.Select(x => x.EmployeeId))
+                .Where(p => p.CategoryId == partCategoryId)
+                .Select(p => p.OrdersPartsEmployees.Select(ope => ope.EmployeeId))
+                .Take(1)
                 .FirstAsync();
 
-            string periodEmployeId = periodEmployeeId.FirstOrDefault();
+            return bestEmployeeId.FirstOrDefault();
+        }
 
-            var periodWorkedOrders = _db.Orders
-                .Where(o => o.DateCreated >= datesPeriod.StartDate
-                && o.DateFinish <= datesPeriod.EndDate.AddDays(1)
-                && o.DateFinish != null
-                && o.DateDeleted == null).Count();
-
-            var ourPeriodWorker = await _db.ImagesEmployees
+        private async Task<int> GetTotalWorkedMinutesAsync()
+        {
+            return await _db.OrdersPartsEmployees
                 .AsNoTracking()
-                .Include(x => x.Employee)
-                .Where(ie => ie.UserId == periodEmployeId.ToString())
+                .Include(opei => opei.OrdersPartsEmployeesInfos)
+                .Where(ope => ope.DateFinish != null
+                              && ope.DateDeleted == null)
+                .SelectMany(x => x.OrdersPartsEmployeesInfos.Select(x => x.ProductionТime))
+                .SumAsync(x => x.Minutes);
+        }
+
+        private async Task<int> GetTotalWorkedOrdersAsync()
+        {
+            return await _db.OrdersPartsEmployees
+                .Where(ope => ope.DateFinish != null
+                              && ope.DateDeleted == null)
+                .CountAsync();
+        }
+
+        private async Task<dynamic> GetOurProudWorkerAsync(string bestEmployeeId, string httpScheme, string httpHost, string httpPathBase)
+        {
+            return await _db.Employees
+                .AsNoTracking()
+                .Where(x => x.Id == bestEmployeeId)
                 .Select(x => new
                 {
-                    Name = _stringManipulator.ReturnFullName(x.Employee.FirstName, x.Employee.LastName),
-                    DepartmentName = x.Employee.Department.Name,
-                    EmployeeImgUrl = _imageStore.GetUserImage(periodEmployeId.ToString(), EMPLOYEE, httpScheme, httpHost, httpPathBase).Result
-                }).FirstAsync();
+                    Name = _stringManipulator.ReturnFullName(x.FirstName, x.LastName),
+                    DepartmentName = x.Department.Name,
+                    EmployeeImgUrl = _imageStore.GetUserImage(bestEmployeeId.ToString(), EMPLOYEE, httpScheme, httpHost, httpPathBase).Result
+                })
+                .FirstAsync();
+        }
 
+        private async Task<string> GetSubDepartmentNameAsync(int partCategoryId)
+        {
+            return await _db.Parts
+                .Where(p => p.CategoryId == partCategoryId)
+                .Select(x => x.Category.Name)
+                .FirstAsync();
+        }
 
-            var subDepartmentPeriodName = await _db.Parts.Where(p => p.CategoryId == bestPeriodWorker.PartCategoryId).Select(x => x.Category.Name).FirstAsync();
+        public async Task<StatisticEmployeeDto> EmployeePeriodStatistics(FinishedOrdersDto datesPeriod, string httpScheme, string httpHost, string httpPathBase)
+        {
+            var bestPeriodWorker = await GetBestPeriodWorkerAsync(datesPeriod);
+
+            var periodWorkedMinutes = await GetPeriodWorkedMinutesAsync(datesPeriod);
+
+            var periodEmployeeId = await GetPeriodEmployeeIdAsync(bestPeriodWorker.PartCategoryId);
+
+            var periodWorkedOrders = await GetPeriodWorkedOrdersAsync(datesPeriod);
+
+            var ourPeriodWorker = await GetOurPeriodWorkerAsync(periodEmployeeId, httpScheme, httpHost, httpPathBase);
+
+            var subDepartmentPeriodName = await GetSubDepartmentPeriodNameAsync(bestPeriodWorker.PartCategoryId);
 
             var employeePeriodStatistics = new StatisticEmployeeDto()
             {
@@ -214,6 +192,86 @@
             return employeePeriodStatistics;
         }
 
+        private async Task<dynamic> GetBestPeriodWorkerAsync(FinishedOrdersDto datesPeriod)
+        {
+            return await _db.OrdersPartsEmployeesInfos
+                .AsNoTracking()
+                .Include(ope => ope.OrderPartEmployee)
+                .Where(ope => ope.OrderPartEmployee.DateCreated >= datesPeriod.StartDate
+                    && ope.OrderPartEmployee.DateFinish <= datesPeriod.EndDate.AddDays(1)
+                    && ope.OrderPartEmployee.DateFinish != null
+                    && ope.OrderPartEmployee.DateDeleted == null)
+                .Where(opei => opei.DescriptionForWorker == null)
+                .GroupBy(opei => opei.OrderPartEmployee.Part.CategoryId)
+                .Select(group => new
+                {
+                    PartCategoryId = group.Key,
+                    WorkedTime = group.Select(x => x.ProductionТime.Minutes).Sum(),
+                    WorkedOrdersCount = group.Select(x => x.OrderId).Count(),
+                })
+                .OrderByDescending(group => group.WorkedTime)
+                .Take(1)
+                .FirstAsync();
+        }
+
+        private async Task<int> GetPeriodWorkedMinutesAsync(FinishedOrdersDto datesPeriod)
+        {
+            return await _db.OrdersPartsEmployees
+                .AsNoTracking()
+                .Include(opei => opei.OrdersPartsEmployeesInfos)
+                .Where(ope => ope.DateCreated >= datesPeriod.StartDate
+                    && ope.DateFinish <= datesPeriod.EndDate.AddDays(1)
+                    && ope.DateFinish != null
+                    && ope.DateDeleted == null)
+                .Where(ope => ope.DateFinish != null && ope.DateDeleted == null)
+                .SelectMany(x => x.OrdersPartsEmployeesInfos.Select(x => x.ProductionТime))
+                .SumAsync(x => x.Minutes);
+        }
+
+        private async Task<string> GetPeriodEmployeeIdAsync(int partCategoryId)
+        {
+            var periodEmployeeId = await _db.Parts
+                .AsNoTracking()
+                .Where(p => p.CategoryId == partCategoryId)
+                .Select(x => x.OrdersPartsEmployees.Select(x => x.EmployeeId))
+                .FirstAsync();
+
+            return periodEmployeeId.FirstOrDefault();
+        }
+
+        private async Task<int> GetPeriodWorkedOrdersAsync(FinishedOrdersDto datesPeriod)
+        {
+            return await _db.Orders
+                .Where(o => o.DateCreated >= datesPeriod.StartDate
+                    && o.DateFinish <= datesPeriod.EndDate.AddDays(1)
+                    && o.DateFinish != null
+                    && o.DateDeleted == null)
+                .CountAsync();
+        }
+
+        private async Task<dynamic> GetOurPeriodWorkerAsync(string periodEmployeeId, string httpScheme, string httpHost, string httpPathBase)
+        {
+            return await _db.Employees
+                .AsNoTracking()
+                .Where(e => e.Id == periodEmployeeId)
+                .Select(x => new
+                {
+                    Name = _stringManipulator.ReturnFullName(x.FirstName, x.LastName),
+                    DepartmentName = x.Department.Name,
+                    EmployeeImgUrl = _imageStore.GetUserImage(periodEmployeeId, EMPLOYEE, httpScheme, httpHost, httpPathBase).Result
+                })
+                .FirstAsync();
+        }
+
+        private async Task<string> GetSubDepartmentPeriodNameAsync(int partCategoryId)
+        {
+            return await _db.Parts
+                .Where(p => p.CategoryId == partCategoryId)
+                .Select(x => x.Category.Name)
+                .FirstAsync();
+        }
+
+       
         public async Task<EmployeeStatisticsDto> GetEmployeesStatistics(FinishedOrdersDto datesPeriod, string httpScheme, string httpHost, string httpPathBase)
         {
 
@@ -229,29 +287,27 @@
 
         public async Task<OrderStatisticDto> GetOrderStatistics(FinishedOrdersDto datesPeriod)
         {
-            return await _db.Orders
-                .AsNoTracking()
-                .Select(o => new OrderStatisticDto
-                {
-                    TotalIncome = _db.Orders.Where(o=>o.DateFinish != null
-                                     && o.DateSended != null
-                                     && o.DateDeleted == null).Sum(o => o.SaleAmount),
-                    TotalSendedOrdersCount = _db.Orders.Where(o=>o.DateFinish != null
-                                     && o.DateSended != null
-                                     && o.DateDeleted == null).Count(),
-                    IncomeForSelectedPeriod = _db.Orders.Where(o => o.DateCreated >= datesPeriod.StartDate
-                                     && o.DateFinish <= datesPeriod.EndDate.AddDays(1)
-                                     && o.DateFinish != null
-                                     && o.DateSended != null
-                                     && o.DateDeleted == null).Sum(o => o.SaleAmount),
-                    SendedOrdersCountForSelectedPeriod = _db.Orders.Where(o => o.DateCreated >= datesPeriod.StartDate
-                                     && o.DateFinish <= datesPeriod.EndDate.AddDays(1)
-                                     && o.DateFinish != null
-                                     && o.DateSended != null
-                                     && o.DateDeleted == null).Count()
-                })
-                .FirstAsync();
+            var totalIncomeQuery = _db.Orders
+                .Where(o => o.DateFinish != null
+                            && o.DateSended != null
+                            && o.DateDeleted == null);
 
+            var incomeForSelectedPeriodQuery = _db.Orders
+                .Where(o => o.DateCreated >= datesPeriod.StartDate
+                            && o.DateFinish <= datesPeriod.EndDate.AddDays(1)
+                            && o.DateFinish != null
+                            && o.DateSended != null
+                            && o.DateDeleted == null);
+
+            var orderStatisticDto = new OrderStatisticDto
+            {
+                TotalIncome = await totalIncomeQuery.SumAsync(o => o.SaleAmount),
+                TotalSendedOrdersCount = await totalIncomeQuery.CountAsync(),
+                IncomeForSelectedPeriod = await incomeForSelectedPeriodQuery.SumAsync(o => o.SaleAmount),
+                SendedOrdersCountForSelectedPeriod = await incomeForSelectedPeriodQuery.CountAsync()
+            };
+
+            return orderStatisticDto;
         }
 
         public async Task<PartStatisticDto> GetTotalPartStatistics()
