@@ -2,6 +2,7 @@
 {
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.Models.Rating;
+
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/rate")]
@@ -15,43 +16,43 @@
         }
 
         [HttpPost]
-        [Route("rate")]
+        [Route("set_rate")]
         public async Task<IActionResult> SetRating([FromBody] RatingDto rating)
         {
-           var result = await _ratingService.SetRating(rating);
+            var result = await _ratingService.SetRating(rating);
             if (result)
             {
                 return Ok();
             }
-            return StatusCode(500);            
+            return StatusCode(500);
         }
 
         [HttpGet]
-        [Route("rate")]
-        public async Task<ActionResult<double>> GetRate([FromQuery] int partId)
+        [Route("get_rate")]
+        public async Task<ActionResult<bool>> GetRate([FromQuery] int partId, [FromQuery] string clientId)
         {
-            var result = await _ratingService.GetAverageRatePerPart(partId);
-            if (result>=0)
+            var result = await _ratingService.ClientRateExists(partId, clientId);
+            if (result)
             {
                 return Ok(result);
             }
             return StatusCode(500);
         }
 
-        [HttpPatch]
-        [Route("rate")]
+        [HttpPut]
+        [Route("update_rate")]
         public async Task<IActionResult> UpdateRating([FromBody] RatingDto rating)
         {
             var result = await _ratingService.UpdateRating(rating);
             if (result)
             {
-                return Ok();
+                return Ok(true);
             }
             return StatusCode(500);
         }
 
         [HttpDelete]
-        [Route("rate")]
+        [Route("delete_rate")]
         public async Task<IActionResult> RemoveRating([FromBody] RatingDto rating)
         {
             var result = await _ratingService.RemoveRating(rating);

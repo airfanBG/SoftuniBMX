@@ -8,7 +8,11 @@
     {
         Task<PastAndCurrentEmployeeWorkingMinutesDto> GetEmployeeOutputForThePastAndCurrentMonth(string employeeId);
         Task<OrderStatisticDto> GetOrderStatistics(FinishedOrdersDto datesPeriod);
-        Task<PartStatisticDto> GetPartStatistics(FinishedOrdersDto datesPeriod);
+        Task<PartStatisticDto> GetPeriodPartStatistics(FinishedOrdersDto datesPeriod);
+        Task<PartStatisticDto> GetTotalPartStatistics();
         Task<StatisticsDto> GetStatistics(FinishedOrdersDto datesPeriod);
+        Task<StatisticEmployeeDto> EmployeeFullStatistics(string httpScheme, string httpHost, string httpPathBase);
+        Task<StatisticEmployeeDto> EmployeePeriodStatistics(FinishedOrdersDto datesPeriod, string httpScheme, string httpHost, string httpPathBase);
+        Task<EmployeeStatisticsDto> GetEmployeesStatistics(FinishedOrdersDto datesPeriod, string httpScheme, string httpHost, string httpPathBase);
     }
 }

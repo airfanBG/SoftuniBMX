@@ -1,57 +1,16 @@
-import React, { useState, useContext } from "react";
-import { UserContext } from "../../../context/GlobalUserProvider.jsx";
+import React, { useState } from "react";
 import styles from "./UserOrdersTable.module.css";
 import Popup from "../../Popup";
 import { get } from "../../../util/api";
 import ComponentUserOrderInfo from "./ComponentUserOrdersInfo";
 import { environment } from "../../../environments/environment.js";
+import { useNavigate } from "react-router-dom";
 
 function UserOrdersTable({ orders }) {
   const [background, setBackground] = useState(false);
-  const [background2, setBackground2] = useState(false);
-  const [background3, setBackground3] = useState(false);
+
   const [data, setData] = useState({});
-  const [comment, setComment] = useState({});
-  const { user } = useContext(UserContext);
-
-  //View Part
-  function viewPart(partId) {
-    async function getData(partId) {
-      const result = await get(environment.find_part + partId);
-      result.images = Array.from(result.images);
-      setData(result);
-      getComment(partId, user.id);
-    }
-    async function getComment(partId, clientId) {
-      try {
-        const result = await get(
-          environment.find_comment + clientId + `&partId=${partId}`
-        );
-
-        if (result === null) {
-          console.log(result);
-        } else {
-          setComment(result);
-        }
-      } catch {
-        console.error("error");
-      }
-    }
-    getData(partId);
-    setBackground2(true);
-  }
-
-  function close2() {
-    setBackground2(false);
-  }
-
-  function close3() {
-    setBackground3(false);
-  }
-
-  function viewComment() {
-    setBackground3(true);
-  }
+  const navigate = useNavigate();
 
   //Order View
   function viewOrder(orderId) {
@@ -72,60 +31,6 @@ function UserOrdersTable({ orders }) {
       {background && (
         <Popup onClose={close}>
           <ComponentUserOrderInfo data={data} />
-        </Popup>
-      )}
-      {background2 && (
-        <Popup onClose={close2}>
-          <div className={styles.partContainer}>
-            <h2>{data.name}</h2>
-            <div>
-              {data.images &&
-                data.images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={image}
-                    alt={`Part Image ${index + 1}`}
-                    style={{ maxWidth: "300px", marginRight: "10px" }}
-                  />
-                ))}
-            </div>
-            <p>
-              Description: <span>{data.description}</span>
-            </p>
-            <p>
-              Intend: <span>{data.intend}</span>
-            </p>
-            <p>
-              OEM Number: <span>{data.oemNumber}</span>
-            </p>
-            <p>
-              Type: <span>{data.type}</span>
-            </p>
-            <p>
-              Category: <span>{data.category}</span>
-            </p>
-            <p>
-              Sale Price: <span>{data.salePrice}</span>
-            </p>
-          </div>
-          <p
-            className={styles.view}
-            onClick={(e) => {
-              e.preventDefault();
-              viewComment();
-            }}
-          >
-            View Comment
-          </p>
-          {background3 && (
-            <Popup onClose={close3}>
-              <div className={styles.comment}>
-                <p className={styles.commentTitle}>{comment.title}</p>
-                <p className={styles.commentText}>{comment.description}</p>
-                <p>Edit</p>
-              </div>
-            </Popup>
-          )}
         </Popup>
       )}
       <table className={styles.table}>
@@ -162,7 +67,7 @@ function UserOrdersTable({ orders }) {
                         href="#"
                         onClick={(e) => {
                           e.preventDefault();
-                          viewPart(part.id);
+                          navigate(`/app/part/${part.id}`);
                         }}
                       >
                         View Part

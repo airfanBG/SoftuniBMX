@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/GlobalUserProvider.jsx";
 
 import { v4 as uuidv4 } from "uuid"; //unique ID
-import { imageResolver } from "../../util/resolvers.js";
+// import { imageResolver } from "../../util/resolvers.js";
 import Images from "./Images.jsx";
 
 const initialState = {

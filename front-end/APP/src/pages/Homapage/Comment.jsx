@@ -2,14 +2,21 @@ import { Link } from "react-router-dom";
 import styles from "./Comment.module.css";
 
 function Comment({ comment }) {
+  const userImg = comment.clientImageUrl;
+
+  const onImageError = (e) => {
+    e.target.src = "/img/icons8-user-64.png";
+  };
   return (
     <figure className={styles.comment}>
       <div className={`${styles["user"]} ${styles["m-bottom-20"]}`}>
         <img
-          src={comment.clientImageUrl}
+          src={userImg ? userImg : "/img/icons8-user-64.png"}
           alt="user photo"
           className={styles.avatar}
+          onError={onImageError}
         />
+
         <div className={styles.header}>
           <div>
             <p className={styles["user-name"]}>{comment.clientFullName}</p>
@@ -19,8 +26,12 @@ function Comment({ comment }) {
           </div>
 
           <p className={styles.commentedPart}>
-            <Link to={"#"} alt="Part, commented by user">
-              {comment.partId}
+            <Link
+              to={`/app/part/${comment.partId}`}
+              alt="Part, commented by user"
+            >
+              {comment.partName}
+              {/* {comment.partId} */}
             </Link>
           </p>
         </div>

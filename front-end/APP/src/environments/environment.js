@@ -32,7 +32,8 @@ export const environment = {
   worker_order_start: "/api/employee_order/start",
   worker_order_end: "/api/employee_order/end",
   worker_order: "/api/employee_order/",
-  worker_times: "/api/manager_statistics?employeeId=",
+  // worker_times: "/api/manager_statistics?employeeId=",
+  worker_times: "/api/manager_statistics/employee_statistics?employeeId=",
   worker_get_salary: "/api/employee/get_salary?employeeId=",
 
   // QUALITY_CONTROL
@@ -53,6 +54,7 @@ export const environment = {
   sended_orders: "/api/manager/sended_orders",
   pay_salary: "/api/worker_management/salary",
   statistic_orders_part: "/api/manager_statistics/order_part_statistics",
+  employees_full_statistic: "/api/manager_statistics/employees_full_statistics",
 
   //SIUPLY_MANAGER
   parts_in_stock: "/api/supplys_manager/parts_in_stock?page=",
@@ -71,5 +73,10 @@ export const environment = {
   find_part: "/api/part/find?partId=", // + id
 
   //COMMENT
-  find_comment: "/api/comment/find?clientId=",// + clientId + &partId=partId
+  find_comment: "/api/comment/find?clientId=", // + clientId + &partId=partId
+
+  //RATE
+  get_client_rate: "/api/rate/get_rate?partId=", // + partId + &clientId=clientId
+  set_client_rate: "/api/rate/set_rate", 
+  update_client_rate: "/api/rate/update_rate",
 };

@@ -5,7 +5,9 @@
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Models.Rating.Contracts;
+
     using Microsoft.EntityFrameworkCore;
+
     using System.Threading.Tasks;
 
     public class RatingService : IRatingService
@@ -21,22 +23,35 @@
             _dateTimeProvider = dateTimeProvider;
         }
 
+        public async Task<bool> ClientRateExists(int partId, string clientId)
+        {
+            var rate = await _db.Rates
+                .FirstOrDefaultAsync(r => r.PartId == partId && r.ClientId == clientId);
+
+            if (rate == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public async Task<double> GetAverageRatePerPart(int partId)
         {
             return await _db.Rates
                             .AsNoTracking()
-                            .Where(r => r.PartId == partId 
+                            .Where(r => r.PartId == partId
                                         && r.IsDeleted == false)
-                            .AverageAsync(r=>r.Rating);
+                            .AverageAsync(r => r.Rating);
         }
 
         public async Task<bool> RemoveRating(IRatingDto ratingInfo)
         {
             try
             {
-                var rating = await _db.Rates.FirstAsync(r => r.ClientId == ratingInfo.ClientId 
-                                                             && r.PartId == ratingInfo.PartId 
-                                                             && r.DateDeleted == null 
+                var rating = await _db.Rates.FirstAsync(r => r.ClientId == ratingInfo.ClientId
+                                                             && r.PartId == ratingInfo.PartId
+                                                             && r.DateDeleted == null
                                                              && r.IsDeleted == false);
                 rating.DateDeleted = _dateTimeProvider.Now;
                 rating.IsDeleted = true;

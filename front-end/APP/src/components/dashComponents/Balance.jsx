@@ -5,6 +5,7 @@ import { formatCurrency } from "../../util/resolvers.js";
 
 function Balance() {
   const { user } = useContext(UserContext);
+
   return (
     <>
       <span>Balance: </span>
