@@ -105,12 +105,12 @@ function OrderPartStatistic() {
               <h3 className={styles.infoHeading}>Summary information</h3>
               <p className={styles.info}>
                 <span>Total income:</span>
-                {!formatCurrency(
+                {/* {!formatCurrency(
                   resultObject.orderStatistics?.totalIncome
                 ).includes("NaN")
                   ? formatCurrency(resultObject.orderStatistics?.totalIncome)
-                  : formatCurrency(0)}
-                {/* {resultObject.orderStatistics?.totalIncome} BGN */}
+                  : formatCurrency(0)} */}
+                {resultObject.orderStatistics?.totalIncome} BGN
               </p>
               <p className={styles.info}>
                 <span>Total sended orders:</span>
@@ -186,7 +186,7 @@ function OrderPartStatistic() {
       </section>
 
       <>
-        <h2 className={styles.listHeading}>Orders in selected time interval</h2>
+        <h2 className={styles.infoHeading}>Orders in selected time interval:</h2>
 
         <section className={styles.board}>
           <p className={styles.info}>
