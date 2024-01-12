@@ -46,7 +46,7 @@
             var result = await _ratingService.UpdateRating(rating);
             if (result)
             {
-                return Ok();
+                return Ok(true);
             }
             return StatusCode(500);
         }

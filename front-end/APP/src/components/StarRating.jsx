@@ -17,6 +17,7 @@ export default function StarsRating({
   className = "",
   defaultRating = 0,
   onSetRating,
+  submitRating,
 }) {
   const [rating, setRating] = useState(defaultRating);
   const [tempRating, setTempRating] = useState(0);
@@ -24,6 +25,7 @@ export default function StarsRating({
   function handleRating(rating) {
     setRating(rating);
     onSetRating(rating);
+    submitRating(rating);
   }
 
   return (
