@@ -159,7 +159,7 @@ function OrderPartStatistic() {
             </div>
             <section className={styles.workerInfo}>
               <h2 className={styles.heading}>
-                {resultObject.employeeFullStatistics?.proudWorkerName}
+                {resultObject.partTotalStatistics?.partName}
               </h2>
               <p className={`${styles.info}`}>
                 <span>Part name:</span>
@@ -177,7 +177,7 @@ function OrderPartStatistic() {
                 <p className={`${styles.info}`}>
                   <span>Income:</span>
                   {!formatCurrency(
-                  resultObject.orderStatistics?.totalIncome
+                  resultObject.partTotalStatistics?.partIncome
                 ).includes("NaN")
                   ? formatCurrency(resultObject.partTotalStatistics?.partIncome)
                   : formatCurrency(0)}
@@ -196,7 +196,7 @@ function OrderPartStatistic() {
           <p className={styles.info}>
             <span>Total income:</span>
             {!formatCurrency(
-                  resultObject.orderStatistics?.totalIncome
+                  resultObject.orderStatistics?.incomeForSelectedPeriod
                 ).includes("NaN")
                   ? formatCurrency(resultObject.orderStatistics?.incomeForSelectedPeriod)
                   : formatCurrency(0)}
@@ -233,7 +233,7 @@ function OrderPartStatistic() {
               </div>
               <section className={styles.workerInfo}>
                 <h2 className={styles.heading}>
-                  {resultObject.partPeriodStatistics?.proudWorkerName}
+                  {resultObject.partPeriodStatistics?.partName}
                 </h2>
                 <p className={`${styles.info}`}>
                   <span>Part name:</span>
@@ -251,7 +251,7 @@ function OrderPartStatistic() {
                   <p className={`${styles.info}`}>
                     <span>Income:</span>
                     {!formatCurrency(
-                  resultObject.orderStatistics?.totalIncome
+                  resultObject.orderStatistics?.partIncome
                 ).includes("NaN")
                   ? formatCurrency(resultObject.partPeriodStatistics?.partIncome)
                   : formatCurrency(0)}
