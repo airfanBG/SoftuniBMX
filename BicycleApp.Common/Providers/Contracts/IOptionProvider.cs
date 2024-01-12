@@ -11,5 +11,6 @@
         public string? EmployeeEmailConfirmEnpoint();
         public string? GetPreviousWorkerPositionName(string currentWorkerPosition);
         public SalaryAccrualPercentages GetSalaryAccrualPercentages();
+        public string GetDefaultAvatarRelativePath();
     }
 }

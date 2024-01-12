@@ -74,5 +74,10 @@
                 DDFL = decimal.Parse(salaryAccrualPercentagesValues.GetSection("DDFL").Value)                
             };
         }
+
+        public string GetDefaultAvatarRelativePath()
+        {
+            return _configuration.GetSection("DefaultImagesRelativePathLocation:DefaultAvatar").Value;
+        }
     }
 }

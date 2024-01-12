@@ -1,11 +1,17 @@
 ﻿namespace BicycleApp.Services.HelperClasses
 {
-    using BicycleApp.Data.Models.EntityModels;
+    using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Services.HelperClasses.Contracts;
     using System.Text;
 
     public class StringManipulator : IStringManipulator
     {
+        private readonly IOptionProvider _optionProvider;
+        public StringManipulator(IOptionProvider optionProvider)
+        {
+            _optionProvider = optionProvider;
+        }
+
         public string? GetTextFromProperty(string? text)
         {
             return string.IsNullOrEmpty(text) ? string.Empty : text;
@@ -22,10 +28,16 @@
         }
         public string UrlImageMaker(string httpScheme, string httpHost, string httpPathBase, string endPoint)
         {
+            string imageRelativePath = string.Empty;
 
-            var slashRaplace = endPoint.Replace("\\", "/");
+            if (endPoint == null)
+            {
+                endPoint = _optionProvider.GetDefaultAvatarRelativePath();
+            }
 
-            return httpScheme + "://" + httpHost + httpPathBase + "/" + slashRaplace;
+            imageRelativePath = endPoint.Replace("\\", "/");
+
+            return httpScheme + "://" + httpHost + httpPathBase + "/" + imageRelativePath;
         }
         public string UrlMaker(string httpScheme, string httpHost, string endPoint, string? values)
         {

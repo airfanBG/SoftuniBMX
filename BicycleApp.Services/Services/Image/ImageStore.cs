@@ -41,12 +41,9 @@
             {
                 string userPath = await _userImageFactory.GetUserImagePathAsync(userId, userRole);
 
-                if (userPath != null)
-                {
-                    var imagePath = _stringManipulator.UrlImageMaker(httpScheme, httpHost, httpPathBase, userPath);
+                var imagePath = _stringManipulator.UrlImageMaker(httpScheme, httpHost, httpPathBase, userPath);
 
-                    return imagePath;
-                }     
+                return imagePath;
             }
             catch (Exception)
             {
@@ -73,7 +70,7 @@
 
                     if (allowedExtensions.Contains(imageExtension))
                     {
-                        string fileName =  _stringManipulator.CreateGuid();
+                        string fileName = _stringManipulator.CreateGuid();
                         string filePath = Path.Combine(userPath, $"{fileName}.{imageExtension}"); ;
 
                         bool isUserImageExist = await _userImageFactory.CheckForExistingUserImage(userImageDto.Id, userImageDto.Role);
@@ -91,11 +88,11 @@
                             }
                             if (userImageDto.Role.ToLower() != CLIENT)
                             {
-                                 _db.ImagesEmployees.Update((ImageEmployee)updatedImage);
+                                _db.ImagesEmployees.Update((ImageEmployee)updatedImage);
                             }
                             else
                             {
-                                 _db.ImagesClients.Update((ImageClient)updatedImage);
+                                _db.ImagesClients.Update((ImageClient)updatedImage);
                             }
                         }
                         else
