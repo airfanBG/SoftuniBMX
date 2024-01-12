@@ -12,25 +12,21 @@
     using System.Threading.Tasks;
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.HelperClasses.Contracts;
-    using BicycleApp.Common.Providers.Contracts;
 
     public class ImageStore : IImageStore
     {
         private readonly BicycleAppDbContext _db;
         private readonly IUserImageFactory _userImageFactory;
         private readonly IStringManipulator _stringManipulator;
-        private readonly IOptionProvider _optionProvider;
 
         public ImageStore(
             BicycleAppDbContext db,
             IUserImageFactory userImageFactory,
-            IStringManipulator stringManipulator,
-            IOptionProvider optionProvider)
+            IStringManipulator stringManipulator)
         {
             _db = db;
             _userImageFactory = userImageFactory;
             _stringManipulator = stringManipulator;
-            _optionProvider = optionProvider;
         }
 
         /// <summary>
@@ -43,14 +39,7 @@
         {
             try
             {
-                string userPath = string.Empty;
-
-                userPath = await _userImageFactory.GetUserImagePathAsync(userId, userRole);
-
-                if (string.IsNullOrEmpty(userPath))
-                {
-                    userPath = _optionProvider.GetDefaultUserRelativePath();
-                }
+                string userPath = await _userImageFactory.GetUserImagePathAsync(userId, userRole);
 
                 var imagePath = _stringManipulator.UrlImageMaker(httpScheme, httpHost, httpPathBase, userPath);
 
@@ -81,7 +70,7 @@
 
                     if (allowedExtensions.Contains(imageExtension))
                     {
-                        string fileName =  _stringManipulator.CreateGuid();
+                        string fileName = _stringManipulator.CreateGuid();
                         string filePath = Path.Combine(userPath, $"{fileName}.{imageExtension}"); ;
 
                         bool isUserImageExist = await _userImageFactory.CheckForExistingUserImage(userImageDto.Id, userImageDto.Role);
@@ -99,11 +88,11 @@
                             }
                             if (userImageDto.Role.ToLower() != CLIENT)
                             {
-                                 _db.ImagesEmployees.Update((ImageEmployee)updatedImage);
+                                _db.ImagesEmployees.Update((ImageEmployee)updatedImage);
                             }
                             else
                             {
-                                 _db.ImagesClients.Update((ImageClient)updatedImage);
+                                _db.ImagesClients.Update((ImageClient)updatedImage);
                             }
                         }
                         else

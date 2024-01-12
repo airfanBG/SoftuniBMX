@@ -61,11 +61,6 @@
 
         }
 
-        public string? GetDefaultUserRelativePath()
-        {
-            return _configuration.GetSection("DefaultImagesRelativePath:User").Value;
-        }
-
         public SalaryAccrualPercentages GetSalaryAccrualPercentages()
         {
             var salaryAccrualPercentagesValues = _configuration.GetSection("SalaryAccrualPercentages");
@@ -78,6 +73,11 @@
                 ZO = decimal.Parse(salaryAccrualPercentagesValues.GetSection("ZO").Value),
                 DDFL = decimal.Parse(salaryAccrualPercentagesValues.GetSection("DDFL").Value)                
             };
+        }
+
+        public string GetDefaultAvatarRelativePath()
+        {
+            return _configuration.GetSection("DefaultImagesRelativePathLocation:DefaultAvatar").Value;
         }
     }
 }

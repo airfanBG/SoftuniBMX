@@ -11,16 +11,17 @@
     using Microsoft.EntityFrameworkCore;
 
     using static BicycleApp.Common.ApplicationGlobalConstants;
+    using BicycleApp.Services.HelperClasses.Contracts;
 
     public class HomePageService : IHomePageService
     {
         private readonly BicycleAppDbContext dbContext;
-        private readonly IImageStore imageStore;
+        private readonly IStringManipulator stringManipulator;
 
-        public HomePageService(BicycleAppDbContext dbContext, IImageStore imageStore)
+        public HomePageService(BicycleAppDbContext dbContext, IStringManipulator stringManipulator)
         {
             this.dbContext = dbContext;
-            this.imageStore = imageStore;
+            this.stringManipulator = stringManipulator;
         }
 
         /// <summary>
@@ -77,7 +78,7 @@
                         PartId = x.PartId,
                         PartName = x.Part.Name,
                         ClientId = x.ClientId,
-                        ClientImageUrl =  imageStore.GetUserImage(x.ClientId, CLIENT, httpScheme, httpHost, httpPathBase).Result,
+                        ClientImageUrl =  stringManipulator.UrlImageMaker(httpScheme, httpHost, httpPathBase,x.Client.Images.Select(i => i.ImageUrl).FirstOrDefault()),
                         ClientFullName = $"{x.Client.FirstName} {x.Client.LastName}",
                         CommentDescription = x.Description,
                         DateCreated = x.DateCreated.ToString(DefaultDateFormat)

@@ -175,7 +175,7 @@
 
                     smtp.Authenticate(sender, password);
 
-                    smtp.Send(email);
+                    string sendInfo = smtp.Send(email);
                     smtp.Disconnect(true);
                 }
 

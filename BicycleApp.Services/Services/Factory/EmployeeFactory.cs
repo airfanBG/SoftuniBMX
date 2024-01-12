@@ -4,7 +4,6 @@
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Models.IdentityModels;
-    using BicycleApp.Services.Models.IdentityModels.Contracts;
     using BicycleApp.Services.Models.Order;
     using System;
 
