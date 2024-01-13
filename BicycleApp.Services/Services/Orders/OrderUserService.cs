@@ -50,7 +50,7 @@
                 decimal totalDiscount = 0M;
                 decimal totalVAT = 0M;
 
-                var vatCategory =  _db.VATCategories.AsNoTracking().First(v => v.Id == order.VATId);
+                var vatCategory = _db.VATCategories.AsNoTracking().First(v => v.Id == order.VATId);
 
                 foreach (var orderPart in order.OrderParts)
                 {
@@ -65,7 +65,7 @@
                     }
                     totalVAT += Math.Round(((currentProductTotalPrice - currentProductTotalDiscount) * vatCategory.VATPercent) / (100 + vatCategory.VATPercent), 2);
                     decimal productPrice = currentPart.SalePrice - currentPart.Discount;
-                    var currentOrderPartToSave =  _orderFactory.CreateOrderPartFromUserOrder(currentPart.Name, 1, orderPart.PartId, productPrice);
+                    var currentOrderPartToSave = _orderFactory.CreateOrderPartFromUserOrder(currentPart.Name, 1, orderPart.PartId, productPrice);
                     newOrder.OrderParts.Add(currentOrderPartToSave);
                 }
 
@@ -84,12 +84,12 @@
                     return null;
                 }
 
-                var newOrderObject =  _orderFactory.CreateUserOrder(newOrder, _dateTimeProvider.Now);
+                var newOrderObject = _orderFactory.CreateUserOrder(newOrder, _dateTimeProvider.Now);
 
                 if (newOrderObject != null)
                 {
-                     _db.Orders.Add(newOrderObject);
-                     _db.SaveChanges();
+                    _db.Orders.Add(newOrderObject);
+                    _db.SaveChanges();
 
                     newOrder.OrderId = newOrderObject.Id;
 
@@ -145,13 +145,13 @@
         public bool CreateOrderPartEmployeeByUserOrder(IOrderPartsEmplyee newOrder)
         {
             try
-            {    
+            {
                 int quntityOfPart = newOrder.OrderQuantity;
 
                 for (int i = 0; i < quntityOfPart; i++)
                 {
-                    string serialNumber =  _stringManipulator.SerialNumberGenerator();
-                    string guidKey =  _stringManipulator.CreateGuid();
+                    string serialNumber = _stringManipulator.SerialNumberGenerator();
+                    string guidKey = _stringManipulator.CreateGuid();
 
                     foreach (var orderPart in newOrder.OrderParts)
                     {
@@ -272,11 +272,10 @@
                 .Select(r => new OrderClientShortInfo()
                 {
                     OrderId = r.Id,
-                    OrderDate = r.DateCreated.ToString(DefaultDateFormat),
+                    OrderDateStart = r.DateCreated.ToString(DefaultDateFormat),
+                    OrderDateFinish = r.DateFinish!.Value.ToString(DefaultDateFormat),
                     Amount = r.FinalAmount,
                     SerialNumber = r.OrdersPartsEmployees.First().SerialNumber,
-                    UnpaidAmount = r.UnpaidAmount,
-                    PaidAmount = r.PaidAmount,
                     Parts = r.OrdersPartsEmployees
                     .Select(pa => new PartShortInfoDto()
                     {
