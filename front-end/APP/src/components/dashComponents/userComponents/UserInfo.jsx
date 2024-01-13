@@ -75,7 +75,7 @@ function UserInfo() {
 
     const result = await put(environment.update_balance, data);
     updateUser({ ...user, balance: user.balance + amount });
-    // console.log(result);
+    console.log(result);
     setLoading(false);
   }
 

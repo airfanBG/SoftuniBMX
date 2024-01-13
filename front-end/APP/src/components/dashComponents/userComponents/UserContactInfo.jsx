@@ -9,7 +9,7 @@ import CreditCard from "../../CreditCard.jsx";
 
 function UserContactInfo({ info, addMoneyBtnHandler }) {
   const { user } = useContext(UserContext);
-  const [amount, setAmount] = useState("");
+  // const [amount, setAmount] = useState("");
   const [card, setCard] = useState("");
   const [expDate, setExpDate] = useState("");
   const [cardName, setCardName] = useState(
@@ -18,12 +18,10 @@ function UserContactInfo({ info, addMoneyBtnHandler }) {
   const [cvv, setCvv] = useState("");
   const [isAccount, setIsAccount] = useState(false);
 
-  function onAddAmountHandler(e) {
-    // e.preventDefault();
-    // if (amount < 1 || amount === "") return;
-    // console.log(e.target.value);
-    // addMoneyBtnHandler(amount);
-    // setAmount("");
+  function onAddAmountHandler(amount) {
+    if (amount < 1 || amount === "") return;
+    console.log(amount);
+    addMoneyBtnHandler(amount);
   }
 
   function switcher(panel) {
@@ -201,7 +199,10 @@ function UserContactInfo({ info, addMoneyBtnHandler }) {
 
                 <button className={styles.amountBtn}>Add to balance</button>
               </form> */}
-              <CreditCard amountBtnHandler={onAddAmountHandler} />
+              <CreditCard
+                amountBtnHandler={onAddAmountHandler}
+                switcher={switcher}
+              />
             </div>
           )}
 

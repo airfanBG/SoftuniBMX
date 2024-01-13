@@ -3,7 +3,7 @@ import Cards from "react-credit-cards-2";
 import "react-credit-cards-2/dist/es/styles-compiled.css";
 import styles from "./CreditCard.module.css";
 
-function CreditCard({ amountBtnHandler }) {
+function CreditCard({ amountBtnHandler, switcher }) {
   const [state, setState] = useState({
     number: "",
     expiry: "",
@@ -12,6 +12,7 @@ function CreditCard({ amountBtnHandler }) {
     focus: "",
     amount: "",
   });
+  const [error, setError] = useState({ isError: false });
 
   const handleInputChange = (evt) => {
     const { name, value, inputMode } = evt.target;
@@ -23,9 +24,19 @@ function CreditCard({ amountBtnHandler }) {
     setState((prev) => ({ ...prev, focus: evt.target.name }));
   };
 
+  function sendAmount(e) {
+    e.preventDefault();
+    if (state.amount <= 0) {
+      setError((prev) => ({ ...prev, isError: true }));
+    }
+    amountBtnHandler(state.amount);
+    setState((prev) => ({ ...prev, amount: "" }));
+    switcher(false);
+  }
+
   return (
     <div className={styles.cardContainer}>
-      <form className={styles.cardForm}>
+      <form className={styles.cardForm} onSubmit={sendAmount}>
         <div className={styles.inputCardField}>
           <label htmlFor="" className={styles.fieldCardLabel}>
             Card number
@@ -112,12 +123,7 @@ function CreditCard({ amountBtnHandler }) {
             />
           </div>
 
-          <button
-            className={styles.amountBtn}
-            onClick={() => console.log(state.amount)}
-          >
-            Add
-          </button>
+          <button className={styles.amountBtn}>Add</button>
         </div>
       </form>
       <Cards
