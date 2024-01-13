@@ -53,10 +53,9 @@ function PartInfo() {
         environment.get_client_rate + id + "&clientId=" + user.id
       );
       if (result === undefined) return;
-      if (receivedRating === partOldRating) return;
       setComment(result);
-      console.log(comment);
       setCommentExists(true);
+      if (receivedRating === partOldRating) return;
       setPartOldRating(receivedRating);
     }
 
