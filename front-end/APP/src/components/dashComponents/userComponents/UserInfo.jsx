@@ -66,15 +66,13 @@ function UserInfo() {
 
   async function addMoneyBtnHandler(amount) {
     setLoading(true);
-
     const data = {
       id: user.id,
-      // "iban": "string",
       balance: Number(amount),
     };
 
     const result = await put(environment.update_balance, data);
-    updateUser({ ...user, balance: user.balance + amount });
+    updateUser({ ...user, balance: Number(user.balance) + Number(amount) });
     // console.log(result);
     setLoading(false);
   }
