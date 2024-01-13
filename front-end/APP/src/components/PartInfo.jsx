@@ -55,6 +55,7 @@ function PartInfo() {
       if (result === undefined) return;
       if (receivedRating === partOldRating) return;
       setComment(result);
+      console.log(comment);
       setCommentExists(true);
       setPartOldRating(receivedRating);
     }
@@ -83,7 +84,7 @@ function PartInfo() {
     try {
       const result = await post(environment.add_comment, commentData);
       if (result) {
-        setCommentUpdated(true);
+        setCommentUpdated(!commentUpdated);
       }
     } catch (error) {
       console.error("Error adding comment:", error);
@@ -94,7 +95,8 @@ function PartInfo() {
     try {
       const result = await post(environment.edit_comment, commentData);
       if (result) {
-        setCommentUpdated(true);
+        setCommentUpdated(!commentUpdated);
+        setComment({});
       }
     } catch (error) {
       console.error("Error adding comment:", error);
