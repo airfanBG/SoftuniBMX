@@ -20,7 +20,6 @@ function UserContactInfo({ info, addMoneyBtnHandler }) {
 
   function onAddAmountHandler(amount) {
     if (Number(amount) < 0 || amount === "") return;
-    console.log(amount);
     addMoneyBtnHandler(amount);
   }
 

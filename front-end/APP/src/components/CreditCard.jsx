@@ -39,7 +39,6 @@ function CreditCard({ amountBtnHandler, switcher }) {
     }
     if (!error.isAllowed) return;
     amountBtnHandler(state.amount);
-    console.log("response");
     setState((prev) => ({ ...prev, amount: "" }));
     switcher(false);
   }
