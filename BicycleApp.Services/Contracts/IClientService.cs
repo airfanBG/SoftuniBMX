@@ -8,7 +8,7 @@
 
         Task<ClientReturnDto> LoginClientAsync(ClientLoginDto clientDto, string httpScheme, string httpHost, string httpPathBase);
 
-        Task<ClientEditDto?> GetClientInfoAsync(string Id);
+        Task<ClientEditDto?> GetClientInfoAsync(string Id, string httpScheme, string httpHost, string httpPathBase);
 
         Task<bool> ChangeClientPasswordAsync(ClientPasswordChangeDto clientPasswordChangeDto);
         Task ConfirmEmailAsync(string clientId, string code);

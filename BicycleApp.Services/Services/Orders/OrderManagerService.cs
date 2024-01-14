@@ -434,7 +434,7 @@
             return false;
         }
 
-        public async Task<ICollection<EmployeeInfoDto>> GetAllEmployees()
+        public async Task<ICollection<EmployeeInfoDto>> GetAllEmployees(string httpScheme, string httpHost, string httpPathBase)
         {
             return await _db.Employees
                             .AsNoTracking()
@@ -452,7 +452,8 @@
                                 IsManeger = e.IsManeger,
                                 PhoneNumber = e.PhoneNumber,
                                 Position = e.Position,
-                                BaseSalary = e.BaseSalary
+                                BaseSalary = e.BaseSalary,
+                                ImageUrl = _stringManipulator.UrlImageMaker(httpScheme, httpHost, httpPathBase, e.ImagesEmployees.Select(e => e.ImageUrl).FirstOrDefault())
 
                             }).ToListAsync();
 

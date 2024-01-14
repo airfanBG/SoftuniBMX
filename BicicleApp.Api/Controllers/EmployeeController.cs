@@ -128,7 +128,7 @@
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<ClientInfoDto>> GetEmployeeInfo([FromQuery] string id)
+        public async Task<ActionResult<EmployeeInfoDto>> GetEmployeeInfo([FromQuery] string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -137,7 +137,11 @@
 
             try
             {
-                var dto = await employeeService.GetEmployeeInfoAsync(id);
+                var httpScheme = Request.Scheme;
+                var httpHost = Request.Host.Value;
+                var httpPathBase = Request.PathBase;
+
+                var dto = await employeeService.GetEmployeeInfoAsync(id, httpScheme, httpHost, httpPathBase);
 
                 if (dto == null)
                 {

@@ -139,7 +139,10 @@
 
             try
             {
-                var dto = await clientService.GetClientInfoAsync(id);
+                var httpScheme = Request.Scheme;
+                var httpHost = Request.Host.Value;
+                var httpPathBase = Request.PathBase;
+                var dto = await clientService.GetClientInfoAsync(id, httpScheme, httpHost, httpPathBase);
 
                 if (dto == null)
                 {

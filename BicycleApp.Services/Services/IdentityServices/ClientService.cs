@@ -182,7 +182,7 @@
         /// </summary>
         /// <param name="Id">The id of the client</param>
         /// <returns>Dto with information for the client</returns>
-        public async Task<ClientEditDto?> GetClientInfoAsync(string Id)
+        public async Task<ClientEditDto?> GetClientInfoAsync(string Id, string httpScheme, string httpHost, string httpPathBase)
         {
             var client = await dbContext.Clients.Include(da => da.DelivaryAddress).FirstOrDefaultAsync(c => c.Id == Id);
 
@@ -206,6 +206,7 @@
                 IBAN = client.IBAN,
                 PhoneNumber = client.PhoneNumber,
                 Town = town,
+                Image = stringManipulator.UrlImageMaker(httpScheme, httpHost, httpPathBase, client.Images.Select(c => c.ImageUrl).FirstOrDefault()),
                 DelivaryAddress = new ClientAddressDto()
                 {
                     Street = client.DelivaryAddress.Street,

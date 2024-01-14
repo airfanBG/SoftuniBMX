@@ -276,7 +276,11 @@ namespace BicicleApp.Api.Controllers
         [HttpGet("all_employees")]
         public async Task<ActionResult<ICollection<EmployeeInfoDto>>> GetAllEmployees()
         {
-            var allEmployeeCollection = await _orderManagerService.GetAllEmployees();
+            string httpScheme = Request.Scheme;
+            string httpHost = Request.Host.Value;
+            string httpPathBase = Request.PathBase;
+
+            var allEmployeeCollection = await _orderManagerService.GetAllEmployees(httpScheme, httpHost, httpPathBase);
 
             return StatusCode(200, allEmployeeCollection);
         }
