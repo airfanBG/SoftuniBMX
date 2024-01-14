@@ -90,7 +90,7 @@ function UserInfo() {
   async function updateImage() {
     const data = { id: user.id, role: user.role, image: base64 };
     const result = await post(environment.upload_avatar, data);
-    console.log(result);
+    // console.log(result);
     navigate("/profile");
     if (!result.isError) {
       updateUser({ ...user, imageUrl: base64 });
