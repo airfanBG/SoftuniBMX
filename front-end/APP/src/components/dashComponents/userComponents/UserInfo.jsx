@@ -13,8 +13,9 @@ import { updateUserData, userInfo } from "../../../userServices/userService.js";
 import { UserContext } from "../../../context/GlobalUserProvider.jsx";
 import EditContactInfo from "./EditContactInfo.jsx";
 import LoaderWheel from "../../LoaderWheel.jsx";
-import { put } from "../../../util/api.js";
+import { post, put } from "../../../util/api.js";
 import { environment } from "../../../environments/environment.js";
+import { useNavigate } from "react-router-dom";
 
 function UserInfo() {
   const { user, updateUser } = useContext(UserContext);
@@ -25,6 +26,7 @@ function UserInfo() {
   const [edit, setEdit] = useState(false);
   const [info, setInfo] = useState("");
   const uploadedImage = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(
     function () {
@@ -64,6 +66,14 @@ function UserInfo() {
     }
   }
 
+  function editBtnHandler() {
+    setEdit(true);
+  }
+
+  function backBtnHandler() {
+    navigate("/profile");
+  }
+
   async function addMoneyBtnHandler(amount) {
     setLoading(true);
     const data = {
@@ -77,9 +87,19 @@ function UserInfo() {
     setLoading(false);
   }
 
-  function editBtnHandler() {
-    setEdit(true);
+  async function updateImage() {
+    const data = { id: user.id, role: user.role, image: base64 };
+    const result = await post(environment.upload_avatar, data);
+    // console.log(result);
+    navigate("/profile");
+    if (!result.isError) {
+      updateUser({ ...user, imageUrl: base64 });
+      setImage(null);
+      setBase64("");
+      setInfo({ ...info, imageUrl: null });
+    }
   }
+
   return (
     <>
       <h2 className={styles.dashHeading}>
@@ -134,9 +154,14 @@ function UserInfo() {
         </div>
         <div className={styles.userInfoControl}>
           <div className={styles.infoWrapper}>
+            {edit && !!image && (
+              <button className={styles.editBtn} onClick={updateImage}>
+                Upload image
+              </button>
+            )}
             <button
               className={styles.editBtn}
-              onClick={!edit ? editBtnHandler : () => setEdit(false)}
+              onClick={!edit ? editBtnHandler : backBtnHandler}
             >
               {edit ? "Back" : "Edit profile"}
             </button>

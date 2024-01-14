@@ -43,6 +43,7 @@
   align-items: flex-start;
   gap: 2rem;
 }
+
 .orders {
   display: flex;
   width: 80%;
@@ -50,7 +51,12 @@
   align-items: center;
   padding: 1rem 0;
 }
-
+.empty {
+  width: 80%;
+  padding: 2rem 0 0 2rem;
+  font-size: 2rem;
+  font-weight: 300;
+}
 .ordersAside {
   width: 20%;
 }

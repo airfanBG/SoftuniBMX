@@ -78,7 +78,9 @@ function UserTrackOrder() {
             </div>
           )}
           {orderList.length === 0 && (
-            <h2>There is no orders in this category</h2>
+            <h2 className={styles.empty}>
+              Your have no active orders at this moment
+            </h2>
           )}
           <aside className={styles.ordersAside}>
             <h3 className={styles.element}>Icon information</h3>

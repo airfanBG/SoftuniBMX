@@ -4,6 +4,25 @@ import styles from "./OrderFullElement.module.css";
 function OrderElement({ order }) {
   const { serialNumber, orderId: id, dateCreated, orderStates } = order;
 
+  function startedAt(t) {
+    const startDate = t.split(".").at(0).replaceAll("-", ".");
+    console.log(t);
+    return startDate;
+  }
+
+  function fieldLabel(s, e) {
+    let result = "";
+    console.log(s);
+    if (s === null && e === null) {
+      result = "On queue";
+    } else if (s !== null && e === null) {
+      result = "Started at:";
+    } else {
+      result = "Produced in:";
+    }
+    return result;
+  }
+
   function jobTIme(t1, t2) {
     let timeResult = "";
     const date1 = new Date(t1).getTime();
@@ -93,8 +112,12 @@ function OrderElement({ order }) {
                   </p>
                 }
                 <p className={styles.field}>
-                  <span className={styles.fieldLabel}>Prodiced time:</span>
-                  {/* {s.elementProduceTimeInMinutes} */}
+                  <span className={styles.fieldLabel}>
+                    {fieldLabel(s.startDate, s.endDate)}
+                  </span>
+                  {!!s.startDate &&
+                    s.endDate === null &&
+                    startedAt(s.startDate)}
                   {!!s.startDate &&
                     !!s.endDate &&
                     jobTIme(s.startDate, s.endDate)}
