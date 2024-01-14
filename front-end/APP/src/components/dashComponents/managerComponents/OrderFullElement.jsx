@@ -12,10 +12,14 @@ function OrderElement({ order }) {
 
   function fieldLabel(s, e) {
     let result = "";
-    if (s === null && e === null) result = "On queue";
-    else if (!!s && e === null) result = "Started at:";
-    else if (!!s && !!e) result === "Produced time:";
-    // s.endDate ? "Produced time:" : "Started at:"
+    console.log(s);
+    if (s === null && e === null) {
+      result = "On queue";
+    } else if (s !== null && e === null) {
+      result = "Started at:";
+    } else {
+      result = "Produced in:";
+    }
     return result;
   }
 
