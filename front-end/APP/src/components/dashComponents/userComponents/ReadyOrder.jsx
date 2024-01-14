@@ -36,7 +36,7 @@ function ReadyOrder({ order, payed, error, message, clearError }) {
           </p>
           <p>
             <span>Order date </span>
-            {/* {order.orderDate.replaceAll("/", ".")} */}
+            {order.orderDateStart.replaceAll("/", ".")}
           </p>
           <p>
             <span>SN# </span>

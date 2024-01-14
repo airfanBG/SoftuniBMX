@@ -59,9 +59,16 @@ function ComponentUserOrdersReady() {
 
         {notEnough && (
           <div className={styles.ordersBlock}>
-            <p>You have not enough money to pay your bill.</p>
-            Please, go to your {<Link to={"/profile"}>profile page</Link>} and
-            fill your bank account to finish payment.
+            <div className={styles.message}>
+              <h2 className={styles.notEnoughHeader}>
+                You have not enough money to pay your bill.
+              </h2>
+              <p className={styles.notEnoughMessage}>
+                Please, go to your {<Link to={"/profile"}>profile page</Link>},
+                enter in &#8221;Bank account&#8221; menu and fill your bank
+                account to finish the payment.
+              </p>
+            </div>
           </div>
         )}
         {!notEnough && (
