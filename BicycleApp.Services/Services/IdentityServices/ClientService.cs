@@ -184,7 +184,7 @@
         /// <returns>Dto with information for the client</returns>
         public async Task<ClientEditDto?> GetClientInfoAsync(string Id, string httpScheme, string httpHost, string httpPathBase)
         {
-            var client = await dbContext.Clients.Include(da => da.DelivaryAddress).FirstOrDefaultAsync(c => c.Id == Id);
+            var client = await dbContext.Clients.Include(da => da.DelivaryAddress).Include(i => i.Images).FirstOrDefaultAsync(c => c.Id == Id);
 
             if (client == null)
             {
