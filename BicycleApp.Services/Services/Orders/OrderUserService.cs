@@ -273,8 +273,10 @@
                 {
                     OrderId = r.Id,
                     OrderDateStart = r.DateCreated.ToString(DefaultDateFormat),
-                    OrderDateFinish = r.DateFinish!.Value.ToString(DefaultDateFormat),
+                    OrderDateFinish = r.DateFinish == null ? null : r.DateFinish.Value.ToString(DefaultDateFormat),
                     Amount = r.FinalAmount,
+                    PaidAmount = r.PaidAmount,
+                    UnpaidAmount = r.UnpaidAmount,
                     SerialNumber = r.OrdersPartsEmployees.First().SerialNumber,
                     Parts = r.OrdersPartsEmployees
                     .Select(pa => new PartShortInfoDto()
