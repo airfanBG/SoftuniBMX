@@ -124,7 +124,7 @@ function CreditCard({ amountBtnHandler, switcher }) {
               onFocus={handleInputFocus}
               className={styles.cardInput}
               minLength={16}
-              maxLength={16}
+              maxLength={19}
             />
           </div>
 

@@ -22,3 +22,25 @@
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
 }
+
+.message {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.notEnoughHeader {
+  font-size: 2.2rem;
+  font-weight: 500;
+}
+.notEnoughMessage {
+  font-size: 1.8rem;
+  font-weight: 300;
+}
+
+.notEnoughMessage a:link,
+.notEnoughMessage a:visited {
+  color: var(--color-line);
+  text-transform: uppercase;
+  font-weight: 400;
+  text-decoration: none;
+}
