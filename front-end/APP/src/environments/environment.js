@@ -15,6 +15,7 @@ export const environment = {
   // CLIENT
   update_client: "/api/client/edit/", // + id
   info_client: "/api/client/info?id=", // + id
+  upload_avatar: "/api/client/add_avatar",
 
   // CLIENT_ORDER
   create_order: "/api/client_order/create",
