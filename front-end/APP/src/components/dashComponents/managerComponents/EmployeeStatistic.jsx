@@ -10,13 +10,10 @@ import { environment } from "../../../environments/environment.js";
 
 import { User } from "@phosphor-icons/react";
 
-
 function ManagerStatistic() {
-
   const [error, setError] = useState({});
   const [loading, setLoading] = useState(false);
   const [resultObject, setResultObject] = useState({});
-
 
   // State to hold user input
   const [startDate, setStartDate] = useState("2023-04-11");
@@ -41,7 +38,9 @@ function ManagerStatistic() {
 
       async function getStatistics() {
         const queryString = `?startDate=${startDate}&endDate=${endDate}`;
-        const result = await get(environment.employees_full_statistic + queryString);
+        const result = await get(
+          environment.employees_full_statistic + queryString
+        );
         if (!result) {
           setLoading(false);
           return setError({
@@ -68,12 +67,7 @@ function ManagerStatistic() {
 
   return (
     <>
-
-      <h2 className={styles.dashHeading}>
-        Employee statistics:
-      </h2>
       <section className={styles.board}>
-        <BoardHeader />
         {loading && <LoaderWheel />}
         <div className={styles.dateContainer}>
           <div className={styles.element}>
@@ -129,7 +123,9 @@ function ManagerStatistic() {
                 Information about selecting date interval
               </h3>
               <ul className={styles.list}>
-                <li>On initial render will be displayed all available orders</li>
+                <li>
+                  On initial render will be displayed all available orders
+                </li>
                 <li>
                   If select start date will limit the interval between selected
                   date and today
@@ -143,15 +139,17 @@ function ManagerStatistic() {
           </aside>
         </div>
         <div>
-          <h3 className={styles.infoHeading}>
-            He is our proud:
-          </h3>
+          <h3 className={styles.infoHeading}>He is our proud:</h3>
           <figure className={styles.figure}>
             <div className={styles["imgHolder"]}>
-              {resultObject.employeeFullStatistics?.proudWorkerWorkedImageUrl ? (
+              {resultObject.employeeFullStatistics
+                ?.proudWorkerWorkedImageUrl ? (
                 <img
                   className={styles.tumbs}
-                  src={resultObject.employeeFullStatistics?.proudWorkerWorkedImageUrl}
+                  src={
+                    resultObject.employeeFullStatistics
+                      ?.proudWorkerWorkedImageUrl
+                  }
                   alt={`${resultObject.employeeFullStatistics?.proudWorkerName} image`}
                 />
               ) : (
@@ -165,7 +163,7 @@ function ManagerStatistic() {
             </div>
 
             <section className={styles.workerInfo}>
-              <h2 className={styles.heading} >
+              <h2 className={styles.heading}>
                 {resultObject.employeeFullStatistics?.proudWorkerName}
               </h2>
               <div className={styles.infoBox}>
@@ -175,7 +173,10 @@ function ManagerStatistic() {
                 </p>
                 <p className={`${styles.info}`}>
                   <span>Position:</span>
-                  {resultObject.employeeFullStatistics?.proudWorkerSubDepartment}
+                  {
+                    resultObject.employeeFullStatistics
+                      ?.proudWorkerSubDepartment
+                  }
                 </p>
                 <p className={`${styles.info}`}>
                   <span>Orders:</span>
@@ -183,7 +184,10 @@ function ManagerStatistic() {
                 </p>
                 <p className={`${styles.info}`}>
                   <span>Minutes:</span>
-                  {resultObject.employeeFullStatistics?.proudWorkerWorkedMinutes}
+                  {
+                    resultObject.employeeFullStatistics
+                      ?.proudWorkerWorkedMinutes
+                  }
                 </p>
               </div>
             </section>
@@ -191,10 +195,10 @@ function ManagerStatistic() {
         </div>
       </section>
       <>
-        <h2 className={styles.dashHeading}>
-          Employee statistic in selected time interval:
-        </h2>
         <section className={styles.board}>
+          <h2 className={`${styles.boardHeading} ${styles.mBottom}`}>
+            Employee statistic in selected time period:
+          </h2>
           <p className={styles.info}>
             <span>Total worked minutes:</span>
             {resultObject.employeePeriodStatistics?.totalWorkedMinutes}
@@ -205,15 +209,19 @@ function ManagerStatistic() {
           </p>
 
           <div>
-          <h3 className={styles.infoHeading}>
-            He is the best at that time period:
-          </h3>
+            <h3 className={styles.infoHeading}>
+              He is the best at that time period:
+            </h3>
             <figure className={styles.figure}>
               <div className={styles["imgHolder"]}>
-                {resultObject.employeeFullStatistics?.proudWorkerWorkedImageUrl ? (
+                {resultObject.employeeFullStatistics
+                  ?.proudWorkerWorkedImageUrl ? (
                   <img
                     className={styles.tumbs}
-                    src={resultObject.employeeFullStatistics?.proudWorkerWorkedImageUrl}
+                    src={
+                      resultObject.employeeFullStatistics
+                        ?.proudWorkerWorkedImageUrl
+                    }
                     alt={`${resultObject.employeeFullStatistics?.proudWorkerName} image`}
                   />
                 ) : (
@@ -226,34 +234,44 @@ function ManagerStatistic() {
                 )}
               </div>
               <section className={styles.workerInfo}>
-                <h2 className={styles.heading} >
+                <h2 className={styles.heading}>
                   {resultObject.employeePeriodStatistics?.proudWorkerName}
                 </h2>
                 <div className={styles.infoBox}>
                   <p className={`${styles.info}`}>
                     <span>Department:</span>
-                    {resultObject.employeePeriodStatistics?.proudWorkerDepartment}
+                    {
+                      resultObject.employeePeriodStatistics
+                        ?.proudWorkerDepartment
+                    }
                   </p>
                   <p className={`${styles.info}`}>
                     <span>Position:</span>
-                    {resultObject.employeePeriodStatistics?.proudWorkerSubDepartment}
+                    {
+                      resultObject.employeePeriodStatistics
+                        ?.proudWorkerSubDepartment
+                    }
                   </p>
                   <p className={`${styles.info}`}>
                     <span>Orders:</span>
-                    {resultObject.employeePeriodStatistics?.proudWorkerWorkedOrders}
+                    {
+                      resultObject.employeePeriodStatistics
+                        ?.proudWorkerWorkedOrders
+                    }
                   </p>
                   <p className={`${styles.info}`}>
                     <span>Minutes:</span>
-                    {resultObject.employeePeriodStatistics?.proudWorkerWorkedMinutes}
+                    {
+                      resultObject.employeePeriodStatistics
+                        ?.proudWorkerWorkedMinutes
+                    }
                   </p>
                 </div>
               </section>
             </figure>
           </div>
-
         </section>
       </>
-
     </>
   );
 }
