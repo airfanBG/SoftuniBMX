@@ -36,6 +36,7 @@ export const environment = {
   // worker_times: "/api/manager_statistics?employeeId=",
   worker_times: "/api/manager_statistics/employee_statistics?employeeId=",
   worker_get_salary: "/api/employee/get_salary?employeeId=",
+  employee_upload_avatar: "/api/employee/add_avatar",
 
   // QUALITY_CONTROL
   quality_assurance: "/api/employee_order/quality_assurance",
