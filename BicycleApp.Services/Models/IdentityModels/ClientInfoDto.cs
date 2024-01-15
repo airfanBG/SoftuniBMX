@@ -1,5 +1,7 @@
 ﻿namespace BicycleApp.Services.Models.IdentityModels
 {
+    using System.Text.Json.Serialization;
+
     public class ClientInfoDto
     {
         public string? Id { get; set; }
@@ -19,5 +21,8 @@
         public string? IBAN { get; set; }
 
         public decimal Balance { get; set; }
+
+        [JsonPropertyName("imageUrl")]
+        public string? Image { get; set; }
     }
 }

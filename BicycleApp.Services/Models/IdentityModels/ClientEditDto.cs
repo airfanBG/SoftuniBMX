@@ -29,6 +29,9 @@ namespace BicycleApp.Services.Models.IdentityModels
         [JsonPropertyName("balance")]
         public decimal Balance { get; set; }
 
+        [JsonPropertyName("imageUrl")]
+        public string? Image { get; set; }
+
         [JsonPropertyName("address")]
         public ClientAddressDto DelivaryAddress { get; set; } = null!;
     }

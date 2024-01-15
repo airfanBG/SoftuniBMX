@@ -285,6 +285,19 @@
 
         }
 
+        public async Task<StatisticsDto> GetStatistics(FinishedOrdersDto datesPeriod)
+        {
+
+            var result = new StatisticsDto
+            {
+                OrderStatistics = await GetOrderStatistics(datesPeriod),
+                TotalPartStatistics = await GetTotalPartStatistics(),
+                PeriodPartStatistics = await GetPeriodPartStatistics(datesPeriod),
+            };
+
+            return result;
+        }
+
         public async Task<OrderStatisticDto> GetOrderStatistics(FinishedOrdersDto datesPeriod)
         {
             var totalIncomeQuery = _db.Orders
@@ -292,13 +305,10 @@
                             && o.DateSended != null
                             && o.DateDeleted == null);
 
-            var incomeForSelectedPeriodQuery = _db.Orders
+            var incomeForSelectedPeriodQuery = totalIncomeQuery
                 .Where(o => o.DateCreated >= datesPeriod.StartDate
-                            && o.DateFinish <= datesPeriod.EndDate.AddDays(1)
-                            && o.DateFinish != null
-                            && o.DateSended != null
-                            && o.DateDeleted == null);
-
+                && o.DateFinish <= datesPeriod.EndDate.AddDays(1)
+);  
             var orderStatisticDto = new OrderStatisticDto
             {
                 TotalIncome = await totalIncomeQuery.SumAsync(o => o.SaleAmount),
@@ -312,7 +322,7 @@
 
         public async Task<PartStatisticDto> GetTotalPartStatistics()
         {
-            var bestSelerPart = await _db.OrdersPartsEmployees
+            var bestSelerParts = await _db.OrdersPartsEmployees
                 .AsNoTracking()
                 .Include(ope => ope.Order)
                 .Include(o => o.Part)
@@ -320,88 +330,62 @@
                 .Where(o => o.DateFinish != null
                          && o.Order.DateSended != null
                          && o.DateDeleted == null)
+                .ToListAsync();
+
+
+            var result = bestSelerParts
                 .GroupBy(ope => ope.PartId)
-                .Select(group => new
+                .Select(group => new PartStatisticDto
                 {
                     PartId = group.Key,
                     PartName = group.Select(gn => gn.PartName).First(),
                     SerialNumber = group.Select(gn => gn.SerialNumber).First(),
-                    SoldCount = group.Select(pqy => Convert.ToInt32(pqy.PartQuantity)).Sum(),
+                    PartSoldCount = group.Select(pqy => Convert.ToInt32(pqy.PartQuantity)).Sum(),
                     PartIncome = group.Select(pinc => pinc.PartPrice).Sum(),
+                    ImageUrl = _db.ImagesParts.Where(ip => ip.PartId == group.Key).Select(ip => ip.ImageUrl).First().ToString(),
                     GroupCount = group.Count(),
-
                 })
                 .OrderByDescending(og => og.GroupCount)
-                .Take(1)
-                .FirstAsync();
+                .FirstOrDefault();
 
-            var result = new PartStatisticDto
-            {
-                PartName = bestSelerPart.PartName,
-                SerialNumber = bestSelerPart.SerialNumber,
-                PartId = bestSelerPart.PartId,
-                ImageUrl = _db.ImagesParts.Where(ip => ip.PartId == bestSelerPart.PartId).Select(ip => ip.ImageUrl).First().ToString(),
-                PartSoldCount = bestSelerPart.SoldCount,
-                PartIncome = bestSelerPart.PartIncome,
-            };
-
+           
             return result;
         }
+
         public async Task<PartStatisticDto> GetPeriodPartStatistics(FinishedOrdersDto datesPeriod)
         {
-
-            var bestSelerPartForPeriod = await _db.OrdersPartsEmployees
+            var bestSelerParts = await _db.OrdersPartsEmployees
                 .AsNoTracking()
                 .Include(ope => ope.Order)
                 .Include(o => o.Part)
-                .ThenInclude(x=>x.ImagesParts)
-                .Where(ope => ope.DateCreated >= datesPeriod.StartDate
-                                     && ope.DateFinish <= datesPeriod.EndDate.AddDays(1)
-                                     && ope.DateFinish != null
-                                     && ope.Order.DateSended != null
-                                     && ope.DateDeleted == null)
-                .GroupBy(ope => ope.PartId)
-                .Select(group => new
-                {
-                    PartName = group.Select(gn => gn.PartName).First(),
-                    PartId = group.Key,
-                    SerialNumber = group.Select(g => g.SerialNumber).First(),
-                    PartSoldCount = group.Select(pq => Convert.ToInt32(pq.PartQuantity)).Sum(),
-                    PartIncome = group.Select(pinc => pinc.PartPrice).Sum(),
-                    GroupCount = group.Count()
+                .ThenInclude(x => x.ImagesParts)
+                .Where(o => o.DateFinish != null
+                         && o.Order.DateSended != null
+                         && o.DateDeleted == null)
+                .ToListAsync();
 
-                })
-                .OrderByDescending(og => og.GroupCount)
-                .Take(1)
-                .FirstAsync();
-          
 
-            var result = new PartStatisticDto
-            {
-                PartName = bestSelerPartForPeriod.PartName,
-                SerialNumber = bestSelerPartForPeriod.SerialNumber,
-                PartId = bestSelerPartForPeriod.PartId,
-                ImageUrl  = _db.ImagesParts.Where(ip => ip.PartId == bestSelerPartForPeriod.PartId).Select(ip => ip.ImageUrl).First().ToString(),
-                PartSoldCount = bestSelerPartForPeriod.PartSoldCount,
-                PartIncome = bestSelerPartForPeriod.PartIncome,
-            };
+            var result = bestSelerParts
+               .Where(o => o.DateFinish >= datesPeriod.StartDate
+                                         && o.DateFinish <= datesPeriod.EndDate.AddDays(1))
+               .GroupBy(ope => ope.PartId)
+               .Select(group => new PartStatisticDto
+               {
 
-            ;
+                   PartId = group.Key,
+                   PartName = group.Select(gn => gn.PartName).First(),
+                   SerialNumber = group.Select(gn => gn.SerialNumber).First(),
+                   PartSoldCount = group.Select(pqy => Convert.ToInt32(pqy.PartQuantity)).Sum(),
+                   PartIncome = group.Select(pinc => pinc.PartPrice).Sum(),
+                   ImageUrl = _db.ImagesParts.Where(ip => ip.PartId == group.Key).Select(ip => ip.ImageUrl).First().ToString(),
+                   GroupCount = group.Count(),
+               })
+               .OrderByDescending(og => og.GroupCount)
+               .FirstOrDefault();
+
 
             return result;
 
-        }
-
-        public async Task<StatisticsDto> GetStatistics(FinishedOrdersDto datesPeriod)
-        {
-            var result = new StatisticsDto
-            {
-                OrderStatistics = await GetOrderStatistics(datesPeriod),
-                PartTotalStatistics = await GetTotalPartStatistics(),
-                PartPeriodStatistics = await GetPeriodPartStatistics(datesPeriod)
-            };
-
-            return result;
         }
 
     }

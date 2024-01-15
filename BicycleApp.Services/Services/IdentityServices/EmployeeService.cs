@@ -191,9 +191,9 @@
         /// </summary>
         /// <param name="Id">Id of the employee</param>
         /// <returns>Dto</returns>
-        public async Task<EmployeeInfoDto?> GetEmployeeInfoAsync(string Id)
+        public async Task<EmployeeInfoDto?> GetEmployeeInfoAsync(string Id, string httpScheme, string httpHost, string httpPathBase)
         {
-            var employee = await dbContext.Employees.FirstOrDefaultAsync(e => e.Id == Id);
+            var employee = await dbContext.Employees.Include(e => e.ImagesEmployees).FirstOrDefaultAsync(e => e.Id == Id);
 
             if (employee == null)
             {
@@ -221,7 +221,8 @@
                 DateOfHire = employee.DateOfHire.ToString(DefaultDateFormat),
                 DateOfLeave = employee.DateOfLeave == null ? null : employee.DateOfLeave.Value.ToString(DefaultDateFormat),
                 DateUpdated = employee.DateUpdated == null ? null : employee.DateUpdated.Value.ToString(DefaultDateFormat),
-                IsManeger = employee.IsManeger
+                IsManeger = employee.IsManeger,
+                ImageUrl = stringManipulator.UrlImageMaker(httpScheme, httpHost, httpPathBase, employee.ImagesEmployees.Select(e => e.ImageUrl).FirstOrDefault())
             };
         }
 

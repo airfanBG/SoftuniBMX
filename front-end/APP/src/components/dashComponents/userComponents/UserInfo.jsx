@@ -16,7 +16,7 @@ import LoaderWheel from "../../LoaderWheel.jsx";
 import { post, put } from "../../../util/api.js";
 import { environment } from "../../../environments/environment.js";
 import { useNavigate } from "react-router-dom";
-import { fetchBase64File } from "../../../util/base64ToFormData.js";
+import { fetchImageFile } from "../../../util/imageUpload.js";
 
 function UserInfo() {
   const { user, updateUser } = useContext(UserContext);
@@ -91,8 +91,16 @@ function UserInfo() {
   }
 
   async function updateImage() {
-    fetchBase64File(newFile, user.id, user.role);
-    setEdit(false);
+    const data = { id: user.id, role: user.role, image: base64 };
+    const result = await post(environment.upload_avatar, data);
+    // console.log(result);
+    navigate("/profile");
+    if (!result.isError) {
+      updateUser({ ...user, imageUrl: base64 });
+      setImage(null);
+      setBase64("");
+      setInfo({ ...info, imageUrl: null });
+    }
   }
 
   return (

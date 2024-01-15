@@ -19,7 +19,7 @@
         Task<ICollection<OrderInfoDto>> AllRejectedOrdersAsync();
         Task<bool> AcceptAndAssignRejectedOrderByManagerAsync(int orderId);
         Task<ICollection<OrderProgretionDto>> AllOrdersInProgressAsync();
-        Task<ICollection<EmployeeInfoDto>> GetAllEmployees();
+        Task<ICollection<EmployeeInfoDto>> GetAllEmployees(string httpScheme, string httpHost, string httpPathBase);
         Task<int> GetTotalProductionTime(int orderId);
         Task<OrderQueryDto> AllDeletedOrdersAsync(int currentPage);
         Task<ICollection<OrderSendedDto>> AllSendedOrdersAsync();

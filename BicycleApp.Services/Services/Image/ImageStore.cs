@@ -137,6 +137,11 @@
         {
             var relativePath = new StringBuilder("wwwroot\\files\\profiles");
 
+            if (role == CLIENT)
+            {
+                role = "client";
+            }
+
             relativePath.Append($"\\{role}");
             relativePath.Append($"\\{DateTime.UtcNow.Year}");
             relativePath.Append($"\\{DateTime.UtcNow.Month}");

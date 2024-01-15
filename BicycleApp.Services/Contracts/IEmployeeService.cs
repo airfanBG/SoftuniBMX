@@ -10,7 +10,7 @@
 
         Task<EmployeeReturnDto> LoginEmployeeAsync(EmployeeLoginDto employeeDto, string httpScheme, string httpHost, string httpPathBase);
 
-        Task<EmployeeInfoDto?> GetEmployeeInfoAsync(string Id);
+        Task<EmployeeInfoDto?> GetEmployeeInfoAsync(string Id, string httpScheme, string httpHost, string httpPathBase);
 
         Task<bool> ChangeEmployeePasswordAsync(EmployeePasswordChangeDto employeePasswordChangeDto);
 
