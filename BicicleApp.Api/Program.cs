@@ -147,7 +147,6 @@ namespace BicicleApp.Api
             app.MapControllers();
 
             app.Run();
-
         }
     }
 }

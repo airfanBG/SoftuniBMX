@@ -5,7 +5,6 @@ import BoardHeader from "../BoardHeader.jsx";
 import LoaderWheel from "../../LoaderWheel.jsx";
 import React, { useEffect } from "react";
 import { get } from "../../../util/api.js";
-import ComponentUserOrderInfo from "./ComponentUserOrdersInfo.jsx";
 import { useParams } from "react-router-dom";
 
 function ComponentUserOrder() {
@@ -31,7 +30,6 @@ function ComponentUserOrder() {
       <section>
         <BoardHeader />
         {loading && <LoaderWheel />}
-        <ComponentUserOrderInfo data={data} />
       </section>
     </>
   );

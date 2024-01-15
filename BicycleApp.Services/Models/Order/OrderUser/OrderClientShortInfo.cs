@@ -6,11 +6,15 @@
 
         public string SerialNumber { get; set; } = null!;
 
-        public string OrderDate { get; set; } = null!;
+        public string OrderDateStart { get; set; } = null!;
+
+        public string? OrderDateFinish { get; set; }
 
         public decimal Amount { get; set; }
-        public decimal UnpaidAmount { get; set; }
+
         public decimal PaidAmount { get; set; }
+
+        public decimal UnpaidAmount { get; set; }
 
         public List<PartShortInfoDto> Parts { get; set; } = new List<PartShortInfoDto>();
 

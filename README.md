@@ -57,7 +57,7 @@
 
    - [Профилна страница](/FrontEndReadMeFiles/ClientFiles/Profile.md)
    - [Редактиране на профил](/FrontEndReadMeFiles/ClientFiles/EditProfile.md)
-   - ! [Банкова информация](/FrontEndReadMeFiles/ClientFiles/)
+   - [Банкова информация](/FrontEndReadMeFiles/ClientFiles/Bank.md)
    - [Създаване на поръчка](/FrontEndReadMeFiles/ClientFiles/Order.md)
    - [Потребителска кошница](/FrontEndReadMeFiles/ClientFiles/Cart.md)
    - [Проследяване на поръчка](/FrontEndReadMeFiles/ClientFiles/TrackOrder.md)
@@ -104,7 +104,7 @@
 
 - [Krasimir Iliev](https://www.linkedin.com/in/krasimir-iliev-bb4189238/)
 
-- [Georgi Kolev]()
+- [Georgi Kolev](www.linkedin.com/in/george-kolev-b37005109)
 
 ### 🤝 Contributing
 
@@ -124,7 +124,7 @@ If you would like to suppurt us you could do it by giving a <!-- Place this tag 
 
 - [Krasimir Iliev]()
 
-- [Georgi Kolev]()
+- Georgi Kolev - [jorjo7@abv.bg](mailto:jorjo7@abv.bg)
 
 ### 📜 Лиценз / License
 

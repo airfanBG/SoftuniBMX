@@ -9,7 +9,7 @@ import CreditCard from "../../CreditCard.jsx";
 
 function UserContactInfo({ info, addMoneyBtnHandler }) {
   const { user } = useContext(UserContext);
-  const [amount, setAmount] = useState("");
+  // const [amount, setAmount] = useState("");
   const [card, setCard] = useState("");
   const [expDate, setExpDate] = useState("");
   const [cardName, setCardName] = useState(
@@ -18,12 +18,9 @@ function UserContactInfo({ info, addMoneyBtnHandler }) {
   const [cvv, setCvv] = useState("");
   const [isAccount, setIsAccount] = useState(false);
 
-  function onAddAmountHandler(e) {
-    // e.preventDefault();
-    // if (amount < 1 || amount === "") return;
-    // console.log(e.target.value);
-    // addMoneyBtnHandler(amount);
-    // setAmount("");
+  function onAddAmountHandler(amount) {
+    if (Number(amount) < 0 || amount === "") return;
+    addMoneyBtnHandler(amount);
   }
 
   function switcher(panel) {
@@ -147,86 +144,12 @@ function UserContactInfo({ info, addMoneyBtnHandler }) {
 
           {isAccount && (
             <div className={styles.formContainer}>
-              {/* <form onSubmit={onAddAmountHandler} className={styles.form}>
-                <div className={styles.formContainer}>
-                  <label htmlFor="" className={styles.labelInput}>
-                    card number
-                  </label>
-                  <input
-                    type="tel"
-                    className={styles.balanceInput}
-                    value={card}
-                    onChange={(e) => setCard(Number(e.target.value))}
-                    // placeholder={"Add card number"}
-                  />
-                </div>
-
-                <div className={styles.formContainer}>
-                  <label htmlFor="" className={styles.labelInput}>
-                    card number
-                  </label>
-                  <input
-                    type="text"
-                    className={styles.balanceInput}
-                    value={cardName}
-                    onChange={(e) => setCardName(e.target.value.trim())}
-                    minLength={15}
-                    maxLength={19}
-                  />
-                </div>
-                <div className={styles.formContainer}>
-                  <label htmlFor="" className={styles.labelInput}>
-                    expiration date
-                  </label>
-                  <input
-                    type="date"
-                    className={styles.balanceInput}
-                    value={expDate}
-                    onChange={(e) => setExpDate(e.target.value.trim())}
-                  />
-                </div>
-
-                <div className={styles.formContainer}>
-                  <label htmlFor="" className={styles.labelInput}>
-                    cvv
-                  </label>
-                  <input
-                    type="number"
-                    className={styles.balanceInput}
-                    value={cvv}
-                    onChange={(e) => setCvv(Number(e.target.value))}
-                    placeholder={"Add cvv"}
-                  />
-                </div>
-
-                <button className={styles.amountBtn}>Add to balance</button>
-              </form> */}
-              <CreditCard amountBtnHandler={onAddAmountHandler} />
+              <CreditCard
+                amountBtnHandler={onAddAmountHandler}
+                switcher={switcher}
+              />
             </div>
           )}
-
-          {/* {user.role === "user" && (
-            <h2 className={styles.infoHeader}>
-              <span>Account information</span>
-            </h2>
-          )}
-          {user.role === "user" && (
-            <div className={styles.fullData}>
-              <div className={styles.row}>
-                <ContactInfoElement
-                  // content={user.balance.toFixed(2)}
-                  content={formatCurrency(user.balance)}
-                  label={"Account balance"}
-                  width={"40%"}
-                />
-                <ContactInfoElement
-                  content={info.iban}
-                  label={"IBAN"}
-                  width={"60%"}
-                />
-              </div>
-            </div>
-          )} */}
         </div>
       )}
     </>

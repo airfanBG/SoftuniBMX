@@ -15,7 +15,11 @@ function PartInfo() {
   const [partRating, setPartRating] = useState(0); // рейтинга на частта
   const [data, setData] = useState({});
   const [comment, setComment] = useState({});
+  const [commentExists, setCommentExists] = useState(false);
   const [partOldRating, setPartOldRating] = useState(false);
+  const [backgroundEdit, setBackgroundEdit] = useState(false);
+  const [backgroundAdd, setBackgroundAdd] = useState(false);
+  const [commentUpdated, setCommentUpdated] = useState(false);
 
   window.scrollTo(0, 0);
 
@@ -49,13 +53,14 @@ function PartInfo() {
         environment.get_client_rate + id + "&clientId=" + user.id
       );
       if (result === undefined) return;
-      if (receivedRating === partOldRating) return;
       setComment(result);
+      setCommentExists(true);
+      if (receivedRating === partOldRating) return;
       setPartOldRating(receivedRating);
     }
 
     getComment();
-  }, [id, partOldRating, user.id]);
+  }, [id, partOldRating, user.id, commentUpdated]);
 
   async function addRating(r) {
     let result;
@@ -71,8 +76,30 @@ function PartInfo() {
     } else {
       result = await put(environment.update_client_rate, obj);
     }
-    console.log(result);
     setPartOldRating(r);
+  }
+
+  async function addComment(commentData) {
+    try {
+      const result = await post(environment.add_comment, commentData);
+      if (result) {
+        setCommentUpdated(!commentUpdated);
+      }
+    } catch (error) {
+      console.error("Error adding comment:", error);
+    }
+  }
+
+  async function editComment(commentData) {
+    try {
+      const result = await post(environment.edit_comment, commentData);
+      if (result) {
+        setCommentUpdated(!commentUpdated);
+        setComment({});
+      }
+    } catch (error) {
+      console.error("Error adding comment:", error);
+    }
   }
 
   return (
@@ -118,7 +145,84 @@ function PartInfo() {
               <p>Current rating: {partRating.toFixed(1)}</p>
             </div>
           </div>
-          <div>coment</div>
+          <div>
+            {commentExists ? (
+              <div className={styles.commentContainer}>
+                <h3>{comment.title}</h3>
+                <p>{comment.description}</p>
+                <button
+                  className={styles.editCommentButton}
+                  onClick={() => setBackgroundEdit(true)}
+                >
+                  Edit Comment
+                </button>
+              </div>
+            ) : (
+              <button
+                className={styles.addCommentButton}
+                onClick={() => setBackgroundAdd(true)}
+              >
+                Add Comment
+              </button>
+            )}
+          </div>
+          {backgroundAdd && (
+            <div className={styles.commentFormContainer}>
+              <h3>New Comment</h3>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const commentData = {
+                    partId: id,
+                    clientId: user.id,
+                    title: e.target.commentTitle.value,
+                    description: e.target.commentDescription.value,
+                  };
+                  addComment(commentData);
+                  setBackgroundAdd(false);
+                }}
+              >
+                <label htmlFor="commentTitle">Title:</label>
+                <input type="text" id="commentTitle" name="commentTitle" />
+
+                <label htmlFor="commentDescription">Description:</label>
+                <textarea id="commentDescription" name="commentDescription" />
+
+                <button type="submit" className={styles.submitCommentButton}>
+                  Send
+                </button>
+              </form>
+            </div>
+          )}
+          {backgroundEdit && (
+            <div className={styles.commentFormContainer}>
+              <h3>Edit Comment</h3>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const commentData = {
+                    id: comment.id,
+                    partId: id,
+                    clientId: user.id,
+                    title: e.target.commentTitle.value,
+                    description: e.target.commentDescription.value,
+                  };
+                  editComment(commentData);
+                  setBackgroundEdit(false);
+                }}
+              >
+                <label htmlFor="commentTitle">Title:</label>
+                <input type="text" id="commentTitle" name="commentTitle" />
+
+                <label htmlFor="commentDescription">Description:</label>
+                <textarea id="commentDescription" name="commentDescription" />
+
+                <button type="submit" className={styles.submitCommentButton}>
+                  Send
+                </button>
+              </form>
+            </div>
+          )}
         </section>
       </div>
     </>

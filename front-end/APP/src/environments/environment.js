@@ -15,6 +15,7 @@ export const environment = {
   // CLIENT
   update_client: "/api/client/edit/", // + id
   info_client: "/api/client/info?id=", // + id
+  upload_avatar: "/api/client/add_avatar",
 
   // CLIENT_ORDER
   create_order: "/api/client_order/create",
@@ -74,9 +75,11 @@ export const environment = {
 
   //COMMENT
   find_comment: "/api/comment/find?clientId=", // + clientId + &partId=partId
+  add_comment: "/api/comment/add",
+  edit_comment: "/api/comment/edit",
 
   //RATE
   get_client_rate: "/api/rate/get_rate?partId=", // + partId + &clientId=clientId
-  set_client_rate: "/api/rate/set_rate", 
+  set_client_rate: "/api/rate/set_rate",
   update_client_rate: "/api/rate/update_rate",
 };

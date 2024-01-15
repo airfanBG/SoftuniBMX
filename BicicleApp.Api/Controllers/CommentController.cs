@@ -38,14 +38,14 @@ namespace BicicleApp.Api.Controllers
                 var result = await commentService.AddNewCommentAsync(commentAddDto);
                 if (result)
                 {
-                    return StatusCode(StatusCodes.Status201Created);
+                    return StatusCode(StatusCodes.Status201Created, true);
                 }
 
                 return BadRequest(commentAddDto);
             }
             catch (Exception)
             {
-                return StatusCode(500);
+                return StatusCode(500, false);
             }
         }
 
@@ -71,14 +71,14 @@ namespace BicicleApp.Api.Controllers
                 var result = await commentService.EditCommentAsync(commentEditDto);
                 if (result)
                 {
-                    return StatusCode(StatusCodes.Status202Accepted);
+                    return StatusCode(StatusCodes.Status202Accepted, true);
                 }
 
                 return BadRequest(commentEditDto);
             }
             catch (Exception)
             {
-                return StatusCode(500);
+                return StatusCode(500, false);
             }
         }
 

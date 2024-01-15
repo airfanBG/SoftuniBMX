@@ -35,6 +35,12 @@
 
 ### [`POST /api/client_order/delete`](/ReadMeFiles/ClientOrder/Delete.md)
 
+- ManagerStatisticsController дава възможността да се ползва функционалността на ManagerStatisticsService. 
+
+### [`GET /api/manager_statistics/employee_statistics`](/ReadMeFiles/ManagerStatistics/employee_statistics.md)
+### [`GET /api/manager_statistics/order_part_statistics`](/ReadMeFiles/ManagerStatistics/order_part_statistics.md)
+### [`GET /api/manager_statistics/employees_full_statistics`](/ReadMeFiles/ManagerStatistics/employees_full_statistics.md)
+
 - OrderManagerController дава възможността да се ползва функционалността на OrderManagerService.
 
 ### [`GET /api/manager/pending_orders`](/ReadMeFiles/Manager/pending_orders.md)

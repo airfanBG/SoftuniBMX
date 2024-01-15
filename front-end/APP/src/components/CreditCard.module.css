@@ -1,3 +1,15 @@
+.board {
+  width: 100%;
+  min-height: 100px;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  padding: 2rem 3rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: #fff;
+}
+
 .cardContainer {
   width: 100%;
   display: flex;
@@ -38,6 +50,7 @@
 .twoOnRow {
   display: flex;
   gap: 2rem;
+  width: 100%;
 }
 
 .expDateField {
@@ -47,18 +60,38 @@
   width: 35%;
 }
 
+.amountBlock {
+  display: flex;
+  gap: 2rem;
+}
 .amount {
-  width: 50%;
+  width: 65%;
 }
 
 .amountBtn {
-  /* width: fit-content; */
-  width: 35%;
-
   background-color: var(--bg-color);
-  padding: 0.2rem 2rem;
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.55rem;
   font-size: 1.6rem;
   color: var(--color-link-light);
   text-transform: uppercase;
+  text-align: center;
   border-radius: 0.3rem;
+}
+
+.amountBtn:hover {
+  background-color: var(--bg-color-light);
+}
+.amountBtn:disabled {
+  background-color: var(--bg-color-light);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.errorContainer {
+  font-size: 2rem;
+  color: var(--color-warning);
+  width: 100%;
+  height: 2rem;
 }
