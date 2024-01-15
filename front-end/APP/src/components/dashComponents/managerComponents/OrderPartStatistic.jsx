@@ -142,11 +142,11 @@ function OrderPartStatistic() {
           <h3 className={styles.infoHeading}>Best seler part:</h3>
           <figure className={styles.figure}>
             <div className={styles["imgHolder"]}>
-              {resultObject.partTotalStatistics?.partName ? (
+              {resultObject.totalPartStatistics?.partName ? (
                 <img
                   className={styles.tumbs}
-                  src={resultObject.partTotalStatistics?.imageUrl}
-                  alt={`${resultObject.partTotalStatistics?.partName} image`}
+                  src={resultObject.totalPartStatistics?.imageUrl}
+                  alt={`${resultObject.totalPartStatistics?.partName} image`}
                 />
               ) : (
                 <User
@@ -159,27 +159,27 @@ function OrderPartStatistic() {
             </div>
             <section className={styles.workerInfo}>
               <h2 className={styles.heading}>
-                {resultObject.partTotalStatistics?.partName}
+                {resultObject.totalPartStatistics?.partName}
               </h2>
               <p className={`${styles.info}`}>
                 <span>Part name:</span>
-                {resultObject.partTotalStatistics?.partName}
+                {resultObject.totalPartStatistics?.partName}
               </p>
               <div className={styles.infoBox}>
                 <p className={`${styles.info}`}>
                   <span>Serial number:</span>
-                  {resultObject.partTotalStatistics?.serialNumber}
+                  {resultObject.totalPartStatistics?.serialNumber}
                 </p>
                 <p className={`${styles.info}`}>
                   <span>Solded count:</span>
-                  {resultObject.partTotalStatistics?.partSoldCount} Pcs.
+                  {resultObject.totalPartStatistics?.partSoldCount} Pcs.
                 </p>
                 <p className={`${styles.info}`}>
                   <span>Income:</span>
                   {!formatCurrency(
-                  resultObject.partTotalStatistics?.partIncome
+                  resultObject.totalPartStatistics?.partIncome
                 ).includes("NaN")
-                  ? formatCurrency(resultObject.partTotalStatistics?.partIncome)
+                  ? formatCurrency(resultObject.totalPartStatistics?.partIncome)
                   : formatCurrency(0)}
                   {/* {resultObject.partTotalStatistics?.partIncome} BGN */}
                 </p>
@@ -216,11 +216,11 @@ function OrderPartStatistic() {
             </h3>
             <figure className={styles.figure}>
               <div className={styles["imgHolder"]}>
-                {resultObject.partPeriodStatistics?.partName ? (
+                {resultObject.periodPartStatistics?.partName ? (
                   <img
                     className={styles.tumbs}
-                    src={resultObject.partPeriodStatistics?.imageUrl}
-                    alt={`${resultObject.partPeriodStatistics?.partName} image`}
+                    src={resultObject.periodPartStatistics?.imageUrl}
+                    alt={`${resultObject.periodPartStatistics?.partName} image`}
                   />
                 ) : (
                   <User
@@ -233,27 +233,27 @@ function OrderPartStatistic() {
               </div>
               <section className={styles.workerInfo}>
                 <h2 className={styles.heading}>
-                  {resultObject.partPeriodStatistics?.partName}
+                  {resultObject.periodPartStatistics?.partName}
                 </h2>
                 <p className={`${styles.info}`}>
                   <span>Part name:</span>
-                  {resultObject.partPeriodStatistics?.partName}
+                  {resultObject.periodPartStatistics?.partName}
                 </p>
                 <div className={styles.infoBox}>
                   <p className={`${styles.info}`}>
                     <span>Serial number:</span>
-                    {resultObject.partPeriodStatistics?.serialNumber}
+                    {resultObject.periodPartStatistics?.serialNumber}
                   </p>
                   <p className={`${styles.info}`}>
                     <span>Solded count:</span>
-                    {resultObject.partPeriodStatistics?.partSoldCount} Pcs.
+                    {resultObject.periodPartStatistics?.partSoldCount} Pcs.
                   </p>
                   <p className={`${styles.info}`}>
                     <span>Income:</span>
                     {!formatCurrency(
-                  resultObject.orderStatistics?.partIncome
+                  resultObject.periodPartStatistics?.partIncome
                 ).includes("NaN")
-                  ? formatCurrency(resultObject.partPeriodStatistics?.partIncome)
+                  ? formatCurrency(resultObject.periodPartStatistics?.partIncome)
                   : formatCurrency(0)}
                     {/* {resultObject.partPeriodStatistics?.partIncome} BGN */}
                   </p>

@@ -51,7 +51,7 @@
             try
             {
                 var result = await _managerSatisticsService.GetStatistics(datesPeriod);
-
+             
 
                 if (result != null)
                 {
