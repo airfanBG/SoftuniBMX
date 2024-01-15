@@ -26,6 +26,7 @@ function UserInfo() {
   const [base64, setBase64] = useState("");
   const [edit, setEdit] = useState(false);
   const [info, setInfo] = useState("");
+  const [newImage, setNewImage] = useState("");
   const uploadedImage = useRef(null);
   const navigate = useNavigate();
 
@@ -49,6 +50,8 @@ function UserInfo() {
   // upload image file from local machine
   async function handleFileUpload(e) {
     const [file] = e.target.files;
+    setNewImage(file);
+
     // console.log(file);
 
     if (file) {
@@ -89,16 +92,18 @@ function UserInfo() {
   }
 
   async function updateImage() {
-    const data = { id: user.id, role: user.role, image: base64 };
-    const result = await post(environment.upload_avatar, data);
-    // console.log(result);
-    navigate("/profile");
-    if (!result.isError) {
-      updateUser({ ...user, imageUrl: base64 });
-      setImage(null);
-      setBase64("");
-      setInfo({ ...info, imageUrl: null });
-    }
+    // const data = { id: user.id, role: user.role, image: base64 };
+    // const result = await post(environment.upload_avatar, data);
+    // // console.log(result);
+    // navigate("/profile");
+    // if (!result.isError) {
+    //   updateUser({ ...user, imageUrl: base64 });
+    //   setImage(null);
+    //   setBase64("");
+    //   setInfo({ ...info, imageUrl: null });
+    // }
+    fetchImageFile(newImage, user.id, user.role);
+    setEdit(false);
   }
 
   return (
