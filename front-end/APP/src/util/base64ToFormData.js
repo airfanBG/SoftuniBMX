@@ -7,26 +7,30 @@
 
 import { environment } from "../environments/environment.js";
 
-function fetchBase64File(base64File, id, role) {
-  // const base64 = "data:image/png;base64,...."; // Place your base64 url here.
-  const API_URL = environment.upload_avatar;
-  const [fileData, base64] = base64File.split(",");
-  const mimeType = fileData.split("/").at(1).split(";").at(0);
-  const fileName = `${id}.${mimeType}`;
+function fetchBase64File(file, id, role) {
+  let apiRole = role === "user" ? "client" : "employee";
 
-  fetch(base64)
-    .then((res) => res.blob())
-    .then((blob) => {
-      const fd = new FormData();
-      const file = new File([blob], fileName);
-      fd.append("image", file);
+  // const API_URL = `https://localhost:7047/api/${apiRole}/add_avatar`;
+  const API_URL = `${environment.BASE_URL}/api/${apiRole}/add_avatar`;
+  // console.log(API_URL);
 
-      // Let's upload the file
-      // Don't set contentType manually → https://github.com/github/fetch/issues/505#issuecomment-293064470
+  const formData = new FormData();
+  formData.append("Id", id);
+  formData.append("Role", role);
+  formData.append("ImageToSave", file);
 
-      fetch(API_URL, { method: "POST", body: fd })
-        .then((res) => res.json())
-        .then((res) => console.log(res));
+  fetch(API_URL, {
+    method: "POST",
+    // mode: "cors",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.error(error);
     });
 }
-fetchBase64File("data:image/jpeg;base64,/9j/4AAQSkZJRgABA", "tes12312");
+
+export { fetchBase64File };
