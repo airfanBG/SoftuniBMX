@@ -26,7 +26,6 @@ function UserInfo() {
   const [base64, setBase64] = useState("");
   const [edit, setEdit] = useState(false);
   const [info, setInfo] = useState("");
-  const [newFile, setNewFile] = useState("");
   const uploadedImage = useRef(null);
   const navigate = useNavigate();
 
@@ -50,7 +49,6 @@ function UserInfo() {
   // upload image file from local machine
   async function handleFileUpload(e) {
     const [file] = e.target.files;
-    setNewFile(file);
     // console.log(file);
 
     if (file) {
