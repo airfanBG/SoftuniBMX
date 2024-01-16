@@ -44,3 +44,9 @@
   font-weight: 400;
   text-decoration: none;
 }
+
+.fontHd {
+  font-size: 2rem;
+  font-weight: 300;
+  margin: 2rem;
+}

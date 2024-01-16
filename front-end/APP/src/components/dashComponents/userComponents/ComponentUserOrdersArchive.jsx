@@ -26,7 +26,7 @@ function ComponentUserOrdersArchive() {
 
   return (
     <>
-      <h2 className={styles.dashHeading}>Selected items</h2>
+      <h2 className={styles.dashHeading}>Orders history</h2>
 
       <section className={styles.board}>
         <BoardHeader />
