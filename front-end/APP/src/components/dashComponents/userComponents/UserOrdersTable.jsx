@@ -1,3 +1,4 @@
+import { formatCurrency } from "../../../util/resolvers.js";
 import styles from "./UserOrdersTable.module.css";
 import { useNavigate } from "react-router-dom";
 
@@ -20,9 +21,9 @@ function UserOrdersTable({ orders }) {
           {orders.map((order) => (
             <tr key={order.orderId} className={styles.row}>
               <td>{order.serialNumber}</td>
-              <td>{order.orderDateStart}</td>
-              <td>{order.orderDateFinish}</td>
-              <td>{order.amount.toFixed(2)}</td>
+              <td>{order.orderDateStart.replaceAll("/", ".")}</td>
+              <td>{order.orderDateFinish.replaceAll("/", ".")}</td>
+              <td>{formatCurrency(order.amount)}</td>
               <td>
                 <ul>
                   {order.parts.map((part) => (
