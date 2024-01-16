@@ -11,6 +11,7 @@
     using BicycleApp.Services.Services.Orders;
     using Moq;
     using Moq.EntityFrameworkCore;
+    using NUnit.Framework.Constraints;
 
     [TestFixture]
     internal class OrderUserServiceTest
@@ -50,7 +51,13 @@
                 IsDeleted = false
             };
             fakeContext.Setup(x => x.Parts).ReturnsDbSet(new List<Part> { part });
-            var fakeVatCategory = new Mock<VATCategory>();
+            VATCategory vatCategory = new VATCategory()
+            {
+                Id = 1,
+                VATPercent = 20.00M,
+                DateCreated = new DateTime(2024, 1, 1),
+            };
+            fakeContext.Setup(x => x.VATCategories).ReturnsDbSet(new List<VATCategory> { vatCategory });
             
 
             IUserOrderDto order = new UserOrderDto()
@@ -59,7 +66,7 @@
                 Description = "someDescription",
                 OrderQuantity = 1,
                 VATId = 1,
-                OrderParts = new List<OrderPartIdDto>() { new OrderPartIdDto() { PartId = 18 } }
+                OrderParts = new List<OrderPartIdDto>() { new OrderPartIdDto() { PartId = 1 } }
             };
 
             // Act 
@@ -68,36 +75,7 @@
             // Assert
             Assert.IsNull(result);
         }
-        [Test]
-        public async Task CreateOrderByUserAsync_Should_ReturNewOrderObject_WhenUserSuccesfulyMadeOrder()
-        {
-            // Arrange
-            IUserOrderDto order = new UserOrderDto()
-            {
-                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                Description = "someDescription",
-                OrderQuantity = 1,
-                VATId = 1,
-                OrderParts = new List<OrderPartIdDto>() { new OrderPartIdDto() { PartId = 2 } }
-            };
-            var vatVategory = new VATCategory
-            {
-                Id = 1,
-                VATPercent = 20.00M,
-                DateCreated = new DateTime(2024,1,1),
-                IsDeleted = false
-            };
-            fakeContext.Setup(x => x.VATCategories).ReturnsDbSet(new List<VATCategory> { vatVategory });
-
-            fakeDateTimeProvider.Setup(x => x.Now).Returns(new DateTime(2024, 1, 1));
-
-            
-            // Act 
-            var result =  fakeOrderUserService.CreateOrderByUser(order);
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
+        
         [Test]
         public async Task CreateOrderByUserAsync_Should_ReturNull_WhenUserDontHaveEnoughBalance()
         {

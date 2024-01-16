@@ -77,7 +77,9 @@
 
                 var client = _db.Clients.First(c => c.Id == order.ClientId);
 
-                var isThereEnoughMoney = CheckBalance(client.Balance, newOrder.FinalAmount);
+                var orderNeededAdvance = NeededAdvanceForOrder(newOrder.FinalAmount);
+
+                var isThereEnoughMoney = CheckBalance(client.Balance, orderNeededAdvance);
 
                 if (!isThereEnoughMoney)
                 {
@@ -354,13 +356,18 @@
             }
             return 0;
         }
-        private bool CheckBalance(decimal clientBalanceAmount, decimal orderAmount)
+        private bool CheckBalance(decimal clientBalanceAmount, decimal orderNeededAmount)
         {
-            if (clientBalanceAmount >= orderAmount)
+            if (clientBalanceAmount >= orderNeededAmount)
             {
                 return true;
             }
             return false;
+        }
+
+        private decimal NeededAdvanceForOrder(decimal orderAmount)
+        {
+            return Math.Round(orderAmount * (20/100), 2);
         }
     }
 }
