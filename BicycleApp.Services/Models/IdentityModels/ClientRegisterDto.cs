@@ -54,9 +54,8 @@
         [JsonPropertyName("role")]
         public string Role { get; set; } = null!;
 
-        [Required]
-        //[StringLength(DelivaryAddressMaxLength)]
+        
         [JsonPropertyName("address")]
-        public ClientAddressDto DelivaryAddress { get; set; } = null!;
+        public ClientAddressDto? DelivaryAddress { get; set; }
     }
 }
