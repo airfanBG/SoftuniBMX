@@ -41,6 +41,17 @@
   - ASP.NET
   - MySQL
 
+### Предварително регистрирани потребители
+
+| EMAIL              | PASSWORD | РОЛЯ               |
+| ------------------ | -------- | ------------------ |
+| client@test.bg     | 123456   | потребител         |
+| marinov@b-free.com | User123! | работник рамки     |
+| todorov@b-free.com | User123! | работник колела    |
+| marinov@b-free.com | User123! | работник аксесоари |
+| ivanov@b-free.com  | User123! | контрол качество   |
+| manager@b-free.com | User123! | мениджър           |
+
 ## 📃 Съдържание и навигиране в приложението
 
 1. <h4 style='text-decoration:underline'>Стартова страница</h4>
@@ -49,9 +60,9 @@
 
 2. <h4 style='text-decoration:underline'>Създаване на профил и влизане в системата</h4>
 
-   - [Registration](/FrontEndReadMeFiles/Autentication/Register.md)
-   - [Login](/FrontEndReadMeFiles/Autentication/Login.md)
-   - [Forgot password](/FrontEndReadMeFiles/Autentication/ForgotPassword.md)
+   - [Регистрация](/FrontEndReadMeFiles/Autentication/Register.md)
+   - [Вход](/FrontEndReadMeFiles/Autentication/Login.md)
+   - [Забравена парола](/FrontEndReadMeFiles/Autentication/ForgotPassword.md)
 
 3. <h4 style='text-decoration:underline'>Клиент</h4>
 
@@ -63,11 +74,13 @@
    - [Проследяване на поръчка](/FrontEndReadMeFiles/ClientFiles/TrackOrder.md)
    - [Готови поръчки](/FrontEndReadMeFiles/ClientFiles/Ready.md)
    - ! [Архив](/FrontEndReadMeFiles/ClientFiles/Archive.md)
+   - ! [Коментари и рейтинг](/FrontEndReadMeFiles/ClientFiles/)
 
 4. <h4 style='text-decoration:underline'>Служители</h4>
 
    - [Профилна страница](/FrontEndReadMeFiles/ClientFiles/Profile.md)
    - ! [Поръчки за отдела](/FrontEndReadMeFiles/Employee/EditProfile.md)
+   - ! [Заплати](/FrontEndReadMeFiles/Employee/)
 
 5. <h4 style='text-decoration:underline'> Качествен контрол</h4>
 
@@ -88,7 +101,9 @@
 
 <!-- 7. <h4 style='text-decoration:underline'>[Крайни точки](/ReadMeFiles_BE)</h4> -->
 
-7. #### 📍 [Крайни точки](/BE_README.md)
+7. #### <h4 style='text-decoration:underline'>Крайни точки</h4>
+
+- 📍 [Връзка](/BE_README.md) към лист със съдържание и описание на всички API отправни точки , използвани в приложението
 
 8. #### 🔗 [Архитектура](http://yuchormanski.free.bg/bikes/high-level-dependencies.html)
 
@@ -96,23 +111,23 @@
 
 <img src="https://cdn-icons-png.flaticon.com/256/174/174857.png" width="15"> - Connect with us on LinkedIn:
 
-- [Daniel Damyanov ]()
+- [Daniel Damyanov ]() - Team Leader
 
-- [Nikolay Yuchormanski](www.linkedin.com/in/nikolay-yuchormanski-b34975255)
+- [Nikolay Yuchormanski](www.linkedin.com/in/nikolay-yuchormanski-b34975255) - Front-End
 
-- [Todor Todorov](https://www.linkedin.com/in/тодор-тодоров-178aaa263/)
+- [Todor Todorov](https://www.linkedin.com/in/тодор-тодоров-178aaa263/) - Back-End
 
-- [Krasimir Iliev](https://www.linkedin.com/in/krasimir-iliev-bb4189238/)
+- [Krasimir Iliev](https://www.linkedin.com/in/krasimir-iliev-bb4189238/) - Back-End
 
-- [Georgi Kolev](www.linkedin.com/in/george-kolev-b37005109)
+- [Georgi Kolev](www.linkedin.com/in/george-kolev-b37005109) - Back-End
 
 ### 🤝 Contributing
 
-Ако харесвате нашата работа, моля, подкрепете ни като оставите <!-- Place this tag where you want the button to render. -->
+Ако харесвате нашата работа, моля, подкрепете ни като оставите
 <a class="github-button" href="https://github.com/airfanBG/SoftuniBMX" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star airfanBG/SoftuniBMX on GitHub">Звезда⭐</a>.
 
-If you would like to suppurt us you could do it by giving a <!-- Place this tag where you want the button to render. -->
-<a class="github-button" href="https://github.com/airfanBG/SoftuniBMX" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star airfanBG/SoftuniBMX on GitHub">Star ⭐</a>.
+<!-- If you would like to suppurt us you could do it by giving a  -->
+<!-- <a class="github-button" href="https://github.com/airfanBG/SoftuniBMX" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star airfanBG/SoftuniBMX on GitHub">Star ⭐</a>. -->
 
 ### 📧 Contact Us
 
@@ -132,4 +147,4 @@ If you would like to suppurt us you could do it by giving a <!-- Place this tag 
 
 - <img src="https://flagpedia.net/data/flags/w580/gb.webp" width="20" /> - This project is licensed under the MIT License. See the [LICENSE](https://github.com/airfanBG/SoftuniBMX/tree/develop?tab=License-1-ov-file) file for details.
 
-🌐 Thank you for joining us on this journey to Bike production! 🌐
+🌐 Thank you for joining us on this journey to Bike Management eXtreme - BMX! 🌐
