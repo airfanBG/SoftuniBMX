@@ -51,7 +51,7 @@
             };
             fakeContext.Setup(x => x.Parts).ReturnsDbSet(new List<Part> { part });
             var fakeVatCategory = new Mock<VATCategory>();
-            fakeVatCategory.Setup().r
+            
 
             IUserOrderDto order = new UserOrderDto()
             {
