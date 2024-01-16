@@ -376,7 +376,7 @@
 
             if (result)
             {
-                return Ok();
+                return Ok(result);
             }
 
             return BadRequest();
