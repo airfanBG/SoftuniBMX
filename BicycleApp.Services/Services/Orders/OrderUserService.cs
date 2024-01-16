@@ -367,7 +367,8 @@
 
         private decimal NeededAdvanceForOrder(decimal orderAmount)
         {
-            return Math.Round(orderAmount * (20/100), 2);
+            decimal neededAdvance = orderAmount * (decimal)(20.00 / 100);
+            return Math.Round(neededAdvance, 2);
         }
     }
 }
