@@ -126,6 +126,14 @@ function InProgress() {
                   - The order is in Quality control
                 </span>
               </p>
+              <p className={styles.listItem}>
+                <span className={styles.listIcon} style={{ color: "red" }}>
+                  <ion-icon name="hammer-outline"></ion-icon>
+                </span>
+                <span className={styles.listItemText}>
+                  - The order was returned by Quality control for re-build
+                </span>
+              </p>
             </div>
           </aside>
         </div>
