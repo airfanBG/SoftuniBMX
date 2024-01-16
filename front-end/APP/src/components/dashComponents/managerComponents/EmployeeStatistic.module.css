@@ -15,9 +15,10 @@
   flex-direction: column;
   gap: 2rem;
   background-color: #fff;
+  margin-bottom: 4rem;
 }
 
-.serial{
+.serial {
   font-size: 1.4rem;
 }
 
@@ -34,10 +35,10 @@
 
 .serial span,
 .dateCreated span {
-font-size: 1.6rem;
-font-weight: 300;
-color: var(--color-hd);
-margin-right: 1rem;
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: var(--color-hd);
+  margin-right: 1rem;
 }
 
 .dateContainer {
@@ -126,7 +127,6 @@ form.form {
 }
 
 .workerInfo {
-
   width: 90%;
   margin: 0.5rem;
   padding: 0.5rem 0.5rem;
@@ -159,7 +159,6 @@ form.form {
   margin-bottom: 0.9rem;
 }
 
-
 .info span {
   position: absolute;
   top: -1rem;
@@ -172,4 +171,8 @@ form.form {
 
 .tumbs {
   z-index: 0;
+}
+
+.mBotom {
+  margin: 3rem 0;
 }

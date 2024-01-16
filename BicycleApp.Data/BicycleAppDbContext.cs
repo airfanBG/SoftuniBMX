@@ -263,7 +263,7 @@
             {
                 entity
                     .HasOne(po => po.Part)
-                    .WithMany()
+                    .WithMany(po => po.PartsInOrder)
                     .HasForeignKey(p => p.PartId)
                     .OnDelete(DeleteBehavior.NoAction);
             });

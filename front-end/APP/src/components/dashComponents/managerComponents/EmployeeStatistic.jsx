@@ -10,13 +10,10 @@ import { environment } from "../../../environments/environment.js";
 
 import { User } from "@phosphor-icons/react";
 
-
 function ManagerStatistic() {
-
   const [error, setError] = useState({});
   const [loading, setLoading] = useState(false);
   const [resultObject, setResultObject] = useState({});
-
 
   // State to hold user input
   const [startDate, setStartDate] = useState("2023-04-11");
@@ -41,7 +38,9 @@ function ManagerStatistic() {
 
       async function getStatistics() {
         const queryString = `?startDate=${startDate}&endDate=${endDate}`;
-        const result = await get(environment.employees_full_statistic + queryString);
+        const result = await get(
+          environment.employees_full_statistic + queryString
+        );
         if (!result) {
           setLoading(false);
           return setError({
@@ -68,12 +67,7 @@ function ManagerStatistic() {
 
   return (
     <>
-
-      <h2 className={styles.dashHeading}>
-        Employee statistics:
-      </h2>
       <section className={styles.board}>
-        <BoardHeader />
         {loading && <LoaderWheel />}
         <div className={styles.dateContainer}>
           <div className={styles.element}>
@@ -129,7 +123,9 @@ function ManagerStatistic() {
                 Information about selecting date interval
               </h3>
               <ul className={styles.list}>
-                <li>On initial render will be displayed all available orders</li>
+                <li>
+                  On initial render will be displayed all available orders
+                </li>
                 <li>
                   If select start date will limit the interval between selected
                   date and today
@@ -143,9 +139,7 @@ function ManagerStatistic() {
           </aside>
         </div>
         <div>
-          <h3 className={styles.infoHeading}>
-            He is our proud:
-          </h3>
+          <h3 className={styles.infoHeading}>He is our proud:</h3>
           <figure className={styles.figure}>
             <div className={styles["imgHolder"]}>
               {resultObject.employeeFullStatistics?.bestWorkerWorkedImageUrl ? (
@@ -191,14 +185,11 @@ function ManagerStatistic() {
         </div>
       </section>
       <>
-        <h2 className={styles.dashHeading}>
-          Employee statistic in selected time interval:
-        </h2>
         <section className={styles.board}>
           <div>
-          <h3 className={styles.infoHeading}>
-            He is the best at that time period:
-          </h3>
+            <h3 className={styles.infoHeading}>
+              He is the best at that time period:
+            </h3>
             <figure className={styles.figure}>
               <div className={styles["imgHolder"]}>
                 {resultObject.employeeFullStatistics?.bestWorkerWorkedImageUrl ? (
@@ -241,10 +232,8 @@ function ManagerStatistic() {
               </section>
             </figure>
           </div>
-
         </section>
       </>
-
     </>
   );
 }

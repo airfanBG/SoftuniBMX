@@ -177,10 +177,12 @@ function OrderPartStatistic() {
                 <p className={`${styles.info}`}>
                   <span>Income:</span>
                   {!formatCurrency(
-                  resultObject.totalPartStatistics?.partIncome
-                ).includes("NaN")
-                  ? formatCurrency(resultObject.totalPartStatistics?.partIncome)
-                  : formatCurrency(0)}
+                    resultObject.totalPartStatistics?.partIncome
+                  ).includes("NaN")
+                    ? formatCurrency(
+                        resultObject.totalPartStatistics?.partIncome
+                      )
+                    : formatCurrency(0)}
                   {/* {resultObject.partTotalStatistics?.partIncome} BGN */}
                 </p>
               </div>
@@ -233,10 +235,12 @@ function OrderPartStatistic() {
                   <p className={`${styles.info}`}>
                     <span>Income:</span>
                     {!formatCurrency(
-                  resultObject.periodPartStatistics?.partIncome
-                ).includes("NaN")
-                  ? formatCurrency(resultObject.periodPartStatistics?.partIncome)
-                  : formatCurrency(0)}
+                      resultObject.periodPartStatistics?.partIncome
+                    ).includes("NaN")
+                      ? formatCurrency(
+                          resultObject.periodPartStatistics?.partIncome
+                        )
+                      : formatCurrency(0)}
                     {/* {resultObject.partPeriodStatistics?.partIncome} BGN */}
                   </p>
                 </div>

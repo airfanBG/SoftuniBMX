@@ -22,6 +22,7 @@
             this.Rates = new HashSet<Rate>();
             this.BikeModelsParts = new HashSet<BikeModelPart>();
             this.CompatableParts = new HashSet<CompatablePart>();
+            this.PartsInOrder = new HashSet<PartOrder>();
         }
 
         [Key]

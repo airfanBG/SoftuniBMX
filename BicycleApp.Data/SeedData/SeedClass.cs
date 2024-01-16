@@ -812,7 +812,6 @@
             {
                 Id = 1,
                 ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                Description = "",
                 SaleAmount = 625.00M,
                 Discount = 0,
                 VAT = 125.00M,
@@ -830,7 +829,6 @@
             {
                 Id = 2,
                 ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                Description = "test2",
                 SaleAmount = 725.00M,
                 Discount = 0,
                 VAT = 125.00M,
@@ -848,7 +846,6 @@
             {
                 Id = 3,
                 ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                Description = "test3",
                 SaleAmount = 825.00M,
                 Discount = 0,
                 VAT = 125.00M,
@@ -866,7 +863,6 @@
             {
                 Id = 4,
                 ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                Description = "test4",
                 SaleAmount = 525.00M,
                 Discount = 0,
                 VAT = 125.00M,
@@ -880,99 +876,10 @@
                 DateFinish = null,
                 StatusId = 1
             };
+           
             Order order5 = new Order()
             {
                 Id = 5,
-                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                Description = "test5",
-                SaleAmount = 725.00M,
-                Discount = 0,
-                VAT = 125.00M,
-                FinalAmount = 850.00M,
-                PaidAmount = 0,
-                UnpaidAmount = 850.00M,
-                DateCreated = dateCreated,
-                DateUpdated = null,
-                DateDeleted = null,
-                IsDeleted = false,
-                DateFinish = null,
-                StatusId = 1
-            };
-            Order order6 = new Order()
-            {
-                Id = 6,
-                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                Description = "test6",
-                SaleAmount = 525.00M,
-                Discount = 0,
-                VAT = 125.00M,
-                FinalAmount = 850.00M,
-                PaidAmount = 0,
-                UnpaidAmount = 650.00M,
-                DateCreated = dateCreated,
-                DateUpdated = null,
-                DateDeleted = null,
-                IsDeleted = false,
-                DateFinish = null,
-                StatusId = 1
-            };
-            Order order7 = new Order()
-            {
-                Id = 7,
-                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                Description = "test7",
-                SaleAmount = 525.00M,
-                Discount = 0,
-                VAT = 125.00M,
-                FinalAmount = 650.00M,
-                PaidAmount = 0,
-                UnpaidAmount = 750.00M,
-                DateCreated = dateCreated,
-                DateUpdated = null,
-                DateDeleted = null,
-                IsDeleted = false,
-                DateFinish = null,
-                StatusId = 1
-            };
-            Order order8 = new Order()
-            {
-                Id = 8,
-                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                Description = "test8",
-                SaleAmount = 725.00M,
-                Discount = 0,
-                VAT = 125.00M,
-                FinalAmount = 850.00M,
-                PaidAmount = 0,
-                UnpaidAmount = 850.00M,
-                DateCreated = dateCreated,
-                DateUpdated = null,
-                DateDeleted = null,
-                IsDeleted = false,
-                DateFinish = null,
-                StatusId = 1
-            };
-            Order order9 = new Order()
-            {
-                Id = 9,
-                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                Description = "test9",
-                SaleAmount = 525.00M,
-                Discount = 0,
-                VAT = 125.00M,
-                FinalAmount = 850.00M,
-                PaidAmount = 0,
-                UnpaidAmount = 650.00M,
-                DateCreated = dateCreated,
-                DateUpdated = null,
-                DateDeleted = null,
-                IsDeleted = false,
-                DateFinish = null,
-                StatusId = 1
-            };
-            Order order10 = new Order()
-            {
-                Id = 10,
                 ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
                 Description = "Passed quality control",
                 SaleAmount = 354.17M,
@@ -989,7 +896,7 @@
                 StatusId = 6
             };
 
-            return new List<Order> { order, order2, order3, order4, order5, order6, order7, order8, order9, order10 };
+            return new List<Order> { order, order2, order3, order4, order5 };
         }
 
         public List<OrderPartEmployee> SeedOrdersPartsEmployees()
@@ -1186,249 +1093,10 @@
                 Description = "test",
                 IsCompleted = false
             };
-            OrderPartEmployee opeFrame5 = new OrderPartEmployee()
-            {
-                OrderId = 5,
-                SerialNumber = "BID12345680",
-                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
-                PartId = 1,
-                EmployeeId = null,
-                PartName = "Frame OG",
-                PartPrice = 100.00M,
-                PartQuantity = 1,
-                DatetimeAsigned = null,
-                StartDatetime = null,
-                EndDatetime = null,
-                Description = "test",
-                IsCompleted = false
-            };
-            OrderPartEmployee opeWheel5 = new OrderPartEmployee()
-            {
-                OrderId = 5,
-                SerialNumber = "BID12345680",
-                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
-                PartId = 5,
-                EmployeeId = null,
-                PartName = "Wheel of the Year for montain",
-                PartPrice = 85.00M,
-                PartQuantity = 1,
-                DatetimeAsigned = null,
-                StartDatetime = null,
-                EndDatetime = null,
-                Description = "test",
-                IsCompleted = false
-            };
-            OrderPartEmployee opeAccessories5 = new OrderPartEmployee()
-            {
-                OrderId = 5,
-                SerialNumber = "BID12345680",
-                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
-                PartId = 11,
-                EmployeeId = null,
-                PartName = "Road budget Shifts",
-                PartPrice = 290.00M,
-                PartQuantity = 1,
-                DatetimeAsigned = null,
-                StartDatetime = null,
-                EndDatetime = null,
-                Description = "test",
-                IsCompleted = false
-            };
-            OrderPartEmployee opeFrame6 = new OrderPartEmployee()
-            {
-                OrderId = 6,
-                SerialNumber = "BID12345680",
-                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
-                PartId = 1,
-                EmployeeId = null,
-                PartName = "Frame OG",
-                PartPrice = 100.00M,
-                PartQuantity = 1,
-                DatetimeAsigned = null,
-                StartDatetime = null,
-                EndDatetime = null,
-                Description = "test",
-                IsCompleted = false
-            };
-            OrderPartEmployee opeWheel6 = new OrderPartEmployee()
-            {
-                OrderId = 6,
-                SerialNumber = "BID12345680",
-                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
-                PartId = 5,
-                EmployeeId = null,
-                PartName = "Wheel of the Year for montain",
-                PartPrice = 85.00M,
-                PartQuantity = 1,
-                DatetimeAsigned = null,
-                StartDatetime = null,
-                EndDatetime = null,
-                Description = "test",
-                IsCompleted = false
-            };
-            OrderPartEmployee opeAccessories6 = new OrderPartEmployee()
-            {
-                OrderId = 6,
-                SerialNumber = "BID12345680",
-                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
-                PartId = 11,
-                EmployeeId = null,
-                PartName = "Road budget Shifts",
-                PartPrice = 290.00M,
-                PartQuantity = 1,
-                DatetimeAsigned = null,
-                StartDatetime = null,
-                EndDatetime = null,
-                Description = "test",
-                IsCompleted = false
-            };
-            OrderPartEmployee opeFrame7 = new OrderPartEmployee()
-            {
-                OrderId = 7,
-                SerialNumber = "BID12345680",
-                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
-                PartId = 1,
-                EmployeeId = null,
-                PartName = "Frame OG",
-                PartPrice = 100.00M,
-                PartQuantity = 1,
-                DatetimeAsigned = null,
-                StartDatetime = null,
-                EndDatetime = null,
-                Description = "test",
-                IsCompleted = false
-            };
-            OrderPartEmployee opeWheel7 = new OrderPartEmployee()
-            {
-                OrderId = 7,
-                SerialNumber = "BID12345680",
-                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
-                PartId = 5,
-                EmployeeId = null,
-                PartName = "Wheel of the Year for montain",
-                PartPrice = 85.00M,
-                PartQuantity = 1,
-                DatetimeAsigned = null,
-                StartDatetime = null,
-                EndDatetime = null,
-                Description = "test",
-                IsCompleted = false
-            };
-            OrderPartEmployee opeAccessories7 = new OrderPartEmployee()
-            {
-                OrderId = 7,
-                SerialNumber = "BID12345680",
-                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
-                PartId = 11,
-                EmployeeId = null,
-                PartName = "Road budget Shifts",
-                PartPrice = 290.00M,
-                PartQuantity = 1,
-                DatetimeAsigned = null,
-                StartDatetime = null,
-                EndDatetime = null,
-                Description = "test",
-                IsCompleted = false
-            };
-            OrderPartEmployee opeFrame8 = new OrderPartEmployee()
-            {
-                OrderId = 8,
-                SerialNumber = "BID12345680",
-                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
-                PartId = 1,
-                EmployeeId = null,
-                PartName = "Frame OG",
-                PartPrice = 100.00M,
-                PartQuantity = 1,
-                DatetimeAsigned = null,
-                StartDatetime = null,
-                EndDatetime = null,
-                Description = "test",
-                IsCompleted = false
-            };
-            OrderPartEmployee opeWheel8 = new OrderPartEmployee()
-            {
-                OrderId = 8,
-                SerialNumber = "BID12345680",
-                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
-                PartId = 5,
-                EmployeeId = null,
-                PartName = "Wheel of the Year for montain",
-                PartPrice = 85.00M,
-                PartQuantity = 1,
-                DatetimeAsigned = null,
-                StartDatetime = null,
-                EndDatetime = null,
-                Description = "test",
-                IsCompleted = false
-            };
-            OrderPartEmployee opeAccessories8 = new OrderPartEmployee()
-            {
-                OrderId = 8,
-                SerialNumber = "BID12345680",
-                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
-                PartId = 11,
-                EmployeeId = null,
-                PartName = "Road budget Shifts",
-                PartPrice = 290.00M,
-                PartQuantity = 1,
-                DatetimeAsigned = null,
-                StartDatetime = null,
-                EndDatetime = null,
-                Description = "test",
-                IsCompleted = false
-            };
-            OrderPartEmployee opeFrame9 = new OrderPartEmployee()
-            {
-                OrderId = 9,
-                SerialNumber = "BID12345680",
-                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
-                PartId = 1,
-                EmployeeId = null,
-                PartName = "Frame OG",
-                PartPrice = 100.00M,
-                PartQuantity = 1,
-                DatetimeAsigned = null,
-                StartDatetime = null,
-                EndDatetime = null,
-                Description = "test",
-                IsCompleted = false
-            };
-            OrderPartEmployee opeWheel9 = new OrderPartEmployee()
-            {
-                OrderId = 9,
-                SerialNumber = "BID12345680",
-                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
-                PartId = 5,
-                EmployeeId = null,
-                PartName = "Wheel of the Year for montain",
-                PartPrice = 85.00M,
-                PartQuantity = 1,
-                DatetimeAsigned = null,
-                StartDatetime = null,
-                EndDatetime = null,
-                Description = "test",
-                IsCompleted = false
-            };
-            OrderPartEmployee opeAccessories9 = new OrderPartEmployee()
-            {
-                OrderId = 9,
-                SerialNumber = "BID12345680",
-                UniqueKeyForSerialNumber = "7d47ca5c-ef3a-4bc0-a8af-f024464e27eb",
-                PartId = 11,
-                EmployeeId = null,
-                PartName = "Road budget Shifts",
-                PartPrice = 290.00M,
-                PartQuantity = 1,
-                DatetimeAsigned = null,
-                StartDatetime = null,
-                EndDatetime = null,
-                Description = "test",
-                IsCompleted = false
-            };
+           
             OrderPartEmployee qualityControlOpeFrame = new OrderPartEmployee()
             {
-                OrderId = 10,
+                OrderId = 5,
                 SerialNumber = "BIDPASQC123",
                 UniqueKeyForSerialNumber = "231b3632-b31c-4711-8f67-fe42b36642b5",
                 PartId = 1,
@@ -1444,7 +1112,7 @@
             };
             OrderPartEmployee qualityControlOpeWheel = new OrderPartEmployee()
             {
-                OrderId = 10,
+                OrderId = 5,
                 SerialNumber = "BIDPASQC123",
                 UniqueKeyForSerialNumber = "231b3632-b31c-4711-8f67-fe42b36642b5",
                 PartId = 2,
@@ -1460,7 +1128,7 @@
             };
             OrderPartEmployee qualityControlOpeAccessories = new OrderPartEmployee()
             {
-                OrderId = 10,
+                OrderId = 5,
                 SerialNumber = "BIDPASQC123",
                 UniqueKeyForSerialNumber = "231b3632-b31c-4711-8f67-fe42b36642b5",
                 PartId = 3,
@@ -1476,8 +1144,7 @@
             };
             return new List<OrderPartEmployee> {
                 opeFrame, opeWheel, opeAccessories, opeFrame2, opeWheel2, opeAccessories2, opeFrame3, opeWheel3, opeAccessories3,
-                opeFrame4, opeWheel4, opeAccessories4, opeFrame5, opeWheel5, opeAccessories5, opeFrame6, opeWheel6, opeAccessories6,
-                opeFrame7, opeWheel7, opeAccessories7, opeFrame8, opeWheel8, opeAccessories8, opeFrame9, opeWheel9, opeAccessories9,qualityControlOpeFrame,qualityControlOpeWheel,qualityControlOpeAccessories
+                opeFrame4, opeWheel4, opeAccessories4, qualityControlOpeFrame,qualityControlOpeWheel,qualityControlOpeAccessories
             };
         }
         public ICollection<OrderPartEmployeeInfo> SeedOrderOrderParsEmployeeInfos()
@@ -1487,7 +1154,7 @@
                 new OrderPartEmployeeInfo()
                 {
                     Id = 1,
-                    OrderId = 10,
+                    OrderId = 5,
                     PartId = 1,
                     UniqueKeyForSerialNumber = "231b3632-b31c-4711-8f67-fe42b36642b5",
                     ProductionТime = new TimeSpan(0,5,0)
@@ -1495,7 +1162,7 @@
                 new OrderPartEmployeeInfo()
                 {
                     Id = 2,
-                    OrderId = 10,
+                    OrderId = 5,
                     PartId = 2,
                     UniqueKeyForSerialNumber = "231b3632-b31c-4711-8f67-fe42b36642b5",
                     ProductionТime = new TimeSpan(0,5,0)
@@ -1503,7 +1170,7 @@
                 new OrderPartEmployeeInfo()
                 {
                     Id = 3,
-                    OrderId = 10,
+                    OrderId = 5,
                     PartId = 3,
                     UniqueKeyForSerialNumber = "231b3632-b31c-4711-8f67-fe42b36642b5",
                     ProductionТime = new TimeSpan(0,15,0)
@@ -1798,24 +1465,6 @@
                     CategoryId = 2,
                     Quantity = 50,
                     SalePrice = 95.00M,
-                    VATCategoryId = 1,
-                    DateCreated = dateCreated,
-                    DateUpdated = null,
-                    DateDeleted = null,
-                    IsDeleted = false
-                 },
-                 new Part()
-                 {
-                    Id = 18,
-                    Name = "InvalidPart",
-                    Description = "PartWithHightValueOfDiscountThanSellPrice",
-                    Intend = "",
-                    OEMNumber = "oemtest1",
-                    Type = 1,
-                    CategoryId = 1,
-                    Quantity = 32,
-                    SalePrice = 100.00M,
-                    Discount = 110.00M,
                     VATCategoryId = 1,
                     DateCreated = dateCreated,
                     DateUpdated = null,

@@ -118,7 +118,7 @@ function CreditCard({ amountBtnHandler, switcher }) {
               type="text"
               inputMode="numeric"
               name="number"
-              // placeholder="Card Number"
+              placeholder="Card Number"
               value={state.number}
               onChange={handleInputChange}
               onFocus={handleInputFocus}
@@ -135,7 +135,7 @@ function CreditCard({ amountBtnHandler, switcher }) {
             <input
               type="text"
               name="name"
-              // placeholder="Name on card"
+              placeholder="Name on card"
               value={state.name}
               onChange={handleInputChange}
               onFocus={handleInputFocus}
@@ -154,7 +154,7 @@ function CreditCard({ amountBtnHandler, switcher }) {
                 type="text"
                 inputMode="numeric"
                 name="expiry"
-                // placeholder="Card expiry date"
+                placeholder="MM / YY"
                 value={state.expiry}
                 onChange={handleInputChange}
                 onFocus={handleInputFocus}
@@ -172,7 +172,7 @@ function CreditCard({ amountBtnHandler, switcher }) {
                 type="text"
                 inputMode="numeric"
                 name="cvc"
-                // placeholder="CVC/CVV"
+                placeholder="123"
                 value={state.cvc}
                 onChange={handleInputChange}
                 onFocus={handleInputFocus}
