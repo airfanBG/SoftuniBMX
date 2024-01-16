@@ -812,7 +812,6 @@
             {
                 Id = 1,
                 ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                Description = "",
                 SaleAmount = 625.00M,
                 Discount = 0,
                 VAT = 125.00M,
@@ -830,7 +829,6 @@
             {
                 Id = 2,
                 ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                Description = "test2",
                 SaleAmount = 725.00M,
                 Discount = 0,
                 VAT = 125.00M,
@@ -848,7 +846,6 @@
             {
                 Id = 3,
                 ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                Description = "test3",
                 SaleAmount = 825.00M,
                 Discount = 0,
                 VAT = 125.00M,
@@ -866,7 +863,6 @@
             {
                 Id = 4,
                 ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                Description = "test4",
                 SaleAmount = 525.00M,
                 Discount = 0,
                 VAT = 125.00M,
@@ -880,99 +876,10 @@
                 DateFinish = null,
                 StatusId = 1
             };
+           
             Order order5 = new Order()
             {
                 Id = 5,
-                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                Description = "test5",
-                SaleAmount = 725.00M,
-                Discount = 0,
-                VAT = 125.00M,
-                FinalAmount = 850.00M,
-                PaidAmount = 0,
-                UnpaidAmount = 850.00M,
-                DateCreated = dateCreated,
-                DateUpdated = null,
-                DateDeleted = null,
-                IsDeleted = false,
-                DateFinish = null,
-                StatusId = 1
-            };
-            Order order6 = new Order()
-            {
-                Id = 6,
-                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                Description = "test6",
-                SaleAmount = 525.00M,
-                Discount = 0,
-                VAT = 125.00M,
-                FinalAmount = 850.00M,
-                PaidAmount = 0,
-                UnpaidAmount = 650.00M,
-                DateCreated = dateCreated,
-                DateUpdated = null,
-                DateDeleted = null,
-                IsDeleted = false,
-                DateFinish = null,
-                StatusId = 1
-            };
-            Order order7 = new Order()
-            {
-                Id = 7,
-                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                Description = "test7",
-                SaleAmount = 525.00M,
-                Discount = 0,
-                VAT = 125.00M,
-                FinalAmount = 650.00M,
-                PaidAmount = 0,
-                UnpaidAmount = 750.00M,
-                DateCreated = dateCreated,
-                DateUpdated = null,
-                DateDeleted = null,
-                IsDeleted = false,
-                DateFinish = null,
-                StatusId = 1
-            };
-            Order order8 = new Order()
-            {
-                Id = 8,
-                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                Description = "test8",
-                SaleAmount = 725.00M,
-                Discount = 0,
-                VAT = 125.00M,
-                FinalAmount = 850.00M,
-                PaidAmount = 0,
-                UnpaidAmount = 850.00M,
-                DateCreated = dateCreated,
-                DateUpdated = null,
-                DateDeleted = null,
-                IsDeleted = false,
-                DateFinish = null,
-                StatusId = 1
-            };
-            Order order9 = new Order()
-            {
-                Id = 9,
-                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                Description = "test9",
-                SaleAmount = 525.00M,
-                Discount = 0,
-                VAT = 125.00M,
-                FinalAmount = 850.00M,
-                PaidAmount = 0,
-                UnpaidAmount = 650.00M,
-                DateCreated = dateCreated,
-                DateUpdated = null,
-                DateDeleted = null,
-                IsDeleted = false,
-                DateFinish = null,
-                StatusId = 1
-            };
-            Order order10 = new Order()
-            {
-                Id = 10,
                 ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
                 Description = "Passed quality control",
                 SaleAmount = 354.17M,
@@ -989,7 +896,7 @@
                 StatusId = 6
             };
 
-            return new List<Order> { order, order2, order3, order4, order5, order6, order7, order8, order9, order10 };
+            return new List<Order> { order, order2, order3, order4, order5 };
         }
 
         public List<OrderPartEmployee> SeedOrdersPartsEmployees()
