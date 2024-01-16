@@ -142,15 +142,11 @@ function ManagerStatistic() {
           <h3 className={styles.infoHeading}>He is our proud:</h3>
           <figure className={styles.figure}>
             <div className={styles["imgHolder"]}>
-              {resultObject.employeeFullStatistics
-                ?.proudWorkerWorkedImageUrl ? (
+              {resultObject.employeeFullStatistics?.bestWorkerWorkedImageUrl ? (
                 <img
                   className={styles.tumbs}
-                  src={
-                    resultObject.employeeFullStatistics
-                      ?.proudWorkerWorkedImageUrl
-                  }
-                  alt={`${resultObject.employeeFullStatistics?.proudWorkerName} image`}
+                  src={resultObject.employeeFullStatistics?.bestWorkerWorkedImageUrl}
+                  alt={`${resultObject.employeeFullStatistics?.bestWorkerName} image`}
                 />
               ) : (
                 <User
@@ -163,31 +159,25 @@ function ManagerStatistic() {
             </div>
 
             <section className={styles.workerInfo}>
-              <h2 className={styles.heading}>
-                {resultObject.employeeFullStatistics?.proudWorkerName}
+              <h2 className={styles.heading} >
+                {resultObject.employeeFullStatistics?.bestWorkerName}
               </h2>
               <div className={styles.infoBox}>
                 <p className={`${styles.info}`}>
                   <span>Department:</span>
-                  {resultObject.employeeFullStatistics?.proudWorkerDepartment}
+                  {resultObject.employeeFullStatistics?.bestWorkerDepartment}
                 </p>
                 <p className={`${styles.info}`}>
                   <span>Position:</span>
-                  {
-                    resultObject.employeeFullStatistics
-                      ?.proudWorkerSubDepartment
-                  }
+                  {resultObject.employeeFullStatistics?.bestWorkerSubDepartment}
                 </p>
                 <p className={`${styles.info}`}>
                   <span>Orders:</span>
-                  {resultObject.employeeFullStatistics?.proudWorkerWorkedOrders}
+                  {resultObject.employeeFullStatistics?.bestWorkerWorkedOrders}
                 </p>
                 <p className={`${styles.info}`}>
                   <span>Minutes:</span>
-                  {
-                    resultObject.employeeFullStatistics
-                      ?.proudWorkerWorkedMinutes
-                  }
+                  {resultObject.employeeFullStatistics?.bestWorkerWorkedMinutes}
                 </p>
               </div>
             </section>
@@ -196,33 +186,17 @@ function ManagerStatistic() {
       </section>
       <>
         <section className={styles.board}>
-          <h2 className={`${styles.boardHeading} ${styles.mBottom}`}>
-            Employee statistic in selected time period:
-          </h2>
-          <p className={styles.info}>
-            <span>Total worked minutes:</span>
-            {resultObject.employeePeriodStatistics?.totalWorkedMinutes}
-          </p>
-          <p className={styles.info}>
-            <span>Total worked orders:</span>
-            {resultObject.employeePeriodStatistics?.totalWorkedOrders} Pcs.
-          </p>
-
           <div>
             <h3 className={styles.infoHeading}>
               He is the best at that time period:
             </h3>
             <figure className={styles.figure}>
               <div className={styles["imgHolder"]}>
-                {resultObject.employeeFullStatistics
-                  ?.proudWorkerWorkedImageUrl ? (
+                {resultObject.employeeFullStatistics?.bestWorkerWorkedImageUrl ? (
                   <img
                     className={styles.tumbs}
-                    src={
-                      resultObject.employeeFullStatistics
-                        ?.proudWorkerWorkedImageUrl
-                    }
-                    alt={`${resultObject.employeeFullStatistics?.proudWorkerName} image`}
+                    src={resultObject.employeeFullStatistics?.bestWorkerWorkedImageUrl}
+                    alt={`${resultObject.employeeFullStatistics?.bestWorkerName} image`}
                   />
                 ) : (
                   <User
@@ -234,37 +208,25 @@ function ManagerStatistic() {
                 )}
               </div>
               <section className={styles.workerInfo}>
-                <h2 className={styles.heading}>
-                  {resultObject.employeePeriodStatistics?.proudWorkerName}
+                <h2 className={styles.heading} >
+                  {resultObject.employeePeriodStatistics?.bestWorkerName}
                 </h2>
                 <div className={styles.infoBox}>
                   <p className={`${styles.info}`}>
                     <span>Department:</span>
-                    {
-                      resultObject.employeePeriodStatistics
-                        ?.proudWorkerDepartment
-                    }
+                    {resultObject.employeePeriodStatistics?.bestWorkerDepartment}
                   </p>
                   <p className={`${styles.info}`}>
                     <span>Position:</span>
-                    {
-                      resultObject.employeePeriodStatistics
-                        ?.proudWorkerSubDepartment
-                    }
+                    {resultObject.employeePeriodStatistics?.bestWorkerSubDepartment}
                   </p>
                   <p className={`${styles.info}`}>
                     <span>Orders:</span>
-                    {
-                      resultObject.employeePeriodStatistics
-                        ?.proudWorkerWorkedOrders
-                    }
+                    {resultObject.employeePeriodStatistics?.bestWorkerWorkedOrders}
                   </p>
                   <p className={`${styles.info}`}>
                     <span>Minutes:</span>
-                    {
-                      resultObject.employeePeriodStatistics
-                        ?.proudWorkerWorkedMinutes
-                    }
+                    {resultObject.employeePeriodStatistics?.bestWorkerWorkedMinutes}
                   </p>
                 </div>
               </section>

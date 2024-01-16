@@ -5,11 +5,11 @@
         public int TotalWorkedMinutes  { get; set; }
         public int TotalWorkedOrders  { get; set; }
 
-        public string ProudWorkerName  { get; set; } = null!;
-        public string ProudWorkerDepartment   { get; set; } = null!;
-        public string ProudWorkerSubDepartment    { get; set; } = null!;
-        public int ProudWorkerWorkedOrders     { get; set; } 
-        public int ProudWorkerWorkedMinutes  { get; set; }
-        public string ProudWorkerWorkedImageUrl  { get; set; } = null!;
+        public string BestWorkerName  { get; set; } = null!;
+        public string BestWorkerDepartment { get; set; } = null!;
+        public string BestWorkerSubDepartment { get; set; } = null!;
+        public int BestWorkerWorkedOrders { get; set; } 
+        public int BestWorkerWorkedMinutes { get; set; }
+        public string BestWorkerWorkedImageUrl { get; set; } = null!;
     }
 }

@@ -192,30 +192,8 @@ function OrderPartStatistic() {
       </section>
 
       <>
-        <h2 className={styles.infoHeading}>
-          Orders in selected time interval:
-        </h2>
-
+        <h2 className={styles.infoHeading}>Orders in selected time interval:</h2>
         <section className={styles.board}>
-          <p className={styles.info}>
-            <span>Total income:</span>
-            {!formatCurrency(
-              resultObject.orderStatistics?.incomeForSelectedPeriod
-            ).includes("NaN")
-              ? formatCurrency(
-                  resultObject.orderStatistics?.incomeForSelectedPeriod
-                )
-              : formatCurrency(0)}
-            {/* {resultObject.orderStatistics?.incomeForSelectedPeriod} BGN */}
-          </p>
-          <p className={styles.info}>
-            <span>Total sended orders:</span>
-            {
-              resultObject.orderStatistics?.sendedOrdersCountForSelectedPeriod
-            }{" "}
-            Pcs.
-          </p>
-
           <div>
             <h3 className={styles.infoHeading}>
               Best seler part for selected period:
