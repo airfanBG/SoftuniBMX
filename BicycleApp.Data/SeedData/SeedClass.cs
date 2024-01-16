@@ -1470,24 +1470,6 @@
                     DateUpdated = null,
                     DateDeleted = null,
                     IsDeleted = false
-                 },
-                 new Part()
-                 {
-                    Id = 18,
-                    Name = "InvalidPart",
-                    Description = "PartWithHightValueOfDiscountThanSellPrice",
-                    Intend = "",
-                    OEMNumber = "oemtest1",
-                    Type = 1,
-                    CategoryId = 1,
-                    Quantity = 32,
-                    SalePrice = 100.00M,
-                    Discount = 110.00M,
-                    VATCategoryId = 1,
-                    DateCreated = dateCreated,
-                    DateUpdated = null,
-                    DateDeleted = null,
-                    IsDeleted = false
                  }
             };
         }

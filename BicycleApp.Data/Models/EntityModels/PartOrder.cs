@@ -1,7 +1,7 @@
 ﻿namespace BicycleApp.Data.Models.EntityModels
 {
     using System.ComponentModel.DataAnnotations;
-
+    using System.ComponentModel.DataAnnotations.Schema;
     using Microsoft.EntityFrameworkCore;
 
     [Comment("Table of all orders of parts in the database")]
