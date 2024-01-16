@@ -20,18 +20,39 @@
         private static readonly Mock<IOrderFactory> fakeOrdeFaktory = new Mock<IOrderFactory>();
         private static readonly Mock<IDateTimeProvider> fakeDateTimeProvider = new Mock<IDateTimeProvider>();
 
-        private readonly IOrderUserService fakeOrderUserService = new OrderUserService(fakeContext.Object, fakeStringManipulator.Object, fakeOrdeFaktory.Object, fakeDateTimeProvider.Object);
+        private readonly IOrderUserService fakeOrderUserService;
 
-        [OneTimeSetUp]
-        public void SetUp()
+        public OrderUserServiceTest()
         {
-
+            fakeOrderUserService = new OrderUserService(fakeContext.Object, fakeStringManipulator.Object, fakeOrdeFaktory.Object, fakeDateTimeProvider.Object);
         }
 
         [Test]
         public async Task CreateOrderByUserAsync_Should_ReturnNull_WhenDiscountIsGreaterThanSalePrice()
         {
             // Arrange
+            Part part = new Part()
+            {
+                Id = 1,
+                Name = "Frame Road",
+                Description = "Best frame in the road!",
+                Intend = "For road usage",
+                OEMNumber = "oemtest1",
+                Type = 1,
+                CategoryId = 1,
+                Quantity = 32,
+                SalePrice = 100.00M,
+                Discount = 120.00M,
+                VATCategoryId = 1,
+                DateCreated = new DateTime(2024, 1, 1),
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false
+            };
+            fakeContext.Setup(x => x.Parts).ReturnsDbSet(new List<Part> { part });
+            var fakeVatCategory = new Mock<VATCategory>();
+            fakeVatCategory.Setup().r
+
             IUserOrderDto order = new UserOrderDto()
             {
                 ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
@@ -59,20 +80,18 @@
                 VATId = 1,
                 OrderParts = new List<OrderPartIdDto>() { new OrderPartIdDto() { PartId = 2 } }
             };
+            var vatVategory = new VATCategory
+            {
+                Id = 1,
+                VATPercent = 20.00M,
+                DateCreated = new DateTime(2024,1,1),
+                IsDeleted = false
+            };
+            fakeContext.Setup(x => x.VATCategories).ReturnsDbSet(new List<VATCategory> { vatVategory });
 
-            var fakeDate = fakeDateTimeProvider.Object.Now;
+            fakeDateTimeProvider.Setup(x => x.Now).Returns(new DateTime(2024, 1, 1));
 
-            fakeOrdeFaktory.Setup(x => x.CreateUserOrder(It.IsAny<IOrder>(), fakeDate))
-                .Returns(new Order()
-                {
-                    ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                    StatusId = 2,
-                    SaleAmount = 456,
-                    Description = "descroption",
-                    FinalAmount = 546,
-                    VAT = 123
-                });
-
+            
             // Act 
             var result =  fakeOrderUserService.CreateOrderByUser(order);
 

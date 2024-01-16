@@ -8,7 +8,6 @@
     using Microsoft.EntityFrameworkCore;
     using Moq;
     using Moq.EntityFrameworkCore;
-    using Newtonsoft.Json;
 
     public class CommentServiceTest
     {
@@ -63,8 +62,8 @@
             int actualCountOfAddedComentInContext = 0;
 
             var fakeCommentDbSet = new Mock<DbSet<Comment>>();
-            _fakeDbContext.Setup(x => x.Comments).Returns(fakeCommentDbSet.Object);
             fakeCommentDbSet.Setup(x => x.AddAsync(comment, It.IsAny<CancellationToken>())).Callback(() => actualCountOfAddedComments++);
+            _fakeDbContext.Setup(x => x.Comments).Returns(fakeCommentDbSet.Object);
             _fakeDbContext.Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>())).Callback(() => actualCountOfAddedComentInContext++);
 
             //Act
