@@ -1991,6 +1991,7 @@
         {
             PartInStock partInStock1 = new PartInStock()
             {
+                Id =1,
                 PartId = 1,
                 SuplierId = 1,
                 DateCreated = dateCreated,
@@ -2000,6 +2001,7 @@
             };
             PartInStock partInStock2 = new PartInStock()
             {
+                Id = 2,
                 PartId = 2,
                 SuplierId = 1,
                 DateCreated = dateCreated,
@@ -2008,6 +2010,7 @@
                 IsDeleted = false
             }; PartInStock partInStock3 = new PartInStock()
             {
+                Id = 3,
                 PartId = 3,
                 SuplierId = 1,
                 DateCreated = dateCreated,
@@ -2016,6 +2019,7 @@
                 IsDeleted = false
             }; PartInStock partInStock4 = new PartInStock()
             {
+                Id = 4,
                 PartId = 4,
                 SuplierId = 2,
                 DateCreated = dateCreated,
@@ -2024,6 +2028,7 @@
                 IsDeleted = false
             }; PartInStock partInStock5 = new PartInStock()
             {
+                Id = 5,
                 PartId = 5,
                 SuplierId = 2,
                 DateCreated = dateCreated,
@@ -2031,7 +2036,8 @@
                 DateDeleted = null,
                 IsDeleted = false
             }; PartInStock partInStock6 = new PartInStock()
-            {
+            {   
+                Id = 6,
                 PartId = 6,
                 SuplierId = 2,
                 DateCreated = dateCreated,
@@ -2039,7 +2045,8 @@
                 DateDeleted = null,
                 IsDeleted = false
             }; PartInStock partInStock7 = new PartInStock()
-            {
+            {   
+                Id = 7,
                 PartId = 7,
                 SuplierId = 3,
                 DateCreated = dateCreated,
@@ -2047,7 +2054,8 @@
                 DateDeleted = null,
                 IsDeleted = false
             }; PartInStock partInStock8 = new PartInStock()
-            {
+            {   
+                Id = 8,
                 PartId = 8,
                 SuplierId = 3,
                 DateCreated = dateCreated,
@@ -2055,7 +2063,8 @@
                 DateDeleted = null,
                 IsDeleted = false
             }; PartInStock partInStock9 = new PartInStock()
-            {
+            {   
+                Id = 9,
                 PartId = 9,
                 SuplierId = 3,
                 DateCreated = dateCreated,
@@ -2064,6 +2073,7 @@
                 IsDeleted = false
             }; PartInStock partInStock10 = new PartInStock()
             {
+                Id = 10,
                 PartId = 10,
                 SuplierId = 3,
                 DateCreated = dateCreated,
@@ -2072,6 +2082,7 @@
                 IsDeleted = false
             }; PartInStock partInStock11 = new PartInStock()
             {
+                Id = 11,
                 PartId = 11,
                 SuplierId = 3,
                 DateCreated = dateCreated,
@@ -2080,6 +2091,7 @@
                 IsDeleted = false
             }; PartInStock partInStock12 = new PartInStock()
             {
+                Id = 12,
                 PartId = 12,
                 SuplierId = 3,
                 DateCreated = dateCreated,
@@ -2088,6 +2100,7 @@
                 IsDeleted = false
             }; PartInStock partInStock13 = new PartInStock()
             {
+                Id = 13,
                 PartId = 13,
                 SuplierId = 3,
                 DateCreated = dateCreated,

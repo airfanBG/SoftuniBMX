@@ -6,6 +6,8 @@ namespace BicycleApp.Data.Models.EntityModels
 {
     public class PartInStock
     {
+        [Key]
+        public int Id { get; set; }
 
         [Required]
         [Comment("Id of the part")]
