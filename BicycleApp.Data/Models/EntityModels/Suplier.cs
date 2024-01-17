@@ -16,7 +16,6 @@
         public Suplier()
         {
             this.Delivaries = new HashSet<Delivary>();
-            this.PartsInStock = new HashSet<PartInStock>();
             this.PartsInOrder = new HashSet<PartOrder>();
         }
 
@@ -57,7 +56,6 @@
         public string ContactName { get; set; } = null!;
 
         public virtual ICollection<Delivary> Delivaries { get; set; }
-        public virtual ICollection<PartInStock> PartsInStock { get; set; }
         public virtual ICollection<PartOrder> PartsInOrder { get; set; }
 
         [Required]
