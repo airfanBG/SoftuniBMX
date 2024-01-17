@@ -95,6 +95,8 @@
 
 ### [`PUT /api/supplys_manager/edit_part_order`](/ReadMeFiles/SuplyManager/edit_part_order.md)
 
+### [`GET /api/supplys_manager/get_suplier_parts`](/ReadMeFiles/SuplyManager/get_suplier_parts.md)
+
 ## Errors
 
 This API uses the following error codes:
