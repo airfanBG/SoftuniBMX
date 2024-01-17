@@ -39,7 +39,8 @@
             var order = await dbContext.OrdersPartsEmployees
                 .FirstOrDefaultAsync(ope => ope.PartId == partOrdersStartEndDto.PartId
                 && ope.EmployeeId == partOrdersStartEndDto.EmployeeId
-                && ope.OrderId == partOrdersStartEndDto.OrderId);
+                && ope.OrderId == partOrdersStartEndDto.OrderId
+                && ope.StartDatetime == null);
 
             if (order == null)
             {
@@ -63,7 +64,8 @@
             var order = await dbContext.OrdersPartsEmployees
                 .FirstOrDefaultAsync(ope => ope.PartId == partOrdersStartEndDto.PartId
                 && ope.EmployeeId == partOrdersStartEndDto.EmployeeId
-                && ope.OrderId == partOrdersStartEndDto.OrderId);
+                && ope.OrderId == partOrdersStartEndDto.OrderId
+                && ope.EndDatetime == null);
 
             if (order == null)
             {
@@ -157,12 +159,12 @@
                                 .Include(ep => ep.Part)
                                 .Include(ep => ep.Order)
                                 .Include(opei => opei.OrdersPartsEmployeesInfos)
+                                .Include(e => e.Employee)
                                 .Where(ep => ep.EmployeeId == employeeId
                                              && ep.EndDatetime == null
                                              && ep.IsCompleted == false
-                                             && ep.Order.OrdersPartsEmployees.Any(ope => ope.Employee.Position == previousWoerkerPositionName
-                                                                                         && ope.OrderId == ep.OrderId
-                                                                                         && ope.IsCompleted == true))
+                                             && ep.Order.OrdersPartsEmployees.Where(ope => ope.Employee.Position == previousWoerkerPositionName
+                                                                                         && ope.OrderId == ep.OrderId).All(c => c.IsCompleted == true))
                                 .OrderBy(o => o.OrderId)
                                 .Select(p => new PartOrdersDto()
                                 {
