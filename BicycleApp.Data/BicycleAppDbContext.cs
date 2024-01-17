@@ -319,6 +319,19 @@
                     .OnDelete(DeleteBehavior.NoAction);
             });
 
+            //PartInStockEntityConfiguration
+            builder.Entity<PartInStock>(entity =>
+            {
+                entity
+                    .HasKey(pis => new { pis.PartId });
+
+                entity
+                    .HasOne(pis => pis.Part)
+                    .WithMany(pis=>pis.PartsInStock)
+                    .HasForeignKey(pis => pis.PartId)
+                    .OnDelete(DeleteBehavior.NoAction);
+            });
+
             //Seed Test Data
             var seeder = new SeedClass();
 

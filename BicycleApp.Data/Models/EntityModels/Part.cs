@@ -23,6 +23,7 @@
             this.BikeModelsParts = new HashSet<BikeModelPart>();
             this.CompatableParts = new HashSet<CompatablePart>();
             this.PartsInOrder = new HashSet<PartOrder>();
+            this.PartsInOrder = new HashSet<PartOrder>();
         }
 
         [Key]
@@ -87,6 +88,7 @@
         public virtual ICollection<Rate> Rates { get; set; }
         public virtual ICollection<BikeModelPart> BikeModelsParts { get; set; }
         public virtual ICollection<PartOrder> PartsInOrder { get; set; }
+        public virtual ICollection<PartInStock> PartsInStock { get; set; }
 
         [Required]
         [Comment("Date of the creation of the entry in tha database")]

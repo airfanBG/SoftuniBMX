@@ -6,12 +6,15 @@ namespace BicycleApp.Data.Models.EntityModels
 {
     public class PartInStock
     {
-        [Key]
-        public int Id { get; set; }
 
         [Required]
-        [Comment("Unic number of the part")]
-        public string OemPartNumber { get; set; } = null!;
+        [Comment("Id of the part")]
+        public int PartId { get; set; }
+        public virtual Part Part { get; set; } = null!;
+
+        [Required]
+        [Comment("Id of the suplier for this part")]
+        public int SuplierId { get; set; }
 
         [Required]
         [Comment("Date of the creation of the entry")]
@@ -26,10 +29,5 @@ namespace BicycleApp.Data.Models.EntityModels
         [Required]
         [Comment("Status of the entry: Active/Inactive")]
         public bool IsDeleted { get; set; } = false;
-
-        //[Required]
-        //[Comment("Id of the suplier for this delivary")]-without this FK the SuplierId exists and is set to null
-        //public int SuplierId { get; set; }
-        //public virtual Suplier Suplier { get; set; } = null!;
     }
 }
