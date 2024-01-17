@@ -10,6 +10,6 @@
         public string? Town { get; set; }       
         public string? IBAN { get; set; }        
         public decimal Balance { get; set; }       
-        public ClientAddressDto DelivaryAddress { get; set; } 
+        public ClientAddressDto? DelivaryAddress { get; set; } 
     }
 }

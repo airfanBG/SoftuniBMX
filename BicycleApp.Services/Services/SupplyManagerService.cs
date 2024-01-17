@@ -147,6 +147,7 @@ namespace BicycleApp.Services.Services
                     throw new ArgumentNullException(nameof(createDelivedryDto.PartId));
                 }
 
+                //трябва да сетва в PartsInStock table SuplierId, PartId и OemPartNumber, САМО ако не съществува такъв запис!?
                 deliveredPart.Quantity += createDelivedryDto.QuantityDelivered;
 
                 await _dbContext.SaveChangesAsync();
@@ -594,12 +595,62 @@ namespace BicycleApp.Services.Services
                 })
                 .ToListAsync();
 
+
                 result.TotalPartsCount = await _dbContext.Parts
                             .AsNoTracking()
                             .Where(p => p.IsDeleted == false && p.DateDeleted.Equals(null))
                             .CountAsync();
 
                 return result;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Database can't retrive data", ex);
+            }
+        }
+
+        public async Task<ICollection<PartDto>> GetAllSuplierPartsInStock(int suplierId)
+        {
+            try
+            {
+                var suplierPartsIds = _dbContext.PartsInStock
+                .AsNoTracking()
+                .Where(spi => spi.SuplierId == suplierId)
+                .Select(spi=> spi.PartId)
+                .ToList();
+
+                var result = await _dbContext.Parts
+                .AsNoTracking()
+                .Include(p => p.ImagesParts)
+                .Where(p=>suplierPartsIds.Contains(p.Id))
+                .Select(p => new PartDto
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    OEMNumber = p.OEMNumber,
+                    Intend = p.Intend,
+                    Description = p.Description,
+                    Type = p.Type,
+                    Quantity = (int)p.Quantity,
+                    Category = p.Category.Name,
+                    Rating = (int)Math.Ceiling(p.Rates
+                                    .Where(r => r.PartId == p.Id)
+                                    .Select(r => r.Rating)
+                                    .Average()) == null
+                                    ? 0
+                                    : (int)Math.Ceiling(p.Rates
+                                    .Where(r => r.PartId == p.Id)
+                                    .Select(r => r.Rating)
+                                    .Average()),
+                    SalePrice = p.SalePrice,
+                    ImageUrls = p.ImagesParts.Where(p => p.PartId == p.Id)
+                    .Select(ip => ip.ImageUrl).ToList()
+                })
+                .ToListAsync();
+
+                return result;
+
             }
             catch (Exception ex)
             {

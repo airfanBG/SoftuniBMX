@@ -895,8 +895,26 @@
                 DateFinish = null,
                 StatusId = 6
             };
+            Order order6 = new Order()
+            {
+                Id = 6,
+                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
+                Description = "Multiple bicycles",
+                SaleAmount = 758.34M,
+                Discount = 0,
+                VAT = 151.66M,
+                FinalAmount = 910.00M,
+                PaidAmount = 182,
+                UnpaidAmount = 728,
+                DateCreated = dateCreated,
+                DateUpdated = null,
+                DateDeleted = null,
+                IsDeleted = false,
+                DateFinish = null,
+                StatusId = 1
+            };
 
-            return new List<Order> { order, order2, order3, order4, order5 };
+            return new List<Order> { order, order2, order3, order4, order5, order6 };
         }
 
         public List<OrderPartEmployee> SeedOrdersPartsEmployees()
@@ -1142,9 +1160,78 @@
                 Description = "test",
                 IsCompleted = true
             };
+            OrderPartEmployee multiplePartOrderFirstFrame = new OrderPartEmployee()
+            {
+                OrderId = 6,
+                SerialNumber = "BIDMOB123_F",
+                UniqueKeyForSerialNumber = "eab8af4f-7b26-498e-a9ef-7bc86f041d5e",
+                PartId = 2,
+                EmployeeId = "21003785-a275-4139-ae20-af6a6cf8fea8",
+                PartName = "Frame Montain",
+                PartPrice = 90.00M,
+                PartQuantity = 1,
+                IsCompleted = false
+            };
+            OrderPartEmployee multiplePartOrderSecondFrame = new OrderPartEmployee()
+            {
+                OrderId = 6,
+                SerialNumber = "BIDMOB123_S",
+                UniqueKeyForSerialNumber = "df68f033-f7cc-4bbe-a50b-662d3e290670",
+                PartId = 2,
+                PartName = "Frame Montain",
+                PartPrice = 90.00M,
+                PartQuantity = 1,
+                IsCompleted = false
+            };
+            OrderPartEmployee multiplePartOrderFirstWheel = new OrderPartEmployee()
+            {
+                OrderId = 6,
+                SerialNumber = "BIDMOB123_F",
+                UniqueKeyForSerialNumber = "eab8af4f-7b26-498e-a9ef-7bc86f041d5e",
+                PartId = 5,
+                PartName = "Wheel of the Year for montain",
+                PartPrice = 85.00M,
+                PartQuantity = 1,
+                IsCompleted = false
+            };
+            OrderPartEmployee multiplePartOrderSecondWheel = new OrderPartEmployee()
+            {
+                OrderId = 6,
+                SerialNumber = "BIDMOB123_S",
+                UniqueKeyForSerialNumber = "df68f033-f7cc-4bbe-a50b-662d3e290670",
+                PartId = 5,
+                PartName = "Wheel of the Year for montain",
+                PartPrice = 85.00M,
+                PartQuantity = 1,
+                IsCompleted = false
+            };
+            OrderPartEmployee multiplePartOrderFirstAccessories = new OrderPartEmployee()
+            {
+                OrderId = 6,
+                SerialNumber = "BIDMOB123_F",
+                UniqueKeyForSerialNumber = "eab8af4f-7b26-498e-a9ef-7bc86f041d5e",
+                PartId = 13,
+                PartName = "Montain Shifts",
+                PartPrice = 280.00M,
+                PartQuantity = 1,
+                IsCompleted = false
+            };
+            OrderPartEmployee multiplePartOrderSecondAccessories = new OrderPartEmployee()
+            {
+                OrderId = 6,
+                SerialNumber = "BIDMOB123_S",
+                UniqueKeyForSerialNumber = "df68f033-f7cc-4bbe-a50b-662d3e290670",
+                PartId = 13,
+                PartName = "Montain Shifts",
+                PartPrice = 280.00M,
+                PartQuantity = 1,
+                IsCompleted = false
+            };
+
             return new List<OrderPartEmployee> {
                 opeFrame, opeWheel, opeAccessories, opeFrame2, opeWheel2, opeAccessories2, opeFrame3, opeWheel3, opeAccessories3,
-                opeFrame4, opeWheel4, opeAccessories4, qualityControlOpeFrame,qualityControlOpeWheel,qualityControlOpeAccessories
+                opeFrame4, opeWheel4, opeAccessories4, qualityControlOpeFrame,qualityControlOpeWheel,qualityControlOpeAccessories,multiplePartOrderFirstFrame,
+                multiplePartOrderSecondFrame, multiplePartOrderFirstWheel, multiplePartOrderSecondWheel, multiplePartOrderFirstAccessories, multiplePartOrderSecondAccessories
             };
         }
         public ICollection<OrderPartEmployeeInfo> SeedOrderOrderParsEmployeeInfos()
@@ -1904,8 +1991,9 @@
         {
             PartInStock partInStock1 = new PartInStock()
             {
-                Id = 1,
-                OemPartNumber = "oemtest1",
+                Id =1,
+                PartId = 1,
+                SuplierId = 1,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
@@ -1914,7 +2002,8 @@
             PartInStock partInStock2 = new PartInStock()
             {
                 Id = 2,
-                OemPartNumber = "oemtest2",
+                PartId = 2,
+                SuplierId = 1,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
@@ -1922,7 +2011,8 @@
             }; PartInStock partInStock3 = new PartInStock()
             {
                 Id = 3,
-                OemPartNumber = "oemtest3",
+                PartId = 3,
+                SuplierId = 1,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
@@ -1930,7 +2020,8 @@
             }; PartInStock partInStock4 = new PartInStock()
             {
                 Id = 4,
-                OemPartNumber = "oemtest4",
+                PartId = 4,
+                SuplierId = 2,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
@@ -1938,39 +2029,44 @@
             }; PartInStock partInStock5 = new PartInStock()
             {
                 Id = 5,
-                OemPartNumber = "oemtest5",
+                PartId = 5,
+                SuplierId = 2,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             }; PartInStock partInStock6 = new PartInStock()
-            {
+            {   
                 Id = 6,
-                OemPartNumber = "oemtest6",
+                PartId = 6,
+                SuplierId = 2,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             }; PartInStock partInStock7 = new PartInStock()
-            {
+            {   
                 Id = 7,
-                OemPartNumber = "oemtest7",
+                PartId = 7,
+                SuplierId = 3,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             }; PartInStock partInStock8 = new PartInStock()
-            {
+            {   
                 Id = 8,
-                OemPartNumber = "oemtest8",
+                PartId = 8,
+                SuplierId = 3,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             }; PartInStock partInStock9 = new PartInStock()
-            {
+            {   
                 Id = 9,
-                OemPartNumber = "oemtest9",
+                PartId = 9,
+                SuplierId = 3,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
@@ -1978,7 +2074,8 @@
             }; PartInStock partInStock10 = new PartInStock()
             {
                 Id = 10,
-                OemPartNumber = "oemtest10",
+                PartId = 10,
+                SuplierId = 3,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
@@ -1986,7 +2083,8 @@
             }; PartInStock partInStock11 = new PartInStock()
             {
                 Id = 11,
-                OemPartNumber = "oemtest11",
+                PartId = 11,
+                SuplierId = 3,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
@@ -1994,7 +2092,8 @@
             }; PartInStock partInStock12 = new PartInStock()
             {
                 Id = 12,
-                OemPartNumber = "oemtest12",
+                PartId = 12,
+                SuplierId = 3,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
@@ -2002,7 +2101,8 @@
             }; PartInStock partInStock13 = new PartInStock()
             {
                 Id = 13,
-                OemPartNumber = "oemtest13",
+                PartId = 13,
+                SuplierId = 3,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
