@@ -1906,8 +1906,9 @@
         {
             PartInStock partInStock1 = new PartInStock()
             {
-                Id = 1,
-                OemPartNumber = "oemtest1",
+                Id =1,
+                PartId = 1,
+                SuplierId = 1,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
@@ -1916,7 +1917,8 @@
             PartInStock partInStock2 = new PartInStock()
             {
                 Id = 2,
-                OemPartNumber = "oemtest2",
+                PartId = 2,
+                SuplierId = 1,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
@@ -1924,7 +1926,8 @@
             }; PartInStock partInStock3 = new PartInStock()
             {
                 Id = 3,
-                OemPartNumber = "oemtest3",
+                PartId = 3,
+                SuplierId = 1,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
@@ -1932,7 +1935,8 @@
             }; PartInStock partInStock4 = new PartInStock()
             {
                 Id = 4,
-                OemPartNumber = "oemtest4",
+                PartId = 4,
+                SuplierId = 2,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
@@ -1940,39 +1944,44 @@
             }; PartInStock partInStock5 = new PartInStock()
             {
                 Id = 5,
-                OemPartNumber = "oemtest5",
+                PartId = 5,
+                SuplierId = 2,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             }; PartInStock partInStock6 = new PartInStock()
-            {
+            {   
                 Id = 6,
-                OemPartNumber = "oemtest6",
+                PartId = 6,
+                SuplierId = 2,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             }; PartInStock partInStock7 = new PartInStock()
-            {
+            {   
                 Id = 7,
-                OemPartNumber = "oemtest7",
+                PartId = 7,
+                SuplierId = 3,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             }; PartInStock partInStock8 = new PartInStock()
-            {
+            {   
                 Id = 8,
-                OemPartNumber = "oemtest8",
+                PartId = 8,
+                SuplierId = 3,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
                 IsDeleted = false
             }; PartInStock partInStock9 = new PartInStock()
-            {
+            {   
                 Id = 9,
-                OemPartNumber = "oemtest9",
+                PartId = 9,
+                SuplierId = 3,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
@@ -1980,7 +1989,8 @@
             }; PartInStock partInStock10 = new PartInStock()
             {
                 Id = 10,
-                OemPartNumber = "oemtest10",
+                PartId = 10,
+                SuplierId = 3,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
@@ -1988,7 +1998,8 @@
             }; PartInStock partInStock11 = new PartInStock()
             {
                 Id = 11,
-                OemPartNumber = "oemtest11",
+                PartId = 11,
+                SuplierId = 3,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
@@ -1996,7 +2007,8 @@
             }; PartInStock partInStock12 = new PartInStock()
             {
                 Id = 12,
-                OemPartNumber = "oemtest12",
+                PartId = 12,
+                SuplierId = 3,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,
@@ -2004,7 +2016,8 @@
             }; PartInStock partInStock13 = new PartInStock()
             {
                 Id = 13,
-                OemPartNumber = "oemtest13",
+                PartId = 13,
+                SuplierId = 3,
                 DateCreated = dateCreated,
                 DateUpdated = dateUpdated,
                 DateDeleted = null,

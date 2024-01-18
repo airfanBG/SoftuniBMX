@@ -50,7 +50,7 @@ function ComponentUserOrdersReady() {
 
   return (
     <>
-      <h2 className={styles.dashHeading}>Selected items</h2>
+      <h2 className={styles.dashHeading}>Ready orders</h2>
 
       <section className={styles.board}>
         <BoardHeader />
@@ -86,7 +86,9 @@ function ComponentUserOrdersReady() {
                 />
               ))}
             {data.length === 0 && (
-              <h3>You have no ready orders at this moment</h3>
+              <h3 className={styles.fontHd}>
+                You have no ready orders at this moment
+              </h3>
             )}
           </div>
         )}

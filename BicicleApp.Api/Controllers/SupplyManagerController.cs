@@ -247,6 +247,38 @@ namespace BicicleApp.Api.Controllers
         }
 
         [HttpGet]
+        [Route("get_suplier_parts")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetSuplierParts([FromQuery] int suplierId)
+        {
+
+            if (suplierId <= 0)
+            {
+                return StatusCode(400);
+            }
+
+            if (await _supplyManagerService.SuplierExists(suplierId) == false)
+            {
+                return StatusCode(400);
+            }
+
+            try
+            {
+                var model = await _supplyManagerService.GetAllSuplierPartsInStock(suplierId);
+
+                return StatusCode(200, model);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(500);
+            }
+        }
+
+        [HttpGet]
         [Route("get_delivery")]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
