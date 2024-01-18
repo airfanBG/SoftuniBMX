@@ -10,6 +10,9 @@ function AddProducts() {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
   const [suppliers, setSuppliers] = useState([]);
+  const [selId, setSelId] = useState("");
+  const [selSup, setSelSup] = useState({});
+  const [selected, setSelected] = useState({});
 
   useEffect(() => {
     async function getSuppliers() {
@@ -17,19 +20,69 @@ function AddProducts() {
       if (!result.isError) {
         setSuppliers(result);
       }
-      // console.log(result);
     }
     getSuppliers();
   }, []);
 
+  useEffect(
+    function () {
+      if (selId === "") return;
+      suppliers.map((s) => {
+        if (s.id == selId) {
+          setSelSup(s);
+        }
+      });
+
+      async function getSelected() {
+        const result = await get(environment.get_supplier_parts + selId);
+        if (result?.isError) {
+          console.log(result.isError.message);
+        }
+        setSelected(result);
+      }
+      getSelected();
+    },
+    [selId, suppliers]
+  );
+
+  function onSelectSupplier(e) {
+    setSelId(e.target.value);
+  }
   return (
     <>
       <h2 className={styles.dashHeading}>Create parts request</h2>
 
       <section className={styles.board}>
-        {/* <BoardHeader /> */}
         {loading && <LoaderWheel />}
-        {/* <h2 className={styles.header}>Scrap</h2> */}
+
+        <div className={styles.dropDown}>
+          <select
+            name=""
+            id=""
+            className={styles.selectEl}
+            onChange={onSelectSupplier}
+          >
+            <option value=""></option>
+            {suppliers &&
+              suppliers.length > 0 &&
+              suppliers.map((s) => (
+                <option key={s.id} className={styles.option} value={s.id}>
+                  {s.categoryName}
+                </option>
+              ))}
+          </select>
+          <p className={`${styles.supInfo} ${styles.name}`}>{selSup.name}</p>
+          <p className={`${styles.supInfo} ${styles.contName}`}>
+            {selSup.contactName}
+          </p>
+          <p className={`${styles.supInfo} ${styles.email}`}>{selSup.email}</p>
+          <p className={`${styles.supInfo} ${styles.phone}`}>
+            {/* <span>
+              <ion-icon name="call-outline"></ion-icon>
+            </span> */}
+            {selSup.phoneNumeber}
+          </p>
+        </div>
       </section>
     </>
   );

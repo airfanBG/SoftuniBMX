@@ -17,3 +17,37 @@
   gap: 2rem;
   background-color: #fff;
 }
+
+.dropDown {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 1rem;
+}
+.selectEl {
+  width: 16rem;
+  font-size: 1.8rem;
+  padding: 0 1rem;
+  border: 0.1rem solid var(--color-border);
+  border-radius: 0.3rem;
+}
+
+.supInfo {
+  font-size: 1.6rem;
+  padding-inline: 1rem;
+  border: 0.1rem solid var(--color-border);
+  border-radius: 0.3rem;
+}
+
+.name {
+  grid-column: 2/4;
+}
+.contName {
+  grid-column: 4/6;
+}
+.email {
+  grid-column: 6/8;
+}
+.phone {
+  grid-column: 8/9;
+  font-size: 1.6rem;
+}

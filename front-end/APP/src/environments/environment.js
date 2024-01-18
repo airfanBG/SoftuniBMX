@@ -62,6 +62,7 @@ export const environment = {
   parts_in_stock: "/api/supplys_manager/parts_in_stock?page=",
   deleted_orders_list: "/api/manager/deleted_orders?page=",
   suppliers_list: "/api/supplys_manager/supliers",
+  get_supplier_parts: "/api/supplys_manager/get_suplier_parts?suplierId=",
 
   // BIKE_SERVICES
   frames: "/api/accountpage/frames",
