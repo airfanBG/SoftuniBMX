@@ -4,7 +4,7 @@
 
     using BicycleApp.Services.Contracts;
 
-    using static BicycleApp.Common.ApplicationGlobalConstants;
+    using static BicycleApp.Common.Constants.ApplicationGlobalConstants;
 
     public class PictureOrganizerServices : IPictureOrganizerServices
     {

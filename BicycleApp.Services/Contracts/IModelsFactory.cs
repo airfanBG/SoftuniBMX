@@ -2,9 +2,11 @@
 {
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Data.Models.IdentityModels;
-    using BicycleApp.Services.Models;
+    using BicycleApp.Services.Models.Bike;
+    using BicycleApp.Services.Models.Comment;
     using BicycleApp.Services.Models.IdentityModels;
     using BicycleApp.Services.Models.IdentityModels.Contracts;
+    using BicycleApp.Services.Models.Part;
     using BicycleApp.Services.Models.Supply;
 
     public interface IModelsFactory

@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using static BicycleApp.Common.EntityValidationConstants.BikeModel;
+    using static BicycleApp.Common.Constants.EntityValidationConstants.BikeModel;
 
     public class BikeStandartModel
     {

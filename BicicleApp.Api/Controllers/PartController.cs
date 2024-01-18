@@ -1,8 +1,7 @@
 ﻿namespace BicicleApp.Api.Controllers
 {
     using BicycleApp.Services.Contracts;
-    using BicycleApp.Services.Models;
-
+    using BicycleApp.Services.Models.Part;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/part")]

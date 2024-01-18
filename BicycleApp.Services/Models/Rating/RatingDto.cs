@@ -2,7 +2,7 @@
 {
     using BicycleApp.Services.Models.Rating.Contracts;
     using System.ComponentModel.DataAnnotations;
-    using static BicycleApp.Common.EntityValidationConstants;
+    using static BicycleApp.Common.Constants.EntityValidationConstants;
 
     public class RatingDto : IRatingDto
     {

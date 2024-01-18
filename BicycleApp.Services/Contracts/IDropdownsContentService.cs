@@ -1,4 +1,4 @@
-﻿using BicycleApp.Services.Models;
+﻿using BicycleApp.Services.Models.Part;
 
 namespace BicycleApp.Services.Contracts
 {

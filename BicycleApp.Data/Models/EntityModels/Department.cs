@@ -8,7 +8,7 @@
 
     using Microsoft.EntityFrameworkCore;
 
-    using static BicycleApp.Common.EntityValidationConstants.Department;
+    using static BicycleApp.Common.Constants.EntityValidationConstants.Department;
 
 
     [Comment("Table of all departments in the database")]

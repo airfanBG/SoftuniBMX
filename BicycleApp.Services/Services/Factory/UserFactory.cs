@@ -4,7 +4,7 @@
     using BicycleApp.Data.Models.IdentityModels;
     using BicycleApp.Services.Contracts.Factory;
     using Microsoft.EntityFrameworkCore;
-    using static BicycleApp.Common.UserConstants;
+    using static BicycleApp.Common.Constants.UserConstants;
 
     public class UserFactory : IUserFactory
     {

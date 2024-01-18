@@ -7,7 +7,7 @@
 
     using Microsoft.EntityFrameworkCore;
 
-    using static BicycleApp.Common.EntityValidationConstants.PartCategory;
+    using static BicycleApp.Common.Constants.EntityValidationConstants.PartCategory;
 
     [Comment("Table of all categories for a part in the database")]
     public class PartCategory : IEntity

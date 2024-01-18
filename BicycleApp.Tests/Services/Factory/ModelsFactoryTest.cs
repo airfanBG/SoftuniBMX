@@ -2,7 +2,7 @@
 {
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.Contracts;
-    using BicycleApp.Services.Models;
+    using BicycleApp.Services.Models.Bike;
     using BicycleApp.Services.Services.Factory;
     using Newtonsoft.Json;
 

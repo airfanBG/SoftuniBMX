@@ -16,7 +16,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.IdentityModel.Tokens;
 
-    using static BicycleApp.Common.UserConstants;
+    using static BicycleApp.Common.Constants.UserConstants;
 
     public class ClientService : IClientService
     {

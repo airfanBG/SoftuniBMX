@@ -8,7 +8,7 @@
 
     using Microsoft.EntityFrameworkCore;
 
-    using static BicycleApp.Common.EntityValidationConstants.Status;
+    using static BicycleApp.Common.Constants.EntityValidationConstants.Status;
 
     [Comment("Table with all the statuses for the orders")]
     public class Status : IEntity

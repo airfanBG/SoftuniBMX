@@ -1,8 +1,7 @@
 ﻿namespace BicicleApp.Api.Controllers
 {
     using BicycleApp.Services.Contracts;
-    using BicycleApp.Services.Models;
-
+    using BicycleApp.Services.Models.HomePage;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 

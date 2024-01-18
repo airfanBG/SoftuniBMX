@@ -4,7 +4,7 @@
     using BicycleApp.Services.Contracts.OrderContracts;
     using BicycleApp.Services.HelperClasses.Contracts;
     using BicycleApp.Services.Models.Order.OrderUser;
-    using static BicycleApp.Common.ApplicationGlobalConstants;
+    using static BicycleApp.Common.Constants.ApplicationGlobalConstants;
 
     using Microsoft.EntityFrameworkCore;
 

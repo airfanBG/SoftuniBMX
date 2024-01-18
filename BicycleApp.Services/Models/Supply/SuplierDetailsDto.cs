@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using BicycleApp.Services.Models.Part;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
 namespace BicycleApp.Services.Models.Supply

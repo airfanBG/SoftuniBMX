@@ -1,6 +1,5 @@
 ﻿using BicycleApp.Services.Contracts;
-using BicycleApp.Services.Models;
-
+using BicycleApp.Services.Models.Comment;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BicicleApp.Api.Controllers

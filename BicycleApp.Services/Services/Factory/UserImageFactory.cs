@@ -5,7 +5,7 @@
     using BicycleApp.Data.Models.EntityModels;
     using BicycleApp.Services.Contracts.Factory;
     using Microsoft.EntityFrameworkCore;
-    using static BicycleApp.Common.UserConstants;
+    using static BicycleApp.Common.Constants.UserConstants;
 
     public class UserImageFactory : IUserImageFactory
     {

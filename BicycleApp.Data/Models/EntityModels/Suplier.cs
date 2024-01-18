@@ -8,7 +8,7 @@
 
     using Microsoft.EntityFrameworkCore;
 
-    using static BicycleApp.Common.EntityValidationConstants.Suplier;
+    using static BicycleApp.Common.Constants.EntityValidationConstants.Suplier;
 
     [Comment("Table of all supliers in the database")]
     public class Suplier : IEntity

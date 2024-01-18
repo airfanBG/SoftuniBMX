@@ -19,8 +19,8 @@
     using System.IdentityModel.Tokens.Jwt;
     using System.Security.Claims;
 
-    using static BicycleApp.Common.ApplicationGlobalConstants;
-    using static BicycleApp.Common.UserConstants;
+    using static BicycleApp.Common.Constants.ApplicationGlobalConstants;
+    using static BicycleApp.Common.Constants.UserConstants;
     using Microsoft.AspNetCore.WebUtilities;
     using BicycleApp.Common.Providers.Contracts;
     using BicycleApp.Services.HelperClasses.Contracts;

@@ -1,0 +1,11 @@
+﻿namespace BicycleApp.Services.Models.Part
+{
+    public class PartInStockInfoDto
+    {
+        public int Id { get; set; }
+        public string? Name { get; set; }
+        public string OemNumber { get; set; } = null!;
+        public string? Description { get; set; }
+        public int Type { get; set; }
+    }
+}

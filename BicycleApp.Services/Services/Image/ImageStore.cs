@@ -4,7 +4,7 @@
     using BicycleApp.Services.Contracts;
     using BicycleApp.Services.Contracts.Factory;
     using BicycleApp.Services.Models.Image;
-    using static BicycleApp.Common.UserConstants;
+    using static BicycleApp.Common.Constants.UserConstants;
 
     using Microsoft.AspNetCore.Http;
 

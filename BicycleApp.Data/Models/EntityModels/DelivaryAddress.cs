@@ -3,7 +3,7 @@
     using BicycleApp.Data.Models.IdentityModels;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using static BicycleApp.Common.EntityValidationConstants;
+    using static BicycleApp.Common.Constants.EntityValidationConstants;
 
     public class DelivaryAddress
     {

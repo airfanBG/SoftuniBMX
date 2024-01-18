@@ -11,7 +11,6 @@ namespace BicicleApp.Api
     using BicycleApp.Services.Contracts.OrderContracts;
     using BicycleApp.Services.HelperClasses;
     using BicycleApp.Services.HelperClasses.Contracts;
-    using BicycleApp.Services.Services;
     using BicycleApp.Services.Services.Email;
     using BicycleApp.Services.Services.Factory;
     using BicycleApp.Services.Services.IdentityServices;
@@ -24,6 +23,13 @@ namespace BicicleApp.Api
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
+    using BicycleApp.Services.Services.ManagerServices;
+    using BicycleApp.Services.Services.Part;
+    using BicycleApp.Services.Services.Bike;
+    using BicycleApp.Services.Services.Comment;
+    using BicycleApp.Services.Services.DropdownsContent;
+    using BicycleApp.Services.Services.HomePage;
+    using BicycleApp.Services.Services.Rating;
 
     public class Program
     {

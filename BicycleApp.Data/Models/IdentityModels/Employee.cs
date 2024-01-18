@@ -7,7 +7,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
-    using static BicycleApp.Common.EntityValidationConstants.User;
+    using static BicycleApp.Common.Constants.EntityValidationConstants.User;
 
     public class Employee : BaseUser
     {

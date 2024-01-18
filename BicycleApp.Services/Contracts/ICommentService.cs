@@ -1,8 +1,7 @@
 ﻿namespace BicycleApp.Services.Contracts
 {
     using System.Threading.Tasks;
-
-    using BicycleApp.Services.Models;
+    using BicycleApp.Services.Models.Comment;
 
     public interface ICommentService
     {

@@ -9,7 +9,7 @@
 
     using Microsoft.EntityFrameworkCore;
 
-    using static BicycleApp.Common.EntityValidationConstants.Town;
+    using static BicycleApp.Common.Constants.EntityValidationConstants.Town;
 
     [Comment("Table of all towns registered in the database")]
     public class Town : IEntity

@@ -4,7 +4,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using BicycleApp.Data.Models.IdentityModels;
-    using static BicycleApp.Common.EntityValidationConstants.Order;
+    using static BicycleApp.Common.Constants.EntityValidationConstants.Order;
 
     using Microsoft.EntityFrameworkCore;
 

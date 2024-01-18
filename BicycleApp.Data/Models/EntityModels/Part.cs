@@ -8,7 +8,7 @@
 
     using Microsoft.EntityFrameworkCore;
 
-    using static BicycleApp.Common.EntityValidationConstants.Part;
+    using static BicycleApp.Common.Constants.EntityValidationConstants.Part;
 
     [Comment("Table of all the parts in the database")]
     public class Part : IEntity

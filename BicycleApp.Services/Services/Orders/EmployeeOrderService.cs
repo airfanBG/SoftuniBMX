@@ -11,8 +11,8 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using static BicycleApp.Common.ApplicationGlobalConstants;
-    using static BicycleApp.Common.UserConstants;
+    using static BicycleApp.Common.Constants.ApplicationGlobalConstants;
+    using static BicycleApp.Common.Constants.UserConstants;
 
     public class EmployeeOrderService : IEmployeeOrderService
     {

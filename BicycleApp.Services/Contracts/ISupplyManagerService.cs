@@ -1,5 +1,5 @@
-﻿using BicycleApp.Services.Models;
-using BicycleApp.Services.Models.Order;
+﻿using BicycleApp.Services.Models.Order;
+using BicycleApp.Services.Models.Part;
 using BicycleApp.Services.Models.Supply;
 
 namespace BicycleApp.Services.Contracts

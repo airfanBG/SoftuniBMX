@@ -1,4 +1,6 @@
-﻿namespace BicycleApp.Services.Models.Order.OrderUser
+﻿using BicycleApp.Services.Models.Part;
+
+namespace BicycleApp.Services.Models.Order.OrderUser
 {
     public class OrderClientShortInfo
     {

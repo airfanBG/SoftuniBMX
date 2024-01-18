@@ -4,7 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Text.Json.Serialization;
 
-    using static BicycleApp.Common.EntityValidationConstants.User;
+    using static BicycleApp.Common.Constants.EntityValidationConstants.User;
 
     public class ClientRegisterDto : IBaseClientDto
     {

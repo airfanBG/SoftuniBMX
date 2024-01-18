@@ -4,7 +4,7 @@
 
     using System.ComponentModel.DataAnnotations;
 
-    using static BicycleApp.Common.EntityValidationConstants.CompatiblePart;
+    using static BicycleApp.Common.Constants.EntityValidationConstants.CompatiblePart;
 
     public class CompatablePart
     {

@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using static BicycleApp.Common.EntityValidationConstants.Suplier;
+using static BicycleApp.Common.Constants.EntityValidationConstants.Suplier;
 
 namespace BicycleApp.Services.Models.Supply
 {

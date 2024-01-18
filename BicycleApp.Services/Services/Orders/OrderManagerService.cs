@@ -14,8 +14,8 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using static BicycleApp.Common.ApplicationGlobalConstants;
-    using static BicycleApp.Common.EntityValidationConstants;
+    using static BicycleApp.Common.Constants.ApplicationGlobalConstants;
+    using static BicycleApp.Common.Constants.EntityValidationConstants;
 
     public class OrderManagerService : IOrderManagerService
     {

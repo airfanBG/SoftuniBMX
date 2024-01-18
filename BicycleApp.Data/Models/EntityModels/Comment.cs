@@ -7,7 +7,7 @@
 
     using Microsoft.EntityFrameworkCore;
 
-    using static BicycleApp.Common.EntityValidationConstants.Coment;
+    using static BicycleApp.Common.Constants.EntityValidationConstants.Coment;
 
     [Comment("Table of all comments for all parts in the database")]
     public class Comment
