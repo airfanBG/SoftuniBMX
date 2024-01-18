@@ -895,26 +895,8 @@
                 DateFinish = null,
                 StatusId = 6
             };
-            Order order6 = new Order()
-            {
-                Id = 6,
-                ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
-                Description = "Multiple bicycles",
-                SaleAmount = 758.34M,
-                Discount = 0,
-                VAT = 151.66M,
-                FinalAmount = 910.00M,
-                PaidAmount = 182,
-                UnpaidAmount = 728,
-                DateCreated = dateCreated,
-                DateUpdated = null,
-                DateDeleted = null,
-                IsDeleted = false,
-                DateFinish = null,
-                StatusId = 1
-            };
 
-            return new List<Order> { order, order2, order3, order4, order5, order6 };
+            return new List<Order> { order, order2, order3, order4, order5 };
         }
 
         public List<OrderPartEmployee> SeedOrdersPartsEmployees()
@@ -1160,78 +1142,11 @@
                 Description = "test",
                 IsCompleted = true
             };
-            OrderPartEmployee multiplePartOrderFirstFrame = new OrderPartEmployee()
-            {
-                OrderId = 6,
-                SerialNumber = "BIDMOB123_F",
-                UniqueKeyForSerialNumber = "eab8af4f-7b26-498e-a9ef-7bc86f041d5e",
-                PartId = 2,
-                EmployeeId = "21003785-a275-4139-ae20-af6a6cf8fea8",
-                PartName = "Frame Montain",
-                PartPrice = 90.00M,
-                PartQuantity = 1,
-                IsCompleted = false
-            };
-            OrderPartEmployee multiplePartOrderSecondFrame = new OrderPartEmployee()
-            {
-                OrderId = 6,
-                SerialNumber = "BIDMOB123_S",
-                UniqueKeyForSerialNumber = "df68f033-f7cc-4bbe-a50b-662d3e290670",
-                PartId = 2,
-                PartName = "Frame Montain",
-                PartPrice = 90.00M,
-                PartQuantity = 1,
-                IsCompleted = false
-            };
-            OrderPartEmployee multiplePartOrderFirstWheel = new OrderPartEmployee()
-            {
-                OrderId = 6,
-                SerialNumber = "BIDMOB123_F",
-                UniqueKeyForSerialNumber = "eab8af4f-7b26-498e-a9ef-7bc86f041d5e",
-                PartId = 5,
-                PartName = "Wheel of the Year for montain",
-                PartPrice = 85.00M,
-                PartQuantity = 1,
-                IsCompleted = false
-            };
-            OrderPartEmployee multiplePartOrderSecondWheel = new OrderPartEmployee()
-            {
-                OrderId = 6,
-                SerialNumber = "BIDMOB123_S",
-                UniqueKeyForSerialNumber = "df68f033-f7cc-4bbe-a50b-662d3e290670",
-                PartId = 5,
-                PartName = "Wheel of the Year for montain",
-                PartPrice = 85.00M,
-                PartQuantity = 1,
-                IsCompleted = false
-            };
-            OrderPartEmployee multiplePartOrderFirstAccessories = new OrderPartEmployee()
-            {
-                OrderId = 6,
-                SerialNumber = "BIDMOB123_F",
-                UniqueKeyForSerialNumber = "eab8af4f-7b26-498e-a9ef-7bc86f041d5e",
-                PartId = 13,
-                PartName = "Montain Shifts",
-                PartPrice = 280.00M,
-                PartQuantity = 1,
-                IsCompleted = false
-            };
-            OrderPartEmployee multiplePartOrderSecondAccessories = new OrderPartEmployee()
-            {
-                OrderId = 6,
-                SerialNumber = "BIDMOB123_S",
-                UniqueKeyForSerialNumber = "df68f033-f7cc-4bbe-a50b-662d3e290670",
-                PartId = 13,
-                PartName = "Montain Shifts",
-                PartPrice = 280.00M,
-                PartQuantity = 1,
-                IsCompleted = false
-            };
 
-            return new List<OrderPartEmployee> {
+            return new List<OrderPartEmployee> 
+            {
                 opeFrame, opeWheel, opeAccessories, opeFrame2, opeWheel2, opeAccessories2, opeFrame3, opeWheel3, opeAccessories3,
-                opeFrame4, opeWheel4, opeAccessories4, qualityControlOpeFrame,qualityControlOpeWheel,qualityControlOpeAccessories,multiplePartOrderFirstFrame,
-                multiplePartOrderSecondFrame, multiplePartOrderFirstWheel, multiplePartOrderSecondWheel, multiplePartOrderFirstAccessories, multiplePartOrderSecondAccessories
+                opeFrame4, opeWheel4, opeAccessories4, qualityControlOpeFrame,qualityControlOpeWheel,qualityControlOpeAccessories
             };
         }
         public ICollection<OrderPartEmployeeInfo> SeedOrderOrderParsEmployeeInfos()
