@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { UserContext } from "../context/GlobalUserProvider.jsx";
 import { environment } from "../environments/environment.js";
 import Images from "./createComponents/Images.jsx";
+import { formatCurrency } from "../util/resolvers.js";
 
 function PartInfo() {
   const { id } = useParams(); // id-то на детаила
@@ -124,25 +125,32 @@ function PartInfo() {
               </div>
             </div>
             <div className={styles.right}>
-              <p>
+              <p className={styles.rightLabel}>
                 Description: <span>{data.description}</span>
               </p>
-              <p>
+              <p className={styles.rightLabel}>
                 Intend: <span>{data.intend}</span>
               </p>
-              <p>
+              <p className={styles.rightLabel}>
                 OEM Number: <span>{data.oemNumber}</span>
               </p>
-              <p>
+              <p className={styles.rightLabel}>
                 Type: <span>{data.type}</span>
               </p>
-              <p>
+              <p className={styles.rightLabel}>
                 Category: <span>{data.category}</span>
               </p>
-              <p>
-                Sale Price: <span>{data.salePrice}</span>
+              <p className={styles.rightLabel}>
+                Sale Price: <span>{formatCurrency(data.salePrice)}</span>
               </p>
-              <p>Current rating: {partRating.toFixed(1)}</p>
+              <p className={styles.rightLabel}>
+                {/* Current rating: <span>{partRating.toFixed(1)}</span> */}
+                Current rating:{" "}
+                <span style={{ marginRight: "1rem" }}>
+                  {parseInt(partRating)}
+                </span>
+                {Array.from({ length: partRating }, (_, i) => "⭐")}
+              </p>
             </div>
           </div>
           <div>
