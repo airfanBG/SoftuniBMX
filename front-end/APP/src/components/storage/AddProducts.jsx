@@ -5,6 +5,8 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/GlobalUserProvider.jsx";
 import { get } from "../../util/api.js";
 import { environment } from "../../environments/environment.js";
+import { formatCurrency } from "../../util/resolvers.js";
+import Popup from "../Popup.jsx";
 
 function AddProducts() {
   const { user } = useContext(UserContext);
@@ -13,6 +15,8 @@ function AddProducts() {
   const [selId, setSelId] = useState("");
   const [selSup, setSelSup] = useState({});
   const [selected, setSelected] = useState({});
+  const [background, setBackground] = useState(false);
+  const [currentImg, setCurrentImg] = useState("");
 
   useEffect(() => {
     async function getSuppliers() {
@@ -38,7 +42,8 @@ function AddProducts() {
         if (result?.isError) {
           console.log(result.isError.message);
         }
-        setSelected(result);
+        const sorted = result.sort((a, b) => a.quantity - b.quantity);
+        setSelected(sorted);
       }
       getSelected();
     },
@@ -48,8 +53,27 @@ function AddProducts() {
   function onSelectSupplier(e) {
     setSelId(e.target.value);
   }
+
+  function onOrderButtonClick(i) {
+    setCurrentImg(i);
+    setBackground(true);
+  }
+
+  function close() {
+    setCurrentImg({});
+    setBackground(false);
+  }
+
   return (
     <>
+      {background && (
+        <Popup onClose={close}>
+          <>
+            <img src={currentImg.img} alt="" />
+            <p className={styles.description}>{currentImg.description}</p>
+          </>
+        </Popup>
+      )}
       <h2 className={styles.dashHeading}>Create parts request</h2>
 
       <section className={styles.board}>
@@ -71,18 +95,100 @@ function AddProducts() {
                 </option>
               ))}
           </select>
-          <p className={`${styles.supInfo} ${styles.name}`}>{selSup.name}</p>
-          <p className={`${styles.supInfo} ${styles.contName}`}>
-            {selSup.contactName}
-          </p>
-          <p className={`${styles.supInfo} ${styles.email}`}>{selSup.email}</p>
-          <p className={`${styles.supInfo} ${styles.phone}`}>
-            {/* <span>
-              <ion-icon name="call-outline"></ion-icon>
-            </span> */}
-            {selSup.phoneNumeber}
-          </p>
+
+          {Object.keys(selected).length === 0 && (
+            <h3 className={styles.noHeading}>
+              Select supplier from the dropdown list
+            </h3>
+          )}
+          {Object.keys(selected).length > 0 && (
+            <div className={styles.selectedInfo}>
+              <p className={`${styles.supInfo} ${styles.name}`}>
+                {selSup.name}
+              </p>
+              <p className={`${styles.supInfo} ${styles.contName}`}>
+                {selSup.contactName}
+              </p>
+
+              <button
+                className={`${styles.supInfo} ${styles.email}`}
+                onClick={() => (window.location = `mailto:${selSup.email}`)}
+              >
+                {selSup.email}
+              </button>
+              <button
+                className={`${styles.supInfo} ${styles.phone}`}
+                onClick={
+                  () => (window.location = `callto:${selSup.phoneNumeber}`)
+                  // window.open(`tel:${selSup.phoneNumeber}`)
+                }
+              >
+                <span>
+                  <ion-icon name="call-outline"></ion-icon>
+                </span>
+                {selSup.phoneNumeber}
+              </button>
+            </div>
+          )}
         </div>
+
+        {Object.values(selected).length > 0 && (
+          <ul className={styles.partsList}>
+            {selected.map((s) => (
+              <li className={styles.selectedListItem} key={s.id}>
+                <p className={styles.element}>
+                  <span className={styles.label}>Part</span>
+                  {s.name}
+                </p>
+                <span
+                  className={styles.icon}
+                  onClick={() =>
+                    onOrderButtonClick({
+                      img: s.imageUrls.at(0),
+                      description: s.description,
+                    })
+                  }
+                >
+                  <ion-icon name="search-outline"></ion-icon>
+                </span>
+                <p className={`${styles.element} ${styles.oem}`}>
+                  <span className={styles.label}>OEM Number</span>
+                  {s.oemNumber}
+                </p>
+                <p className={`${styles.element} ${styles.price}`}>
+                  <span className={styles.label}>Price</span>
+                  {formatCurrency(s.salePrice)}
+                </p>
+                <p
+                  className={`${styles.element} ${styles.qty}`}
+                  style={s.quantity < 20 ? { color: "red" } : null}
+                >
+                  <span className={styles.label}>Available:</span>
+                  {s.quantity}
+                </p>
+                <p className={`${styles.element} ${styles.type}`}>
+                  <span className={styles.label}>Type</span>
+                  {s.type}
+                </p>
+                <p className={`${styles.element} ${styles.rating}`}>
+                  <span className={styles.label}>Rating</span>
+                  {Array.from({ length: s.rating }, (v) => "⭐")}
+                </p>
+                <p className={`${styles.element} ${styles.rating}`}>
+                  <span className={styles.label}>Intend:</span>
+                  {s.category}
+                </p>
+
+                <p className={`${styles.element} ${styles.rating}`}>
+                  <span className={styles.label}>Quantity:</span>
+                  <input type="number" className={`${styles.inputElement} `} />
+                </p>
+
+                <button className={styles.purchaseBtn}>Purchase</button>
+              </li>
+            ))}
+          </ul>
+        )}
       </section>
     </>
   );

@@ -73,8 +73,8 @@
    - [Потребителска кошница](/FrontEndReadMeFiles/ClientFiles/Cart.md)
    - [Проследяване на поръчка](/FrontEndReadMeFiles/ClientFiles/TrackOrder.md)
    - [Готови поръчки](/FrontEndReadMeFiles/ClientFiles/Ready.md)
-   - ! [Архив](/FrontEndReadMeFiles/ClientFiles/Archive.md)
-   - ! [Коментари и рейтинг](/FrontEndReadMeFiles/ClientFiles/)
+   - [Архив](/FrontEndReadMeFiles/ClientFiles/Archive.md)
+   - [Коментари и рейтинг](/FrontEndReadMeFiles/ClientFiles/Comments.md)
 
 4. <h4 style='text-decoration:underline'>Служители</h4>
 

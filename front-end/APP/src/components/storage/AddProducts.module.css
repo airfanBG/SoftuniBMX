@@ -19,12 +19,27 @@
 }
 
 .dropDown {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 1rem;
+  display: flex;
+  gap: 4rem;
+  padding-bottom: 1rem;
+  border-bottom: 0.1rem dotted var(--color-line);
+  margin-bottom: 2rem;
 }
+
+.noHeading {
+  font-size: 2rem;
+  font-weight: 300;
+}
+
+.selectedInfo {
+  width: 70%;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 0.1rem;
+}
+
 .selectEl {
-  width: 16rem;
+  width: 30%;
   font-size: 1.8rem;
   padding: 0 1rem;
   border: 0.1rem solid var(--color-border);
@@ -39,15 +54,120 @@
 }
 
 .name {
-  grid-column: 2/4;
+  grid-column: 1/3;
+  width: 20rem;
 }
 .contName {
-  grid-column: 4/6;
+  grid-column: 3/5;
+  width: 15rem;
 }
 .email {
-  grid-column: 6/8;
+  grid-column: 5/7;
+  width: 20rem;
 }
 .phone {
-  grid-column: 8/9;
+  width: 10rem;
+
+  grid-column: 7;
+  display: flex;
   font-size: 1.6rem;
+  position: relative;
+  padding-left: 3rem;
+}
+
+.phone span {
+  position: absolute;
+  top: 0.21rem;
+  left: 0.9rem;
+  color: green;
+}
+
+.selectedListItem {
+  width: 100%;
+  /* display: grid;
+  grid-template-columns: repeat(7, 1fr); */
+  display: flex;
+  gap: 0.05rem;
+  margin-bottom: 2rem;
+}
+
+.element {
+  width: 15rem;
+  font-size: 1.6rem;
+  position: relative;
+  padding: 0.3rem 1rem 0;
+  border: 0.1rem solid var(--color-border);
+  border-radius: 0.3rem;
+}
+.element .label {
+  background-color: #fff;
+  padding-inline: 0.2rem;
+  position: absolute;
+  text-transform: uppercase;
+  font-size: 1rem;
+  color: var(--color-border-hover);
+  top: -0.8rem;
+  left: 1rem;
+}
+.element:first-child {
+  width: 20rem;
+}
+
+span.icon {
+  width: fit-content;
+  font-size: 2rem;
+  padding-inline: 0.5rem;
+}
+
+.oem {
+  width: 10rem;
+  text-align: center;
+}
+.qty {
+  width: 10rem;
+  text-align: center;
+  /* font-weight: 400; */
+}
+.price {
+  width: 10rem;
+  text-align: right;
+}
+.type {
+  width: 10rem;
+  text-align: center;
+}
+.rating {
+  width: 10rem;
+  text-align: center;
+  font-size: 1.1rem;
+  padding-top: 0.8rem;
+}
+
+.selectedListItem input.inputElement {
+  width: 100%;
+  font-size: 1.4rem;
+  text-align: center;
+  border: 0.1rem solid transparent;
+}
+
+.purchaseBtn {
+  width: fit-content;
+  background-color: var(--button-agree);
+  padding: 0 2.1rem;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  color: var(--color-link-light);
+  margin-left: 1rem;
+  border-radius: 0.2rem;
+  transition: all 0.2s ease;
+}
+
+.purchaseBtn:hover {
+  background-color: var(--button-agree-hover);
+}
+
+.description {
+  padding: 4rem 2rem 2rem;
+  font-size: 1.8rem;
+  /* margin-top: 2rem; */
 }
