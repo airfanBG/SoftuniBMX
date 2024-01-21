@@ -1,5 +1,6 @@
 export const environment = {
   BASE_URL: "https://bmx.azurewebsites.net",
+  // BASE_URL: "http://localhost:5173",
 
   // AUTH
   login_client: "/api/client/login",
