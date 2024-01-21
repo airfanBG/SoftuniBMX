@@ -1,3 +1,4 @@
+import { formatCurrency } from "../../util/resolvers.js";
 import StarsRating from "../Stars.jsx";
 import styles from "./ElementInfo.module.css";
 const color = {
@@ -21,7 +22,7 @@ function ElementInfo({ data }) {
         <div className={`${styles.info} `}>
           {/* <div className={`${styles.info} ${styles.price}`}> */}
           <span className={styles.label}>Price</span>
-          {data.salePrice}
+          {data.salePrice !== undefined ? formatCurrency(data.salePrice) : ""}
         </div>
         <StarsRating
           size={20}
