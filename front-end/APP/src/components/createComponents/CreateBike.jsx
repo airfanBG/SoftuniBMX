@@ -22,6 +22,7 @@ import { UserContext } from "../../context/GlobalUserProvider.jsx";
 import { v4 as uuidv4 } from "uuid"; //unique ID
 // import { imageResolver } from "../../util/resolvers.js";
 import Images from "./Images.jsx";
+import { formatCurrency } from "../../util/resolvers.js";
 
 const initialState = {
   frames: [],
@@ -283,7 +284,10 @@ function CreateBike() {
               }
             >
               <ion-icon name="cart-outline"></ion-icon>
-              <span className={styles.priceNumbers}> {total.toFixed(2)}</span>
+              <span className={styles.priceNumbers}>
+                {" "}
+                {formatCurrency(total)}
+              </span>
             </button>
           </header>
 
