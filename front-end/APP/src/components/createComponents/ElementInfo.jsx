@@ -23,6 +23,7 @@ function ElementInfo({ data }) {
           {/* <div className={`${styles.info} ${styles.price}`}> */}
           <span className={styles.label}>Price</span>
           {data.salePrice !== undefined ? formatCurrency(data.salePrice) : ""}
+          {""}
         </div>
         <StarsRating
           size={20}
