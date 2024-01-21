@@ -43,7 +43,7 @@ namespace BicicleApp.Api
                 options.AddPolicy(bmxCors,
                                   policy =>
                                   {
-                                      policy.WithOrigins("http://localhost:5173")
+                                      policy.WithOrigins("https://extreme-bmx.vercel.app")
                                             .AllowAnyHeader()
                                             .AllowAnyMethod();
                                   });
