@@ -34,7 +34,6 @@
         /// <returns>Task<ICollection<OrderProgretionDto>></returns>
         public async Task<ICollection<OrderProgretionDto>> GetAllReadyOrder()
         {
-            var list = _db.Orders.ToList();
             try
             {
                 return await _db.Orders
@@ -68,10 +67,8 @@
             }
             catch (Exception)
             {
-
-                throw;
             }
-           
+            return null;           
         }
 
         /// <summary>

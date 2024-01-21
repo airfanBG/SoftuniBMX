@@ -816,8 +816,8 @@
                 Discount = 0,
                 VAT = 125.00M,
                 FinalAmount = 750.00M,
-                PaidAmount = 0,
-                UnpaidAmount = 750.00M,
+                PaidAmount = 125.00M,
+                UnpaidAmount = 625.00M,
                 DateCreated = dateCreated,
                 DateUpdated = null,
                 DateDeleted = null,
@@ -833,8 +833,8 @@
                 Discount = 0,
                 VAT = 125.00M,
                 FinalAmount = 850.00M,
-                PaidAmount = 0,
-                UnpaidAmount = 850.00M,
+                PaidAmount = 141.67M,
+                UnpaidAmount = 708.33M,
                 DateCreated = dateCreated,
                 DateUpdated = null,
                 DateDeleted = null,
@@ -850,8 +850,8 @@
                 Discount = 0,
                 VAT = 125.00M,
                 FinalAmount = 950.00M,
-                PaidAmount = 0,
-                UnpaidAmount = 750.00M,
+                PaidAmount = 158.33M,
+                UnpaidAmount = 791.67M,
                 DateCreated = dateCreated,
                 DateUpdated = null,
                 DateDeleted = null,
@@ -867,8 +867,8 @@
                 Discount = 0,
                 VAT = 125.00M,
                 FinalAmount = 650.00M,
-                PaidAmount = 0,
-                UnpaidAmount = 750.00M,
+                PaidAmount = 125.00M,
+                UnpaidAmount = 625.00M,
                 DateCreated = dateCreated,
                 DateUpdated = null,
                 DateDeleted = null,
@@ -1205,7 +1205,7 @@
                  {
                     Id = 2,
                     Name = "Frame Montain",
-                    Description = "Best frame in the montain",
+                    Description = "Best frame in the mountain",
                     Intend = "For montain usage",
                     OEMNumber = "oemtest2",
                     Type = 2,
@@ -1222,7 +1222,7 @@
                  {
                     Id = 3,
                     Name = "Frame Road woman",
-                    Description = "Best frame in the road for womens",
+                    Description = "Best frame in the road for women",
                     Intend = "For road usage in women bikes",
                     OEMNumber = "oemtest3",
                     Type = 3,
@@ -1552,7 +1552,7 @@
                 {
                     ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
                     PartId = 3,
-                    Rating = 6
+                    Rating = 5
                 },
                 new Rate()
                 {
@@ -1582,25 +1582,25 @@
                 {
                     ClientId = "99d3ca6f-2067-4316-a5d7-934c93789521",
                     PartId = 5,
-                    Rating = 6
+                    Rating = 5
                 },
                  new Rate()
                 {
                     ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
                     PartId = 6,
-                    Rating = 6
+                    Rating = 5
                 },
                 new Rate()
                 {
                     ClientId = "99d3ca6f-2067-4316-a5d7-934c93789521",
                     PartId = 6,
-                    Rating = 6
+                    Rating = 5
                 },
                 new Rate()
                 {
                     ClientId = "ae0da70f-6e0b-4ef8-85a2-0c5cccd4b4fd",
                     PartId = 7,
-                    Rating = 6
+                    Rating = 5
                 },
                 new Rate()
                 {
