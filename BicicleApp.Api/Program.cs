@@ -44,6 +44,7 @@ namespace BicicleApp.Api
                                   policy =>
                                   {
                                       policy.WithOrigins("https://extreme-bmx.vercel.app")
+                                      //policy.WithOrigins("http://localhost:5173")
                                             .AllowAnyHeader()
                                             .AllowAnyMethod();
                                   });
