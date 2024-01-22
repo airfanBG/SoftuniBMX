@@ -117,3 +117,8 @@
     grid-row-gap: 3rem;
   }
 }
+@media (max-width: 375px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+}

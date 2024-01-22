@@ -154,3 +154,36 @@
     padding: 2rem 0 4rem;
   }
 }
+@media (max-width: 375px) {
+  .model-selection-hd {
+    font-size: 3.4rem;
+    text-align: center;
+    margin-block: 2rem 0;
+  }
+  .custom-bike {
+    margin-bottom: 0;
+  }
+  .steps {
+    grid-template-columns: 1fr;
+    gap: 11rem;
+    margin: 2rem 0 2rem;
+  }
+  .step {
+    width: 20rem;
+  }
+  .steps .step-link {
+    line-height: 3;
+    margin-top: -4rem;
+  }
+  .bottom-line {
+    width: 40%;
+    height: 2rem;
+    border-bottom: 2px solid var(--color-line);
+    border-radius: unset;
+    margin-bottom: 3rem;
+  }
+  .cards {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+  }
+}

@@ -108,4 +108,11 @@
     left: 70%;
   }
 }
-/* absolute inset-0 flex items-center justify-center bg-slate-200/20 backdrop-blur-sm */
+@media (max-width: 375px) {
+  .navigation {
+    width: 375px;
+  }
+  .mobileNav {
+    left: 86%;
+  }
+}

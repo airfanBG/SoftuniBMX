@@ -97,3 +97,20 @@
     grid-template-columns: 1fr;
   }
 }
+@media (max-width: 375px) {
+  .user-content {
+    padding: 2rem;
+  }
+  .user-hd {
+    text-align: center;
+    margin-bottom: 0;
+  }
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .comment {
+    height: 24rem;
+    gap: 1rem;
+  }
+}

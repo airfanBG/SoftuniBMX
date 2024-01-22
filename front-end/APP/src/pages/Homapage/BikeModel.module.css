@@ -187,3 +187,14 @@
     letter-spacing: 1.5px;
   }
 }
+@media (max-width: 375px) {
+  .card-content .card-pf {
+    font-size: 1.8rem;
+    height: 8rem;
+  }
+  .priceTag .card-link {
+    font-weight: 300;
+    padding: 0.8rem 8rem;
+    letter-spacing: 1.5px;
+  }
+}
