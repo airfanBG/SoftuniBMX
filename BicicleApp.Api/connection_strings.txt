@@ -1,0 +1,1 @@
+NewUI - "Server=DESKTOP-O0P5VDC\\SQLEXPRESS;Database=BicycleNewDB;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False"
