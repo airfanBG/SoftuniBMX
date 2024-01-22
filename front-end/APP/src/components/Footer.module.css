@@ -107,3 +107,13 @@
 .footer-links:last-child {
   justify-self: center;
 }
+
+@media (max-width: 785px) {
+  .footer-content {
+    margin: 0 auto;
+    width: 90%;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 4rem;
+    grid-row-gap: 3rem;
+  }
+}

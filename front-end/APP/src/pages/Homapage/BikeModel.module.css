@@ -132,3 +132,58 @@
 .price span.priceDecimal {
   font-size: 5.2rem;
 }
+
+@media (max-width: 1250px) {
+  .price {
+    font-size: 5rem;
+  }
+  .price span.priceDecimal {
+    font-size: 4.2rem;
+  }
+  .priceTag .card-link {
+    font-weight: 400;
+  }
+}
+@media (max-width: 1145px) {
+  /* .price {
+    font-size: 5rem;
+  }
+  .price span.priceDecimal {
+    font-size: 4.2rem;
+  } */
+  .priceTag {
+    margin-top: 15%;
+  }
+}
+@media (max-width: 900px) {
+  .price {
+    font-size: 4rem;
+  }
+  .price span.priceDecimal {
+    font-size: 3.2rem;
+  }
+  .priceTag .card-link {
+    font-weight: 400;
+    padding: 0.4rem 1rem;
+    letter-spacing: 1.5px;
+  }
+}
+@media (max-width: 785px) {
+  .card-content .card-pf {
+    font-size: 1.6rem;
+    height: 11rem;
+  }
+  .priceTag {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  .price {
+    font-size: 3.5rem;
+  }
+  .priceTag .card-link {
+    font-weight: 400;
+    padding: 0.4rem 2rem;
+    letter-spacing: 1.5px;
+  }
+}

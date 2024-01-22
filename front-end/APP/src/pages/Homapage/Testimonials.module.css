@@ -27,3 +27,12 @@
   font-size: 2rem;
   color: var(--color-main-dark);
 }
+
+@media (max-width: 1145px) {
+  .testimonials-content {
+    padding: 10rem 5rem;
+  }
+  .testimonials-pf {
+    font-size: 1.8rem;
+  }
+}
