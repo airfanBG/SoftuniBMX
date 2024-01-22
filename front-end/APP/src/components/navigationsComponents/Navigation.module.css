@@ -74,6 +74,9 @@
   line-height: 2;
   color: var(--color-line);
 }
+.mobileNav {
+  display: none;
+}
 
 @media (max-width: 785px) {
   .navigation {
