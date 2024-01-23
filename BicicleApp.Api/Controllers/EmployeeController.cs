@@ -255,5 +255,21 @@
 
             return BadRequest();
         }
+
+        [HttpPost]
+        [Route("edit")]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> EditEmployee([FromBody] EmployeeEditDto employee)
+        {
+            var result = await employeeService.EditEmployee(employee);
+
+            if (!string.IsNullOrEmpty(result))
+            {
+                return Ok(result);
+            }
+
+            return BadRequest();
+        }
     }
 }

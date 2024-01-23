@@ -18,5 +18,6 @@
 
         Task ConfirmEmailAsync(string emmployeeId, string code);
         Task<EmployeeSalaryDateDto?> GetSalary(string employeeId);
+        Task<string> EditEmployee(EmployeeEditDto employee);
     }
 }

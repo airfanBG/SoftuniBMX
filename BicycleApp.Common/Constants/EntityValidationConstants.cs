@@ -10,6 +10,7 @@
             public const int LastNameMinLength = 3;
             public const int LastNameMaxLength = 30;
 
+            public const int PhoneNumberMinLength = 0;
             public const int PhoneNumberMaxLength = 30;
 
             public const int DelivaryAddressMaxLength = 200;
