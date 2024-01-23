@@ -95,7 +95,9 @@
 
             var isRoleExists = await roleManager.RoleExistsAsync(employeeRegisterDto.Role.ToLower());
             var identityRole = new BaseUserRole();
+            identityRole.Id = stringManipulator.CreateGuid();
             identityRole.Name = employeeRegisterDto.Role;
+            identityRole.NormalizedName = employeeRegisterDto.Role.ToUpper();
             
             if (!isRoleExists)
             {
@@ -394,5 +396,25 @@
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
+        public async Task<string> EditEmployee(EmployeeEditDto employee)
+        {
+            try
+            {
+                var employeeToEdit = await dbContext.Employees.FirstAsync(e => e.Id == employee.EmployeeId);
+                employeeToEdit.FirstName = employee.FirstName;
+                employeeToEdit.LastName = employee.LastName;
+                employeeToEdit.PhoneNumber = employee.PhoneNumber;
+
+                dbContext.Employees.Update(employeeToEdit);
+                await dbContext.SaveChangesAsync();
+
+                return employeeToEdit.Id;
+            }
+            catch (Exception)
+            {
+            }
+
+            return string.Empty;
+        }
     }
 }
