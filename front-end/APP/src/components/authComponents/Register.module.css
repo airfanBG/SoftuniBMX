@@ -206,3 +206,22 @@ textarea {
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
 }
+
+@media (max-width: 785px) {
+  .form {
+    width: 100%;
+    gap: 5rem;
+  }
+  .fieldsGroup {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+@media (max-width: 430px) {
+  .form {
+    padding: 0 2rem;
+  }
+  .button-submit {
+    margin: 0;
+  }
+}
