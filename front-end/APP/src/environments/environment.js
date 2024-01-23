@@ -38,6 +38,7 @@ export const environment = {
   worker_times: "/api/manager_statistics/employee_statistics?employeeId=",
   worker_get_salary: "/api/employee/get_salary?employeeId=",
   employee_upload_avatar: "/api/employee/add_avatar",
+  update_employee: "/api/employee/edit",
 
   // QUALITY_CONTROL
   quality_assurance: "/api/employee_order/quality_assurance",
@@ -47,6 +48,7 @@ export const environment = {
   // MANAGER
   pending_orders: "/api/manager/pending_orders?page=",
   approve_order: "/api/manager/approve_order?orderId=", // + id
+  approve_rejected_order: "/api/manager/approve_rejected_order?orderId=", // + id
   reject_order: "/api/manager/reject_order?orderId=", // + id
   del_order: "/api/manager/delete_order?orderId=", // +id
   in_progress_orders: "/api/manager/orders_in_progress",

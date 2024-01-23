@@ -1,5 +1,5 @@
 import { environment } from "../environments/environment.js";
-import { get, put } from "../util/api.js";
+import { get, post, put } from "../util/api.js";
 
 async function userInfo(id, role) {
   const result =
@@ -14,7 +14,7 @@ function updateUserData(id, data, role) {
   if (role === "user") {
     result = put(environment.update_client, data);
   } else {
-    // result = put(environment.update_employee + id, data);
+    result = post(environment.update_employee, data);
   }
   return result;
 }

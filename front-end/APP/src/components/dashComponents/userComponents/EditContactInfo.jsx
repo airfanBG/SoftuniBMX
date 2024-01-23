@@ -86,7 +86,9 @@ function EditContactInfo({ info, setInfo, base64 }) {
       strNumber,
       floor,
     };
+
     let data;
+
     if (role === "user") {
       data = {
         id,
@@ -104,12 +106,8 @@ function EditContactInfo({ info, setInfo, base64 }) {
       data = {
         firstName,
         lastName,
-        department: info?.department,
-        phoneNumber: info?.phoneNumber,
-        position: info?.position,
-        dateOfHire: info?.dateOfHire,
-        isManager: info?.isManager,
-        imageUrl: updatedImg,
+        phoneNumber,
+        employeeId: id,
       };
     }
 
@@ -123,21 +121,30 @@ function EditContactInfo({ info, setInfo, base64 }) {
     });
 
     const result = await updateUserData(id, data, role);
-    // console.log(result);
+    console.log(result);
 
     // IF RESULT IS OK UPDATE CONTEXT
-    setInfo({
-      ...info,
-      email: email,
-      firstName: firstName,
-      lastName: lastName,
-      iban: iban,
-      balance: balance,
-      phone: phoneNumber,
-      city: city,
-      address: newAddress,
-      imageUrl: updatedImg,
-    });
+    if (role === "user") {
+      setInfo({
+        ...info,
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        iban: iban,
+        balance: balance,
+        phone: phoneNumber,
+        city: city,
+        address: newAddress,
+        imageUrl: updatedImg,
+      });
+    } else {
+      setInfo({
+        ...info,
+        firstName: firstName,
+        lastName: lastName,
+        phone: phoneNumber,
+      });
+    }
 
     // // UPDATE CONTEXT USER
     // updateUser({
