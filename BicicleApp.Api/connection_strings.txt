@@ -1,1 +1,6 @@
 NewUI - "Server=DESKTOP-O0P5VDC\\SQLEXPRESS;Database=BicycleNewDB;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False"
+                                  {
+                                      //policy.WithOrigins("https://extreme-bmx.vercel.app")
+                                      policy.WithOrigins("http://localhost:5173")
+                                            .AllowAnyHeader()
+                                            .AllowAnyMethod();
