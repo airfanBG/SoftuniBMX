@@ -1,85 +1,150 @@
 # <b>Bicycle Management eXtreme- BMX</b>
 
-![Clipboard01](https://github.com/yuchormanski/React-BMX-Project/assets/693307/1ec2b1ac-da72-46bb-92df-8ed871bb035c)
+![hweader](https://github.com/airfanBG/SoftuniBMX/assets/693307/ca4ea5d2-f7f4-449c-b83c-59e0e1e312e8)
 
-### Резюме
-Приложението трябва да обслужва завод за производство на велосипеди. Заводът произвежда три основни модела велосипеди, като в зависимост от избора на клиента всеки компонент може да има по няколко разновидности. Всеки един клиент, след избора на основният вид велосипед, може да избира какви модели и марки компоненти свързани с него да добавя.
+## Резюме
 
-## Сървиси
+Приложението обслужва пълната функционалност на предприятие за производство на велосипеди, както и неговото менажиране. Заводът произвежда три основни модела велосипеди, като в зависимост от избора на клиента всеки компонент може да има по няколко разновидности.
 
-- DropdownsContentService е сървис, който взима записите на частите от категория рамки от базата и ги връща под формата на колекция от ДТО обекти. Също така на база Id на избрана рамка връща колекция от съвместимите за нея части под формата на колекция от ДТО обекти. При подадено Id има функционалността да вземе от базата и върне цялата налична информация за частта записана под този Id номер под формата на ДТО обект.
-- OrderManagerService е сървис, който взима записите на изчакващите одобрение поръчки (pending orders), отказаните поръчки (rejected orders), одобрените и вкарани в производство поръчки (orders_in_progress) и завършените (finished orders) от базата и ги връща под формата на колекция от ДТО обекти. Също така при подадено Id има функционалността да одобри (approve) изчакващите одобрение поръчки (pending orders) и отказаните (rejected orders) или да отхвърли поръчка (reject order).
+Приложението дава възможност потребителя сам да сглоби велосипед, като избере, поетапно от възможностите - рамка, колела и аксесоари.
+При избиране на страницата CREATE се прави първоначална заявка за зареждане на възможностите за избор на рамка, като основна част на велосипеда.
 
-## Базов (основен) URL
-Базовия URL е общ за всички API заявки и е:
-- https://localhost:7047
+Приложението покрива всички дейности за потребителския избор и работения процес.
 
-## Крайни точки (APIs):
-- AccountPageController дава възсможността да се ползва функционалността на DropdownsContentService. 
+#### 👤 От страна на клиента
 
-### [`GET /api/accountpage/frames`](/ReadMeFiles/AccountPage/Frames.md)
-### [`GET /api/accountpage/compatible_parts`](/ReadMeFiles/AccountPage/CompatibleParts.md)
-### [`GET /api/accountpage/selected_part`](/ReadMeFiles/AccountPage/SelectedPart.md)
-- ClientOrderController дава възсможността на потребителя на създава, преглежда и изтрива поръчки, направени от него.
+- избор на някой от базовите велосипеди или асемблиране на собствен модел от възможните предоставени като избор части.
+- Проследяване на поръчката до нейното завършване
+- Редактиране на клиентския профил
+- Добавяне на средства за изплащане на избрания продукт
 
-### [`POST /api/client_order/create`](/ReadMeFiles/ClientOrder/Create.md)
-### [`POST /api/client_order/progress`](/ReadMeFiles/ClientOrder/Progress.md)
-### [`POST /api/client_order/delete`](/ReadMeFiles/ClientOrder/Delete.md)
+#### 🏭 От страна на предприятието
 
-- OrderManagerController дава възможността да се ползва функционалността на OrderManagerService. 
+- Изработване на избраната селекция и одобрение от качествен контрол
+- Проследяване на работния процес
+- Изработване и асемблиране на частите на текущите поръчки в съответните отдели
+- Одобрение на продукта, връщане за рекламация на детаил или бракуване
+- Добавяне на нови кадри, обслужващи работния процес
+- Проследяване на работния процес на служителите, като екип и по отделно
+- Начисляване на трудово възнаграждение
+- Управление на склад и складова наличност
+- Добавяне на нови доставчици
+- Извършване на нови поръчки при недостатъчна наличност на части
 
-### [`GET /api/manager/pending_orders`](/ReadMeFiles/Manager/pending_orders.md)
-### [`GET /api/manager/rejected_orders`](/ReadMeFiles/Manager/rejected_orders.md)
-### [`GET /api/manager/orders_in_progress`](/ReadMeFiles/Manager/orders_in_progress.md)
-### [`POST /api/manager/delete_order?orderId=`](/ReadMeFiles/Manager/delete_order.md)
-### [`POST /api/manager/approve_order?orderId=`](/ReadMeFiles/Manager/approve_order.md)
-### [`POST /api/manager/approve_rejected_order?orderId=`](/ReadMeFiles/Manager/approve_rejected_order.md)
-### [`POST /api/manager/reject_order?orderId=`](/ReadMeFiles/Manager/reject_order.md)
-### [`GET /api/manager/finished_orders`](/ReadMeFiles/Manager/finished_orders.md)
-### [`POST /api/manager/send_order?orderId=`](/ReadMeFiles/Manager/send_order.md)
-### [`GET /api/manager/sended_orders`](/ReadMeFiles/Manager/sended_orders.md)
+## ⚙️ Използвани технологии
 
-- SuplyManagerController дава възможността да се ползва функционалността на SuplyManagerService. 
+- Front-end
+  - React.js
+  - JavaScript
+  - HTML/CSS
+- Back-end
+  - ASP.NET
+  - MySQL
 
-### [`GET /api/supplys_manager/deliveries`](/ReadMeFiles/SuplyManager/deliveries.md)
-### [`GET /api/supplys_manager/supliers`](/ReadMeFiles/SuplyManager/supliers.md)
-### [`GET /api/supplys_manager/part_orders`](/ReadMeFiles/SuplyManager/part_orders.md)
-### [`POST /api/supplys_manager/create_delivery`](/ReadMeFiles/SuplyManager/create_delivery.md)
-### [`POST /api/supplys_manager/create_suplier`](/ReadMeFiles/SuplyManager/create_suplier.md)
-### [`POST /api/supplys_manager/create_part_order`](/ReadMeFiles/SuplyManager/create_part_order.md)
-### [`GET /api/supplys_manager/get_suplier`](/ReadMeFiles/SuplyManager/get_suplier.md)
-### [`GET /api/supplys_manager/get_delivery`](/ReadMeFiles/SuplyManager/get_delivery.md)
-### [`GET /api/supplys_manager/get_part_order`](/ReadMeFiles/SuplyManager/get_part_order.md)
-### [`POST /api/supplys_manager/delete_suplier`](/ReadMeFiles/SuplyManager/delete_suplier.md)
-### [`POST /api/supplys_manager/delete_delivery`](/ReadMeFiles/SuplyManager/delete_delivery.md)
-### [`POST /api/supplys_manager/delete_part_order`](/ReadMeFiles/SuplyManager/delete_part_order.md)
-### [`PUT /api/supplys_manager/edit_delivery`](/ReadMeFiles/SuplyManager/edit_delivery.md)
-### [`PUT /api/supplys_manager/edit_suplier`](/ReadMeFiles/SuplyManager/edit_suplier.md)
-### [`PUT /api/supplys_manager/edit_part_order`](/ReadMeFiles/SuplyManager/edit_part_order.md)
+### Предварително регистрирани потребители
 
-## Errors
+| EMAIL              | PASSWORD | РОЛЯ               |
+| ------------------ | -------- | ------------------ |
+| client@test.bg     | 123456   | потребител         |
+| marinov@b-free.com | User123! | работник рамки     |
+| todorov@b-free.com | User123! | работник колела    |
+| marinov@b-free.com | User123! | работник аксесоари |
+| ivanov@b-free.com  | User123! | контрол качество   |
+| manager@b-free.com | User123! | мениджър           |
 
-This API uses the following error codes:
+## 📃 Съдържание и навигиране в приложението
 
-- `204 No Content`: The requested resource was empty.
-- `404 Bad Request`: The request was malformed or missing required parameters.
-- `500 Internal Server Error`: An unexpected error occurred on the server.
+1. <h4 style='text-decoration:underline'>Стартова страница</h4>
 
+   - [Index Page](/FrontEndReadMeFiles/IndexPage/indexPage.md)
 
-#### Markdown template (за пример)
+2. <h4 style='text-decoration:underline'>Създаване на профил и влизане в системата</h4>
 
-Markdown is a lightweight markup language based on the formatting conventions
-that people naturally use in email.
-As [John Gruber] writes on the [Markdown site][df1]
+   - [Регистрация](/FrontEndReadMeFiles/Autentication/Register.md)
+   - [Вход](/FrontEndReadMeFiles/Autentication/Login.md)
+   - [Забравена парола](/FrontEndReadMeFiles/Autentication/ForgotPassword.md)
 
-> The overriding design goal for Markdown's
-> formatting syntax is to make it as readable
-> as possible. The idea is that a
-> Markdown-formatted document should be
-> publishable as-is, as plain text, without
-> looking like it's been marked up with tags
-> or formatting instructions.
+3. <h4 style='text-decoration:underline'>Клиент</h4>
 
-This text you see here is *actually- written in Markdown! To get a feel
-for Markdown's syntax, type some text into the left window and
-watch the results in the right.
+   - [Профилна страница](/FrontEndReadMeFiles/ClientFiles/Profile.md)
+   - [Редактиране на профил](/FrontEndReadMeFiles/ClientFiles/EditProfile.md)
+   - [Банкова информация](/FrontEndReadMeFiles/ClientFiles/Bank.md)
+   - [Създаване на поръчка](/FrontEndReadMeFiles/ClientFiles/Order.md)
+   - [Потребителска кошница](/FrontEndReadMeFiles/ClientFiles/Cart.md)
+   - [Проследяване на поръчка](/FrontEndReadMeFiles/ClientFiles/TrackOrder.md)
+   - [Готови поръчки](/FrontEndReadMeFiles/ClientFiles/Ready.md)
+   - [Архив](/FrontEndReadMeFiles/ClientFiles/Archive.md)
+   - [Коментари и рейтинг](/FrontEndReadMeFiles/ClientFiles/Comments.md)
+
+4. <h4 style='text-decoration:underline'>Служители</h4>
+
+   - [Профилна страница](/FrontEndReadMeFiles/ClientFiles/Profile.md)
+   - ! [Поръчки за отдела](/FrontEndReadMeFiles/Employee/EditProfile.md)
+   - ! [Заплати](/FrontEndReadMeFiles/Employee/)
+
+5. <h4 style='text-decoration:underline'> Качествен контрол</h4>
+
+   - [Профилна страница](/FrontEndReadMeFiles/ClientFiles/Profile.md)
+   - ! [Одобрение на поръчки](/FrontEndReadMeFiles/Manager/NewOrders.md)
+
+6. <h4 style='text-decoration:underline'>Управител</h4>
+
+   - ! [Нови поръчки](/FrontEndReadMeFiles/Manager/NewOrders.md)
+   - ! [В продукция](/FrontEndReadMeFiles/Manager/Production.md)
+   - ! [Завършени]()
+   - ! [Изпратени]()
+   - ! [Служители](/FrontEndReadMeFiles/Manager/Employers.md)
+   - ! [Нов служител](/FrontEndReadMeFiles/Manager/AddEmployee.md)
+   - ! [Заплати](/FrontEndReadMeFiles/Manager/)
+   - ! [Склад]()
+   - ! [Статистика]()
+
+<!-- 7. <h4 style='text-decoration:underline'>[Крайни точки](/ReadMeFiles_BE)</h4> -->
+
+7. #### <h4 style='text-decoration:underline'>Крайни точки</h4>
+
+- 📍 [Връзка](/BE_README.md) към лист със съдържание и описание на всички API отправни точки , използвани в приложението
+
+8. #### 🔗 [Архитектура](http://yuchormanski.free.bg/bikes/high-level-dependencies.html)
+
+## 👥 Team
+
+<img src="https://cdn-icons-png.flaticon.com/256/174/174857.png" width="15"> - Connect with us on LinkedIn:
+
+- [Daniel Damyanov ]() - Team Leader
+
+- [Nikolay Yuchormanski](www.linkedin.com/in/nikolay-yuchormanski-b34975255) - Front-End
+
+- [Todor Todorov](https://www.linkedin.com/in/тодор-тодоров-178aaa263/) - Back-End
+
+- [Krasimir Iliev](https://www.linkedin.com/in/krasimir-iliev-bb4189238/) - Back-End
+
+- [Georgi Kolev](www.linkedin.com/in/george-kolev-b37005109) - Back-End
+
+### 🤝 Contributing
+
+Ако харесвате нашата работа, моля, подкрепете ни като оставите
+<a class="github-button" href="https://github.com/airfanBG/SoftuniBMX" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star airfanBG/SoftuniBMX on GitHub">Звезда⭐</a>.
+
+<!-- If you would like to suppurt us you could do it by giving a  -->
+<!-- <a class="github-button" href="https://github.com/airfanBG/SoftuniBMX" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star airfanBG/SoftuniBMX on GitHub">Star ⭐</a>. -->
+
+### 📧 Contact Us
+
+- [Даниел Дамянов]()
+
+- Nikolay Yuchormanski - [yuchormanski@gmail.com](mailto:yuchormanski@gmail.com)
+
+- Todor Todorov - [t.todorov135@gmail.com,](mailto:t.todorov135@gmail.com)
+
+- [Krasimir Iliev]()
+
+- Georgi Kolev - [jorjo7@abv.bg](mailto:jorjo7@abv.bg)
+
+### 📜 Лиценз / License
+
+- <img src="https://flagpedia.net/data/flags/h120/bg.webp" width="20"> - Този проект е лицензиран съгласно MIT лиценз. Вижте [лицензния](https://github.com/airfanBG/SoftuniBMX/tree/develop?tab=License-1-ov-file) файл за подробности.
+
+- <img src="https://flagpedia.net/data/flags/w580/gb.webp" width="20" /> - This project is licensed under the MIT License. See the [LICENSE](https://github.com/airfanBG/SoftuniBMX/tree/develop?tab=License-1-ov-file) file for details.
+
+🌐 Thank you for joining us on this journey to Bike Management eXtreme - BMX! 🌐
