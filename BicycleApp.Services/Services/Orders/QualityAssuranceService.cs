@@ -38,6 +38,13 @@
             {
                 return await _db.Orders
                            .AsNoTracking()
+                           .Include(ope => ope.OrdersPartsEmployees)
+                           .ThenInclude(opei => opei.OrdersPartsEmployeesInfos)
+                           .Include(e => e.OrdersPartsEmployees)
+                           .ThenInclude(e => e.Employee)
+                           .Include(p => p.OrdersPartsEmployees)
+                           .ThenInclude(p=>p.Part)
+                           .ThenInclude(c=> c.Category)
                            .Where(o => o.DateFinish == null
                                        && o.IsDeleted == false
                                        && o.OrdersPartsEmployees.Where(ope => ope.OrderId == o.Id).All(ope => ope.IsCompleted == true))
