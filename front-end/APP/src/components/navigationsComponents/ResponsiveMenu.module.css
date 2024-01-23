@@ -1,0 +1,20 @@
+.menuIcon {
+  font-size: 3rem;
+}
+.navList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.navLink {
+  font-size: 2.4rem;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--color-main-dark);
+}
+
+.navLink:global(.active) {
+  border-bottom: 2px solid var(--color-line);
+}

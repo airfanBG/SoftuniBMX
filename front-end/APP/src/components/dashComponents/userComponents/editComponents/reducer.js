@@ -11,7 +11,7 @@ function reducer(state, action) {
     case "setCity":
       return { ...state, city: action.payload };
     case "setPhone":
-      return { ...state, phone: action.payload };
+      return { ...state, phoneNumber: action.payload };
     case "setBalance":
       return { ...state, balance: Number(action.payload) };
     case "setCountry":

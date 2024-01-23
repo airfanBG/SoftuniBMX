@@ -103,107 +103,119 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 5rem;
 }
-/* 
-.card {
-  min-width: 18rem;
-  display: flex;
-  flex-direction: column;
-  border-radius: 10px;
-  border: 1px solid var(--color-border);
-  overflow: hidden;
-  transition: all 0.4s ease-in-out;
-  gap: 3.6rem;
-  position: relative;
+
+@media (max-width: 1250px) {
+  .steps {
+    padding-inline: 3rem;
+  }
+  .step {
+    font-size: 2rem;
+  }
 }
-.card:hover {
-  border: 1px solid var(--color-border-hover);
+@media (max-width: 1145px) {
+  .steps {
+    gap: 1.5rem;
+  }
+  .steps .step-link {
+    font-size: 1.8rem;
+    line-height: 3rem;
+    border-radius: 7px;
+  }
+}
+@media (max-width: 1050px) {
+  .steps {
+    gap: 1rem;
+    padding-inline: 0.5rem;
+  }
+  .step {
+    width: 25rem;
+  }
 }
 
-.card-img {
-  width: 100%;
-  object-fit: contain;
-  transition: all 0.4s ease-in-out;
-  z-index: 1;
+@media (max-width: 900px) {
+  .steps {
+    gap: 0.5rem;
+    font-size: 1.8rem;
+  }
+  .step {
+    width: 20rem;
+  }
+  .steps .step-link {
+    line-height: 2.5rem;
+  }
+  .cards {
+    padding: 0 3rem;
+    gap: 2rem;
+  }
+}
+@media (max-width: 785px) {
+  .steps {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15rem;
+    margin: 8rem 0 2rem;
+  }
+  .model-selection {
+    padding: 2rem 0 4rem;
+  }
 }
 
-.card:hover .card-img {
-  transform: scale(1.1);
-}
-.card-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0 2rem 3rem;
-  z-index: 2;
-}
-.card-hd {
-  font-size: 2.2rem;
-  font-weight: 300;
-  color: var(--color-main-dark);
-}
-.card-hd span {
-  color: var(--color-line);
-}
-
-.card-pf {
-  font-size: 1.6rem;
-  line-height: 1.3;
-  color: var(--color-hd);
-  height: 13rem;
-}
-
-.card-pf:nth-of-type(2) {
-  text-align: right;
-  height: unset;
-  align-self: flex-end;
+@media (max-width: 430px) {
+  .model-selection-hd {
+    font-size: 4rem;
+    text-align: center;
+    margin-block: 2rem 0;
+  }
+  .custom-bike {
+    margin-bottom: 0;
+  }
+  .cards {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+  }
+  .steps {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15rem;
+    margin: 8rem 0 2rem;
+  }
+  .steps .step-link {
+    line-height: 3;
+    margin-top: -4rem;
+  }
+  .model-selection {
+    padding: 2rem 0 6rem;
+  }
 }
 
-.card-link:link,
-.card-link:visited {
-  background-color: var(--color-main-dark);
-  color: var(--color-link-light);
-  font-size: 1.6rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 0.8rem 1.6rem;
-  border-radius: 10px;
-  border: 1px solid transparent;
-  transition: all 0.2s ease-in-out;
+@media (max-width: 375px) {
+  .model-selection-hd {
+    font-size: 3.4rem;
+    text-align: center;
+    margin-block: 2rem 0;
+  }
+  .custom-bike {
+    margin-bottom: 0;
+  }
+  .steps {
+    grid-template-columns: 1fr;
+    gap: 11rem;
+    margin: 2rem 0 2rem;
+  }
+  .step {
+    width: 20rem;
+  }
+  .steps .step-link {
+    line-height: 3;
+    margin-top: -4rem;
+  }
+  .bottom-line {
+    width: 40%;
+    height: 2rem;
+    border-bottom: 2px solid var(--color-line);
+    border-radius: unset;
+    margin-bottom: 3rem;
+  }
+  .cards {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+  }
 }
-
-.card-link:hover,
-.card-link:active {
-  background-color: var(--color-link-light);
-  color: var(--color-main-dark);
-  box-shadow: inset 0px 0px 0px 2px var(--color-border-hover);
-  border: 1px solid var(--color-main-dark);
-  box-shadow: 0px 1px 3px 1px #71707059;
-}
-
-.main-red {
-  color: var(--color-line);
-}
-
-.top {
-  text-transform: uppercase;
-  position: absolute;
-  top: 35px;
-  right: -68px;
-  transform: rotate(45deg);
-  background-color: #ffd43b;
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #333;
-  padding: 0.8rem 8rem;
-  z-index: 10;
-  transition: all 0.3s ease-in-out;
-  border-radius: 0.8rem;
-}
-
-.card:hover .top {
-  transform: scale(1.1);
-  transform: translate(-28.5%, -90%);
-  box-shadow: 0px 3px 5px #3333333a;
-} */

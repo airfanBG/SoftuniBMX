@@ -19,4 +19,15 @@ async function onSendHandler(id) {
   return sended;
 }
 
-export { approveHandlerAction, onRejectHandler, onDeleteHandler, onSendHandler };
+async function approveRejectedHandlerAction(id) {
+  const approved = await post(`${environment.approve_rejected_order}${id}`);
+  return approved;
+}
+
+export {
+  approveHandlerAction,
+  approveRejectedHandlerAction,
+  onRejectHandler,
+  onDeleteHandler,
+  onSendHandler,
+};

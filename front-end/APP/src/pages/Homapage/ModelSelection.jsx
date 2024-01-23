@@ -59,7 +59,7 @@ function ModelSelection() {
           </Link>
         </div>
       </article>
-      <p className={styles["secondary-hd"]}>or take one of our offer</p>
+      <p className={styles["secondary-hd"]}>or take one of our offers</p>
 
       <h3 className={styles["model-selection-hd"]}>Choose model</h3>
       <div
