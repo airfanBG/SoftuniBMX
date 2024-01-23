@@ -36,6 +36,16 @@
     font-size: 1.8rem;
   }
 }
+@media (max-width: 785px) {
+  .testimonials-content {
+    padding: 2rem;
+  }
+}
+@media (max-width: 430px) {
+  .testimonials-content {
+    padding: 2rem;
+  }
+}
 @media (max-width: 375px) {
   .testimonials-content {
     padding: 2rem;

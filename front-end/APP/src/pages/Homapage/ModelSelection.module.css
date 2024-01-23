@@ -135,6 +135,10 @@
 @media (max-width: 900px) {
   .steps {
     gap: 0.5rem;
+    font-size: 1.8rem;
+  }
+  .step {
+    width: 20rem;
   }
   .steps .step-link {
     line-height: 2.5rem;
@@ -146,7 +150,7 @@
 }
 @media (max-width: 785px) {
   .steps {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 15rem;
     margin: 8rem 0 2rem;
   }
@@ -154,6 +158,34 @@
     padding: 2rem 0 4rem;
   }
 }
+
+@media (max-width: 430px) {
+  .model-selection-hd {
+    font-size: 4rem;
+    text-align: center;
+    margin-block: 2rem 0;
+  }
+  .custom-bike {
+    margin-bottom: 0;
+  }
+  .cards {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+  }
+  .steps {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15rem;
+    margin: 8rem 0 2rem;
+  }
+  .steps .step-link {
+    line-height: 3;
+    margin-top: -4rem;
+  }
+  .model-selection {
+    padding: 2rem 0 6rem;
+  }
+}
+
 @media (max-width: 375px) {
   .model-selection-hd {
     font-size: 3.4rem;
