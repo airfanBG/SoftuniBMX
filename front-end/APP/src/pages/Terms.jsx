@@ -307,7 +307,7 @@ function Terms() {
                 rel="external nofollow noopener"
                 // target="_blank"
               >
-                http://localhost:5173/contacts
+                http://[::1]/contacts
               </a>
             </li>
           </ul>
