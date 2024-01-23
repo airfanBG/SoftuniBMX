@@ -86,7 +86,9 @@
             //TODO: Remove client role management. DB don`t need so much records.
             var isRoleExists = await roleManager.RoleExistsAsync(clientDto.Role.ToLower());
             var identityRole = new BaseUserRole();
+            identityRole.Id = stringManipulator.CreateGuid();
             identityRole.Name = clientDto.Role;
+            identityRole.NormalizedName = clientDto.Role.ToUpper();
             if (!isRoleExists)
             {
                 await roleManager.CreateAsync(identityRole);

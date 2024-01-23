@@ -10,7 +10,7 @@
 
         public string? Block { get; set; }
 
-        public string? Floor { get; set; }
+        public int? Floor { get; set; }
 
         public string? Apartment { get; set; }
 

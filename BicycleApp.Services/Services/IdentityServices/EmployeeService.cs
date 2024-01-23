@@ -95,7 +95,9 @@
 
             var isRoleExists = await roleManager.RoleExistsAsync(employeeRegisterDto.Role.ToLower());
             var identityRole = new BaseUserRole();
+            identityRole.Id = stringManipulator.CreateGuid();
             identityRole.Name = employeeRegisterDto.Role;
+            identityRole.NormalizedName = employeeRegisterDto.Role.ToUpper();
             
             if (!isRoleExists)
             {
