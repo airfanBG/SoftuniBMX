@@ -5,6 +5,7 @@ import {
   onDeleteHandler,
   onRejectHandler,
   approveHandlerAction,
+  approveRejectedHandlerAction,
 } from "./managerActions/orderActions.js";
 
 function Order({
@@ -22,7 +23,11 @@ function Order({
   async function onBtnClickHandler(type, orderId) {
     let result = {};
     if (type === "approve") {
-      result = await approveHandlerAction(orderId);
+      if (window.location.pathname.split("/").pop() === "manager-rejected") {
+        result = await approveRejectedHandlerAction(orderId);
+      } else {
+        result = await approveHandlerAction(orderId);
+      }
       onStatusChange();
     } else if (type === "reject") {
       result = await onRejectHandler(orderId);

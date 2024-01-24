@@ -169,3 +169,27 @@
 .userInfoControl input.addMoneyInput[type="number"] {
   -moz-appearance: textfield;
 } */
+
+@media (max-width: 900px) {
+  .wrapper {
+    width: 900px;
+  }
+}
+@media (max-width: 785px) {
+  .wrapper {
+    width: 785px;
+  }
+}
+@media (max-width: 430px) {
+  .wrapper {
+    width: 430px;
+  }
+  .userInfoWrapper {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 375px) {
+  .wrapper {
+    width: 375px;
+  }
+}

@@ -27,3 +27,27 @@
   font-size: 2rem;
   color: var(--color-main-dark);
 }
+
+@media (max-width: 1145px) {
+  .testimonials-content {
+    padding: 10rem 5rem;
+  }
+  .testimonials-pf {
+    font-size: 1.8rem;
+  }
+}
+@media (max-width: 785px) {
+  .testimonials-content {
+    padding: 2rem;
+  }
+}
+@media (max-width: 430px) {
+  .testimonials-content {
+    padding: 2rem;
+  }
+}
+@media (max-width: 375px) {
+  .testimonials-content {
+    padding: 2rem;
+  }
+}

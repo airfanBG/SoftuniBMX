@@ -1,31 +1,24 @@
-import styles from "./Navigation.module.css";
-
-import { memo, useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { UserContext } from "../../context/GlobalUserProvider.jsx";
-import ReadyOrderInfo from "../ReadyOrderInfo.jsx";
-import ResponsiveMenu from "./ResponsiveMenu.jsx";
 
-function Navigation() {
+import styles from "./ResponsiveMenu.module.css";
+import Popup from "../Popup.jsx";
+import { UserContext } from "../../context/GlobalUserProvider.jsx";
+
+function ResponsiveMenu() {
+  const [isVisible, setIsVisible] = useState(false);
   const { user, hasOrder } = useContext(UserContext);
-  const [readyOrder, setReadyOrder] = useState(user.orderIsReady);
-  useEffect(() => {
-    if (user.orderIsReady) {
-      setReadyOrder(true);
-    } else {
-      setReadyOrder(false);
-    }
-  }, [user]);
+
+  function toggle() {
+    setIsVisible(!isVisible);
+  }
   return (
-    <>
-      <div className={styles.navigation}>
-        <p className={styles.logo}>
-          <NavLink to={"/"} id="start" className={styles.logoFirstLine}>
-            e<span>&#10006;</span>treme - BMX
-          </NavLink>
-          <span className={styles.logoSecondary}>Bicycle Management</span>
-        </p>
-        <nav className={styles.nav}>
+    <div>
+      <button onClick={toggle} className={styles.menuIcon}>
+        &#9776;
+      </button>
+      {isVisible && (
+        <Popup onClose={toggle}>
           <ul className={styles.navList} role="list">
             <li className={styles.navListItem}>
               {window.location.pathname === "/" && user.role === "user" ? (
@@ -33,15 +26,6 @@ function Navigation() {
                   Create
                 </NavLink>
               ) : (
-                // {window.location.pathname === "/" &&
-                // user.role !== "accessoriesworker" &&
-                // user.role !== "wheelworker" &&
-                // user.role !== "frameworker" &&
-                // user.role !== "manager" &&
-                // user.role !== "qualitycontrol" ? (
-                //   <NavLink to={"/app"} className={styles.navLink}>
-                //     Create
-                //   </NavLink>
                 <NavLink to={"/"} className={styles.navLink}>
                   Home
                 </NavLink>
@@ -53,12 +37,6 @@ function Navigation() {
                 <NavLink to={"/app"} className={styles.navLink}>
                   Create
                 </NavLink>
-                // user.role !== "worker" &&
-                // user.role !== "manager" &&
-                // user.role !== "qControl" && (
-                //   <NavLink to={"/app"} className={styles.navLink}>
-                //     Create
-                //   </NavLink>
               )}
             <li className={styles.navListItem}>
               <NavLink to={"/about"} className={styles.navLink}>
@@ -89,14 +67,10 @@ function Navigation() {
               </li>
             )}
           </ul>
-        </nav>
-        <nav className={styles.mobileNav}>
-          <ResponsiveMenu />
-        </nav>
-      </div>
-      {readyOrder && <ReadyOrderInfo hideReady={setReadyOrder} />}
-    </>
+        </Popup>
+      )}
+    </div>
   );
 }
 
-export default memo(Navigation);
+export default ResponsiveMenu;

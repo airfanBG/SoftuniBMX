@@ -4,6 +4,7 @@ import styles from "./BikeModel.module.css";
 
 import { Link } from "react-router-dom";
 import { UserContext } from "../../context/GlobalUserProvider.jsx";
+import { formatCurrency } from "../../util/resolvers.js";
 
 function BikeModel({ imageUrl, model, price, top, description, id }) {
   const { user } = useContext(UserContext);
@@ -33,10 +34,11 @@ function BikeModel({ imageUrl, model, price, top, description, id }) {
         </h3>
         <p className={styles["card-pf"]}>{description}</p>
         <div className={styles.priceTag}>
-          <span className={styles.price}>
+          {/* <span className={styles.price}>
             {pSplit.at(0)}.
             <span className={styles.priceDecimal}>{pSplit.at(1)}</span>
-          </span>
+          </span> */}
+          <span className={styles.price}>{formatCurrency(price)}</span>
           <p>
             {/* <p className={styles["card-pf"]}> */}
             {user.role === "user" && (

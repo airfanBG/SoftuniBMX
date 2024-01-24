@@ -349,7 +349,7 @@ function CreateBike() {
             </article>
 
             <article className={styles.framesBlock}>
-              <h3 className={styles.heading}>Select wheels</h3>
+              <h3 className={styles.heading}>Select accessories</h3>
               <div className={styles.selection}>
                 <SelectComponent
                   disabled={parts.length === 0}
