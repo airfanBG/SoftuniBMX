@@ -13,6 +13,7 @@
     using Microsoft.EntityFrameworkCore;
     using Moq;
     using Moq.EntityFrameworkCore;
+    using NUnit.Framework.Internal;
 
     [TestFixture]
     internal class OrderUserServiceTest
@@ -75,7 +76,6 @@
             Assert.IsNull(result);
             fakeContext.Reset();
         }
-
         [Test]
         public void CreateOrderByUser_ShouldReturNull_WhenUserDontHaveEnoughBalance()
         {
@@ -329,7 +329,350 @@
             Assert.AreEqual(newOrder.VAT, result.VAT);
             Assert.AreEqual(newOrder.SaleAmount, result.SaleAmount);
         }
+        [Test]
+        public async Task GetOrdersProgresions_ShouldReturnExactOneOrder()
+        {
+            //Arrange
+            string clientId = "searchedClientId";
 
+            Order orderWithCorrectClientId = new Order
+            {
+                Id = 1,
+                ClientId = clientId,
+                IsDeleted = false,
+                DateFinish = null,
+                DateCreated = new DateTime(2024,1,1),
+                OrdersPartsEmployees = new List<OrderPartEmployee>
+                                       {
+                                            new OrderPartEmployee
+                                            {                                                
+                                                IsCompleted = true,
+                                                EmployeeId = "test",
+                                                Employee = new Employee
+                                                {
+                                                    FirstName = "Marin",
+                                                    LastName = "Marinov",
+                                                    Id = "test"
+                                                },
+                                                PartId = 1,
+                                                Part = new Part
+                                                {
+                                                    Id = 1,
+                                                    Name = "First part",
+                                                    CategoryId = 1,
+                                                    Category = new PartCategory
+                                                    {
+                                                        Id = 1,
+                                                        Name = "Test category"
+                                                    }
+                                                },
+                                                UniqueKeyForSerialNumber = "test serial number",
+                                                DateCreated = new DateTime(2024, 1, 2, 13,1,1),
+                                                DateFinish =  new DateTime(2024, 1, 2, 13,2,1)
+
+                                            }
+                                       }
+            };
+            Order orderWithIncorrectClientId = new Order
+            {
+                Id = 1,
+                ClientId = "other client id",
+                IsDeleted = false,
+                DateFinish = null,
+                DateCreated = new DateTime(2024, 1, 1),
+                OrdersPartsEmployees = new List<OrderPartEmployee>
+                                       {
+                                            new OrderPartEmployee
+                                            {
+                                                IsCompleted = true,
+                                                EmployeeId = "test",
+                                                Employee = new Employee
+                                                {
+                                                    FirstName = "Marin",
+                                                    LastName = "Marinov",
+                                                    Id = "test"
+                                                },
+                                                PartId = 1,
+                                                Part = new Part
+                                                {
+                                                    Id = 1,
+                                                    Name = "First part",
+                                                    CategoryId = 1,
+                                                    Category = new PartCategory
+                                                    {
+                                                        Id = 1,
+                                                        Name = "Test category"
+                                                    }
+                                                },
+                                                UniqueKeyForSerialNumber = "test serial number",
+                                                DateCreated = new DateTime(2024, 1, 2, 13,1,1),
+                                                DateFinish =  new DateTime(2024, 1, 2, 13,2,1)
+
+                                            }
+                                       }
+            };
+
+            List<Order> orders = new List<Order>();
+            orders.Add(orderWithCorrectClientId);
+            orders.Add(orderWithIncorrectClientId);
+
+            fakeContext.Setup(x => x.Orders).ReturnsDbSet(orders);
+
+            //Act
+
+            var actual = await fakeOrderUserService.GetOrdersProgresions(clientId);
+            int actualClientOrders = actual.Count;
+            int expectedClientOrders = 1;
+
+            //Assert
+            Assert.That(actualClientOrders, Is.EqualTo(expectedClientOrders));
+        }
+        [Test]
+        public async Task GetOrdersProgresions_ShouldReturnCorrectPropertiesValue()
+        {
+            //Arrange
+            string clientId = "searchedClientId";
+            int orderId = 1;
+            DateTime orderDateCreated = new DateTime(2024, 1, 1);
+            string partModelName = "First part";
+            string categoryName = "Test category";
+
+            Order orderWithCorrectClientId = new Order
+            {
+                Id = orderId,
+                ClientId = clientId,
+                IsDeleted = false,
+                DateFinish = null,
+                DateCreated = orderDateCreated,
+                OrdersPartsEmployees = new List<OrderPartEmployee>
+                                       {
+                                            new OrderPartEmployee
+                                            {
+                                                IsCompleted = true,
+                                                EmployeeId = "test",
+                                                Employee = new Employee
+                                                {
+                                                    FirstName = "Marin",
+                                                    LastName = "Marinov",
+                                                    Id = "test"
+                                                },
+                                                PartId = 1,
+                                                Part = new Part
+                                                {
+                                                    Id = 1,
+                                                    Name = partModelName,
+                                                    CategoryId = 1,
+                                                    Category = new PartCategory
+                                                    {
+                                                        Id = 1,
+                                                        Name = categoryName
+                                                    }
+                                                },
+                                                UniqueKeyForSerialNumber = "test serial number",
+                                                DateCreated = new DateTime(2024, 1, 2, 13,1,1),
+                                                DateFinish =  new DateTime(2024, 1, 2, 13,2,1)
+
+                                            }
+                                       }
+            };
+
+            List<Order> orders = new List<Order>();
+            orders.Add(orderWithCorrectClientId);
+
+            fakeContext.Setup(x => x.Orders).ReturnsDbSet(orders);
+
+            //Act
+
+            var actual = await fakeOrderUserService.GetOrdersProgresions(clientId);
+            var actualOrderProgressionDto = actual.First();
+
+            //Assert
+            Assert.That(actualOrderProgressionDto.OrderId, Is.EqualTo(orderId));
+            Assert.That(actualOrderProgressionDto.OrderStates.First().PartModel, Is.EqualTo(partModelName));
+            Assert.That(actualOrderProgressionDto.OrderStates.First().PartType, Is.EqualTo(categoryName));
+        }
+        [Test]
+        public void CreateOrderPartEmployeeByUserOrder_ShouldReturnTrue_WhenOrderPartEmployeeProductSuccessfulyIsAddedToDatabase()
+        {
+            //Arrange
+            var input = new Mock<IOrderPartsEmplyee>();
+            input.Setup(x => x.OrderQuantity).Returns(1);
+
+            string testPartName = "test part name";
+            decimal partPrice = 100.00M;
+            int partQuantity = 1;
+            int partId = 1;
+            var orderPart = new Mock<IOrderPartDto>();
+            orderPart.Setup(x => x.PartName).Returns(testPartName);
+            orderPart.Setup(x => x.PartPrice).Returns(partPrice);
+            orderPart.Setup(x => x.PartQuantity).Returns(partQuantity);
+            orderPart.Setup(x => x.PartId).Returns(partId);
+
+            input.Setup(x => x.OrderParts).Returns(new List<IOrderPartDto> { orderPart.Object });
+
+            string serialNumber = "test serial number";
+            fakeStringManipulator.Setup(x => x.SerialNumberGenerator()).Returns(serialNumber);
+
+            string uniqueKeyForSerialNumber = "uniqueKeyForSerialNumber";
+            fakeStringManipulator.Setup(x => x.CreateGuid()).Returns(uniqueKeyForSerialNumber);
+
+            OrderPartEmployee returnOrderPartEmployee = new OrderPartEmployee
+            {
+                OrderId = 1,
+                Order = new Order(),
+                SerialNumber = serialNumber,
+                UniqueKeyForSerialNumber = uniqueKeyForSerialNumber,
+                DateCreated = new DateTime(2024, 1, 1),
+                OrdersPartsEmployeesInfos = new List<OrderPartEmployeeInfo>(),
+                Part = new Part()
+                {
+                    Id = partId,
+                    Name = testPartName,
+                    SalePrice = partPrice,
+                    Quantity = partQuantity
+                },
+                PartId = partId,
+                PartName = testPartName,
+                PartPrice = partPrice,
+                PartQuantity = partQuantity
+            };
+
+            fakeOrdeFaktory.Setup(x => x.CreateOrderPartEmployeeProduct(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<int>(), It.IsAny<decimal>(), It.IsAny<DateTime>())).Returns(returnOrderPartEmployee);
+
+            var fakeOrderPartEmployeeDbSet = new Mock<DbSet<OrderPartEmployee>>();
+            fakeContext.Setup(x => x.OrdersPartsEmployees).Returns(fakeOrderPartEmployeeDbSet.Object);
+
+            //Act
+            var actual = fakeOrderUserService.CreateOrderPartEmployeeByUserOrder(input.Object);
+
+            //Assert
+            Assert.IsTrue(actual);
+        }
+        [Test]
+        public void CreateOrderPartEmployeeByUserOrder_ShouldReturnCountOfInvokedMethods()
+        {
+            //Arrange
+            var input = new Mock<IOrderPartsEmplyee>();
+            input.Setup(x => x.OrderQuantity).Returns(1);
+
+            string testPartName = "test part name";
+            decimal partPrice = 100.00M;
+            int partQuantity = 1;
+            int partId = 1;
+            var orderPart = new Mock<IOrderPartDto>();
+            orderPart.Setup(x => x.PartName).Returns(testPartName);
+            orderPart.Setup(x => x.PartPrice).Returns(partPrice);
+            orderPart.Setup(x => x.PartQuantity).Returns(partQuantity);
+            orderPart.Setup(x => x.PartId).Returns(partId);
+
+            input.Setup(x => x.OrderParts).Returns(new List<IOrderPartDto> { orderPart.Object });
+
+            string serialNumber = "test serial number";
+            fakeStringManipulator.Setup(x => x.SerialNumberGenerator()).Returns(serialNumber);
+
+            string uniqueKeyForSerialNumber = "uniqueKeyForSerialNumber";
+            fakeStringManipulator.Setup(x => x.CreateGuid()).Returns(uniqueKeyForSerialNumber);
+
+            OrderPartEmployee returnOrderPartEmployee = new OrderPartEmployee
+            {
+                OrderId = 1,
+                Order = new Order(),
+                SerialNumber = serialNumber,
+                UniqueKeyForSerialNumber = uniqueKeyForSerialNumber,
+                DateCreated = new DateTime(2024, 1, 1),
+                OrdersPartsEmployeesInfos = new List<OrderPartEmployeeInfo>(),
+                Part = new Part()
+                {
+                    Id = partId,
+                    Name = testPartName,
+                    SalePrice = partPrice,
+                    Quantity = partQuantity
+                },
+                PartId = partId,
+                PartName = testPartName,
+                PartPrice = partPrice,
+                PartQuantity = partQuantity
+            };
+
+            fakeOrdeFaktory.Setup(x => x.CreateOrderPartEmployeeProduct(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<int>(), It.IsAny<decimal>(), It.IsAny<DateTime>())).Returns(returnOrderPartEmployee);
+
+            var fakeOrderPartEmployeeDbSet = new Mock<DbSet<OrderPartEmployee>>();
+            fakeContext.Setup(x => x.OrdersPartsEmployees).Returns(fakeOrderPartEmployeeDbSet.Object);
+
+            int countOfAddedOrderPartEmployeeItems = 0;
+            fakeOrderPartEmployeeDbSet.Setup(x => x.Add(It.IsAny<OrderPartEmployee>())).Callback(() => countOfAddedOrderPartEmployeeItems++);
+
+            int countOfSaveChangesFromContext = 0;
+            fakeContext.Setup(x => x.SaveChanges()).Callback(() => countOfSaveChangesFromContext++);
+
+            //Act
+            var actual = fakeOrderUserService.CreateOrderPartEmployeeByUserOrder(input.Object);
+
+            int expectedCountOfAddedOrderPartEmployeeItems = 1;
+            int expectedCountOfSaveChangesFromContext = 1;
+            //Assert
+            Assert.That(countOfAddedOrderPartEmployeeItems, Is.EqualTo(expectedCountOfAddedOrderPartEmployeeItems));
+            Assert.That(countOfSaveChangesFromContext, Is.EqualTo(expectedCountOfSaveChangesFromContext));
+        }
+        [Test]
+        public async Task DeleteOrder_ShouldReturnExactOneTimeSaveChanges()
+        {
+            //Arrange
+            string userId = "userId";
+            int orderId = 1;
+
+            Order orderToBeDeleted = new Order
+            {
+                ClientId = userId,
+                Id = orderId,
+                StatusId = 1,
+                IsDeleted = false,
+                DateDeleted = null
+            };
+            fakeContext.Setup(x => x.Orders).ReturnsDbSet(new List<Order> { orderToBeDeleted });
+
+            DateTime dateОfЕxtinction = new DateTime(2024, 1, 1);
+            fakeDateTimeProvider.Setup(x => x.Now).Returns(dateОfЕxtinction);
+
+            int countOfCallOfSaveChanges = 0;
+            fakeContext.Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>())).Callback(() => countOfCallOfSaveChanges++);
+
+            //Act
+            await fakeOrderUserService.DeleteOrder(userId, orderId);
+
+            int expectedCountOfCallOfSaveChanges = 1;
+
+            //Assert
+            Assert.That(countOfCallOfSaveChanges, Is.EqualTo(expectedCountOfCallOfSaveChanges));
+        }
+        [Test]
+        public async Task DeleteOrder_ShouldReturnCorrectProprtiesValues()
+        {
+            //Arrange
+            string userId = "userId";
+            int orderId = 1;
+
+            Order orderToBeDeleted = new Order
+            {
+                ClientId = userId,
+                Id = orderId,
+                StatusId = 1,
+                IsDeleted = false,
+                DateDeleted = null
+            };
+            fakeContext.Setup(x => x.Orders).ReturnsDbSet(new List<Order> { orderToBeDeleted });
+
+            DateTime dateОfЕxtinction = new DateTime(2024, 1, 1);
+            fakeDateTimeProvider.Setup(x => x.Now).Returns(dateОfЕxtinction);
+
+            //Act
+            await fakeOrderUserService.DeleteOrder(userId, orderId);
+            var deletedOrder = fakeContext.Object.Orders.FirstOrDefault();
+
+            //Assert
+            Assert.That(deletedOrder.DateDeleted, Is.EqualTo(dateОfЕxtinction));
+            Assert.IsTrue(deletedOrder.IsDeleted);
+        }
 
     }
 }

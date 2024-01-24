@@ -115,7 +115,7 @@
                                 .ThenInclude(ope => ope.Employee)
                             .Include(o => o.OrdersPartsEmployees)
                                 .ThenInclude(ope => ope.Part)
-                            .ThenInclude(part => part.Category)
+                                .ThenInclude(part => part.Category)
                             .Where(o => o.ClientId == userId && o.IsDeleted == false && o.DateFinish == null)
                             .Select(o => new OrderProgretionDto()
                             {
@@ -234,7 +234,10 @@
                 var client = await _db.Clients.FirstAsync(c => c.Id == clientId);
 
                 decimal neededMoneyForOrder = Math.Round(newOrder.FinalAmount * (percentageOfDeduction / 100));
-
+                if (neededMoneyForOrder > client.Balance)
+                {
+                    return false;
+                }
                 client.Balance -= neededMoneyForOrder;
 
                 var order = await _db.Orders.FirstAsync(o => o.Id == newOrder.OrderId);
