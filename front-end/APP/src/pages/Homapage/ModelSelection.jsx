@@ -20,7 +20,7 @@ function ModelSelection() {
           <span className={styles["main-red"]}>three</span>!
         </p>
         <div className={styles.steps}>
-          <div className={styles.step}>
+          <Link className={styles.step} to={"app"}>
             <img
               src="./img/frame.png"
               alt="bmx frame"
@@ -30,8 +30,8 @@ function ModelSelection() {
             <span>
               <i className="fa-solid fa-arrow-right-long steps-icon"></i>
             </span>
-          </div>
-          <div className={styles.step}>
+          </Link>
+          <Link className={styles.step} to={"app"}>
             <img
               src="./img/wheels.png"
               alt="bike wheels"
@@ -41,8 +41,8 @@ function ModelSelection() {
             <span>
               <i className="fa-solid fa-arrow-right-long steps-icon"></i>
             </span>
-          </div>
-          <div className={styles.step}>
+          </Link>
+          <Link className={styles.step} to={"app"}>
             <img
               src="./img/parts.png"
               alt="bike parts"
@@ -52,7 +52,7 @@ function ModelSelection() {
             <span>
               <i className="fa-solid fa-arrow-right-long steps-icon"></i>
             </span>
-          </div>
+          </Link>
 
           <Link to={"app"} className={styles["step-link"]}>
             Start production

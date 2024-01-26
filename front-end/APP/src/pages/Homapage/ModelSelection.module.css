@@ -61,6 +61,8 @@
   align-items: center;
   justify-content: space-evenly;
   position: relative;
+  text-decoration: none;
+  color: var(--color-main-dark);
 }
 
 .step p {
