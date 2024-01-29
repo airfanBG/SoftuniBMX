@@ -79,7 +79,7 @@
 4. <h4 style='text-decoration:underline'>Служители</h4>
 
    - [Профилна страница](/FrontEndReadMeFiles/ClientFiles/Profile.md)
-   - ! [Поръчки за отдела](/FrontEndReadMeFiles/QualityControl/Orders.md)
+   - [Поръчки за отдела](/FrontEndReadMeFiles/QualityControl/Orders.md)
    - ! [Заплати](/FrontEndReadMeFiles/Employee/)
 
 5. <h4 style='text-decoration:underline'> Качествен контрол</h4>
