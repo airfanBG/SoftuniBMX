@@ -89,7 +89,7 @@ function Salaries() {
                   {e.department}
                 </p>
                 <p className={styles.empData}>
-                  <span className={styles.label}>Dae of Hire</span>
+                  <span className={styles.label}>Date of Hire</span>
                   {e.dateOfHire}
                 </p>
               </div>
