@@ -21,81 +21,83 @@
 
 - AccountPageController дава възсможността да се ползва функционалността на DropdownsContentService.
 
-### [`GET /api/accountpage/frames`](/ReadMeFiles/AccountPage/Frames.md)
+### [`GET /api/accountpage/frames`](/ReadMeFiles_BE_BE/AccountPage/Frames.md)
 
-### [`GET /api/accountpage/compatible_parts`](/ReadMeFiles/AccountPage/CompatibleParts.md)
+### [`GET /api/accountpage/compatible_parts`](/ReadMeFiles_BE/AccountPage/CompatibleParts.md)
 
-### [`GET /api/accountpage/selected_part`](/ReadMeFiles/AccountPage/SelectedPart.md)
+### [`GET /api/accountpage/selected_part`](/ReadMeFiles_BE/AccountPage/SelectedPart.md)
 
 - ClientOrderController дава възсможността на потребителя на създава, преглежда и изтрива поръчки, направени от него.
 
-### [`POST /api/client_order/create`](/ReadMeFiles/ClientOrder/Create.md)
+### [`POST /api/client_order/create`](/ReadMeFiles_BE/ClientOrder/Create.md)
 
-### [`POST /api/client_order/progress`](/ReadMeFiles/ClientOrder/Progress.md)
+### [`POST /api/client_order/progress`](/ReadMeFiles_BE/ClientOrder/Progress.md)
 
-### [`POST /api/client_order/delete`](/ReadMeFiles/ClientOrder/Delete.md)
+### [`POST /api/client_order/delete`](/ReadMeFiles_BE/ClientOrder/Delete.md)
 
-- ManagerStatisticsController дава възможността да се ползва функционалността на ManagerStatisticsService. 
+- ManagerStatisticsController дава възможността да се ползва функционалността на ManagerStatisticsService.
 
-### [`GET /api/manager_statistics/employee_statistics`](/ReadMeFiles/ManagerStatistics/employee_statistics.md)
-### [`GET /api/manager_statistics/order_part_statistics`](/ReadMeFiles/ManagerStatistics/order_part_statistics.md)
-### [`GET /api/manager_statistics/employees_full_statistics`](/ReadMeFiles/ManagerStatistics/employees_full_statistics.md)
+### [`GET /api/manager_statistics/employee_statistics`](/ReadMeFiles_BE/ManagerStatistics/employee_statistics.md)
+
+### [`GET /api/manager_statistics/order_part_statistics`](/ReadMeFiles_BE/ManagerStatistics/order_part_statistics.md)
+
+### [`GET /api/manager_statistics/employees_full_statistics`](/ReadMeFiles_BE/ManagerStatistics/employees_full_statistics.md)
 
 - OrderManagerController дава възможността да се ползва функционалността на OrderManagerService.
 
-### [`GET /api/manager/pending_orders`](/ReadMeFiles/Manager/pending_orders.md)
+### [`GET /api/manager/pending_orders`](/ReadMeFiles_BE/Manager/pending_orders.md)
 
-### [`GET /api/manager/rejected_orders`](/ReadMeFiles/Manager/rejected_orders.md)
+### [`GET /api/manager/rejected_orders`](/ReadMeFiles_BE/Manager/rejected_orders.md)
 
-### [`GET /api/manager/orders_in_progress`](/ReadMeFiles/Manager/orders_in_progress.md)
+### [`GET /api/manager/orders_in_progress`](/ReadMeFiles_BE/Manager/orders_in_progress.md)
 
-### [`POST /api/manager/delete_order?orderId=`](/ReadMeFiles/Manager/delete_order.md)
+### [`POST /api/manager/delete_order?orderId=`](/ReadMeFiles_BE/Manager/delete_order.md)
 
-### [`POST /api/manager/approve_order?orderId=`](/ReadMeFiles/Manager/approve_order.md)
+### [`POST /api/manager/approve_order?orderId=`](/ReadMeFiles_BE/Manager/approve_order.md)
 
-### [`POST /api/manager/approve_rejected_order?orderId=`](/ReadMeFiles/Manager/approve_rejected_order.md)
+### [`POST /api/manager/approve_rejected_order?orderId=`](/ReadMeFiles_BE/Manager/approve_rejected_order.md)
 
-### [`POST /api/manager/reject_order?orderId=`](/ReadMeFiles/Manager/reject_order.md)
+### [`POST /api/manager/reject_order?orderId=`](/ReadMeFiles_BE/Manager/reject_order.md)
 
-### [`GET /api/manager/finished_orders`](/ReadMeFiles/Manager/finished_orders.md)
+### [`GET /api/manager/finished_orders`](/ReadMeFiles_BE/Manager/finished_orders.md)
 
-### [`POST /api/manager/send_order?orderId=`](/ReadMeFiles/Manager/send_order.md)
+### [`POST /api/manager/send_order?orderId=`](/ReadMeFiles_BE/Manager/send_order.md)
 
-### [`GET /api/manager/sended_orders`](/ReadMeFiles/Manager/sended_orders.md)
+### [`GET /api/manager/sended_orders`](/ReadMeFiles_BE/Manager/sended_orders.md)
 
 - SuplyManagerController дава възможността да се ползва функционалността на SuplyManagerService.
 
-### [`GET /api/supplys_manager/deliveries`](/ReadMeFiles/SuplyManager/deliveries.md)
+### [`GET /api/supplys_manager/deliveries`](/ReadMeFiles_BE/SuplyManager/deliveries.md)
 
-### [`GET /api/supplys_manager/supliers`](/ReadMeFiles/SuplyManager/supliers.md)
+### [`GET /api/supplys_manager/supliers`](/ReadMeFiles_BE/SuplyManager/supliers.md)
 
-### [`GET /api/supplys_manager/part_orders`](/ReadMeFiles/SuplyManager/part_orders.md)
+### [`GET /api/supplys_manager/part_orders`](/ReadMeFiles_BE/SuplyManager/part_orders.md)
 
-### [`POST /api/supplys_manager/create_delivery`](/ReadMeFiles/SuplyManager/create_delivery.md)
+### [`POST /api/supplys_manager/create_delivery`](/ReadMeFiles_BE/SuplyManager/create_delivery.md)
 
-### [`POST /api/supplys_manager/create_suplier`](/ReadMeFiles/SuplyManager/create_suplier.md)
+### [`POST /api/supplys_manager/create_suplier`](/ReadMeFiles_BE/SuplyManager/create_suplier.md)
 
-### [`POST /api/supplys_manager/create_part_order`](/ReadMeFiles/SuplyManager/create_part_order.md)
+### [`POST /api/supplys_manager/create_part_order`](/ReadMeFiles_BE/SuplyManager/create_part_order.md)
 
-### [`GET /api/supplys_manager/get_suplier`](/ReadMeFiles/SuplyManager/get_suplier.md)
+### [`GET /api/supplys_manager/get_suplier`](/ReadMeFiles_BE/SuplyManager/get_suplier.md)
 
-### [`GET /api/supplys_manager/get_delivery`](/ReadMeFiles/SuplyManager/get_delivery.md)
+### [`GET /api/supplys_manager/get_delivery`](/ReadMeFiles_BE/SuplyManager/get_delivery.md)
 
-### [`GET /api/supplys_manager/get_part_order`](/ReadMeFiles/SuplyManager/get_part_order.md)
+### [`GET /api/supplys_manager/get_part_order`](/ReadMeFiles_BE/SuplyManager/get_part_order.md)
 
-### [`POST /api/supplys_manager/delete_suplier`](/ReadMeFiles/SuplyManager/delete_suplier.md)
+### [`POST /api/supplys_manager/delete_suplier`](/ReadMeFiles_BE/SuplyManager/delete_suplier.md)
 
-### [`POST /api/supplys_manager/delete_delivery`](/ReadMeFiles/SuplyManager/delete_delivery.md)
+### [`POST /api/supplys_manager/delete_delivery`](/ReadMeFiles_BE/SuplyManager/delete_delivery.md)
 
-### [`POST /api/supplys_manager/delete_part_order`](/ReadMeFiles/SuplyManager/delete_part_order.md)
+### [`POST /api/supplys_manager/delete_part_order`](/ReadMeFiles_BE/SuplyManager/delete_part_order.md)
 
-### [`PUT /api/supplys_manager/edit_delivery`](/ReadMeFiles/SuplyManager/edit_delivery.md)
+### [`PUT /api/supplys_manager/edit_delivery`](/ReadMeFiles_BE/SuplyManager/edit_delivery.md)
 
-### [`PUT /api/supplys_manager/edit_suplier`](/ReadMeFiles/SuplyManager/edit_suplier.md)
+### [`PUT /api/supplys_manager/edit_suplier`](/ReadMeFiles_BE/SuplyManager/edit_suplier.md)
 
-### [`PUT /api/supplys_manager/edit_part_order`](/ReadMeFiles/SuplyManager/edit_part_order.md)
+### [`PUT /api/supplys_manager/edit_part_order`](/ReadMeFiles_BE/SuplyManager/edit_part_order.md)
 
-### [`GET /api/supplys_manager/get_suplier_parts`](/ReadMeFiles/SuplyManager/get_suplier_parts.md)
+### [`GET /api/supplys_manager/get_suplier_parts`](/ReadMeFiles_BE/SuplyManager/get_suplier_parts.md)
 
 ## Errors
 
